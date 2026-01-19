@@ -82,11 +82,8 @@ export const Study = () => {
       <div className={`${sidebarOpen ? 'w-64' : 'w-0'} bg-background border-r border-border flex-shrink-0 overflow-y-auto transition-all duration-300 ${!sidebarOpen && 'border-r-0'}`}>
         <div className={`${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="p-4 border-b border-border">
-            <div className="flex items-center justify-between mb-2">
-              <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
-                <ArrowLeft className="w-4 h-4 mr-1" />
-                Ana Sayfaya Dön
-              </Link>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Kategoriler</h2>
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-1 rounded-lg hover:bg-muted transition-colors"
@@ -95,7 +92,6 @@ export const Study = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <h2 className="text-lg font-semibold mt-2">Kategoriler</h2>
           </div>
           <div className="p-2">
             {mainCategories.map((mainCat) => (
