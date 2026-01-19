@@ -1,6 +1,13 @@
 // Medical Terminology Data - Extracted from PDFs
 
-// Body Systems for sidebar navigation
+// Main Categories for sidebar navigation
+export const mainCategories = [
+  { id: 'prefixes', name: 'Ön Ekler' },
+  { id: 'roots', name: 'Kökler' },
+  { id: 'suffixes', name: 'Son Ekler' }
+];
+
+// Body Systems as subcategories under each main category
 export const bodySystems = [
   { id: 'movement', name: 'Hareket Sistemi' },
   { id: 'respiratory', name: 'Solunum Sistemi' },
@@ -28,6 +35,13 @@ export const categories = [
 // Subcategories organized by body system
 export const subcategoriesBySystem = {
   movement: [
+    { id: 'bone_structures', name: 'Kemik / İskelet Yapıları' },
+    { id: 'joint_structures', name: 'Eklem Yapıları ve İlişkili Anatomik Alanlar' },
+    { id: 'muscle_structures', name: 'Kas ve Kasla İlişkili Yapılar' },
+    { id: 'tissue_components', name: 'Doku / Yapısal Bileşenler' },
+    { id: 'regional_anatomy', name: 'Organ / Bölgesel Anatomik Alanlar' },
+    { id: 'physiological_functional', name: 'Fizyolojik / Fonksiyonel Kökler' },
+    { id: 'pathological_conditions', name: 'Patolojik Durum Kökleri' },
     { id: 'anatomy', name: 'Anatomi' },
     { id: 'support', name: 'Destek Dokuları' },
     { id: 'joints', name: 'Eklemler & Hareket' }
@@ -110,6 +124,94 @@ export const medicalTermsData = {
     { id: 34, term: 'Tenotomy', turkish: 'Tendon Kesilmesi', roots: 'ten- (tendon) + -tomy (kesme)', definition: 'Tendonun cerrahi olarak kesilmesi veya uzatılması', category: 'surgery' }
   ],
   roots: [
+    // Kemik / İskelet Yapıları - Hareket Sistemi
+    { id: 1001, term: 'Acetabul/o', turkish: 'Kalça çukuru', roots: 'acetabul/o', definition: 'Kalça kemiğinde femur başını alan çukur', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1002, term: 'Acromi/o', turkish: 'Omuz çıkıntısı', roots: 'acromi/o', definition: 'Kürek kemiğinin omuz ucundaki çıkıntı', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1003, term: 'Calcane/o', turkish: 'Topuk kemiği', roots: 'calcane/o', definition: 'Ayağın topuk kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1004, term: 'Carp/o', turkish: 'El bileği', roots: 'carp/o', definition: 'El bileği kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1005, term: 'Cephal/o', turkish: 'Baş, kafa', roots: 'cephal/o', definition: 'Baş veya kafa ile ilgili', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1006, term: 'Clavicul/o', turkish: 'Köprücük kemiği', roots: 'clavicul/o', definition: 'Köprücük kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1007, term: 'Coccyg/o', turkish: 'Kuyruk sokumu', roots: 'coccyg/o', definition: 'Omurganın en alt kısmındaki kuyruk sokumu kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1008, term: 'Cost/o', turkish: 'Kaburga', roots: 'cost/o', definition: 'Kaburga kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1009, term: 'Crani/o', turkish: 'Kafatası', roots: 'crani/o', definition: 'Kafatası kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1010, term: 'Femor/o', turkish: 'Uyluk kemiği', roots: 'femor/o', definition: 'Uyluk kemiği (femur)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1011, term: 'Fibul/o', turkish: 'İnce baldır kemiği', roots: 'fibul/o', definition: 'Alt bacaktaki ince kemik (fibula)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1012, term: 'Front/o', turkish: 'Alın', roots: 'front/o', definition: 'Alın kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1013, term: 'Glen/o', turkish: 'Eklem çukuru', roots: 'glen/o', definition: 'Eklem çukuru (özellikle omuz)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1014, term: 'Humer/o', turkish: 'Kol kemiği', roots: 'humer/o', definition: 'Üst kol kemiği (humerus)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1015, term: 'Ischi/o', turkish: 'Oturma kemiği', roots: 'ischi/o', definition: 'Kalça kemiğinin alt kısmı (ischium)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1016, term: 'Ili/o', turkish: 'Kalça kemiği', roots: 'ili/o', definition: 'Kalça kemiğinin üst kısmı (ilium)', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1017, term: 'Lumb/o', turkish: 'Bel', roots: 'lumb/o', definition: 'Bel bölgesi omurları', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1018, term: 'Malleol/o', turkish: 'Ayak bileği çıkıntısı', roots: 'malleol/o', definition: 'Ayak bileğindeki kemik çıkıntıları', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1019, term: 'Mandibul/o', turkish: 'Alt çene', roots: 'mandibul/o', definition: 'Alt çene kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1020, term: 'Maxill/o', turkish: 'Üst çene', roots: 'maxill/o', definition: 'Üst çene kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1021, term: 'Metacarp/o', turkish: 'El ayası kemikleri', roots: 'metacarp/o', definition: 'El ayasındaki kemikler', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1022, term: 'Metatars/o', turkish: 'Ayak ayası kemikleri', roots: 'metatars/o', definition: 'Ayak ayasındaki kemikler', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1023, term: 'Occipit/o', turkish: 'Ense kemiği', roots: 'occipit/o', definition: 'Kafatasının arka kısmındaki kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1024, term: 'Olecran/o', turkish: 'Dirsek çıkıntısı', roots: 'olecran/o', definition: 'Dirsekteki kemik çıkıntısı', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1025, term: 'Osse/o – Oste/o', turkish: 'Kemik', roots: 'osse/o, oste/o', definition: 'Kemik dokusu', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1026, term: 'Patell/o', turkish: 'Diz kapağı', roots: 'patell/o', definition: 'Diz kapağı kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1027, term: 'Pelv/o', turkish: 'Leğen kemiği', roots: 'pelv/o', definition: 'Leğen kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1028, term: 'Phalang/o', turkish: 'Parmak kemiği', roots: 'phalang/o', definition: 'El ve ayak parmak kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1029, term: 'Pub/o', turkish: 'Kasık kemiği', roots: 'pub/o', definition: 'Leğen kemiğinin ön kısmı', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1030, term: 'Radi/o', turkish: 'Çemberli kemik (radius)', roots: 'radi/o', definition: 'Ön kolun başparmak tarafındaki kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1031, term: 'Sacr/o', turkish: 'Kuyruk sokumu üstü', roots: 'sacr/o', definition: 'Omurganın alt kısmındaki üçgen kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1032, term: 'Scapul/o', turkish: 'Kürek kemiği', roots: 'scapul/o', definition: 'Sırt üst kısmındaki kürek kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1033, term: 'Sphen/o', turkish: 'Kama kemiği', roots: 'sphen/o', definition: 'Kafatasında kama şeklindeki kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1034, term: 'Spondyl/o', turkish: 'Omur', roots: 'spondyl/o', definition: 'Omurga kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1035, term: 'Stern/o', turkish: 'Göğüs kemiği', roots: 'stern/o', definition: 'Göğsün ortasındaki düz kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1036, term: 'Tempor/o', turkish: 'Şakak', roots: 'tempor/o', definition: 'Kafatasının yan kısmındaki kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1037, term: 'Tibi/o', turkish: 'Kaval kemiği', roots: 'tibi/o', definition: 'Alt bacağın kalın kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1038, term: 'Uln/o', turkish: 'Dirsek kemiği (ulna)', roots: 'uln/o', definition: 'Ön kolun serçe parmak tarafındaki kemik', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1039, term: 'Vertebr/o', turkish: 'Omur', roots: 'vertebr/o', definition: 'Omurga kemikleri', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1040, term: 'Xiph/o', turkish: 'Kılıç çıkıntısı', roots: 'xiph/o', definition: 'Göğüs kemiğinin alt ucundaki çıkıntı', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+    { id: 1041, term: 'Zygomat/o', turkish: 'Elmacık kemiği', roots: 'zygomat/o', definition: 'Yanaklardaki elmacık kemiği', category: 'roots', system: 'movement', subcategory: 'bone_structures', mainCategory: 'roots' },
+
+    // Eklem Yapıları ve İlişkili Anatomik Alanlar - Hareket Sistemi
+    { id: 1042, term: 'Arthr/o', turkish: 'Eklem', roots: 'arthr/o', definition: 'Eklem yapısı', category: 'roots', system: 'movement', subcategory: 'joint_structures', mainCategory: 'roots' },
+    { id: 1043, term: 'Articul/o', turkish: 'Eklem', roots: 'articul/o', definition: 'Eklem, eklemleşme', category: 'roots', system: 'movement', subcategory: 'joint_structures', mainCategory: 'roots' },
+    { id: 1044, term: 'Burs/o', turkish: 'Bursa (eklem kesesi)', roots: 'burs/o', definition: 'Eklemlerde sürtünmeyi azaltan sıvı dolu kese', category: 'roots', system: 'movement', subcategory: 'joint_structures', mainCategory: 'roots' },
+    { id: 1045, term: 'Synovi/o', turkish: 'Sinoviyal (eklem zarı)', roots: 'synovi/o', definition: 'Eklemleri döşeyen ve eklem sıvısı üreten zar', category: 'roots', system: 'movement', subcategory: 'joint_structures', mainCategory: 'roots' },
+
+    // Kas ve Kasla İlişkili Yapılar - Hareket Sistemi
+    { id: 1046, term: 'Brachi/o', turkish: 'Kol', roots: 'brachi/o', definition: 'Kol bölgesi', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1047, term: 'Muscul/o', turkish: 'Kas', roots: 'muscul/o', definition: 'Kas dokusu', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1048, term: 'My/o', turkish: 'Kas', roots: 'my/o', definition: 'Kas yapısı', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1049, term: 'Myos/o', turkish: 'Kas', roots: 'myos/o', definition: 'Kas dokusu', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1050, term: 'Tendin/o – Ten/o', turkish: 'Tendon (kas kirişi)', roots: 'tendin/o, ten/o', definition: 'Kasları kemiklere bağlayan bağ dokusu', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1051, term: 'Tenosynovi/o', turkish: 'Tendon kılıfı', roots: 'tenosynovi/o', definition: 'Tendonları saran koruyucu kılıf', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+    { id: 1052, term: 'Fasci/o', turkish: 'Fasya (bağ dokusu)', roots: 'fasci/o', definition: 'Kasları ve organları saran bağ dokusu tabakası', category: 'roots', system: 'movement', subcategory: 'muscle_structures', mainCategory: 'roots' },
+
+    // Doku / Yapısal Bileşenler - Hareket Sistemi
+    { id: 1053, term: 'Cartilagin/o', turkish: 'Kıkırdak', roots: 'cartilagin/o', definition: 'Kıkırdak dokusu', category: 'roots', system: 'movement', subcategory: 'tissue_components', mainCategory: 'roots' },
+    { id: 1054, term: 'Chondr/o', turkish: 'Kıkırdak', roots: 'chondr/o', definition: 'Kıkırdak yapısı', category: 'roots', system: 'movement', subcategory: 'tissue_components', mainCategory: 'roots' },
+    { id: 1055, term: 'Fibr/o', turkish: 'Lif, lifli doku', roots: 'fibr/o', definition: 'Lifli bağ dokusu', category: 'roots', system: 'movement', subcategory: 'tissue_components', mainCategory: 'roots' },
+    { id: 1056, term: 'Medull/o', turkish: 'İlik, iç kısım', roots: 'medull/o', definition: 'Kemik iliği veya organların iç kısmı', category: 'roots', system: 'movement', subcategory: 'tissue_components', mainCategory: 'roots' },
+    { id: 1057, term: 'Myel/o', turkish: 'Kemik iliği, omurilik', roots: 'myel/o', definition: 'Kemik iliği veya omurilik', category: 'roots', system: 'movement', subcategory: 'tissue_components', mainCategory: 'roots' },
+
+    // Organ / Bölgesel Anatomik Alanlar - Hareket Sistemi
+    { id: 1058, term: 'Cervic/o', turkish: 'Boyun', roots: 'cervic/o', definition: 'Boyun bölgesi', category: 'roots', system: 'movement', subcategory: 'regional_anatomy', mainCategory: 'roots' },
+    { id: 1059, term: 'Facio', turkish: 'Yüz', roots: 'facio', definition: 'Yüz bölgesi', category: 'roots', system: 'movement', subcategory: 'regional_anatomy', mainCategory: 'roots' },
+    { id: 1060, term: 'Phren/o', turkish: 'Diyafram', roots: 'phren/o', definition: 'Göğüs ve karın boşluğunu ayıran kas', category: 'roots', system: 'movement', subcategory: 'regional_anatomy', mainCategory: 'roots' },
+    { id: 1061, term: 'Thorac/o', turkish: 'Göğüs', roots: 'thorac/o', definition: 'Göğüs bölgesi', category: 'roots', system: 'movement', subcategory: 'regional_anatomy', mainCategory: 'roots' },
+    { id: 1062, term: 'Pariet/o', turkish: 'Duvar, cidar', roots: 'pariet/o', definition: 'Vücut boşluklarının duvarı', category: 'roots', system: 'movement', subcategory: 'regional_anatomy', mainCategory: 'roots' },
+
+    // Fizyolojik / Fonksiyonel Kökler - Hareket Sistemi
+    { id: 1063, term: 'Kinesi/o', turkish: 'Hareket', roots: 'kinesi/o', definition: 'Hareket, hareket etme', category: 'roots', system: 'movement', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1064, term: 'Ton/o', turkish: 'Basınç, gerilim', roots: 'ton/o', definition: 'Kas tonusu, gerilim, basınç', category: 'roots', system: 'movement', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1065, term: 'Duct/o', turkish: 'Çekmek, iletmek', roots: 'duct/o', definition: 'Çekmek, götürmek, iletmek', category: 'roots', system: 'movement', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1066, term: 'Electr/o', turkish: 'Elektrik', roots: 'electr/o', definition: 'Elektrik, elektriksel aktivite', category: 'roots', system: 'movement', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1067, term: 'Hydr/o', turkish: 'Su', roots: 'hydr/o', definition: 'Su, sıvı', category: 'roots', system: 'movement', subcategory: 'physiological_functional', mainCategory: 'roots' },
+
+    // Patolojik Durum Kökleri - Hareket Sistemi
+    { id: 1068, term: 'Ankyl/o', turkish: 'Eğri, bükük', roots: 'ankyl/o', definition: 'Eklem sertliği, eğrilik', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1069, term: 'Kyph/o', turkish: 'Kambur', roots: 'kyph/o', definition: 'Omurganın öne doğru eğriliği (kamburluk)', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1070, term: 'Lord/o', turkish: 'Çukurlaşmış', roots: 'lord/o', definition: 'Omurganın içe doğru eğriliği', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1071, term: 'Scoli/o', turkish: 'Eğri', roots: 'scoli/o', definition: 'Omurganın yana doğru eğriliği (skolyoz)', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1072, term: 'Orth/o', turkish: 'Düz, doğru', roots: 'orth/o', definition: 'Düz, doğru, normal pozisyon', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1073, term: 'Rhabd/o', turkish: 'Çubuk şeklinde', roots: 'rhabd/o', definition: 'Çubuk şeklinde, çizgili kas', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+
+    // Eski terimler (geriye dönük uyumluluk için)
     { id: 35, term: 'Arthr/o', turkish: 'Eklem', roots: 'arthr/o', definition: 'Eklem anlamına gelen kök. Örnek: Arthritis (eklem iltihabı)', category: 'roots' },
     { id: 36, term: 'Oste/o', turkish: 'Kemik', roots: 'oste/o', definition: 'Kemik anlamına gelen kök. Örnek: Osteoporosis (kemik erimesi)', category: 'roots' },
     { id: 37, term: 'My/o', turkish: 'Kas', roots: 'my/o', definition: 'Kas anlamına gelen kök. Örnek: Myalgia (kas ağrısı)', category: 'roots' },
@@ -156,15 +258,24 @@ export const getTermsByCategory = (categoryId) => {
 };
 
 // Get terms by body system
-export const getTermsBySystem = (systemId) => {
+export const getTermsBySystem = (systemId, mainCategoryId = null) => {
   const allTerms = getAllTerms();
-  return allTerms.filter(term => term.system === systemId);
+  return allTerms.filter(term => {
+    const systemMatch = term.system === systemId;
+    const mainCategoryMatch = mainCategoryId ? term.mainCategory === mainCategoryId : true;
+    return systemMatch && mainCategoryMatch;
+  });
 };
 
 // Get terms by system and subcategory
-export const getTermsBySubcategory = (systemId, subcategoryId) => {
+export const getTermsBySubcategory = (systemId, subcategoryId, mainCategoryId = null) => {
   const allTerms = getAllTerms();
-  return allTerms.filter(term => term.system === systemId && term.subcategory === subcategoryId);
+  return allTerms.filter(term => {
+    const systemMatch = term.system === systemId;
+    const subcategoryMatch = term.subcategory === subcategoryId;
+    const mainCategoryMatch = mainCategoryId ? term.mainCategory === mainCategoryId : true;
+    return systemMatch && subcategoryMatch && mainCategoryMatch;
+  });
 };
 
 // Get random terms for games
