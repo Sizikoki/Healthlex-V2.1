@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, X, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,7 @@ export const Quiz = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
-  
+
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -23,12 +23,7 @@ export const Quiz = () => {
   const [answers, setAnswers] = useState([]);
   const [quizComplete, setQuizComplete] = useState(false);
 
-  useEffect(() => {
-    initializeQuiz();
-    updateStreak();
-  }, [categoryId]);
-
-  const initializeQuiz = () => {
+  const initializeQuiz = useCallback(() => {
     const terms = getRandomTerms(10, categoryId);
     const quizQuestions = terms.map((term, index) => {
       const allTerms = getRandomTerms(100, categoryId);
@@ -37,9 +32,9 @@ export const Quiz = () => {
         .sort(() => Math.random() - 0.5)
         .slice(0, 3)
         .map(t => t.turkish);
-      
+
       const options = [term.turkish, ...wrongAnswers].sort(() => Math.random() - 0.5);
-      
+
       return {
         id: index,
         term: term.term,
@@ -49,7 +44,7 @@ export const Quiz = () => {
         definition: term.definition
       };
     });
-    
+
     setQuestions(quizQuestions);
     setCurrentQuestion(0);
     setSelectedAnswer(null);
@@ -57,7 +52,12 @@ export const Quiz = () => {
     setScore(0);
     setAnswers([]);
     setQuizComplete(false);
-  };
+  }, [categoryId]);
+
+  useEffect(() => {
+    initializeQuiz();
+    updateStreak();
+  }, [initializeQuiz]);
 
   const handleAnswerSelect = (answer) => {
     if (!showResult) {
@@ -70,17 +70,17 @@ export const Quiz = () => {
       toast.error('Lütfen bir cevap seçin');
       return;
     }
-    
+
     const isCorrect = selectedAnswer === questions[currentQuestion].correctAnswer;
     setShowResult(true);
-    
+
     const newAnswers = [...answers, {
       questionId: currentQuestion,
       selectedAnswer,
       isCorrect
     }];
     setAnswers(newAnswers);
-    
+
     if (isCorrect) {
       setScore(score + 1);
     }
@@ -111,35 +111,33 @@ export const Quiz = () => {
       <div className="min-h-screen bg-muted/30 py-8 flex items-center justify-center">
         <Card className="max-w-2xl w-full mx-4 shadow-2xl">
           <CardContent className="p-8 text-center">
-            <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 ${
-              percentage >= 80 ? 'bg-gradient-to-br from-success to-secondary' :
+            <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 ${percentage >= 80 ? 'bg-gradient-to-br from-success to-secondary' :
               percentage >= 60 ? 'bg-gradient-to-br from-primary to-accent' :
-              'bg-gradient-to-br from-accent to-destructive'
-            }`}>
+                'bg-gradient-to-br from-accent to-destructive'
+              }`}>
               <Trophy className="w-12 h-12 text-white" />
             </div>
-            
+
             <h2 className="text-3xl font-bold mb-2">Quiz Tamamlandı!</h2>
             <p className="text-lg text-muted-foreground mb-6">
               {percentage >= 80 ? 'Mükemmel!' : percentage >= 60 ? 'İyi çalıştın!' : 'Pratik yapmaya devam et!'}
             </p>
-            
+
             <div className="mb-8">
               <div className="text-6xl font-bold text-primary mb-2">{score}/{questions.length}</div>
               <div className="text-xl text-muted-foreground">Doğru Cevap (%{percentage})</div>
             </div>
-            
+
             {/* Answer Review */}
             <div className="space-y-3 mb-6 max-h-64 overflow-y-auto">
               {questions.map((q, index) => {
                 const answer = answers.find(a => a.questionId === index);
                 return (
-                  <div key={index} className={`p-3 rounded-lg border text-left ${
-                    answer?.isCorrect ? 'bg-success/10 border-success' : 'bg-destructive/10 border-destructive'
-                  }`}>
+                  <div key={index} className={`p-3 rounded-lg border text-left ${answer?.isCorrect ? 'bg-success/10 border-success' : 'bg-destructive/10 border-destructive'
+                    }`}>
                     <div className="flex items-start gap-2">
-                      {answer?.isCorrect ? 
-                        <Check className="w-5 h-5 text-success mt-0.5" /> : 
+                      {answer?.isCorrect ?
+                        <Check className="w-5 h-5 text-success mt-0.5" /> :
                         <X className="w-5 h-5 text-destructive mt-0.5" />
                       }
                       <div className="flex-1">
@@ -154,7 +152,7 @@ export const Quiz = () => {
                 );
               })}
             </div>
-            
+
             <div className="flex gap-3">
               <Button variant="outline" onClick={initializeQuiz} className="flex-1">
                 <RotateCw className="w-4 h-4 mr-2" />
@@ -183,7 +181,7 @@ export const Quiz = () => {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Oyunlara Dön
           </Button>
-          
+
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold">Quiz</h1>
@@ -194,7 +192,7 @@ export const Quiz = () => {
               <div className="text-sm text-muted-foreground">Puan</div>
             </div>
           </div>
-          
+
           <Progress value={progress} className="h-2" />
         </div>
 
@@ -210,7 +208,7 @@ export const Quiz = () => {
                 </div>
               )}
             </div>
-            
+
             <RadioGroup value={selectedAnswer || ''} onValueChange={handleAnswerSelect}>
               <div className="space-y-3">
                 {question.options.map((option, index) => {
@@ -218,21 +216,20 @@ export const Quiz = () => {
                   const isCorrect = option === question.correctAnswer;
                   const showCorrect = showResult && isCorrect;
                   const showWrong = showResult && isSelected && !isCorrect;
-                  
+
                   return (
                     <div
                       key={index}
-                      className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer ${
-                        showCorrect ? 'bg-success/10 border-success' :
+                      className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer ${showCorrect ? 'bg-success/10 border-success' :
                         showWrong ? 'bg-destructive/10 border-destructive' :
-                        isSelected ? 'bg-primary/10 border-primary' :
-                        'border-border hover:border-primary/50 hover:bg-muted'
-                      }`}
+                          isSelected ? 'bg-primary/10 border-primary' :
+                            'border-border hover:border-primary/50 hover:bg-muted'
+                        }`}
                       onClick={() => !showResult && handleAnswerSelect(option)}
                     >
                       <RadioGroupItem value={option} id={`option-${index}`} disabled={showResult} />
-                      <Label 
-                        htmlFor={`option-${index}`} 
+                      <Label
+                        htmlFor={`option-${index}`}
                         className="flex-1 cursor-pointer font-medium"
                       >
                         {option}
@@ -244,14 +241,13 @@ export const Quiz = () => {
                 })}
               </div>
             </RadioGroup>
-            
+
             {showResult && (
-              <div className={`mt-6 p-4 rounded-lg ${
-                selectedAnswer === question.correctAnswer ? 'bg-success/10 border border-success' : 'bg-destructive/10 border border-destructive'
-              }`}>
+              <div className={`mt-6 p-4 rounded-lg ${selectedAnswer === question.correctAnswer ? 'bg-success/10 border border-success' : 'bg-destructive/10 border border-destructive'
+                }`}>
                 <div className="flex items-start gap-3">
-                  {selectedAnswer === question.correctAnswer ? 
-                    <Check className="w-6 h-6 text-success mt-0.5" /> : 
+                  {selectedAnswer === question.correctAnswer ?
+                    <Check className="w-6 h-6 text-success mt-0.5" /> :
                     <X className="w-6 h-6 text-destructive mt-0.5" />
                   }
                   <div>

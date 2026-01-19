@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,21 +21,7 @@ export const MatchGame = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
 
-  useEffect(() => {
-    initializeGame();
-    updateStreak();
-  }, [categoryId]);
-
-  useEffect(() => {
-    if (startTime && !gameComplete) {
-      const interval = setInterval(() => {
-        setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [startTime, gameComplete]);
-
-  const initializeGame = () => {
+  const initializeGame = useCallback(() => {
     const terms = getRandomTerms(6, categoryId);
     const gameCards = [];
 
@@ -63,7 +49,21 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  };
+  }, [categoryId]);
+
+  useEffect(() => {
+    initializeGame();
+    updateStreak();
+  }, [initializeGame]);
+
+  useEffect(() => {
+    if (startTime && !gameComplete) {
+      const interval = setInterval(() => {
+        setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [startTime, gameComplete]);
 
   const handleCardClick = (card) => {
     // Don't allow clicks if two cards are already selected or if card is already matched
