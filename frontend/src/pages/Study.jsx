@@ -204,7 +204,7 @@ export const Study = () => {
                       const progress = getTermProgress(term.id);
                       return (
                         <Card
-                          key={term.id}
+                          key={`${term.id}-${refreshTrigger}`}
                           className={`w-[280px] transition-all hover:shadow-md ${progress.learned ? 'border-success bg-success/5' : ''
                             }`}
                         >
@@ -219,7 +219,9 @@ export const Study = () => {
                               variant="default"
                               size="sm"
                               onClick={() => handleMarkAsLearned(term.id)}
-                              className={`w-full mt-3 font-semibold ${progress.learned
+                              data-term-id={term.id}
+                              data-learned={progress.learned ? "true" : "false"}
+                              className={`w-full mt-3 font-semibold transition-colors ${progress.learned
                                 ? 'bg-green-600 hover:bg-green-700 text-white'
                                 : 'bg-blue-600 hover:bg-blue-700 text-white'
                                 }`}
