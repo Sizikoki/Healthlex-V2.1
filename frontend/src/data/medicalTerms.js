@@ -21,7 +21,9 @@ export const bodySystems = [
   { id: 'oncology', name: 'Onkoloji' },
   { id: 'radiology', name: 'Radyoloji' },
   { id: 'digestive', name: 'Sindirim Sistemi' },
-  { id: 'urinary', name: 'Üriner Sistem' }
+  { id: 'urinary', name: 'Üriner Sistem' },
+  { id: 'reproductive', name: 'Üreme Sistemi' },
+  { id: 'nervous', name: 'Sinir Sistemi' }
 ];
 
 // Legacy categories for backward compatibility
@@ -47,12 +49,23 @@ export const subcategoriesBySystem = {
     { id: 'joints', name: 'Eklemler & Hareket' }
   ],
   respiratory: [
+    { id: 'respiratory_organs', name: 'Solunum Organları ve Yapıları' },
+    { id: 'nasal_structures', name: 'Üst Solunum Yolu – Nazal Yapılar' },
+    { id: 'thoracic_areas', name: 'Göğüs ve İlişkili Anatomik Alanlar' },
+    { id: 'glands_structures', name: 'Bezler ve Yapısal Bileşenler' },
+    { id: 'respiratory_mechanics', name: 'Solunum Mekaniği ile İlişkili Yapılar' },
+    { id: 'physiological_functional', name: 'Fizyolojik / Fonksiyonel Kökler' },
     { id: 'anatomy', name: 'Anatomi' }
   ],
   skin: [
     { id: 'anatomy', name: 'Anatomi' }
   ],
   circulatory: [
+    { id: 'heart_chambers', name: 'Kalp ve Kalp Bölümleri' },
+    { id: 'vessels_structures', name: 'Damarlar ve Damar Yapıları' },
+    { id: 'physiological_functional', name: 'Fizyolojik / Fonksiyonel Kökler' },
+    { id: 'pathological_conditions', name: 'Patolojik Durum Kökleri' },
+    { id: 'diagnostic_imaging', name: 'Tanı – Görüntüleme Kökleri' },
     { id: 'anatomy', name: 'Anatomi' }
   ],
   sensory: [
@@ -77,9 +90,38 @@ export const subcategoriesBySystem = {
     { id: 'general', name: 'Genel' }
   ],
   digestive: [
+    { id: 'digestive_organs', name: 'Sindirim ve İlişkili Organlar' },
+    { id: 'liver_bile_pancreas', name: 'Karaciğer – Safra – Pankreas' },
+    { id: 'abdomen_peritoneum', name: 'Karın – Periton – İlişkili Yapılar' },
+    { id: 'other_anatomical', name: 'Diğer Anatomik Yapılar' },
+    { id: 'physiological_functional', name: 'Fizyolojik / Fonksiyonel Kökler' },
+    { id: 'pathological_clinical', name: 'Patolojik Durum / Klinik Hal Kökleri' },
+    { id: 'diagnostic_imaging', name: 'Tanı – Görüntüleme – Ölçüm Kökleri' },
+    { id: 'biochemical_content', name: 'Madde / İçerik / Biyokimyasal Kökler' },
+    { id: 'blood_stool_secretion', name: 'Kan – Dışkı – Salgı İlişkili Kökler' },
+    { id: 'other_clinical', name: 'Diğer Klinik / Yardımcı Kökler' },
     { id: 'anatomy', name: 'Anatomi' }
   ],
   urinary: [
+    { id: 'anatomical_structures', name: 'Anatomik Yapı Kökleri' },
+    { id: 'physiological_functional', name: 'Fizyolojik / Fonksiyonel Kökler' },
+    { id: 'pathological_urine_content', name: 'Patolojik İçerik / İdrarda Bulunan Maddeler' },
+    { id: 'pathological_formations', name: 'Patolojik Oluşumlar' },
+    { id: 'clinical_symptoms', name: 'Klinik Durum / Semptom Kökleri' },
+    { id: 'treatment_procedures', name: 'Tedavi / İşlem / Fonksiyon Kökleri' },
+    { id: 'anatomy', name: 'Anatomi' }
+  ],
+  reproductive: [
+    { id: 'female_organs', name: 'Kadın Üreme Organları' },
+    { id: 'male_organs', name: 'Erkek Üreme Organları' },
+    { id: 'gametes_secretions', name: 'Gametler, Salgılar ve Döngüler' },
+    { id: 'clinical_conditions', name: 'Klinik Durumlar ve İşlev Bozuklukları' },
+    { id: 'diagnostic_surgical', name: 'Tanı, İşlem ve Cerrahi Girişimler' },
+    { id: 'anatomy', name: 'Anatomi' }
+  ],
+  nervous: [
+    { id: 'central_peripheral_structures', name: 'Merkezi ve Çevresel Sinir Yapıları' },
+    { id: 'mental_sensory_functions', name: 'Zihinsel Süreçler ve Duyusal İşlevler' },
     { id: 'anatomy', name: 'Anatomi' }
   ]
 };
@@ -210,6 +252,269 @@ export const medicalTermsData = {
     { id: 1071, term: 'Scoli/o', turkish: 'Eğri', roots: 'scoli/o', definition: 'Omurganın yana doğru eğriliği (skolyoz)', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
     { id: 1072, term: 'Orth/o', turkish: 'Düz, doğru', roots: 'orth/o', definition: 'Düz, doğru, normal pozisyon', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
     { id: 1073, term: 'Rhabd/o', turkish: 'Çubuk şeklinde', roots: 'rhabd/o', definition: 'Çubuk şeklinde, çizgili kas', category: 'roots', system: 'movement', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+
+    // Solunum Organları ve Yapıları - Solunum Sistemi
+    { id: 1074, term: 'Alveol/o', turkish: 'Alveoller', roots: 'alveol/o', definition: 'Akciğerlerdeki hava keseleri', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1075, term: 'Bronchi/o', turkish: 'Bronş', roots: 'bronchi/o', definition: 'Ana hava yolları', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1076, term: 'Bronch/o', turkish: 'Bronş', roots: 'bronch/o', definition: 'Ana hava yolları', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1077, term: 'Bronchiol/o', turkish: 'Bronşioller', roots: 'bronchiol/o', definition: 'Küçük hava yolları', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1078, term: 'Laryng/o', turkish: 'Larenks', roots: 'laryng/o', definition: 'Gırtlak, ses kutusu', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1079, term: 'Pharyng/o', turkish: 'Farenks', roots: 'pharyng/o', definition: 'Yutak', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1080, term: 'Trache/o', turkish: 'Trakea', roots: 'trache/o', definition: 'Soluk borusu', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1081, term: 'Pneumon/o', turkish: 'Akciğer', roots: 'pneumon/o', definition: 'Akciğer organı', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1082, term: 'Pulmon/o', turkish: 'Akciğer', roots: 'pulmon/o', definition: 'Akciğer organı', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1083, term: 'Pleur/a', turkish: 'Plevra', roots: 'pleur/a', definition: 'Akciğerleri saran zar', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1084, term: 'Pleur/o', turkish: 'Plevra', roots: 'pleur/o', definition: 'Akciğerleri saran zar', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+    { id: 1085, term: 'Tonsill/o', turkish: 'Bademcikler', roots: 'tonsill/o', definition: 'Boğazdaki lenf dokusu', category: 'roots', system: 'respiratory', subcategory: 'respiratory_organs', mainCategory: 'roots' },
+
+    // Üst Solunum Yolu – Nazal Yapılar - Solunum Sistemi
+    { id: 1086, term: 'Nas/o', turkish: 'Burun', roots: 'nas/o', definition: 'Burun yapısı', category: 'roots', system: 'respiratory', subcategory: 'nasal_structures', mainCategory: 'roots' },
+    { id: 1087, term: 'Rhin/o', turkish: 'Burun', roots: 'rhin/o', definition: 'Burun yapısı', category: 'roots', system: 'respiratory', subcategory: 'nasal_structures', mainCategory: 'roots' },
+    { id: 1088, term: 'Sinus/o', turkish: 'Sinüsler', roots: 'sinus/o', definition: 'Burun çevresindeki hava boşlukları', category: 'roots', system: 'respiratory', subcategory: 'nasal_structures', mainCategory: 'roots' },
+
+    // Göğüs ve İlişkili Anatomik Alanlar - Solunum Sistemi
+    { id: 1089, term: 'Thorac/o', turkish: 'Göğüs', roots: 'thorac/o', definition: 'Göğüs bölgesi, toraks', category: 'roots', system: 'respiratory', subcategory: 'thoracic_areas', mainCategory: 'roots' },
+    { id: 1090, term: 'Pector/o', turkish: 'Göğüs', roots: 'pector/o', definition: 'Göğüs bölgesi', category: 'roots', system: 'respiratory', subcategory: 'thoracic_areas', mainCategory: 'roots' },
+    { id: 1091, term: 'Steth/o', turkish: 'Göğüs', roots: 'steth/o', definition: 'Göğüs bölgesi', category: 'roots', system: 'respiratory', subcategory: 'thoracic_areas', mainCategory: 'roots' },
+
+    // Bezler ve Yapısal Bileşenler - Solunum Sistemi
+    { id: 1092, term: 'Adenoid/o', turkish: 'Bezler', roots: 'adenoid/o', definition: 'Bez yapıları, adenoid dokular', category: 'roots', system: 'respiratory', subcategory: 'glands_structures', mainCategory: 'roots' },
+    { id: 1093, term: 'Lob/o', turkish: 'Lob', roots: 'lob/o', definition: 'Akciğer lobu, bölüm', category: 'roots', system: 'respiratory', subcategory: 'glands_structures', mainCategory: 'roots' },
+    { id: 1094, term: 'Muc/o', turkish: 'Muküs', roots: 'muc/o', definition: 'Muküs, sıvı salgı', category: 'roots', system: 'respiratory', subcategory: 'glands_structures', mainCategory: 'roots' },
+
+    // Solunum Mekaniği ile İlişkili Yapılar - Solunum Sistemi
+    { id: 1095, term: 'Phren/o', turkish: 'Diyafragma', roots: 'phren/o', definition: 'Diyafragma kası, solunum kası', category: 'roots', system: 'respiratory', subcategory: 'respiratory_mechanics', mainCategory: 'roots' },
+
+    // Fizyolojik / Fonksiyonel Kökler - Solunum Sistemi
+    { id: 1096, term: 'Spir/o', turkish: 'Solunum', roots: 'spir/o', definition: 'Solunum, nefes alma', category: 'roots', system: 'respiratory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1097, term: 'Ox/o', turkish: 'Oksijen', roots: 'ox/o', definition: 'Oksijen gazı', category: 'roots', system: 'respiratory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1098, term: 'Pneumat/o', turkish: 'Hava / Solunum', roots: 'pneumat/o', definition: 'Hava, solunum', category: 'roots', system: 'respiratory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1099, term: 'Pneum/o', turkish: 'Hava / Solunum', roots: 'pneum/o', definition: 'Hava, solunum', category: 'roots', system: 'respiratory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+
+    // Kalp ve Kalp Bölümleri - Dolaşım Sistemi
+    { id: 1100, term: 'Cardi/o', turkish: 'Kalp', roots: 'cardi/o', definition: 'Kalp organı', category: 'roots', system: 'circulatory', subcategory: 'heart_chambers', mainCategory: 'roots' },
+    { id: 1101, term: 'Atri/o', turkish: 'Atriyum (kulakçık)', roots: 'atri/o', definition: 'Kalbin üst odacıkları', category: 'roots', system: 'circulatory', subcategory: 'heart_chambers', mainCategory: 'roots' },
+    { id: 1102, term: 'Ventricul/o', turkish: 'Ventrikül (karıncık)', roots: 'ventricul/o', definition: 'Kalbin alt odacıkları', category: 'roots', system: 'circulatory', subcategory: 'heart_chambers', mainCategory: 'roots' },
+    { id: 1103, term: 'Valvul/o', turkish: 'Kapakçık', roots: 'valvul/o', definition: 'Kalp kapakçıkları', category: 'roots', system: 'circulatory', subcategory: 'heart_chambers', mainCategory: 'roots' },
+    { id: 1104, term: 'Coron/o', turkish: 'Taç (koroner yapı)', roots: 'coron/o', definition: 'Koroner damarlar, kalbi besleyen damarlar', category: 'roots', system: 'circulatory', subcategory: 'heart_chambers', mainCategory: 'roots' },
+
+    // Damarlar ve Damar Yapıları - Dolaşım Sistemi
+    { id: 1105, term: 'Angi/o', turkish: 'Damar', roots: 'angi/o', definition: 'Kan damarları', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1106, term: 'Aort/o', turkish: 'Aorta', roots: 'aort/o', definition: 'Vücudun ana atardamarı', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1107, term: 'Arteri/o', turkish: 'Arter (atardamar)', roots: 'arteri/o', definition: 'Kalbin kanlı kanı taşıyan damarlar', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1108, term: 'Phleb/o', turkish: 'Ven (toplardamar)', roots: 'phleb/o', definition: 'Kansız kanı kalbe taşıyan damarlar', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1109, term: 'Ven/o', turkish: 'Ven (toplardamar)', roots: 'ven/o', definition: 'Kansız kanı kalbe taşıyan damarlar', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1110, term: 'Vas/o', turkish: 'Damar / Ven', roots: 'vas/o', definition: 'Damar yapıları', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+    { id: 1111, term: 'Vascul/o', turkish: 'Damar yapısı', roots: 'vascul/o', definition: 'Damar sistemi ve yapıları', category: 'roots', system: 'circulatory', subcategory: 'vessels_structures', mainCategory: 'roots' },
+
+    // Fizyolojik / Fonksiyonel Kökler - Dolaşım Sistemi
+    { id: 1112, term: 'Rhythm/o', turkish: 'Ritim', roots: 'rhythm/o', definition: 'Kalp ritmi, düzenli atış', category: 'roots', system: 'circulatory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1113, term: 'Tensi/o', turkish: 'Tansiyon / Basınç', roots: 'tensi/o', definition: 'Kan basıncı, tansiyon', category: 'roots', system: 'circulatory', subcategory: 'physiological_functional', mainCategory: 'roots' },
+
+    // Patolojik Durum Kökleri - Dolaşım Sistemi
+    { id: 1114, term: 'Ather/o', turkish: 'Yağlı birikim, plak', roots: 'ather/o', definition: 'Damar duvarında yağ birikimi, ateroskleroz', category: 'roots', system: 'circulatory', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+    { id: 1115, term: 'Isch/o', turkish: 'Gizlemek, saklamak (iskemi)', roots: 'isch/o', definition: 'İskemi, kan akışının azalması', category: 'roots', system: 'circulatory', subcategory: 'pathological_conditions', mainCategory: 'roots' },
+
+    // Tanı – Görüntüleme Kökleri - Dolaşım Sistemi
+    { id: 1116, term: 'Ech/o', turkish: 'Yankı (ekokardiyografi)', roots: 'ech/o', definition: 'Yankı, ultrason görüntüleme', category: 'roots', system: 'circulatory', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+
+    // Sindirim ve İlişkili Organlar - Sindirim Sistemi
+    { id: 1117, term: 'Esophag/o', turkish: 'Özofagus', roots: 'esophag/o', definition: 'Yemek borusu', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1118, term: 'Gastr/o', turkish: 'Mide', roots: 'gastr/o', definition: 'Mide organı', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1119, term: 'Duoden/o', turkish: 'Duodenum', roots: 'duoden/o', definition: 'İnce bağırsağın ilk bölümü', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1120, term: 'Enter/o', turkish: 'Bağırsak', roots: 'enter/o', definition: 'İnce bağırsak', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1121, term: 'Ile/o', turkish: 'İleum', roots: 'ile/o', definition: 'İnce bağırsağın son bölümü', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1122, term: 'Colon/o', turkish: 'Kolon', roots: 'colon/o', definition: 'Kalın bağırsak', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1123, term: 'Col/o', turkish: 'Kolon', roots: 'col/o', definition: 'Kalın bağırsak', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1124, term: 'Rect/o', turkish: 'Rektüm', roots: 'rect/o', definition: 'Düz bağırsak', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1125, term: 'Sigmoid/o', turkish: 'Sigmoid kolon', roots: 'sigmoid/o', definition: 'S şeklindeki kolon bölümü', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+    { id: 1126, term: 'Appendic/o', turkish: 'Apendiks', roots: 'appendic/o', definition: 'Kör bağırsağa bağlı ek', category: 'roots', system: 'digestive', subcategory: 'digestive_organs', mainCategory: 'roots' },
+
+    // Karaciğer – Safra – Pankreas - Sindirim Sistemi
+    { id: 1127, term: 'Hepat/o', turkish: 'Karaciğer', roots: 'hepat/o', definition: 'Karaciğer organı', category: 'roots', system: 'digestive', subcategory: 'liver_bile_pancreas', mainCategory: 'roots' },
+    { id: 1128, term: 'Pancreat/o', turkish: 'Pankreas', roots: 'pancreat/o', definition: 'Pankreas bezi', category: 'roots', system: 'digestive', subcategory: 'liver_bile_pancreas', mainCategory: 'roots' },
+    { id: 1129, term: 'Cholecyst/o', turkish: 'Safra kesesi', roots: 'cholecyst/o', definition: 'Safra kesesi organı', category: 'roots', system: 'digestive', subcategory: 'liver_bile_pancreas', mainCategory: 'roots' },
+    { id: 1130, term: 'Chol/e', turkish: 'Safra', roots: 'chol/e', definition: 'Safra sıvısı', category: 'roots', system: 'digestive', subcategory: 'liver_bile_pancreas', mainCategory: 'roots' },
+    { id: 1131, term: 'Choledoch/o', turkish: 'Koledok kanalı', roots: 'choledoch/o', definition: 'Ana safra kanalı', category: 'roots', system: 'digestive', subcategory: 'liver_bile_pancreas', mainCategory: 'roots' },
+
+    // Karın – Periton – İlişkili Yapılar - Sindirim Sistemi
+    { id: 1132, term: 'Lapar/o', turkish: 'Karın', roots: 'lapar/o', definition: 'Karın bölgesi', category: 'roots', system: 'digestive', subcategory: 'abdomen_peritoneum', mainCategory: 'roots' },
+    { id: 1133, term: 'Periton/o', turkish: 'Periton', roots: 'periton/o', definition: 'Karın zarı', category: 'roots', system: 'digestive', subcategory: 'abdomen_peritoneum', mainCategory: 'roots' },
+    { id: 1134, term: 'Umbilic/o', turkish: 'Göbek', roots: 'umbilic/o', definition: 'Göbek bölgesi', category: 'roots', system: 'digestive', subcategory: 'abdomen_peritoneum', mainCategory: 'roots' },
+
+    // Diğer Anatomik Yapılar - Sindirim Sistemi
+    { id: 1135, term: 'Splen/o', turkish: 'Dalak', roots: 'splen/o', definition: 'Dalak organı', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1136, term: 'Cyst/o', turkish: 'Kese, kist', roots: 'cyst/o', definition: 'Kese yapısı, kist', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1137, term: 'Polyp/o', turkish: 'Polip', roots: 'polyp/o', definition: 'Mukoza üzerinde çıkıntı', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1138, term: 'Herni/o', turkish: 'Fıtık', roots: 'herni/o', definition: 'Organın yerinden çıkması', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1139, term: 'Inguin/o', turkish: 'Kasık', roots: 'inguin/o', definition: 'Kasık bölgesi', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1140, term: 'Hiat/o', turkish: 'Açıklık', roots: 'hiat/o', definition: 'Doğal açıklık, gedik', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+    { id: 1141, term: 'An/o', turkish: 'Anüs', roots: 'an/o', definition: 'Makat, sindirim sisteminin sonu', category: 'roots', system: 'digestive', subcategory: 'other_anatomical', mainCategory: 'roots' },
+
+    // Fizyolojik / Fonksiyonel Kökler - Sindirim Sistemi
+    { id: 1142, term: 'Motil/o', turkish: 'Hareket', roots: 'motil/o', definition: 'Bağırsak hareketi, motilite', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1143, term: 'Tens/o', turkish: 'Basınç, gerilim', roots: 'tens/o', definition: 'Gerilim, basınç', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1144, term: 'Rrhe/o', turkish: 'Akmak', roots: 'rrhe/o', definition: 'Akmak, akıntı', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1145, term: 'Peps/o', turkish: 'Sindirim', roots: 'peps/o', definition: 'Sindirim süreci', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1146, term: 'Phag/o', turkish: 'Yutmak', roots: 'phag/o', definition: 'Yutma, yeme', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1147, term: 'Sorb/o', turkish: 'Emmek', roots: 'sorb/o', definition: 'Emilim, absorpsiyon', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1148, term: 'Toler/o', turkish: 'Dayanmak', roots: 'toler/o', definition: 'Tolere etme, dayanma', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1149, term: 'pH', turkish: 'Asidite / Alkalinite', roots: 'pH', definition: 'Asit-baz dengesi', category: 'roots', system: 'digestive', subcategory: 'physiological_functional', mainCategory: 'roots' },
+
+    // Patolojik Durum / Klinik Hal Kökleri - Sindirim Sistemi
+    { id: 1150, term: 'Ascit/o', turkish: 'Sıvı birikimi', roots: 'ascit/o', definition: 'Karında sıvı birikimi, asit', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1151, term: 'Steat/o', turkish: 'Yağ', roots: 'steat/o', definition: 'Yağ, yağlı doku', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1152, term: 'Icter/o', turkish: 'Sarılık', roots: 'icter/o', definition: 'Sarılık, ikter', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1153, term: 'Cirrh/o', turkish: 'Sarımsı renk (siroz)', roots: 'cirrh/o', definition: 'Siroz, karaciğer sertliği', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1154, term: 'Odyn/o', turkish: 'Ağrı', roots: 'odyn/o', definition: 'Ağrı, sızı', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1155, term: 'Melan/o', turkish: 'Siyah', roots: 'melan/o', definition: 'Siyah renk, koyu', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1156, term: 'Halit/o', turkish: 'Nefes (halitozis)', roots: 'halit/o', definition: 'Ağız kokusu, halitozis', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1157, term: 'Singult/o', turkish: 'Hıçkırık', roots: 'singult/o', definition: 'Hıçkırık', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+    { id: 1158, term: 'Gargur/o', turkish: 'Kaynama sesi', roots: 'gargur/o', definition: 'Bağırsaklarda gürlültü', category: 'roots', system: 'digestive', subcategory: 'pathological_clinical', mainCategory: 'roots' },
+
+    // Tanı – Görüntüleme – Ölçüm Kökleri - Sindirim Sistemi
+    { id: 1159, term: 'Penetr/o', turkish: 'İçeri girme', roots: 'penetr/o', definition: 'Nüfuz etme, içeri girme', category: 'roots', system: 'digestive', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+    { id: 1160, term: 'For/o', turkish: 'Delmek', roots: 'for/o', definition: 'Delmek, perfore etmek', category: 'roots', system: 'digestive', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+    { id: 1161, term: 'Tent', turkish: 'Gerilmek', roots: 'tent', definition: 'Gerilme, distansiyon', category: 'roots', system: 'digestive', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+    { id: 1162, term: 'Verticul/o', turkish: 'Çıkıntı, kese', roots: 'verticul/o', definition: 'Divertikül, çıkıntı', category: 'roots', system: 'digestive', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+    { id: 1163, term: 'Rrhoid/o', turkish: 'Akıntı / çıkıntı', roots: 'rrhoid/o', definition: 'Hemoroid, basür', category: 'roots', system: 'digestive', subcategory: 'diagnostic_imaging', mainCategory: 'roots' },
+
+    // Madde / İçerik / Biyokimyasal Kökler - Sindirim Sistemi
+    { id: 1164, term: 'Aer/o', turkish: 'Hava', roots: 'aer/o', definition: 'Hava, gaz', category: 'roots', system: 'digestive', subcategory: 'biochemical_content', mainCategory: 'roots' },
+    { id: 1165, term: 'Lact/o', turkish: 'Süt', roots: 'lact/o', definition: 'Süt, laktoz', category: 'roots', system: 'digestive', subcategory: 'biochemical_content', mainCategory: 'roots' },
+    { id: 1166, term: 'Gluten/o', turkish: 'Gluten', roots: 'gluten/o', definition: 'Gluten proteini', category: 'roots', system: 'digestive', subcategory: 'biochemical_content', mainCategory: 'roots' },
+    { id: 1167, term: 'Flatu/o', turkish: 'Gaz', roots: 'flatu/o', definition: 'Barsak gazı, flatülans', category: 'roots', system: 'digestive', subcategory: 'biochemical_content', mainCategory: 'roots' },
+
+    // Kan – Dışkı – Salgı İlişkili Kökler - Sindirim Sistemi
+    { id: 1168, term: 'Hemat/o', turkish: 'Kan', roots: 'hemat/o', definition: 'Kan', category: 'roots', system: 'digestive', subcategory: 'blood_stool_secretion', mainCategory: 'roots' },
+    { id: 1169, term: 'Hem/o', turkish: 'Kan', roots: 'hem/o', definition: 'Kan', category: 'roots', system: 'digestive', subcategory: 'blood_stool_secretion', mainCategory: 'roots' },
+    { id: 1170, term: 'Emesis / Emet/o', turkish: 'Kusma', roots: 'emesis, emet/o', definition: 'Kusma', category: 'roots', system: 'digestive', subcategory: 'blood_stool_secretion', mainCategory: 'roots' },
+    { id: 1171, term: 'Fec/o', turkish: 'Dışkı', roots: 'fec/o', definition: 'Dışkı, gaita', category: 'roots', system: 'digestive', subcategory: 'blood_stool_secretion', mainCategory: 'roots' },
+    { id: 1172, term: 'Faec/o', turkish: 'Dışkı', roots: 'faec/o', definition: 'Dışkı, gaita', category: 'roots', system: 'digestive', subcategory: 'blood_stool_secretion', mainCategory: 'roots' },
+
+    // Diğer Klinik / Yardımcı Kökler - Sindirim Sistemi
+    { id: 1173, term: 'Stip', turkish: 'Sıkı, kuru', roots: 'stip', definition: 'Kabizlik, sıkılık', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+    { id: 1174, term: 'Pact/o', turkish: 'Sıkıştırmak', roots: 'pact/o', definition: 'Sıkıştırma, kompaksiyon', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+    { id: 1175, term: 'Irrit/o', turkish: 'Tahriş', roots: 'irrit/o', definition: 'Tahriş, irritasyon', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+    { id: 1176, term: 'Chalasi/o', turkish: 'Gevşeme', roots: 'chalasi/o', definition: 'Gevşeme, akalazya', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+    { id: 1177, term: 'Port/o', turkish: 'Kapı (portal)', roots: 'port/o', definition: 'Portal damar sistemi', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+    { id: 1178, term: 'Vag/o', turkish: 'Vagus siniri', roots: 'vag/o', definition: 'Vagus siniri', category: 'roots', system: 'digestive', subcategory: 'other_clinical', mainCategory: 'roots' },
+
+    // Anatomik Yapı Kökleri - Boşaltım Sistemi
+    { id: 1179, term: 'Nephr/o', turkish: 'Böbrek', roots: 'nephr/o', definition: 'Böbrek organı', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+    { id: 1180, term: 'Kidney', turkish: 'Böbrek', roots: 'kidney', definition: 'Böbrek organı', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+    { id: 1181, term: 'Vesic/o', turkish: 'Mesane', roots: 'vesic/o', definition: 'İdrar kesesi', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+    { id: 1182, term: 'Cyst/o', turkish: 'Mesane / Kese', roots: 'cyst/o', definition: 'Mesane, kese yapısı', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+    { id: 1183, term: 'Urethr/o', turkish: 'Üretra', roots: 'urethr/o', definition: 'İdrar kanalı', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+    { id: 1184, term: 'Periton/o', turkish: 'Periton', roots: 'periton/o', definition: 'Karın zarı', category: 'roots', system: 'urinary', subcategory: 'anatomical_structures', mainCategory: 'roots' },
+
+    // Fizyolojik / Fonksiyonel Kökler - Boşaltım Sistemi
+    { id: 1185, term: 'Ur/o', turkish: 'İdrar', roots: 'ur/o', definition: 'İdrar, idrar ile ilgili', category: 'roots', system: 'urinary', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1186, term: 'Mict/o', turkish: 'İdrar yapmak', roots: 'mict/o', definition: 'İşeme, miksiyon', category: 'roots', system: 'urinary', subcategory: 'physiological_functional', mainCategory: 'roots' },
+    { id: 1187, term: 'Continent', turkish: 'Tutmak', roots: 'continent', definition: 'İdrarı tutma, kontinans', category: 'roots', system: 'urinary', subcategory: 'physiological_functional', mainCategory: 'roots' },
+
+    // Patolojik İçerik / İdrarda Bulunan Maddeler - Boşaltım Sistemi
+    { id: 1188, term: 'Hemat/o', turkish: 'Kan', roots: 'hemat/o', definition: 'İdrarda kan', category: 'roots', system: 'urinary', subcategory: 'pathological_urine_content', mainCategory: 'roots' },
+    { id: 1189, term: 'Py/o', turkish: 'İrin', roots: 'py/o', definition: 'İrin, püy', category: 'roots', system: 'urinary', subcategory: 'pathological_urine_content', mainCategory: 'roots' },
+    { id: 1190, term: 'Glycos/o', turkish: 'Şeker', roots: 'glycos/o', definition: 'İdrarda şeker, glikoz', category: 'roots', system: 'urinary', subcategory: 'pathological_urine_content', mainCategory: 'roots' },
+    { id: 1191, term: 'Protein/o', turkish: 'Protein', roots: 'protein/o', definition: 'İdrarda protein', category: 'roots', system: 'urinary', subcategory: 'pathological_urine_content', mainCategory: 'roots' },
+    { id: 1192, term: 'Keton/o', turkish: 'Keton', roots: 'keton/o', definition: 'İdrarda keton', category: 'roots', system: 'urinary', subcategory: 'pathological_urine_content', mainCategory: 'roots' },
+
+    // Patolojik Oluşumlar - Boşaltım Sistemi
+    { id: 1193, term: 'Lith/o', turkish: 'Taş', roots: 'lith/o', definition: 'Böbrek taşı, üriner taş', category: 'roots', system: 'urinary', subcategory: 'pathological_formations', mainCategory: 'roots' },
+    { id: 1194, term: 'Glob/o', turkish: 'Yuvarlak kitle', roots: 'glob/o', definition: 'Küresel yapı, kitle', category: 'roots', system: 'urinary', subcategory: 'pathological_formations', mainCategory: 'roots' },
+
+    // Klinik Durum / Semptom Kökleri - Boşaltım Sistemi
+    { id: 1195, term: 'Alges/o', turkish: 'Ağrı', roots: 'alges/o', definition: 'Ağrı, ağrılı durum', category: 'roots', system: 'urinary', subcategory: 'clinical_symptoms', mainCategory: 'roots' },
+    { id: 1196, term: 'Spasm/o', turkish: 'Spazm', roots: 'spasm/o', definition: 'Kas spazmları', category: 'roots', system: 'urinary', subcategory: 'clinical_symptoms', mainCategory: 'roots' },
+    { id: 1197, term: 'Inflamm/o', turkish: 'İltihap', roots: 'inflamm/o', definition: 'Enflamasyon, iltihap', category: 'roots', system: 'urinary', subcategory: 'clinical_symptoms', mainCategory: 'roots' },
+
+    // Tedavi / İşlem / Fonksiyon Kökleri - Boşaltım Sistemi
+    { id: 1198, term: 'Lys/o', turkish: 'Ayırmak, çözmek', roots: 'lys/o', definition: 'Parçalama, lizis', category: 'roots', system: 'urinary', subcategory: 'treatment_procedures', mainCategory: 'roots' },
+
+    // Kadın Üreme Organları - Üreme Sistemi
+    { id: 1199, term: 'Metr/o', turkish: 'Uterus', roots: 'metr/o', definition: 'Rahim organı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1200, term: 'Hyster/o', turkish: 'Uterus', roots: 'hyster/o', definition: 'Rahim organı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1201, term: 'Cervic/o', turkish: 'Serviks', roots: 'cervic/o', definition: 'Rahim ağzı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1202, term: 'Vagin/o', turkish: 'Vajina', roots: 'vagin/o', definition: 'Vajina kanalı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1203, term: 'Colp/o', turkish: 'Vajina', roots: 'colp/o', definition: 'Vajina kanalı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1204, term: 'Vulv/o', turkish: 'Vulva', roots: 'vulv/o', definition: 'Dış gen', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1205, term: 'Salping/o', turkish: 'Fallop tüpü', roots: 'salping/o', definition: 'Yumurta kanalı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1206, term: 'Oophor/o', turkish: 'Over', roots: 'oophor/o', definition: 'Yumurtalık', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1207, term: 'Amni/o', turkish: 'Amniyon sıvısı', roots: 'amni/o', definition: 'Bebeği saran sıvı', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+    { id: 1208, term: 'Isi/o', turkish: 'Perine', roots: 'isi/o', definition: 'Perine bölgesi', category: 'roots', system: 'reproductive', subcategory: 'female_organs', mainCategory: 'roots' },
+
+    // Erkek Üreme Organları - Üreme Sistemi
+    { id: 1209, term: 'Orchid/o', turkish: 'Testis', roots: 'orchid/o', definition: 'Erkek üreme bezi', category: 'roots', system: 'reproductive', subcategory: 'male_organs', mainCategory: 'roots' },
+    { id: 1210, term: 'Epididym/o', turkish: 'Epididim', roots: 'epididym/o', definition: 'Sperm depolama kanalı', category: 'roots', system: 'reproductive', subcategory: 'male_organs', mainCategory: 'roots' },
+    { id: 1211, term: 'Prostat/o', turkish: 'Prostat', roots: 'prostat/o', definition: 'Prostat bezi', category: 'roots', system: 'reproductive', subcategory: 'male_organs', mainCategory: 'roots' },
+    { id: 1212, term: 'Vas/o', turkish: 'Vas deferens', roots: 'vas/o', definition: 'Sperm kanalı', category: 'roots', system: 'reproductive', subcategory: 'male_organs', mainCategory: 'roots' },
+    { id: 1213, term: 'Urethr/o', turkish: 'Üretra', roots: 'urethr/o', definition: 'İdrar ve sperm kanalı', category: 'roots', system: 'reproductive', subcategory: 'male_organs', mainCategory: 'roots' },
+
+    // Gametler, Salgılar ve Döngüler - Üreme Sistemi
+    { id: 1214, term: 'Sperm/o', turkish: 'Sperm', roots: 'sperm/o', definition: 'Erkek üreme hücresi', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+    { id: 1215, term: 'Semin/o', turkish: 'Semen / Tohum', roots: 'semin/o', definition: 'Meni sıvısı', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+    { id: 1216, term: 'Zoo/o', turkish: 'Canlı (sperm)', roots: 'zoo/o', definition: 'Canlı sperm', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+    { id: 1217, term: 'Galact/o', turkish: 'Süt', roots: 'galact/o', definition: 'Anne sütü', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+    { id: 1218, term: 'Men/o', turkish: 'Adet', roots: 'men/o', definition: 'Adet döngüsü', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+    { id: 1219, term: 'Col/o', turkish: 'Kolon (jinekoloji)', roots: 'col/o', definition: 'Rektovajinal ilişki', category: 'roots', system: 'reproductive', subcategory: 'gametes_secretions', mainCategory: 'roots' },
+
+    // Klinik Durumlar ve İşlev Bozuklukları - Üreme Sistemi
+    { id: 1220, term: 'Rrhag/o', turkish: 'Ani kanama', roots: 'rrhag/o', definition: 'Aşırı kanama', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1221, term: 'Alges/o', turkish: 'Ağrı', roots: 'alges/o', definition: 'Ağrı, ağrılı durum', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1222, term: 'Leuc/o', turkish: 'Beyaz (lökore)', roots: 'leuc/o', definition: 'Beyaz akıntı', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1223, term: 'Spasm/o', turkish: 'Spazm', roots: 'spasm/o', definition: 'Kas spazmları', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1224, term: 'Inflamm/o', turkish: 'İltihap', roots: 'inflamm/o', definition: 'Enflamasyon, iltihap', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1225, term: 'Varic/o', turkish: 'Genişlemiş damar', roots: 'varic/o', definition: 'Varikosel, genişlemiş ven', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1226, term: 'Potent/o', turkish: 'Güç (erektil)', roots: 'potent/o', definition: 'Erektil fonksiyon', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1227, term: 'Priap/o', turkish: 'Penis (erektil)', roots: 'priap/o', definition: 'Uzamış ereksiyon', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+    { id: 1228, term: 'Spad/o', turkish: 'Yarık, çatlak', roots: 'spad/o', definition: 'Hipo/epispadias', category: 'roots', system: 'reproductive', subcategory: 'clinical_conditions', mainCategory: 'roots' },
+
+    // Tanı, İşlem ve Cerrahi Girişimler - Üreme Sistemi
+    { id: 1229, term: 'Smear', turkish: 'Yayma', roots: 'smear', definition: 'Hücre yayma testi', category: 'roots', system: 'reproductive', subcategory: 'diagnostic_surgical', mainCategory: 'roots' },
+    { id: 1230, term: 'Curet/o', turkish: 'Kazımak', roots: 'curet/o', definition: 'Küretaj, kazıma', category: 'roots', system: 'reproductive', subcategory: 'diagnostic_surgical', mainCategory: 'roots' },
+    { id: 1231, term: 'Sect/o', turkish: 'Kesmek', roots: 'sect/o', definition: 'Cerrahi kesim', category: 'roots', system: 'reproductive', subcategory: 'diagnostic_surgical', mainCategory: 'roots' },
+    { id: 1232, term: 'Cept/o', turkish: 'Almak', roots: 'cept/o', definition: 'Alma, konsepsiyon', category: 'roots', system: 'reproductive', subcategory: 'diagnostic_surgical', mainCategory: 'roots' },
+    { id: 1233, term: 'Cesar', turkish: 'Sezaryen', roots: 'cesar', definition: 'Sezaryen doğum', category: 'roots', system: 'reproductive', subcategory: 'diagnostic_surgical', mainCategory: 'roots' },
+
+    // Merkezi ve Çevresel Sinir Yapıları - Sinir Sistemi
+    { id: 1234, term: 'Dors/o', turkish: 'Sırt', roots: 'dors/o', definition: 'Sırt bölgesi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1235, term: 'Opisth/o', turkish: 'Arka', roots: 'opisth/o', definition: 'Arka kısım', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1236, term: 'Peripher/o', turkish: 'Çevresel', roots: 'peripher/o', definition: 'Çevre sinir sistemi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1237, term: 'Cerebr/o', turkish: 'Beyin', roots: 'cerebr/o', definition: 'Beyin organı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1238, term: 'Encephal/o', turkish: 'Beyin', roots: 'encephal/o', definition: 'Beyin organı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1239, term: 'Myel/o', turkish: 'Omurilik', roots: 'myel/o', definition: 'Omurilik yapısı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1240, term: 'Mening/o', turkish: 'Beyin zarı', roots: 'mening/o', definition: 'Beyin ve omurilik zarı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1241, term: 'Ventricul/o', turkish: 'Ventrikül', roots: 'ventricul/o', definition: 'Beyin karıncığı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1242, term: 'Dur/o', turkish: 'Dura', roots: 'dur/o', definition: 'Sert beyin zarı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1243, term: 'Neur/o', turkish: 'Sinir', roots: 'neur/o', definition: 'Sinir yapısı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1244, term: 'Radicul/o', turkish: 'Sinir kökü', roots: 'radicul/o', definition: 'Sinir kökü yapısı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1245, term: 'Ganglion/o', turkish: 'Ganglion', roots: 'ganglion/o', definition: 'Sinir hücre kümesi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1246, term: 'Plex/o', turkish: 'Sinir ağı', roots: 'plex/o', definition: 'Sinir pleksus', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1247, term: 'Cervic/o', turkish: 'Boyun', roots: 'cervic/o', definition: 'Boyun bölgesi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1248, term: 'Lumb/o', turkish: 'Bel', roots: 'lumb/o', definition: 'Bel bölgesi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1249, term: 'Disc/o', turkish: 'Disk', roots: 'disc/o', definition: 'Omurlar arası disk', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1250, term: 'Arthr/o', turkish: 'Eklem', roots: 'arthr/o', definition: 'Eklem yapısı', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1251, term: 'Chondr/o', turkish: 'Kıkırdak', roots: 'chondr/o', definition: 'Kıkırdak doku', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1252, term: 'Lamin/o', turkish: 'Lamina', roots: 'lamin/o', definition: 'Omur laminaları', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1253, term: 'Fract/o', turkish: 'Kırık', roots: 'fract/o', definition: 'Kırık, frak', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1254, term: 'Crani/o', turkish: 'Kafatası', roots: 'crani/o', definition: 'Kafatası kemikleri', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+    { id: 1255, term: 'Cephal/o', turkish: 'Baş', roots: 'cephal/o', definition: 'Baş bölgesi', category: 'roots', system: 'nervous', subcategory: 'central_peripheral_structures', mainCategory: 'roots' },
+
+    // Zihinsel Süreçler ve Duyusal İşlevler - Sinir Sistemi
+    { id: 1256, term: 'Man/o', turkish: 'Zihin', roots: 'man/o', definition: 'Zihin, mani', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1257, term: 'Psych/o', turkish: 'Zihin', roots: 'psych/o', definition: 'Ruh, zihin', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1258, term: 'Phren/o', turkish: 'Zihin', roots: 'phren/o', definition: 'Zihin, akli durum', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1259, term: 'Dement/o', turkish: 'Akıl, bilinç', roots: 'dement/o', definition: 'Akıl, demans', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1260, term: 'Somn/o', turkish: 'Uyku', roots: 'somn/o', definition: 'Uyku durumu', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1261, term: 'Coma / Com/o', turkish: 'Koma', roots: 'coma, com/o', definition: 'Derin bilinçsizlik', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1262, term: 'Esthes/o', turkish: 'Duyum', roots: 'esthes/o', definition: 'Duyusal algı', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1263, term: 'Gnos/o', turkish: 'Tanıma', roots: 'gnos/o', definition: 'Tanıma, gnozi', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1264, term: 'Mnes/o', turkish: 'Hafıza', roots: 'mnes/o', definition: 'Hafıza, anımsama', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1265, term: 'Phas/o', turkish: 'Konuşma', roots: 'phas/o', definition: 'Konuşma, fazi', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1266, term: 'Calcul/o', turkish: 'Hesap', roots: 'calcul/o', definition: 'Hesaplama yeteneği', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1267, term: 'Orient/o', turkish: 'Yön', roots: 'orient/o', definition: 'Yönelim, oryantasyon', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
+    { id: 1268, term: 'Cop/o', turkish: 'Kesilmek', roots: 'cop/o', definition: 'Kesilme, senkop', category: 'roots', system: 'nervous', subcategory: 'mental_sensory_functions', mainCategory: 'roots' },
 
     // Eski terimler (geriye dönük uyumluluk için)
     { id: 35, term: 'Arthr/o', turkish: 'Eklem', roots: 'arthr/o', definition: 'Eklem anlamına gelen kök. Örnek: Arthritis (eklem iltihabı)', category: 'roots' },
