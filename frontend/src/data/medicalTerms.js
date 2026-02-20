@@ -46,7 +46,15 @@ export const subcategoriesBySystem = {
     { id: 'pathological_conditions', name: 'Patolojik Durum Kökleri' },
     { id: 'anatomy', name: 'Anatomi' },
     { id: 'support', name: 'Destek Dokuları' },
-    { id: 'joints', name: 'Eklemler & Hareket' }
+    { id: 'joints', name: 'Eklemler & Hareket' },
+    { id: 'skull_bones', name: 'Kafatası Kemikleri' },
+    { id: 'face_bones', name: 'Yüz Kemikleri' },
+    { id: 'trunk_bones', name: 'Gövde Kemikleri' },
+    { id: 'anatomic_direction', name: 'Anatomik Yön Terimleri' },
+    { id: 'basic_movement', name: 'Temel Hareket Terimleri' },
+    { id: 'regional_movement', name: 'Bölgesel Hareket Terimleri' },
+    { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
+    { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' }
   ],
   respiratory: [
     { id: 'respiratory_organs', name: 'Solunum Organları ve Yapıları' },
@@ -817,6 +825,50 @@ export const medicalTermsData = {
     { id: 62, term: 'Osteosarcoma', turkish: 'Osteosarkom (Kemik kanseri)', roots: 'osteon (kemik) + sarcoma (et tümörü)', definition: 'Kötü huylu kemik tümörü', category: 'pathology' },
     { id: 63, term: 'Fibromyalgia', turkish: 'Fibromiyalji (Yaygın kas ağrısı)', roots: 'fibra (lif) + mys (kas) + -algia (ağrı)', definition: 'Yaygın kas-iskelet sistemi ağrısı', category: 'pathology' },
     { id: 64, term: 'Atrophy', turkish: 'Atrofi (Kas erimesi)', roots: 'a- (yok) + trophē (beslenme)', definition: 'Kas veya dokunun küçülmesi', category: 'pathology' }
+  ],
+  skull_bones: [
+    { id: 65, term: 'Os Frontale', turkish: 'Frontal Bone', roots: 'os (kemik) + frons (alın)', definition: 'Beyni çevreleyen ve koruyan, kafatasının üst kısmını oluşturan kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 66, term: 'Os Parietale', turkish: 'Parietal Bone', roots: 'os (kemik) + paries (duvar)', definition: 'Kafatasının üst dış duvarını ve tavanını oluşturan büyük, kavisli bir kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 67, term: 'Os Temporale', turkish: 'Temporal Bone', roots: 'os (kemik) + tempus (şakak)', definition: 'Kafatasının alt yan duvarlarına katkıda bulunur.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 68, term: 'Os Occipitale', turkish: 'Occipital Bone', roots: 'os (kemik) + occiput (ense)', definition: 'Kafatasının arka duvarının ve tabanının büyük bir bölümünü oluşturan kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 69, term: 'Os Sphenoideum', turkish: 'Sphenoid Bone', roots: 'os (kemik) + sphen (kama)', definition: 'Beyni çevreleyen ve koruyan kafatasının üst kısmını oluşturan kemiklerden biridir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 70, term: 'Os Ethmoideum', turkish: 'Ethmoid Bone', roots: 'os (kemik) + ethmos (elek)', definition: 'Kafatasının üst kısmında yer alır ve beyni çevreleyip korur.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' }
+  ],
+  face_bones: [
+    { id: 71, term: 'Os Nasale', turkish: 'Nasal Bone', roots: 'os (kemik) + nasus (burun)', definition: 'Üst yüzün ortasında, Maxilla ön çıkıntıları arasında yan yana yer alan küçük dikdörtgen şekilli kemikler olup birlikte burun sırtını oluştururlar.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 72, term: 'Os Lacrimalia', turkish: 'Lacrimal Bone', roots: 'os (kemik) + lacrima (gözyaşı)', definition: 'Medial Orbital duvarların ön kısmını oluşturan çiftli kraniofasiyal kemiklerdir.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 73, term: 'Os Zygomaticum', turkish: 'Zygomatic Bone', roots: 'os (kemik) + zygoma (yanak)', definition: 'Yanağın çıkıntısını oluşturan önemli bir yüz kemiğidir. Şekli kabaca dikdörtgen şeklindedir.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 74, term: 'Maxilla', turkish: 'Maxilla', roots: 'maxilla (üst çene)', definition: 'Yüzün orta üçte birini oluşturan, orta hatta birleşen bir çift simetrik kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 75, term: 'Os Palatinum', turkish: 'Palatine Bone', roots: 'os (kemik) + palatum (damak)', definition: 'Orta hatta birleşen çift L şeklinde kemiklerdir.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 76, term: 'Processus Maxillaris Conchae Nasalis Inferioris', turkish: 'Maxillary Process of Inferior Nasal Concha', roots: 'processus (çıkıntı) + maxilla + concha (kabuk)', definition: 'Inferior Nasal Concha\'nın lateral yüzünden çıkan, Maxilla ile eklemleşen kemik çıkıntısıdır.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 77, term: 'Vomer', turkish: 'Vomer', roots: 'vomer (saban demiri)', definition: 'Eşlenmemiş yüz kemiklerinden biridir ve kemik nasal septumun posteroinferior bölümünü oluşturur.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
+    { id: 78, term: 'Mandibula', turkish: 'Mandible', roots: 'mandibula (alt çene)', definition: 'Alt çenenin tek orta hat kemiğidir.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' }
+  ],
+  trunk_bones: [
+    { id: 79, term: 'Columna Vertebralis', turkish: 'Vertebral Column', roots: 'columna (sütun) + vertebra (omur)', definition: 'Omur adı verilen ve Intervertebral Disklerle birbirinden ayrılan 33 kemikten oluşur.', category: 'anatomy', system: 'movement', subcategory: 'trunk_bones' },
+    { id: 80, term: 'Sternum', turkish: 'Sternum', roots: 'sternum (göğüs kemiği)', definition: 'Clavicula ve Kaburgalarla eklemlenen ön orta hat göğüs duvarı kemik plakasıdır.', category: 'anatomy', system: 'movement', subcategory: 'trunk_bones' },
+    { id: 81, term: 'Costae', turkish: 'Ribs', roots: 'costa (kaburga)', definition: 'Göğüs organlarını koruyan göğüs kafesinin ana yapısını oluşturur, ancak asıl işlevi solunuma yardımcı olmaktır.', category: 'anatomy', system: 'movement', subcategory: 'trunk_bones' },
+    { id: 82, term: 'Vertebra', turkish: 'Vertebra', roots: 'vertebra (omur)', definition: 'Omur, Omurga\'nın temel segmental birimidir.', category: 'anatomy', system: 'movement', subcategory: 'trunk_bones' }
+  ],
+  upper_extremity_bones: [
+    { id: 83, term: 'Scapula / Os Scapulare', turkish: 'Scapula / Scapular Bone', roots: 'scapula (kürek kemiği)', definition: 'Kabaca üçgen şeklinde bir göğüs kemeri kemiğidir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 84, term: 'Clavicula', turkish: 'Clavicle', roots: 'clavicula (köprücük kemiği)', definition: 'Göğüs kemerinin aksial iskelete bağlayan tek kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 85, term: 'Humerus / Os Humeri', turkish: 'Humerus / Humeral Bone', roots: 'humerus (kol kemiği)', definition: 'Üst kol bölgesinde yer alan uzun bir kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 86, term: 'Radius / Os Radiale', turkish: 'Radius / Radial Bone', roots: 'radius (tekerlek çubuğu)', definition: 'Ön kolda bulunan ve başparmak tarafındaki kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 87, term: 'Ulna / Os Ulnae', turkish: 'Ulna / Ulnar Bone', roots: 'ulna (dirsek kemiği)', definition: 'Ön kolda bulunan ve serçe parmak tarafında bulunan kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 88, term: 'Ossa Carpi', turkish: 'Carpal Bones', roots: 'ossa (kemikler) + carpus (el bileği)', definition: 'El bileğini oluşturan 8 kısa kemikten meydana gelir ve ön kol ile el arasındaki eklemleşmeyi sağlar.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 89, term: 'Ossa Metacarpi', turkish: 'Metacarpal Bones', roots: 'ossa (kemikler) + metacarpus (el ayası)', definition: 'El iskeletinde Ossa Carpi ile Phalanges Proximales arasında yer alan 5 uzun kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' },
+    { id: 90, term: 'Phalanx Manus', turkish: 'Phalanx of Hand', roots: 'phalanx (parmak kemiği) + manus (el)', definition: 'Phalanges Digitorum Manus, parmakların kemikleridir.', category: 'anatomy', system: 'movement', subcategory: 'upper_extremity_bones' }
+  ],
+  lower_extremity_bones: [
+    { id: 91, term: 'Os Coxae', turkish: 'Hip Bone / Coxal Bone', roots: 'os (kemik) + coxa (kalça)', definition: 'Os coxae, ilium, ischium ve pubis\'in birleşmesiyle oluşan kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 92, term: 'Femur', turkish: 'Thigh', roots: 'femur (uyluk kemiği)', definition: 'İnsan vücudundaki en uzun, en hacimli ve en güçlü kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 93, term: 'Patella', turkish: 'Patella / Knee Bone', roots: 'patella (diz kapağı)', definition: 'İnsan vücudundaki en büyük Sesamoid kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 94, term: 'Tibia', turkish: 'Tibia / Shin Bone', roots: 'tibia (kaval kemiği)', definition: 'Bacağın en büyük kemiğidir; Art. Genus ve Art. Talocruralis\'in oluşumuna katılır.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 95, term: 'Fibula', turkish: 'Fibula', roots: 'fibula (ince baldır kemiği)', definition: 'Bacağın iki kemiğinden daha küçük olanıdır.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 96, term: 'Ossa Tarsi', turkish: 'Tarsal Bones', roots: 'ossa (kemikler) + tarsus (ayak bileği)', definition: 'Ayakta Ossa Metatarsalia ve Phalanges Pedis dışında kalan yedi kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 97, term: 'Ossa Metatarsi', turkish: 'Metatarsal Bones', roots: 'ossa (kemikler) + metatarsus (ayak ayası)', definition: 'Ayakta medialden laterale doğru I\'den V\'e numaralandırılan 5 uzun kemikten oluşur.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' },
+    { id: 98, term: 'Phalanges Pedis / Ossa Digitorum Pedis', turkish: 'Phalanges of Foot / Phalangeal Bones of Foot', roots: 'phalanx (parmak kemiği) + pes (ayak)', definition: 'Ossa Metatarsalia\'nın Distal\'inde yer alan ve ayak parmaklarını oluşturan uzun kemiklerdir.', category: 'anatomy', system: 'movement', subcategory: 'lower_extremity_bones' }
   ]
 };
 
@@ -852,8 +904,38 @@ export const getTermsBySubcategory = (systemId, subcategoryId, mainCategoryId = 
 };
 
 // Get random terms for games
-export const getRandomTerms = (count = 10, categoryId = null) => {
-  const terms = categoryId ? getTermsByCategory(categoryId) : getAllTerms();
+// Supports both legacy category IDs and new filter format
+// Filter format: "mainCategory:system" or "mainCategory:system:subcategory"
+// Examples: "roots:movement", "roots:respiratory:respiratory_organs", "anatomy" (legacy)
+export const getRandomTerms = (count = 10, filter = null) => {
+  let terms = [];
+
+  if (!filter || filter === 'all') {
+    // Get all terms
+    terms = getAllTerms();
+  } else if (typeof filter === 'string') {
+    // Parse filter string
+    const parts = filter.split(':');
+
+    if (parts.length === 1) {
+      // Legacy category ID (anatomy, surgery, roots, pathology)
+      terms = getTermsByCategory(filter);
+    } else if (parts.length === 2) {
+      // mainCategory:system format
+      const [mainCategory, system] = parts;
+      terms = getTermsBySystem(system, mainCategory);
+    } else if (parts.length === 3) {
+      // mainCategory:system:subcategory format
+      const [mainCategory, system, subcategory] = parts;
+      terms = getTermsBySubcategory(system, subcategory, mainCategory);
+    }
+  }
+
+  // If no terms found, fall back to all terms
+  if (terms.length === 0) {
+    terms = getAllTerms();
+  }
+
   const shuffled = [...terms].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 };

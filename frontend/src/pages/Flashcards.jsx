@@ -4,7 +4,7 @@ import { ArrowLeft, RotateCw, ChevronRight, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { getRandomTerms, categories } from '@/data/medicalTerms';
+import { getRandomTerms } from '@/data/medicalTerms';
 import { saveProgress, saveFlashcardSession, updateStreak } from '@/utils/storage';
 import { toast } from 'sonner';
 
@@ -12,7 +12,7 @@ export const Flashcards = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
-  
+
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -83,7 +83,7 @@ export const Flashcards = () => {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Oyunlara Dön
           </Button>
-          
+
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold">Flashcard</h1>
@@ -93,9 +93,9 @@ export const Flashcards = () => {
               <RotateCw className="w-5 h-5" />
             </Button>
           </div>
-          
+
           <Progress value={progress} className="h-2" />
-          
+
           <div className="flex items-center gap-4 mt-4 text-sm">
             <div className="flex items-center gap-1">
               <Check className="w-4 h-4 text-success" />
@@ -110,10 +110,9 @@ export const Flashcards = () => {
 
         {/* Flashcard */}
         <div className="perspective-1000 mb-8">
-          <Card 
-            className={`relative h-80 cursor-pointer transition-all duration-500 transform-style-3d ${
-              isFlipped ? 'rotate-y-180' : ''
-            }`}
+          <Card
+            className={`relative h-80 cursor-pointer transition-all duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''
+              }`}
             onClick={handleFlip}
             style={{
               transformStyle: 'preserve-3d',
@@ -121,7 +120,7 @@ export const Flashcards = () => {
             }}
           >
             {/* Front */}
-            <div 
+            <div
               className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 bg-gradient-to-br from-primary/5 to-secondary/5"
               style={{ backfaceVisibility: 'hidden' }}
             >
@@ -133,9 +132,9 @@ export const Flashcards = () => {
             </div>
 
             {/* Back */}
-            <div 
+            <div
               className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 bg-gradient-to-br from-secondary/5 to-accent/5"
-              style={{ 
+              style={{
                 backfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)'
               }}
@@ -144,7 +143,7 @@ export const Flashcards = () => {
               <div className="text-2xl sm:text-3xl font-bold text-center text-secondary mb-4">
                 {currentTerm.turkish}
               </div>
-              
+
               {currentTerm.roots && (
                 <div className="mb-4 text-center">
                   <div className="text-xs font-medium text-muted-foreground mb-1">Kök/Ekler</div>
@@ -153,7 +152,7 @@ export const Flashcards = () => {
                   </div>
                 </div>
               )}
-              
+
               <div className="text-sm text-center text-muted-foreground max-w-md">
                 {currentTerm.definition}
               </div>

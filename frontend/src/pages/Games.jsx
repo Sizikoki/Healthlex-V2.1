@@ -4,7 +4,7 @@ import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { categories } from '@/data/medicalTerms';
+import { mainCategories, bodySystems } from '@/data/medicalTerms';
 
 export const Games = () => {
   const [selectedCategory, setSelectedCategory] = React.useState('all');
@@ -55,7 +55,7 @@ export const Games = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
             Farklı oyun modlarıyla tıbbi terminolojiyi kalcı olarak öğren
           </p>
-          
+
           {/* Category Selector */}
           <div className="flex items-center justify-center gap-4 max-w-md mx-auto">
             <span className="text-sm font-medium text-muted-foreground">Kategori:</span>
@@ -65,10 +65,25 @@ export const Games = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Tüm Kategoriler</SelectItem>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </SelectItem>
+
+                {mainCategories.map((mainCat) => (
+                  <React.Fragment key={mainCat.id}>
+                    <SelectItem
+                      value={mainCat.id}
+                      className="font-semibold text-primary"
+                    >
+                      {mainCat.name}
+                    </SelectItem>
+                    {bodySystems.map((system) => (
+                      <SelectItem
+                        key={`${mainCat.id}:${system.id}`}
+                        value={`${mainCat.id}:${system.id}`}
+                        className="pl-6"
+                      >
+                        → {system.name}
+                      </SelectItem>
+                    ))}
+                  </React.Fragment>
                 ))}
               </SelectContent>
             </Select>
