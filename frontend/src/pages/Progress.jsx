@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getStats, getQuizScores, getMatchScores, getUser, getStreak } from '@/utils/storage';
+import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getUser, getStreak } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 
 export const ProgressPage = () => {
@@ -14,6 +14,7 @@ export const ProgressPage = () => {
   const streak = getStreak();
   const quizScores = getQuizScores().slice(-10).reverse();
   const matchScores = getMatchScores().slice(-10).reverse();
+  const morphemeScores = getMorphemeScores().slice(-10).reverse();
   const totalTerms = getAllTerms().length;
   const progressPercentage = Math.round((stats.learnedTerms / totalTerms) * 100);
 
@@ -69,8 +70,8 @@ export const ProgressPage = () => {
   ];
 
   const formatDate = (dateStr) => {
-    return new Date(dateStr).toLocaleDateString('tr-TR', { 
-      day: 'numeric', 
+    return new Date(dateStr).toLocaleDateString('tr-TR', {
+      day: 'numeric',
       month: 'short',
       hour: '2-digit',
       minute: '2-digit'
@@ -161,19 +162,17 @@ export const ProgressPage = () => {
                   accent: 'from-accent to-success',
                   success: 'from-success to-secondary'
                 };
-                
+
                 return (
                   <div
                     key={achievement.id}
-                    className={`p-4 rounded-lg border-2 transition-all ${
-                      achievement.unlocked
+                    className={`p-4 rounded-lg border-2 transition-all ${achievement.unlocked
                         ? 'bg-card border-success shadow-lg'
                         : 'bg-muted/50 border-muted opacity-60'
-                    }`}
+                      }`}
                   >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colorClasses[achievement.color]} flex items-center justify-center mb-3 ${
-                      !achievement.unlocked && 'grayscale'
-                    }`}>
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colorClasses[achievement.color]} flex items-center justify-center mb-3 ${!achievement.unlocked && 'grayscale'
+                      }`}>
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="font-semibold mb-1">{achievement.title}</div>
@@ -190,11 +189,12 @@ export const ProgressPage = () => {
 
         {/* Activity History */}
         <Tabs defaultValue="quiz" className="mb-8">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="quiz">Quiz Geçmişi</TabsTrigger>
             <TabsTrigger value="match">Eşleştirme Geçmişi</TabsTrigger>
+            <TabsTrigger value="morpheme">Morfem Geçmişi</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="quiz">
             <Card>
               <CardHeader>
@@ -204,7 +204,7 @@ export const ProgressPage = () => {
               <CardContent>
                 {quizScores.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
-                    Henüz quiz tamamlamadın. 
+                    Henüz quiz tamamlamadın.
                     <Link to="/games" className="text-primary hover:underline ml-1">Hemen başla!</Link>
                   </div>
                 ) : (
@@ -216,11 +216,10 @@ export const ProgressPage = () => {
                           <div className="text-sm text-muted-foreground">{formatDate(score.date)}</div>
                         </div>
                         <div className="text-right">
-                          <div className={`text-2xl font-bold ${
-                            score.percentage >= 80 ? 'text-success' :
-                            score.percentage >= 60 ? 'text-primary' :
-                            'text-accent'
-                          }`}>
+                          <div className={`text-2xl font-bold ${score.percentage >= 80 ? 'text-success' :
+                              score.percentage >= 60 ? 'text-primary' :
+                                'text-accent'
+                            }`}>
                             {score.percentage}%
                           </div>
                         </div>
@@ -231,7 +230,7 @@ export const ProgressPage = () => {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="match">
             <Card>
               <CardHeader>
@@ -241,7 +240,7 @@ export const ProgressPage = () => {
               <CardContent>
                 {matchScores.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
-                    Henüz eşleştirme oyunu oynamadın. 
+                    Henüz eşleştirme oyunu oynamadın.
                     <Link to="/games" className="text-primary hover:underline ml-1">Hemen başla!</Link>
                   </div>
                 ) : (
@@ -262,6 +261,42 @@ export const ProgressPage = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="morpheme">
+            <Card>
+              <CardHeader>
+                <CardTitle>Son Morfem Oyunları</CardTitle>
+                <CardDescription>Son 10 Morfem Yapıcı performansın</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {morphemeScores.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    Henüz Morfem Yapıcı oynamadın.
+                    <Link to="/games" className="text-primary hover:underline ml-1">Hemen başla!</Link>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {morphemeScores.map((score, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted">
+                        <div>
+                          <div className="font-medium">{score.score} / {score.total} puan</div>
+                          <div className="text-sm text-muted-foreground">{formatDate(score.date)}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className={`text-2xl font-bold ${score.percentage >= 80 ? 'text-success' :
+                              score.percentage >= 60 ? 'text-primary' :
+                                'text-accent'
+                            }`}>
+                            {score.percentage}%
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
         {/* CTA */}
@@ -271,8 +306,8 @@ export const ProgressPage = () => {
             <h2 className="text-2xl font-bold mb-2">Yolculuğuna Devam Et!</h2>
             <p className="mb-6 opacity-90">
               {stats.learnedTerms < 20 ? 'Harika bir başlangıç yaptın!' :
-               stats.learnedTerms < 50 ? 'Çok iyi ilerliyorsun!' :
-               'Mükemmel bir performans! Devam et!'}
+                stats.learnedTerms < 50 ? 'Çok iyi ilerliyorsun!' :
+                  'Mükemmel bir performans! Devam et!'}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild variant="secondary" size="lg">

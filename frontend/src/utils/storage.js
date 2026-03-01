@@ -7,6 +7,7 @@ const STORAGE_KEYS = {
   FLASHCARD_PROGRESS: 'medterm_flashcard',
   QUIZ_SCORES: 'medterm_quiz_scores',
   MATCH_SCORES: 'medterm_match_scores',
+  MORPHEME_SCORES: 'medterm_morpheme_scores',
   STUDY_STREAK: 'medterm_streak'
 };
 
@@ -141,6 +142,29 @@ export const saveMatchScore = (categoryId, time, moves) => {
 export const getMatchScores = () => {
   const key = getUserStorageKey(STORAGE_KEYS.MATCH_SCORES);
   if (!key) return []; // No user logged in
+
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+};
+
+// Morpheme game scores
+export const saveMorphemeScore = (score, total, percentage) => {
+  const key = getUserStorageKey(STORAGE_KEYS.MORPHEME_SCORES);
+  if (!key) return;
+
+  const scores = getMorphemeScores();
+  scores.push({
+    score,
+    total,
+    percentage,
+    date: new Date().toISOString()
+  });
+  localStorage.setItem(key, JSON.stringify(scores));
+};
+
+export const getMorphemeScores = () => {
+  const key = getUserStorageKey(STORAGE_KEYS.MORPHEME_SCORES);
+  if (!key) return [];
 
   const data = localStorage.getItem(key);
   return data ? JSON.parse(data) : [];

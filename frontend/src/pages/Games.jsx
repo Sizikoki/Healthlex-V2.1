@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles } from 'lucide-react';
+import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { mainCategories, bodySystems } from '@/data/medicalTerms';
+// Study sayfasıyla aynı kategori listesi
+const GAME_CATEGORIES = [
+  { id: 'skull_bones', name: 'Kafatası Kemikleri' },
+  { id: 'face_bones', name: 'Yüz Kemikleri' },
+  { id: 'trunk_bones', name: 'Gövde Kemikleri' },
+  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
+  { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
+];
 
 export const Games = () => {
   const [selectedCategory, setSelectedCategory] = React.useState('all');
@@ -33,6 +40,14 @@ export const Games = () => {
       icon: Brain,
       color: 'from-accent to-success',
       path: '/quiz'
+    },
+    {
+      id: 'morpheme',
+      title: 'Morfem Yapıcı',
+      description: 'Verilen tanıma göre tıbbi terimi ön ek, kök ve son ek seçerek kendin oluştur!',
+      icon: Puzzle,
+      color: 'from-violet-500 to-purple-600',
+      path: '/morpheme'
     }
   ];
 
@@ -66,24 +81,10 @@ export const Games = () => {
               <SelectContent>
                 <SelectItem value="all">Tüm Kategoriler</SelectItem>
 
-                {mainCategories.map((mainCat) => (
-                  <React.Fragment key={mainCat.id}>
-                    <SelectItem
-                      value={mainCat.id}
-                      className="font-semibold text-primary"
-                    >
-                      {mainCat.name}
-                    </SelectItem>
-                    {bodySystems.map((system) => (
-                      <SelectItem
-                        key={`${mainCat.id}:${system.id}`}
-                        value={`${mainCat.id}:${system.id}`}
-                        className="pl-6"
-                      >
-                        → {system.name}
-                      </SelectItem>
-                    ))}
-                  </React.Fragment>
+                {GAME_CATEGORIES.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>

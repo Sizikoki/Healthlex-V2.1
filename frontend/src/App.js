@@ -9,6 +9,7 @@ import { Games } from '@/pages/Games';
 import { Flashcards } from '@/pages/Flashcards';
 import { MatchGame } from '@/pages/MatchGame';
 import { Quiz } from '@/pages/Quiz';
+import { MorphemeGame } from '@/pages/MorphemeGame';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
 import { isLoggedIn } from '@/utils/storage';
@@ -42,6 +43,11 @@ function App() {
           <Route path="/quiz" element={
             <ProtectedRoute>
               <Quiz />
+            </ProtectedRoute>
+          } />
+          <Route path="/morpheme" element={
+            <ProtectedRoute>
+              <MorphemeGame />
             </ProtectedRoute>
           } />
           <Route path="/progress" element={

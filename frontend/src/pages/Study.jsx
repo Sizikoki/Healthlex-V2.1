@@ -71,19 +71,21 @@ export const Study = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto relative">
-        {/* Hamburger - sol kenara sabitlenmiş, sidebar kapalıyken görünür */}
+      <div className="flex-1 overflow-y-auto flex flex-col">
+        {/* Sticky top bar — sadece sidebar kapalıyken görünür, içeriğin üstünde yer kaplar */}
         {!sidebarOpen && (
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="absolute top-8 left-3 z-20 p-2 rounded-lg hover:bg-muted transition-colors"
-            aria-label="Menüyü aç"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+          <div className="sticky top-0 z-20 flex items-center h-12 px-2 bg-background/90 backdrop-blur border-b border-border flex-shrink-0">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Menüyü aç"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         )}
 
-        <div className="max-w-[1260px] mx-auto px-6 py-8">
+        <div className="max-w-[1260px] mx-auto px-6 py-8 w-full">
           {/* Header */}
           <div className="mb-6">
             <div className="mb-4">
@@ -120,14 +122,13 @@ export const Study = () => {
               </p>
             </Card>
           ) : (
-            <div className="flex flex-wrap gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {terms.map((term) => {
                 const progress = getTermProgress(term.id);
                 return (
                   <div
                     key={`${term.id}-${refreshTrigger}`}
-                    className="group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-200"
-                    style={{ width: '387.33px', height: '239.5px', flexShrink: 0 }}
+                    className="group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-200 flex flex-col min-h-[220px]"
                   >
                     {/* Badge */}
                     <div className="absolute top-0 right-2 z-10">
