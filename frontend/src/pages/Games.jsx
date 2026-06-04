@@ -60,10 +60,6 @@ export const Games = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 bg-accent/10 rounded-full border border-accent/20 mb-4">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">Eğlenerek öğren</span>
-          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Oyunlar
           </h1>

@@ -274,7 +274,7 @@ export const Home = () => {
 
       {/* CTA Section */}
       {!loggedIn && (
-        <section className="py-16 bg-gradient-to-r from-primary via-secondary to-accent">
+        <section className="py-16 bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 border-t border-primary/20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Trophy className="w-16 h-16 text-white mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
