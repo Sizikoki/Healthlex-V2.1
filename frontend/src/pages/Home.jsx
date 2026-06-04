@@ -13,7 +13,7 @@ export const Home = () => {
     {
       icon: BookOpen,
       title: 'Kapsamlı Kelime Havuzu',
-      description: 'Tıbbi terminoloji kökleri, anatomik terimler, ameliyat terimleri ve patolojiler',
+      description: 'Kafatası, yüz, gövde ve üst/alt ekstremite kemiklerini içeren detaylı kemik anatomisi terimleri',
       color: 'primary'
     },
     {
@@ -30,8 +30,8 @@ export const Home = () => {
     },
     {
       icon: Sparkles,
-      title: 'Kök ve Ek Analizi',
-      description: 'Kelimelerin köklerini ve eklerini öğren, yeni kelimeleri kolaylıkla çöz',
+      title: 'Anatomik Açıklamalar',
+      description: 'Her kemik terimi için detaylı anatomik açıklamalar ve Türkçe karşılıkları',
       color: 'success'
     }
   ];
