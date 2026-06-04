@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Trophy, BookOpen, Gamepad2, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, Sparkles, Trophy, BookOpen, Gamepad2, TrendingUp, Check, X, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { categories } from '@/data/medicalTerms';
 import { isLoggedIn, getStats } from '@/utils/storage';
 
 export const Home = () => {
@@ -37,6 +36,61 @@ export const Home = () => {
     }
   ];
 
+  // Mini Demo State & Data
+  const demoQuestions = [
+    {
+      term: 'Caput Radii',
+      options: ['Radius Boynu', 'Radius Başı', 'Radius Pürtüğü'],
+      answer: 'Radius Başı',
+      description: 'Radius (döner kemik) başı anlamına gelir.'
+    },
+    {
+      term: 'Olecranon',
+      options: ['Köprücük Kemiği', 'Dirsek Çıkıntısı', 'Kürek Kemiği'],
+      answer: 'Dirsek Çıkıntısı',
+      description: 'Ulnanın (dirsek kemiği) üst ucundaki dirsek çıkıntısıdır.'
+    },
+    {
+      term: 'Os Frontale',
+      options: ['Alın Kemiği', 'Şakak Kemiği', 'Yanak Kemiği'],
+      answer: 'Alın Kemiği',
+      description: 'Kafatasının alın bölgesini oluşturan kemiktir.'
+    }
+  ];
+
+  const [currentDemo, setCurrentDemo] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [demoScore, setDemoScore] = useState(0);
+  const [demoFinished, setDemoFinished] = useState(false);
+
+  const handleDemoAnswer = (option) => {
+    if (selectedAnswer !== null) return;
+    setSelectedAnswer(option);
+    if (option === demoQuestions[currentDemo].answer) {
+      setDemoScore(prev => prev + 1);
+    }
+    setShowExplanation(true);
+  };
+
+  const handleNextDemo = () => {
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    if (currentDemo < demoQuestions.length - 1) {
+      setCurrentDemo(prev => prev + 1);
+    } else {
+      setDemoFinished(true);
+    }
+  };
+
+  const resetDemo = () => {
+    setCurrentDemo(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setDemoScore(0);
+    setDemoFinished(false);
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -44,11 +98,6 @@ export const Home = () => {
         <div className="absolute inset-0 gradient-hero opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="text-center space-y-6">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Sağlıkçılar için özel olarak tasarlandı</span>
-            </div>
-
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground">
               Tıbbi Terminolojiyi
               <span className="block mt-2 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
@@ -130,41 +179,96 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Kategori Seç</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Öğrenmek istediğin kategoriden başla
-            </p>
+      {/* Mini Demo Section */}
+      <section className="py-16 relative overflow-hidden">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-2">Hemen Şimdi Dene!</h2>
+            <p className="text-muted-foreground">Kayıt olmadan platformun nasıl çalıştığını test et.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category) => {
-              const colorClasses = {
-                primary: 'from-primary to-primary-dark',
-                secondary: 'from-secondary to-secondary-dark',
-                accent: 'from-accent to-success',
-                success: 'from-success to-accent'
-              };
+          <Card className="p-8 border border-primary/20 shadow-xl relative backdrop-blur bg-card/85 transition-all">
+            {!demoFinished ? (
+              <div className="space-y-6">
+                <div className="flex justify-between items-center text-sm font-medium text-muted-foreground border-b pb-4">
+                  <span>Soru {currentDemo + 1} / {demoQuestions.length}</span>
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">Skor: {demoScore}</span>
+                </div>
 
-              return (
-                <Link key={category.id} to={`/study?category=${category.id}`}>
-                  <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${colorClasses[category.color]} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <div className="text-3xl text-white">🫀</div>
+                <div className="text-center py-6">
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Latin Terim</span>
+                  <h3 className="text-3xl sm:text-4xl font-extrabold text-foreground">{demoQuestions[currentDemo].term}</h3>
+                </div>
+
+                <div className="grid gap-3">
+                  {demoQuestions[currentDemo].options.map((option, idx) => {
+                    const isCorrect = option === demoQuestions[currentDemo].answer;
+                    const isSelected = option === selectedAnswer;
+                    let btnStyle = "border border-border/80 hover:bg-muted/50 hover:border-primary/50 text-left justify-start h-auto py-4 px-6 text-base font-medium transition-all";
+
+                    if (selectedAnswer !== null) {
+                      if (isCorrect) {
+                        btnStyle = "border border-success bg-success/15 hover:bg-success/15 text-success text-left justify-start h-auto py-4 px-6 text-base font-medium flex items-center justify-between";
+                      } else if (isSelected) {
+                        btnStyle = "border border-destructive bg-destructive/15 hover:bg-destructive/15 text-destructive text-left justify-start h-auto py-4 px-6 text-base font-medium flex items-center justify-between";
+                      } else {
+                        btnStyle = "opacity-55 border border-border text-left justify-start h-auto py-4 px-6 text-base font-medium";
+                      }
+                    }
+
+                    return (
+                      <Button
+                        key={idx}
+                        onClick={() => handleDemoAnswer(option)}
+                        variant="ghost"
+                        className={btnStyle}
+                        disabled={selectedAnswer !== null}
+                      >
+                        <span>{option}</span>
+                        {selectedAnswer !== null && isCorrect && <Check className="w-5 h-5 ml-2 shrink-0 text-success" />}
+                        {selectedAnswer !== null && isSelected && !isCorrect && <X className="w-5 h-5 ml-2 shrink-0 text-destructive" />}
+                      </Button>
+                    );
+                  })}
+                </div>
+
+                {showExplanation && (
+                  <div className="p-4 bg-muted/50 border rounded-lg mt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <p className="font-semibold text-foreground mb-1">Açıklama:</p>
+                    <p className="text-muted-foreground">{demoQuestions[currentDemo].description}</p>
+                    <div className="flex justify-end pt-4 border-t mt-4">
+                      <Button onClick={handleNextDemo} size="lg" className="gradient-primary">
+                        {currentDemo === demoQuestions.length - 1 ? 'Sonucu Gör' : 'Sonraki Soru'}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{category.name}</h3>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <span>Başla</span>
-                      <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-10 space-y-6">
+                <Trophy className="w-20 h-20 text-yellow-500 mx-auto animate-bounce" />
+                <div>
+                  <h3 className="text-3xl font-extrabold text-foreground mb-2">Tebrikler!</h3>
+                  <p className="text-xl text-muted-foreground">
+                    Mini demoyu tamamladınız. Doğru sayısı: <span className="font-bold text-primary">{demoScore} / {demoQuestions.length}</span>
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                  <Button asChild size="lg" className="gradient-primary text-base">
+                    <Link to="/register">
+                      Tüm Terimleri Öğren
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
+                  </Button>
+                  <Button onClick={resetDemo} size="lg" variant="outline" className="text-base">
+                    <RotateCcw className="w-5 h-5 mr-2" />
+                    Tekrar Dene
+                  </Button>
+                </div>
+              </div>
+            )}
+          </Card>
         </div>
       </section>
 
@@ -190,26 +294,6 @@ export const Home = () => {
           </div>
         </section>
       )}
-
-      {/* Stats Section */}
-      <section className="py-16 border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl sm:text-5xl font-bold text-primary mb-2">1000+</div>
-              <div className="text-lg text-muted-foreground">Tıbbi Terim</div>
-            </div>
-            <div>
-              <div className="text-4xl sm:text-5xl font-bold text-secondary mb-2">50+</div>
-              <div className="text-lg text-muted-foreground">Kök ve Ek</div>
-            </div>
-            <div>
-              <div className="text-4xl sm:text-5xl font-bold text-accent mb-2">3</div>
-              <div className="text-lg text-muted-foreground">Oyun Modu</div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
