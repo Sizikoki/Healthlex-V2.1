@@ -30,8 +30,8 @@ export const Home = () => {
     },
     {
       icon: Sparkles,
-      title: 'Anatomik Açıklamalar',
-      description: 'Her kemik terimi için detaylı anatomik açıklamalar ve Türkçe karşılıkları',
+      title: 'Terim Kartları & Tanımlar',
+      description: "Kelimelerin Latince, İngilizce karşılıklarını öğren, flashcard'lar ve pratik oyunlarla hafızana kalıcı olarak işle.",
       color: 'success'
     }
   ];
