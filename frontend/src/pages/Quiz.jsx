@@ -94,7 +94,7 @@ export const Quiz = () => {
     } else {
       // Quiz complete
       setQuizComplete(true);
-      saveQuizScore(categoryId || 'all', score + (selectedAnswer === questions[currentQuestion].correctAnswer ? 1 : 0), questions.length);
+      saveQuizScore(categoryId || 'all', score, questions.length);
     }
   };
 

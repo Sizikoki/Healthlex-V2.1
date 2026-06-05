@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User as UserIcon, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,9 +83,9 @@ export const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Hesabın yok mu?{' '}
-              <a href="/register" className="text-primary font-medium hover:underline">
+              <Link to="/register" className="text-primary font-medium hover:underline">
                 Kayıt Ol
-              </a>
+              </Link>
             </p>
           </div>
         </CardContent>
@@ -123,8 +123,8 @@ export const Register = () => {
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-gradient-to-br from-primary via-secondary to-accent rounded-xl shadow-lg">
-              <Sparkles className="w-8 h-8 text-white" />
+            <div className="p-3 bg-primary rounded-xl shadow-lg">
+              <Activity className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
           <CardTitle className="text-2xl font-bold">HealthLexMed'e Kayıt Ol</CardTitle>
@@ -185,9 +185,9 @@ export const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Zaten hesabın var mı?{' '}
-              <a href="/login" className="text-primary font-medium hover:underline">
+              <Link to="/login" className="text-primary font-medium hover:underline">
                 Giriş Yap
-              </a>
+              </Link>
             </p>
           </div>
         </CardContent>

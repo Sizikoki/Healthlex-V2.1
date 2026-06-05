@@ -37,22 +37,23 @@ export const Flashcards = () => {
       saveProgress(currentTerm.id, true);
       setLearnedCount(learnedCount + 1);
     }
-    goToNext();
+    goToNext(true);
   };
 
   const handleDontKnow = () => {
     setSkippedCount(skippedCount + 1);
-    goToNext();
+    goToNext(false);
   };
 
-  const goToNext = () => {
+  const goToNext = (wasLearned) => {
     setIsFlipped(false);
+    const finalLearned = wasLearned ? learnedCount + 1 : learnedCount;
     if (currentIndex < terms.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       // Session complete
-      saveFlashcardSession(categoryId || 'all', learnedCount + 1, terms.length);
-      toast.success(`Tamamlandı! ${learnedCount + 1}/${terms.length} terim öğrenildi.`);
+      saveFlashcardSession(categoryId || 'all', finalLearned, terms.length);
+      toast.success(`Tamamlandı! ${finalLearned}/${terms.length} terim öğrenildi.`);
       navigate('/games');
     }
   };
