@@ -16,6 +16,15 @@ const CATEGORIES = [
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
 ];
 
+const UPPER_EXTREMITY_GROUPS = [
+  { name: 'Scapula', ids: [83, 351, 352, 391, 392, 393, 394, 395, 396, 397, 398] },
+  { name: 'Clavicula', ids: [84, 375, 376, 377, 378, 379, 380, 381, 382] },
+  { name: 'Humerus', ids: [85, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374] },
+  { name: 'Radius', ids: [86, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314] },
+  { name: 'Ulna', ids: [87, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327] },
+  { name: 'Ossa Manus', ids: [88, 89, 90, 328, 329, 330, 331, 332] }
+];
+
 export const Study = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,6 +43,73 @@ export const Study = () => {
     saveProgress(termId, newStatus);
     toast.success(newStatus ? 'Terim öğrenildi olarak işaretlendi!' : 'Öğrenildi işareti kaldırıldı');
     setRefreshTrigger(prev => prev + 1);
+  };
+
+  const renderTermCard = (term) => {
+    const progress = getTermProgress(term.id);
+    return (
+      <div
+        key={`${term.id}-${refreshTrigger}`}
+        className="group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-200 flex flex-col min-h-[220px]"
+      >
+        {/* Badge */}
+        <div className="absolute top-0 right-2 z-10">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600">
+            {selectedCategory.name}
+          </span>
+        </div>
+
+        {/* Card body */}
+        <div className="p-5 flex flex-col h-full">
+
+          {/* Title */}
+          <div className="mb-3 pr-28 pt-1">
+            <h3 className="text-lg font-bold leading-tight text-slate-900">
+              {term.term}
+            </h3>
+          </div>
+
+          {/* EN + Turkish */}
+          <div className="mt-2 space-y-2 mb-4">
+            <div className="flex items-baseline gap-2">
+              <span className="text-[10px] font-bold text-slate-400 w-5 shrink-0">EN</span>
+              <span className="text-sm font-medium text-slate-500">{term.turkish}</span>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mb-4" />
+
+          {/* Definition */}
+          <p className="text-sm text-slate-600 line-clamp-2 mb-5 min-h-[2.5rem]">
+            {term.definition}
+          </p>
+
+          {/* Button */}
+          <div className="flex items-center justify-center mt-auto">
+            <button
+              onClick={() => handleMarkAsLearned(term.id)}
+              data-term-id={term.id}
+              data-learned={progress.learned ? "true" : "false"}
+              className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${progress.learned
+                ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 hover:bg-emerald-200 focus:ring-emerald-400'
+                : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 focus:ring-indigo-400'
+                }`}
+            >
+              {progress.learned ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+                  <span>Öğrenildi</span>
+                </>
+              ) : (
+                <span>Öğrendim</span>
+              )}
+            </button>
+          </div>
+
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -121,74 +197,27 @@ export const Study = () => {
                 {searchQuery ? 'Arama kriterlerinizi değiştirmeyi deneyin' : 'Bu kategoride henüz terim bulunmuyor'}
               </p>
             </Card>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {terms.map((term) => {
-                const progress = getTermProgress(term.id);
+          ) : selectedCategoryId === 'upper_extremity_bones' ? (
+            <div className="space-y-12">
+              {UPPER_EXTREMITY_GROUPS.map((group) => {
+                const groupTerms = terms.filter(t => group.ids.includes(t.id));
+                if (groupTerms.length === 0) return null;
                 return (
-                  <div
-                    key={`${term.id}-${refreshTrigger}`}
-                    className="group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-200 flex flex-col min-h-[220px]"
-                  >
-                    {/* Badge */}
-                    <div className="absolute top-0 right-2 z-10">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600">
-                        {selectedCategory.name}
-                      </span>
+                  <div key={group.name} className="space-y-4">
+                    <div className="flex items-center gap-3 border-b border-border pb-2">
+                      <h3 className="text-2xl font-bold text-foreground">{group.name}</h3>
+                      <Badge variant="secondary" className="text-sm">{groupTerms.length} terim</Badge>
                     </div>
-
-                    {/* Card body */}
-                    <div className="p-5 flex flex-col h-full">
-
-                      {/* Title */}
-                      <div className="mb-3 pr-28 pt-1">
-                        <h3 className="text-lg font-bold leading-tight text-slate-900">
-                          {term.term}
-                        </h3>
-                      </div>
-
-                      {/* EN + Turkish */}
-                      <div className="mt-2 space-y-2 mb-4">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-[10px] font-bold text-slate-400 w-5 shrink-0">EN</span>
-                          <span className="text-sm font-medium text-slate-500">{term.turkish}</span>
-                        </div>
-                      </div>
-
-                      {/* Divider */}
-                      <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mb-4" />
-
-                      {/* Definition */}
-                      <p className="text-sm text-slate-600 line-clamp-2 mb-5 min-h-[2.5rem]">
-                        {term.definition}
-                      </p>
-
-                      {/* Button */}
-                      <div className="flex items-center justify-center mt-auto">
-                        <button
-                          onClick={() => handleMarkAsLearned(term.id)}
-                          data-term-id={term.id}
-                          data-learned={progress.learned ? "true" : "false"}
-                          className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${progress.learned
-                            ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 hover:bg-emerald-200 focus:ring-emerald-400'
-                            : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 focus:ring-indigo-400'
-                            }`}
-                        >
-                          {progress.learned ? (
-                            <>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-                              <span>Öğrenildi</span>
-                            </>
-                          ) : (
-                            <span>Öğrendim</span>
-                          )}
-                        </button>
-                      </div>
-
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {groupTerms.map(renderTermCard)}
                     </div>
                   </div>
                 );
               })}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {terms.map(renderTermCard)}
             </div>
           )}
         </div>
