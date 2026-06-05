@@ -9,7 +9,12 @@ const GAME_CATEGORIES = [
   { id: 'skull_bones', name: 'Kafatası Kemikleri' },
   { id: 'face_bones', name: 'Yüz Kemikleri' },
   { id: 'trunk_bones', name: 'Gövde Kemikleri' },
-  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
+  { id: 'scapula', name: 'Scapula' },
+  { id: 'clavicula', name: 'Clavicula' },
+  { id: 'humerus', name: 'Humerus' },
+  { id: 'radius', name: 'Radius' },
+  { id: 'ulna', name: 'Ulna' },
+  { id: 'ossa_manus', name: 'Ossa Manus' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
 ];
 

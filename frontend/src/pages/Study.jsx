@@ -12,7 +12,12 @@ const CATEGORIES = [
   { id: 'skull_bones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
   { id: 'face_bones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
   { id: 'trunk_bones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
-  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
+  { id: 'scapula', name: 'Scapula', system: 'movement', subcategory: 'scapula' },
+  { id: 'clavicula', name: 'Clavicula', system: 'movement', subcategory: 'clavicula' },
+  { id: 'humerus', name: 'Humerus', system: 'movement', subcategory: 'humerus' },
+  { id: 'radius', name: 'Radius', system: 'movement', subcategory: 'radius' },
+  { id: 'ulna', name: 'Ulna', system: 'movement', subcategory: 'ulna' },
+  { id: 'ossa_manus', name: 'Ossa Manus', system: 'movement', subcategory: 'ossa_manus' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
 ];
 
