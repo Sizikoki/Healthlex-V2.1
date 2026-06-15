@@ -1,241 +1,48 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Trophy, RotateCcw, Layers, Puzzle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { saveMorphemeScore } from '@/utils/storage';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
+import { getAllTerms } from '@/data/medicalTerms';
 
-// ─── VERİ ──────────────────────────────────────────────────────────────────
+// Dynamic question generator from terms list
+const generateQuestions = (allTerms) => {
+  // Shuffle all terms
+  const shuffledTerms = [...allTerms].sort(() => Math.random() - 0.5);
 
-const ROOTS = [
-    'Acetabul/o', 'Acromi/o', 'Ankyl/o', 'Arthr/o', 'Articul/o',
-    'Brachi/o', 'Burs/o', 'Calcane/o', 'Carp/o', 'Cartilagin/o',
-    'Cephal/o', 'Cervic/o', 'Chondr/o', 'Clavicul/o', 'Coccyg/o',
-    'Cost/o', 'Crani/o', 'Duct/o', 'Electr/o',
-    // distractor roots
-    'Lord/o', 'Scapul/o', 'Stern/o', 'Vertebr/o', 'Abdomin/o',
-    'Phren/o', 'Tendin/o',
-];
+  // Choose up to 10 terms that have roots
+  const gameTerms = shuffledTerms.slice(0, Math.min(10, shuffledTerms.length));
 
-const SUFFIXES = [
-    '-plasty', '-tomy', '-itis', '-osis', '-scopy',
-    '-gram', '-graphy', '-ectomy', '-malacia', '-dynia',
-    '-pathy', '-metry', '-ion / -ation',
-    '-algia', '-ous', '-ar', '-al', '-ic',
-];
+  return gameTerms.map(term => {
+    const correctRoot = term.roots;
 
-const PREFIXES = [
-    'a- / an-', 'hyper-', 'hypo-', 'sub-', 'supra-',
-    'inter-', 'intra-', 'peri-', 'retro-', 'trans-',
-    'pre-', 'post-',
-];
+    // Distractors from other terms' roots
+    const otherRoots = allTerms
+      .map(t => t.roots)
+      .filter(r => r !== correctRoot);
 
-// Sorular: { term, definition, parts: [] }
-// parts item: { type: 'prefix'|'root'|'suffix', value: string }
-const QUESTIONS = [
-    {
-        term: 'Subacromial',
-        definition: 'Acromion (Scapula\'nın çıkıntısı) altındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'sub-' },
-            { type: 'root', value: 'Acromi/o' },
-            { type: 'suffix', value: '-al' },
-        ],
-    },
-    {
-        term: 'Arthroscopy',
-        definition: 'Articulatio (eklem) içinin endoskopik incelenmesi',
-        parts: [
-            { type: 'root', value: 'Arthr/o' },
-            { type: 'suffix', value: '-scopy' },
-        ],
-    },
-    {
-        term: 'Hyperlordosis',
-        definition: 'Lordosis (bel çukuru) aşırı artışı',
-        parts: [
-            { type: 'prefix', value: 'hyper-' },
-            { type: 'root', value: 'Lord/o' },
-            { type: 'suffix', value: '-osis' },
-        ],
-    },
-    {
-        term: 'Intercostal',
-        definition: 'Costae (kaburgalar) arasındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'inter-' },
-            { type: 'root', value: 'Cost/o' },
-            { type: 'suffix', value: '-al' },
-        ],
-    },
-    {
-        term: 'Craniotomy',
-        definition: 'Cranium (kafatası) üzerine cerrahi açılma',
-        parts: [
-            { type: 'root', value: 'Crani/o' },
-            { type: 'suffix', value: '-tomy' },
-        ],
-    },
-    {
-        term: 'Bursitis',
-        definition: 'Bursa (içi dolu kese) inflamasyonu',
-        parts: [
-            { type: 'root', value: 'Burs/o' },
-            { type: 'suffix', value: '-itis' },
-        ],
-    },
-    {
-        term: 'Suprascapular',
-        definition: 'Scapula (kürek kemiği) üzerindeki bölge',
-        parts: [
-            { type: 'prefix', value: 'supra-' },
-            { type: 'root', value: 'Scapul/o' },
-            { type: 'suffix', value: '-ar' },
-        ],
-    },
-    {
-        term: 'Calcaneodynia',
-        definition: 'Calcaneus (topuk kemiği)\'nde ağrı',
-        parts: [
-            { type: 'root', value: 'Calcane/o' },
-            { type: 'suffix', value: '-dynia' },
-        ],
-    },
-    {
-        term: 'Retroclavicular',
-        definition: 'Clavicula (köprücük kemiği) arkasındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'retro-' },
-            { type: 'root', value: 'Clavicul/o' },
-            { type: 'suffix', value: '-ar' },
-        ],
-    },
-    {
-        term: 'Ankylosis',
-        definition: 'Eklemde ankiloz (sertlik) oluşumu',
-        parts: [
-            { type: 'root', value: 'Ankyl/o' },
-            { type: 'suffix', value: '-osis' },
-        ],
-    },
-    {
-        term: 'Acetabuloplasty',
-        definition: 'Acetabulum (kalça soketi)\'nin cerrahi rekonstrüksiyonu',
-        parts: [
-            { type: 'root', value: 'Acetabul/o' },
-            { type: 'suffix', value: '-plasty' },
-        ],
-    },
-    {
-        term: 'Transabdominal',
-        definition: 'Abdomen (karın) üzerinden / boyunca geçen',
-        parts: [
-            { type: 'prefix', value: 'trans-' },
-            { type: 'root', value: 'Abdomin/o' },
-            { type: 'suffix', value: '-al' },
-        ],
-    },
-    {
-        term: 'Subphrenic',
-        definition: 'Phren (diyafram) altındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'sub-' },
-            { type: 'root', value: 'Phren/o' },
-            { type: 'suffix', value: '-ic' },
-        ],
-    },
-    {
-        term: 'Costectomy',
-        definition: 'Costa (kaburga) ekzisyonu (çıkarma) işlemi',
-        parts: [
-            { type: 'root', value: 'Cost/o' },
-            { type: 'suffix', value: '-ectomy' },
-        ],
-    },
-    {
-        term: 'Cervicodynia',
-        definition: 'Servikal (boyun) bölgesinde ağrı',
-        parts: [
-            { type: 'root', value: 'Cervic/o' },
-            { type: 'suffix', value: '-dynia' },
-        ],
-    },
-    {
-        term: 'Peritendinous',
-        definition: 'Tendo (tendon) çevresindeki bölge',
-        parts: [
-            { type: 'prefix', value: 'peri-' },
-            { type: 'root', value: 'Tendin/o' },
-            { type: 'suffix', value: '-ous' },
-        ],
-    },
-    {
-        term: 'Retrosternal',
-        definition: 'Sternum (göğüs kemiği) arkasındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'retro-' },
-            { type: 'root', value: 'Stern/o' },
-            { type: 'suffix', value: '-al' },
-        ],
-    },
-    {
-        term: 'Intervertebral',
-        definition: 'Vertebrae (omurlar) arasındaki bölge',
-        parts: [
-            { type: 'prefix', value: 'inter-' },
-            { type: 'root', value: 'Vertebr/o' },
-            { type: 'suffix', value: '-al' },
-        ],
-    },
-    {
-        term: 'Cranioplasty',
-        definition: 'Cranium (kafatası) rekonstrüksiyonu (onarımı)',
-        parts: [
-            { type: 'root', value: 'Crani/o' },
-            { type: 'suffix', value: '-plasty' },
-        ],
-    },
-];
+    // Pick 3 unique distractors
+    const uniqueDistractors = [...new Set(otherRoots)]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
 
-// ─── YARDIMCI FONKSİYONLAR ─────────────────────────────────────────────────
+    // Shuffle correct answer and distractors
+    const options = [correctRoot, ...uniqueDistractors].sort(() => Math.random() - 0.5);
 
-// Soru için kullanılacak parça setini oluşturur (doğrular + distractors)
-function buildSlotOptions(question) {
-    const neededTypes = question.parts.map(p => p.type);
-    const neededValues = question.parts.map(p => p.value.toLowerCase());
-
-    const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
-
-    const pickDistractors = (pool, correctValues, count) => {
-        const filtered = pool.filter(v => !correctValues.includes(v.toLowerCase()));
-        return shuffle(filtered).slice(0, count);
+    return {
+      term: term.term,
+      definition: term.definition,
+      parts: [
+        { type: 'root', value: correctRoot }
+      ],
+      options: options
     };
-
-    const slots = {};
-
-    if (neededTypes.includes('prefix')) {
-        const correct = question.parts.filter(p => p.type === 'prefix').map(p => p.value);
-        const distractors = pickDistractors(PREFIXES, neededValues, 3);
-        slots.prefix = shuffle([...correct, ...distractors]);
-    }
-
-    {
-        const correct = question.parts.filter(p => p.type === 'root').map(p => p.value);
-        const distractors = pickDistractors(ROOTS, neededValues, 4);
-        slots.root = shuffle([...correct, ...distractors]);
-    }
-
-    if (neededTypes.includes('suffix')) {
-        const correct = question.parts.filter(p => p.type === 'suffix').map(p => p.value);
-        const distractors = pickDistractors(SUFFIXES, neededValues, 3);
-        slots.suffix = shuffle([...correct, ...distractors]);
-    }
-
-    return slots;
-}
-
-// ─── BILEŞENLER ────────────────────────────────────────────────────────────
+  });
+};
 
 const SLOT_META = {
     prefix: { label: 'Ön Ek', color: 'from-violet-500 to-purple-600', border: 'border-violet-400', bg: 'bg-violet-50 dark:bg-violet-950/30', text: 'text-violet-700 dark:text-violet-300', badge: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300' },
@@ -299,10 +106,10 @@ function BuiltTermDisplay({ parts, selections }) {
     );
 }
 
-// ─── ANA SAYFA ─────────────────────────────────────────────────────────────
-
 export const MorphemeGame = () => {
-    const [questions] = useState(() => [...QUESTIONS].sort(() => Math.random() - 0.5));
+    const [loading, setLoading] = useState(true);
+    const [allTerms, setAllTerms] = useState([]);
+    const [questions, setQuestions] = useState([]);
     const [qIndex, setQIndex] = useState(0);
     const [selections, setSelections] = useState({});
     const [answered, setAnswered] = useState(false);
@@ -310,10 +117,63 @@ export const MorphemeGame = () => {
     const [score, setScore] = useState(0);
     const [wrongAttempts, setWrongAttempts] = useState(0);
     const [finished, setFinished] = useState(false);
-    const [history, setHistory] = useState([]); // { term, correct, wrongAttempts }[]
+    const [history, setHistory] = useState([]); // { term, correct, wrongAttempts, pts }[]
+
+    // Load game terms from Firestore (fallback to local Terms data)
+    useEffect(() => {
+        const loadGameData = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'terms'));
+                let rawTerms = [];
+                querySnapshot.forEach((doc) => {
+                    rawTerms.push(doc.data());
+                });
+
+                if (rawTerms.length === 0) {
+                    rawTerms = getAllTerms();
+                }
+
+                // Normalize fields (english vs turkish, turkishDefinition vs definition)
+                const normalized = rawTerms.map(t => ({
+                    id: t.id,
+                    term: t.term,
+                    definition: t.turkishDefinition || t.definition || '',
+                    roots: t.roots || ''
+                })).filter(t => t.roots && t.roots.trim() !== '');
+
+                setAllTerms(normalized);
+                const generated = generateQuestions(normalized);
+                setQuestions(generated);
+            } catch (error) {
+                console.error('Error loading Morpheme Game data:', error);
+
+                // Fallback to local terms
+                const localTerms = getAllTerms();
+                const normalized = localTerms.map(t => ({
+                    id: t.id,
+                    term: t.term,
+                    definition: t.definition || '',
+                    roots: t.roots || ''
+                })).filter(t => t.roots && t.roots.trim() !== '');
+
+                setAllTerms(normalized);
+                const generated = generateQuestions(normalized);
+                setQuestions(generated);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadGameData();
+    }, []);
 
     const currentQ = questions[qIndex];
-    const slotOptions = React.useMemo(() => buildSlotOptions(currentQ), [currentQ]);
+    const slotOptions = React.useMemo(() => {
+        if (!currentQ) return { root: [] };
+        return {
+            root: currentQ.options
+        };
+    }, [currentQ]);
 
     const handleSelect = useCallback((type, value) => {
         if (answered) return;
@@ -321,7 +181,7 @@ export const MorphemeGame = () => {
     }, [answered]);
 
     const isAllSelected = () => {
-        return currentQ.parts.every(p => selections[p.type]);
+        return currentQ && currentQ.parts.every(p => selections[p.type]);
     };
 
     const handleCheck = () => {
@@ -330,9 +190,7 @@ export const MorphemeGame = () => {
             return;
         }
 
-        const correct = currentQ.parts.every(p =>
-            selections[p.type]?.toLowerCase() === p.value.toLowerCase()
-        );
+        const correct = selections.root?.toLowerCase() === currentQ.parts[0].value.toLowerCase();
 
         setAnswered(true);
         setIsCorrect(correct);
@@ -356,7 +214,6 @@ export const MorphemeGame = () => {
         } else {
             const newWrong = wrongAttempts + 1;
             setWrongAttempts(newWrong);
-            // 3. yanlış ve sonrasında -1 puan kes
             if (newWrong >= 3) {
                 setScore(s => s - 1);
                 toast.error(`❌ Yanlış! (${newWrong}. hata) -1 puan kesildi!`, { duration: 4000 });
@@ -375,7 +232,6 @@ export const MorphemeGame = () => {
 
     const handleNext = () => {
         if (qIndex + 1 >= questions.length) {
-            // Oyun bitti
             const pct = Math.round((score / (questions.length * 2)) * 100);
             saveMorphemeScore(score, questions.length * 2, pct);
             setFinished(true);
@@ -389,6 +245,8 @@ export const MorphemeGame = () => {
     };
 
     const handleRestart = () => {
+        const generated = generateQuestions(allTerms);
+        setQuestions(generated);
         setQIndex(0);
         setSelections({});
         setAnswered(false);
@@ -399,7 +257,33 @@ export const MorphemeGame = () => {
         setHistory([]);
     };
 
-    // ── BİTİŞ EKRANI ──────────────────────────────────────────────────────────
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+                <Card className="w-full max-w-md p-8 text-center shadow-xl">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                    <h3 className="text-xl font-semibold mb-2">Morfem Oyunu Yükleniyor...</h3>
+                    <p className="text-muted-foreground">Kelimeler veritabanından çekiliyor...</p>
+                </Card>
+            </div>
+        );
+    }
+
+    if (questions.length === 0) {
+        return (
+            <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+                <Card className="w-full max-w-md p-8 text-center shadow-xl">
+                    <h3 className="text-xl font-semibold mb-2 text-destructive">Hata</h3>
+                    <p className="text-muted-foreground mb-4">Oyun için kelime havuzu bulunamadı. Lütfen daha sonra tekrar deneyin.</p>
+                    <Button asChild className="gradient-primary">
+                        <Link to="/games">Oyunlara Dön</Link>
+                    </Button>
+                </Card>
+            </div>
+        );
+    }
+
+    // Bitiş Ekranı
     if (finished) {
         const pct = Math.round((score / (questions.length * 2)) * 100);
         const correctCount = history.filter(h => h.correct).length;
@@ -461,14 +345,11 @@ export const MorphemeGame = () => {
         );
     }
 
-    // ── OYUN EKRANI ────────────────────────────────────────────────────────────
-    const progress = ((qIndex) / questions.length) * 100;
+    const progress = (qIndex / questions.length) * 100;
 
     return (
         <div className="min-h-screen bg-muted/30 py-8 px-4">
             <div className="max-w-3xl mx-auto">
-
-                {/* Top Bar */}
                 <div className="flex items-center justify-between mb-6">
                     <Button asChild variant="ghost" size="sm">
                         <Link to="/games"><ArrowLeft className="w-4 h-4 mr-1" />Oyunlar</Link>
@@ -484,7 +365,6 @@ export const MorphemeGame = () => {
                     </div>
                 </div>
 
-                {/* Progress Bar */}
                 <div className="w-full bg-muted rounded-full h-2 mb-8 overflow-hidden">
                     <div
                         className="h-2 rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-500"
@@ -492,7 +372,6 @@ export const MorphemeGame = () => {
                     />
                 </div>
 
-                {/* Question Card */}
                 <Card className="mb-6 border-2 shadow-xl">
                     <CardHeader className="pb-4">
                         <div className="flex items-center gap-2 mb-1">
@@ -507,7 +386,6 @@ export const MorphemeGame = () => {
                     </CardHeader>
 
                     <CardContent className="space-y-5">
-                        {/* Oluşturulan Terim */}
                         <div className="rounded-xl bg-muted/50 p-4">
                             <div className="flex items-center justify-between mb-3">
                                 <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
@@ -528,7 +406,6 @@ export const MorphemeGame = () => {
                             <BuiltTermDisplay parts={currentQ.parts} selections={selections} />
                         </div>
 
-                        {/* Feedback */}
                         {answered && isCorrect && (
                             <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-700 rounded-xl text-emerald-700 dark:text-emerald-300 font-semibold animate-in fade-in">
                                 <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
@@ -541,37 +418,19 @@ export const MorphemeGame = () => {
                         {answered && !isCorrect && (
                             <div className="flex items-center gap-2 px-4 py-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-700 rounded-xl text-red-700 dark:text-red-300 font-semibold animate-in fade-in">
                                 <XCircle className="w-5 h-5 flex-shrink-0" />
-                                <span>Yanlış! İpucu: {currentQ.parts.length} parça kullanılmalı.</span>
+                                <span>Yanlış! Lütfen doğru kökü seçtiğinizden emin olun.</span>
                             </div>
                         )}
 
-                        {/* Morpheme Seçiciler */}
                         <div className="space-y-3">
-                            {currentQ.parts.some(p => p.type === 'prefix') && (
-                                <MorphemeSlot
-                                    type="prefix"
-                                    options={slotOptions.prefix || []}
-                                    selected={selections.prefix || null}
-                                    onSelect={handleSelect}
-                                />
-                            )}
                             <MorphemeSlot
                                 type="root"
                                 options={slotOptions.root || []}
                                 selected={selections.root || null}
                                 onSelect={handleSelect}
                             />
-                            {currentQ.parts.some(p => p.type === 'suffix') && (
-                                <MorphemeSlot
-                                    type="suffix"
-                                    options={slotOptions.suffix || []}
-                                    selected={selections.suffix || null}
-                                    onSelect={handleSelect}
-                                />
-                            )}
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="flex gap-3 pt-2">
                             {!answered || !isCorrect ? (
                                 <Button
@@ -604,9 +463,8 @@ export const MorphemeGame = () => {
                     </CardContent>
                 </Card>
 
-                {/* Hint */}
                 <p className="text-center text-xs text-muted-foreground">
-                    Her alanda bir seçenek seçin. Doğru yanıtta <strong>+2</strong>, tekrar denemede <strong>+1</strong> puan.
+                    Doğru kök seçeneğini belirleyin. Doğru yanıtta <strong>+2</strong>, tekrar denemede <strong>+1</strong> puan.
                 </p>
             </div>
         </div>
