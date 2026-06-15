@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Activity, Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getUser, logout, isLoggedIn } from '@/utils/storage';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,10 +21,16 @@ export const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     logout();
     window.location.href = '/login';
   };
+
 
   const navLinks = [
     { path: '/', label: 'Ana Sayfa' },

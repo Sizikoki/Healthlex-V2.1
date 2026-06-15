@@ -1,34 +1,79 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Activity, Mail, Lock, User as UserIcon, Sparkles } from 'lucide-react';
+import { Activity, Mail, Lock, User as UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { saveUser } from '@/utils/storage';
+import { saveUser, syncProgressFromFirestore } from '@/utils/storage';
 import { toast } from 'sonner';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '@/firebase/config';
+
+// Helper function to translate Firebase auth errors to Turkish
+const getTurkishErrorMessage = (errorCode) => {
+  switch (errorCode) {
+    case 'auth/invalid-email':
+      return 'Geçersiz bir e-posta adresi girdiniz.';
+    case 'auth/user-disabled':
+      return 'Bu kullanıcı hesabı engellenmiştir.';
+    case 'auth/user-not-found':
+      return 'Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.';
+    case 'auth/wrong-password':
+      return 'Hatalı şifre girdiniz. Lütfen tekrar deneyin.';
+    case 'auth/email-already-in-use':
+      return 'Bu e-posta adresi zaten kullanımda.';
+    case 'auth/weak-password':
+      return 'Şifreniz çok zayıf. Şifre en az 6 karakter olmalıdır.';
+    case 'auth/operation-not-allowed':
+      return 'Bu giriş yöntemine izin verilmedi.';
+    case 'auth/too-many-requests':
+      return 'Çok fazla başarısız giriş denemesi yaptınız. Lütfen daha sonra tekrar deneyin.';
+    case 'auth/invalid-credential':
+      return 'E-posta adresi veya şifre hatalı.';
+    default:
+      return 'Bir hata oluştu. Lütfen tekrar deneyin.';
+  }
+};
 
 export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       toast.error('Lütfen tüm alanları doldurun');
       return;
     }
 
-    // Mock login
-    saveUser({
-      name: email.split('@')[0],
-      email: email,
-      joinDate: new Date().toISOString()
-    });
+    try {
+      setLoading(true);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    toast.success('Giriş başarılı! Hoş geldiniz.');
-    navigate('/');
+      // Save user to storage to maintain compatibility with existing tracking features
+      saveUser({
+        uid: user.uid,
+        name: user.displayName || email.split('@')[0],
+        email: email,
+        joinDate: user.metadata.creationTime || new Date().toISOString()
+      });
+
+      // Synchronize progress from Firestore immediately on login
+      await syncProgressFromFirestore();
+
+      toast.success('Giriş başarılı! Hoş geldiniz.');
+      navigate('/');
+    } catch (error) {
+      console.error('Login error:', error);
+      const message = getTurkishErrorMessage(error.code);
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,6 +101,7 @@ export const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -71,12 +117,13 @@ export const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
+                  disabled={loading}
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full gradient-primary shadow-lg">
-              Giriş Yap
+            <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={loading}>
+              {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
             </Button>
           </form>
 
@@ -99,23 +146,45 @@ export const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
       toast.error('Lütfen tüm alanları doldurun');
       return;
     }
 
-    // Mock registration
-    saveUser({
-      name: name,
-      email: email,
-      joinDate: new Date().toISOString()
-    });
+    try {
+      setLoading(true);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    toast.success('Hesap oluşturuldu! Hoş geldiniz.');
-    navigate('/');
+      // Update the user profile with the displayName in Firebase Auth
+      await updateProfile(user, {
+        displayName: name
+      });
+
+      // Save user to storage to maintain compatibility with existing tracking features
+      saveUser({
+        uid: user.uid,
+        name: name,
+        email: email,
+        joinDate: user.metadata.creationTime || new Date().toISOString()
+      });
+
+      // Synchronize progress from Firestore immediately on registration
+      await syncProgressFromFirestore();
+
+      toast.success('Hesap oluşturuldu! Hoş geldiniz.');
+      navigate('/');
+    } catch (error) {
+      console.error('Registration error:', error);
+      const message = getTurkishErrorMessage(error.code);
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -143,6 +212,7 @@ export const Register = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="pl-10"
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -158,6 +228,7 @@ export const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -173,12 +244,13 @@ export const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
+                  disabled={loading}
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full gradient-primary shadow-lg">
-              Hesap Oluştur
+            <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={loading}>
+              {loading ? 'Hesap Oluşturuluyor...' : 'Hesap Oluştur'}
             </Button>
           </form>
 
@@ -194,4 +266,4 @@ export const Register = () => {
       </Card>
     </div>
   );
-};
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { Navbar } from '@/components/Navbar';
@@ -12,7 +12,8 @@ import { Quiz } from '@/pages/Quiz';
 import { MorphemeGame } from '@/pages/MorphemeGame';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
-import { isLoggedIn } from '@/utils/storage';
+import { isLoggedIn, syncProgressFromFirestore } from '@/utils/storage';
+import { seedMedicalTerms } from '@/firebase/seeder';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -20,8 +21,17 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  useEffect(() => {
+    seedMedicalTerms();
+    if (isLoggedIn()) {
+      syncProgressFromFirestore();
+    }
+  }, []);
+
+
   return (
     <BrowserRouter>
+
       <div className="App min-h-screen bg-background">
         <Navbar />
         <Routes>

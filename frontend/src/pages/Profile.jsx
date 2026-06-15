@@ -6,17 +6,25 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { getUser, getStats, logout } from '@/utils/storage';
 import { toast } from 'sonner';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 
 export const Profile = () => {
   const navigate = useNavigate();
   const user = getUser();
   const stats = getStats();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     logout();
     toast.success('Çıkış yapıldı');
     navigate('/login');
   };
+
 
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString('tr-TR', {
