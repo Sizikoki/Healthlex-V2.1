@@ -18,7 +18,6 @@ export const Flashcards = () => {
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -86,7 +85,6 @@ export const Flashcards = () => {
 
   const goToNext = (wasLearned) => {
     setIsFlipped(false);
-    setShowDetails(false); // Reset details state for next card
     const finalLearned = wasLearned ? learnedCount + 1 : learnedCount;
     if (currentIndex < terms.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -101,7 +99,6 @@ export const Flashcards = () => {
   const handleRestart = () => {
     setCurrentIndex(0);
     setIsFlipped(false);
-    setShowDetails(false); // Reset details state
     setLearnedCount(0);
     setSkippedCount(0);
     loadTerms();
@@ -207,36 +204,6 @@ export const Flashcards = () => {
               <div className="text-xl sm:text-2xl font-bold text-center text-foreground max-w-md px-2 leading-relaxed">
                 {currentTerm.turkishDefinition || currentTerm.definition}
               </div>
-
-              {/* Show More toggle */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowDetails(!showDetails);
-                }}
-                className="mt-6 px-3 py-1.5 rounded-lg border border-border bg-card/50 text-xs font-semibold hover:bg-card hover:text-primary transition-all flex items-center gap-1.5 shadow-sm"
-              >
-                <span>{showDetails ? 'Daha Az Göster' : 'Daha Fazla Göster'}</span>
-                <span className="text-[10px]">{showDetails ? '▲' : '▼'}</span>
-              </button>
-
-              {/* Optional Details Section */}
-              {showDetails && (
-                <div className="mt-4 w-full max-w-sm text-left space-y-3 border-t border-border/50 pt-4 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div className="flex justify-between items-baseline gap-2">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">İngilizce</span>
-                    <span className="text-sm font-semibold text-secondary text-right">{currentTerm.english || currentTerm.turkish}</span>
-                  </div>
-                  {currentTerm.roots && (
-                    <div className="flex justify-between items-center gap-2">
-                      <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Kök / Ekler</span>
-                      <span className="text-xs bg-accent/10 text-accent font-semibold px-2 py-0.5 rounded border border-accent/20">
-                        {currentTerm.roots}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
 
           </Card>
