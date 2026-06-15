@@ -26,19 +26,18 @@ export const MatchGame = () => {
   const [loading, setLoading] = useState(true);
 
   const setupGame = useCallback((termsList) => {
-    const listToUse = termsList || allTerms;
-    if (listToUse.length === 0) return;
+    if (!termsList || termsList.length === 0) return;
 
-    let filtered = listToUse;
+    let filtered = termsList;
     if (categoryId && categoryId !== 'all') {
-      filtered = listToUse.filter(t => t.category === categoryId);
+      filtered = termsList.filter(t => t.category === categoryId);
       if (filtered.length === 0) {
-        filtered = listToUse.filter(t => t.system === categoryId || t.subcategory === categoryId);
+        filtered = termsList.filter(t => t.system === categoryId || t.subcategory === categoryId);
       }
     }
 
     if (filtered.length === 0) {
-      filtered = listToUse;
+      filtered = termsList;
     }
 
     // Select 6 random terms dynamically
@@ -69,7 +68,7 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [allTerms, categoryId]);
+  }, [categoryId]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
