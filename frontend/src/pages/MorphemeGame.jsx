@@ -123,7 +123,17 @@ export const MorphemeGame = () => {
     useEffect(() => {
         const loadGameData = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'terms'));
+                let timeoutId;
+                const timeoutPromise = new Promise((_, reject) => {
+                    timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+                });
+
+                const querySnapshot = await Promise.race([
+                    getDocs(collection(db, 'terms')),
+                    timeoutPromise
+                ]);
+                if (timeoutId) clearTimeout(timeoutId);
+
                 let rawTerms = [];
                 querySnapshot.forEach((doc) => {
                     rawTerms.push(doc.data());
