@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { getRandomTerms } from '@/data/medicalTerms';
+import { getAllTerms } from '@/data/medicalTerms';
 import { saveMatchScore, updateStreak } from '@/utils/storage';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
 
 export const MatchGame = () => {
@@ -13,6 +15,7 @@ export const MatchGame = () => {
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
 
+  const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
   const [selected, setSelected] = useState([]);
   const [matched, setMatched] = useState([]);
@@ -20,27 +23,44 @@ export const MatchGame = () => {
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const initializeGame = useCallback(() => {
-    const terms = getRandomTerms(6, categoryId);
+  const setupGame = useCallback((termsList) => {
+    const listToUse = termsList || allTerms;
+    if (listToUse.length === 0) return;
+
+    let filtered = listToUse;
+    if (categoryId && categoryId !== 'all') {
+      filtered = listToUse.filter(t => t.category === categoryId);
+      if (filtered.length === 0) {
+        filtered = listToUse.filter(t => t.system === categoryId || t.subcategory === categoryId);
+      }
+    }
+
+    if (filtered.length === 0) {
+      filtered = listToUse;
+    }
+
+    // Select 6 random terms dynamically
+    const shuffledTerms = [...filtered].sort(() => Math.random() - 0.5);
+    const selectedTerms = shuffledTerms.slice(0, Math.min(6, shuffledTerms.length));
+
     const gameCards = [];
-
-    terms.forEach((term, index) => {
+    selectedTerms.forEach((term, index) => {
       gameCards.push({
         id: `term-${index}`,
-        content: term.term,
+        content: term.term, // Latin Term
         pairId: index,
         type: 'term'
       });
       gameCards.push({
         id: `turkish-${index}`,
-        content: term.turkish,
+        content: term.turkishDefinition, // turkishDefinition (Turkish Definition)
         pairId: index,
         type: 'turkish'
       });
     });
 
-    // Shuffle cards
     const shuffled = gameCards.sort(() => Math.random() - 0.5);
     setCards(shuffled);
     setSelected([]);
@@ -49,12 +69,61 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId]);
+  }, [allTerms, categoryId]);
+
+  const initializeGame = useCallback(() => {
+    setupGame(allTerms);
+  }, [setupGame, allTerms]);
 
   useEffect(() => {
-    initializeGame();
+    const fetchTerms = async () => {
+      try {
+        setLoading(true);
+        const querySnapshot = await getDocs(collection(db, 'terms'));
+        let rawTerms = [];
+        querySnapshot.forEach((doc) => {
+          rawTerms.push(doc.data());
+        });
+
+        if (rawTerms.length === 0) {
+          rawTerms = getAllTerms();
+        }
+
+        // Normalize Firestore & fallback models
+        const normalized = rawTerms.map(t => ({
+          id: t.id,
+          term: t.term,
+          turkishDefinition: t.turkishDefinition || t.definition || '',
+          category: t.category || '',
+          system: t.system || '',
+          subcategory: t.subcategory || ''
+        })).filter(t => t.term && t.turkishDefinition);
+
+        setAllTerms(normalized);
+        setupGame(normalized);
+      } catch (error) {
+        console.error('Error fetching terms in MatchGame:', error);
+        const localTerms = getAllTerms().map(t => ({
+          id: t.id,
+          term: t.term,
+          turkishDefinition: t.definition || '',
+          category: t.category || '',
+          system: t.system || '',
+          subcategory: t.subcategory || ''
+        })).filter(t => t.term && t.turkishDefinition);
+
+        setAllTerms(localTerms);
+        setupGame(localTerms);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTerms();
     updateStreak();
-  }, [initializeGame]);
+  }, [categoryId, setupGame]);
+
+
 
   useEffect(() => {
     if (startTime && !gameComplete) {
@@ -112,9 +181,36 @@ export const MatchGame = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const progress = (matched.length / (cards.length / 2)) * 100;
+  const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-8 text-center shadow-xl">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <h3 className="text-xl font-semibold mb-2">Oyun Yükleniyor...</h3>
+          <p className="text-muted-foreground">Kelimeler veritabanından çekiliyor...</p>
+        </Card>
+      </div>
+    );
+  }
+
+  if (allTerms.length === 0) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-8 text-center shadow-xl">
+          <h3 className="text-xl font-semibold mb-2 text-destructive">Hata</h3>
+          <p className="text-muted-foreground mb-4">Eşleştirme oyunu için kelime havuzu bulunamadı.</p>
+          <Button asChild className="gradient-primary">
+            <Link to="/games">Oyunlara Dön</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   return (
+
     <div className="min-h-screen bg-muted/30 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

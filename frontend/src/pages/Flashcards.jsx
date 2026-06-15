@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, RotateCw, ChevronRight, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { getRandomTerms } from '@/data/medicalTerms';
+import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
 import { saveProgress, saveFlashcardSession, updateStreak } from '@/utils/storage';
 import { toast } from 'sonner';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 
 export const Flashcards = () => {
   const [searchParams] = useSearchParams();
@@ -18,15 +20,51 @@ export const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const selectedTerms = getRandomTerms(20, categoryId);
-    setTerms(selectedTerms);
-    updateStreak();
+  const loadTerms = useCallback(async () => {
+    try {
+      setLoading(true);
+      const querySnapshot = await getDocs(collection(db, 'terms'));
+      let rawTerms = [];
+      querySnapshot.forEach((doc) => {
+        rawTerms.push(doc.data());
+      });
+
+      if (rawTerms.length === 0) {
+        rawTerms = getAllTerms();
+      }
+
+      let filteredTerms = rawTerms;
+      if (categoryId && categoryId !== 'all') {
+        filteredTerms = rawTerms.filter(t => t.category === categoryId);
+        if (filteredTerms.length === 0) {
+          filteredTerms = rawTerms.filter(t => t.system === categoryId || t.subcategory === categoryId);
+        }
+      }
+
+      if (filteredTerms.length === 0) {
+        filteredTerms = rawTerms;
+      }
+
+      const shuffled = [...filteredTerms].sort(() => Math.random() - 0.5);
+      setTerms(shuffled.slice(0, Math.min(20, shuffled.length)));
+    } catch (error) {
+      console.error('Error fetching terms in Flashcards:', error);
+      const selectedTerms = getRandomTerms(20, categoryId);
+      setTerms(selectedTerms);
+    } finally {
+      setLoading(false);
+    }
   }, [categoryId]);
 
+  useEffect(() => {
+    loadTerms();
+    updateStreak();
+  }, [loadTerms]);
+
   const currentTerm = terms[currentIndex];
-  const progress = ((currentIndex) / terms.length) * 100;
+  const progress = terms.length > 0 ? ((currentIndex) / terms.length) * 100 : 0;
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -59,17 +97,39 @@ export const Flashcards = () => {
   };
 
   const handleRestart = () => {
-    const selectedTerms = getRandomTerms(20, categoryId);
-    setTerms(selectedTerms);
     setCurrentIndex(0);
     setIsFlipped(false);
     setLearnedCount(0);
     setSkippedCount(0);
+    loadTerms();
   };
 
-  if (terms.length === 0) {
-    return <div className="min-h-screen flex items-center justify-center">Yükleniyor...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-8 text-center shadow-xl">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <h3 className="text-xl font-semibold mb-2">Kartlar Yükleniyor...</h3>
+          <p className="text-muted-foreground">Kelimeler veritabanından çekiliyor...</p>
+        </Card>
+      </div>
+    );
   }
+
+  if (terms.length === 0) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-8 text-center shadow-xl">
+          <h3 className="text-xl font-semibold mb-2 text-destructive">Hata</h3>
+          <p className="text-muted-foreground mb-4">Bu kategoriye ait kelime bulunamadı.</p>
+          <Button asChild className="gradient-primary">
+            <Link to="/games">Oyunlara Dön</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen bg-muted/30 py-8">
@@ -140,9 +200,9 @@ export const Flashcards = () => {
                 transform: 'rotateY(180deg)'
               }}
             >
-              <div className="text-sm font-medium text-muted-foreground mb-2">Türkçe</div>
+              <div className="text-sm font-medium text-muted-foreground mb-1">İngilizce Karşılık</div>
               <div className="text-2xl sm:text-3xl font-bold text-center text-secondary mb-4">
-                {currentTerm.turkish}
+                {currentTerm.english || currentTerm.turkish}
               </div>
 
               {currentTerm.roots && (
@@ -154,10 +214,12 @@ export const Flashcards = () => {
                 </div>
               )}
 
+              <div className="text-xs font-medium text-muted-foreground mb-1">Türkçe Tanım</div>
               <div className="text-sm text-center text-muted-foreground max-w-md">
-                {currentTerm.definition}
+                {currentTerm.turkishDefinition || currentTerm.definition}
               </div>
             </div>
+
           </Card>
         </div>
 
