@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, BookOpen, Menu, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { getTermsBySubcategory, searchTerms } from '@/data/medicalTerms';
 import { saveProgress, getTermProgress } from '@/utils/storage';
 import { toast } from 'sonner';
@@ -30,6 +31,13 @@ export const Study = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  useEffect(() => {
+    // Mobil ekranlarda varsayılan olarak kapalı olsun
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  }, []);
 
   const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
 
@@ -114,8 +122,8 @@ export const Study = () => {
 
   return (
     <div className="min-h-screen bg-muted/30 flex">
-      {/* Left Sidebar */}
-      <div className={`${sidebarOpen ? 'w-64' : 'w-0'} bg-background border-r border-border flex-shrink-0 overflow-y-auto transition-all duration-300 ${!sidebarOpen && 'border-r-0'}`}>
+      {/* Left Sidebar - Desktop only */}
+      <div className={`hidden md:block ${sidebarOpen ? 'w-64' : 'w-0'} bg-background border-r border-border flex-shrink-0 overflow-y-auto transition-all duration-300 ${!sidebarOpen && 'border-r-0'}`}>
         <div className={`${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="p-4 border-b border-border">
             <div className="flex items-center justify-between">
@@ -146,11 +154,53 @@ export const Study = () => {
         </div>
       </div>
 
+      {/* Mobile Sidebar - Drawer Overlay */}
+      <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+        <SheetContent side="left" className="w-[280px] p-0 flex flex-col h-full">
+          <SheetHeader className="p-4 border-b border-border flex-shrink-0">
+            <SheetTitle className="text-left font-semibold">Kategoriler</SheetTitle>
+          </SheetHeader>
+          <div className="p-2 space-y-1 overflow-y-auto flex-1">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => {
+                  setSelectedCategoryId(cat.id);
+                  setSearchQuery('');
+                  setSidebarOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${selectedCategoryId === cat.id
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
+
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto flex flex-col">
-        {/* Sticky top bar — sadece sidebar kapalıyken görünür, içeriğin üstünde yer kaplar */}
+        {/* Sticky top bar — Mobile header (always visible to trigger drawer) */}
+        <div className="sticky top-0 z-20 flex items-center h-12 px-4 bg-background/90 backdrop-blur border-b border-border flex-shrink-0 md:hidden justify-between">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 border border-border bg-card shadow-sm"
+            aria-label="Menüyü aç"
+          >
+            <Menu className="w-5 h-5" />
+            <span className="text-sm font-semibold">Kategoriler</span>
+          </button>
+          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            {selectedCategory.name}
+          </div>
+        </div>
+
+        {/* Sticky top bar — Desktop header (only visible when desktop sidebar is closed) */}
         {!sidebarOpen && (
-          <div className="sticky top-0 z-20 flex items-center h-12 px-2 bg-background/90 backdrop-blur border-b border-border flex-shrink-0">
+          <div className="sticky top-0 z-20 hidden md:flex items-center h-12 px-2 bg-background/90 backdrop-blur border-b border-border flex-shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
               className="p-2 rounded-lg hover:bg-muted transition-colors"
@@ -161,7 +211,7 @@ export const Study = () => {
           </div>
         )}
 
-        <div className="max-w-[1260px] mx-auto px-6 py-8 w-full">
+        <div className="max-w-[1260px] mx-auto px-4 sm:px-6 py-8 w-full">
           {/* Header */}
           <div className="mb-6">
             <div className="mb-4">
