@@ -11,6 +11,27 @@ import { getAllTerms } from '@/data/medicalTerms';
  * Implements a safe, one-time execution guard using a hybrid localStorage and Firestore document check.
  */
 export const seedMedicalTerms = async () => {
+  // Ensure the test term 999 is written to Firestore
+  try {
+    const testDocRef = doc(db, 'terms', '999');
+    const docSnap = await getDoc(testDocRef);
+    if (!docSnap.exists()) {
+      await setDoc(testDocRef, {
+        id: 999,
+        term: 'Ahmet',
+        english: 'Peri',
+        roots: 'ahmet + peri',
+        turkishDefinition: 'Mehmet',
+        category: 'anatomy',
+        system: 'movement',
+        subcategory: 'skull_bones'
+      });
+      console.log('Seeded test term 999.');
+    }
+  } catch (error) {
+    console.error('Failed to seed test term 999:', error);
+  }
+
   // 1. Check local storage first to prevent redundant Firestore reads
   if (localStorage.getItem('medical_terms_seeded') === 'true') {
     return;

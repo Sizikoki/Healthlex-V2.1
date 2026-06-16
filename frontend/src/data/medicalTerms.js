@@ -163,7 +163,8 @@ export const medicalTermsData = {
     { id: 67, term: 'Os Temporale', turkish: 'Temporal Bone', roots: 'os (kemik) + tempus (şakak)', definition: 'Kafatasının alt yan duvarlarına katkıda bulunur.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
     { id: 68, term: 'Os Occipitale', turkish: 'Occipital Bone', roots: 'os (kemik) + occiput (ense)', definition: 'Kafatasının arka duvarının ve tabanının büyük bir bölümünü oluşturan kemiktir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
     { id: 69, term: 'Os Sphenoideum', turkish: 'Sphenoid Bone', roots: 'os (kemik) + sphen (kama)', definition: 'Beyni çevreleyen ve koruyan kafatasının üst kısmını oluşturan kemiklerden biridir.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
-    { id: 70, term: 'Os Ethmoideum', turkish: 'Ethmoid Bone', roots: 'os (kemik) + ethmos (elek)', definition: 'Kafatasının üst kısmında yer alır ve beyni çevreleyip korur.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' }
+    { id: 70, term: 'Os Ethmoideum', turkish: 'Ethmoid Bone', roots: 'os (kemik) + ethmos (elek)', definition: 'Kafatasının üst kısmında yer alır ve beyni çevreleyip korur.', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' },
+    { id: 999, term: 'Ahmet', turkish: 'Peri', roots: 'ahmet + peri', definition: 'Mehmet', category: 'anatomy', system: 'movement', subcategory: 'skull_bones' }
   ],
   face_bones: [
     { id: 71, term: 'Os Nasale', turkish: 'Nasal Bone', roots: 'os (kemik) + nasus (burun)', definition: 'Üst yüzün ortasında, Maxilla ön çıkıntıları arasında yan yana yer alan küçük dikdörtgen şekilli kemikler olup birlikte burun sırtını oluştururlar.', category: 'anatomy', system: 'movement', subcategory: 'face_bones' },
