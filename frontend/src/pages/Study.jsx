@@ -4,9 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { getTermsBySubcategory, searchTerms } from '@/data/medicalTerms';
 import { saveProgress, getTermProgress } from '@/utils/storage';
 import { toast } from 'sonner';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
+import { getAllTerms } from '@/data/medicalTerms';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -31,6 +33,8 @@ export const Study = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [allTerms, setAllTerms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Mobil ekranlarda varsayılan olarak kapalı olsun
@@ -39,11 +43,78 @@ export const Study = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchTerms = async () => {
+      try {
+        setLoading(true);
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+        });
+
+        const querySnapshot = await Promise.race([
+          getDocs(collection(db, 'terms')),
+          timeoutPromise
+        ]);
+        if (timeoutId) clearTimeout(timeoutId);
+
+        let rawTerms = [];
+        querySnapshot.forEach((doc) => {
+          rawTerms.push(doc.data());
+        });
+
+        if (rawTerms.length === 0) {
+          rawTerms = getAllTerms();
+        }
+
+        const normalized = rawTerms.map(t => ({
+          id: t.id,
+          term: t.term,
+          turkish: t.english || t.turkish || '',
+          definition: t.turkishDefinition || t.definition || '',
+          roots: t.roots || '',
+          category: t.category || '',
+          system: t.system || '',
+          subcategory: t.subcategory || ''
+        }));
+
+        setAllTerms(normalized);
+      } catch (error) {
+        console.error('Error fetching terms in Study:', error);
+        // Fallback to local terms
+        const localTerms = getAllTerms().map(t => ({
+          id: t.id,
+          term: t.term,
+          turkish: t.turkish || '',
+          definition: t.definition || '',
+          roots: t.roots || '',
+          category: t.category || '',
+          system: t.system || '',
+          subcategory: t.subcategory || ''
+        }));
+        setAllTerms(localTerms);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTerms();
+  }, []);
+
   const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
 
+  const filteredTerms = allTerms.filter(
+    (t) => t.system === selectedCategory.system && t.subcategory === selectedCategory.subcategory
+  );
+
   const terms = searchQuery
-    ? searchTerms(searchQuery).filter(t => t.system === selectedCategory.system && t.subcategory === selectedCategory.subcategory)
-    : getTermsBySubcategory(selectedCategory.system, selectedCategory.subcategory);
+    ? filteredTerms.filter(
+        (t) =>
+          t.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          t.turkish.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          t.definition.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : filteredTerms;
 
   const handleMarkAsLearned = (termId) => {
     const progress = getTermProgress(termId);
@@ -239,7 +310,12 @@ export const Study = () => {
           </div>
 
           {/* Terms */}
-          {terms.length === 0 ? (
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-4"></div>
+              <p className="text-muted-foreground text-sm">Terimler yükleniyor...</p>
+            </div>
+          ) : terms.length === 0 ? (
             <Card className="p-12 text-center">
               <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Terim bulunamadı</h3>
