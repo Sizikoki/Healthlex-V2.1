@@ -1,0 +1,442 @@
+[
+    {
+        "id": 1001,
+        "term": "Radialis",
+        "english": "Radial",
+        "roots": "radius (döner kemik) + alis (aitlik eki)",
+        "turkishDefinition": "Ön kolda radius kemiği tarafında (başparmak yönünde) olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "upper_extremity_bones"
+    },
+    {
+        "id": 1002,
+        "term": "Ulnaris",
+        "english": "Ulnar",
+        "roots": "ulna (dirsek kemiği) + aris (aitlik eki)",
+        "turkishDefinition": "Ön kolda ulna kemiği tarafında (serçe parmak yönünde) olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "upper_extremity_bones"
+    },
+    {
+        "id": 1003,
+        "term": "Palmaris",
+        "english": "Palmar",
+        "roots": "palma (el ayası) + aris (aitlik eki)",
+        "turkishDefinition": "El ayasına, avuç içine ait olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "upper_extremity_bones"
+    },
+    {
+        "id": 1004,
+        "term": "Tibialis",
+        "english": "Tibial",
+        "roots": "tibia (kaval kemiği) + alis (aitlik eki)",
+        "turkishDefinition": "Bacakta tibia kemiği tarafında, iç yanda olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "lower_extremity_bones"
+    },
+    {
+        "id": 1005,
+        "term": "Fibularis",
+        "english": "Fibular",
+        "roots": "fibula (kamış kemiği) + aris (aitlik eki)",
+        "turkishDefinition": "Bacakta fibula kemiği tarafında, dış yanda olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "lower_extremity_bones"
+    },
+    {
+        "id": 1006,
+        "term": "Plantaris",
+        "english": "Plantar",
+        "roots": "planta (ayak tabanı) + aris (aitlik eki)",
+        "turkishDefinition": "Ayak tabanına ait, ayak tabanı tarafında olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "lower_extremity_bones"
+    },
+    {
+        "id": 1007,
+        "term": "Frontalis",
+        "english": "Frontal",
+        "roots": "frons (alın) + alis (aitlik eki)",
+        "turkishDefinition": "Alın bölgesine ait, ön tarafta yer alan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "skull_bones"
+    },
+    {
+        "id": 1008,
+        "term": "Occipitalis",
+        "english": "Occipital",
+        "roots": "occiput (başın arkası) + alis (aitlik eki)",
+        "turkishDefinition": "Başın arkası, ard kafa bölgesine ait olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "skull_bones"
+    },
+    {
+        "id": 1009,
+        "term": "Cranialis",
+        "english": "Cranial",
+        "roots": "cranium (kafatası) + alis (aitlik eki)",
+        "turkishDefinition": "Baş tarafına ait, başa daha yakın olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "skull_bones"
+    },
+    {
+        "id": 1010,
+        "term": "Rostralis",
+        "english": "Rostral",
+        "roots": "rostrum (gaga/burun) + alis (aitlik eki)",
+        "turkishDefinition": "Gaga veya burun tarafına yakın olan (özellikle beyin anatomisinde ön kısım).",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "skull_bones"
+    },
+    {
+        "id": 1011,
+        "term": "Horizontalis",
+        "english": "Horizontal",
+        "roots": "horizon (ufuk) + alis (aitlik eki)",
+        "turkishDefinition": "Enlemesine, yere paralel olan yatay düzlem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1012,
+        "term": "Medianus",
+        "english": "Median",
+        "roots": "medius (orta) + anus (aitlik eki)",
+        "turkishDefinition": "Vücudu tam ortadan sağ ve sol eşit iki yarıma bölen dik düzlem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1013,
+        "term": "Coronalis",
+        "english": "Coronal",
+        "roots": "corona (taç) + alis (aitlik eki)",
+        "turkishDefinition": "Vücudu ön ve arka bölümlere ayıran alın düzlemi.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1014,
+        "term": "Sagittalis",
+        "english": "Sagittal",
+        "roots": "sagitta (ok) + alis (aitlik eki)",
+        "turkishDefinition": "Ok yönünde uzanan, vücudu sağ ve sol asimetrik parçalara bölen düzlem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1015,
+        "term": "Transversus",
+        "english": "Transverse",
+        "roots": "trans (karşı tarafa) + vertere (dönmek)",
+        "turkishDefinition": "Gövde veya organ eksenine dik, enine kesit olan düzlem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1016,
+        "term": "Longitudinalis",
+        "english": "Longitudinal",
+        "roots": "longitudo (boylam) + inalis (aitlik eki)",
+        "turkishDefinition": "Vücut veya organ boyunca uzanan, boylamsal düzlem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1017,
+        "term": "Axialis",
+        "english": "Axial",
+        "roots": "axis (eksen) + alis (aitlik eki)",
+        "turkishDefinition": "Eksenel, merkez eksen boyunca olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1018,
+        "term": "Verticalis",
+        "english": "Vertical",
+        "roots": "vertex (tepe/zirve) + icalis (aitlik eki)",
+        "turkishDefinition": "Düşey, dikey konumda olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1019,
+        "term": "Dexter",
+        "english": "Right",
+        "roots": "dexter (sağ taraf)",
+        "turkishDefinition": "Sağ taraf, sağda olan yapı.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1020,
+        "term": "Sinister",
+        "english": "Left",
+        "roots": "sinister (sol taraf)",
+        "turkishDefinition": "Sol taraf, solda olan yapı.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1021,
+        "term": "Anterior",
+        "english": "Anterior / Front",
+        "roots": "ante (önce/ön) + ior (karşılaştırma eki)",
+        "turkishDefinition": "Ön taraf, vücudun önünde bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1022,
+        "term": "Posterior",
+        "english": "Posterior / Back",
+        "roots": "post (sonra/arka) + erior (karşılaştırma eki)",
+        "turkishDefinition": "Arka taraf, vücudun arkasında bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1023,
+        "term": "Ventralis",
+        "english": "Ventral",
+        "roots": "venter (karın) + alis (aitlik eki)",
+        "turkishDefinition": "Karın tarafında olan, önde yer alan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1024,
+        "term": "Dorsalis",
+        "english": "Dorsal",
+        "roots": "dorsum (sırt) + alis (aitlik eki)",
+        "turkishDefinition": "Sırt tarafında olan, arkada yer alan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1025,
+        "term": "Superior",
+        "english": "Superior / Upper",
+        "roots": "super (üst/yukarı) + ior (karşılaştırma eki)",
+        "turkishDefinition": "Üst taraf, yukarıda bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1026,
+        "term": "Inferior",
+        "english": "Inferior / Lower",
+        "roots": "infer (alt/aşağı) + ior (karşılaştırma eki)",
+        "turkishDefinition": "Alt taraf, aşağıda bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1027,
+        "term": "Medialis",
+        "english": "Medial",
+        "roots": "medius (orta) + alis (aitlik eki)",
+        "turkishDefinition": "İç yan, vücut orta hattına daha yakın olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1028,
+        "term": "Lateralis",
+        "english": "Lateral",
+        "roots": "latus (yan/taraf) + alis (aitlik eki)",
+        "turkishDefinition": "Dış yan, vücut orta hattından uzak olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1029,
+        "term": "Intermedius",
+        "english": "Intermediate",
+        "roots": "inter (arasında) + medius (orta)",
+        "turkishDefinition": "İki yapının tam ortasında bulunan, ara yerdeki.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1030,
+        "term": "Medius",
+        "english": "Middle",
+        "roots": "medius (orta/ortadaki)",
+        "turkishDefinition": "Orta, ortadaki.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1031,
+        "term": "Caudalis",
+        "english": "Caudal",
+        "roots": "cauda (kuyruk) + alis (aitlik eki)",
+        "turkishDefinition": "Kuyruk tarafına ait, ayak tarafına/aşağıya daha yakın olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1032,
+        "term": "Apicalis",
+        "english": "Apical",
+        "roots": "apex (tepe/uç) + icalis (aitlik eki)",
+        "turkishDefinition": "Tepe noktasına (apex) ait, uçta/tepede bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1033,
+        "term": "Basalis",
+        "english": "Basal",
+        "roots": "basis (taban/taban kısmı) + alis (aitlik eki)",
+        "turkishDefinition": "Taban kısmına ait, tabanda bulunan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1034,
+        "term": "Externus",
+        "english": "External",
+        "roots": "externus (dış/dışarıda olan)",
+        "turkishDefinition": "Dış, bir yapının dışarısında olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1035,
+        "term": "Internus",
+        "english": "Internal",
+        "roots": "internus (iç/içeride olan)",
+        "turkishDefinition": "İç, bir yapının içerisinde olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1036,
+        "term": "Luminalis",
+        "english": "Luminal",
+        "roots": "lumen (boşluk/ışık) + inalis (aitlik eki)",
+        "turkishDefinition": "Organ veya damar boşluğuna (lümen) bakan yüzey.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1037,
+        "term": "Superficialis",
+        "english": "Superficial",
+        "roots": "superficies (yüzey) + alis (aitlik eki)",
+        "turkishDefinition": "Yüzeysel, deri yüzeyine yakın olan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1038,
+        "term": "Profundus",
+        "english": "Deep",
+        "roots": "profundus (derin/derinde yer alan)",
+        "turkishDefinition": "Derin, yüzeyden uzakta derinde yer alan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1039,
+        "term": "Proximalis",
+        "english": "Proximal",
+        "roots": "proximus (en yakın) + alis (aitlik eki)",
+        "turkishDefinition": "Gövdeye veya merkeze en yakın olan başlangıç kısmı.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1040,
+        "term": "Distalis",
+        "english": "Distal",
+        "roots": "distare (uzakta durmak) + alis (aitlik eki)",
+        "turkishDefinition": "Gövdeden veya başlangıç noktasından en uzak olan uç kısım.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1041,
+        "term": "Centralis",
+        "english": "Central",
+        "roots": "centrum (merkez) + alis (aitlik eki)",
+        "turkishDefinition": "Merkezi, merkezde yer alan.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1042,
+        "term": "Periphericus",
+        "english": "Peripheral",
+        "roots": "peripheria (çevre/çeper) + icus (aitlik eki)",
+        "turkishDefinition": "Çevresel, merkeze uzak olan çevre yapılar.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1043,
+        "term": "Flexorius",
+        "english": "Flexor",
+        "roots": "flectere (bükmek) + orius (sıfat eki)",
+        "turkishDefinition": "Bükücü, bükülmeyi/fleksiyonu sağlayan yüzey veya kasla ilgili.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    },
+    {
+        "id": 1044,
+        "term": "Extensorius",
+        "english": "Extensor",
+        "roots": "extendere (germek) + orius (sıfat eki)",
+        "turkishDefinition": "Gerici, germeyi/ekstansiyonu sağlayan yüzey veya kasla ilgili.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "trunk_bones"
+    }
+]

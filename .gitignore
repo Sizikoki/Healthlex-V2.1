@@ -84,4 +84,6 @@ android-sdk/ -e
 -e 
 # Environment files
 *.env
-*.env.*
+*.env.* 
+
+serviceAccountKey.json

@@ -1,0 +1,12 @@
+{
+  "name": "healthlexmed-seed",
+  "version": "1.0.0",
+  "description": "HealthLexMed Firebase Seed Script",
+  "main": "upload.js",
+  "scripts": {
+    "upload": "node upload.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}
