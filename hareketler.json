@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1045,
+    "term": "Abductio",
+    "english": "Abduction",
+    "roots": "ab- (uzaklaştırmak, -den uzak) + ducere (götürmek, çekmek)",
+    "turkishDefinition": "Vücut orta hattından uzaklaştırma hareketi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1046,
+    "term": "Adductio",
+    "english": "Adduction",
+    "roots": "ad- (yaklaştırmak, -e doğru) + ducere (götürmek, çekmek)",
+    "turkishDefinition": "Vücut orta hattına yakınlaştırma hareketi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1047,
+    "term": "Rotatio Lateralis",
+    "english": "Lateral Rotation",
+    "roots": "rotare (döndürmek) + latus / lateralis (yan, dış taraf)",
+    "turkishDefinition": "Bir uzvun kendi uzun ekseni etrafında dışa doğru dönme hareketi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1048,
+    "term": "Rotatio Medialis",
+    "english": "Medial Rotation",
+    "roots": "rotare (döndürmek) + medius / medialis (orta, iç taraf)",
+    "turkishDefinition": "Bir uzvun kendi uzun ekseni etrafında içe doğru dönme hareketi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1049,
+    "term": "Circumductio",
+    "english": "Circumduction",
+    "roots": "circum- (etrafında, dairesel) + ducere (götürmek, çekmek)",
+    "turkishDefinition": "Bir uzvun flexion, extension, abduction ve adduction kombinasyonuyla yaptığı dairesel dönme hareketi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1050,
+    "term": "Flexio",
+    "english": "Flexion",
+    "roots": "flectere (bükmek, eğmek)",
+    "turkishDefinition": "Eklem açısını küçülterek vücut bölümlerini birbirine yaklaştıran hareket.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1051,
+    "term": "Extensio",
+    "english": "Extension",
+    "roots": "ex- (dışarı, dışa doğru) + tendere (germek, uzatmak)",
+    "turkishDefinition": "Eklem açısını büyüterek vücut bölümlerini birbirinden uzaklaştırma hareketi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1052,
+    "term": "Pronatio",
+    "english": "Pronation",
+    "roots": "pronare (öne doğru eğmek, yüzüstü çevirmek)",
+    "turkishDefinition": "Ön kolun dönmesiyle avuç içinin arkaya / aşağıya bakması ; ayak tabanının dışa dönmesi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1053,
+    "term": "Supinatio",
+    "english": "Supination",
+    "roots": "supinare (arkaüstü/sırtüstü çevirmek)",
+    "turkishDefinition": "Ön kolun dönmesiyle avuç içinin öne / yukarı bakması ; ayak tabanının içe dönmesi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1054,
+    "term": "Oppositio",
+    "english": "Opposition",
+    "roots": "ob- (karşı, karşısına) + ponere (koymak, yerleştirmek)",
+    "turkishDefinition": "Başparmağın, avuç içini çaprazlayarak diğer parmak uçlarına yaklaşma hareketi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1055,
+    "term": "Repositio",
+    "english": "Reposition",
+    "roots": "re- (tekrar, geri) + ponere (koymak, yerleştirmek)",
+    "turkishDefinition": "Opozisyon halindeki başparmağın anatomik başlangıç konumuna geri dönmesi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1056,
+    "term": "Plantiflexio",
+    "english": "Plantar Flexion",
+    "roots": "planta (ayak tabanı) + flectere (bükmek)",
+    "turkishDefinition": "Ayak bileğinde, ayak ucunun tabana doğru aşağı doğru bükülmesi",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1057,
+    "term": "Dorsiflexio",
+    "english": "Dorsiflexion",
+    "roots": "dorsum (sırt, ayak sırtı) + flectere (bükmek)",
+    "turkishDefinition": "Ayak bileğinde, ayak ucunun yukarıya doğru çekilmesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1058,
+    "term": "Elevatio",
+    "english": "Elevation",
+    "roots": "e- (dışarı, yukarı) + levare (kaldırmak, hafifletmek)",
+    "turkishDefinition": "Omuz veya Mandibula gibi bir yapının yukarı doğru yükselme hareketi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1059,
+    "term": "Depressio",
+    "english": "Depression",
+    "roots": "de- (aşağı) + premere (bastırmak)",
+    "turkishDefinition": "Yukarı kaldırılmış bir yapının dikey eksende aşağıya doğru indirilmesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1060,
+    "term": "Eversio",
+    "english": "Eversion",
+    "roots": "ex- (dışarı, dışa doğru) + vertere (döndürmek)",
+    "turkishDefinition": "Ayak tabanının, vücut orta hattından uzaklaşarak dışa dönmesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1061,
+    "term": "Inversio",
+    "english": "Inversion",
+    "roots": "in- (içeri, içe doğru) + vertere (döndürmek)",
+    "turkishDefinition": "Ayak tabanının, vücut orta hattına bakacak şekilde içe dönmesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1062,
+    "term": "Protractio",
+    "english": "Protraction",
+    "roots": "pro- (öne doğru, ileri) + trahere (çekmek)",
+    "turkishDefinition": "Omuz kuşağı veya Mandibula'nın yatay düzlemde öne doğru kayma hareketi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  },
+  {
+    "id": 1063,
+    "term": "Retractio",
+    "english": "Retraction",
+    "roots": "re- (geri, arkaya) + trahere (çekmek)",
+    "turkishDefinition": "Öne çekilmiş omuz kuşağı veya Mandibula'nın arkaya doğru çekilmesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "motus"
+  }
+]

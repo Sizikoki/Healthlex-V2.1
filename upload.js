@@ -13,6 +13,7 @@ const SERVICE_ACCOUNT_PATH = "./serviceAccountKey.json";
 const COLLECTION_NAME = "terms";
 const JSON_FILES = [
   "./yon_terimleri.json",
+  "./hareketler.json",
 ];
 
 // Kelimeler Firestore'da zaten varsa eskisini silip üzerine yazsın (true) yaptık.
