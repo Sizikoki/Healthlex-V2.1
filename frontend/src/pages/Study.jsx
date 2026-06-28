@@ -17,6 +17,7 @@ const CATEGORIES = [
   { id: 'trunk_bones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
   { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
+  { id: 'movement_terms', name: 'Hareket Terimleri', category: 'movement_terms' },
 ];
 
 const UPPER_EXTREMITY_GROUPS = [
@@ -103,9 +104,12 @@ export const Study = () => {
 
   const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
 
-  const filteredTerms = allTerms.filter(
-    (t) => t.system === selectedCategory.system && t.subcategory === selectedCategory.subcategory
-  );
+  const filteredTerms = allTerms.filter((t) => {
+    if (selectedCategory.category) {
+      return t.category === selectedCategory.category;
+    }
+    return t.system === selectedCategory.system && t.subcategory === selectedCategory.subcategory;
+  });
 
   const terms = searchQuery
     ? filteredTerms.filter(

@@ -11,6 +11,7 @@ const GAME_CATEGORIES = [
   { id: 'trunk_bones', name: 'Gövde Kemikleri' },
   { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
+  { id: 'movement_terms', name: 'Hareket Terimleri' },
 ];
 
 export const Games = () => {
