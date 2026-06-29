@@ -14,7 +14,6 @@ import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
 import { isLoggedIn, syncProgressFromFirestore } from '@/utils/storage';
 import { seedMedicalTerms } from '@/firebase/seeder';
-import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -73,7 +72,6 @@ function App() {
           } />
         </Routes>
         <Toaster position="top-right" richColors />
-        <Analytics />
       </div>
     </BrowserRouter>
   );
