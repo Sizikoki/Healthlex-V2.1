@@ -18,7 +18,7 @@ module.exports = {
   		},
   		colors: {
   			'medical-dark': '#0F1E36',
-  			'medical-accent': '#2563EB',
+  			'medical-accent': 'hsl(var(--primary))',
   			'medical-light': '#F0F6FC',
   			'medical-bg': '#FAFCFF',
   			background: 'hsl(var(--background))',
