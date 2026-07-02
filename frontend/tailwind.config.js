@@ -14,7 +14,7 @@ module.exports = {
   		},
   		fontFamily: {
   			serif: ['Crimson Pro', 'serif'],
-  			sans: ['Inter', 'sans-serif'],
+  			sans: ['Nunito', 'sans-serif'],
   		},
   		colors: {
   			'medical-dark': '#0F1E36',
