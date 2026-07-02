@@ -238,9 +238,9 @@ h1, h2, .title-serif {
   --line: #D3E0F0;
   --card: #FFFFFF;
   --radius: 14px;
-  --serif: 'Newsreader', serif;
-  --mono: 'IBM Plex Mono', monospace;
-  --sans: 'IBM Plex Sans', sans-serif;
+  --serif: 'Nunito', sans-serif;
+  --mono: 'Nunito', sans-serif;
+  --sans: 'Nunito', sans-serif;
   
   font-family: var(--sans);
   background: var(--paper);

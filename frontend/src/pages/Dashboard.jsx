@@ -19,6 +19,18 @@ export const Dashboard = () => {
     setInProp(true);
   }, []);
 
+  const formatName = (name) => {
+    if (!name) return 'Kullanıcı';
+    return name
+      .split(' ')
+      .map(word => {
+        if (!word) return '';
+        return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
+      })
+      .join(' ');
+  };
+  const userName = formatName(user?.name);
+
   // ----------------------------------------------------
   // Dynamic Category Progress Calculations
   // ----------------------------------------------------
@@ -73,11 +85,11 @@ export const Dashboard = () => {
           <section className="mb-[52px]">
             <div className={`welcome p-[34px] md:p-[36px] rounded-[18px] transition-all duration-500 transform ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <div>
-                <div className="eyebrow text-[#93C5FD] text-[0.72rem] tracking-[0.12em] uppercase font-semibold mb-2">
+                <div className="eyebrow text-[#38BDF8] text-[0.78rem] tracking-[0.15em] uppercase font-bold mb-2">
                   Hoş geldin
                 </div>
                 <h1 className="font-serif font-semibold text-[1.8rem] md:text-[2.2rem] leading-[1.2] mb-2 tracking-tight">
-                  Merhaba, {user?.name || 'Kullanıcı'} 👋
+                  Merhaba, {userName} 👋
                 </h1>
                 <p className="text-[#D0E1F9] text-[0.98rem] max-w-[44ch] leading-[1.5]">
                   Bugün {terms.length - stats.learnedTerms > 10 ? 12 : Math.max(3, terms.length - stats.learnedTerms)} terim seni bekliyor. Serini bozma — 5 dakikanı ayır, kaldığın yerden devam et.
@@ -102,7 +114,7 @@ export const Dashboard = () => {
                 </button>
                 <button
                   onClick={() => document.getElementById('modes')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="btn btn-ghost-light bg-white/10 text-white border border-white/25 font-semibold text-[0.94rem] px-[20px] py-[12px] rounded-[9px] hover:bg-white/20 transition-all"
+                  className="btn bg-[#2563EB] text-white border border-blue-600/30 font-semibold text-[0.94rem] px-[20px] py-[12px] rounded-[9px] hover:bg-blue-700 transition-all"
                 >
                   Oyun Seç
                 </button>
