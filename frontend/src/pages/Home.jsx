@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { isLoggedIn, getStats } from '@/utils/storage';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase/config';
+import { Dashboard } from './Dashboard';
 
 export const Home = () => {
-  const loggedIn = isLoggedIn();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const loggedIn = !!user || isLoggedIn();
   const stats = loggedIn ? getStats() : null;
 
   // Tab State: 'quiz' | 'flashcard' | 'match'
@@ -222,6 +234,10 @@ export const Home = () => {
     setMorphemeSelected([]);
     setMorphemeSuccess(null);
   };
+
+  if (loggedIn) {
+    return <Dashboard />;
+  }
 
   return (
     <main className="font-sans text-gray-800 bg-white min-h-screen">

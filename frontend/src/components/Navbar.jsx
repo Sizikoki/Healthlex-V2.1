@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Activity, Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getUser, logout, isLoggedIn, getStats } from '@/utils/storage';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/config';
 import {
   DropdownMenu,
@@ -16,7 +16,16 @@ import {
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const loggedIn = isLoggedIn();
+  const [firebaseUser, setFirebaseUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (usr) => {
+      setFirebaseUser(usr);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const loggedIn = !!firebaseUser || isLoggedIn();
   const user = getUser();
   const stats = loggedIn ? getStats() : null;
 
