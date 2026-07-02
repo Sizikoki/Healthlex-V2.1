@@ -17,10 +17,10 @@ module.exports = {
   			sans: ['Inter', 'sans-serif'],
   		},
   		colors: {
-  			'medical-dark': '#0B192C',
-  			'medical-accent': '#00ADB5',
-  			'medical-light': '#F3F7FA',
-  			'medical-bg': '#FAFDFE',
+  			'medical-dark': '#0F1E36',
+  			'medical-accent': '#2563EB',
+  			'medical-light': '#F0F6FC',
+  			'medical-bg': '#FAFCFF',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

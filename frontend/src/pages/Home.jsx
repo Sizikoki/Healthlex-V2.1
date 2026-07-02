@@ -213,6 +213,10 @@ export const Home = () => {
               )}
               <a
                 href="#demo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="text-medical-dark font-semibold border-b-2 border-medical-dark pb-0.5 flex items-center gap-1 hover:text-medical-accent hover:border-medical-accent transition-all"
               >
                 <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
