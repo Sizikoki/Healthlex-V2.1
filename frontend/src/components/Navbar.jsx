@@ -52,13 +52,13 @@ export const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="bg-[#0E6B5C] p-2 rounded-md">
+            <div className="bg-[#2563EB] p-2 rounded-md">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 12h4l2 7 4-14 2 7h6" />
               </svg>
             </div>
             <span className="text-xl font-bold tracking-tight text-[#131C18]">
-              Health<span className="text-[#0E6B5C] font-semibold font-serif italic">Lex</span>Med
+              Health<span className="text-[#2563EB] font-semibold font-serif italic">Lex</span>Med
             </span>
           </Link>
 
