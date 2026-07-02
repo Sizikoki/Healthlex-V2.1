@@ -73,16 +73,16 @@ export const Dashboard = () => {
           <section className="mb-[52px]">
             <div className={`welcome p-[34px] md:p-[36px] rounded-[18px] transition-all duration-500 transform ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <div>
-                <div className="eyebrow text-[#8FCBBB] text-[0.72rem] tracking-[0.12em] uppercase font-semibold mb-2">
+                <div className="eyebrow text-[#93C5FD] text-[0.72rem] tracking-[0.12em] uppercase font-semibold mb-2">
                   Hoş geldin
                 </div>
                 <h1 className="font-serif font-semibold text-[1.8rem] md:text-[2.2rem] leading-[1.2] mb-2 tracking-tight">
                   Merhaba, {user?.name || 'Kullanıcı'} 👋
                 </h1>
-                <p className="text-[#CFE4DE] text-[0.98rem] max-w-[44ch] leading-[1.5]">
+                <p className="text-[#D0E1F9] text-[0.98rem] max-w-[44ch] leading-[1.5]">
                   Bugün {terms.length - stats.learnedTerms > 10 ? 12 : Math.max(3, terms.length - stats.learnedTerms)} terim seni bekliyor. Serini bozma — 5 dakikanı ayır, kaldığın yerden devam et.
                 </p>
-                <div className="welcome-pills flex gap-[16px] text-[0.82rem] text-[#CFE4DE] mt-6">
+                <div className="welcome-pills flex gap-[16px] text-[0.82rem] text-[#D0E1F9] mt-6">
                   <span className="flex items-center gap-[6px]">
                     <span className="dot w-[5px] h-[5px] rounded-full bg-white opacity-60"></span>
                     {stats.learnedTerms} terim öğrenildi
@@ -123,7 +123,7 @@ export const Dashboard = () => {
                 className="tile bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] md:p-[24px] flex flex-col gap-[14px] cursor-pointer hover:border-[var(--teal)] hover:-translate-y-0.5 transition-all"
                 onClick={() => navigate('/quiz')}
               >
-                <div className="ic ic-teal w-[42px] h-[42px] rounded-[10px] bg-[#E1F0EC] color-[var(--teal-deep)] flex items-center justify-center">
+                <div className="ic ic-teal w-[42px] h-[42px] rounded-[10px] bg-[#E0ECFD] color-[var(--teal-deep)] flex items-center justify-center">
                   <svg className="w-[21px] h-[21px] text-[var(--teal-deep)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 1.9-2.4 3.7M12 17h.01" />
@@ -204,7 +204,7 @@ export const Dashboard = () => {
                     </div>
                     {/* Back Face */}
                     <div className="flip-face flip-back absolute inset-0 rounded-[12px] flex flex-col items-center justify-center p-[18px] bg-[var(--teal-deep)] text-white rotate-y-180 backface-hidden">
-                      <p className="text-[0.9rem] leading-[1.5] text-[#EAF2EF] m-0">
+                      <p className="text-[0.9rem] leading-[1.5] text-[#E0ECFD] m-0">
                         {todayTerm.meaning}
                       </p>
                     </div>

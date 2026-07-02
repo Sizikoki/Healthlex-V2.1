@@ -227,15 +227,15 @@ h1, h2, .title-serif {
 
 /* Dashboard Theme */
 .dashboard-theme {
-  --paper: #F1F4EF;
-  --paper-dim: #E8ECE4;
-  --ink: #131C18;
-  --teal: #0E6B5C;
-  --teal-deep: #0A3F37;
+  --paper: #F5F8FC;
+  --paper-dim: #E6EEF7;
+  --ink: #0F1E36;
+  --teal: #2563EB;
+  --teal-deep: #0F1E36;
   --coral: #C1442D;
   --gold: #B8862E;
-  --muted: #5C6B63;
-  --line: #D6DED4;
+  --muted: #576F8E;
+  --line: #D3E0F0;
   --card: #FFFFFF;
   --radius: 14px;
   --serif: 'Newsreader', serif;
@@ -347,7 +347,7 @@ h1, h2, .title-serif {
   display: flex;
   gap: 16px;
   font-size: 0.82rem;
-  color: #CFE4DE;
+  color: #D0E1F9;
 }
 
 .dashboard-theme .welcome-pills span {
@@ -424,7 +424,7 @@ h1, h2, .title-serif {
 }
 
 .dashboard-theme .ic-teal {
-  background: #E1F0EC;
+  background: #E0ECFD;
   color: var(--teal-deep);
 }
 

@@ -88,7 +88,7 @@ export const Navbar = () => {
                     <div className="streak-badge flex items-center gap-[6px] bg-[#FBEFE1] border border-[#EAD8B8] px-[12px] py-[7px] rounded-[20px] font-semibold text-[0.85rem] text-[#B8862E]">
                       🔥 {stats?.currentStreak || 0} gün
                     </div>
-                    <div className="avatar w-[36px] h-[36px] rounded-full bg-[#0A3F37] text-white flex items-center justify-center font-semibold text-[0.95rem]">
+                    <div className="avatar w-[36px] h-[36px] rounded-full bg-[#0F1E36] text-white flex items-center justify-center font-semibold text-[0.95rem]">
                       {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
                   </div>
