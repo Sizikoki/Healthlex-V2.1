@@ -187,11 +187,11 @@ h1, h2, .title-serif {
 }
 
 .hero-gradient {
-  background: linear-gradient(to bottom, #F3F7FA 0%, #FFFFFF 100%);
+  background: linear-gradient(to bottom, #F0F6FC 0%, #FFFFFF 100%);
 }
 
 .card-shadow {
-  box-shadow: 0 4px 20px rgba(11, 25, 44, 0.05);
+  box-shadow: 0 4px 20px rgba(15, 30, 54, 0.05);
 }
 
 .flashcard-stack {

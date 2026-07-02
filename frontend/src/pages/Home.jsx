@@ -170,6 +170,59 @@ export const Home = () => {
     setMatchError(false);
   };
 
+  // ----------------------------------------------------
+  // MORPHEME BUILDER STATE & DATA
+  // ----------------------------------------------------
+  const morphemeQuestions = [
+    {
+      description: "Köprücük kemiğinin altındaki kas anlamına gelen terimi oluşturun:",
+      blocks: ['clavi', 'us', 'Sub'],
+      correct: ['Sub', 'clavi', 'us'],
+      assembled: 'Subclavius',
+      definition: 'Subclavius: Sub- (altında) + -clavi- (köprücük kemiği) + -us (ek/sonek) birleşiminden oluşan, köprücük kemiğinin altındaki kas terimidir.'
+    },
+    {
+      description: "Eklem iltihabı anlamına gelen terimi oluşturun:",
+      blocks: ['itis', 'arthr'],
+      correct: ['arthr', 'itis'],
+      assembled: 'Arthritis',
+      definition: 'Arthritis: Arthr- (eklem) + -itis (iltihap/yangı) birleşiminden oluşan eklem iltihabı terimidir.'
+    }
+  ];
+
+  const [morphemeStep, setMorphemeStep] = useState(0);
+  const [morphemeSelected, setMorphemeSelected] = useState([]);
+  const [morphemeSuccess, setMorphemeSuccess] = useState(null);
+
+  const handleBlockClick = (block) => {
+    if (morphemeSelected.includes(block) || morphemeSuccess !== null) return;
+    setMorphemeSelected((prev) => [...prev, block]);
+  };
+
+  const handleRemoveBlock = (block) => {
+    if (morphemeSuccess !== null) return;
+    setMorphemeSelected((prev) => prev.filter((b) => b !== block));
+  };
+
+  const checkMorphemeAnswer = () => {
+    const q = morphemeQuestions[morphemeStep];
+    const isCorrect = morphemeSelected.length === q.correct.length && 
+                      morphemeSelected.every((val, index) => val === q.correct[index]);
+    setMorphemeSuccess(isCorrect);
+  };
+
+  const handleNextMorpheme = () => {
+    setMorphemeSelected([]);
+    setMorphemeSuccess(null);
+    setMorphemeStep((prev) => prev + 1);
+  };
+
+  const resetMorphemeGame = () => {
+    setMorphemeStep(0);
+    setMorphemeSelected([]);
+    setMorphemeSuccess(null);
+  };
+
   return (
     <main className="font-sans text-gray-800 bg-white min-h-screen">
       {/* HERO SECTION */}
@@ -323,7 +376,7 @@ export const Home = () => {
             </div>
 
             {/* Mode Switcher Tabs */}
-            <div className="flex bg-gray-100 p-1.5 rounded-xl border border-gray-200">
+            <div className="flex bg-medical-light p-1.5 rounded-xl border border-gray-200">
               <button
                 onClick={() => setDemoMode('quiz')}
                 className={`px-6 py-2 rounded-lg font-semibold transition-all ${
@@ -347,6 +400,14 @@ export const Home = () => {
                 }`}
               >
                 Eşleştirme
+              </button>
+              <button
+                onClick={() => setDemoMode('morpheme')}
+                className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                  demoMode === 'morpheme' ? 'bg-white shadow-sm text-medical-dark' : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Morfem Yapıcı
               </button>
             </div>
           </div>
@@ -633,6 +694,144 @@ export const Home = () => {
                     <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-sm mx-auto">
                       <button
                         onClick={resetMatchGame}
+                        className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium transition-colors"
+                      >
+                        Yeniden Oyna
+                      </button>
+                      <Link
+                        to="/register"
+                        className="px-6 py-3 bg-medical-dark text-white font-medium rounded-lg hover:opacity-90 transition-opacity text-center"
+                      >
+                        Ücretsiz Kaydol
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* 4. MORPHEME BUILDER MODE */}
+            {demoMode === 'morpheme' && (
+              <div className="w-full">
+                {morphemeStep < 2 ? (
+                  <div className="text-center w-full">
+                    <div className="flex justify-between items-center mb-10">
+                      <span className="text-gray-500 font-medium">Soru {morphemeStep + 1} / 2</span>
+                      <button
+                        onClick={resetMorphemeGame}
+                        className="text-xs font-semibold text-medical-dark underline hover:text-medical-accent"
+                      >
+                        Sıfırla
+                      </button>
+                    </div>
+
+                    <div className="mb-8">
+                      <span className="text-xs font-bold tracking-[0.2em] text-medical-accent uppercase block mb-4">MORFEM OYUNU</span>
+                      <p className="text-lg text-gray-700 mb-6 font-medium max-w-xl mx-auto">
+                        {morphemeQuestions[morphemeStep].description}
+                      </p>
+                    </div>
+
+                    {/* Word Slots Display */}
+                    <div className="flex justify-center gap-2 mb-10">
+                      {morphemeQuestions[morphemeStep].correct.map((_, idx) => {
+                        const filledPart = morphemeSelected[idx];
+                        return (
+                          <div 
+                            key={idx} 
+                            onClick={() => filledPart && handleRemoveBlock(filledPart)}
+                            className={`w-28 h-14 border-2 border-dashed rounded-xl flex items-center justify-center font-mono text-lg font-bold transition-all cursor-pointer ${
+                              filledPart 
+                                ? 'border-medical-accent bg-medical-accent/5 text-medical-accent hover:bg-rose-50 hover:border-rose-300 hover:text-rose-600' 
+                                : 'border-gray-300 text-gray-300 bg-white'
+                            }`}
+                          >
+                            {filledPart || '?'}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Shuffled Clickable Blocks */}
+                    <div className="flex justify-center gap-3 flex-wrap mb-8">
+                      {morphemeQuestions[morphemeStep].blocks.map((block, idx) => {
+                        const isUsed = morphemeSelected.includes(block);
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => handleBlockClick(block)}
+                            disabled={isUsed || morphemeSuccess !== null}
+                            className={`px-6 py-3 border font-mono text-lg font-bold rounded-xl transition-all ${
+                              isUsed 
+                                ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-55' 
+                                : 'bg-white border-gray-200 text-medical-dark hover:border-medical-dark hover:shadow-md'
+                            }`}
+                          >
+                            {block}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Check & Success States */}
+                    {morphemeSelected.length === morphemeQuestions[morphemeStep].correct.length && morphemeSuccess === null && (
+                      <button
+                        onClick={checkMorphemeAnswer}
+                        className="px-8 py-3 bg-medical-dark text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        Kontrol Et
+                      </button>
+                    )}
+
+                    {morphemeSuccess !== null && (
+                      <div className="mt-8 max-w-xl mx-auto p-6 bg-white border border-gray-200 rounded-2xl text-left">
+                        <h4 className="font-bold text-medical-dark mb-2">
+                          {morphemeSuccess ? '✓ Tebrikler, Doğru Sıralama!' : '✗ Maalesef Yanlış Sıralama'}
+                        </h4>
+                        <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                          {morphemeQuestions[morphemeStep].definition}
+                        </p>
+                        <div className="flex gap-3">
+                          {!morphemeSuccess && (
+                            <button
+                              onClick={() => {
+                                setMorphemeSelected([]);
+                                setMorphemeSuccess(null);
+                              }}
+                              className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium"
+                            >
+                              Tekrar Dene
+                            </button>
+                          )}
+                          <button
+                            onClick={handleNextMorpheme}
+                            className="flex-1 py-2 bg-medical-dark text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                          >
+                            {morphemeStep === morphemeQuestions.length - 1 ? 'Sonuçları Gör' : 'Sonraki Soru →'}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-medical-accent/15 rounded-full flex items-center justify-center mx-auto mb-6 text-medical-accent">
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 00-1.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138-3.138z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                        ></path>
+                      </svg>
+                    </div>
+                    <h3 className="text-3xl font-bold text-medical-dark mb-4">Morfem Oyunu Tamamlandı!</h3>
+                    <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
+                      Harika bir iş çıkardın! Kelimelerin morfolojik yapılarını başarıyla çözümledin.
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-sm mx-auto">
+                      <button
+                        onClick={resetMorphemeGame}
                         className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium transition-colors"
                       >
                         Yeniden Oyna
