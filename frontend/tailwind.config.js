@@ -12,7 +12,15 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+  		fontFamily: {
+  			serif: ['Crimson Pro', 'serif'],
+  			sans: ['Inter', 'sans-serif'],
+  		},
   		colors: {
+  			'medical-dark': '#0B192C',
+  			'medical-accent': '#00ADB5',
+  			'medical-light': '#F3F7FA',
+  			'medical-bg': '#FAFDFE',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

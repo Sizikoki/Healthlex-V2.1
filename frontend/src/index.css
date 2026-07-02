@@ -175,3 +175,52 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Custom premium styles for HealthLexMed */
+.font-serif-italic {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+}
+
+h1, h2, .title-serif {
+  font-family: 'Crimson Pro', serif;
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, #F3F7FA 0%, #FFFFFF 100%);
+}
+
+.card-shadow {
+  box-shadow: 0 4px 20px rgba(11, 25, 44, 0.05);
+}
+
+.flashcard-stack {
+  perspective: 1000px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* 3D Flashcard Flip styling */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
