@@ -14,6 +14,7 @@ const COLLECTION_NAME = "terms";
 const JSON_FILES = [
   "./yon_terimleri.json",
   "./hareketler.json",
+  "./Eklem_Ust_Extremite.json",
 ];
 
 // Kelimeler Firestore'da zaten varsa eskisini silip üzerine yazsın (true) yaptık.
