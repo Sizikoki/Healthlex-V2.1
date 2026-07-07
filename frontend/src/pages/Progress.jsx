@@ -89,6 +89,7 @@ export const ProgressPage = () => {
     { id: 'trunk_bones', name: 'Gövde Kemikleri' },
     { id: 'face_bones', name: 'Yüz Kemikleri' },
     { id: 'upper_extremity_bones', name: 'Üst Ekstremite' },
+    { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
     { id: 'lower_extremity_bones', name: 'Alt Ekstremite' },
   ];
 

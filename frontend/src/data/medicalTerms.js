@@ -54,7 +54,8 @@ export const subcategoriesBySystem = {
     { id: 'basic_movement', name: 'Temel Hareket Terimleri' },
     { id: 'regional_movement', name: 'Bölgesel Hareket Terimleri' },
     { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
-    { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' }
+    { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
+    { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' }
   ],
   respiratory: [
     { id: 'respiratory_organs', name: 'Solunum Organları ve Yapıları' },
@@ -293,7 +294,209 @@ export const medicalTermsData = {
     { id: 1061, term: 'Inversio', turkish: 'Inversion', roots: 'in- (içeri, içe doğru) + vertere (döndürmek)', definition: 'Ayak tabanının, vücut orta hattına bakacak şekilde içe dönmesi.', category: 'movement_terms', system: 'movement', subcategory: 'motus' },
     { id: 1062, term: 'Protractio', turkish: 'Protraction', roots: 'pro- (öne doğru, ileri) + trahere (çekmek)', definition: 'Omuz kuşağı veya Mandibula\'nın yatay düzlemde öne doğru kayma hareketi.', category: 'movement_terms', system: 'movement', subcategory: 'motus' },
     { id: 1063, term: 'Retractio', turkish: 'Retraction', roots: 're- (geri, arkaya) + trahere (çekmek)', definition: 'Öne çekilmiş omuz kuşağı veya Mandibula\'nın arkaya doğru çekilmesi.', category: 'movement_terms', system: 'movement', subcategory: 'motus' }
-  ]
+  ],
+  upper_extremity_joints: [
+    {
+        id: 500,
+        term: "articulatio humeri",
+        turkish: "shoulder joint",
+        roots: "articulatio (eklem) + humeri (humerusa ait)",
+        definition: "Omuz eklemi; humerus başı ile scapula'nın cavitas glenoidalis'i arasında oluşan top-yuva tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 501,
+        term: "articulatio acromioclavicularis",
+        turkish: "acromioclavicular joint",
+        roots: "articulatio (eklem) + acromion (akromion) + clavicula (köprücük kemiği)",
+        definition: "clavicula'nın akromiyal ucu ile scapula'nın acromion'u arasındaki düzlem tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 502,
+        term: "articulatio sternoclavicularis",
+        turkish: "sternoclavicular joint",
+        roots: "articulatio (eklem) + sternum (göğüs kemiği) + clavicula (köprücük kemiği)",
+        definition: "clavicula'nın sternal ucu ile sternum'un manubriumu arasındaki eyer tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 503,
+        term: "articulatio cubiti",
+        turkish: "elbow joint",
+        roots: "articulatio (eklem) + cubitus (dirsek)",
+        definition: "Dirsek eklemi; humerus, radius ve ulna arasında oluşan bileşik menteşe tipi sinovyal eklem. Articulatio humeroulnaris, humeroradialis ve radioulnaris proximalis'i kapsar.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 504,
+        term: "articulatio humeroulnaris",
+        turkish: "humeroulnar joint",
+        roots: "articulatio (eklem) + humerus + ulna",
+        definition: "humerus'un trochlea'sı ile ulna'nın incisura trochlearis'i arasındaki menteşe tipi eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 505,
+        term: "articulatio humeroradialis",
+        turkish: "humeroradial joint",
+        roots: "articulatio (eklem) + humerus + radius",
+        definition: "humerus'un capitulum'u ile radius'un fovea articularis'i arasındaki top-yuva tipi eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 506,
+        term: "articulatio radioulnaris proximalis",
+        turkish: "proximal radioulnar joint",
+        roots: "articulatio (eklem) + radius + ulna + proximalis (yakın)",
+        definition: "radius başının çevresi ile ulna'nın incisura radialis'i arasındaki pivot tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 507,
+        term: "articulatio radioulnaris distalis",
+        turkish: "distal radioulnar joint",
+        roots: "articulatio (eklem) + radius + ulna + distalis (uzak)",
+        definition: "ulna başı ile radius'un incisura ulnaris'i arasındaki pivot tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 508,
+        term: "articulatio radiocarpalis",
+        turkish: "radiocarpal joint",
+        roots: "articulatio (eklem) + radius + carpus (el bileği)",
+        definition: "El bileği eklemi; radius'un distal yüzeyi ile os scaphoideum, os lunatum ve os triquetrum arasındaki ellipsoid tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 509,
+        term: "articulatio mediocarpalis",
+        turkish: "midcarpal joint",
+        roots: "articulatio (eklem) + medius (orta) + carpus (el bileği)",
+        definition: "proksimal karpal sıra ile distal karpal sıra arasındaki bileşik sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 510,
+        term: "articulationes carpometacarpales",
+        turkish: "carpometacarpal joints",
+        roots: "articulatio (eklem) + carpus (el bileği) + metacarpus (el tarağı)",
+        definition: "distal karpal kemikler ile 5 metakarp kemiğinin tabanları arasındaki eklemler.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 511,
+        term: "articulatio carpometacarpalis pollicis",
+        turkish: "carpometacarpal joint of thumb",
+        roots: "articulatio (eklem) + carpus + metacarpus + pollex (başparmak)",
+        definition: "os trapezium ile 1. metakarp tabanı arasındaki eyer tipi sinovyal eklem.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 512,
+        term: "articulationes metacarpophalangeae",
+        turkish: "metacarpophalangeal joints",
+        roots: "articulatio (eklem) + metacarpus (el tarağı) + phalanx (parmak kemiği)",
+        definition: "metakarp başları ile proksimal falanksların tabanları arasındaki kondiloid tip sinovyal eklemler.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 513,
+        term: "articulationes interphalangeae manus",
+        turkish: "interphalangeal joints of hand",
+        roots: "articulatio (eklem) + inter (arasında) + phalanx (parmak kemiği) + manus (el)",
+        definition: "Elin interfalangeal eklemleri; parmak falankslari arasındaki menteşe tipi sinovyal eklemler.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 514,
+        term: "cavitas glenoidalis",
+        turkish: "glenoid cavity",
+        roots: "cavitas (çukur, boşluk) + glenoid (yuva şeklinde)",
+        definition: "scapula'nın lateralinde yer alan sığ eklem yüzeyi. Humerus başını karşılar ve labrum glenoidale ile derinleştirilir.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 515,
+        term: "labrum glenoidale",
+        turkish: "glenoid labrum",
+        roots: "labrum (dudak, kenar) + glenoidale (glenoide ait)",
+        definition: "cavitas glenoidalis çevresini çevreleyen fibrokartilaj halka.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 516,
+        term: "capsula articularis",
+        turkish: "articular capsule",
+        roots: "capsula (kapsül, kılıf) + articularis (ekleme ait)",
+        definition: "Eklem kapsülü; sinovyal eklemi çevreleyen fibröz kılıf. Dış tabakası fibröz membran, iç tabakası sinovyal membrandan oluşur.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 517,
+        term: "membrana synovialis",
+        turkish: "synovial membrane",
+        roots: "membrana (zar, tabaka) + synovialis (sinoviyal, yumurta akı benzeri)",
+        definition: "eklem kapsülünün iç tabakası. Sinovyal sıvı üretir, eklem kıkırdağını besler ve sürtünmeyi azaltır.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 518,
+        term: "discus articularis",
+        turkish: "articular disc",
+        roots: "discus (disk, yuvarlak levha) + articularis (ekleme ait)",
+        definition: "bazı eklemlerde iki eklem yüzeyi arasında yer alan fibrokartilaj yapı.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    },
+    {
+        id: 519,
+        term: "bursa synovialis",
+        turkish: "synovial bursa",
+        roots: "bursa (kese, torba) + synovialis (sinoviyal)",
+        definition: "tendon veya kasların kemik üzerinden geçtiği yerlerde sürtünmeyi azaltan sinovyal sıvı içeren küçük kese.",
+        category: "anatomy",
+        system: "movement",
+        subcategory: "upper_extremity_joints"
+    }
+]
 };
 
 // Get all terms as a flat array

@@ -10,6 +10,7 @@ const GAME_CATEGORIES = [
   { id: 'face_bones', name: 'Yüz Kemikleri' },
   { id: 'trunk_bones', name: 'Gövde Kemikleri' },
   { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
+  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
   { id: 'movement_terms', name: 'Hareket Terimleri' },
 ];

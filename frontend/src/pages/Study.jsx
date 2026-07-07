@@ -16,6 +16,7 @@ const CATEGORIES = [
   { id: 'face_bones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
   { id: 'trunk_bones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
   { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
+  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri', system: 'movement', subcategory: 'upper_extremity_joints' },
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
   { id: 'movement_terms', name: 'Hareket Terimleri', category: 'movement_terms' },
 ];
