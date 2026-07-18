@@ -34,5 +34,12 @@ export function formatMedicalTerm(term) {
     return term;
   }
 
-  return term.charAt(0).toLocaleUpperCase('tr-TR') + term.slice(1).toLocaleLowerCase('tr-TR');
+  return term.split(' ').map(word => {
+    if (word.includes('-')) {
+      return word.split('-').map(subWord => {
+        return subWord.charAt(0).toLocaleUpperCase('tr-TR') + subWord.slice(1).toLocaleLowerCase('tr-TR');
+      }).join('-');
+    }
+    return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
+  }).join(' ');
 }
