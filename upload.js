@@ -5,7 +5,7 @@
 // ============================================================
 
 const admin = require("firebase-admin");
-const fs = require("fs");
+const fs = require("fs"); 
 const path = require("path");
 
 // ─── 1. AYARLAR ──────────────────────────────────────────────
@@ -16,6 +16,7 @@ const JSON_FILES = [
   "./hareketler.json",
   "./Eklem_Ust_Extremite.json",
   "./Alt_Ekstremite_Eklemleri.json",
+  "./Omurga_Eklemleri.json",
 ];
 
 // Kelimeler Firestore'da zaten varsa eskisini silip üzerine yazsın (true) yaptık.
@@ -40,6 +41,55 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+
+// ─── 3. OTOMATİK FORMATLAMA YARDIMCILARI ──────────────────────
+function formatLatinTerm(str) {
+  if (!str || typeof str !== 'string') return str;
+  return str.trim().split(' ').map(word => {
+    if (word.includes('-')) {
+      return word.split('-').map(subWord => {
+        return subWord.charAt(0).toLocaleUpperCase('tr-TR') + subWord.slice(1).toLocaleLowerCase('tr-TR');
+      }).join('-');
+    }
+    return word.charAt(0).toLocaleUpperCase('tr-TR') + word.slice(1).toLocaleLowerCase('tr-TR');
+  }).join(' ');
+}
+
+function formatEnglishTerm(str) {
+  if (!str || typeof str !== 'string') return str;
+  const lowercaseWords = new Set(['of', 'the', 'and', 'in', 'to', 'with', 'for', 'at', 'by', 'from']);
+  
+  return str.trim().split(' ').map((word, index) => {
+    if (word === '') return '';
+    
+    let prefix = '';
+    let cleanWord = word;
+    if (word.startsWith('(')) {
+      prefix = '(';
+      cleanWord = word.slice(1);
+    }
+    
+    let suffix = '';
+    if (cleanWord.endsWith(',')) {
+      suffix = ',';
+      cleanWord = cleanWord.slice(0, -1);
+    } else if (cleanWord.endsWith(')')) {
+      suffix = ')';
+      cleanWord = cleanWord.slice(0, -1);
+    }
+    
+    if (cleanWord === cleanWord.toUpperCase() && cleanWord.length >= 2) {
+      return prefix + cleanWord + suffix;
+    }
+    
+    if (lowercaseWords.has(cleanWord.toLowerCase()) && index > 0) {
+      return prefix + cleanWord.toLowerCase() + suffix;
+    }
+    
+    const capitalized = cleanWord.charAt(0).toLocaleUpperCase('tr-TR') + cleanWord.slice(1).toLocaleLowerCase('tr-TR');
+    return prefix + capitalized + suffix;
+  }).join(' ');
+}
 
 // ─── 4. DOĞRULAMA (YENİ ŞEMAYA GÖRE DÜZENLENDİ) ──────────────
 function validateTerm(item, index, fileName) {
@@ -138,10 +188,10 @@ async function uploadTerms() {
         // BURASI DÜZELTİLDİ: Tamamen frontend şemasına (A Şeması) uygun şekilde kaydediyor
         const firestoreDoc = {
           id: Number(item.id),
-          term: item.term.trim(),
-          english: item.english.trim(),
+          term: formatLatinTerm(item.term),
+          english: formatEnglishTerm(item.english),
           turkishDefinition: item.turkishDefinition.trim(),
-          roots: item.roots.trim(), // .map kaldırıldı, düz string olarak kaydediliyor
+          roots: item.roots.trim(),
           category: item.category.trim(),
           system: item.system.trim(),
           subcategory: item.subcategory.trim(),

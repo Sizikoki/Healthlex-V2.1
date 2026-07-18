@@ -1,0 +1,192 @@
+[
+    {
+        "id": 544,
+        "term": "columna vertebralis",
+        "english": "vertebral column (spine)",
+        "turkishDefinition": "Omurga; 33 vertebradan oluşan, gövdenin ana eksenini oluşturan kemik yapı. Cervical, thoracic, lumbal, sakral ve koksigeal bölümlere ayrılır.",
+        "roots": "columna (sütun) + vertebralis (omura ait)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 545,
+        "term": "articulatio zygapophysialis",
+        "english": "zygapophyseal joint (facet joint)",
+        "turkishDefinition": "Zigapofizyal eklem (faset eklem); komşu vertebraların processus articularis'leri arasındaki düzlem tipi sinovyal eklem. Omurganın hareket yönünü ve derecesini belirler.",
+        "roots": "articulatio (eklem) + zygon (bağlantı) + physis (çıkıntı)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 546,
+        "term": "discus intervertebralis",
+        "english": "intervertebral disc",
+        "turkishDefinition": "İntervertebral disk; komşu vertebra korpuslarını birbirine bağlayan fibrokartilaj yapı. Dış kısmı annulus fibrosus, iç kısmı nucleus pulposus'tan oluşur.",
+        "roots": "discus (disk) + inter (arasında) + vertebra (omur)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 547,
+        "term": "nucleus pulposus",
+        "english": "nucleus pulposus",
+        "turkishDefinition": "Nükleus pulpozus; intervertebral diskin jel benzeri iç kısmı. Yüksek su içeriğiyle yük dağılımını ve şok emilimini sağlar; yaşla birlikte su kaybederek dejenerasyona uğrar.",
+        "roots": "nucleus (çekirdek) + pulposus (etli, yumuşak)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 548,
+        "term": "annulus fibrosus",
+        "english": "annulus fibrosus",
+        "turkishDefinition": "Anulus fibrosus; intervertebral diskin dış kısmını oluşturan konsantrik kollajen lif tabakaları. Nucleus pulposus'u çevreler ve diskin bütünlüğünü korur.",
+        "roots": "annulus (halka) + fibrosus (lifli)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 549,
+        "term": "ligamentum longitudinale anterius",
+        "english": "anterior longitudinal ligament",
+        "turkishDefinition": "Ön longitudinal bağ; vertebra korpuslarının ön yüzü boyunca kafa tabanından sakruma kadar uzanan güçlü bağ. Omurganın aşırı ekstansiyonunu sınırlar.",
+        "roots": "ligamentum (bağ) + longitudinalis (boylamsal) + anterius (ön)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 550,
+        "term": "ligamentum longitudinale posterius",
+        "english": "posterior longitudinal ligament",
+        "turkishDefinition": "Arka longitudinal bağ; vertebra korpuslarının arka yüzü boyunca, canalis vertebralis içinde uzanan bağ. Omurganın aşırı fleksiyonunu ve disk herniasyonunu sınırlamaya yardımcı olur.",
+        "roots": "ligamentum (bağ) + longitudinalis (boylamsal) + posterius (arka)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 551,
+        "term": "ligamentum flavum",
+        "english": "ligamentum flavum (yellow ligament)",
+        "turkishDefinition": "Ligamentum flavum (sarı bağ); komşu vertebraların lamina'ları arasında uzanan, yüksek elastin içeriği nedeniyle sarı renkte görünen bağ. Omurganın fleksiyondan ekstansiyona dönüşünde yardımcı olur.",
+        "roots": "ligamentum (bağ) + flavus (sarı)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 552,
+        "term": "ligamentum interspinale",
+        "english": "interspinous ligament",
+        "turkishDefinition": "İnterspinöz bağ; komşu vertebraların processus spinosus'ları arasında uzanan ince bağ. Aşırı fleksiyon sırasında gerilerek stabilite sağlar.",
+        "roots": "ligamentum (bağ) + inter (arasında) + spina (diken, çıkıntı)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 553,
+        "term": "ligamentum supraspinale",
+        "english": "supraspinous ligament",
+        "turkishDefinition": "Supraspinöz bağ; vertebraların processus spinosus uçları boyunca C7'den sakruma kadar uzanan yüzeysel bağ. Aşırı fleksiyona karşı direnç gösterir.",
+        "roots": "ligamentum (bağ) + supra (üstünde) + spina (diken, çıkıntı)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 554,
+        "term": "articulatio atlantooccipitalis",
+        "english": "atlanto-occipital joint",
+        "turkishDefinition": "Atlantooksipital eklem; atlas (C1) ile os occipitale'nin condylus occipitalis'leri arasındaki elipsoid tipi sinovyal eklem. Başın fleksiyon-ekstansiyonunu (baş sallama hareketi) sağlar.",
+        "roots": "articulatio (eklem) + atlas (1. servikal vertebra) + occiput (art kafa)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 555,
+        "term": "articulatio atlantoaxialis",
+        "english": "atlanto-axial joint",
+        "turkishDefinition": "Atlantoaksiyal eklem; atlas (C1) ile axis (C2) arasındaki eklem kompleksi. Median ve lateral parçalardan oluşur; başın yanlara dönme hareketinin (hayır anlamı) yaklaşık yarısını sağlar.",
+        "roots": "articulatio (eklem) + atlas (1. servikal vertebra) + axis (2. servikal vertebra)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 556,
+        "term": "dens axis",
+        "english": "dens (odontoid process) of axis",
+        "turkishDefinition": "Axis'in dens'i (odontoid çıkıntısı); axis vertebrasının üst yüzünden yukarı doğru uzanan, atlas'ın içinden geçerek atlantoaksiyal eklemin pivot ekseni görevi gören çıkıntı.",
+        "roots": "dens (diş) + axis (2. servikal vertebra)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 557,
+        "term": "ligamentum transversum atlantis",
+        "english": "transverse ligament of atlas",
+        "turkishDefinition": "Atlasın transvers bağı; atlas'ın iç yüzünde yer alan, dens axis'i arkadan destekleyerek yerinde tutan güçlü bağ. Bütünlüğü bozulursa medulla spinalis hasarı riski oluşur.",
+        "roots": "ligamentum (bağ) + transversus (enine) + atlas (1. servikal vertebra)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 558,
+        "term": "articulatio sacroiliaca",
+        "english": "sacroiliac joint",
+        "turkishDefinition": "Sakroiliak eklem; os sacrum ile os ilium arasındaki güçlü, sınırlı hareketli sinovyal eklem. Gövde ağırlığını pelvise aktarır; klinik olarak sık ağrı kaynağıdır.",
+        "roots": "articulatio (eklem) + sacrum (kuyruk sokumu üstü kemik) + ilium (kalça kemiği üst kısmı)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 559,
+        "term": "symphysis pubica",
+        "english": "pubic symphysis",
+        "turkishDefinition": "Pubik simfiz; iki os pubis arasında, fibrokartilaj bir disk aracılığıyla oluşan sekonder kıkırdak eklem. Pelvis stabilitesini sağlar, gebelikte hafifçe gevşer.",
+        "roots": "symphysis (birleşme, kaynaşma) + pubica (pubise ait)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 560,
+        "term": "articulatio sacrococcygea",
+        "english": "sacrococcygeal joint",
+        "turkishDefinition": "Sakrokoksigeal eklem; os sacrum'un alt ucu ile os coccygis arasındaki sekonder kıkırdak eklem. Otururken hafif hareket serbestisi sağlar.",
+        "roots": "articulatio (eklem) + sacrum (kuyruk sokumu üstü kemik) + coccyx (kuyruk sokumu kemiği)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 561,
+        "term": "canalis vertebralis",
+        "english": "vertebral canal (spinal canal)",
+        "turkishDefinition": "Vertebral kanal (omurilik kanalı); üst üste dizilen vertebraların foramen vertebrale'lerinin oluşturduğu, medulla spinalis'i içine alan uzun kanal.",
+        "roots": "canalis (kanal) + vertebralis (omura ait)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    },
+    {
+        "id": 562,
+        "term": "foramen intervertebrale",
+        "english": "intervertebral foramen",
+        "turkishDefinition": "İntervertebral foramen; komşu vertebraların pedikülleri arasında oluşan açıklık. Spinal sinirlerin canalis vertebralis'ten çıktığı yerdir; daralması radikülopatiye yol açabilir.",
+        "roots": "foramen (delik, açıklık) + inter (arasında) + vertebra (omur)",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "spine_joints"
+    }
+]
