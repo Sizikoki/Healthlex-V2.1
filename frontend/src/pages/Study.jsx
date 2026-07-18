@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
+import { formatMedicalTerm } from '@/utils/format';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -149,7 +150,7 @@ export const Study = () => {
           {/* Title */}
           <div className="mb-3 pr-28 pt-1">
             <h3 className="text-lg font-bold leading-tight text-slate-900">
-              {term.term}
+              {formatMedicalTerm(term.term)}
             </h3>
           </div>
 

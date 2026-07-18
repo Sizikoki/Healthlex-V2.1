@@ -9,6 +9,7 @@ import { saveProgress, saveFlashcardSession, updateStreak } from '@/utils/storag
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
+import { formatMedicalTerm } from '@/utils/format';
 
 export const Flashcards = () => {
   const [searchParams] = useSearchParams();
@@ -197,7 +198,7 @@ export const Flashcards = () => {
             >
               <div className="text-sm font-medium text-muted-foreground mb-4">Terim</div>
               <div className="text-3xl sm:text-4xl font-bold text-center mb-6">
-                {currentTerm.term}
+                {formatMedicalTerm(currentTerm.term)}
               </div>
               <div className="text-sm text-muted-foreground">Kartı çevirmek için tıkla</div>
             </div>

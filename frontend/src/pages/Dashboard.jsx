@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getStats, getUser, getStreak, getProgress } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
+import { formatMedicalTerm } from '@/utils/format';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -212,7 +213,7 @@ export const Dashboard = () => {
                         Latin Terim
                       </div>
                       <div className="term font-mono text-[1.5rem] font-bold text-[var(--ink)]">
-                        {todayTerm.term}
+                        {formatMedicalTerm(todayTerm.term)}
                       </div>
                     </div>
                     {/* Back Face */}

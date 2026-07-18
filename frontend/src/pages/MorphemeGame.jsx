@@ -8,6 +8,7 @@ import { saveMorphemeScore } from '@/utils/storage';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
+import { formatMedicalTerm } from '@/utils/format';
 
 // Dynamic question generator from terms list
 const generateQuestions = (allTerms) => {
@@ -34,7 +35,7 @@ const generateQuestions = (allTerms) => {
     const options = [correctRoot, ...uniqueDistractors].sort(() => Math.random() - 0.5);
 
     return {
-      term: term.term,
+      term: formatMedicalTerm(term.term),
       definition: term.definition,
       parts: [
         { type: 'root', value: correctRoot }

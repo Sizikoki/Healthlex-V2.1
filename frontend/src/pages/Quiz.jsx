@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { getRandomTerms } from '@/data/medicalTerms';
 import { saveQuizScore, updateStreak } from '@/utils/storage';
 import { toast } from 'sonner';
+import { formatMedicalTerm } from '@/utils/format';
 
 export const Quiz = () => {
   const [searchParams] = useSearchParams();
@@ -37,7 +38,7 @@ export const Quiz = () => {
 
       return {
         id: index,
-        term: term.term,
+        term: formatMedicalTerm(term.term),
         correctAnswer: term.turkish,
         options: options,
         roots: term.roots,

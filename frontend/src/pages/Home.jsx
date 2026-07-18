@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { isLoggedIn, getStats } from '@/utils/storage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/config';
+import { formatMedicalTerm } from '@/utils/format';
 import { Dashboard } from './Dashboard';
 
 export const Home = () => {
@@ -444,7 +445,7 @@ export const Home = () => {
                     <div className="mb-12">
                       <span className="text-xs font-bold tracking-[0.2em] text-medical-accent uppercase block mb-4">LATİN TERİM</span>
                       <h3 className="text-4xl md:text-5xl font-bold text-medical-dark tracking-tight">
-                        {demoQuestions[currentQuizIndex].term}
+                        {formatMedicalTerm(demoQuestions[currentQuizIndex].term)}
                       </h3>
                     </div>
 
@@ -557,7 +558,7 @@ export const Home = () => {
                     <div className="absolute inset-0 w-full h-full bg-white border border-gray-200 rounded-3xl shadow-md p-8 flex flex-col justify-center items-center backface-hidden">
                       <span className="text-xs font-bold tracking-[0.2em] text-medical-accent uppercase mb-4">LATİN TERİM</span>
                       <h3 className="text-4xl font-extrabold text-medical-dark tracking-tight mb-2">
-                        {demoFlashcards[currentFlashcardIndex].term}
+                        {formatMedicalTerm(demoFlashcards[currentFlashcardIndex].term)}
                       </h3>
                       <p className="text-xs text-gray-400 mt-8">Anlamını görmek için tıkla</p>
                     </div>

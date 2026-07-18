@@ -9,6 +9,7 @@ import { saveMatchScore, updateStreak } from '@/utils/storage';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
+import { formatMedicalTerm } from '@/utils/format';
 
 export const MatchGame = () => {
   const [searchParams] = useSearchParams();
@@ -48,7 +49,7 @@ export const MatchGame = () => {
     selectedTerms.forEach((term, index) => {
       gameCards.push({
         id: `term-${index}`,
-        content: term.term, // Latin Term
+        content: formatMedicalTerm(term.term), // Latin Term
         pairId: index,
         type: 'term'
       });
