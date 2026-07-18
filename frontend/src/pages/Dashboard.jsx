@@ -42,6 +42,7 @@ export const Dashboard = () => {
     { id: 'upper_extremity_bones', name: 'Üst Ekstremite Kemikleri' },
     { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
     { id: 'lower_extremity_bones', name: 'Alt Ekstremite Kemikleri' },
+    { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
   ];
 
   const getCategoryProgress = (catId) => {
