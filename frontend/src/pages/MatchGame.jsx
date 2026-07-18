@@ -103,11 +103,12 @@ export const MatchGame = () => {
         const normalized = rawTerms.map(t => ({
           id: t.id,
           term: t.term,
+          turkishShort: t.turkishShort || '',
           turkishDefinition: t.turkishDefinition || t.definition || '',
           category: t.category || '',
           system: t.system || '',
           subcategory: t.subcategory || ''
-        })).filter(t => t.term && t.turkishDefinition);
+        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition));
 
         setAllTerms(normalized);
         setupGame(normalized);
@@ -116,11 +117,12 @@ export const MatchGame = () => {
         const localTerms = getAllTerms().map(t => ({
           id: t.id,
           term: t.term,
+          turkishShort: t.turkishShort || '',
           turkishDefinition: t.definition || '',
           category: t.category || '',
           system: t.system || '',
           subcategory: t.subcategory || ''
-        })).filter(t => t.term && t.turkishDefinition);
+        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition));
 
         setAllTerms(localTerms);
         setupGame(localTerms);
