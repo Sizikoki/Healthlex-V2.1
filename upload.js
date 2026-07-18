@@ -27,7 +27,7 @@ const OVERWRITE_EXISTING = true;
 
 // ─── 2. ZORUNLU ALANLAR (Frontend Şeması ile Uyumlu) ─────────
 // Frontend'in (Study.jsx) beklediği tüm kritik alanları buraya ekledik
-const REQUIRED_FIELDS = ["id", "term", "english", "turkishDefinition", "roots", "category", "system", "subcategory"];
+const REQUIRED_FIELDS = ["id", "term", "english", "turkishDefinition", "roots", "category", "system", "subcategory", "turkishShort"];
 // ─────────────────────────────────────────────────────────────
 
 if (!fs.existsSync(SERVICE_ACCOUNT_PATH)) {
@@ -118,6 +118,9 @@ function validateTerm(item, index, fileName) {
   if (item.roots && typeof item.roots !== "string") {
     errors.push('"roots" düz metin (string) olmalı');
   }
+  if (item.turkishShort && typeof item.turkishShort !== "string") {
+    errors.push('"turkishShort" string olmalı');
+  }
 
   if (errors.length > 0) {
     console.warn(
@@ -126,6 +129,28 @@ function validateTerm(item, index, fileName) {
     return false;
   }
   return true;
+}
+
+function deriveTurkishShort(definition) {
+  if (!definition || typeof definition !== 'string') return '';
+  const trimmed = definition.trim();
+  
+  const semiIndex = trimmed.indexOf(';');
+  if (semiIndex !== -1) {
+    return trimmed.substring(0, semiIndex).trim();
+  }
+  
+  const dotIndex = trimmed.indexOf('.');
+  if (dotIndex !== -1) {
+    return trimmed.substring(0, dotIndex).trim();
+  }
+  
+  const words = trimmed.split(/\s+/);
+  if (words.length > 5) {
+    return words.slice(0, 5).join(' ');
+  }
+  
+  return trimmed;
 }
 
 function loadTermsFromFile(filePath) {
@@ -137,7 +162,13 @@ function loadTermsFromFile(filePath) {
   let raw = fs.readFileSync(filePath, "utf8");
   let terms = JSON.parse(raw);
   console.log(`📂 ${fileName} → ${terms.length} terim okundu`);
-  return terms;
+  
+  return terms.map(item => {
+    if (!item.turkishShort) {
+      item.turkishShort = deriveTurkishShort(item.turkishDefinition || item.definition || '');
+    }
+    return item;
+  });
 }
 
 // ─── 5. ANA YÜKLEME FONKSİYONU ───────────────────────────────
@@ -192,6 +223,7 @@ async function uploadTerms() {
           term: formatLatinTerm(item.term),
           english: formatEnglishTerm(item.english),
           turkishDefinition: item.turkishDefinition.trim(),
+          turkishShort: item.turkishShort.trim(),
           roots: item.roots.trim(),
           category: item.category.trim(),
           system: item.system.trim(),

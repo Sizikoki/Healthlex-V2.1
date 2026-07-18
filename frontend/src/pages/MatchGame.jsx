@@ -55,7 +55,7 @@ export const MatchGame = () => {
       });
       gameCards.push({
         id: `turkish-${index}`,
-        content: term.turkishDefinition, // turkishDefinition (Turkish Definition)
+        content: term.turkishShort || term.definition || term.turkishDefinition,
         pairId: index,
         type: 'turkish'
       });

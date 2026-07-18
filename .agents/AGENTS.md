@@ -19,3 +19,9 @@ Whenever seeding new JSON datasets into Firestore (via `upload.js` seed script) 
 
 ### 3. Turkish Definitions / Explanations (`turkishDefinition` / `definition` key)
 - Must remain completely untouched; preserve the original string as-is.
+
+### 4. Turkish Short Definitions (`turkishShort` key)
+- Represents a condensed/shortened definition of the term (e.g. for card games and matching cards).
+- Must be a short string, usually derived from the part before the semicolon `;` in the full definition.
+- Must remain completely untouched once set/derived.
+
