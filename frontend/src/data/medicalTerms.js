@@ -502,7 +502,7 @@ export const medicalTermsData = {
     {
         "id": 520,
         "term": "Articulatio Coxae",
-        "turkish": "hip joint",
+        "turkish": "Hip joint",
         "roots": "articulatio (eklem) + coxa (kalça)",
         "definition": "Kalça eklemi; femur başı ile os coxae'nin acetabulum'u arasında oluşan top-yuva tipi sinovyal eklem. Vücuttaki en stabil eklemlerden biridir.",
         "category": "anatomy",
@@ -512,7 +512,7 @@ export const medicalTermsData = {
     {
         "id": 521,
         "term": "Acetabulum",
-        "turkish": "acetabulum",
+        "turkish": "Acetabulum",
         "roots": "acetabulum (sirke kabı - şekil benzetmesi)",
         "definition": "Asetabulum; os coxae üzerinde os ilium, os ischii ve os pubis'in birleşiminden oluşan derin, yarım küre şeklindeki eklem çukuru. Femur başını karşılar.",
         "category": "anatomy",
@@ -522,7 +522,7 @@ export const medicalTermsData = {
     {
         "id": 522,
         "term": "Labrum Acetabulare",
-        "turkish": "acetabular labrum",
+        "turkish": "Acetabular labrum",
         "roots": "labrum (dudak, kenar) + acetabulare (asetabuluma ait)",
         "definition": "Asetabular dudak; acetabulum kenarını çevreleyen fibrokartilaj halka. Eklem yüzeyini derinleştirerek kalça ekleminin stabilitesini ve negatif basıncını artırır.",
         "category": "anatomy",
@@ -532,7 +532,7 @@ export const medicalTermsData = {
     {
         "id": 523,
         "term": "Ligamentum Capitis Femoris",
-        "turkish": "ligament of head of femur",
+        "turkish": "Ligament of head of femur",
         "roots": "ligamentum (bağ) + caput (baş) + femur (uyluk kemiği)",
         "definition": "Femur başı bağı; femur başındaki fovea capitis'ten acetabulum tabanına uzanan intraartiküler bağ. İçinden femur başına giden bir arter (a. capitis femoris) geçer.",
         "category": "anatomy",
@@ -542,7 +542,7 @@ export const medicalTermsData = {
     {
         "id": 524,
         "term": "Articulatio Genus",
-        "turkish": "knee joint",
+        "turkish": "Knee joint",
         "roots": "articulatio (eklem) + genu (diz)",
         "definition": "Diz eklemi; femur, tibia ve patella arasında oluşan vücudun en büyük ve en karmaşık sinovyal eklemi. Menteşe ve rotasyon hareketlerini birleştirir.",
         "category": "anatomy",
@@ -552,7 +552,7 @@ export const medicalTermsData = {
     {
         "id": 525,
         "term": "Articulatio Femorotibialis",
-        "turkish": "femorotibial joint",
+        "turkish": "Femorotibial joint",
         "roots": "articulatio (eklem) + femur + tibia (kaval kemiği)",
         "definition": "Femorotibiyal eklem; diz ekleminin femur ile tibia kondilleri arasındaki ana eklem bölümü. Diz fleksiyon ve ekstansiyonunun asıl gerçekleştiği yerdir.",
         "category": "anatomy",
@@ -562,7 +562,7 @@ export const medicalTermsData = {
     {
         "id": 526,
         "term": "Articulatio Femoropatellaris",
-        "turkish": "femoropatellar joint",
+        "turkish": "Femoropatellar joint",
         "roots": "articulatio (eklem) + femur + patella (diz kapağı)",
         "definition": "Femoropatellar eklem; patella'nın arka yüzü ile femur'un facies patellaris'i arasındaki eklem bölümü. Diz ekstansiyonu sırasında patella'nın kayma hareketini sağlar.",
         "category": "anatomy",
@@ -572,7 +572,7 @@ export const medicalTermsData = {
     {
         "id": 527,
         "term": "Meniscus Medialis",
-        "turkish": "medial meniscus",
+        "turkish": "Medial meniscus",
         "roots": "meniscus (hilal şeklinde yapı) + medialis (iç, orta hatta yakın)",
         "definition": "Medial menisküs; tibia'nın medial kondili üzerinde yer alan C şeklinde fibrokartilaj yapı. Yük dağılımını sağlar, lateral menisküse göre daha az hareketli ve yaralanmaya daha yatkındır.",
         "category": "anatomy",
@@ -582,7 +582,7 @@ export const medicalTermsData = {
     {
         "id": 528,
         "term": "Meniscus Lateralis",
-        "turkish": "lateral meniscus",
+        "turkish": "Lateral meniscus",
         "roots": "meniscus (hilal şeklinde yapı) + lateralis (dış, yan)",
         "definition": "Lateral menisküs; tibia'nın lateral kondili üzerinde yer alan, medial menisküse göre daha yuvarlak ve hareketli fibrokartilaj yapı.",
         "category": "anatomy",
@@ -592,7 +592,7 @@ export const medicalTermsData = {
     {
         "id": 529,
         "term": "Ligamentum Cruciatum Anterius",
-        "turkish": "anterior cruciate ligament (ACL)",
+        "turkish": "Anterior cruciate ligament (ACL)",
         "roots": "ligamentum (bağ) + cruciatus (çapraz şeklinde) + anterius (ön)",
         "definition": "Ön çapraz bağ; tibia'nın ön interkondiler alanından femur'un lateral kondiline uzanan intraartiküler bağ. Tibia'nın öne doğru kaymasını sınırlar, diz stabilitesinde kritik rol oynar.",
         "category": "anatomy",
@@ -602,7 +602,7 @@ export const medicalTermsData = {
     {
         "id": 530,
         "term": "Ligamentum Cruciatum Posterius",
-        "turkish": "posterior cruciate ligament (PCL)",
+        "turkish": "Posterior cruciate ligament (PCL)",
         "roots": "ligamentum (bağ) + cruciatus (çapraz şeklinde) + posterius (arka)",
         "definition": "Arka çapraz bağ; tibia'nın arka interkondiler alanından femur'un medial kondiline uzanan intraartiküler bağ. Tibia'nın arkaya doğru kaymasını sınırlar.",
         "category": "anatomy",
@@ -612,7 +612,7 @@ export const medicalTermsData = {
     {
         "id": 531,
         "term": "Ligamentum Collaterale Tibiale",
-        "turkish": "tibial collateral ligament (medial collateral ligament, MCL)",
+        "turkish": "Tibial collateral ligament (medial collateral ligament, MCL)",
         "roots": "ligamentum (bağ) + collateralis (yan) + tibiale (tibiaya ait)",
         "definition": "Tibial kollateral bağ (medial kollateral bağ); femur'un medial epikondilinden tibia'ya uzanan, dizin iç tarafını destekleyen ekstraartiküler bağ. Valgus streslerine karşı korur.",
         "category": "anatomy",
@@ -622,7 +622,7 @@ export const medicalTermsData = {
     {
         "id": 532,
         "term": "Ligamentum Collaterale Fibulare",
-        "turkish": "fibular collateral ligament (lateral collateral ligament, LCL)",
+        "turkish": "Fibular collateral ligament (lateral collateral ligament, LCL)",
         "roots": "ligamentum (bağ) + collateralis (yan) + fibulare (fibulaya ait)",
         "definition": "Fibular kollateral bağ (lateral kollateral bağ); femur'un lateral epikondilinden fibula başına uzanan, dizin dış tarafını destekleyen ekstraartiküler bağ. Varus streslerine karşı korur.",
         "category": "anatomy",
@@ -632,7 +632,7 @@ export const medicalTermsData = {
     {
         "id": 533,
         "term": "Ligamentum Patellae",
-        "turkish": "patellar ligament",
+        "turkish": "Patellar ligament",
         "roots": "ligamentum (bağ) + patella (diz kapağı)",
         "definition": "Patellar bağ; patella'nın alt ucundan tibia'nın tuberositas tibiae'sine uzanan, quadriceps femoris tendonunun devamı niteliğindeki güçlü bağ.",
         "category": "anatomy",
@@ -642,7 +642,7 @@ export const medicalTermsData = {
     {
         "id": 534,
         "term": "Articulatio Tibiofibularis",
-        "turkish": "tibiofibular joint (proximal)",
+        "turkish": "Tibiofibular joint (proximal)",
         "roots": "articulatio (eklem) + tibia (kaval kemiği) + fibula (kamış kemiği)",
         "definition": "Tibiofibular eklem; tibia'nın lateral kondili ile fibula başı arasındaki düzlem tipi sinovyal eklem. Ayak bileği hareketleri sırasında fibula'nın küçük rotasyonel hareketlerine izin verir.",
         "category": "anatomy",
@@ -652,7 +652,7 @@ export const medicalTermsData = {
     {
         "id": 535,
         "term": "Articulatio Talocruralis",
-        "turkish": "talocrural joint (ankle joint)",
+        "turkish": "Talocrural joint (ankle joint)",
         "roots": "articulatio (eklem) + talus (aşık kemiği) + crus (bacak)",
         "definition": "Ayak bileği eklemi; tibia ve fibula'nın distal uçları ile talus arasındaki menteşe tipi sinovyal eklem. Dorsifleksiyon ve plantar fleksiyonu sağlar.",
         "category": "anatomy",
@@ -662,7 +662,7 @@ export const medicalTermsData = {
     {
         "id": 536,
         "term": "Articulatio Subtalaris",
-        "turkish": "subtalar joint",
+        "turkish": "Subtalar joint",
         "roots": "articulatio (eklem) + sub (altında) + talus (aşık kemiği)",
         "definition": "Subtalar eklem; talus ile calcaneus arasındaki sinovyal eklem. Ayağın inversiyon ve eversiyon hareketlerinin büyük kısmını sağlar.",
         "category": "anatomy",
@@ -672,7 +672,7 @@ export const medicalTermsData = {
     {
         "id": 537,
         "term": "Articulatio Talocalcaneonavicularis",
-        "turkish": "talocalcaneonavicular joint",
+        "turkish": "Talocalcaneonavicular joint",
         "roots": "articulatio (eklem) + talus + calcaneus (topuk kemiği) + naviculare (naviküler kemiğe ait)",
         "definition": "Talokalkaneonaviküler eklem; talus, calcaneus ve os naviculare arasındaki bileşik sinovyal eklem. Subtalar eklemle birlikte inversiyon-eversiyon hareketine katkı sağlar.",
         "category": "anatomy",
@@ -682,7 +682,7 @@ export const medicalTermsData = {
     {
         "id": 538,
         "term": "Articulatio Calcaneocuboidea",
-        "turkish": "calcaneocuboid joint",
+        "turkish": "Calcaneocuboid joint",
         "roots": "articulatio (eklem) + calcaneus (topuk kemiği) + cuboideum (küp şeklinde kemik)",
         "definition": "Kalkaneoküboid eklem; calcaneus ile os cuboideum arasındaki sinovyal eklem. Talokalkaneonaviküler eklemle birlikte transvers tarsal eklem hattını (Chopart eklemi) oluşturur.",
         "category": "anatomy",
@@ -692,7 +692,7 @@ export const medicalTermsData = {
     {
         "id": 539,
         "term": "Articulationes Tarsometatarsales",
-        "turkish": "tarsometatarsal joints (Lisfranc joint)",
+        "turkish": "Tarsometatarsal joints (Lisfranc joint)",
         "roots": "articulatio (eklem) + tarsus (ayak bileği-tarsal bölge) + metatarsus (ayak tarağı)",
         "definition": "Tarsometatarsal eklemler; distal tarsal kemikler (cuneiforme ve cuboideum) ile 5 metatars kemiğinin tabanları arasındaki eklemler. Klinik olarak 'Lisfranc eklemi' olarak da bilinir.",
         "category": "anatomy",
@@ -702,7 +702,7 @@ export const medicalTermsData = {
     {
         "id": 540,
         "term": "Articulationes Metatarsophalangeales",
-        "turkish": "metatarsophalangeal joints (MTP joints)",
+        "turkish": "Metatarsophalangeal joints (MTP joints)",
         "roots": "articulatio (eklem) + metatarsus (ayak tarağı) + phalanx (parmak kemiği)",
         "definition": "Metatarsofalangeal eklemler; metatars başları ile proksimal falanksların tabanları arasındaki kondiloid tip sinovyal eklemler. Yürüme sırasında itiş fazında kritik rol oynar.",
         "category": "anatomy",
@@ -712,7 +712,7 @@ export const medicalTermsData = {
     {
         "id": 541,
         "term": "Articulationes İnterphalangeales Pedis",
-        "turkish": "interphalangeal joints of the foot",
+        "turkish": "İnterphalangeal joints of the foot",
         "roots": "articulatio (eklem) + inter (arasında) + phalanx (parmak kemiği) + pes (ayak)",
         "definition": "Ayağın interfalangeal eklemleri; ayak parmağı falanksları arasındaki menteşe tipi sinovyal eklemler. Proksimal (PIP) ve distal (DIP) interfalangeal eklemleri kapsar.",
         "category": "anatomy",
@@ -722,7 +722,7 @@ export const medicalTermsData = {
     {
         "id": 542,
         "term": "Ligamentum İnguinale",
-        "turkish": "inguinal ligament",
+        "turkish": "İnguinal ligament",
         "roots": "ligamentum (bağ) + inguen (kasık)",
         "definition": "İnguinal bağ (kasık bağı); spina iliaca anterior superior'dan tuberculum pubicum'a uzanan, karın duvarı ile uyluk arasındaki sınırı oluşturan bağ.",
         "category": "anatomy",
@@ -732,7 +732,7 @@ export const medicalTermsData = {
     {
         "id": 543,
         "term": "Membrana İnterossea Cruris",
-        "turkish": "interosseous membrane of leg",
+        "turkish": "İnterosseous membrane of leg",
         "roots": "membrana (zar) + interosseus (kemikler arası) + crus (bacak)",
         "definition": "Bacağın interosseöz membranı; tibia ve fibula gövdeleri arasında uzanan, iki kemiği birbirine bağlayan fibröz zar. Kas yapışma yüzeyi olarak da görev yapar.",
         "category": "anatomy",
