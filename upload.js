@@ -17,6 +17,7 @@ const JSON_FILES = [
   "./Eklem_Ust_Extremite.json",
   "./Alt_Ekstremite_Eklemleri.json",
   "./Omurga_Eklemleri.json",
+  "./Kafa_ve_Boyun_Eklemleri.json",
 ];
 
 // Kelimeler Firestore'da zaten varsa eskisini silip üzerine yazsın (true) yaptık.
