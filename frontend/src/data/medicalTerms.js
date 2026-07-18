@@ -57,7 +57,8 @@ export const subcategoriesBySystem = {
     { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
     { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
     { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
-    { id: 'spine_joints', name: 'Omurga Eklemleri' }
+    { id: 'spine_joints', name: 'Omurga Eklemleri' },
+    { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri' }
   ],
   respiratory: [
     { id: 'respiratory_organs', name: 'Solunum Organları ve Yapıları' },
@@ -932,6 +933,139 @@ export const medicalTermsData = {
         "category": "anatomy",
         "system": "movement",
         "subcategory": "spine_joints"
+    }
+]
+,
+  head_and_neck_joints: [
+    {
+        "id": 563,
+        "term": "Articulatio Temporomandibularis",
+        "turkish": "Temporomandibular Joint (TMJ)",
+        "roots": "articulatio (eklem) + temporalis (şakak kemiğine ait) + mandibula (alt çene)",
+        "definition": "Temporomandibular eklem; os temporale'nin fossa mandibularis'i ile mandibula'nın caput mandibulae'si arasındaki bileşik sinovyal eklem. Çene açma-kapama, öne-arkaya kayma ve yanal hareketleri sağlar.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 564,
+        "term": "Discus Articularis Temporomandibularis",
+        "turkish": "Articular Disc of Temporomandibular Joint",
+        "roots": "discus (disk) + articularis (ekleme ait) + temporomandibularis (temporomandibulara ait)",
+        "definition": "Temporomandibular eklem diski; eklem boşluğunu üst ve alt olmak üzere ikiye ayıran fibrokartilaj disk. Eklem yüzeylerinin uyumunu sağlar ve yükü dağıtır.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 565,
+        "term": "Fossa Mandibularis",
+        "turkish": "Mandibular Fossa",
+        "roots": "fossa (çukur) + mandibularis (alt çeneye ait)",
+        "definition": "Mandibular çukur; os temporale üzerinde yer alan, mandibula'nın caput mandibulae'sini (kondil başı) karşılayan derin çukur.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 566,
+        "term": "Caput Mandibulae",
+        "turkish": "Head of Mandible (Mandibular Condyle)",
+        "roots": "caput (baş) + mandibula (alt çene)",
+        "definition": "Mandibula başı (kondili); mandibula'nın processus condylaris'inin üst ucunda yer alan, temporomandibular eklemi oluşturan yuvarlak eklem yüzeyi.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 567,
+        "term": "Ligamentum Temporomandibulare",
+        "turkish": "Temporomandibular Ligament (Lateral Ligament)",
+        "roots": "ligamentum (bağ) + temporomandibularis (temporomandibulara ait)",
+        "definition": "Temporomandibular bağ (lateral bağ); eklem kapsülünün lateral yüzünü güçlendiren bağ. Mandibula'nın aşırı geriye ve aşağıya hareketini sınırlar.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 568,
+        "term": "Sutura Coronalis",
+        "turkish": "Coronal Suture",
+        "roots": "sutura (dikiş, sütur) + coronalis (taç şeklinde, önden geçen)",
+        "definition": "Koronal sütur; os frontale ile iki os parietale arasında, kafatasının önden geçen sabit fibröz eklemi.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 569,
+        "term": "Sutura Sagittalis",
+        "turkish": "Sagittal Suture",
+        "roots": "sutura (dikiş, sütur) + sagittalis (ok yönünde, ön-arka doğrultuda)",
+        "definition": "Sagittal sütur; iki os parietale arasında, kafatasının tepesinde ön-arka doğrultuda uzanan sabit fibröz eklem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 570,
+        "term": "Sutura Lambdoidea",
+        "turkish": "Lambdoid Suture",
+        "roots": "sutura (dikiş, sütur) + lambda (Yunan alfabesinde λ harfi)",
+        "definition": "Lambdoid sütur; iki os parietale ile os occipitale arasında, kafatasının arkasında yer alan ve Yunan harfi lambda'ya benzeyen sabit fibröz eklem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 571,
+        "term": "Sutura Squamosa",
+        "turkish": "Squamous Suture",
+        "roots": "sutura (dikiş, sütur) + squamosus (pullu, ince tabaka şeklinde)",
+        "definition": "Squamöz sütur; os temporale'nin pars squamosa'sı ile os parietale arasında, kafatasının yan tarafında yer alan pullu (üst üste binen) tipte fibröz eklem.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 572,
+        "term": "Fonticulus Anterior",
+        "turkish": "Anterior Fontanelle",
+        "roots": "fonticulus (küçük pınar, kaynak) + anterior (ön)",
+        "definition": "Ön bıngıldak; yenidoğanda sutura coronalis ile sutura sagittalis'in kesiştiği noktada, kemikleşmenin henüz tamamlanmadığı en büyük yumuşak bölge. Genellikle 18-24 ayda kapanır.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 573,
+        "term": "Fonticulus Posterior",
+        "turkish": "Posterior Fontanelle",
+        "roots": "fonticulus (küçük pınar, kaynak) + posterior (arka)",
+        "definition": "Arka bıngıldak; yenidoğanda sutura sagittalis ile sutura lambdoidea'nın kesiştiği noktadaki daha küçük yumuşak bölge. Genellikle 2-3 ayda kapanır.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 574,
+        "term": "Articulationes Costovertebrales",
+        "turkish": "Costovertebral Joints",
+        "roots": "articulatio (eklem) + costa (kaburga) + vertebra (omur)",
+        "definition": "Kostovertebral eklemler; kaburgaların başı ile torasik vertebra korpusları arasındaki sinovyal eklemler. Solunum sırasında kaburgaların hareketine izin verir.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
+    },
+    {
+        "id": 575,
+        "term": "Articulationes Sternocostales",
+        "turkish": "Sternocostal Joints",
+        "roots": "articulatio (eklem) + sternum (göğüs kemiği) + costa (kaburga)",
+        "definition": "Sternokostal eklemler; kaburga kıkırdaklarının (cartilago costalis) sternum ile birleştiği eklemler. 1. kosta kıkırdağı sternumla sinkondroz, diğerleri genelde sinovyal eklem oluşturur.",
+        "category": "anatomy",
+        "system": "movement",
+        "subcategory": "head_and_neck_joints"
     }
 ]
 };

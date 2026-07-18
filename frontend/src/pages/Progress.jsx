@@ -93,6 +93,7 @@ export const ProgressPage = () => {
     { id: 'lower_extremity_bones', name: 'Alt Ekstremite' },
     { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
     { id: 'spine_joints', name: 'Omurga Eklemleri' },
+    { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri' },
   ];
 
   const categoriesWithProgress = catList.map(cat => {

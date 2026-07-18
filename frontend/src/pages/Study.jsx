@@ -21,6 +21,7 @@ const CATEGORIES = [
   { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
   { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri', system: 'movement', subcategory: 'lower_extremity_joints' },
   { id: 'spine_joints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
+  { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
   { id: 'movement_terms', name: 'Hareket Terimleri', category: 'movement_terms' },
 ];
 
