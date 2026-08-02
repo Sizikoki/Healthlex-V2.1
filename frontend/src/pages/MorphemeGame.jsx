@@ -4,11 +4,12 @@ import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Trophy, RotateCcw, Laye
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { saveMorphemeScore } from '@/utils/storage';
+import { saveMorphemeScore, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 // Dynamic question generator from terms list
 const generateQuestions = (allTerms) => {
@@ -119,10 +120,20 @@ export const MorphemeGame = () => {
     const [wrongAttempts, setWrongAttempts] = useState(0);
     const [finished, setFinished] = useState(false);
     const [history, setHistory] = useState([]); // { term, correct, wrongAttempts, pts }[]
+    const [showGuestModal, setShowGuestModal] = useState(false);
 
     // Load game terms from Firestore (fallback to local Terms data)
     useEffect(() => {
         const loadGameData = async () => {
+            if (!isLoggedIn()) {
+                if (!canGuestPlay()) {
+                    setShowGuestModal(true);
+                    setLoading(false);
+                    return;
+                }
+                incrementGuestPlay();
+            }
+
             try {
                 let timeoutId;
                 const timeoutPromise = new Promise((_, reject) => {
@@ -478,6 +489,10 @@ export const MorphemeGame = () => {
                     Doğru kök seçeneğini belirleyin. Doğru yanıtta <strong>+2</strong>, tekrar denemede <strong>+1</strong> puan.
                 </p>
             </div>
+            <GuestLimitModal
+                isOpen={showGuestModal}
+                onClose={() => setShowGuestModal(false)}
+            />
         </div>
     );
 };

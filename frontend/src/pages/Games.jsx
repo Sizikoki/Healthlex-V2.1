@@ -1,9 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle, UserPlus, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { isLoggedIn, canGuestPlay, getGuestRemainingPlays, GUEST_DAILY_LIMIT } from '@/utils/storage';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
+
 // Study sayfasıyla aynı kategori listesi
 const GAME_CATEGORIES = [
   { id: 'skull_bones', name: 'Kafatası Kemikleri' },
@@ -19,7 +22,12 @@ const GAME_CATEGORIES = [
 ];
 
 export const Games = () => {
-  const [selectedCategory, setSelectedCategory] = React.useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const userIsLoggedIn = isLoggedIn();
+  const remainingPlays = getGuestRemainingPlays();
 
   const games = [
     {
@@ -60,16 +68,49 @@ export const Games = () => {
     return selectedCategory === 'all' ? '' : `?category=${selectedCategory}`;
   };
 
+  const handleGamePlayClick = (e, gamePath) => {
+    if (!userIsLoggedIn && !canGuestPlay()) {
+      e.preventDefault();
+      setIsLimitModalOpen(true);
+    } else {
+      navigate(`${gamePath}${getCategoryParam()}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-muted/30 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Guest Banner */}
+        {!userIsLoggedIn && (
+          <div className="mb-8 p-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+            <div className="flex items-center gap-3 text-amber-900 dark:text-amber-200">
+              <div className="p-2.5 bg-amber-500/20 rounded-xl">
+                <Lock className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base">Misafir Modundasınız</h3>
+                <p className="text-sm opacity-90">
+                  Bugünkü kalan ücretsiz oyun hakkınız: <strong className="text-amber-700 dark:text-amber-300 font-bold">{remainingPlays} / {GUEST_DAILY_LIMIT}</strong>
+                </p>
+              </div>
+            </div>
+            <Link to="/register">
+              <Button size="sm" className="gradient-primary whitespace-nowrap shadow-md">
+                <UserPlus className="w-4 h-4 mr-2" />
+                Sınırsız Oyun İçin Üye Ol
+              </Button>
+            </Link>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Oyunlar
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Farklı oyun modlarıyla tıbbi terminolojiyi kalcı olarak öğren
+            Farklı oyun modlarıyla tıbbi terminolojiyi kalıcı olarak öğren
           </p>
 
           {/* Category Selector */}
@@ -106,12 +147,13 @@ export const Games = () => {
                   <CardDescription className="text-base">{game.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Link to={`${game.path}${getCategoryParam()}`}>
-                    <Button className="w-full gradient-primary group-hover:shadow-lg transition-all">
-                      Oyna
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
+                  <Button
+                    onClick={(e) => handleGamePlayClick(e, game.path)}
+                    className="w-full gradient-primary group-hover:shadow-lg transition-all"
+                  >
+                    Oyna
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
                 </CardContent>
               </Card>
             );
@@ -147,7 +189,14 @@ export const Games = () => {
             </div>
           </CardContent>
         </Card>
+
       </div>
+
+      {/* Guest Limit Modal */}
+      <GuestLimitModal
+        isOpen={isLimitModalOpen}
+        onClose={() => setIsLimitModalOpen(false)}
+      />
     </div>
   );
 };

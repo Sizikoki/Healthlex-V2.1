@@ -17,9 +17,50 @@ const STORAGE_KEYS = {
 const getUserStorageKey = (baseKey) => {
   const user = getUser();
   if (!user || !user.email) {
-    return null; // No user logged in
+    return `${baseKey}_guest`;
   }
   return `${baseKey}_${user.email}`;
+};
+
+// Guest Daily Play Limit Utilities
+export const GUEST_DAILY_LIMIT = 3;
+
+export const getGuestPlayInfo = () => {
+  const today = new Date().toISOString().split('T')[0];
+  const data = localStorage.getItem('medterm_guest_daily_plays');
+  if (!data) return { date: today, count: 0 };
+  try {
+    const parsed = JSON.parse(data);
+    if (parsed.date !== today) {
+      return { date: today, count: 0 };
+    }
+    return parsed;
+  } catch (e) {
+    return { date: today, count: 0 };
+  }
+};
+
+export const canGuestPlay = () => {
+  if (isLoggedIn()) return true;
+  const info = getGuestPlayInfo();
+  return info.count < GUEST_DAILY_LIMIT;
+};
+
+export const getGuestRemainingPlays = () => {
+  if (isLoggedIn()) return Infinity;
+  const info = getGuestPlayInfo();
+  return Math.max(0, GUEST_DAILY_LIMIT - info.count);
+};
+
+export const incrementGuestPlay = () => {
+  if (isLoggedIn()) return true;
+  const info = getGuestPlayInfo();
+  if (info.count >= GUEST_DAILY_LIMIT) {
+    return false;
+  }
+  const newInfo = { date: info.date, count: info.count + 1 };
+  localStorage.setItem('medterm_guest_daily_plays', JSON.stringify(newInfo));
+  return true;
 };
 
 // User management

@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getAllTerms } from '@/data/medicalTerms';
-import { saveMatchScore, updateStreak } from '@/utils/storage';
+import { saveMatchScore, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 export const MatchGame = () => {
   const [searchParams] = useSearchParams();
@@ -25,9 +26,19 @@ export const MatchGame = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showGuestModal, setShowGuestModal] = useState(false);
 
   const setupGame = useCallback((termsList) => {
     if (!termsList || termsList.length === 0) return;
+
+    if (!isLoggedIn()) {
+      if (!canGuestPlay()) {
+        setShowGuestModal(true);
+        setLoading(false);
+        return;
+      }
+      incrementGuestPlay();
+    }
 
     let filtered = termsList;
     if (categoryId && categoryId !== 'all') {
@@ -359,6 +370,10 @@ export const MatchGame = () => {
           </div>
         )}
       </div>
+      <GuestLimitModal
+        isOpen={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
     </div>
   );
 };

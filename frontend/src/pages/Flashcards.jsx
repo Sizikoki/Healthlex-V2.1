@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
-import { saveProgress, saveFlashcardSession, updateStreak } from '@/utils/storage';
+import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 export const Flashcards = () => {
   const [searchParams] = useSearchParams();
@@ -22,8 +23,18 @@ export const Flashcards = () => {
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [showGuestModal, setShowGuestModal] = useState(false);
 
   const loadTerms = useCallback(async () => {
+    if (!isLoggedIn()) {
+      if (!canGuestPlay()) {
+        setShowGuestModal(true);
+        setLoading(false);
+        return;
+      }
+      incrementGuestPlay();
+    }
+
     try {
       setLoading(true);
       let timeoutId;
@@ -256,6 +267,10 @@ export const Flashcards = () => {
           </div>
         )}
       </div>
+      <GuestLimitModal
+        isOpen={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
     </div>
   );
 };

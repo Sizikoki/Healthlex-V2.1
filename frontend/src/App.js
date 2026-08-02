@@ -41,31 +41,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/study" element={<Study />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/flashcards" element={
-            <ProtectedRoute>
-              <Flashcards />
-            </ProtectedRoute>
-          } />
-          <Route path="/match" element={
-            <ProtectedRoute>
-              <MatchGame />
-            </ProtectedRoute>
-          } />
-          <Route path="/quiz" element={
-            <ProtectedRoute>
-              <Quiz />
-            </ProtectedRoute>
-          } />
-          <Route path="/morpheme" element={
-            <ProtectedRoute>
-              <MorphemeGame />
-            </ProtectedRoute>
-          } />
-          <Route path="/progress" element={
-            <ProtectedRoute>
-              <ProgressPage />
-            </ProtectedRoute>
-          } />
+          <Route path="/flashcards" element={<Flashcards />} />
+          <Route path="/match" element={<MatchGame />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/morpheme" element={<MorphemeGame />} />
+          <Route path="/progress" element={<ProgressPage />} />
           <Route path="/profile" element={
             <ProtectedRoute>
               <Profile />

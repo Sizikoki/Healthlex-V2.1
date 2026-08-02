@@ -7,9 +7,10 @@ import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { getRandomTerms } from '@/data/medicalTerms';
-import { saveQuizScore, updateStreak } from '@/utils/storage';
+import { saveQuizScore, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
 import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 export const Quiz = () => {
   const [searchParams] = useSearchParams();
@@ -23,8 +24,17 @@ export const Quiz = () => {
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [quizComplete, setQuizComplete] = useState(false);
+  const [showGuestModal, setShowGuestModal] = useState(false);
 
   const initializeQuiz = useCallback(() => {
+    if (!isLoggedIn()) {
+      if (!canGuestPlay()) {
+        setShowGuestModal(true);
+        return;
+      }
+      incrementGuestPlay();
+    }
+
     const terms = getRandomTerms(10, categoryId);
     const quizQuestions = terms.map((term, index) => {
       const allTerms = getRandomTerms(100, categoryId);
@@ -283,6 +293,10 @@ export const Quiz = () => {
           )}
         </div>
       </div>
+      <GuestLimitModal
+        isOpen={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
     </div>
   );
 };

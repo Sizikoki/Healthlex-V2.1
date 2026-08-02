@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getUser, getStreak, getProgress } from '@/utils/storage';
+import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 
 export const ProgressPage = () => {
@@ -9,6 +9,7 @@ export const ProgressPage = () => {
   const streak = getStreak();
   const progress = getProgress();
   const terms = getAllTerms();
+  const userIsLoggedIn = isLoggedIn();
 
   const quizScores = getQuizScores().slice(-10).reverse();
   const matchScores = getMatchScores().slice(-10).reverse();
@@ -37,7 +38,7 @@ export const ProgressPage = () => {
       })
       .join(' ');
   };
-  const userName = formatName(user?.name);
+  const userName = userIsLoggedIn ? formatName(user?.name) : 'Misafir';
 
   // ----------------------------------------------------
   // Helper Date and Time Formatters
@@ -165,6 +166,29 @@ export const ProgressPage = () => {
       <main className="py-[36px] px-0">
         <div className="wrap">
           
+          {/* GUEST BANNER */}
+          {!userIsLoggedIn && (
+            <div className="mb-6 p-5 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+              <div className="flex items-center gap-3 text-amber-950">
+                <span className="text-2xl">⚡</span>
+                <div>
+                  <h3 className="font-bold text-base">Misafir Modu (Canlı Önizleme)</h3>
+                  <p className="text-sm opacity-90 text-amber-900">
+                    İlerlemeniz bu cihazda geçici olarak tutulmaktadır. İlerlemenizi kaybetmemek ve sınırsız oyun oynamak için üye olun!
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-2.5 whitespace-nowrap">
+                <Link to="/register" className="btn bg-[var(--teal)] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[var(--teal-deep)] transition-all">
+                  Üye Ol
+                </Link>
+                <Link to="/login" className="btn bg-white border border-gray-300 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-50 transition-all">
+                  Giriş Yap
+                </Link>
+              </div>
+            </div>
+          )}
+
           {/* GREETING & NEXT GOAL */}
           <section className="mb-[40px]">
             <div className={`transition-all duration-500 transform ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
