@@ -90,10 +90,10 @@ export const logout = () => {
 // Progress tracking
 export const saveProgress = async (termId, isLearned) => {
   const key = getUserStorageKey(STORAGE_KEYS.PROGRESS);
-  if (!key) return; // No user logged in
+  if (!key) return; // Fallback
 
   const user = getUser();
-  const userIdentifier = user.uid || user.email;
+  const userIdentifier = user ? (user.uid || user.email) : null;
 
   // 1. Update local storage cache immediately for fast UI feedback
   const progress = getProgress();
@@ -104,24 +104,26 @@ export const saveProgress = async (termId, isLearned) => {
   };
   localStorage.setItem(key, JSON.stringify(progress));
 
-  // 2. Synchronize to Firestore in the background
-  try {
-    const docId = `${userIdentifier}_${termId}`;
-    const progressDocRef = doc(db, 'user_progress', docId);
+  // 2. Synchronize to Firestore in the background (only if user logged in)
+  if (userIdentifier) {
+    try {
+      const docId = `${userIdentifier}_${termId}`;
+      const progressDocRef = doc(db, 'user_progress', docId);
 
-    if (isLearned) {
-      await setDoc(progressDocRef, {
-        userId: userIdentifier,
-        termId: termId,
-        status: 'learned',
-        lastReviewed: new Date().toISOString(),
-        reviewCount: progress[termId].reviewCount
-      });
-    } else {
-      await deleteDoc(progressDocRef);
+      if (isLearned) {
+        await setDoc(progressDocRef, {
+          userId: userIdentifier,
+          termId: termId,
+          status: 'learned',
+          lastReviewed: new Date().toISOString(),
+          reviewCount: progress[termId].reviewCount
+        });
+      } else {
+        await deleteDoc(progressDocRef);
+      }
+    } catch (error) {
+      console.error('Error syncing progress to Firestore:', error);
     }
-  } catch (error) {
-    console.error('Error syncing progress to Firestore:', error);
   }
 };
 

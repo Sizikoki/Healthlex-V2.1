@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, BookOpen, Menu, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { saveProgress, getTermProgress } from '@/utils/storage';
+import { saveProgress, getTermProgress, isLoggedIn } from '@/utils/storage';
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
@@ -129,7 +130,11 @@ export const Study = () => {
     const progress = getTermProgress(termId);
     const newStatus = !progress.learned;
     saveProgress(termId, newStatus);
-    toast.success(newStatus ? 'Terim öğrenildi olarak işaretlendi!' : 'Öğrenildi işareti kaldırıldı');
+    if (!isLoggedIn()) {
+      toast.info(newStatus ? 'Terim öğrenildi! (Misafir Modu: İlerlemeniz bu cihazda saklanır)' : 'Öğrenildi işareti kaldırıldı');
+    } else {
+      toast.success(newStatus ? 'Terim öğrenildi olarak işaretlendi!' : 'Öğrenildi işareti kaldırıldı');
+    }
     setRefreshTrigger(prev => prev + 1);
   };
 
@@ -292,6 +297,25 @@ export const Study = () => {
         )}
 
         <div className="max-w-[1260px] mx-auto px-4 sm:px-6 py-8 w-full">
+          {/* Guest Banner */}
+          {!isLoggedIn() && (
+            <div className="mb-6 p-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-sm shadow-sm">
+              <div className="flex items-center gap-2.5 text-amber-950">
+                <span className="text-xl">💡</span>
+                <div>
+                  <strong className="font-semibold block">Misafir Modundasınız</strong>
+                  Kelime kartlarını serbestçe inceleyebilir ve 'Öğrendim' işaretlemesi yapabilirsiniz. İlerlemenizi kalıcı tutmak ve tüm cihazlarda senkronize etmek için 
+                  <Link to="/register" className="font-bold underline ml-1 text-amber-900 hover:text-amber-700">Üye Olun</Link>.
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <Link to="/register" className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm whitespace-nowrap">
+                  Ücretsiz Üye Ol
+                </Link>
+              </div>
+            </div>
+          )}
+
           {/* Header */}
           <div className="mb-6">
             <div className="mb-4">
