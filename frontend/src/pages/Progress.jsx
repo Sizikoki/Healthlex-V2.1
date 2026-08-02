@@ -104,13 +104,6 @@ export const ProgressPage = () => {
     return { ...cat, pct };
   });
 
-  const pcts = categoriesWithProgress.map(c => c.pct);
-  const minPct = Math.min(...pcts);
-  const maxPct = Math.max(...pcts);
-  const weakestCategory = (minPct < maxPct && minPct < 100)
-    ? categoriesWithProgress.find(c => c.pct === minPct)
-    : null;
-
   // ----------------------------------------------------
   // Achievements Setup
   // ----------------------------------------------------
@@ -340,18 +333,14 @@ export const ProgressPage = () => {
             
             <div className={`cat-list bg-white border border-[var(--line)] rounded-[var(--radius)] p-[6px_26px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               {categoriesWithProgress.map((cat) => {
-                const isWeakest = weakestCategory ? (cat.id === weakestCategory.id && cat.pct < 100) : false;
                 return (
                   <div className="cat-row flex items-center gap-[18px] py-[16px] border-b border-[var(--line)] last:border-none" key={cat.id}>
                     <div className="cat-name w-[170px] flex-shrink-0 text-[0.92rem] font-bold text-[var(--ink)] flex items-center gap-[8px]">
                       {cat.name}
-                      {isWeakest && <span className="weak-tag font-mono text-[0.62rem] bg-[#F7E4DE] text-[var(--coral)] p-[2px_7px] rounded-[10px] uppercase tracking-[0.06em]">En Zayıf</span>}
                     </div>
                     <div className="cat-bar-track flex-1 h-[8px] rounded-[6px] bg-[var(--paper-dim)] overflow-hidden">
                       <div 
-                        className={`cat-bar-fill h-full rounded-[6px] transition-all duration-1000 ${
-                          isWeakest ? 'weak bg-[var(--coral)]' : 'bg-[var(--teal)]'
-                        }`}
+                        className="cat-bar-fill h-full rounded-[6px] transition-all duration-1000 bg-[var(--teal)]"
                         style={{ width: inProp ? `${cat.pct}%` : '0%' }}
                       ></div>
                     </div>
@@ -368,7 +357,7 @@ export const ProgressPage = () => {
                 to="/study" 
                 className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-[var(--teal-deep)] transition-all"
               >
-                {weakestCategory ? `${weakestCategory.name}'e Bugün Çalış →` : 'Hemen Kelime Çalış →'}
+                Kelime Çalışmaya Başla →
               </Link>
             </div>
           </section>
@@ -596,7 +585,7 @@ export const ProgressPage = () => {
                   Quiz Çöz, Ustalığa Yaklaş →
                 </Link>
                 <Link to="/study" className="btn btn-outline bg-white/10 text-white border border-white/70 font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-white/20 transition-all">
-                  {weakestCategory ? `${weakestCategory.name}'e Çalış` : 'Kelime Çalış'}
+                  Kelime Kartlarına Çalış
                 </Link>
               </div>
             </div>
