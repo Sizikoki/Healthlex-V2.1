@@ -104,8 +104,12 @@ export const ProgressPage = () => {
     return { ...cat, pct };
   });
 
-  const minPct = Math.min(...categoriesWithProgress.map(c => c.pct));
-  const weakestCategory = categoriesWithProgress.find(c => c.pct === minPct) || categoriesWithProgress[4];
+  const pcts = categoriesWithProgress.map(c => c.pct);
+  const minPct = Math.min(...pcts);
+  const maxPct = Math.max(...pcts);
+  const weakestCategory = (minPct < maxPct && minPct < 100)
+    ? categoriesWithProgress.find(c => c.pct === minPct)
+    : null;
 
   // ----------------------------------------------------
   // Achievements Setup
@@ -336,7 +340,7 @@ export const ProgressPage = () => {
             
             <div className={`cat-list bg-white border border-[var(--line)] rounded-[var(--radius)] p-[6px_26px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               {categoriesWithProgress.map((cat) => {
-                const isWeakest = cat.id === weakestCategory.id && cat.pct < 100;
+                const isWeakest = weakestCategory ? (cat.id === weakestCategory.id && cat.pct < 100) : false;
                 return (
                   <div className="cat-row flex items-center gap-[18px] py-[16px] border-b border-[var(--line)] last:border-none" key={cat.id}>
                     <div className="cat-name w-[170px] flex-shrink-0 text-[0.92rem] font-bold text-[var(--ink)] flex items-center gap-[8px]">
@@ -364,7 +368,7 @@ export const ProgressPage = () => {
                 to="/study" 
                 className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-[var(--teal-deep)] transition-all"
               >
-                {weakestCategory.name}'e Bugün Çalış →
+                {weakestCategory ? `${weakestCategory.name}'e Bugün Çalış →` : 'Hemen Kelime Çalış →'}
               </Link>
             </div>
           </section>
@@ -592,7 +596,7 @@ export const ProgressPage = () => {
                   Quiz Çöz, Ustalığa Yaklaş →
                 </Link>
                 <Link to="/study" className="btn btn-outline bg-white/10 text-white border border-white/70 font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-white/20 transition-all">
-                  {weakestCategory.name}'e Çalış
+                  {weakestCategory ? `${weakestCategory.name}'e Çalış` : 'Kelime Çalış'}
                 </Link>
               </div>
             </div>
