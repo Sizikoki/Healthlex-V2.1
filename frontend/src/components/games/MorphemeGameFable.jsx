@@ -268,6 +268,8 @@ function update(model, msg) {
     }
     case "ResetGame":
       return loadQuestion({ ...model, score: 0 }, 0);
+    case "SetQuestions":
+      return init(msg.questions);
     default:
       return model;
   }
@@ -327,6 +329,10 @@ export default function MorphemeGameFable({
   );
 
   const [model, dispatch] = useReducer(update, questions, init);
+
+  useEffect(() => {
+    dispatch({ type: "SetQuestions", questions });
+  }, [questions]);
 
   useEffect(() => {
     if (model.state.tag !== "AnswerChecked") return;
