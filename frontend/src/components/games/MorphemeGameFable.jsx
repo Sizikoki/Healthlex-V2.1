@@ -174,7 +174,30 @@ function shuffle(arr) {
 }
 
 function assembledPreview(parts) {
-  return parts.map((p) => p.text.replace(/^-+|-+$/g, "")).join("");
+  if (!parts || parts.length === 0) return "";
+
+  let result = "";
+  for (let i = 0; i < parts.length; i++) {
+    const currentRaw = parts[i].text.trim();
+    const cleanCurrent = currentRaw.replace(/^-+|-+$/g, "");
+    if (!cleanCurrent) continue;
+
+    if (i === 0) {
+      result = cleanCurrent.charAt(0).toLocaleUpperCase("tr-TR") + cleanCurrent.slice(1);
+    } else {
+      const prevRaw = parts[i - 1].text.trim();
+      const prevEndsWithHyphen = prevRaw.endsWith("-");
+      const currentStartsWithHyphen = currentRaw.startsWith("-");
+
+      if (prevEndsWithHyphen || currentStartsWithHyphen) {
+        result += cleanCurrent.toLocaleLowerCase("tr-TR");
+      } else {
+        result += " " + cleanCurrent.charAt(0).toLocaleUpperCase("tr-TR") + cleanCurrent.slice(1);
+      }
+    }
+  }
+
+  return result;
 }
 
 function isCorrectSequence(selected, correct) {
