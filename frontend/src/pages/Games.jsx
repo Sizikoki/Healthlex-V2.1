@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle, UserPlus, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { isLoggedIn, canGuestPlay, getGuestRemainingPlays, GUEST_DAILY_LIMIT } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
+import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
+import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 
 const GAME_CATEGORIES = [
@@ -31,6 +33,16 @@ export const Games = () => {
 
   const userIsLoggedIn = isLoggedIn();
   const remainingPlays = getGuestRemainingPlays();
+
+  const categoryTerms = useMemo(() => {
+    return selectedCategory === 'all'
+      ? getAllTerms()
+      : getTermsByCategory(selectedCategory);
+  }, [selectedCategory]);
+
+  const adaptedQuestions = useMemo(() => {
+    return adaptTermsToMorphemeQuestions(categoryTerms);
+  }, [categoryTerms]);
 
   const games = [
     {
@@ -92,6 +104,7 @@ export const Games = () => {
         {/* Active Game Render View */}
         {activeGame === 'morpheme' ? (
           <MorphemeGameFable
+            terms={adaptedQuestions}
             language={currentLanguage}
             onBack={() => setActiveGame(null)}
             t={t}
