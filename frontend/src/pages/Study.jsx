@@ -11,19 +11,20 @@ import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Sabit kategori listesi
 const CATEGORIES = [
-  { id: 'skull_bones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
-  { id: 'face_bones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
-  { id: 'trunk_bones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
-  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
-  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri', system: 'movement', subcategory: 'upper_extremity_joints' },
-  { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
-  { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri', system: 'movement', subcategory: 'lower_extremity_joints' },
-  { id: 'spine_joints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
-  { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
-  { id: 'movement_terms', name: 'Hareket Terimleri', category: 'movement_terms' },
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Extremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri', system: 'movement', subcategory: 'upper_extremity_joints' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Extremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', system: 'movement', subcategory: 'lower_extremity_joints' },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', category: 'movement_terms' },
 ];
 
 const UPPER_EXTREMITY_GROUPS = [
@@ -36,6 +37,7 @@ const UPPER_EXTREMITY_GROUPS = [
 ];
 
 export const Study = () => {
+  const { t } = useLanguage();
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -148,7 +150,7 @@ export const Study = () => {
         {/* Badge */}
         <div className="absolute top-0 right-2 z-10">
           <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600">
-            {selectedCategory.name}
+            {t(selectedCategory.key, selectedCategory.name)}
           </span>
         </div>
 
@@ -192,10 +194,10 @@ export const Study = () => {
               {progress.learned ? (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
-                  <span>Öğrenildi</span>
+                  <span>{t('learned')}</span>
                 </>
               ) : (
-                <span>Öğrendim</span>
+                <span>{t('markLearned')}</span>
               )}
             </button>
           </div>
@@ -212,7 +214,7 @@ export const Study = () => {
         <div className={`${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-300`}>
           <div className="p-4 border-b border-border">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Kategoriler</h2>
+              <h2 className="text-lg font-semibold">{t('categories')}</h2>
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-1 rounded-lg hover:bg-muted transition-colors"
@@ -232,7 +234,7 @@ export const Study = () => {
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
               >
-                {cat.name}
+                {t(cat.key, cat.name)}
               </button>
             ))}
           </div>
@@ -243,7 +245,7 @@ export const Study = () => {
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
         <SheetContent side="left" className="w-[280px] p-0 flex flex-col h-full">
           <SheetHeader className="p-4 border-b border-border flex-shrink-0">
-            <SheetTitle className="text-left font-semibold">Kategoriler</SheetTitle>
+            <SheetTitle className="text-left font-semibold">{t('categories')}</SheetTitle>
           </SheetHeader>
           <div className="p-2 space-y-1 overflow-y-auto flex-1">
             {CATEGORIES.map((cat) => (
@@ -259,7 +261,7 @@ export const Study = () => {
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
               >
-                {cat.name}
+                {t(cat.key, cat.name)}
               </button>
             ))}
           </div>
@@ -276,10 +278,10 @@ export const Study = () => {
             aria-label="Menüyü aç"
           >
             <Menu className="w-5 h-5" />
-            <span className="text-sm font-semibold">Kategoriler</span>
+            <span className="text-sm font-semibold">{t('categories')}</span>
           </button>
           <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            {selectedCategory.name}
+            {t(selectedCategory.key, selectedCategory.name)}
           </div>
         </div>
 
@@ -303,14 +305,14 @@ export const Study = () => {
               <div className="flex items-center gap-2.5 text-amber-950">
                 <span className="text-xl">💡</span>
                 <div>
-                  <strong className="font-semibold block">Misafir Modundasınız</strong>
-                  Kelime kartlarını serbestçe inceleyebilir ve 'Öğrendim' işaretlemesi yapabilirsiniz. İlerlemenizi kalıcı tutmak ve tüm cihazlarda senkronize etmek için 
-                  <Link to="/register" className="font-bold underline ml-1 text-amber-900 hover:text-amber-700">Üye Olun</Link>.
+                  <strong className="font-semibold block">{t('guestMode')}</strong>
+                  Kelime kartlarını serbestçe inceleyebilir ve '{t('markLearned')}' işaretlemesi yapabilirsiniz. İlerlemenizi kalıcı tutmak ve tüm cihazlarda senkronize etmek için 
+                  <Link to="/register" className="font-bold underline ml-1 text-amber-900 hover:text-amber-700">{t('register')}</Link>.
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <Link to="/register" className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                  Ücretsiz Üye Ol
+                  {t('startFree')}
                 </Link>
               </div>
             </div>
@@ -319,8 +321,8 @@ export const Study = () => {
           {/* Header */}
           <div className="mb-6">
             <div className="mb-4">
-              <h1 className="text-3xl font-bold">Tıbbi Terimler</h1>
-              <p className="text-muted-foreground mt-1">{selectedCategory.name}</p>
+              <h1 className="text-3xl font-bold">{t('medicalTerms')}</h1>
+              <p className="text-muted-foreground mt-1">{t(selectedCategory.key, selectedCategory.name)}</p>
             </div>
 
             {/* Search */}
@@ -328,7 +330,7 @@ export const Study = () => {
               <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Terim, anlam veya tanım ara..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -338,20 +340,20 @@ export const Study = () => {
 
           {/* Section title + count */}
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-2xl font-bold">{selectedCategory.name}</h2>
-            <Badge variant="secondary" className="text-sm">{terms.length} terim</Badge>
+            <h2 className="text-2xl font-bold">{t(selectedCategory.key, selectedCategory.name)}</h2>
+            <Badge variant="secondary" className="text-sm">{terms.length} {t('terms')}</Badge>
           </div>
 
           {/* Terms */}
           {loading ? (
             <div className="flex flex-col items-center justify-center py-12">
               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-4"></div>
-              <p className="text-muted-foreground text-sm">Terimler yükleniyor...</p>
+              <p className="text-muted-foreground text-sm">{t('loadingTerms')}</p>
             </div>
           ) : terms.length === 0 ? (
             <Card className="p-12 text-center">
               <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Terim bulunamadı</h3>
+              <h3 className="text-xl font-semibold mb-2">{t('noTermsFound')}</h3>
               <p className="text-muted-foreground">
                 {searchQuery ? 'Arama kriterlerinizi değiştirmeyi deneyin' : 'Bu kategoride henüz terim bulunmuyor'}
               </p>

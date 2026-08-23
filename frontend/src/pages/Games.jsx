@@ -6,22 +6,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { isLoggedIn, canGuestPlay, getGuestRemainingPlays, GUEST_DAILY_LIMIT } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
+import { useLanguage } from '@/context/LanguageContext';
 
-// Study sayfasıyla aynı kategori listesi
 const GAME_CATEGORIES = [
-  { id: 'skull_bones', name: 'Kafatası Kemikleri' },
-  { id: 'face_bones', name: 'Yüz Kemikleri' },
-  { id: 'trunk_bones', name: 'Gövde Kemikleri' },
-  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri' },
-  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
-  { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri' },
-  { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
-  { id: 'spine_joints', name: 'Omurga Eklemleri' },
-  { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri' },
-  { id: 'movement_terms', name: 'Hareket Terimleri' },
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri' },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Extremite Kemikleri' },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Extremite Kemikleri' },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri' },
 ];
 
 export const Games = () => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -32,32 +33,32 @@ export const Games = () => {
   const games = [
     {
       id: 'flashcards',
-      title: 'Flashcard',
-      description: 'Terim kartlarını çevirerek öğren. Bildiğin ve bilmediğin terimleri ayır.',
+      title: t('flashcards'),
+      description: t('flashcardDesc'),
       icon: BookOpen,
       color: 'from-primary to-primary-dark',
       path: '/flashcards'
     },
     {
       id: 'match',
-      title: 'Eşleştirme',
-      description: 'Terimleri Türkçe karşılıklarıyla eşleştir. Hızlı düşün, rekor kır!',
+      title: t('matchingGame'),
+      description: t('matchDesc'),
       icon: Shuffle,
       color: 'from-secondary to-accent',
       path: '/match'
     },
     {
       id: 'quiz',
-      title: 'Quiz',
-      description: 'Çoktan seçmeli sorularla bilgini test et. Kendini sına, ilerlemeyi gör.',
+      title: t('quizMode'),
+      description: t('quizDesc'),
       icon: Brain,
       color: 'from-accent to-success',
       path: '/quiz'
     },
     {
       id: 'morpheme',
-      title: 'Morfem Yapıcı',
-      description: 'Verilen tanıma göre tıbbi terimi ön ek, kök ve son ek seçerek kendin oluştur!',
+      title: t('morphemeBuilder'),
+      description: t('morphemeDesc'),
       icon: Puzzle,
       color: 'from-violet-500 to-purple-600',
       path: '/morpheme'
@@ -89,7 +90,7 @@ export const Games = () => {
                 <Lock className="w-6 h-6 text-amber-600 dark:text-amber-400" />
               </div>
               <div>
-                <h3 className="font-bold text-base">Misafir Modundasınız</h3>
+                <h3 className="font-bold text-base">{t('guestMode')}</h3>
                 <p className="text-sm opacity-90">
                   Bugünkü kalan ücretsiz oyun hakkınız: <strong className="text-amber-700 dark:text-amber-300 font-bold">{remainingPlays} / {GUEST_DAILY_LIMIT}</strong>
                 </p>
@@ -98,7 +99,7 @@ export const Games = () => {
             <Link to="/register">
               <Button size="sm" className="gradient-primary whitespace-nowrap shadow-md">
                 <UserPlus className="w-4 h-4 mr-2" />
-                Sınırsız Oyun İçin Üye Ol
+                {t('startFree')}
               </Button>
             </Link>
           </div>
@@ -107,25 +108,25 @@ export const Games = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Oyunlar
+            {t('gamesHeader')}
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Farklı oyun modlarıyla tıbbi terminolojiyi kalıcı olarak öğren
+            {t('gamesSub')}
           </p>
 
           {/* Category Selector */}
           <div className="flex items-center justify-center gap-4 max-w-md mx-auto">
-            <span className="text-sm font-medium text-muted-foreground">Kategori:</span>
+            <span className="text-sm font-medium text-muted-foreground">{t('category')}:</span>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-64">
-                <SelectValue placeholder="Kategori seç" />
+                <SelectValue placeholder={t('selectCategoryPlaceholder')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Tüm Kategoriler</SelectItem>
+                <SelectItem value="all">{t('allCategories')}</SelectItem>
 
                 {GAME_CATEGORIES.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
-                    {cat.name}
+                    {t(cat.key, cat.name)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -151,7 +152,7 @@ export const Games = () => {
                     onClick={(e) => handleGamePlayClick(e, game.path)}
                     className="w-full gradient-primary group-hover:shadow-lg transition-all"
                   >
-                    Oyna
+                    {t('play')}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </CardContent>
@@ -165,7 +166,7 @@ export const Games = () => {
           <CardContent className="p-8">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-primary" />
-              Oyun İpuçları
+              {t('gameTips')}
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div>

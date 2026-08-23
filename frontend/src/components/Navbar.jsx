@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Activity, Menu, X, User, LogOut } from 'lucide-react';
+import { Activity, Menu, X, User, LogOut, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getUser, logout, isLoggedIn, getStats } from '@/utils/storage';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/config';
+import { useLanguage } from '@/context/LanguageContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +18,7 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const [firebaseUser, setFirebaseUser] = useState(null);
+  const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usr) => {
@@ -43,17 +45,44 @@ export const Navbar = () => {
 
   const navLinks = loggedIn
     ? [
-        { path: '/', label: 'Panelim' },
-        { path: '/study', label: 'Kelime Kartları' },
-        { path: '/games', label: 'Oyunlar' },
-        { path: '/progress', label: 'İlerleme' },
+        { path: '/', label: t('dashboard') },
+        { path: '/study', label: t('study') },
+        { path: '/games', label: t('games') },
+        { path: '/progress', label: t('progress') },
       ]
     : [
-        { path: '/', label: 'Ana Sayfa' },
-        { path: '/study', label: 'Kelime Kartları' },
-        { path: '/games', label: 'Oyunlar' },
-        { path: '/progress', label: 'İlerleme' },
+        { path: '/', label: t('home') },
+        { path: '/study', label: t('study') },
+        { path: '/games', label: t('games') },
+        { path: '/progress', label: t('progress') },
       ];
+
+  const LanguageSwitcher = () => (
+    <div className="flex items-center bg-white border border-[#D6DED4] rounded-lg p-1 text-xs font-semibold shadow-sm">
+      <button
+        onClick={() => setLanguage('tr')}
+        className={`px-2.5 py-1 rounded transition-colors ${
+          currentLanguage === 'tr'
+            ? 'bg-primary text-white font-bold'
+            : 'text-[#5C6B63] hover:text-[#131C18]'
+        }`}
+        title="Türkçe"
+      >
+        TR
+      </button>
+      <button
+        onClick={() => setLanguage('en')}
+        className={`px-2.5 py-1 rounded transition-colors ${
+          currentLanguage === 'en'
+            ? 'bg-primary text-white font-bold'
+            : 'text-[#5C6B63] hover:text-[#131C18]'
+        }`}
+        title="English"
+      >
+        EN
+      </button>
+    </div>
+  );
 
   return (
     <nav className="sticky top-0 z-50 bg-[#F1F4EF]/94 backdrop-blur-md border-b border-[#D6DED4]" data-purpose="main-header">
@@ -88,14 +117,16 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* User Menu / Auth Actions */}
+          {/* User Menu / Auth Actions + Language Switcher */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
+
             {loggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="flex items-center gap-[14px] cursor-pointer select-none">
                     <div className="streak-badge flex items-center gap-[6px] bg-[#FBEFE1] border border-[#EAD8B8] px-[12px] py-[7px] rounded-[20px] font-semibold text-[0.85rem] text-[#B8862E]">
-                      🔥 {stats?.currentStreak || 0} gün
+                      🔥 {stats?.currentStreak || 0} {t('daysStreak')}
                     </div>
                     <div className="avatar w-[36px] h-[36px] rounded-full bg-[#0F1E36] text-white flex items-center justify-center font-semibold text-[0.95rem]">
                       {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
@@ -106,30 +137,31 @@ export const Navbar = () => {
                   <DropdownMenuItem asChild>
                     <Link to="/profile" className="flex items-center cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-50">
                       <User className="w-4 h-4 mr-2 text-gray-500" />
-                      Profilim
+                      {t('myProfile')}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-gray-100" />
                   <DropdownMenuItem onClick={handleLogout} className="text-destructive cursor-pointer px-4 py-2 hover:bg-red-50">
                     <LogOut className="w-4 h-4 mr-2" />
-                    Çıkış Yap
+                    {t('logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <div className="flex items-center gap-4">
                 <Link to="/login" className="px-6 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors bg-white">
-                  Giriş Yap
+                  {t('login')}
                 </Link>
                 <Link to="/register" className="px-6 py-2 bg-medical-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
-                  Ücretsiz Başla
+                  {t('startFree')}
                 </Link>
               </div>
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button & Language switcher */}
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageSwitcher />
             <Button
               variant="ghost"
               size="icon"
@@ -164,7 +196,7 @@ export const Navbar = () => {
                   <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
                     <Button variant="outline" className="w-full justify-start">
                       <User className="w-4 h-4 mr-2" />
-                      {user?.name}
+                      {user?.name || t('myProfile')}
                     </Button>
                   </Link>
                   <Button
@@ -176,16 +208,16 @@ export const Navbar = () => {
                     }}
                   >
                     <LogOut className="w-4 h-4 mr-2" />
-                    Çıkış Yap
+                    {t('logout')}
                   </Button>
                 </>
               ) : (
                 <div className="grid grid-cols-2 gap-2 px-2">
                   <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 border border-gray-300 rounded-lg font-medium text-gray-700 bg-white hover:bg-gray-50">
-                    Giriş Yap
+                    {t('login')}
                   </Link>
                   <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 bg-medical-accent text-white rounded-lg font-medium hover:opacity-90">
-                    Ücretsiz Başla
+                    {t('startFree')}
                   </Link>
                 </div>
               )}

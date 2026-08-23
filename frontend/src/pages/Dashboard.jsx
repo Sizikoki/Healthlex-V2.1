@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { getStats, getUser, getStreak, getProgress } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const user = getUser();
   const stats = getStats();
   const streak = getStreak();
@@ -16,7 +18,6 @@ export const Dashboard = () => {
   const [totdFlipped, setTotdFlipped] = useState(false);
 
   useEffect(() => {
-    // Trigger the slide-up reveal animations on mount
     setInProp(true);
   }, []);
 
@@ -36,15 +37,15 @@ export const Dashboard = () => {
   // Dynamic Category Progress Calculations
   // ----------------------------------------------------
   const catList = [
-    { id: 'skull_bones', name: 'Kafatası Kemikleri' },
-    { id: 'face_bones', name: 'Yüz Kemikleri' },
-    { id: 'trunk_bones', name: 'Gövde Kemikleri' },
-    { id: 'upper_extremity_bones', name: 'Üst Ekstremite Kemikleri' },
-    { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
-    { id: 'lower_extremity_bones', name: 'Alt Ekstremite Kemikleri' },
-    { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
-    { id: 'spine_joints', name: 'Omurga Eklemleri' },
-    { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri' },
+    { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
+    { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri' },
+    { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri' },
+    { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri' },
+    { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri' },
+    { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri' },
+    { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
+    { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
+    { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
   ];
 
   const getCategoryProgress = (catId) => {
@@ -54,20 +55,16 @@ export const Dashboard = () => {
     return Math.round((learnedCatTerms.length / catTerms.length) * 100);
   };
 
-  // Find active category to resume (first category that is partially done, or default to first)
   let activeCategory = catList.find(c => {
     const p = getCategoryProgress(c.id);
     return p > 0 && p < 100;
-  }) || catList[3]; // Default to Upper Extremity if none are started
+  }) || catList[3];
 
   const activeProgress = getCategoryProgress(activeCategory.id);
   const activeCatTerms = terms.filter(t => t.category === activeCategory.id || t.subcategory === activeCategory.id);
   const activeLearnedCount = activeCatTerms.filter(t => progress[t.id]?.learned).length;
   const activeTotalCount = activeCatTerms.length;
 
-  // ----------------------------------------------------
-  // Rotating Term of the Day
-  // ----------------------------------------------------
   const termsOfTheDay = [
     { term: 'Malleolus', meaning: 'Ayak bileğinin iç ve dış çıkıntıları; tibia ve fibulanın alt uçlarında yer alır.' },
     { term: 'Sustentaculum Tali', meaning: 'Topuk kemiğinin aşık kemiğini destekleyen raf benzeri çıkıntısı.' },
@@ -91,10 +88,10 @@ export const Dashboard = () => {
             <div className={`welcome p-[34px] md:p-[36px] rounded-[18px] transition-all duration-500 transform ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <div>
                 <div className="eyebrow text-[#38BDF8] text-[0.78rem] tracking-[0.15em] uppercase font-bold mb-2">
-                  Hoş geldin
+                  {t('welcome')}
                 </div>
                 <h1 className="font-serif font-semibold text-[1.8rem] md:text-[2.2rem] leading-[1.2] mb-2 tracking-tight">
-                  Merhaba, {userName} 👋
+                  {t('hello')}, {userName} 👋
                 </h1>
                 <p className="text-[#D0E1F9] text-[0.98rem] max-w-[44ch] leading-[1.5]">
                   Bugün {terms.length - stats.learnedTerms > 10 ? 12 : Math.max(3, terms.length - stats.learnedTerms)} terim seni bekliyor. Serini bozma — 5 dakikanı ayır, kaldığın yerden devam et.
@@ -102,11 +99,11 @@ export const Dashboard = () => {
                 <div className="welcome-pills flex gap-[16px] text-[0.82rem] text-[#D0E1F9] mt-6">
                   <span className="flex items-center gap-[6px]">
                     <span className="dot w-[5px] h-[5px] rounded-full bg-white opacity-60"></span>
-                    {stats.learnedTerms} terim öğrenildi
+                    {stats.learnedTerms} {t('termsMastered')}
                   </span>
                   <span className="flex items-center gap-[6px]">
                     <span className="dot w-[5px] h-[5px] rounded-full bg-white opacity-60"></span>
-                    %{stats.averageQuizScore || 0} ortalama başarı
+                    %{stats.averageQuizScore || 0} {t('averageAccuracy')}
                   </span>
                 </div>
               </div>
@@ -115,13 +112,13 @@ export const Dashboard = () => {
                   onClick={() => navigate('/study')}
                   className="btn btn-primary bg-[var(--coral)] text-white font-semibold text-[0.94rem] px-[20px] py-[12px] rounded-[9px] hover:bg-[#a83a26] transition-all"
                 >
-                  Bugünkü Tekrara Başla →
+                  {t('startTodayReview')} →
                 </button>
                 <button
                   onClick={() => document.getElementById('modes')?.scrollIntoView({ behavior: 'smooth' })}
                   className="btn bg-[#2563EB] text-white border border-blue-600/30 font-semibold text-[0.94rem] px-[20px] py-[12px] rounded-[9px] hover:bg-blue-700 transition-all"
                 >
-                  Oyun Seç
+                  {t('selectGame')}
                 </button>
               </div>
             </div>
@@ -131,7 +128,7 @@ export const Dashboard = () => {
           <section className="mb-[52px]" id="modes">
             <div className={`section-head flex justify-between items-end mb-[20px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <h2 className="font-serif font-semibold text-[1.45rem] tracking-tight text-[var(--ink)]">
-                Bugün Ne Çalışmak İstersin?
+                {t('whatToStudyToday')}
               </h2>
             </div>
             <div className={`tiles grid grid-cols-1 md:grid-cols-3 gap-[18px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
@@ -146,12 +143,12 @@ export const Dashboard = () => {
                     <path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 1.9-2.4 3.7M12 17h.01" />
                   </svg>
                 </div>
-                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">Quiz</h3>
+                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">{t('quizMode')}</h3>
                 <p className="text-[0.86rem] text-[var(--muted)] leading-[1.5] m-0">
-                  Çoktan seçmeli sorularla bilgini test et, anında geri bildirim al.
+                  {t('quizDesc')}
                 </p>
                 <span className="go mt-auto font-semibold text-[0.84rem] text-[var(--teal-deep)] flex items-center gap-[6px]">
-                  Başla →
+                  {t('play')} →
                 </span>
               </div>
 
@@ -166,12 +163,12 @@ export const Dashboard = () => {
                     <path d="M8 8h8M8 12h8M8 16h5" />
                   </svg>
                 </div>
-                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">Flashcard</h3>
+                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">{t('flashcards')}</h3>
                 <p className="text-[0.86rem] text-[var(--muted)] leading-[1.5] m-0">
-                  Kartları çevir, terimleri ve tanımlarını tekrar ederek pekiştir.
+                  {t('flashcardDesc')}
                 </p>
                 <span className="go mt-auto font-semibold text-[0.84rem] text-[var(--teal-deep)] flex items-center gap-[6px]">
-                  Başla →
+                  {t('play')} →
                 </span>
               </div>
 
@@ -185,12 +182,12 @@ export const Dashboard = () => {
                     <path d="M6 3v18M18 3v18M3 8l3-3 3 3M21 16l-3 3-3-3" />
                   </svg>
                 </div>
-                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">Eşleştirme</h3>
+                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">{t('matchingGame')}</h3>
                 <p className="text-[0.86rem] text-[var(--muted)] leading-[1.5] m-0">
-                  Latince terimleri Türkçe karşılıklarıyla eşleştir, hızını artır.
+                  {t('matchDesc')}
                 </p>
                 <span className="go mt-auto font-semibold text-[0.84rem] text-[var(--teal-deep)] flex items-center gap-[6px]">
-                  Başla →
+                  {t('play')} →
                 </span>
               </div>
             </div>
@@ -203,7 +200,7 @@ export const Dashboard = () => {
               {/* Term of Day Flippable Card */}
               <div className={`totd-card bg-white border border-[var(--line)] rounded-[var(--radius)] p-[28px] flex flex-col items-center text-center transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
                 <div className="eyebrow text-[0.72rem] tracking-[0.12em] uppercase font-semibold text-[var(--teal)] mb-[8px]">
-                  Bugünün Terimi
+                  {t('termOfTheDay')}
                 </div>
                 <div 
                   className={`flip-card w-[260px] h-[170px] cursor-pointer my-[14px] ${totdFlipped ? 'flipped' : ''}`}
@@ -213,7 +210,7 @@ export const Dashboard = () => {
                     {/* Front Face */}
                     <div className="flip-face absolute inset-0 rounded-[12px] border border-[var(--line)] flex flex-col items-center justify-center p-[18px] bg-[var(--paper)] backface-hidden">
                       <div className="lbl font-mono text-[0.68rem] tracking-[0.1em] text-[var(--teal)] uppercase mb-[8px]">
-                        Latin Terim
+                        Latin
                       </div>
                       <div className="term font-mono text-[1.5rem] font-bold text-[var(--ink)]">
                         {formatMedicalTerm(todayTerm.term)}
@@ -228,7 +225,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
                 <div className="flip-hint text-[0.78rem] text-[var(--muted)]">
-                  ↻ çevirmek için dokun
+                  ↻ {t('tapToFlip')}
                 </div>
               </div>
 
@@ -238,10 +235,10 @@ export const Dashboard = () => {
                   <div className="resume-top flex justify-between items-start gap-[14px]">
                     <div>
                       <div className="eyebrow text-[0.72rem] tracking-[0.12em] uppercase font-semibold text-[var(--teal)] mb-[8px]">
-                        Devam Et
+                        {t('continueLearning')}
                       </div>
                       <h3 className="text-[1.06rem] font-bold text-[var(--ink)] m-0 mt-[16px] mb-[6px]">
-                        {activeCategory.name}
+                        {t(activeCategory.key, activeCategory.name)}
                       </h3>
                     </div>
                     {/* Conic Gradient dynamic progress ring */}
@@ -257,14 +254,14 @@ export const Dashboard = () => {
                     </div>
                   </div>
                   <p className="text-[0.88rem] text-[var(--muted)] leading-[1.5] m-0 mt-4 mb-[20px]">
-                    Kaldığın yer: {activeLearnedCount} / {activeTotalCount} terim. {activeTotalCount - activeLearnedCount > 0 ? `${activeTotalCount - activeLearnedCount} terim seni bekliyor.` : 'Bu kategoriyi başarıyla tamamladın!'}
+                    Kaldığın yer: {activeLearnedCount} / {activeTotalCount} terim.
                   </p>
                 </div>
                 <button
                   onClick={() => navigate('/study')}
                   className="btn btn-primary bg-[var(--coral)] text-white font-semibold text-[0.94rem] px-[20px] py-[12px] rounded-[9px] hover:bg-[#a83a26] transition-all self-start"
                 >
-                  Kaldığın Yerden Devam Et →
+                  {t('continueLearning')} →
                 </button>
               </div>
 
@@ -275,13 +272,13 @@ export const Dashboard = () => {
           <section className="mb-[52px]">
             <div className={`section-head flex justify-between items-end mb-[20px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <h2 className="font-serif font-semibold text-[1.45rem] tracking-tight text-[var(--ink)]">
-                İlerleyen
+                {t('inProgress')}
               </h2>
               <span 
                 onClick={() => navigate('/progress')}
                 className="see-all text-[0.86rem] font-bold text-[var(--teal-deep)] cursor-pointer"
               >
-                Tüm istatistikler →
+                {t('allStats')} →
               </span>
             </div>
 
@@ -292,7 +289,7 @@ export const Dashboard = () => {
                   {stats.learnedTerms}
                 </div>
                 <div className="lbl text-[0.85rem] text-[var(--muted)] mt-1">
-                  Terim öğrenildi
+                  {t('termsMastered')}
                 </div>
               </div>
               <div className="stat bg-white p-[24px] md:p-[22px]">
@@ -300,7 +297,7 @@ export const Dashboard = () => {
                   %{stats.averageQuizScore || 0}
                 </div>
                 <div className="lbl text-[0.85rem] text-[var(--muted)] mt-1">
-                  Ortalama doğruluk
+                  {t('averageAccuracy')}
                 </div>
               </div>
               <div className="stat bg-white p-[24px] md:p-[22px]">
@@ -308,7 +305,7 @@ export const Dashboard = () => {
                   {streak.currentStreak}
                 </div>
                 <div className="lbl text-[0.85rem] text-[var(--muted)] mt-1">
-                  Günlük seri
+                  {t('dailyStreak')}
                 </div>
               </div>
             </div>
@@ -320,7 +317,7 @@ export const Dashboard = () => {
                 return (
                   <div className="cat-row flex items-center gap-[18px] py-[18px] border-b border-[var(--line)] last:border-none" key={cat.id}>
                     <div className="cat-name w-[180px] flex-shrink-0 text-[0.92rem] font-bold text-[var(--ink)]">
-                      {cat.name}
+                      {t(cat.key, cat.name)}
                     </div>
                     <div className="cat-bar-track flex-1 h-[8px] rounded-[6px] bg-[var(--paper-dim)] overflow-hidden">
                       <div 

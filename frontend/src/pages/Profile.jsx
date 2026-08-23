@@ -4,9 +4,11 @@ import { getStats, getUser, saveUser, getStreak, getQuizScores, getProgress, get
 import { signOut, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '@/firebase/config';
 import { toast } from 'sonner';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Profile = () => {
   const navigate = useNavigate();
+  const { currentLanguage, setLanguage, t } = useLanguage();
   const user = getUser();
   const stats = getStats();
   const streak = getStreak();
@@ -470,10 +472,40 @@ export const Profile = () => {
           {/* ACCOUNT SETTINGS SECTION */}
           <section className="mb-[36px]">
             <div className="card bg-white border border-[var(--line)] rounded-[var(--radius)] p-[28px]">
-              <h2 className="font-serif font-semibold text-[1.2rem] text-[var(--ink)] mb-1">Hesap Ayarları</h2>
+              <h2 className="font-serif font-semibold text-[1.2rem] text-[var(--ink)] mb-1">{t('accountSettings')}</h2>
               <p className="section-sub text-[0.86rem] text-[var(--muted)] m-0 mb-[18px]">
-                Bildirimler, güvenlik ve veri tercihlerin.
+                Bildirimler, güvenlik, dil ve veri tercihlerin.
               </p>
+
+              {/* Interface Language Setting */}
+              <div className="setting-row flex justify-between items-center gap-[16px] py-[16px] border-b border-[var(--line)]">
+                <div>
+                  <div className="setting-label text-[0.92rem] font-semibold text-[var(--ink)]">Uygulama Dili / Interface Language</div>
+                  <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5">Platformun tercih edilen arayüz dili</div>
+                </div>
+                <div className="flex gap-[8px]">
+                  <button
+                    onClick={() => setLanguage('tr')}
+                    className={`chip p-[8px_14px] rounded-[9px] border font-semibold text-[0.86rem] transition-all ${
+                      currentLanguage === 'tr'
+                        ? 'active border-[var(--teal)] bg-[var(--blue-tint)] text-[var(--blue)] shadow-sm'
+                        : 'bg-white border-[var(--line)] text-[var(--muted)] hover:bg-[var(--paper-dim)]'
+                    }`}
+                  >
+                    Türkçe
+                  </button>
+                  <button
+                    onClick={() => setLanguage('en')}
+                    className={`chip p-[8px_14px] rounded-[9px] border font-semibold text-[0.86rem] transition-all ${
+                      currentLanguage === 'en'
+                        ? 'active border-[var(--teal)] bg-[var(--blue-tint)] text-[var(--blue)] shadow-sm'
+                        : 'bg-white border-[var(--line)] text-[var(--muted)] hover:bg-[var(--paper-dim)]'
+                    }`}
+                  >
+                    English
+                  </button>
+                </div>
+              </div>
 
               {/* Reminder Settings */}
               <div className="setting-row flex justify-between items-center gap-[16px] py-[16px] border-b border-[var(--line)]">

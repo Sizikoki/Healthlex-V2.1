@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const ProgressPage = () => {
+  const { t } = useLanguage();
   const stats = getStats();
   const user = getUser();
   const streak = getStreak();
@@ -86,15 +88,15 @@ export const ProgressPage = () => {
   // Category Breakdown Calculations
   // ----------------------------------------------------
   const catList = [
-    { id: 'skull_bones', name: 'Kafatası Kemikleri' },
-    { id: 'trunk_bones', name: 'Gövde Kemikleri' },
-    { id: 'face_bones', name: 'Yüz Kemikleri' },
-    { id: 'upper_extremity_bones', name: 'Üst Ekstremite' },
-    { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri' },
-    { id: 'lower_extremity_bones', name: 'Alt Ekstremite' },
-    { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri' },
-    { id: 'spine_joints', name: 'Omurga Eklemleri' },
-    { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri' },
+    { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
+    { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri' },
+    { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri' },
+    { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite' },
+    { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri' },
+    { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite' },
+    { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
+    { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
+    { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
   ];
 
   const categoriesWithProgress = catList.map(cat => {
@@ -327,7 +329,7 @@ export const ProgressPage = () => {
           <section className="mb-[40px]">
             <div className={`section-head flex justify-between items-end mb-[18px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               <h2 className="font-serif font-semibold text-[1.32rem] tracking-tight text-[var(--ink)]">
-                Bölgeye Göre İlerlemen
+                {t('progressByRegion')}
               </h2>
             </div>
             
@@ -336,7 +338,7 @@ export const ProgressPage = () => {
                 return (
                   <div className="cat-row flex items-center gap-[18px] py-[16px] border-b border-[var(--line)] last:border-none" key={cat.id}>
                     <div className="cat-name w-[170px] flex-shrink-0 text-[0.92rem] font-bold text-[var(--ink)] flex items-center gap-[8px]">
-                      {cat.name}
+                      {t(cat.key, cat.name)}
                     </div>
                     <div className="cat-bar-track flex-1 h-[8px] rounded-[6px] bg-[var(--paper-dim)] overflow-hidden">
                       <div 
