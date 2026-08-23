@@ -305,9 +305,9 @@ export const Study = () => {
               <div className="flex items-center gap-2.5 text-amber-950">
                 <span className="text-xl">💡</span>
                 <div>
-                  <strong className="font-semibold block">{t('guestMode')}</strong>
-                  Kelime kartlarını serbestçe inceleyebilir ve '{t('markLearned')}' işaretlemesi yapabilirsiniz. İlerlemenizi kalıcı tutmak ve tüm cihazlarda senkronize etmek için 
-                  <Link to="/register" className="font-bold underline ml-1 text-amber-900 hover:text-amber-700">{t('register')}</Link>.
+                  <strong className="font-semibold block mb-0.5">{t('guestMode')}</strong>
+                  <span>{t('studyGuestBannerText')} </span>
+                  <Link to="/register" className="font-bold underline text-amber-900 hover:text-amber-700">{t('signUpLink')}</Link>.
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">

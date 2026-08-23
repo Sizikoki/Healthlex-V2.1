@@ -94,16 +94,16 @@ export const Dashboard = () => {
                   {t('hello')}, {userName} 👋
                 </h1>
                 <p className="text-[#D0E1F9] text-[0.98rem] max-w-[44ch] leading-[1.5]">
-                  Bugün {terms.length - stats.learnedTerms > 10 ? 12 : Math.max(3, terms.length - stats.learnedTerms)} terim seni bekliyor. Serini bozma — 5 dakikanı ayır, kaldığın yerden devam et.
+                  {terms.length - stats.learnedTerms > 10 ? 12 : Math.max(3, terms.length - stats.learnedTerms)} {t('dashboardTermsWaiting')}
                 </p>
                 <div className="welcome-pills flex gap-[16px] text-[0.82rem] text-[#D0E1F9] mt-6">
                   <span className="flex items-center gap-[6px]">
                     <span className="dot w-[5px] h-[5px] rounded-full bg-white opacity-60"></span>
-                    {stats.learnedTerms} {t('termsMastered')}
+                    {stats.learnedTerms} {t('dashboardLearnedTermsSub')}
                   </span>
                   <span className="flex items-center gap-[6px]">
                     <span className="dot w-[5px] h-[5px] rounded-full bg-white opacity-60"></span>
-                    %{stats.averageQuizScore || 0} {t('averageAccuracy')}
+                    %{stats.averageQuizScore || 0} {t('dashboardAverageScoreSub')}
                   </span>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export const Dashboard = () => {
                 onClick={() => navigate('/quiz')}
               >
                 <div className="ic ic-teal w-[42px] h-[42px] rounded-[10px] bg-[#E0ECFD] color-[var(--teal-deep)] flex items-center justify-center">
-                  <svg className="w-[21px] h-[21px] text-[var(--teal-deep)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 1.9-2.4 3.7M12 17h.01" />
                   </svg>
@@ -158,7 +158,7 @@ export const Dashboard = () => {
                 onClick={() => navigate('/flashcards')}
               >
                 <div className="ic ic-coral w-[42px] h-[42px] rounded-[10px] bg-[#F7E4DE] color-[var(--coral)] flex items-center justify-center">
-                  <svg className="w-[21px] h-[21px] text-[var(--coral)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="4" y="3" width="16" height="18" rx="2" />
                     <path d="M8 8h8M8 12h8M8 16h5" />
                   </svg>
@@ -178,7 +178,7 @@ export const Dashboard = () => {
                 onClick={() => navigate('/match')}
               >
                 <div className="ic ic-gold w-[42px] h-[42px] rounded-[10px] bg-[#FBEFE1] color-[var(--gold)] flex items-center justify-center">
-                  <svg className="w-[21px] h-[21px] text-[var(--gold)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-[21px] h-[21px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 3v18M18 3v18M3 8l3-3 3 3M21 16l-3 3-3-3" />
                   </svg>
                 </div>
@@ -210,7 +210,7 @@ export const Dashboard = () => {
                     {/* Front Face */}
                     <div className="flip-face absolute inset-0 rounded-[12px] border border-[var(--line)] flex flex-col items-center justify-center p-[18px] bg-[var(--paper)] backface-hidden">
                       <div className="lbl font-mono text-[0.68rem] tracking-[0.1em] text-[var(--teal)] uppercase mb-[8px]">
-                        Latin
+                        {t('latinTerm')}
                       </div>
                       <div className="term font-mono text-[1.5rem] font-bold text-[var(--ink)]">
                         {formatMedicalTerm(todayTerm.term)}
@@ -254,7 +254,7 @@ export const Dashboard = () => {
                     </div>
                   </div>
                   <p className="text-[0.88rem] text-[var(--muted)] leading-[1.5] m-0 mt-4 mb-[20px]">
-                    Kaldığın yer: {activeLearnedCount} / {activeTotalCount} terim.
+                    {t('currentPlace')} {activeLearnedCount} / {activeTotalCount} {t('terms')}. {activeTotalCount - activeLearnedCount > 0 ? `${activeTotalCount - activeLearnedCount} ${t('termsRemainingWaiting')}` : t('categoryCompleted')}
                   </p>
                 </div>
                 <button

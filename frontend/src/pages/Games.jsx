@@ -92,14 +92,14 @@ export const Games = () => {
               <div>
                 <h3 className="font-bold text-base">{t('guestMode')}</h3>
                 <p className="text-sm opacity-90">
-                  Bugünkü kalan ücretsiz oyun hakkınız: <strong className="text-amber-700 dark:text-amber-300 font-bold">{remainingPlays} / {GUEST_DAILY_LIMIT}</strong>
+                  {t('guestPlaysRemaining')} <strong className="text-amber-700 dark:text-amber-300 font-bold">{remainingPlays} / {GUEST_DAILY_LIMIT}</strong>
                 </p>
               </div>
             </div>
             <Link to="/register">
               <Button size="sm" className="gradient-primary whitespace-nowrap shadow-md">
                 <UserPlus className="w-4 h-4 mr-2" />
-                {t('startFree')}
+                {t('unlimitedPlaySignUp')}
               </Button>
             </Link>
           </div>
@@ -170,21 +170,21 @@ export const Games = () => {
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <div className="text-lg font-semibold mb-2 text-primary">🎯 Düzenli Çalış</div>
+                <div className="text-lg font-semibold mb-2 text-primary">{t('tip1Title')}</div>
                 <p className="text-sm text-muted-foreground">
-                  Her gün en az 10 dakika çalışarak günlük serileri koruyun ve hızlı öğrenin.
+                  {t('tip1Desc')}
                 </p>
               </div>
               <div>
-                <div className="text-lg font-semibold mb-2 text-secondary">🎮 Çeşitlilik Oluştur</div>
+                <div className="text-lg font-semibold mb-2 text-secondary">{t('tip2Title')}</div>
                 <p className="text-sm text-muted-foreground">
-                  Farklı oyun modlarını kullanarak bilgilerinizi pekiştirin ve monotonluktan kaçının.
+                  {t('tip2Desc')}
                 </p>
               </div>
               <div>
-                <div className="text-lg font-semibold mb-2 text-accent">📊 İlerlemeni Takip Et</div>
+                <div className="text-lg font-semibold mb-2 text-accent">{t('tip3Title')}</div>
                 <p className="text-sm text-muted-foreground">
-                  Quiz sonuçlarını ve eşleştirme sürelerini takip ederek gelişimini gör.
+                  {t('tip3Desc')}
                 </p>
               </div>
             </div>

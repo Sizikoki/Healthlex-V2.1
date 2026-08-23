@@ -5,8 +5,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/config';
 import { formatMedicalTerm } from '@/utils/format';
 import { Dashboard } from './Dashboard';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Home = () => {
+  const { t } = useLanguage();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -249,15 +251,14 @@ export const Home = () => {
           <div className="lg:w-1/2 z-10">
             <div className="flex items-center gap-2 mb-6">
               <div className="h-[1px] w-8 bg-medical-accent"></div>
-              <span className="uppercase tracking-widest text-xs font-bold text-medical-accent">Sınava Hazırlananlar İçin</span>
+              <span className="uppercase tracking-widest text-xs font-bold text-medical-accent">{t('heroBadge')}</span>
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold text-medical-dark leading-[1.1] mb-8">
-              Tıbbi Terimleri <br />
-              <span className="italic font-serif-italic font-normal">Ezberlemeden,</span> Kalıcı <br />
-              Öğren
+              {t('heroTitle1')} <br />
+              <span className="italic font-serif-italic font-normal">{t('heroTitle2')}</span> {t('heroTitle3')}
             </h1>
             <p className="text-lg text-gray-600 max-w-lg mb-10 leading-relaxed">
-              Kök, önek ve sonekleri oyunlaştırılmış kartlarla pekiştir. Sınav öncesi hızlı tekrar için tasarlandı — kayıt olmadan hemen dene.
+              {t('heroDesc')}
             </p>
             <div className="flex flex-wrap items-center gap-6">
               {loggedIn ? (
@@ -265,7 +266,7 @@ export const Home = () => {
                   to="/study"
                   className="px-8 py-4 bg-medical-dark text-white rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 transition-all shadow-md"
                 >
-                  Çalışmaya Başla
+                  {t('studyCardsBtn')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                   </svg>
@@ -275,7 +276,7 @@ export const Home = () => {
                   to="/register"
                   className="px-8 py-4 bg-medical-dark text-white rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 transition-all shadow-md"
                 >
-                  Ücretsiz Başla
+                  {t('startFree')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                   </svg>
@@ -292,7 +293,7 @@ export const Home = () => {
                 <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M19 14l-7 7m0 0l-7-7m7 7V3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                 </svg>
-                Kayıt olmadan dene
+                {t('tryWithoutRegister')}
               </a>
             </div>
 
