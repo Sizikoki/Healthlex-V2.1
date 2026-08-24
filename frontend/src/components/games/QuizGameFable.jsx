@@ -57,9 +57,8 @@ import {
 } from 'lucide-react';
 
 // ── Ayarlar ──────────────────────────────────────────────────────────────────
-const FEEDBACK_DELAY_MS_CORRECT = 1200; // Doğru cevapta bekleme süresi (1.2 sn)
-const FEEDBACK_DELAY_MS_WRONG = 5000;   // Yanlış cevapta açıklamayı okuma süresi (5 sn)
-const ROUND_SIZE = 10;                  // Tur başına soru
+const FEEDBACK_DELAY_MS = 5000; // Geri bildirim süresi (Doğru ve Yanlış için 5 sn)
+const ROUND_SIZE = 10;          // Tur başına soru
 const POINTS_CORRECT = 10;              // Doğru: +10
 const POINTS_WRONG = 5;                 // Yanlış: -5 (skor 0'ın altına inmez)
 
@@ -368,17 +367,14 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     startRound();
   }, [startRound]);
 
-  // ── Sub: Geri bildirim zamanlayıcısı (Doğru: 1.2 sn / Yanlış: 5 sn) ───────
+  // ── Sub: 5 sn geri bildirim zamanlayıcısı (Elmish aboneliği) ─────────────
   // AnswerChecked'e her girişte YENİ bir state objesi oluştuğu için efekt
   // soru başına tam bir kez kurulur; durumdan çıkışta cleanup timer'ı söker.
   useEffect(() => {
     if (model.state.tag !== S.AnswerChecked) return undefined;
-    const delay = model.state.isCorrect
-      ? FEEDBACK_DELAY_MS_CORRECT
-      : FEEDBACK_DELAY_MS_WRONG;
     const timerId = setTimeout(() => {
       dispatch({ type: M.NextQuestion });
-    }, delay);
+    }, FEEDBACK_DELAY_MS);
     return () => clearTimeout(timerId);
   }, [model.state]);
 
@@ -658,17 +654,23 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                       <ArrowRight className="w-4 h-4" />
                     </button>
 
-                    {/* Yanlış cevapta 5 saniyelik görsel süre çubuğu */}
-                    {!model.state.isCorrect && (
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-rose-500/20">
-                        <div
-                          className="h-full bg-rose-400/60"
-                          style={{
-                            animation: `hlxCountdown ${FEEDBACK_DELAY_MS_WRONG}ms linear forwards`,
-                          }}
-                        />
-                      </div>
-                    )}
+                    {/* 5 saniyelik görsel süre çubuğu (Doğru ve Yanlış için) */}
+                    <div
+                      className={cx(
+                        'absolute bottom-0 left-0 right-0 h-1',
+                        model.state.isCorrect ? 'bg-emerald-500/20' : 'bg-rose-500/20'
+                      )}
+                    >
+                      <div
+                        className={cx(
+                          'h-full',
+                          model.state.isCorrect ? 'bg-emerald-400/60' : 'bg-rose-400/60'
+                        )}
+                        style={{
+                          animation: `hlxCountdown ${FEEDBACK_DELAY_MS}ms linear forwards`,
+                        }}
+                      />
+                    </div>
                   </div>
                 )}
               </div>
