@@ -207,8 +207,8 @@ function isCorrectSequence(selected, correct) {
   );
 }
 
-function normalizeQuestions(terms) {
-  if (!Array.isArray(terms) || terms.length === 0) return DEFAULT_QUESTIONS;
+function normalizeQuestions(terms, roundSize = 10) {
+  if (!Array.isArray(terms) || terms.length === 0) return DEFAULT_QUESTIONS.slice(0, roundSize);
   const valid = terms.filter(
     (q) =>
       q &&
@@ -216,7 +216,8 @@ function normalizeQuestions(terms) {
       Array.isArray(q.correctSequence) &&
       q.correctSequence.length > 0
   );
-  return valid.length === 0 ? DEFAULT_QUESTIONS : valid;
+  if (valid.length === 0) return DEFAULT_QUESTIONS.slice(0, roundSize);
+  return shuffle(valid).slice(0, Math.min(roundSize, valid.length));
 }
 
 function loadQuestion(model, index) {
@@ -289,8 +290,10 @@ function update(model, msg) {
       if (tag !== "AnswerChecked" || model.state.isSuccess) return model;
       return loadQuestion(model, model.currentIndex);
     }
-    case "ResetGame":
-      return loadQuestion({ ...model, score: 0 }, 0);
+    case "ResetGame": {
+      const reshuffled = shuffle(model.questions);
+      return init(reshuffled);
+    }
     case "SetQuestions":
       return init(msg.questions);
     default:
@@ -400,7 +403,7 @@ export default function MorphemeGameFable({
         <div className="mt-8 flex items-center justify-center gap-3">
           <button
             type="button"
-            onClick={() => dispatch({ type: "ResetGame" })}
+            onClick={() => dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) })}
             className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-2.5 font-semibold text-white transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
           >
             <RotateCcw aria-hidden="true" className="h-4 w-4"/>

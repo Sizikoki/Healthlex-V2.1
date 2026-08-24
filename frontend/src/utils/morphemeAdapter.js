@@ -316,10 +316,10 @@ function parseTermToMorphemes(term) {
   return sequence.length >= 2 ? sequence : null;
 }
 
-export function adaptTermsToMorphemeQuestions(terms) {
+export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
   let sourceTerms = Array.isArray(terms) && terms.length > 0 ? terms : [];
 
-  const questions = [];
+  const candidateQuestions = [];
   const allParsedParts = [];
 
   sourceTerms.forEach((term, idx) => {
@@ -333,7 +333,7 @@ export function adaptTermsToMorphemeQuestions(terms) {
         en: term.englishDefinition || term.english || term.turkish || targetLatinTerm,
       };
 
-      questions.push({
+      candidateQuestions.push({
         id: term.id || idx + 1,
         targetLatinTerm,
         definition,
@@ -343,15 +343,15 @@ export function adaptTermsToMorphemeQuestions(terms) {
     }
   });
 
-  // If filtered category produces less than 4 questions, fall back to global terms pool
-  if (questions.length < 4) {
+  // Kategori 10'dan az soru üretiyorsa genel havuzdan 10'a tamamla
+  if (candidateQuestions.length < roundSize) {
     const fallbackTerms = getAllTerms();
     fallbackTerms.forEach((term, idx) => {
-      if (!questions.some((q) => q.targetLatinTerm === term.term)) {
+      if (!candidateQuestions.some((q) => q.targetLatinTerm === term.term)) {
         const sequence = parseTermToMorphemes(term);
         if (sequence && sequence.length > 0) {
           allParsedParts.push(...sequence);
-          questions.push({
+          candidateQuestions.push({
             id: term.id || `fb_${idx}`,
             targetLatinTerm: term.term,
             definition: {
@@ -366,9 +366,13 @@ export function adaptTermsToMorphemeQuestions(terms) {
     });
   }
 
+  // Havuzu karıştırıp tam roundSize (10) soru seç
+  const shuffledCandidates = [...candidateQuestions].sort(() => Math.random() - 0.5);
+  const selectedQuestions = shuffledCandidates.slice(0, Math.min(roundSize, shuffledCandidates.length));
+
   const pool = allParsedParts.length >= 6 ? allParsedParts : [...allParsedParts, ...FALLBACK_DISTRACTORS];
 
-  questions.forEach((q) => {
+  selectedQuestions.forEach((q) => {
     const correctTexts = new Set(q.correctSequence.map((p) => p.text.toLowerCase()));
     const validDistractors = pool.filter((p) => !correctTexts.has(p.text.toLowerCase()));
 
@@ -410,5 +414,5 @@ export function adaptTermsToMorphemeQuestions(terms) {
     q.distractors = uniqueDistractors;
   });
 
-  return questions.length > 0 ? questions : DEFAULT_QUESTIONS;
+  return selectedQuestions.length > 0 ? selectedQuestions : DEFAULT_QUESTIONS.slice(0, roundSize);
 }
