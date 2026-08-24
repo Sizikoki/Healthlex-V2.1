@@ -3,6 +3,10 @@
  *  HealthLexMed — Morfem Yapıcı (Morpheme Builder)
  *  MorphemeGameFable.jsx
  * =====================================================================
+ *  Fable/Elmish kapalı durum makinesi mimarisi.
+ *  Site genel açık/koyu tema CSS değişkenlerine (bg-card, text-foreground,
+ *  border-border, bg-muted, gradient-primary) %100 uyumludur.
+ * =====================================================================
  */
 import React, { useReducer, useEffect, useMemo, useCallback } from "react";
 import {
@@ -64,16 +68,16 @@ const STRINGS = {
 
 const PART_META = {
   prefix: {
-    chip: "border-indigo-500/40 bg-indigo-500/10 text-indigo-300 hover:border-indigo-400",
-    dot: "bg-indigo-400",
+    chip: "border-primary/40 bg-primary/10 text-primary hover:border-primary/80",
+    dot: "bg-primary",
   },
   root: {
-    chip: "border-violet-500/40 bg-violet-500/10 text-violet-300 hover:border-violet-400",
-    dot: "bg-violet-400",
+    chip: "border-secondary/40 bg-secondary/10 text-secondary hover:border-secondary/80",
+    dot: "bg-secondary",
   },
   suffix: {
-    chip: "border-fuchsia-500/40 bg-fuchsia-500/10 text-fuchsia-300 hover:border-fuchsia-400",
-    dot: "bg-fuchsia-400",
+    chip: "border-accent/40 bg-accent/10 text-accent-foreground dark:text-accent hover:border-accent/80",
+    dot: "bg-accent",
   },
 };
 
@@ -103,7 +107,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 2,
     targetLatinTerm: "Sublingualis",
-    definition: { tr: "Dil altına ait", en: "Pertaining to under the tongue" },
+    definition: { tr: "Dil altı ile ilgili", en: "Under the tongue" },
     correctSequence: [
       P("sub", "sub-", "altında", "under, below", "prefix"),
       P("lingu", "lingu", "dil", "tongue", "root"),
@@ -112,21 +116,25 @@ export const DEFAULT_QUESTIONS = [
     distractors: [
       P("supra", "supra-", "üstünde", "above", "prefix"),
       P("gloss", "gloss", "dil (Yunanca)", "tongue (Greek)", "root"),
-      P("osis1", "-osis", "hastalık durumu", "diseased condition", "suffix"),
+      P("icus1", "-icus", "ait, ilgili", "pertaining to", "suffix"),
     ],
   },
   {
     id: 3,
-    targetLatinTerm: "Arthritis",
-    definition: { tr: "Eklem iltihabı", en: "Inflammation of a joint" },
+    targetLatinTerm: "Gastroenteritis",
+    definition: {
+      tr: "Mide ve bağırsak iltihabı",
+      en: "Inflammation of stomach and intestines",
+    },
     correctSequence: [
-      P("arthr", "arthr", "eklem", "joint", "root"),
+      P("gastr2", "gastr", "mide", "stomach", "root"),
+      P("enter", "enter", "bağırsak", "intestine", "root"),
       P("itis2", "-itis", "iltihap", "inflammation", "suffix"),
     ],
     distractors: [
+      P("hepat", "hepat", "karaciğer", "liver", "root"),
+      P("osis1", "-osis", "hastalık durumu", "condition", "suffix"),
       P("peri", "peri-", "çevresinde", "around", "prefix"),
-      P("oste", "oste", "kemik", "bone", "root"),
-      P("osis2", "-osis", "dejeneratif durum", "degenerative condition", "suffix"),
     ],
   },
   {
@@ -315,13 +323,13 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
       aria-label={`${part.text} — ${meaning}`}
       className={`group flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2 text-left
         transition-all duration-150 hover:scale-[1.03] active:scale-95
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
         ${meta.chip} ${dimmed ? "opacity-60" : ""}`}
     >
       <span className="font-mono text-base font-semibold tracking-tight">
         {part.text}
       </span>
-      <span className="flex items-center gap-1.5 text-[11px] text-slate-400">
+      <span className="flex items-center gap-1.5 text-[11px] opacity-80">
         <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
         {tr(part.partType)} · {meaning}
       </span>
@@ -384,16 +392,16 @@ export default function MorphemeGameFable({
 
   if (finished) {
     return (
-      <div className="w-full max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900 px-6 py-14 text-center text-slate-100">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500">
+      <div className="w-full max-w-3xl mx-auto rounded-3xl border border-border bg-card px-6 py-14 text-center text-card-foreground shadow-xl">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl gradient-primary shadow-lg shadow-primary/20">
           <Trophy aria-hidden="true" className="h-8 w-8 text-white"/>
         </div>
-        <h2 className="text-2xl font-bold">{tr("finishedTitle")}</h2>
-        <p className="mt-2 text-slate-400">
+        <h2 className="text-2xl font-bold text-foreground">{tr("finishedTitle")}</h2>
+        <p className="mt-2 text-muted-foreground">
           {tr("finalScore")}:{" "}
           <span
             className={`font-mono text-xl font-semibold ${
-              model.score >= 0 ? "text-emerald-400" : "text-rose-400"
+              model.score >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
             }`}
           >
             {model.score > 0 ? `+${model.score}` : model.score}
@@ -404,7 +412,7 @@ export default function MorphemeGameFable({
           <button
             type="button"
             onClick={() => dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) })}
-            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-2.5 font-semibold text-white transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="flex items-center gap-2 rounded-xl gradient-primary px-5 py-2.5 font-semibold text-primary-foreground transition hover:opacity-90 shadow-md shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <RotateCcw aria-hidden="true" className="h-4 w-4"/>
             {tr("playAgain")}
@@ -413,7 +421,7 @@ export default function MorphemeGameFable({
             <button
               type="button"
               onClick={onBack}
-              className="flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-2.5 text-slate-300 transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+              className="flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-5 py-2.5 text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <ArrowLeft aria-hidden="true" className="h-4 w-4"/>
               {tr("back")}
@@ -426,20 +434,20 @@ export default function MorphemeGameFable({
 
   if (!q) {
     return (
-      <div className="w-full max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center text-slate-400">
+      <div className="w-full max-w-3xl mx-auto rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground shadow-xl">
         {tr("noQuestions")}
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900 px-4 py-6 text-slate-100 sm:px-6">
+    <div className="w-full max-w-3xl mx-auto rounded-3xl border border-border bg-card px-4 py-6 text-card-foreground sm:px-6 shadow-xl">
       <div className="mb-5 flex items-center justify-between gap-3">
         {onBack ? (
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-slate-400 transition hover:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-muted-foreground transition hover:text-foreground hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <ArrowLeft aria-hidden="true" className="h-4 w-4"/>
             {tr("back")}
@@ -449,15 +457,15 @@ export default function MorphemeGameFable({
         )}
 
         <div className="flex items-center gap-2">
-          <Puzzle aria-hidden="true" className="h-4 w-4 text-violet-400"/>
-          <span className="text-sm font-semibold">{tr("gameTitle")}</span>
+          <Puzzle aria-hidden="true" className="h-4 w-4 text-primary"/>
+          <span className="text-sm font-semibold text-foreground">{tr("gameTitle")}</span>
         </div>
 
         <div
-          className={`rounded-full border px-3 py-1 font-mono text-sm ${
+          className={`rounded-full border px-3 py-1 font-mono text-sm font-medium ${
             model.score >= 0
-              ? "border-slate-700 bg-slate-800 text-slate-200"
-              : "border-rose-500/40 bg-rose-500/10 text-rose-300"
+              ? "border-border bg-muted text-foreground"
+              : "border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-300"
           }`}
           aria-live="polite"
         >
@@ -466,28 +474,28 @@ export default function MorphemeGameFable({
       </div>
 
       <div className="mb-6">
-        <div className="mb-1.5 flex justify-between text-xs text-slate-500">
+        <div className="mb-1.5 flex justify-between text-xs text-muted-foreground">
           <span>
             {tr("question")} {model.currentIndex + 1} / {total}
           </span>
           <span>{tr("gameSubtitle")}</span>
         </div>
-        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
+        <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500"
+            className="h-full rounded-full gradient-primary transition-all duration-500"
             style={{ width: `${((model.currentIndex + 1) / total) * 100}%` }}
           />
         </div>
       </div>
 
-      <div className="mb-5 rounded-2xl border border-slate-800 bg-slate-800/50 p-5">
-        <p className="mb-1 text-[11px] uppercase tracking-widest text-indigo-400">
+      <div className="mb-5 rounded-2xl border border-border bg-muted/40 p-5">
+        <p className="mb-1 text-[11px] uppercase tracking-widest text-primary font-semibold">
           {tr("targetTerm")}
         </p>
-        <h2 className="font-serif text-3xl italic tracking-tight text-slate-100">
+        <h2 className="font-serif text-3xl italic tracking-tight text-foreground">
           {q.targetLatinTerm}
         </h2>
-        <p className="mt-1 text-slate-400">{loc(q.definition)}</p>
+        <p className="mt-1 text-muted-foreground">{loc(q.definition)}</p>
       </div>
 
       <div
@@ -496,21 +504,21 @@ export default function MorphemeGameFable({
             ? "border-emerald-500/60 bg-emerald-500/5"
             : failure
             ? "border-rose-500/60 bg-rose-500/5"
-            : "border-slate-700"
+            : "border-border bg-muted/20"
         }`}
       >
-        <p className="mb-2 text-[11px] uppercase tracking-widest text-slate-500">
+        <p className="mb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
           {tr("builtTerm")}
         </p>
 
         {model.selectedSequence.length === 0 ? (
-          <p className="text-sm text-slate-500">{tr("emptyHint")}</p>
+          <p className="text-sm text-muted-foreground">{tr("emptyHint")}</p>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
             {model.selectedSequence.map((part, i) => (
               <React.Fragment key={part.id}>
                 {i > 0 && (
-                  <span className="text-slate-600" aria-hidden="true">
+                  <span className="text-muted-foreground/60" aria-hidden="true">
                     +
                   </span>
                 )}
@@ -523,8 +531,8 @@ export default function MorphemeGameFable({
                 />
               </React.Fragment>
             ))}
-            <ArrowRight aria-hidden="true" className="ml-1 h-4 w-4 text-slate-600"/>
-            <span className="font-mono text-lg font-semibold text-violet-300">
+            <ArrowRight aria-hidden="true" className="ml-1 h-4 w-4 text-muted-foreground"/>
+            <span className="font-mono text-lg font-semibold text-primary">
               {assembledPreview(model.selectedSequence)}
             </span>
           </div>
@@ -536,12 +544,12 @@ export default function MorphemeGameFable({
           role="status"
           className="mb-5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3"
         >
-          <p className="flex items-center gap-2 font-semibold text-emerald-300">
-            <Check aria-hidden="true" className="h-5 w-5"/>
+          <p className="flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-300">
+            <Check aria-hidden="true" className="h-5 w-5 text-emerald-500"/>
             {tr("correctMsg")} (+1)
           </p>
-          <p className="mt-1.5 text-sm text-emerald-200/80">
-            <span className="uppercase tracking-wide text-[10px] text-emerald-400/80">
+          <p className="mt-1.5 text-sm text-emerald-900/80 dark:text-emerald-200/80">
+            <span className="uppercase tracking-wide text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
               {tr("analysis")}:{" "}
             </span>
             {q.correctSequence
@@ -553,15 +561,15 @@ export default function MorphemeGameFable({
       {failure && (
         <div
           role="alert"
-          className="mb-5 flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 font-semibold text-rose-300"
+          className="mb-5 flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 font-semibold text-rose-700 dark:text-rose-300"
         >
-          <X aria-hidden="true" className="h-5 w-5"/>
+          <X aria-hidden="true" className="h-5 w-5 text-rose-500"/>
           {tr("wrongMsg")} (−1)
         </div>
       )}
 
       <div className="mb-6">
-        <p className="mb-2 text-[11px] uppercase tracking-widest text-slate-500">
+        <p className="mb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
           {tr("pool")}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -583,11 +591,11 @@ export default function MorphemeGameFable({
         onClick={() => dispatch({ type: "SubmitAnswer" })}
         disabled={!isPlaying || model.selectedSequence.length === 0}
         className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-semibold transition
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
           ${
             isPlaying && model.selectedSequence.length > 0
-              ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white hover:opacity-90 active:scale-[0.99]"
-              : "cursor-not-allowed bg-slate-800 text-slate-500"
+              ? "gradient-primary text-primary-foreground hover:opacity-90 active:scale-[0.99] shadow-md shadow-primary/20"
+              : "cursor-not-allowed bg-muted text-muted-foreground/60 border border-border"
           }`}
       >
         <Check aria-hidden="true" className="h-5 w-5"/>

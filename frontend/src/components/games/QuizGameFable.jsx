@@ -1,54 +1,10 @@
 // =============================================================================
 // HealthLexMed — QuizGameFable  (SELF-CONTAINED · TEK DOSYA)
-// Konum önerisi: src/components/games/QuizGameFable.jsx
+// Konum: src/components/games/QuizGameFable.jsx
 // =============================================================================
-// Harici PROJE importu YOKTUR — yalnızca npm paketleri (react, lucide-react)
-// kullanılır. Soru/çeldirici üretimi (adapter) bu dosyaya gömülüdür.
-//
-// Fable 5 / Elmish (Model-Update-View) deseninin React karşılığı:
-//   Model  → useReducer state'i (tek gerçeklik kaynağı)
-//   Update → saf `update(model, msg)` reducer'ı (matematiksel olarak KAPALI)
-//   View   → Model'in saf fonksiyonu olan JSX
-//   Cmd    → Yan etkiler kenarda: zamanlayıcı aboneliği (useEffect),
-//            soru üretimi (gömülü adapter), titreşim (handler içinde)
-//
-// F# tip karşılıkları:
-//   type QuizOption   = { Id: string; Text: string; IsCorrect: bool }
-//   type QuizQuestion = { Id: int; TargetTerm: string; QuestionText: string;
-//                         Options: QuizOption list; Explanation: string }
-//   type GameState    = Playing | AnswerChecked of selectedId * isCorrect | Finished
-//   type Msg          = SelectOption of optionId | NextQuestion | ResetGame
-//                     | SetQuestions of QuizQuestion list
-//
-// ── KAPALI DURUM MAKİNESİ — GEÇİŞ TABLOSU ────────────────────────────────────
-// (Tabloda olmayan her (durum, mesaj) çifti modeli DEĞİŞTİRMEDEN döner;
-//  böylece hiçbir mesaj sırası makineyi tanımsız bir duruma sokamaz.)
-//
-//   Durum          | Msg           | Sonuç
-//   ---------------+---------------+------------------------------------------
-//   *              | SetQuestions  | Yeni tur (Playing, index 0, skor 0)
-//   Playing        | SelectOption  | AnswerChecked(selectedId, isCorrect)
-//                  |               |   + skor/doğru/yanlış güncellenir
-//   Playing        | NextQuestion  | YOK SAYILIR  ← bayat zamanlayıcı koruması
-//   AnswerChecked  | SelectOption  | YOK SAYILIR  ← şık KİLİDİ (çift tıklama)
-//   AnswerChecked  | NextQuestion  | sıradaki soru → Playing, bitti → Finished
-//   Finished       | SelectOption  | YOK SAYILIR
-//   Finished       | NextQuestion  | YOK SAYILIR
-//   *              | ResetGame     | Aynı soru setiyle baştan (Playing)
-//
-// ── YARIŞ DURUMU (RACE CONDITION) SAVUNMASI — İKİ KATMAN ─────────────────────
-// 1) Reducer katmanı: `NextQuestion` yalnızca AnswerChecked'te işlenir.
-//    Zamanlayıcı geç ateşlense, iki kez ateşlense ya da tur sıfırlandıktan
-//    sonra ateşlense bile geçiş no-op'tur — durum bozulamaz.
-// 2) Efekt katmanı: zamanlayıcı, AnswerChecked durumuna bağlı bir Elmish
-//    "aboneliği" gibi kurulur; durum değişince/unmount olunca cleanup ile
-//    temizlenir. Katman 1 sayesinde bu temizlik başarısız olsa dahi sonuç
-//    yine güvenlidir.
-//
-// ── VERİ NOTU ────────────────────────────────────────────────────────────────
-// medicalTerms.js'te `turkish` alanı terimin İNGİLİZCE karşılığını tutar
-// ("Os Frontale" → "Frontal Bone"); Türkçe açıklama `turkishShort` /
-// `definition` alanlarındadır. getMeaningText bu eşlemeyi merkezileştirir.
+// Fable 5 / Elmish (Model-Update-View) kapalı durum makinesi mimarisi.
+// Site genel açık/koyu tema CSS değişkenlerine (bg-card, text-foreground,
+// border-border, bg-muted, gradient-primary) %100 uyumludur.
 // =============================================================================
 
 import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
@@ -59,17 +15,13 @@ import {
 // ── Ayarlar ──────────────────────────────────────────────────────────────────
 const FEEDBACK_DELAY_MS = 5000; // Geri bildirim süresi (Doğru ve Yanlış için 5 sn)
 const ROUND_SIZE = 10;          // Tur başına soru
-const POINTS_CORRECT = 10;              // Doğru: +10
-const POINTS_WRONG = 5;                 // Yanlış: -5 (skor 0'ın altına inmez)
+const POINTS_CORRECT = 10;      // Doğru: +10
+const POINTS_WRONG = 5;         // Yanlış: -5 (skor 0'ın altına inmez)
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
 // =============================================================================
 // GÖMÜLÜ ADAPTER — Soru & Çeldirici Üretimi (Elmish Cmd katmanının karşılığı)
-// -----------------------------------------------------------------------------
-// ÖNEMLİ (Elmish saflık ilkesi): Rastgelelik (karıştırma, çeldirici seçimi,
-// yön seçimi) BİLİNÇLİ olarak burada — saf reducer'ın DIŞINDA — yapılır.
-// Reducer'a giren soru listesi tamamen belirlenmiş (deterministik) bir veridir.
 // =============================================================================
 
 const QUIZ_DIRECTIONS = Object.freeze({
@@ -77,7 +29,7 @@ const QUIZ_DIRECTIONS = Object.freeze({
   MEANING_TO_TERM: 'meaningToTerm', // Soru: anlam/tanım    → Şıklar: Latince terim
 });
 
-/** Fisher–Yates — tarafsız karıştırma (sort(() => Math.random() - 0.5) hilesi değil). */
+/** Fisher–Yates — tarafsız karıştırma. */
 const shuffle = (arr) => {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i -= 1) {
@@ -106,7 +58,6 @@ const norm = (s) => (s || '').trim().toLocaleLowerCase('tr');
  * @returns {Array} QuizQuestion[] — havuz yetersizse boş dizi
  */
 function adaptTermsToQuizQuestions(terms, { language = 'tr', roundSize = ROUND_SIZE } = {}) {
-  // 1) Geçerli ve terim-adına-göre tekil havuz
   const seenTerms = new Set();
   const pool = [];
   for (const t of terms || []) {
@@ -119,13 +70,10 @@ function adaptTermsToQuizQuestions(terms, { language = 'tr', roundSize = ROUND_S
     pool.push({ ...t, __meaning: meaning });
   }
 
-  // En az 1 doğru + 1 çeldirici gerekir
   if (pool.length < 2) return [];
 
-  // 2) Bu tur sorulacak terimleri seç
   const selected = shuffle(pool).slice(0, Math.min(roundSize, pool.length));
 
-  // 3) Her hedef terim için soru kur
   const questions = selected.map((target, qIndex) => {
     const direction =
       Math.random() < 0.5
@@ -137,9 +85,6 @@ function adaptTermsToQuizQuestions(terms, { language = 'tr', roundSize = ROUND_S
 
     const answerText = optionTextOf(target);
 
-    // Çeldiriciler: hedefle aynı metni taşımayan, metin bazında tekil 3 seçenek.
-    // Havuz zaten Games sayfasında kategoriye göre filtrelendiği için
-    // çeldiriciler doğal olarak aynı konu alanından gelir (zorluk dengesi).
     const usedTexts = new Set([norm(answerText)]);
     const distractors = [];
     for (const t of shuffle(pool)) {
@@ -161,18 +106,16 @@ function adaptTermsToQuizQuestions(terms, { language = 'tr', roundSize = ROUND_S
         { id: `q${qIndex}-t${target.id}`, text: answerText, isCorrect: true },
         ...distractors,
       ]),
-      // Geri bildirim satırında gösterilen kısa pedagojik açıklama
       explanation: target.roots
         ? `${target.term} · ${target.roots}`
         : `${target.term} — ${target.__meaning}`,
     };
   });
 
-  // En az 2 şıklı sorular geçerli sayılır (küçük kategorilerde 2–3 şık olabilir)
   return questions.filter((q) => q.options.length >= 2);
 }
 
-// ── i18n (t prop'u varsa önceliklidir; yoksa yerleşik sözlük) ───────────────
+// ── i18n ────────────────────────────────────────────────────────────────────
 const TEXT = {
   tr: {
     title: 'Terim Quiz',
@@ -232,32 +175,27 @@ const M = Object.freeze({
   ResetGame: 'RESET_GAME',
 });
 
-// Model — F#'taki record'un karşılığı
 const initialModel = {
-  questions: null, // null: henüz üretilmedi · []: yetersiz terim
+  questions: null,
   currentIndex: 0,
   score: 0,
   correctCount: 0,
   wrongCount: 0,
-  state: { tag: S.Playing }, // Playing | { tag: AnswerChecked, selectedId, isCorrect } | Finished
+  state: { tag: S.Playing },
 };
 
-// ── Update: SAF reducer (yan etkisiz, rastgelesiz, kapalı) ──────────────────
 function update(model, msg) {
   switch (msg.type) {
     case M.SetQuestions:
-      // Her durumdan geçerli: taze tur başlat
       return { ...initialModel, questions: msg.questions };
 
     case M.SelectOption: {
-      // KİLİT: yalnızca Playing durumunda şık seçilebilir.
-      // AnswerChecked'te gelen ikinci dokunuş burada no-op olur.
       if (model.state.tag !== S.Playing) return model;
 
       const q = model.questions?.[model.currentIndex];
       if (!q) return model;
       const opt = q.options.find((o) => o.id === msg.optionId);
-      if (!opt) return model; // Tanımsız şık kimliği → kapalılık gereği no-op
+      if (!opt) return model;
 
       const isCorrect = opt.isCorrect;
       return {
@@ -272,8 +210,6 @@ function update(model, msg) {
     }
 
     case M.NextQuestion: {
-      // Yalnızca AnswerChecked'ten geçerli geçiş.
-      // Bayat/yinelenen zamanlayıcı tetiklemeleri burada emilir.
       if (model.state.tag !== S.AnswerChecked) return model;
 
       const nextIndex = model.currentIndex + 1;
@@ -284,12 +220,9 @@ function update(model, msg) {
     }
 
     case M.ResetGame:
-      // Aynı soru setiyle baştan (saf sıfırlama). Taze karışık set için
-      // View katmanı SetQuestions + gömülü adapter kullanır (Cmd karşılığı).
       return { ...initialModel, questions: model.questions };
 
     default:
-      // Kapalılık: bilinmeyen mesaj hiçbir şeyi değiştiremez
       return model;
   }
 }
@@ -303,18 +236,16 @@ const toTitleCase = (s) =>
     (w) => w.charAt(0).toLocaleUpperCase('en') + w.slice(1).toLocaleLowerCase('en'),
   );
 
-/** Dokunsal geri bildirim — destekleyen mobil tarayıcılarda kısa titreşim. */
 const vibrate = (pattern) => {
   try {
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(pattern);
     }
   } catch {
-    /* sessizce yut — titreşim kritik değil */
+    /* titreşim yutulur */
   }
 };
 
-// Animasyonlar (prefers-reduced-motion'a saygılı)
 const KEYFRAMES = `
 @keyframes hlxFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes hlxPop { 0% { transform: scale(0.8); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
@@ -328,13 +259,6 @@ const KEYFRAMES = `
 // =============================================================================
 // Bileşen
 // =============================================================================
-/**
- * @param {Object}   props
- * @param {Array}    props.terms     Ham terim listesi (medicalTerms.js formatı)
- * @param {'tr'|'en'} props.language Aktif dil
- * @param {Function} props.onBack    Oyun listesine dönüş
- * @param {Function} [props.t]       Global çeviri fonksiyonu t(key, fallback)
- */
 export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
   const [model, dispatch] = useReducer(update, initialModel);
 
@@ -346,7 +270,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
           const v = t(key, fallback);
           if (typeof v === 'string' && v && v !== key) return v;
         } catch {
-          /* sözlükte yoksa yerleşik metne düş */
+          /* fallback */
         }
       }
       return fallback;
@@ -354,7 +278,6 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     [t],
   );
 
-  // ── Cmd: tur üretimi (rastgelelik reducer DIŞINDA, gömülü adapter'da) ─────
   const startRound = useCallback(() => {
     dispatch({
       type: M.SetQuestions,
@@ -362,14 +285,11 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     });
   }, [terms, language]);
 
-  // İlk açılış + kategori/dil değişiminde taze tur
   useEffect(() => {
     startRound();
   }, [startRound]);
 
-  // ── Sub: 5 sn geri bildirim zamanlayıcısı (Elmish aboneliği) ─────────────
-  // AnswerChecked'e her girişte YENİ bir state objesi oluştuğu için efekt
-  // soru başına tam bir kez kurulur; durumdan çıkışta cleanup timer'ı söker.
+  // ── Sub: 5 sn geri bildirim zamanlayıcısı ──────────────────────────────────
   useEffect(() => {
     if (model.state.tag !== S.AnswerChecked) return undefined;
     const timerId = setTimeout(() => {
@@ -383,14 +303,12 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
   const locked = model.state.tag !== S.Playing;
 
   const handleSelect = (optionId) => {
-    // Görsel katman ön kontrolü — asıl güvence reducer'daki kilittir
     if (model.state.tag !== S.Playing || !currentQuestion) return;
     const opt = currentQuestion.options.find((o) => o.id === optionId);
     vibrate(opt?.isCorrect ? 14 : [28, 40, 28]);
     dispatch({ type: M.SelectOption, optionId });
   };
 
-  // İlerleme: geri bildirim gösterilen soru da "cevaplandı" sayılır
   const answeredCount =
     model.currentIndex + (model.state.tag === S.AnswerChecked ? 1 : 0);
   const progressPct = totalQuestions > 0 ? (answeredCount / totalQuestions) * 100 : 0;
@@ -407,7 +325,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     return tx('quizMsgKeepGoing', L.msgKeepGoing);
   }, [accuracy, tx, L]);
 
-  // ── Şık stilleri (durum makinesinin görsel izdüşümü) ──────────────────────
+  // ── Şık stilleri (Tema Uyumlu) ─────────────────────────────────────────────
   const optionClasses = (opt) => {
     const base =
       'w-full min-h-[56px] rounded-xl border-2 px-4 py-3 flex items-center gap-3 ' +
@@ -416,38 +334,38 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     if (!locked) {
       return cx(
         base,
-        'border-slate-700 bg-slate-800/50 text-slate-100',
-        'hover:bg-slate-800 hover:border-indigo-500/60',
+        'border-border bg-muted/30 text-foreground',
+        'hover:bg-muted/80 hover:border-primary/50',
         'active:scale-[0.98] cursor-pointer',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
       );
     }
-    // AnswerChecked / Finished: kilitli görünüm
+
+    // AnswerChecked / Finished
     if (opt.isCorrect) {
-      return cx(base, 'border-emerald-500 bg-emerald-500/10 text-emerald-300');
+      return cx(base, 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-medium');
     }
     if (model.state.tag === S.AnswerChecked && opt.id === model.state.selectedId) {
       return cx(
         base,
-        'border-rose-500 bg-rose-500/10 text-rose-300',
+        'border-rose-500 bg-rose-500/10 text-rose-700 dark:text-rose-300 font-medium',
         'animate-[hlxShake_0.3s_ease-in-out]',
       );
     }
-    return cx(base, 'border-slate-800 bg-slate-800/30 text-slate-500 opacity-60');
+    return cx(base, 'border-border/60 bg-muted/20 text-muted-foreground opacity-60');
   };
 
   const badgeClasses = (opt) => {
     const base =
       'w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-sm font-bold transition-colors';
-    if (!locked) return cx(base, 'bg-slate-700 text-slate-300');
-    if (opt.isCorrect) return cx(base, 'bg-emerald-500 text-white');
+    if (!locked) return cx(base, 'bg-muted text-muted-foreground border border-border/50');
+    if (opt.isCorrect) return cx(base, 'bg-emerald-500 text-white shadow-sm');
     if (model.state.tag === S.AnswerChecked && opt.id === model.state.selectedId) {
-      return cx(base, 'bg-rose-500 text-white');
+      return cx(base, 'bg-rose-500 text-white shadow-sm');
     }
-    return cx(base, 'bg-slate-800 text-slate-600');
+    return cx(base, 'bg-muted/50 text-muted-foreground/60');
   };
 
-  // ── View ──────────────────────────────────────────────────────────────────
   return (
     <div
       className="hlx-quiz w-full max-w-2xl mx-auto"
@@ -455,7 +373,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     >
       <style>{KEYFRAMES}</style>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden text-slate-100">
+      <div className="bg-card border border-border rounded-3xl shadow-xl overflow-hidden text-card-foreground">
         {/* ── Üst çubuk ── */}
         <div className="px-4 sm:px-6 pt-4 sm:pt-5">
           <div className="flex items-center justify-between gap-3">
@@ -464,26 +382,26 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
               onClick={onBack}
               className={cx(
                 'flex items-center gap-1.5 min-h-[44px] px-3 -ml-3 rounded-xl',
-                'text-sm font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-800/60',
+                'text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60',
                 'active:scale-[0.98] transition-all touch-manipulation select-none',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
               )}
             >
               <ArrowLeft className="w-4 h-4" />
               {tx('back', L.back)}
             </button>
 
-            <div className="hidden sm:flex items-center gap-2 text-sm font-semibold text-slate-300">
-              <BookOpen className="w-4 h-4 text-indigo-400" />
+            <div className="hidden sm:flex items-center gap-2 text-sm font-semibold text-foreground">
+              <BookOpen className="w-4 h-4 text-primary" />
               {tx('quizTitle', L.title)}
             </div>
 
-            {/* Skor rozeti — her değişimde "pop" animasyonu (key=score) */}
+            {/* Skor rozeti */}
             <div
               key={model.score}
-              className="flex items-center gap-1.5 rounded-full border border-slate-700 bg-slate-800/50 px-3.5 py-1.5 text-sm font-bold animate-[hlxPop_0.25s_ease-out]"
+              className="flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-3.5 py-1.5 text-sm font-bold text-foreground animate-[hlxPop_0.25s_ease-out]"
             >
-              <Zap className="w-4 h-4 text-amber-400" />
+              <Zap className="w-4 h-4 text-amber-500 dark:text-amber-400" />
               {model.score}
             </div>
           </div>
@@ -491,24 +409,24 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
           {/* İlerleme */}
           {model.state.tag !== S.Finished && totalQuestions > 0 && (
             <div className="mt-4">
-              <div className="flex items-center justify-between text-xs font-medium text-slate-400 mb-1.5">
+              <div className="flex items-center justify-between text-xs font-medium text-muted-foreground mb-1.5">
                 <span>
                   {tx('question', L.question)}{' '}
-                  <span className="text-slate-200 font-bold">
+                  <span className="text-foreground font-bold">
                     {Math.min(model.currentIndex + 1, totalQuestions)}
                   </span>
                   {' / '}{totalQuestions}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Target className="w-3.5 h-3.5 text-emerald-400" />
-                  {model.correctCount}
-                  <X className="w-3.5 h-3.5 text-rose-400 ml-1.5" />
-                  {model.wrongCount}
+                  <Target className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="font-semibold text-foreground">{model.correctCount}</span>
+                  <X className="w-3.5 h-3.5 text-rose-500 ml-1.5" />
+                  <span className="font-semibold text-foreground">{model.wrongCount}</span>
                 </span>
               </div>
-              <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+              <div className="h-2 rounded-full bg-muted overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500 ease-out"
+                  className="h-full rounded-full gradient-primary transition-all duration-500 ease-out"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
@@ -518,54 +436,51 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
 
         {/* ── Gövde ── */}
         <div className="px-4 sm:px-6 py-5 sm:py-6">
-          {/* Yükleniyor (adapter ilk render sonrası çalışır — tek kare) */}
           {model.questions === null && (
             <div className="py-16 flex justify-center">
-              <div className="w-8 h-8 rounded-full border-2 border-slate-700 border-t-indigo-500 animate-spin" />
+              <div className="w-8 h-8 rounded-full border-2 border-muted border-t-primary animate-spin" />
             </div>
           )}
 
-          {/* Yetersiz terim */}
           {model.questions !== null && totalQuestions === 0 && (
             <div className="py-12 text-center animate-[hlxFadeUp_0.3s_ease-out]">
-              <p className="text-slate-400 mb-6">
+              <p className="text-muted-foreground mb-6">
                 {tx('quizNotEnoughTerms', L.notEnoughTerms)}
               </p>
               <button
                 type="button"
                 onClick={onBack}
-                className="min-h-[56px] px-6 rounded-xl border-2 border-slate-700 bg-slate-800/50 font-semibold hover:bg-slate-800 active:scale-[0.98] transition-all touch-manipulation select-none"
+                className="min-h-[56px] px-6 rounded-xl border border-border bg-muted/50 font-semibold text-foreground hover:bg-muted active:scale-[0.98] transition-all touch-manipulation select-none"
               >
                 {tx('back', L.back)}
               </button>
             </div>
           )}
 
-          {/* Soru ekranı — Playing / AnswerChecked */}
           {model.state.tag !== S.Finished && currentQuestion && (
             <div
               key={currentQuestion.id}
               className="animate-[hlxFadeUp_0.3s_ease-out]"
             >
               {/* Soru kartı */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-800/50 px-5 py-6 sm:py-8 text-center mb-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-3">
+              <div className="rounded-2xl border border-border bg-muted/40 px-5 py-6 sm:py-8 text-center mb-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
                   {currentQuestion.direction === QUIZ_DIRECTIONS.TERM_TO_MEANING
                     ? tx('quizPromptTerm', L.promptTermToMeaning)
                     : tx('quizPromptMeaning', L.promptMeaningToTerm)}
                 </p>
                 {currentQuestion.direction === QUIZ_DIRECTIONS.TERM_TO_MEANING ? (
-                  <h2 className="font-serif italic text-2xl sm:text-3xl font-bold text-slate-100 break-words">
+                  <h2 className="font-serif italic text-2xl sm:text-3xl font-bold text-foreground break-words">
                     {toTitleCase(currentQuestion.questionText)}
                   </h2>
                 ) : (
-                  <h2 className="text-lg sm:text-xl font-semibold leading-relaxed text-slate-100">
+                  <h2 className="text-lg sm:text-xl font-semibold leading-relaxed text-foreground">
                     {currentQuestion.questionText}
                   </h2>
                 )}
               </div>
 
-              {/* Şıklar — dikey akış, dokunmatik hedef ≥ 56px */}
+              {/* Şıklar */}
               <div className="flex flex-col gap-3" role="group">
                 {currentQuestion.options.map((opt, i) => {
                   const isSelected =
@@ -605,7 +520,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                 })}
               </div>
 
-              {/* Geri bildirim şeridi — yükseklik ayrılmış (yerleşim zıplamaz) */}
+              {/* Geri bildirim şeridi */}
               <div className="min-h-[72px] mt-4" aria-live="polite">
                 {model.state.tag === S.AnswerChecked && (
                   <div
@@ -618,43 +533,43 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                   >
                     <div className="flex items-start gap-2.5 flex-1 z-10">
                       {model.state.isCorrect ? (
-                        <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                        <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                       ) : (
-                        <X className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                        <X className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
                       )}
                       <div className="text-sm leading-snug">
                         <span
                           className={cx(
                             'font-bold',
-                            model.state.isCorrect ? 'text-emerald-300' : 'text-rose-300',
+                            model.state.isCorrect ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300',
                           )}
                         >
                           {model.state.isCorrect
                             ? `${tx('quizCorrect', L.correct)} +${POINTS_CORRECT}`
                             : `${tx('quizWrong', L.wrong)} −${POINTS_WRONG}`}
                         </span>
-                        <span className="block text-slate-200 mt-1 font-medium">
+                        <span className="block text-foreground/90 mt-1 font-medium">
                           {currentQuestion.explanation}
                         </span>
                       </div>
                     </div>
 
-                    {/* Beklemek istemeyenler için doğrudan geçiş butonu */}
+                    {/* Doğrudan geçiş butonu */}
                     <button
                       type="button"
                       onClick={() => dispatch({ type: M.NextQuestion })}
                       className={cx(
                         'w-full sm:w-auto px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 shrink-0 transition-all select-none touch-manipulation z-10',
                         model.state.isCorrect
-                          ? 'bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/30 active:scale-95'
-                          : 'bg-rose-500/20 text-rose-100 hover:bg-rose-500/30 border border-rose-500/40 active:scale-95 shadow-md shadow-rose-500/10'
+                          ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/30 active:scale-95'
+                          : 'bg-rose-500/15 text-rose-700 dark:text-rose-200 hover:bg-rose-500/25 border border-rose-500/40 active:scale-95 shadow-sm'
                       )}
                     >
                       <span>{tx('quizNextQuestion', L.nextQuestion)}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
 
-                    {/* 5 saniyelik görsel süre çubuğu (Doğru ve Yanlış için) */}
+                    {/* Görsel süre çubuğu */}
                     <div
                       className={cx(
                         'absolute bottom-0 left-0 right-0 h-1',
@@ -664,7 +579,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                       <div
                         className={cx(
                           'h-full',
-                          model.state.isCorrect ? 'bg-emerald-400/60' : 'bg-rose-400/60'
+                          model.state.isCorrect ? 'bg-emerald-500' : 'bg-rose-500'
                         )}
                         style={{
                           animation: `hlxCountdown ${FEEDBACK_DELAY_MS}ms linear forwards`,
@@ -680,59 +595,56 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
           {/* Bitiş ekranı */}
           {model.state.tag === S.Finished && (
             <div className="text-center py-4 animate-[hlxFadeUp_0.35s_ease-out]">
-              <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-violet-500/30 mb-5 animate-[hlxPop_0.4s_ease-out]">
+              <div className="w-20 h-20 mx-auto rounded-2xl gradient-primary flex items-center justify-center shadow-lg shadow-primary/20 mb-5 animate-[hlxPop_0.4s_ease-out]">
                 <Trophy className="w-10 h-10 text-white" />
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-bold mb-1.5">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-1.5 text-foreground">
                 {tx('quizFinishedTitle', L.finishedTitle)}
               </h2>
-              <p className="text-sm text-slate-400 mb-6">{finishMessage}</p>
+              <p className="text-sm text-muted-foreground mb-6">{finishMessage}</p>
 
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
                 {tx('quizTotalScore', L.totalScore)}
               </p>
-              <p className="text-5xl font-black bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent mb-7">
+              <p className="text-5xl font-black text-primary mb-7">
                 {model.score}
               </p>
 
               <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className="rounded-2xl border border-slate-800 bg-slate-800/50 py-4">
-                  <p className="text-2xl font-bold text-emerald-400">
+                <div className="rounded-2xl border border-border bg-muted/40 py-4">
+                  <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                     {model.correctCount}
                   </p>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     {tx('quizCorrectLabel', L.correctLabel)}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-slate-800 bg-slate-800/50 py-4">
-                  <p className="text-2xl font-bold text-rose-400">
+                <div className="rounded-2xl border border-border bg-muted/40 py-4">
+                  <p className="text-2xl font-bold text-rose-600 dark:text-rose-400">
                     {model.wrongCount}
                   </p>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     {tx('quizWrongLabel', L.wrongLabel)}
                   </p>
                 </div>
-                <div className="rounded-2xl border border-slate-800 bg-slate-800/50 py-4">
-                  <p className="text-2xl font-bold text-indigo-400">%{accuracy}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                <div className="rounded-2xl border border-border bg-muted/40 py-4">
+                  <p className="text-2xl font-bold text-primary">%{accuracy}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     {tx('quizAccuracy', L.accuracy)}
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                {/* Cmd: taze karışık set — gömülü adapter yeniden çalışır */}
                 <button
                   type="button"
                   onClick={startRound}
                   className={cx(
-                    'flex-1 min-h-[56px] rounded-xl font-bold text-white',
-                    'bg-gradient-to-r from-indigo-500 to-violet-500',
-                    'hover:from-indigo-400 hover:to-violet-400',
-                    'active:scale-[0.98] transition-all touch-manipulation select-none',
-                    'flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/25',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400',
+                    'flex-1 min-h-[56px] rounded-xl font-bold text-white gradient-primary',
+                    'hover:opacity-90 active:scale-[0.98] transition-all touch-manipulation select-none',
+                    'flex items-center justify-center gap-2 shadow-lg shadow-primary/20',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                   )}
                 >
                   <RotateCcw className="w-5 h-5" />
@@ -742,10 +654,10 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                   type="button"
                   onClick={onBack}
                   className={cx(
-                    'flex-1 min-h-[56px] rounded-xl font-semibold text-slate-300',
-                    'border-2 border-slate-700 bg-slate-800/50 hover:bg-slate-800',
+                    'flex-1 min-h-[56px] rounded-xl font-semibold text-foreground',
+                    'border border-border bg-muted/50 hover:bg-muted',
                     'active:scale-[0.98] transition-all touch-manipulation select-none',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                   )}
                 >
                   {tx('back', L.back)}
