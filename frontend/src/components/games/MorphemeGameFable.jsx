@@ -68,16 +68,16 @@ const STRINGS = {
 
 const PART_META = {
   prefix: {
-    chip: "border-primary/40 bg-primary/10 text-primary hover:border-primary/80",
-    dot: "bg-primary",
+    chip: "border-indigo-500/50 bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 hover:border-indigo-600 dark:hover:border-indigo-400 hover:bg-indigo-500/15",
+    dot: "bg-indigo-600 dark:bg-indigo-400",
   },
   root: {
-    chip: "border-secondary/40 bg-secondary/10 text-secondary hover:border-secondary/80",
-    dot: "bg-secondary",
+    chip: "border-violet-500/50 bg-violet-500/10 text-violet-900 dark:text-violet-300 hover:border-violet-600 dark:hover:border-violet-400 hover:bg-violet-500/15",
+    dot: "bg-violet-600 dark:bg-violet-400",
   },
   suffix: {
-    chip: "border-accent/40 bg-accent/10 text-accent-foreground dark:text-accent hover:border-accent/80",
-    dot: "bg-accent",
+    chip: "border-amber-500/50 bg-amber-500/10 text-amber-900 dark:text-amber-300 hover:border-amber-600 dark:hover:border-amber-400 hover:bg-amber-500/15",
+    dot: "bg-amber-600 dark:bg-amber-400",
   },
 };
 
@@ -321,15 +321,15 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
       type="button"
       onClick={onClick}
       aria-label={`${part.text} — ${meaning}`}
-      className={`group flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2 text-left
-        transition-all duration-150 hover:scale-[1.03] active:scale-95
+      className={`group flex flex-col items-start gap-0.5 rounded-xl border px-3.5 py-2 text-left
+        transition-all duration-150 hover:scale-[1.03] active:scale-95 shadow-sm
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
         ${meta.chip} ${dimmed ? "opacity-60" : ""}`}
     >
-      <span className="font-mono text-base font-semibold tracking-tight">
+      <span className="font-mono text-base font-bold tracking-tight">
         {part.text}
       </span>
-      <span className="flex items-center gap-1.5 text-[11px] opacity-80">
+      <span className="flex items-center gap-1.5 text-[11px] font-medium opacity-90">
         <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
         {tr(part.partType)} · {meaning}
       </span>
