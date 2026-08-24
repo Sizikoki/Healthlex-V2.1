@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle, UserPlus, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,9 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { isLoggedIn, canGuestPlay, getGuestRemainingPlays, GUEST_DAILY_LIMIT } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
+import QuizGameFable from '@/components/games/QuizGameFable';
 
 const GAME_CATEGORIES = [
   { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
@@ -24,21 +27,95 @@ const GAME_CATEGORIES = [
   { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri' },
 ];
 
+// Sayfa içinde (route değişmeden) render edilen Fable/Elmish oyunları
+const INLINE_GAMES = ['morpheme', 'quiz'];
+
 export const Games = () => {
   const { currentLanguage, t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeGame, setActiveGame] = useState(null);
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
+  const [liveTerms, setLiveTerms] = useState(() => getAllTerms());
+  const [, setIsLoadingTerms] = useState(false);
   const navigate = useNavigate();
 
   const userIsLoggedIn = isLoggedIn();
   const remainingPlays = getGuestRemainingPlays();
 
+  // Canlı Firestore / API verilerini çekme ve yerel fallback mekanizması
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchLiveTerms = async () => {
+      try {
+        setIsLoadingTerms(true);
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+        });
+
+        const querySnapshot = await Promise.race([
+          getDocs(collection(db, 'terms')),
+          timeoutPromise
+        ]);
+        if (timeoutId) clearTimeout(timeoutId);
+
+        const rawTerms = [];
+        querySnapshot.forEach((doc) => {
+          rawTerms.push(doc.data());
+        });
+
+        if (rawTerms.length > 0 && isMounted) {
+          const normalized = rawTerms.map((termItem) => ({
+            id: termItem.id,
+            term: termItem.term,
+            turkish: termItem.english || termItem.turkish || '',
+            turkishShort: termItem.turkishShort || '',
+            definition: termItem.turkishDefinition || termItem.definition || '',
+            turkishDefinition: termItem.turkishDefinition || termItem.definition || '',
+            english: termItem.english || termItem.turkish || '',
+            englishDefinition: termItem.englishDefinition || termItem.english || '',
+            roots: termItem.roots || '',
+            morphemes: termItem.morphemes || '',
+            category: termItem.category || '',
+            system: termItem.system || '',
+            subcategory: termItem.subcategory || '',
+          }));
+          setLiveTerms(normalized);
+        }
+      } catch (error) {
+        console.warn('Live terms fetch error/timeout, using local fallback:', error);
+      } finally {
+        if (isMounted) setIsLoadingTerms(false);
+      }
+    };
+
+    fetchLiveTerms();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const categoryTerms = useMemo(() => {
-    return selectedCategory === 'all'
-      ? getAllTerms()
-      : getTermsByCategory(selectedCategory);
-  }, [selectedCategory]);
+    if (selectedCategory === 'all') {
+      return liveTerms.length > 0 ? liveTerms : getAllTerms();
+    }
+
+    const filtered = liveTerms.filter(
+      (termItem) =>
+        termItem.subcategory === selectedCategory ||
+        termItem.category === selectedCategory ||
+        termItem.system === selectedCategory
+    );
+
+    if (filtered.length > 0) {
+      return filtered;
+    }
+
+    // Fallback to local category terms
+    return getTermsByCategory(selectedCategory);
+  }, [selectedCategory, liveTerms]);
 
   const adaptedQuestions = useMemo(() => {
     return adaptTermsToMorphemeQuestions(categoryTerms);
@@ -90,8 +167,8 @@ export const Games = () => {
       return;
     }
 
-    if (gameId === 'morpheme') {
-      setActiveGame('morpheme');
+    if (INLINE_GAMES.includes(gameId)) {
+      setActiveGame(gameId);
     } else {
       navigate(`${gamePath}${getCategoryParam()}`);
     }
@@ -100,11 +177,18 @@ export const Games = () => {
   return (
     <div className="min-h-screen bg-muted/30 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Active Game Render View */}
         {activeGame === 'morpheme' ? (
           <MorphemeGameFable
             terms={adaptedQuestions}
+            language={currentLanguage}
+            onBack={() => setActiveGame(null)}
+            t={t}
+          />
+        ) : activeGame === 'quiz' ? (
+          <QuizGameFable
+            terms={categoryTerms}
             language={currentLanguage}
             onBack={() => setActiveGame(null)}
             t={t}
