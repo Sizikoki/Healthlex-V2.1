@@ -53,14 +53,15 @@
 
 import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
 import {
-  ArrowLeft, Trophy, Check, X, RotateCcw, Zap, Target, BookOpen,
+  ArrowLeft, ArrowRight, Trophy, Check, X, RotateCcw, Zap, Target, BookOpen,
 } from 'lucide-react';
 
 // ── Ayarlar ──────────────────────────────────────────────────────────────────
-const FEEDBACK_DELAY_MS = 1200; // Geri bildirim süresi → otomatik sıradaki soru
-const ROUND_SIZE = 10;          // Tur başına soru
-const POINTS_CORRECT = 10;      // Doğru: +10
-const POINTS_WRONG = 5;         // Yanlış: -5 (skor 0'ın altına inmez)
+const FEEDBACK_DELAY_MS_CORRECT = 1200; // Doğru cevapta bekleme süresi (1.2 sn)
+const FEEDBACK_DELAY_MS_WRONG = 5000;   // Yanlış cevapta açıklamayı okuma süresi (5 sn)
+const ROUND_SIZE = 10;                  // Tur başına soru
+const POINTS_CORRECT = 10;              // Doğru: +10
+const POINTS_WRONG = 5;                 // Yanlış: -5 (skor 0'ın altına inmez)
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
@@ -188,6 +189,7 @@ const TEXT = {
     accuracy: 'Başarı',
     playAgain: 'Yeniden Oyna',
     back: 'Geri Dön',
+    nextQuestion: 'Sıradaki Soru',
     notEnoughTerms: 'Bu kategoride quiz oluşturmak için yeterli terim bulunmuyor.',
     msgPerfect: 'Mükemmel! Terimlere hakimsin. 🏆',
     msgGreat: 'Çok iyi! Az kaldı, ustalaşıyorsun. 💪',
@@ -208,6 +210,7 @@ const TEXT = {
     accuracy: 'Accuracy',
     playAgain: 'Play Again',
     back: 'Go Back',
+    nextQuestion: 'Next Question',
     notEnoughTerms: 'Not enough terms in this category to build a quiz.',
     msgPerfect: 'Perfect! You have mastered these terms. 🏆',
     msgGreat: 'Great job! Mastery is within reach. 💪',
@@ -317,6 +320,7 @@ const KEYFRAMES = `
 @keyframes hlxFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes hlxPop { 0% { transform: scale(0.8); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
 @keyframes hlxShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@keyframes hlxCountdown { from { width: 100%; } to { width: 0%; } }
 @media (prefers-reduced-motion: reduce) {
   .hlx-quiz *, .hlx-quiz { animation: none !important; transition: none !important; }
 }
@@ -364,14 +368,17 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
     startRound();
   }, [startRound]);
 
-  // ── Sub: 1.2 sn geri bildirim zamanlayıcısı (Elmish aboneliği) ────────────
+  // ── Sub: Geri bildirim zamanlayıcısı (Doğru: 1.2 sn / Yanlış: 5 sn) ───────
   // AnswerChecked'e her girişte YENİ bir state objesi oluştuğu için efekt
   // soru başına tam bir kez kurulur; durumdan çıkışta cleanup timer'ı söker.
   useEffect(() => {
     if (model.state.tag !== S.AnswerChecked) return undefined;
+    const delay = model.state.isCorrect
+      ? FEEDBACK_DELAY_MS_CORRECT
+      : FEEDBACK_DELAY_MS_WRONG;
     const timerId = setTimeout(() => {
       dispatch({ type: M.NextQuestion });
-    }, FEEDBACK_DELAY_MS);
+    }, delay);
     return () => clearTimeout(timerId);
   }, [model.state]);
 
@@ -607,32 +614,61 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
                 {model.state.tag === S.AnswerChecked && (
                   <div
                     className={cx(
-                      'rounded-xl border px-4 py-3 flex items-start gap-2.5 animate-[hlxFadeUp_0.2s_ease-out]',
+                      'rounded-2xl border px-4 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-[hlxFadeUp_0.2s_ease-out] relative overflow-hidden',
                       model.state.isCorrect
                         ? 'border-emerald-500/40 bg-emerald-500/10'
                         : 'border-rose-500/40 bg-rose-500/10',
                     )}
                   >
-                    {model.state.isCorrect ? (
-                      <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                    ) : (
-                      <X className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-                    )}
-                    <div className="text-sm leading-snug">
-                      <span
-                        className={cx(
-                          'font-bold',
-                          model.state.isCorrect ? 'text-emerald-300' : 'text-rose-300',
-                        )}
-                      >
-                        {model.state.isCorrect
-                          ? `${tx('quizCorrect', L.correct)} +${POINTS_CORRECT}`
-                          : `${tx('quizWrong', L.wrong)} −${POINTS_WRONG}`}
-                      </span>
-                      <span className="block text-slate-400 mt-0.5">
-                        {currentQuestion.explanation}
-                      </span>
+                    <div className="flex items-start gap-2.5 flex-1 z-10">
+                      {model.state.isCorrect ? (
+                        <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                      ) : (
+                        <X className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                      )}
+                      <div className="text-sm leading-snug">
+                        <span
+                          className={cx(
+                            'font-bold',
+                            model.state.isCorrect ? 'text-emerald-300' : 'text-rose-300',
+                          )}
+                        >
+                          {model.state.isCorrect
+                            ? `${tx('quizCorrect', L.correct)} +${POINTS_CORRECT}`
+                            : `${tx('quizWrong', L.wrong)} −${POINTS_WRONG}`}
+                        </span>
+                        <span className="block text-slate-200 mt-1 font-medium">
+                          {currentQuestion.explanation}
+                        </span>
+                      </div>
                     </div>
+
+                    {/* Beklemek istemeyenler için doğrudan geçiş butonu */}
+                    <button
+                      type="button"
+                      onClick={() => dispatch({ type: M.NextQuestion })}
+                      className={cx(
+                        'w-full sm:w-auto px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 shrink-0 transition-all select-none touch-manipulation z-10',
+                        model.state.isCorrect
+                          ? 'bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/30 active:scale-95'
+                          : 'bg-rose-500/20 text-rose-100 hover:bg-rose-500/30 border border-rose-500/40 active:scale-95 shadow-md shadow-rose-500/10'
+                      )}
+                    >
+                      <span>{tx('quizNextQuestion', L.nextQuestion)}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    {/* Yanlış cevapta 5 saniyelik görsel süre çubuğu */}
+                    {!model.state.isCorrect && (
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-rose-500/20">
+                        <div
+                          className="h-full bg-rose-400/60"
+                          style={{
+                            animation: `hlxCountdown ${FEEDBACK_DELAY_MS_WRONG}ms linear forwards`,
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
