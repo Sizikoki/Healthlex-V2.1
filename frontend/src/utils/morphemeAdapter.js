@@ -96,11 +96,23 @@ export const FALLBACK_DISTRACTORS = [
 ];
 
 /**
+ * Eğik çizgi (/) veya noktalı virgül (;) ile ayrılmış çoklu terimlerden
+ * birincil (asıl) terimi ayıklar. (Örn: "Phalanges Pedis / Ossa Digitorum Pedis" -> "Phalanges Pedis")
+ */
+export function getPrimaryLatinTerm(rawTerm) {
+  if (!rawTerm || typeof rawTerm !== 'string') return '';
+  const parts = rawTerm.split(/[\/;]/).map((p) => p.trim()).filter(Boolean);
+  let primary = parts[0] || rawTerm.trim();
+  // Sondaki (ACL), (PCL) gibi kısaltmaları temizle
+  return primary.replace(/\s*\([A-Z0-9,\s\-]+\)$/i, '').trim();
+}
+
+/**
  * Kelimeyi ön ek, kök ve son ek parçalarına ayırır.
  * morphemesData.js içindeki 116 prefix, 318 root ve 125 suffix'i kullanır.
  */
 export function decomposeWord(wordText, parentMeaningMap = {}) {
-  let lower = wordText.toLowerCase().replace(/^-+|-+$/g, '');
+  let lower = wordText.toLowerCase().replace(/^[^\w\u00C0-\u017F]+|[^\w\u00C0-\u017F]+$/g, '');
   if (!lower) return [];
 
   // 1. Doğrudan tek parça anatomik kök / isim kontrolü (örn. "os", "cor", "vas", "pes", "dens")
@@ -196,10 +208,13 @@ export function decomposeWord(wordText, parentMeaningMap = {}) {
 
 /**
  * Terim nesnesini morfem dizisine dönüştürür.
+ * Çoklu alternatif isim içeren terimlerde (örn. "Phalanges Pedis / Ossa Digitorum Pedis")
+ * sadece birincil ismi parçalara ayırır.
  */
 export function parseTermToMorphemes(term) {
-  const termName = term.term || '';
-  if (!termName || typeof termName !== 'string') return null;
+  const rawTermName = term.term || term.name || '';
+  const primaryTermName = getPrimaryLatinTerm(rawTermName);
+  if (!primaryTermName) return null;
 
   // Build parent meaning map from term.roots (e.g. "os (kemik) + occiput (ense)")
   const parentMeaningMap = {};
@@ -218,8 +233,8 @@ export function parseTermToMorphemes(term) {
     });
   }
 
-  // Split term name into words (e.g. "Os Occipitale" -> ["Os", "Occipitale"])
-  const words = termName.split(/\s+/).map((w) => w.trim()).filter(Boolean);
+  // Split clean primary term name into words (e.g. "Phalanges Pedis" -> ["Phalanges", "Pedis"])
+  const words = primaryTermName.split(/\s+/).map((w) => w.trim()).filter(Boolean);
   if (words.length === 0) return null;
 
   const sequence = [];
@@ -253,7 +268,7 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
     if (sequence && sequence.length > 0) {
       allParsedParts.push(...sequence);
 
-      const targetLatinTerm = term.term || term.name || `Term #${term.id || idx}`;
+      const targetLatinTerm = getPrimaryLatinTerm(term.term || term.name || `Term #${term.id || idx}`);
       const definition = {
         tr: term.turkishShort || term.turkishDefinition || term.definition || term.turkish || '',
         en: term.englishDefinition || term.english || term.turkish || targetLatinTerm,
@@ -273,16 +288,17 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
   if (candidateQuestions.length < roundSize) {
     const fallbackTerms = getAllTerms();
     fallbackTerms.forEach((term, idx) => {
-      if (!candidateQuestions.some((q) => q.targetLatinTerm === term.term)) {
+      const primaryTerm = getPrimaryLatinTerm(term.term);
+      if (!candidateQuestions.some((q) => q.targetLatinTerm === primaryTerm)) {
         const sequence = parseTermToMorphemes(term);
         if (sequence && sequence.length > 0) {
           allParsedParts.push(...sequence);
           candidateQuestions.push({
             id: term.id || `fb_${idx}`,
-            targetLatinTerm: term.term,
+            targetLatinTerm: primaryTerm,
             definition: {
               tr: term.turkishShort || term.turkishDefinition || term.definition || '',
-              en: term.englishDefinition || term.english || term.turkish || term.term,
+              en: term.englishDefinition || term.english || term.turkish || primaryTerm,
             },
             correctSequence: sequence,
             distractors: [],
