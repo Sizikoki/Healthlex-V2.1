@@ -3,6 +3,7 @@ export const translations = {
     // Navigasyon & Menü
     study: "Çalışma / Sözlük",
     studyShort: "Kelime Kartları",
+    morphemes: "Morfemler",
     games: "Oyunlar",
     progress: "İlerleme",
     signInSignUp: "Giriş Yap / Kayıt Ol",
@@ -192,6 +193,7 @@ export const translations = {
     // Navigasyon & Menü
     study: "Study & Dictionary",
     studyShort: "Study Cards",
+    morphemes: "Morphemes",
     games: "Games",
     progress: "Progress",
     signInSignUp: "Sign In / Sign Up",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Activity, Menu, X, User, LogOut, Globe } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getUser, logout, isLoggedIn, getStats } from '@/utils/storage';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
@@ -47,24 +47,26 @@ export const Navbar = () => {
     ? [
         { path: '/', label: t('dashboard') },
         { path: '/study', label: t('study') },
+        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
         { path: '/games', label: t('games') },
         { path: '/progress', label: t('progress') },
       ]
     : [
         { path: '/', label: t('home') },
         { path: '/study', label: t('study') },
+        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
         { path: '/games', label: t('games') },
         { path: '/progress', label: t('progress') },
       ];
 
   const LanguageSwitcher = () => (
-    <div className="flex items-center bg-white border border-[#D6DED4] rounded-lg p-1 text-xs font-semibold shadow-sm">
+    <div className="flex items-center bg-card border border-border rounded-lg p-1 text-xs font-semibold shadow-sm">
       <button
         onClick={() => setLanguage('tr')}
         className={`px-2.5 py-1 rounded transition-colors ${
           currentLanguage === 'tr'
-            ? 'bg-primary text-white font-bold'
-            : 'text-[#5C6B63] hover:text-[#131C18]'
+            ? 'bg-primary text-primary-foreground font-bold'
+            : 'text-muted-foreground hover:text-foreground'
         }`}
         title="Türkçe"
       >
@@ -74,8 +76,8 @@ export const Navbar = () => {
         onClick={() => setLanguage('en')}
         className={`px-2.5 py-1 rounded transition-colors ${
           currentLanguage === 'en'
-            ? 'bg-primary text-white font-bold'
-            : 'text-[#5C6B63] hover:text-[#131C18]'
+            ? 'bg-primary text-primary-foreground font-bold'
+            : 'text-muted-foreground hover:text-foreground'
         }`}
         title="English"
       >
@@ -85,7 +87,7 @@ export const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#F1F4EF]/94 backdrop-blur-md border-b border-[#D6DED4]" data-purpose="main-header">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border" data-purpose="main-header">
       <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -95,7 +97,7 @@ export const Navbar = () => {
                 <path d="M3 12h4l2 7 4-14 2 7h6" />
               </svg>
             </div>
-            <span className="text-xl font-bold tracking-tight text-[#131C18]">
+            <span className="text-xl font-bold tracking-tight text-foreground">
               Health<span className="text-primary font-semibold font-serif italic">Lex</span>Med
             </span>
           </Link>
@@ -106,10 +108,10 @@ export const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 text-[0.92rem] font-medium transition-all ${
+                className={`px-3.5 py-2 text-[0.92rem] font-medium transition-all ${
                   isActive(link.path)
-                    ? 'bg-white border border-[#D6DED4] text-[#131C18] shadow-sm rounded-lg'
-                    : 'text-[#5C6B63] hover:text-[#131C18] hover:bg-[#E8ECE4] rounded-lg'
+                    ? 'bg-card border border-border text-foreground shadow-sm rounded-lg font-semibold'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/80 rounded-lg'
                 }`}
               >
                 {link.label}
@@ -125,23 +127,23 @@ export const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="flex items-center gap-[14px] cursor-pointer select-none">
-                    <div className="streak-badge flex items-center gap-[6px] bg-[#FBEFE1] border border-[#EAD8B8] px-[12px] py-[7px] rounded-[20px] font-semibold text-[0.85rem] text-[#B8862E]">
+                    <div className="streak-badge flex items-center gap-[6px] bg-amber-500/10 border border-amber-500/30 px-[12px] py-[7px] rounded-[20px] font-semibold text-[0.85rem] text-amber-700 dark:text-amber-400">
                       🔥 {stats?.currentStreak || 0} {t('daysStreak')}
                     </div>
-                    <div className="avatar w-[36px] h-[36px] rounded-full bg-[#0F1E36] text-white flex items-center justify-center font-semibold text-[0.95rem]">
+                    <div className="avatar w-[36px] h-[36px] rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-[0.95rem]">
                       {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200">
+                <DropdownMenuContent align="end" className="w-48 bg-card border border-border">
                   <DropdownMenuItem asChild>
-                    <Link to="/profile" className="flex items-center cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-50">
-                      <User className="w-4 h-4 mr-2 text-gray-500" />
+                    <Link to="/profile" className="flex items-center cursor-pointer px-4 py-2 text-foreground hover:bg-muted">
+                      <User className="w-4 h-4 mr-2 text-muted-foreground" />
                       {t('myProfile')}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-gray-100" />
-                  <DropdownMenuItem onClick={handleLogout} className="text-destructive cursor-pointer px-4 py-2 hover:bg-red-50">
+                  <DropdownMenuSeparator className="bg-border" />
+                  <DropdownMenuItem onClick={handleLogout} className="text-destructive cursor-pointer px-4 py-2 hover:bg-destructive/10">
                     <LogOut className="w-4 h-4 mr-2" />
                     {t('logout')}
                   </DropdownMenuItem>
@@ -149,10 +151,10 @@ export const Navbar = () => {
               </DropdownMenu>
             ) : (
               <div className="flex items-center gap-4">
-                <Link to="/login" className="px-6 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors bg-white">
+                <Link to="/login" className="px-6 py-2 border border-border rounded-lg font-medium text-foreground hover:bg-muted transition-colors bg-card">
                   {t('login')}
                 </Link>
-                <Link to="/register" className="px-6 py-2 bg-medical-accent text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+                <Link to="/register" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity shadow-sm">
                   {t('startFree')}
                 </Link>
               </div>
@@ -166,7 +168,7 @@ export const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-medical-dark hover:bg-gray-100"
+              className="text-foreground hover:bg-muted"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
@@ -175,7 +177,7 @@ export const Navbar = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t border-gray-100">
+          <div className="md:hidden py-4 space-y-2 border-t border-border">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -183,14 +185,14 @@ export const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-2 rounded-lg font-medium transition-all ${
                   isActive(link.path)
-                    ? 'bg-medical-dark text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
+                    ? 'bg-primary text-primary-foreground font-semibold'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-gray-100 space-y-2">
+            <div className="pt-4 border-t border-border space-y-2">
               {loggedIn ? (
                 <>
                   <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
@@ -213,10 +215,10 @@ export const Navbar = () => {
                 </>
               ) : (
                 <div className="grid grid-cols-2 gap-2 px-2">
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 border border-gray-300 rounded-lg font-medium text-gray-700 bg-white hover:bg-gray-50">
+                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 border border-border rounded-lg font-medium text-foreground bg-card hover:bg-muted">
                     {t('login')}
                   </Link>
-                  <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 bg-medical-accent text-white rounded-lg font-medium hover:opacity-90">
+                  <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90">
                     {t('startFree')}
                   </Link>
                 </div>
