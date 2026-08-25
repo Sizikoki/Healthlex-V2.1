@@ -219,25 +219,25 @@ export const MorphemeExplorer = () => {
     setCurrentPage(1);
   };
 
-  // Tür Rozetleri Stilleri
+  // Tür Rozetleri Stilleri (Sabit ve orijinal terminoloji standardı)
   const getTypeBadge = (type) => {
     switch (type) {
       case 'prefix':
         return (
           <Badge className="bg-blue-500/15 text-blue-700 dark:text-blue-400 border border-blue-500/30 hover:bg-blue-500/20 font-medium">
-            {isTr ? 'Ön Ek (Prefix)' : 'Prefix'}
+            Ön Ek (Prefix)
           </Badge>
         );
       case 'root':
         return (
           <Badge className="bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30 hover:bg-violet-500/20 font-medium">
-            {isTr ? 'Kök (Root)' : 'Combining Form'}
+            Kök (Root)
           </Badge>
         );
       case 'suffix':
         return (
           <Badge className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 font-medium">
-            {isTr ? 'Son Ek (Suffix)' : 'Suffix'}
+            Son Ek (Suffix)
           </Badge>
         );
       default:
@@ -417,7 +417,7 @@ export const MorphemeExplorer = () => {
                           </div>
                           {item.category && CATEGORY_NAMES[item.category] && (
                             <p className="text-[0.75rem] font-medium text-muted-foreground">
-                              {CATEGORY_NAMES[item.category][currentLanguage]}
+                              {CATEGORY_NAMES[item.category].tr}
                             </p>
                           )}
                         </div>
@@ -426,14 +426,18 @@ export const MorphemeExplorer = () => {
                       {/* Anlamlar Bölümü */}
                       <div className="space-y-2 pt-1 border-t border-border/50">
                         <div className="flex items-start gap-2 text-sm">
-                          <span className="shrink-0 text-base" title="Türkçe">🇹🇷</span>
+                          <span className="shrink-0 px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold tracking-wider">
+                            TR
+                          </span>
                           <span className="text-foreground font-medium leading-snug">
                             {item.meaningTr}
                           </span>
                         </div>
 
                         <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="shrink-0 text-base" title="English">🇬🇧</span>
+                          <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold tracking-wider border border-border/50">
+                            EN
+                          </span>
                           <span className="leading-snug">
                             {item.meaningEn}
                           </span>
