@@ -61,13 +61,15 @@ function adaptTermsToQuizQuestions(terms, { language = 'tr', roundSize = ROUND_S
   const seenTerms = new Set();
   const pool = [];
   for (const t of terms || []) {
-    if (!t || !t.term) continue;
+    const rawTerm = t.term || '';
+    const cleanTerm = rawTerm.split(/[\/;]/)[0].trim().replace(/\s*\([A-Z0-9,\s\-]+\)$/i, '').trim();
+    if (!cleanTerm) continue;
     const meaning = getMeaningText(t, language);
     if (!meaning) continue;
-    const key = norm(t.term);
+    const key = norm(cleanTerm);
     if (seenTerms.has(key)) continue;
     seenTerms.add(key);
-    pool.push({ ...t, __meaning: meaning });
+    pool.push({ ...t, term: cleanTerm, __meaning: meaning });
   }
 
   if (pool.length < 2) return [];

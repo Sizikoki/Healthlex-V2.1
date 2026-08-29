@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, BookOpen, Menu, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, BookOpen, Menu, X, Sparkles } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +12,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
+import { getTermMorphemes } from '@/utils/morphemeAdapter';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -37,7 +38,10 @@ const UPPER_EXTREMITY_GROUPS = [
 ];
 
 export const Study = () => {
-  const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { currentLanguage, t } = useLanguage();
+  const isTr = currentLanguage === 'tr';
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -76,32 +80,26 @@ export const Study = () => {
           rawTerms = getAllTerms();
         }
 
-        const normalized = rawTerms.map(t => ({
-          id: t.id,
-          term: t.term,
-          turkish: t.english || t.turkish || '',
-          definition: t.turkishDefinition || t.definition || '',
-          roots: t.roots || '',
-          category: t.category || '',
-          system: t.system || '',
-          subcategory: t.subcategory || ''
+        const normalized = rawTerms.map((termItem) => ({
+          id: termItem.id,
+          term: termItem.term,
+          turkish: termItem.english || termItem.turkish || '',
+          turkishShort: termItem.turkishShort || '',
+          definition: termItem.turkishDefinition || termItem.definition || '',
+          turkishDefinition: termItem.turkishDefinition || termItem.definition || '',
+          english: termItem.english || termItem.turkish || '',
+          englishDefinition: termItem.englishDefinition || termItem.english || '',
+          roots: termItem.roots || '',
+          morphemes: termItem.morphemes || '',
+          category: termItem.category || '',
+          system: termItem.system || '',
+          subcategory: termItem.subcategory || '',
         }));
 
         setAllTerms(normalized);
       } catch (error) {
-        console.error('Error fetching terms in Study:', error);
-        // Fallback to local terms
-        const localTerms = getAllTerms().map(t => ({
-          id: t.id,
-          term: t.term,
-          turkish: t.turkish || '',
-          definition: t.definition || '',
-          roots: t.roots || '',
-          category: t.category || '',
-          system: t.system || '',
-          subcategory: t.subcategory || ''
-        }));
-        setAllTerms(localTerms);
+        console.warn('Live terms fetch error/timeout, using local fallback:', error);
+        setAllTerms(getAllTerms());
       } finally {
         setLoading(false);
       }
@@ -112,11 +110,14 @@ export const Study = () => {
 
   const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
 
-  const filteredTerms = allTerms.filter((t) => {
+  const filteredTerms = allTerms.filter(t => {
     if (selectedCategory.category) {
       return t.category === selectedCategory.category;
     }
-    return t.system === selectedCategory.system && t.subcategory === selectedCategory.subcategory;
+    if (selectedCategory.subcategory) {
+      return t.subcategory === selectedCategory.subcategory;
+    }
+    return true;
   });
 
   const terms = searchQuery
@@ -140,60 +141,115 @@ export const Study = () => {
     setRefreshTrigger(prev => prev + 1);
   };
 
+  const handleMorphemeClick = (part) => {
+    const cleanQuery = part.text.replace(/[-/]/g, '').trim();
+    if (cleanQuery) {
+      navigate(`/morphemes?search=${encodeURIComponent(cleanQuery)}`);
+    }
+  };
+
   const renderTermCard = (term) => {
     const progress = getTermProgress(term.id);
+    const morphemes = getTermMorphemes(term);
+
     return (
       <div
         key={`${term.id}-${refreshTrigger}`}
-        className="group relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-200 flex flex-col min-h-[220px]"
+        className="group relative bg-card text-card-foreground rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-border flex flex-col justify-between min-h-[260px]"
       >
-        {/* Badge */}
-        <div className="absolute top-0 right-2 z-10">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600">
+        {/* Category Badge */}
+        <div className="absolute top-3 right-3 z-10">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50">
             {t(selectedCategory.key, selectedCategory.name)}
           </span>
         </div>
 
         {/* Card body */}
-        <div className="p-5 flex flex-col h-full">
-
-          {/* Title */}
-          <div className="mb-3 pr-28 pt-1">
-            <h3 className="text-lg font-bold leading-tight text-slate-900">
-              {formatMedicalTerm(term.term)}
-            </h3>
-          </div>
-
-          {/* EN + Turkish */}
-          <div className="mt-2 space-y-2 mb-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-[10px] font-bold text-slate-400 w-5 shrink-0">EN</span>
-              <span className="text-sm font-medium text-slate-500">{term.turkish}</span>
+        <div className="p-5 flex flex-col h-full justify-between">
+          <div>
+            {/* Title */}
+            <div className="mb-2 pr-28 pt-1">
+              <h3 className="text-lg font-bold leading-tight text-foreground font-serif tracking-tight group-hover:text-primary transition-colors">
+                {formatMedicalTerm(term.term)}
+              </h3>
             </div>
+
+            {/* EN Label */}
+            {term.turkish && (
+              <div className="flex items-baseline gap-2 mb-3">
+                <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[9px] font-bold tracking-wider border border-border/50">
+                  EN
+                </span>
+                <span className="text-xs font-medium text-muted-foreground leading-snug">
+                  {term.turkish}
+                </span>
+              </div>
+            )}
+
+            {/* Divider */}
+            <div className="w-full h-px bg-border/60 mb-3" />
+
+            {/* Definition */}
+            <p className="text-sm text-foreground/90 leading-relaxed mb-4 line-clamp-3">
+              {term.definition}
+            </p>
+
+            {/* İnteraktif Morfem Analizi Rozetleri */}
+            {morphemes && morphemes.length > 0 && (
+              <div className="mb-4 pt-2.5 border-t border-border/50">
+                <div className="mb-2">
+                  <span className="text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
+                    {isTr ? 'Morfem Yapısı' : 'Word Breakdown'}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {morphemes.map((part, idx) => {
+                    const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
+
+                    return (
+                      <React.Fragment key={part.id || idx}>
+                        {idx > 0 && (
+                          <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => handleMorphemeClick(part)}
+                          title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
+                        >
+                          <span className="font-semibold text-foreground">{part.text}</span>
+                          {meaningText && (
+                            <span className="text-[10.5px] font-sans font-normal text-muted-foreground max-w-[120px] truncate">
+                              ({meaningText})
+                            </span>
+                          )}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mb-4" />
-
-          {/* Definition */}
-          <p className="text-sm text-slate-600 line-clamp-2 mb-5 min-h-[2.5rem]">
-            {term.definition}
-          </p>
-
-          {/* Button */}
-          <div className="flex items-center justify-center mt-auto">
+          {/* Öğrenildi / Öğren Butonu */}
+          <div className="flex items-center justify-center pt-2 border-t border-border/40 mt-auto">
             <button
               onClick={() => handleMarkAsLearned(term.id)}
               data-term-id={term.id}
-              data-learned={progress.learned ? "true" : "false"}
-              className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${progress.learned
-                ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 hover:bg-emerald-200 focus:ring-emerald-400'
-                : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 focus:ring-indigo-400'
-                }`}
+              data-learned={progress.learned ? 'true' : 'false'}
+              className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                progress.learned
+                  ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 focus:ring-emerald-400'
+                  : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 focus:ring-primary'
+              }`}
             >
               {progress.learned ? (
                 <>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
                   <span>{t('learned')}</span>
                 </>
               ) : (
@@ -201,7 +257,6 @@ export const Study = () => {
               )}
             </button>
           </div>
-
         </div>
       </div>
     );
@@ -269,107 +324,64 @@ export const Study = () => {
       </Sheet>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto flex flex-col">
-        {/* Sticky top bar — Mobile header (always visible to trigger drawer) */}
-        <div className="sticky top-0 z-20 flex items-center h-12 px-4 bg-background/90 backdrop-blur border-b border-border flex-shrink-0 md:hidden justify-between">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-lg hover:bg-muted transition-colors flex items-center gap-2 border border-border bg-card shadow-sm"
-            aria-label="Menüyü aç"
-          >
-            <Menu className="w-5 h-5" />
-            <span className="text-sm font-semibold">{t('categories')}</span>
-          </button>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            {t(selectedCategory.key, selectedCategory.name)}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Top bar */}
+        <div className="bg-background border-b border-border p-4 flex items-center justify-between gap-4 sticky top-0 z-10 shadow-xs">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="p-2 rounded-lg hover:bg-muted transition-colors border border-border"
+              aria-label="Kategorileri Göster/Gizle"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-xl font-bold">{t(selectedCategory.key, selectedCategory.name)}</h1>
+              <p className="text-xs text-muted-foreground">{terms.length} {t('termsCount')}</p>
+            </div>
+          </div>
+
+          {/* Search bar */}
+          <div className="relative w-48 sm:w-72">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder={t('searchPlaceholder')}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 pr-4 text-sm rounded-xl"
+            />
           </div>
         </div>
 
-        {/* Sticky top bar — Desktop header (only visible when desktop sidebar is closed) */}
-        {!sidebarOpen && (
-          <div className="sticky top-0 z-20 hidden md:flex items-center h-12 px-2 bg-background/90 backdrop-blur border-b border-border flex-shrink-0">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-lg hover:bg-muted transition-colors"
-              aria-label="Menüyü aç"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
-        )}
-
-        <div className="max-w-[1260px] mx-auto px-4 sm:px-6 py-8 w-full">
-          {/* Guest Banner */}
-          {!isLoggedIn() && (
-            <div className="mb-6 p-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-sm shadow-sm">
-              <div className="flex items-center gap-2.5 text-amber-950">
-                <span className="text-xl">💡</span>
-                <div>
-                  <strong className="font-semibold block mb-0.5">{t('guestMode')}</strong>
-                  <span>{t('studyGuestBannerText')} </span>
-                  <Link to="/register" className="font-bold underline text-amber-900 hover:text-amber-700">{t('signUpLink')}</Link>.
-                </div>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <Link to="/register" className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                  {t('startFree')}
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {/* Header */}
-          <div className="mb-6">
-            <div className="mb-4">
-              <h1 className="text-3xl font-bold">{t('medicalTerms')}</h1>
-              <p className="text-muted-foreground mt-1">{t(selectedCategory.key, selectedCategory.name)}</p>
-            </div>
-
-            {/* Search */}
-            <div className="relative max-w-md">
-              <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder={t('searchPlaceholder')}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-          </div>
-
-          {/* Section title + count */}
-          <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-2xl font-bold">{t(selectedCategory.key, selectedCategory.name)}</h2>
-            <Badge variant="secondary" className="text-sm">{terms.length} {t('terms')}</Badge>
-          </div>
-
-          {/* Terms */}
+        {/* Content Area */}
+        <div className="p-4 sm:p-6 lg:p-8 flex-1">
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-4"></div>
-              <p className="text-muted-foreground text-sm">{t('loadingTerms')}</p>
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
             </div>
           ) : terms.length === 0 ? (
-            <Card className="p-12 text-center">
-              <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{t('noTermsFound')}</h3>
-              <p className="text-muted-foreground">
-                {searchQuery ? 'Arama kriterlerinizi değiştirmeyi deneyin' : 'Bu kategoride henüz terim bulunmuyor'}
-              </p>
-            </Card>
-          ) : selectedCategoryId === 'upper_extremity_bones' ? (
-            <div className="space-y-12">
+            <div className="text-center py-16 bg-card border border-border rounded-2xl p-8">
+              <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
+              <h3 className="text-base font-semibold">{t('noTermsFound')}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{t('tryAnotherSearch')}</p>
+            </div>
+          ) : selectedCategoryId === 'upper_extremity_bones' && !searchQuery ? (
+            /* Üst Extremite Kemikleri - Gruplu Görünüm */
+            <div className="space-y-10">
               {UPPER_EXTREMITY_GROUPS.map((group) => {
                 const groupTerms = terms.filter(t => group.ids.includes(t.id));
                 if (groupTerms.length === 0) return null;
+
                 return (
                   <div key={group.name} className="space-y-4">
-                    <div className="flex items-center gap-3 border-b border-border pb-2">
-                      <h3 className="text-2xl font-bold text-foreground">{group.name}</h3>
-                      <Badge variant="secondary" className="text-sm">{groupTerms.length} terim</Badge>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-lg font-bold tracking-tight">{group.name}</h2>
+                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        {groupTerms.length}
+                      </span>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                       {groupTerms.map(renderTermCard)}
                     </div>
                   </div>
@@ -377,7 +389,8 @@ export const Study = () => {
               })}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            /* Standart Liste Görünümü */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {terms.map(renderTermCard)}
             </div>
           )}

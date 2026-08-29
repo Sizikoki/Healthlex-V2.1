@@ -207,14 +207,13 @@ export function decomposeWord(wordText, parentMeaningMap = {}) {
 }
 
 /**
- * Terim nesnesini morfem dizisine dönüştürür.
- * Çoklu alternatif isim içeren terimlerde (örn. "Phalanges Pedis / Ossa Digitorum Pedis")
- * sadece birincil ismi parçalara ayırır.
+ * Terim nesnesini morfem dizisine dönüştürür (Çalışma ve Bilgi kartları için tüm parçaları döner).
  */
-export function parseTermToMorphemes(term) {
+export function getTermMorphemes(term) {
+  if (!term) return [];
   const rawTermName = term.term || term.name || '';
   const primaryTermName = getPrimaryLatinTerm(rawTermName);
-  if (!primaryTermName) return null;
+  if (!primaryTermName) return [];
 
   // Build parent meaning map from term.roots (e.g. "os (kemik) + occiput (ense)")
   const parentMeaningMap = {};
@@ -235,7 +234,7 @@ export function parseTermToMorphemes(term) {
 
   // Split clean primary term name into words (e.g. "Phalanges Pedis" -> ["Phalanges", "Pedis"])
   const words = primaryTermName.split(/\s+/).map((w) => w.trim()).filter(Boolean);
-  if (words.length === 0) return null;
+  if (words.length === 0) return [];
 
   const sequence = [];
 
@@ -251,6 +250,14 @@ export function parseTermToMorphemes(term) {
     });
   });
 
+  return sequence;
+}
+
+/**
+ * Terim nesnesini morfem dizisine dönüştürür (Oyun soruları için en az 2 parça gerektirir).
+ */
+export function parseTermToMorphemes(term) {
+  const sequence = getTermMorphemes(term);
   return sequence.length >= 2 ? sequence : null;
 }
 

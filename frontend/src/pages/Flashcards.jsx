@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, RotateCw, ChevronRight, Check, X } from 'lucide-react';
+import { ArrowLeft, RotateCw, ChevronRight, Check, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -11,6 +11,7 @@ import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
+import { getTermMorphemes } from '@/utils/morphemeAdapter';
 
 export const Flashcards = () => {
   const [searchParams] = useSearchParams();
@@ -223,9 +224,38 @@ export const Flashcards = () => {
               }}
             >
               <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">Türkçe Tanım</div>
-              <div className="text-xl sm:text-2xl font-bold text-center text-foreground max-w-md px-2 leading-relaxed">
+              <div className="text-xl sm:text-2xl font-bold text-center text-foreground max-w-md px-2 leading-relaxed mb-4">
                 {currentTerm.turkishDefinition || currentTerm.definition}
               </div>
+
+              {/* Morfem Analizi */}
+              {currentTerm && getTermMorphemes(currentTerm).length > 0 && (
+                <div className="mt-2 pt-3 border-t border-border/50 max-w-md w-full text-center">
+                  <div className="mb-2 text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
+                    Morfem Yapısı
+                  </div>
+                  <div className="flex flex-wrap items-center justify-center gap-1.5">
+                    {getTermMorphemes(currentTerm).map((part, idx) => {
+                      const meaningText = part.meaning?.tr || '';
+                      return (
+                        <React.Fragment key={idx}>
+                          {idx > 0 && (
+                            <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
+                          )}
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg border border-border/70 bg-muted/60 text-xs font-mono font-medium shadow-xs">
+                            <span className="font-semibold text-foreground">{part.text}</span>
+                            {meaningText && (
+                              <span className="text-[10.5px] font-sans font-normal text-muted-foreground">
+                                ({meaningText})
+                              </span>
+                            )}
+                          </span>
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
           </Card>

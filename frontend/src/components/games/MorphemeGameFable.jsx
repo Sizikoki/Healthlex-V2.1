@@ -217,13 +217,26 @@ function isCorrectSequence(selected, correct) {
 
 function normalizeQuestions(terms, roundSize = 10) {
   if (!Array.isArray(terms) || terms.length === 0) return DEFAULT_QUESTIONS.slice(0, roundSize);
-  const valid = terms.filter(
-    (q) =>
-      q &&
-      typeof q.targetLatinTerm === "string" &&
-      Array.isArray(q.correctSequence) &&
-      q.correctSequence.length > 0
-  );
+  const valid = terms
+    .map((q) => {
+      if (!q || typeof q.targetLatinTerm !== "string") return q;
+      const cleanTarget = q.targetLatinTerm
+        .split(/[\/;]/)[0]
+        .trim()
+        .replace(/\s*\([A-Z0-9,\s\-]+\)$/i, "")
+        .trim();
+      return {
+        ...q,
+        targetLatinTerm: cleanTarget || q.targetLatinTerm,
+      };
+    })
+    .filter(
+      (q) =>
+        q &&
+        typeof q.targetLatinTerm === "string" &&
+        Array.isArray(q.correctSequence) &&
+        q.correctSequence.length > 0
+    );
   if (valid.length === 0) return DEFAULT_QUESTIONS.slice(0, roundSize);
   return shuffle(valid).slice(0, Math.min(roundSize, valid.length));
 }

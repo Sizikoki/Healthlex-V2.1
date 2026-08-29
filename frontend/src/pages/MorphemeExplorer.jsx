@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Search,
   BookOpen,
@@ -70,12 +71,21 @@ function normalizeSearchText(text) {
 export const MorphemeExplorer = () => {
   const { currentLanguage } = useLanguage();
   const isTr = currentLanguage === 'tr';
+  const [searchParams] = useSearchParams();
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
   const [activeTab, setActiveTab] = useState('all'); // 'all', 'prefix', 'root', 'suffix'
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 24;
+
+  useEffect(() => {
+    const q = searchParams.get('search');
+    if (q !== null && q !== undefined) {
+      setSearchQuery(q);
+      setCurrentPage(1);
+    }
+  }, [searchParams]);
 
   // Tüm morfemleri tek bir listeye dönüştürme ve standartlaştırma
   const allMorphemes = useMemo(() => {

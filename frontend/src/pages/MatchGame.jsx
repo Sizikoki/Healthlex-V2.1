@@ -60,7 +60,7 @@ export const MatchGame = () => {
     selectedTerms.forEach((term, index) => {
       gameCards.push({
         id: `term-${index}`,
-        content: formatMedicalTerm(term.term), // Latin Term
+        content: formatMedicalTerm((term.term || '').split(/[\/;]/)[0].trim()), // Latin Term
         pairId: index,
         type: 'term'
       });
