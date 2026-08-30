@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Sparkles, Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain } from 'lucide-react';
+import { getAllTerms } from '@/data/medicalTerms';
+import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import './LandingPage.css';
 
 const DEMO_ROUNDS = [
@@ -35,6 +40,34 @@ const DEMO_ROUNDS = [
 export const Home = () => {
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
   const [revealedIndices, setRevealedIndices] = useState([]);
+  const [termCount, setTermCount] = useState(() => getAllTerms().length);
+
+  const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 559 morfem
+
+  useEffect(() => {
+    const fetchTermCount = async () => {
+      try {
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+        });
+
+        const querySnapshot = await Promise.race([
+          getDocs(collection(db, 'terms')),
+          timeoutPromise
+        ]);
+        if (timeoutId) clearTimeout(timeoutId);
+
+        if (querySnapshot && querySnapshot.size > 0) {
+          setTermCount(querySnapshot.size);
+        }
+      } catch (error) {
+        console.warn('Using local terms count fallback:', error);
+      }
+    };
+
+    fetchTermCount();
+  }, []);
 
   const currentRound = DEMO_ROUNDS[currentRoundIndex];
   const isAllRevealed = revealedIndices.length === currentRound.chips.length;
@@ -65,22 +98,38 @@ export const Home = () => {
         {/* ================= HERO ================= */}
         <section className="hero">
           <div className="wrap">
+            <span className="eyebrow">
+              <Sparkles className="w-4 h-4 text-primary" />
+              Sağlık Bilimleri ve Anatomi İçin
+            </span>
             <h1>
               Ezberleme.
               <br />
-              Çöz.
+              <span className="text-primary">Çöz.</span>
             </h1>
             <p className="sub">
-              Her Latince tıp terimi 2–3 parçadan oluşur. Parçaları öğren; <span className="mono">600+</span> terimi ezberlemeden oku, sınavdan 2 hafta sonra da hatırla.
+              Her Latince tıp terimi 2–3 parçadan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong> terimi ezberlemeden oku, sınavdan 2 hafta sonra da hatırla.
             </p>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => scrollToSection('fiyat')}
-            >
-              Tüm Terimlerin Kilidini Aç
-            </button>
-            <p className="microline">Tek seferlik ödeme · Abonelik yok · TR ⟷ EN</p>
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                className="site-btn-primary"
+                onClick={() => scrollToSection('fiyat')}
+              >
+                Tüm Terimlerin Kilidini Aç
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+              <Link to="/study" className="site-btn-secondary">
+                Sözlüğü İncele
+              </Link>
+            </div>
+            <p className="microline">
+              <span>✓ Tek seferlik ödeme</span>
+              <span>·</span>
+              <span>✓ Abonelik yok</span>
+              <span>·</span>
+              <span>✓ TR ⟷ EN</span>
+            </p>
             <p
               className="down"
               onClick={() => scrollToSection('demo')}
@@ -98,7 +147,7 @@ export const Home = () => {
                 <span>{currentRoundIndex + 1}</span> / {DEMO_ROUNDS.length}
               </p>
               <p className="demo-term-label">Bu terimi daha önce hiç görmediysen bile çözebilirsin:</p>
-              <p className="mono" style={{ fontWeight: 700, fontSize: 'clamp(1.3rem,3.2vw,1.9rem)', marginBottom: '6px' }}>
+              <p className="font-bold text-2xl sm:text-3xl text-foreground mb-2 tracking-tight">
                 {currentRound.term}
               </p>
               <div className="chips">
@@ -122,7 +171,7 @@ export const Home = () => {
               )}
 
               {isAllRevealed && (
-                <div className="demo-result show">
+                <div className="demo-result">
                   <p>{currentRound.result}</p>
                   {!isFinalRound && (
                     <button
@@ -137,16 +186,17 @@ export const Home = () => {
               )}
 
               {isAllRevealed && isFinalRound && (
-                <div className="demo-final show">
+                <div className="demo-final">
                   <p>
-                    <strong>3 terim çözdün — ezberlemeden.</strong> İçeride 600+ terim ve 200+ morfem seni bekliyor.
+                    <strong className="text-foreground">3 terim çözdün — ezberlemeden.</strong> İçeride {termCount}+ terim ve {totalMorphemes}+ morfem seni bekliyor.
                   </p>
                   <button
                     type="button"
-                    className="btn"
+                    className="site-btn-primary"
                     onClick={() => scrollToSection('fiyat')}
                   >
                     Tüm Terimlerin Kilidini Aç
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </button>
                 </div>
               )}
@@ -160,7 +210,7 @@ export const Home = () => {
             <span className="eyebrow">Sorun</span>
             <h2>Sınav gecesini hatırlıyor musun?</h2>
             <p>
-              Önünde 40 sayfalık kemik listesi. <span className="mono">Sustentaculum tali</span>'yi on kez yazdın; on birincide yine deftere bakıyorsun. Sabah sınavda çıkıyor, hatırlıyorsun. İki hafta sonra klinikte aynı terim geçiyor — kafanda tek harf yok.
+              Önünde 40 sayfalık kemik listesi. <span className="font-semibold text-foreground">Sustentaculum tali</span>'yi on kez yazdın; on birincide yine deftere bakıyorsun. Sabah sınavda çıkıyor, hatırlıyorsun. İki hafta sonra klinikte aynı terim geçiyor — kafanda tek harf yok.
             </p>
             <p className="punch">
               Sorun sende değil, yöntemde: anlamadan ezberlenen terim, kısa süreli hafızada misafirdir.
@@ -187,7 +237,7 @@ export const Home = () => {
                 <span className="no">ADIM 2</span>
                 <h3>Anla</h3>
                 <p className="ex">KALP · KAS · HASTALIK</p>
-                <p>Her parçanın tek bir anlamı vardır ve 600+ terimin içinde tekrar eder.</p>
+                <p>Her parçanın tek bir anlamı vardır ve {termCount}+ terimin içinde tekrar eder.</p>
               </div>
               <div className="step">
                 <span className="no">ADIM 3</span>
@@ -197,7 +247,7 @@ export const Home = () => {
               </div>
             </div>
             <p className="logic-close">
-              200+ morfemi öğrendiğinde, daha önce hiç görmediğin terimleri de okursun. Ezber sana liste kazandırır; mantık sana dil kazandırır.
+              {totalMorphemes}+ morfemi öğrendiğinde, daha önce hiç görmediğin terimleri de okursun. Ezber sana liste kazandırır; mantık sana dil kazandırır.
             </p>
           </div>
         </section>
@@ -209,15 +259,15 @@ export const Home = () => {
             <h2>Sayılarla Healthlex</h2>
             <div className="stats">
               <div className="stat">
-                <div className="n">600+</div>
+                <div className="n">{termCount}+</div>
                 <div className="l">Terim</div>
               </div>
               <div className="stat">
-                <div className="n">200+</div>
+                <div className="n">{totalMorphemes}+</div>
                 <div className="l">Morfem</div>
               </div>
               <div className="stat">
-                <div className="n">7</div>
+                <div className="n">10</div>
                 <div className="l">Kategori</div>
               </div>
               <div className="stat">
@@ -231,19 +281,31 @@ export const Home = () => {
             </div>
             <div className="games">
               <div className="game">
-                <h3>BİLGİ KARTLARI</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  <BookOpen className="w-5 h-5 text-primary" />
+                  <h3>BİLGİ KARTLARI</h3>
+                </div>
                 <p>Terimi gör, tahmin et, kartı çevir. Aktif hatırlama tekniğinin ta kendisi.</p>
               </div>
               <div className="game">
-                <h3>EŞLEŞTİRME</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  <Layers className="w-5 h-5 text-primary" />
+                  <h3>EŞLEŞTİRME</h3>
+                </div>
                 <p>Latince terimleri Türkçe anlamlarıyla süreye karşı eşleştir. Kendi rekorunu kovala.</p>
               </div>
               <div className="game">
-                <h3>QUIZ</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy className="w-5 h-5 text-primary" />
+                  <h3>QUIZ</h3>
+                </div>
                 <p>Kategoriye özel dinamik sorular. Her testte çeldiriciler yeniden üretilir.</p>
               </div>
               <div className="game">
-                <h3>MORFEM OYUNU</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  <Brain className="w-5 h-5 text-primary" />
+                  <h3>MORFEM OYUNU</h3>
+                </div>
                 <p>Ek ve kökleri birleştirerek terimi kur — az önce bu sayfada oynadığın oyunun tamamı.</p>
               </div>
             </div>
@@ -266,10 +328,10 @@ export const Home = () => {
               </div>
               <div className="founder-text">
                 <p>
-                  Ben Sıddık. Fizyoterapistim; İstanbul'daki kliniğimde her gün bu terimlerle çalışıyorum — hastalarıma <span className="mono">sternocleidomastoideus</span>'u anlatırken kimse ezber sormuyor.
+                  Ben Sıddık. Fizyoterapistim; meslek hayatımda her gün bu terimlerle çalışıyorum — hastalarıma <span className="font-semibold text-foreground">sternocleidomastoideus</span>'u anlatırken kimse ezber sormuyor.
                 </p>
                 <p>
-                  Öğrenciyken bu terimi sınav için defalarca ezberledim, defalarca unuttum. Aklımda kalan gün, bir hocamın terimi tahtada parçalayarak yazdığı gündü: <span className="mono">sterno · cleido · mastoid</span>. Göğüs kemiği, köprücük, kulak arkasındaki çıkıntı. Kasın adı, kasın yolunu anlatıyordu. O gün ezberlemeyi bıraktım.
+                  Öğrenciyken bu terimi sınav için defalarca ezberledim, defalarca unuttum. Aklımda kalan gün, bir hocamın terimi tahtada parçalayarak yazdığı gündü: <span className="font-semibold text-primary">sterno · cleido · mastoid</span>. Göğüs kemiği, köprücük, kulak arkasındaki çıkıntı. Kasın adı, kasın yolunu anlatıyordu. O gün ezberlemeyi bıraktım.
                 </p>
                 <p>
                   Healthlex'i, klinikte her gün kullandığım bu mantığı sağlık bilimleri öğrencilerine taşımak için tek başıma yazdım. İçindeki her terim tek tek elimden geçti.
@@ -319,7 +381,7 @@ export const Home = () => {
               <table>
                 <thead>
                   <tr>
-                    <th></th>
+                    <th>Özellik</th>
                     <th>Healthlex</th>
                     <th>
                       Genel kart uygulamaları
@@ -333,85 +395,85 @@ export const Home = () => {
                   <tr>
                     <td>Terimleri köklerine ayıran motor</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                   </tr>
                   <tr>
                     <td>Tıp içeriği hazır yüklü</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                   </tr>
                   <tr>
                     <td>Türkçe ⟷ Latince çift dil</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                   </tr>
                   <tr>
                     <td>Tıbba özel 4 oyun modu</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                   </tr>
                   <tr>
                     <td>İnternetsiz çalışır</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                   </tr>
                   <tr>
                     <td>Ödeme</td>
                     <td>
-                      <span className="alt">Tek sefer</span>
+                      <span className="font-semibold text-primary">Tek sefer</span>
                     </td>
                     <td>
-                      <span className="alt">Abonelik / saatlerce deste hazırlığı</span>
+                      <span className="text-muted-foreground">Abonelik / saatlerce deste hazırlığı</span>
                     </td>
                     <td>
-                      <span className="alt">Ücretsiz</span>
+                      <span className="text-muted-foreground">Ücretsiz</span>
                     </td>
                   </tr>
                   <tr>
                     <td>2 hafta sonra hatırlıyor musun?</td>
                     <td>
-                      <span className="yes">✓</span>
+                      <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                     <td>
-                      <span className="no">—</span>
+                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
                     </td>
                   </tr>
                 </tbody>
@@ -428,48 +490,87 @@ export const Home = () => {
             <p className="price-topline">Aylık ücret yok. Yenileme yok. Bir kez öde, çalışmaya başla.</p>
 
             <div className="tiers">
+              {/* Temel Paket */}
               <div className="tier">
                 <h3>Temel</h3>
                 <div className="price">₺399</div>
                 <div className="once">tek seferlik</div>
                 <ul>
-                  <li>Anatomi çekirdeği: kemikler + eklemler + hareket terimleri</li>
-                  <li>Bilgi kartları + Quiz</li>
-                  <li>TR ⟷ EN çift dil</li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Anatomi çekirdeği: kemikler + eklemler + hareket terimleri</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Bilgi kartları + Quiz</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>TR ⟷ EN çift dil</span>
+                  </li>
                 </ul>
-                <Link to="/register" className="btn">
-                  Temel'i Aç — ₺399
-                </Link>
+                <div className="btn-container">
+                  <Link to="/register" className="site-btn-secondary w-full text-center">
+                    Temel'i Aç — ₺399
+                  </Link>
+                </div>
               </div>
 
+              {/* Tam Erişim (Öne Çıkan) */}
               <div className="tier hot">
                 <span className="badge">EN ÇOK SEÇİLEN</span>
-                <h3>Tam Erişim</h3>
+                <h3 className="text-primary">Tam Erişim</h3>
                 <div className="price">₺649</div>
                 <div className="once">tek seferlik</div>
                 <ul>
-                  <li>7 kategorinin tamamı + 200+ morfem kütüphanesi</li>
-                  <li>4 oyun modunun hepsi</li>
-                  <li>İlerleme istatistikleri ve seviye sistemi</li>
-                  <li>TR ⟷ EN çift dil</li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>10 kategorinin tamamı + {totalMorphemes}+ morfem kütüphanesi</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>4 oyun modunun hepsi</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>İlerleme istatistikleri ve seviye sistemi</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>TR ⟷ EN çift dil</span>
+                  </li>
                 </ul>
-                <Link to="/register" className="btn">
-                  Tam Erişimi Aç — ₺649
-                </Link>
+                <div className="btn-container">
+                  <Link to="/register" className="site-btn-primary w-full text-center">
+                    Tam Erişimi Aç — ₺649
+                  </Link>
+                </div>
               </div>
 
+              {/* Tam Erişim + Gelecek */}
               <div className="tier">
                 <h3>Tam Erişim + Gelecek</h3>
                 <div className="price">₺999</div>
                 <div className="once">tek seferlik</div>
                 <ul>
-                  <li>Tam Erişim'deki her şey</li>
-                  <li>Eklenecek her yeni modül ömür boyu dahil (kaslar, sinirler, klinik terimler)</li>
-                  <li>Yeni içeriklere ilk gün erişim</li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Tam Erişim'deki her şey</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Eklenecek her yeni modül ömür boyu dahil (kaslar, sinirler, klinik terimler)</span>
+                  </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Yeni içeriklere ilk gün erişim</span>
+                  </li>
                 </ul>
-                <Link to="/register" className="btn">
-                  Ömür Boyu Aç — ₺999
-                </Link>
+                <div className="btn-container">
+                  <Link to="/register" className="site-btn-secondary w-full text-center">
+                    Ömür Boyu Aç — ₺999
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -497,10 +598,11 @@ export const Home = () => {
           </p>
           <button
             type="button"
-            className="btn"
+            className="site-btn-primary"
             onClick={() => scrollToSection('fiyat')}
           >
             Tüm Terimlerin Kilidini Aç
+            <ArrowRight className="w-4 h-4 ml-2" />
           </button>
           <div className="footer-meta">
             <span>Healthlex — Latince tıp terimlerini kök mantığıyla ve oyunla öğreten platform.</span>
