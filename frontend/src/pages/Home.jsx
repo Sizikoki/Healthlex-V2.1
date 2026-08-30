@@ -349,7 +349,7 @@ export const Home = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-medical-dark"></div>
-                  3 oyun modu
+                  4 oyun modu
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-medical-dark"></div>
@@ -930,7 +930,7 @@ export const Home = () => {
               </div>
               <h3 className="text-xl font-bold text-medical-dark mb-4">Eğlenceli Oyunlar</h3>
               <p className="text-gray-500 leading-relaxed">
-                Flashcard, eşleştirme ve quiz ile ezberlemeden, oynayarak pekiştir.
+                Flashcard, eşleştirme, quiz ve morfem ile ezberlemeden, oynayarak pekiştir.
               </p>
             </div>
 
@@ -996,8 +996,8 @@ export const Home = () => {
               <div className="text-gray-500">Kayıtlı tıbbi terim</div>
             </div>
             <div className="p-12 border-b md:border-b-0 md:border-r border-gray-100 bg-white">
-              <div className="text-5xl font-bold text-medical-dark mb-2">3</div>
-              <div className="text-gray-500 leading-snug">Oyun modu — quiz, flashcard, eşleştirme</div>
+              <div className="text-5xl font-bold text-medical-dark mb-2">4</div>
+              <div className="text-gray-500 leading-snug">Oyun modu — quiz, flashcard, eşleştirme, morfem</div>
             </div>
             <div className="p-12 bg-white">
               <div className="text-5xl font-bold text-medical-dark mb-2">0₺</div>

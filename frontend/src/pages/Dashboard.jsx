@@ -175,7 +175,7 @@ export const Dashboard = () => {
                 {t('whatToStudyToday')}
               </h2>
             </div>
-            <div className={`tiles grid grid-cols-1 md:grid-cols-3 gap-[18px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <div className={`tiles grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[18px] transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               {/* Quiz Tile */}
               <div 
                 className="tile bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] md:p-[24px] flex flex-col gap-[14px] cursor-pointer hover:border-[var(--teal)] hover:-translate-y-0.5 transition-all"
@@ -229,6 +229,28 @@ export const Dashboard = () => {
                 <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">{t('matchingGame')}</h3>
                 <p className="text-[0.86rem] text-[var(--muted)] leading-[1.5] m-0">
                   {t('matchDesc')}
+                </p>
+                <span className="go mt-auto font-semibold text-[0.84rem] text-[var(--teal-deep)] flex items-center gap-[6px]">
+                  {t('play')} →
+                </span>
+              </div>
+
+              {/* Morpheme Builder Tile */}
+              <div 
+                className="tile bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] md:p-[24px] flex flex-col gap-[14px] cursor-pointer hover:border-[var(--teal)] hover:-translate-y-0.5 transition-all"
+                onClick={() => navigate('/morpheme')}
+              >
+                <div className="ic ic-purple w-[42px] h-[42px] rounded-[10px] bg-[#F3E8FF] color-[#7E22CE] flex items-center justify-center">
+                  <svg className="w-[21px] h-[21px] text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19.439 7.85c0-1.57.8-2.35 1.56-3.11A3.5 3.5 0 0 0 16 2a3.5 3.5 0 0 0-2.74 5.7" />
+                    <path d="M4.56 16.15c0 1.57-.8 2.35-1.56 3.11A3.5 3.5 0 0 0 8 22a3.5 3.5 0 0 0 2.74-5.7" />
+                    <path d="M7.85 4.56c-1.57 0-2.35-.8-3.11-1.56A3.5 3.5 0 0 0 2 8a3.5 3.5 0 0 0 5.7 2.74" />
+                    <path d="M16.15 19.44c1.57 0 2.35.8 3.11 1.56A3.5 3.5 0 0 0 22 16a3.5 3.5 0 0 0-5.7-2.74" />
+                  </svg>
+                </div>
+                <h3 className="text-[1.02rem] font-bold text-[var(--ink)] m-0">{t('morphemeBuilder')}</h3>
+                <p className="text-[0.86rem] text-[var(--muted)] leading-[1.5] m-0">
+                  {t('morphemeDesc')}
                 </p>
                 <span className="go mt-auto font-semibold text-[0.84rem] text-[var(--teal-deep)] flex items-center gap-[6px]">
                   {t('play')} →
