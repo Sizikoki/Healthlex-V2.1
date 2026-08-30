@@ -4,6 +4,8 @@ import { getStats, getUser, getStreak, getProgress } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -12,13 +14,55 @@ export const Dashboard = () => {
   const stats = getStats();
   const streak = getStreak();
   const progress = getProgress();
-  const terms = getAllTerms();
+  const [terms, setTerms] = useState(() => getAllTerms());
 
   const [inProp, setInProp] = useState(false);
   const [totdFlipped, setTotdFlipped] = useState(false);
 
   useEffect(() => {
     setInProp(true);
+
+    const fetchLiveTerms = async () => {
+      try {
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+        });
+
+        const querySnapshot = await Promise.race([
+          getDocs(collection(db, 'terms')),
+          timeoutPromise
+        ]);
+        if (timeoutId) clearTimeout(timeoutId);
+
+        let rawTerms = [];
+        querySnapshot.forEach((doc) => {
+          rawTerms.push(doc.data());
+        });
+
+        if (rawTerms.length > 0) {
+          const normalized = rawTerms.map((termItem) => ({
+            id: termItem.id,
+            term: termItem.term,
+            turkish: termItem.english || termItem.turkish || '',
+            turkishShort: termItem.turkishShort || '',
+            definition: termItem.turkishDefinition || termItem.definition || '',
+            turkishDefinition: termItem.turkishDefinition || termItem.definition || '',
+            english: termItem.english || termItem.turkish || '',
+            englishDefinition: termItem.englishDefinition || termItem.english || '',
+            roots: termItem.roots || '',
+            category: termItem.category || '',
+            system: termItem.system || '',
+            subcategory: termItem.subcategory || '',
+          }));
+          setTerms(normalized);
+        }
+      } catch (error) {
+        console.warn('Dashboard terms fetch error, using local fallback:', error);
+      }
+    };
+
+    fetchLiveTerms();
   }, []);
 
   const formatName = (name) => {

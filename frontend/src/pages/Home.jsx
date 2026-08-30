@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { isLoggedIn, getStats } from '@/utils/storage';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/config';
+import { auth, db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
+import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { Dashboard } from './Dashboard';
 import { useLanguage } from '@/context/LanguageContext';
@@ -10,12 +12,38 @@ import { useLanguage } from '@/context/LanguageContext';
 export const Home = () => {
   const { t } = useLanguage();
   const [user, setUser] = useState(null);
+  const [termCount, setTermCount] = useState(() => getAllTerms().length);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
     });
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const fetchTermCount = async () => {
+      try {
+        let timeoutId;
+        const timeoutPromise = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
+        });
+
+        const querySnapshot = await Promise.race([
+          getDocs(collection(db, 'terms')),
+          timeoutPromise
+        ]);
+        if (timeoutId) clearTimeout(timeoutId);
+
+        if (querySnapshot && querySnapshot.size > 0) {
+          setTermCount(querySnapshot.size);
+        }
+      } catch (error) {
+        console.warn('Could not fetch terms count from Firestore, using local fallback:', error);
+      }
+    };
+
+    fetchTermCount();
   }, []);
 
   const loggedIn = !!user || isLoggedIn();
@@ -317,7 +345,7 @@ export const Home = () => {
               <div className="mt-12 flex flex-wrap gap-8 text-gray-500 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-medical-dark"></div>
-                  500+ tıbbi terim
+                  {termCount}+ tıbbi terim
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-medical-dark"></div>
@@ -964,7 +992,7 @@ export const Home = () => {
           {/* Statistics Strip */}
           <div className="mt-20 border border-gray-100 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-3">
             <div className="p-12 border-b md:border-b-0 md:border-r border-gray-100 bg-white">
-              <div className="text-5xl font-bold text-medical-dark mb-2">500+</div>
+              <div className="text-5xl font-bold text-medical-dark mb-2">{termCount}+</div>
               <div className="text-gray-500">Kayıtlı tıbbi terim</div>
             </div>
             <div className="p-12 border-b md:border-b-0 md:border-r border-gray-100 bg-white">
