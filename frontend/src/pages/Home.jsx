@@ -57,9 +57,8 @@ export const Home = () => {
     const fetchPrices = async () => {
       const basicId = PADDLE_PRICE_BASIC || localStorage.getItem('paddle_test_price_basic');
       const proId = PADDLE_PRICE_PRO || localStorage.getItem('paddle_test_price_pro');
-      const lifetimeId = PADDLE_PRICE_LIFETIME || localStorage.getItem('paddle_test_price_lifetime');
 
-      const priceIds = [basicId, proId, lifetimeId].filter(Boolean);
+      const priceIds = [basicId, proId].filter(Boolean);
       if (priceIds.length > 0) {
         const previews = await getPricePreviews(priceIds);
         setPaddlePrices(previews);
@@ -556,8 +555,8 @@ export const Home = () => {
             <div className="tiers">
               {/* Temel Paket */}
               <div className="tier">
-                <h3>Temel</h3>
-                <div className="price">{paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '₺399'}</div>
+                <h3>Temel Paket</h3>
+                <div className="price">{paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}</div>
                 <div className="once">tek seferlik</div>
                 <ul>
                   <li>
@@ -579,16 +578,16 @@ export const Home = () => {
                     onClick={() => handlePaddleCheckout(PADDLE_PRICE_BASIC, 'Temel Paket', 'basic')}
                     className="site-btn-secondary w-full text-center"
                   >
-                    Temel Paketi Aç — {paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '₺399'}
+                    Temel Paketi Aç — {paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}
                   </button>
                 </div>
               </div>
 
-              {/* Tam Erişim (Öne Çıkan) */}
+              {/* Tam Paket (Öne Çıkan) */}
               <div className="tier hot">
                 <span className="badge">EN ÇOK TERCİH EDİLEN</span>
-                <h3 className="text-primary">Tam Erişim</h3>
-                <div className="price">{paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '₺649'}</div>
+                <h3 className="text-primary">Tam Paket</h3>
+                <div className="price">{paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}</div>
                 <div className="once">tek seferlik</div>
                 <ul>
                   <li>
@@ -597,7 +596,7 @@ export const Home = () => {
                   </li>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>4 oyun modunun tamamı</span>
+                    <span>4 oyun modunun tamamı (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)</span>
                   </li>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
@@ -607,44 +606,18 @@ export const Home = () => {
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
                     <span>TR ⟷ EN çift dil desteği</span>
                   </li>
+                  <li>
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                    <span>Gelecek tüm yeni modüller ve güncellemeler dahil</span>
+                  </li>
                 </ul>
                 <div className="btn-container">
                   <button
                     type="button"
-                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, 'Tam Erişim', 'pro')}
+                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, 'Tam Paket', 'pro')}
                     className="site-btn-primary w-full text-center"
                   >
-                    Tam Erişimi Aç — {paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '₺649'}
-                  </button>
-                </div>
-              </div>
-
-              {/* Tam Erişim + Gelecek */}
-              <div className="tier">
-                <h3>Tam Erişim + Gelecek</h3>
-                <div className="price">{paddlePrices[PADDLE_PRICE_LIFETIME]?.formattedTotal || '₺999'}</div>
-                <div className="once">tek seferlik</div>
-                <ul>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Tam Erişim paketindeki her şey</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Eklenecek tüm yeni modüller ömür boyu dahil (kaslar, sinirler, klinik terimler)</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Yeni içerik ve güncellemelere ilk gün erişim</span>
-                  </li>
-                </ul>
-                <div className="btn-container">
-                  <button
-                    type="button"
-                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_LIFETIME, 'Tam Erişim + Gelecek', 'lifetime')}
-                    className="site-btn-secondary w-full text-center"
-                  >
-                    Ömür Boyu Erişimi Aç — {paddlePrices[PADDLE_PRICE_LIFETIME]?.formattedTotal || '₺999'}
+                    Tam Paketi Aç — {paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}
                   </button>
                 </div>
               </div>
@@ -653,7 +626,7 @@ export const Home = () => {
             <div className="after-price">
               <p className="flow-line">Ödemenizi yapın → Hesabınız açılsın → 2 dakika içinde ilk kategorinizde çalışmaya başlayın.</p>
               <p className="expensive-line">
-                Evet, ücretsiz alternatiflerden farklı olarak bir bedeli var. Ancak ezberleyip unutmak zaman kaybettirir; bir kez öğrenip ömür boyu hatırlamak ₺649.
+                Evet, ücretsiz alternatiflerden farklı olarak bir bedeli var. Ancak ezberleyip unutmak zaman kaybettirir; bir kez öğrenip ömür boyu hatırlamak {paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}.
               </p>
             </div>
           </div>
