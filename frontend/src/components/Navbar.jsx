@@ -43,21 +43,12 @@ export const Navbar = () => {
     window.location.href = '/login';
   };
 
-  const navLinks = loggedIn
-    ? [
-        { path: '/', label: t('dashboard') },
-        { path: '/study', label: t('study') },
-        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
-        { path: '/games', label: t('games') },
-        { path: '/progress', label: t('progress') },
-      ]
-    : [
-        { path: '/', label: t('home') },
-        { path: '/study', label: t('study') },
-        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
-        { path: '/games', label: t('games') },
-        { path: '/progress', label: t('progress') },
-      ];
+  const navLinks = [
+    { path: '/', label: t('home') },
+    { path: '/morphemes', label: t('morphemesTerms', 'Morfemler & Terimler') },
+    { path: '/games', label: t('gamesStudy', 'Oyunlar / Çalışma Alanı') },
+    { path: '/progress', label: t('myProgress', 'İlerlemem (Profil)') },
+  ];
 
   const LanguageSwitcher = () => (
     <div className="flex items-center bg-card border border-border rounded-lg p-1 text-xs font-semibold shadow-sm">

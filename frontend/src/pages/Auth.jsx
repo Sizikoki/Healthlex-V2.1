@@ -66,7 +66,7 @@ export const Login = () => {
       await syncProgressFromFirestore();
 
       toast.success('Giriş başarılı! Hoş geldiniz.');
-      navigate('/');
+      navigate('/morphemes');
     } catch (error) {
       console.error('Login error:', error);
       const message = getTurkishErrorMessage(error.code);
@@ -177,7 +177,7 @@ export const Register = () => {
       await syncProgressFromFirestore();
 
       toast.success('Hesap oluşturuldu! Hoş geldiniz.');
-      navigate('/');
+      navigate('/morphemes');
     } catch (error) {
       console.error('Registration error:', error);
       const message = getTurkishErrorMessage(error.code);

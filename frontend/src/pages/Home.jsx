@@ -6,7 +6,6 @@ import { auth, db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
-import { Dashboard } from './Dashboard';
 import { useLanguage } from '@/context/LanguageContext';
 
 export const Home = () => {
@@ -266,10 +265,6 @@ export const Home = () => {
     setMorphemeSuccess(null);
   };
 
-  if (loggedIn) {
-    return <Dashboard />;
-  }
-
   return (
     <main className="font-sans text-gray-800 bg-white min-h-screen">
       {/* HERO SECTION */}
@@ -291,10 +286,10 @@ export const Home = () => {
             <div className="flex flex-wrap items-center gap-6">
               {loggedIn ? (
                 <Link
-                  to="/study"
+                  to="/morphemes"
                   className="px-8 py-4 bg-medical-dark text-white rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 transition-all shadow-md"
                 >
-                  {t('studyCardsBtn')}
+                  {t('studyCardsBtn', 'Çalışmaya Başla')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                   </svg>
@@ -1028,10 +1023,10 @@ export const Home = () => {
           </p>
           {loggedIn ? (
             <Link
-              to="/study"
+              to="/morphemes"
               className="px-12 py-5 bg-medical-accent text-white rounded-xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-2 mx-auto w-fit shadow-md"
             >
-              Çalisma Başla
+              Çalışmaya Başla
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M14 5l7 7m0 0l-7 7m7-7H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
               </svg>

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { Navbar } from '@/components/Navbar';
 import { Home } from '@/pages/Home';
-import { Dashboard } from '@/pages/Dashboard';
 import { Login, Register } from '@/pages/Auth';
 import { Study } from '@/pages/Study';
 import { Games } from '@/pages/Games';
@@ -39,7 +38,9 @@ function App() {
         <div className="App min-h-screen bg-background">
           <Navbar />
           <Routes>
-            <Route path="/" element={isLoggedIn() ? <Dashboard /> : <Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Navigate to="/morphemes" replace />} />
+            <Route path="/panel" element={<Navigate to="/morphemes" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/study" element={<Study />} />
