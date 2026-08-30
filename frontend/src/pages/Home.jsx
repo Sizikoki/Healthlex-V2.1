@@ -40,9 +40,8 @@ const DEMO_ROUNDS = [
   }
 ];
 
-const PADDLE_PRICE_BASIC = process.env.REACT_APP_PADDLE_PRICE_ID_BASIC;
-const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_ID_PRO;
-const PADDLE_PRICE_LIFETIME = process.env.REACT_APP_PADDLE_PRICE_ID_LIFETIME;
+const PADDLE_PRICE_BASIC = process.env.REACT_APP_PADDLE_PRICE_ID_BASIC || 'pri_01m1a0dry4498ex7bdc34d4twd';
+const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_01m1a0c5kkv836f94g4z81vj0q';
 
 export const Home = () => {
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
@@ -55,8 +54,8 @@ export const Home = () => {
   // Fetch Paddle localized price previews
   useEffect(() => {
     const fetchPrices = async () => {
-      const basicId = PADDLE_PRICE_BASIC || localStorage.getItem('paddle_test_price_basic');
-      const proId = PADDLE_PRICE_PRO || localStorage.getItem('paddle_test_price_pro');
+      const basicId = PADDLE_PRICE_BASIC || 'pri_01m1a0dry4498ex7bdc34d4twd';
+      const proId = PADDLE_PRICE_PRO || 'pri_01m1a0c5kkv836f94g4z81vj0q';
 
       const priceIds = [basicId, proId].filter(Boolean);
       if (priceIds.length > 0) {
@@ -72,22 +71,7 @@ export const Home = () => {
     const currentUser = auth.currentUser || getUser();
     const customerEmail = currentUser?.email || undefined;
 
-    let targetPriceId = priceId || localStorage.getItem(`paddle_test_price_${planKey}`);
-
-    if (!targetPriceId) {
-      const enteredPriceId = window.prompt(
-        `Paddle Checkout Test: ${planName} için Price ID giriniz:\n(Örn: pri_01j... Paddle Sandbox panelinizden alabilirsiniz)`,
-        ''
-      );
-
-      if (!enteredPriceId || !enteredPriceId.trim()) {
-        toast.info('Paddle Checkout açmak için geçerli bir Price ID gereklidir.');
-        return;
-      }
-
-      targetPriceId = enteredPriceId.trim();
-      localStorage.setItem(`paddle_test_price_${planKey}`, targetPriceId);
-    }
+    const targetPriceId = priceId || (planKey === 'basic' ? 'pri_01m1a0dry4498ex7bdc34d4twd' : 'pri_01m1a0c5kkv836f94g4z81vj0q');
 
     try {
       toast.loading('Paddle Checkout açılıyor...', { id: 'paddle-loading' });

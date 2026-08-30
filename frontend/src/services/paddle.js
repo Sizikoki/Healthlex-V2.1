@@ -1,7 +1,7 @@
 import { initializePaddle } from '@paddle/paddle-js';
 
 // Environment variable configurations
-const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || '';
+const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'test_6e3b91d057ac064f535d586f588';
 const PADDLE_ENV = (process.env.REACT_APP_PADDLE_ENV || 'sandbox').toLowerCase();
 
 let paddleInstancePromise = null;
