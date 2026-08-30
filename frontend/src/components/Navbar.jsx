@@ -31,7 +31,7 @@ export const Navbar = () => {
   const user = getUser();
   const stats = loggedIn ? getStats() : null;
 
-  const isActive = (path) => location.pathname === path || (path === '/' && location.pathname === '/study');
+  const isActive = (path) => location.pathname === path;
 
   const handleLogout = async () => {
     try {
@@ -43,12 +43,20 @@ export const Navbar = () => {
     window.location.href = '/login';
   };
 
-  const navLinks = [
-    { path: '/', label: t('study', 'Çalışma / Sözlük') },
-    { path: '/morphemes', label: t('morphemesTerms', 'Morfemler & Terimler') },
-    { path: '/games', label: t('gamesStudy', 'Oyunlar / Çalışma Alanı') },
-    { path: '/progress', label: t('myProgress', 'İlerlemem (Profil)') },
-  ];
+  const navLinks = loggedIn
+    ? [
+        { path: '/study', label: t('study') },
+        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
+        { path: '/games', label: t('games') },
+        { path: '/progress', label: t('progress') },
+      ]
+    : [
+        { path: '/', label: t('home') },
+        { path: '/study', label: t('study') },
+        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
+        { path: '/games', label: t('games') },
+        { path: '/progress', label: t('progress') },
+      ];
 
   const LanguageSwitcher = () => (
     <div className="flex items-center bg-card border border-border rounded-lg p-1 text-xs font-semibold shadow-sm">
