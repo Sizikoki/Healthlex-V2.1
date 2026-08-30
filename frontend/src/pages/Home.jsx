@@ -166,14 +166,9 @@ export const Home = () => {
                 Tüm Terimlerin Kilidini Aç
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
-              <Link to="/study" className="site-btn-secondary">
-                Sözlüğü İncele
-              </Link>
             </div>
             <p className="microline">
-              <span>✓ Tek seferlik ödeme</span>
-              <span>·</span>
-              <span>✓ Abonelik yok</span>
+              <span>✓ Yıllık abonelik</span>
               <span>·</span>
               <span>✓ TR ⟷ EN</span>
             </p>
@@ -502,7 +497,7 @@ export const Home = () => {
                   <tr>
                     <td>Ödeme Modeli</td>
                     <td>
-                      <span className="font-semibold text-primary">Tek seferlik</span>
+                      <span className="font-semibold text-primary">Yıllık abonelik</span>
                     </td>
                     <td>
                       <span className="text-muted-foreground">Abonelik / Saatlerce deste hazırlığı</span>
@@ -533,27 +528,39 @@ export const Home = () => {
         <section id="fiyat">
           <div className="wrap">
             <span className="eyebrow">Fiyatlandırma</span>
-            <h2>Tek seferlik ödeme. Abonelik yok.</h2>
-            <p className="price-topline">Aylık ücret yok. Yenileme ücreti yok. Bir kez ödeyin, sınırsız çalışın.</p>
+            <h2>Yıllık abonelik. Tek seferlik ödeme yok.</h2>
+            <p className="price-topline">Aylık değil yıllık ücretlendirme. Abonelik her yıl otomatik yenilenir.</p>
 
             <div className="tiers">
               {/* Temel Paket */}
               <div className="tier">
                 <h3>Temel Paket</h3>
                 <div className="price">{paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}</div>
-                <div className="once">tek seferlik</div>
+                <div className="once">yıllık</div>
                 <ul>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Anatomi çekirdeği: Kemikler, eklemler ve hareket terimleri</span>
+                    <span>3 kategori: Kemikler, Eklemler, Kas Sistemi</span>
                   </li>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Bilgi kartları ve Quiz modları</span>
+                    <span>Bilgi Kartları ve Quiz modları</span>
                   </li>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
                     <span>TR ⟷ EN çift dil desteği</span>
+                  </li>
+                  <li className="opacity-40">
+                    <Minus className="w-4 h-4 shrink-0 mt-1" />
+                    <span>Eşleştirme ve Morfem Oyunu yok</span>
+                  </li>
+                  <li className="opacity-40">
+                    <Minus className="w-4 h-4 shrink-0 mt-1" />
+                    <span>İlerleme istatistikleri ve seviye sistemi yok</span>
+                  </li>
+                  <li className="opacity-40">
+                    <Minus className="w-4 h-4 shrink-0 mt-1" />
+                    <span>Morfem kütüphanesi yok</span>
                   </li>
                 </ul>
                 <div className="btn-container">
@@ -572,7 +579,7 @@ export const Home = () => {
                 <span className="badge">EN ÇOK TERCİH EDİLEN</span>
                 <h3 className="text-primary">Tam Paket</h3>
                 <div className="price">{paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}</div>
-                <div className="once">tek seferlik</div>
+                <div className="once">yıllık</div>
                 <ul>
                   <li>
                     <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
@@ -608,9 +615,9 @@ export const Home = () => {
             </div>
 
             <div className="after-price">
-              <p className="flow-line">Ödemenizi yapın → Hesabınız açılsın → 2 dakika içinde ilk kategorinizde çalışmaya başlayın.</p>
+              <p className="flow-line">Ödemeni yap → hesabın açılır → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, istediğin an iptal edebilirsin.</p>
               <p className="expensive-line">
-                Evet, ücretsiz alternatiflerden farklı olarak bir bedeli var. Ancak ezberleyip unutmak zaman kaybettirir; bir kez öğrenip ömür boyu hatırlamak {paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}.
+                Evet, ücretsiz alternatiflerden pahalıyız. Ezberleyip unutmak bedava; bir daha unutmamak yılda 20 dolar.
               </p>
             </div>
           </div>
