@@ -43,20 +43,13 @@ export const Navbar = () => {
     window.location.href = '/login';
   };
 
-  const navLinks = loggedIn
-    ? [
-        { path: '/study', label: t('study') },
-        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
-        { path: '/games', label: t('games') },
-        { path: '/progress', label: t('progress') },
-      ]
-    : [
-        { path: '/', label: t('home') },
-        { path: '/study', label: t('study') },
-        { path: '/morphemes', label: t('morphemes', 'Morfemler') },
-        { path: '/games', label: t('games') },
-        { path: '/progress', label: t('progress') },
-      ];
+  const navLinks = [
+    { path: '/', label: t('home', 'Ana Sayfa') },
+    { path: '/study', label: t('study') },
+    { path: '/morphemes', label: t('morphemes', 'Morfemler') },
+    { path: '/games', label: t('games') },
+    { path: '/progress', label: t('progress') },
+  ];
 
   const LanguageSwitcher = () => (
     <div className="flex items-center bg-card border border-border rounded-lg p-1 text-xs font-semibold shadow-sm">

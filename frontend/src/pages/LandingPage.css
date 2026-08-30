@@ -1,0 +1,710 @@
+/* ============================================================
+   Healthlex Landing Page Styles
+   - Black text (#111111)
+   - White paper (#ffffff)
+   - Accent teal (#00C2A8) for CTA buttons
+   - Serif font: Newsreader
+   - Mono font: IBM Plex Mono
+   ============================================================ */
+
+.landing-page {
+  --ink: #111111;
+  --paper: #ffffff;
+  --accent: #00C2A8;
+  --muted: #5a5a5a;
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.185rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  width: 100%;
+}
+
+.landing-page * {
+  box-sizing: border-box;
+}
+
+.landing-page .wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.landing-page a {
+  color: var(--ink);
+}
+
+.landing-page ::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --- Typography Scale --- */
+.landing-page h1 {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(3.6rem, 10vw, 7.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.landing-page h2 {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.4rem;
+}
+
+.landing-page .eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  display: block;
+}
+
+.landing-page .mono {
+  font-family: var(--mono);
+}
+
+.landing-page .muted {
+  color: var(--muted);
+}
+
+.landing-page .big-claim {
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  max-width: 44ch;
+}
+
+/* --- Buttons --- */
+.landing-page .btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 16px 26px;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.landing-page .btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.landing-page .btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.landing-page .btn.small {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* --- Sections --- */
+.landing-page section {
+  padding: clamp(84px, 12vh, 130px) 0;
+}
+
+/* --- Hero Section --- */
+.landing-page .hero {
+  padding-top: clamp(72px, 10vh, 110px);
+}
+
+.landing-page .hero .sub {
+  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+  max-width: 38ch;
+  margin: 1.8rem 0 2.4rem;
+}
+
+.landing-page .hero .microline {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 1.1rem;
+}
+
+.landing-page .hero .down {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 3.2rem;
+  cursor: pointer;
+}
+
+/* --- Demo Box --- */
+.landing-page .demo-box {
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--paper);
+}
+
+.landing-page .demo-term-label {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.landing-page .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 10px 0 6px;
+}
+
+.landing-page .chip {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 14px 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: background .15s ease, color .15s ease;
+  user-select: none;
+}
+
+.landing-page .chip .meaning {
+  display: block;
+  font-size: 0.72em;
+  font-weight: 400;
+  margin-top: 4px;
+  visibility: hidden;
+}
+
+.landing-page .chip.revealed {
+  background: var(--ink);
+  color: var(--paper);
+  cursor: default;
+}
+
+.landing-page .chip.revealed .meaning {
+  visibility: visible;
+}
+
+.landing-page .chip:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.landing-page .demo-hint {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+.landing-page .demo-result {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--ink);
+}
+
+.landing-page .demo-result p {
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  max-width: 52ch;
+}
+
+.landing-page .demo-next {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background .12s ease, color .12s ease;
+}
+
+.landing-page .demo-next:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.landing-page .demo-final {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--ink);
+}
+
+.landing-page .demo-final p {
+  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+  max-width: 40ch;
+  margin-bottom: 1.6rem;
+}
+
+.landing-page .demo-progress {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+/* --- Problem --- */
+.landing-page .problem p {
+  max-width: 58ch;
+  margin-bottom: 1.2rem;
+}
+
+.landing-page .problem .punch {
+  font-weight: 800;
+  font-style: italic;
+}
+
+.landing-page .wave {
+  margin-top: 2.2rem;
+  border-left: 3px solid var(--ink);
+  padding-left: 20px;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.4rem);
+  max-width: 46ch;
+}
+
+/* --- Steps (Method) --- */
+.landing-page .steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 2.4rem;
+}
+
+.landing-page .step {
+  border-top: 2px solid var(--ink);
+  padding-top: 16px;
+}
+
+.landing-page .step .no {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+}
+
+.landing-page .step h3 {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 8px 0 6px;
+}
+
+.landing-page .step .ex {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  margin: 10px 0 8px;
+}
+
+.landing-page .step p {
+  font-size: 1.02rem;
+}
+
+.landing-page .logic-close {
+  margin-top: 2.6rem;
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  max-width: 48ch;
+  font-weight: 500;
+}
+
+/* --- Stats & Games --- */
+.landing-page .stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin: 2.2rem 0 3rem;
+}
+
+.landing-page .stat .n {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+  line-height: 1;
+}
+
+.landing-page .stat .l {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.landing-page .games {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.landing-page .game {
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 20px 22px;
+}
+
+.landing-page .game h3 {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.landing-page .game p {
+  font-size: 1rem;
+}
+
+.landing-page .scope-line {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  max-width: 56ch;
+}
+
+/* --- Founder --- */
+.landing-page .founder-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.landing-page .placeholder {
+  border: 2px dashed var(--ink);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 16px;
+}
+
+.landing-page .photo-ph {
+  aspect-ratio: 4 / 5;
+}
+
+.landing-page .video-ph {
+  aspect-ratio: 16 / 9;
+  margin-top: 36px;
+}
+
+.landing-page .founder-text p {
+  max-width: 56ch;
+  margin-bottom: 1.1rem;
+}
+
+.landing-page .founder-sign {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  margin-top: 1.4rem;
+}
+
+/* --- Testimonials / Quotes --- */
+.landing-page .editor-note {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  border: 1px dashed var(--muted);
+  border-radius: 3px;
+  padding: 8px 12px;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.landing-page .quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.landing-page .quote {
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 22px;
+}
+
+.landing-page .quote p {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+.landing-page .quote .who {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* --- Comparison Table --- */
+.landing-page .table-scroll {
+  overflow-x: auto;
+  margin-top: 1.6rem;
+}
+
+.landing-page table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 640px;
+}
+
+.landing-page th,
+.landing-page td {
+  border: 2px solid var(--ink);
+  padding: 13px 16px;
+  text-align: center;
+  font-size: 0.98rem;
+}
+
+.landing-page th {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.landing-page thead th {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.landing-page td:first-child,
+.landing-page th:first-child {
+  text-align: left;
+  font-family: var(--serif);
+  font-weight: 600;
+}
+
+.landing-page td .yes,
+.landing-page td .no {
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.landing-page td .alt {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+/* --- Pricing Tiers --- */
+.landing-page .price-topline {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 2.4rem;
+}
+
+.landing-page .tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.landing-page .tier {
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--paper);
+}
+
+.landing-page .tier.hot {
+  border-width: 3px;
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.landing-page .tier .badge {
+  position: absolute;
+  top: -14px;
+  left: 22px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+
+.landing-page .tier h3 {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.landing-page .tier .price {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.5vw, 2.9rem);
+  margin: 12px 0 4px;
+}
+
+.landing-page .tier .once {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.landing-page .tier ul {
+  list-style: none;
+  margin-bottom: 26px;
+  padding-left: 0;
+}
+
+.landing-page .tier li {
+  font-size: 1rem;
+  padding: 7px 0;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.landing-page .tier li:last-child {
+  border-bottom: none;
+}
+
+.landing-page .tier .btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+.landing-page .after-price {
+  margin-top: 2.6rem;
+}
+
+.landing-page .flow-line {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  margin-bottom: 1.2rem;
+}
+
+.landing-page .expensive-line {
+  font-size: clamp(1.2rem, 2.4vw, 1.4rem);
+  font-weight: 800;
+  font-style: italic;
+  max-width: 46ch;
+}
+
+/* --- Footer --- */
+.landing-page .lp-footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(80px, 12vh, 120px) 0 46px;
+  margin-top: 40px;
+}
+
+.landing-page .lp-footer a {
+  color: var(--paper);
+}
+
+.landing-page .giant-term {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 5.6vw, 3.6rem);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.landing-page .giant-meanings {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+}
+
+.landing-page .footer-punch {
+  font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+  max-width: 42ch;
+  margin: 3rem 0 2.2rem;
+  font-weight: 500;
+}
+
+.landing-page .lp-footer .btn {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--paper);
+  box-shadow: 5px 5px 0 var(--paper);
+}
+
+.landing-page .lp-footer .btn:hover {
+  box-shadow: 2px 2px 0 var(--paper);
+}
+
+.landing-page .footer-meta {
+  margin-top: 4.5rem;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  opacity: 0.8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  justify-content: space-between;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 840px) {
+  .landing-page .steps {
+    grid-template-columns: 1fr;
+  }
+  .landing-page .stats {
+    grid-template-columns: repeat(2, 1fr) 1fr;
+    grid-template-rows: auto auto;
+  }
+  .landing-page .quotes {
+    grid-template-columns: 1fr;
+  }
+  .landing-page .tiers {
+    grid-template-columns: 1fr;
+  }
+  .landing-page .founder-grid {
+    grid-template-columns: 1fr;
+  }
+  .landing-page .photo-ph {
+    max-width: 280px;
+  }
+  .landing-page .games {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .landing-page .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
