@@ -1,4 +1,5 @@
 import { initializePaddle } from '@paddle/paddle-js';
+import { toast } from 'sonner';
 
 // Environment variable configurations
 const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'test_6e3b91d057ac064f535d586f588';
@@ -29,8 +30,32 @@ export const getPaddle = async () => {
           if (process.env.NODE_ENV !== 'production') {
             console.log('[Paddle Event]', event?.name, event);
           }
+
+          // Ödeme Başarılı Bildirimi
           if (event?.name === 'checkout.completed') {
             console.log('[Paddle] Checkout completed successfully!', event.data);
+            toast.success('Ödemeniz başarıyla tamamlandı! Tüm içeriklerin kilidi açıldı 🎉', {
+              duration: 6000
+            });
+          }
+
+          // Ödeme Başarısız Bildirimi
+          if (event?.name === 'checkout.payment.failed') {
+            console.warn('[Paddle] Payment failed:', event.data);
+            toast.error('Ödeme işlemi tamamlanamadı. Lütfen kart bilgilerinizi kontrol edip tekrar deneyin.', {
+              duration: 6000
+            });
+          }
+
+          // Genel Hata Bildirimi
+          if (event?.name === 'checkout.error') {
+            console.error('[Paddle] Checkout error:', event.data);
+            toast.error('Ödeme sırasında bir hata oluştu. Lütfen tekrar deneyiniz.');
+          }
+
+          // Pencere Kapatıldığında
+          if (event?.name === 'checkout.closed') {
+            console.log('[Paddle] Checkout overlay closed.');
           }
         }
       });
@@ -105,8 +130,10 @@ export const getPricePreviews = async (priceIds = []) => {
  * @param {Array} [options.items] - Array of { priceId, quantity }
  * @param {string} [options.customerEmail] - Signed-in user's email address
  * @param {Object} [options.customData] - Additional metadata to associate with transaction
- * @param {string} [options.successUrl] - Redirect or success destination
+ * @param {string} [options.successUrl] - Optional redirect URL (omitted by default so Paddle keeps success screen in popup)
  * @param {string} [options.displayMode] - 'overlay' or 'inline' (default: 'overlay')
+ * @param {string} [options.theme] - 'light' or 'dark' (default: 'light')
+ * @param {boolean} [options.allowLogout] - allow user to switch Paddle account (default: false)
  */
 export const openPaddleCheckout = async ({
   priceId,
@@ -114,12 +141,14 @@ export const openPaddleCheckout = async ({
   customerEmail,
   customData = {},
   successUrl,
-  displayMode = 'overlay'
+  displayMode = 'overlay',
+  theme = 'light',
+  allowLogout = false
 }) => {
   try {
     const paddle = await getPaddle();
     if (!paddle) {
-      alert('Ödeme sistemi başlatılamadı. Lütfen internet bağlantınızı kontrol edin veya daha sonra tekrar deneyin.');
+      toast.error('Ödeme sistemi başlatılamadı. Lütfen internet bağlantınızı kontrol edin.');
       return;
     }
 
@@ -135,15 +164,21 @@ export const openPaddleCheckout = async ({
       return;
     }
 
+    const checkoutSettings = {
+      displayMode: displayMode || 'overlay', // Varsayılan popup pencere
+      theme: theme || 'light',              // 'light' veya 'dark'
+      allowLogout: allowLogout ?? false,    // Oturumu kapatmaya izin verme
+      locale: 'tr'
+    };
+
+    // successUrl tanımlanmazsa Paddle kendi başarı ekranını pencere içinde tutar
+    if (successUrl) {
+      checkoutSettings.successUrl = successUrl;
+    }
+
     const checkoutOptions = {
       items: checkoutItems,
-      settings: {
-        displayMode,
-        theme: 'light',
-        locale: 'tr',
-        allowLogout: true,
-        successUrl: successUrl || `${window.location.origin}/study?checkout=success`
-      },
+      settings: checkoutSettings,
       customData
     };
 
@@ -157,6 +192,7 @@ export const openPaddleCheckout = async ({
     paddle.Checkout.open(checkoutOptions);
   } catch (error) {
     console.error('[Paddle] Error opening checkout:', error);
+    toast.error('Ödeme penceresi açılırken bir hata oluştu.');
   }
 };
 
