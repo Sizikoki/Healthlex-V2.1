@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { isLoggedIn, getStats } from '@/utils/storage';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
-import { getAllTerms } from '@/data/medicalTerms';
-import { formatMedicalTerm } from '@/utils/format';
-import { useLanguage } from '@/context/LanguageContext';
+import React from 'react';
+import { Study } from './Study';
 
 export const Home = () => {
+  return <Study />;
+};
+
+const _unused_Home = () => {
   const { t } = useLanguage();
   const [user, setUser] = useState(null);
   const [termCount, setTermCount] = useState(() => getAllTerms().length);

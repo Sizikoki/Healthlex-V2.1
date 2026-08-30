@@ -31,7 +31,7 @@ export const Navbar = () => {
   const user = getUser();
   const stats = loggedIn ? getStats() : null;
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => location.pathname === path || (path === '/' && location.pathname === '/study');
 
   const handleLogout = async () => {
     try {
@@ -44,7 +44,7 @@ export const Navbar = () => {
   };
 
   const navLinks = [
-    { path: '/', label: t('home') },
+    { path: '/', label: t('study', 'Çalışma / Sözlük') },
     { path: '/morphemes', label: t('morphemesTerms', 'Morfemler & Terimler') },
     { path: '/games', label: t('gamesStudy', 'Oyunlar / Çalışma Alanı') },
     { path: '/progress', label: t('myProgress', 'İlerlemem (Profil)') },
