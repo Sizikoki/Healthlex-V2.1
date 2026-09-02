@@ -1,49 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain } from 'lucide-react';
+import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain } from 'lucide-react';
 import { getAllTerms } from '@/data/medicalTerms';
 import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { db, auth } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { getPricePreviews, openPaddleCheckout } from '@/services/paddle';
 import { getUser } from '@/utils/storage';
+import { useLanguage } from '@/context/LanguageContext';
+import { getHomeDemoRounds, HOME_CONTENT } from '@/data/homeContent';
 import { toast } from 'sonner';
 import './LandingPage.css';
-
-const DEMO_ROUNDS = [
-  {
-    term: 'GASTROENTERITIS',
-    chips: [
-      { part: 'GASTRO', meaning: 'MİDE' },
-      { part: 'ENTER', meaning: 'BAĞIRSAK' },
-      { part: 'ITIS', meaning: 'İLTİHAP' }
-    ],
-    result: 'Gastroenteritis = Mide-bağırsak iltihabı. İlk terimini çözdün.'
-  },
-  {
-    term: 'OSTEOMYELITIS',
-    chips: [
-      { part: 'OSTEO', meaning: 'KEMİK' },
-      { part: 'MYEL', meaning: 'İLİK' },
-      { part: 'ITIS', meaning: 'İLTİHAP' }
-    ],
-    result: 'Osteomyelitis = Kemik iliği iltihabı. "-itis" ekini artık ömür boyu tanırsın.'
-  },
-  {
-    term: 'STERNOCLEIDOMASTOIDEUS',
-    chips: [
-      { part: 'STERNO', meaning: 'GÖĞÜS KEMİĞİ' },
-      { part: 'CLEIDO', meaning: 'KÖPRÜCÜK KEMİĞİ' },
-      { part: 'MASTOID', meaning: 'MEME ÇIKINTISI' }
-    ],
-    result: 'Musculus sternocleidomastoideus: Göğüs kemiği ile köprücük kemiğinden başlayıp kulak arkasındaki çıkıntıya uzanan kas. Adı, tam olarak izlediği yolu anlatıyor.'
-  }
-];
 
 const PADDLE_PRICE_BASIC = process.env.REACT_APP_PADDLE_PRICE_ID_BASIC || 'pri_01m1a0dry4498ex7bdc34d4twd';
 const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_01m1a0c5kkv836f94g4z81vj0q';
 
 export const Home = () => {
+  const { currentLanguage } = useLanguage();
+  const lang = currentLanguage === 'en' ? 'en' : 'tr';
+  const content = HOME_CONTENT[lang] || HOME_CONTENT.tr;
+  const demoRounds = getHomeDemoRounds(lang);
+
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
   const [revealedIndices, setRevealedIndices] = useState([]);
   const [termCount, setTermCount] = useState(() => getAllTerms().length);
@@ -74,7 +51,8 @@ export const Home = () => {
     const targetPriceId = priceId || (planKey === 'basic' ? 'pri_01m1a0dry4498ex7bdc34d4twd' : 'pri_01m1a0c5kkv836f94g4z81vj0q');
 
     try {
-      toast.loading('Paddle Checkout açılıyor...', { id: 'paddle-loading' });
+      const loadingMsg = lang === 'en' ? 'Opening Paddle Checkout...' : 'Paddle Checkout açılıyor...';
+      toast.loading(loadingMsg, { id: 'paddle-loading' });
       await openPaddleCheckout({
         priceId: targetPriceId,
         customerEmail,
@@ -87,7 +65,8 @@ export const Home = () => {
     } catch (err) {
       toast.dismiss('paddle-loading');
       console.error('Checkout error:', err);
-      toast.error('Paddle Checkout açılırken hata oluştu.');
+      const errorMsg = lang === 'en' ? 'Error opening Paddle Checkout.' : 'Paddle Checkout açılırken hata oluştu.';
+      toast.error(errorMsg);
     }
   };
 
@@ -116,9 +95,9 @@ export const Home = () => {
     fetchTermCount();
   }, []);
 
-  const currentRound = DEMO_ROUNDS[currentRoundIndex];
+  const currentRound = demoRounds[currentRoundIndex] || demoRounds[0];
   const isAllRevealed = revealedIndices.length === currentRound.chips.length;
-  const isFinalRound = currentRoundIndex === DEMO_ROUNDS.length - 1;
+  const isFinalRound = currentRoundIndex === demoRounds.length - 1;
 
   const handleChipClick = (index) => {
     if (revealedIndices.includes(index)) return;
@@ -126,7 +105,7 @@ export const Home = () => {
   };
 
   const handleNextRound = () => {
-    if (currentRoundIndex < DEMO_ROUNDS.length - 1) {
+    if (currentRoundIndex < demoRounds.length - 1) {
       setCurrentRoundIndex((prev) => prev + 1);
       setRevealedIndices([]);
     }
@@ -145,17 +124,13 @@ export const Home = () => {
         {/* ================= HERO ================= */}
         <section className="hero">
           <div className="wrap">
-            <span className="eyebrow">
-              <Sparkles className="w-4 h-4 text-primary" />
-              Sağlık Bilimleri ve Anatomi İçin
-            </span>
             <h1>
-              Ezberleme.
+              {content.hero.title1}
               <br />
-              <span className="text-primary">Çöz.</span>
+              <span className="text-primary">{content.hero.title2}</span>
             </h1>
             <p className="sub">
-              Her Latince tıp terimi 2–3 parçadan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong> terimi ezberlemeden oku, sınavdan 2 hafta sonra da hatırla.
+              {content.hero.sub(termCount)}
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <button
@@ -163,20 +138,20 @@ export const Home = () => {
                 className="site-btn-primary"
                 onClick={() => scrollToSection('fiyat')}
               >
-                Tüm Terimlerin Kilidini Aç
+                {content.hero.ctaBtn}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
             </div>
             <p className="microline">
-              <span>✓ Yıllık abonelik</span>
+              <span>{content.hero.micro1}</span>
               <span>·</span>
-              <span>✓ TR ⟷ EN</span>
+              <span>{content.hero.micro2}</span>
             </p>
             <p
               className="down"
               onClick={() => scrollToSection('demo')}
             >
-              ↓ Önce kanıt: İlk terimini 20 saniyede çöz.
+              {content.hero.scrollProof}
             </p>
           </div>
         </section>
@@ -186,9 +161,9 @@ export const Home = () => {
           <div className="wrap">
             <div className="demo-box" aria-live="polite">
               <p className="demo-progress">
-                <span>{currentRoundIndex + 1}</span> / {DEMO_ROUNDS.length}
+                <span>{currentRoundIndex + 1}</span> / {demoRounds.length}
               </p>
-              <p className="demo-term-label">Bu terimi daha önce hiç görmediysen bile çözebilirsin:</p>
+              <p className="demo-term-label">{content.demo.label}</p>
               <p className="font-bold text-2xl sm:text-3xl text-foreground mb-2 tracking-tight">
                 {currentRound.term}
               </p>
@@ -209,7 +184,7 @@ export const Home = () => {
                 })}
               </div>
               {!isAllRevealed && (
-                <p className="demo-hint">Parçalara dokunun, anlamları açılsın.</p>
+                <p className="demo-hint">{content.demo.hint}</p>
               )}
 
               {isAllRevealed && (
@@ -221,7 +196,7 @@ export const Home = () => {
                       type="button"
                       onClick={handleNextRound}
                     >
-                      Sıradaki Terim →
+                      {content.demo.nextBtn}
                     </button>
                   )}
                 </div>
@@ -230,14 +205,14 @@ export const Home = () => {
               {isAllRevealed && isFinalRound && (
                 <div className="demo-final">
                   <p>
-                    <strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {termCount}+ terim ve {totalMorphemes}+ morfem seni bekliyor.
+                    {content.demo.finalMsg(termCount, totalMorphemes)}
                   </p>
                   <button
                     type="button"
                     className="site-btn-primary"
                     onClick={() => scrollToSection('fiyat')}
                   >
-                    Tüm Terimlerin Kilidini Aç
+                    {content.demo.finalBtn}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </button>
                 </div>
@@ -249,16 +224,16 @@ export const Home = () => {
         {/* ================= PROBLEM ================= */}
         <section className="problem">
           <div className="wrap">
-            <span className="eyebrow">Sorun</span>
-            <h2>Sınav gecesini hatırlıyor musun?</h2>
+            <span className="eyebrow">{content.problem.eyebrow}</span>
+            <h2>{content.problem.title}</h2>
             <p>
-              Önünde 40 sayfalık kemik listesi. <span className="font-semibold text-foreground">Sustentaculum tali</span>'yi on kez yazdın; on birincide yine deftere bakıyorsun. Sabah sınavda çıkıyor, hatırlıyorsun. İki hafta sonra klinikte aynı terim geçiyor; kafanda tek bir harf bile yok.
+              {content.problem.p1}
             </p>
             <p className="punch">
-              Sorun sende değil, yöntemde: Anlamadan ezberlenen terim, kısa süreli hafızada misafirdir.
+              {content.problem.punch}
             </p>
             <p className="wave">
-              Dil öğrenmenin oyunlaştırılabileceğini Duolingo kanıtladı. Latince tıp dili neden hâlâ liste ezberi?
+              {content.problem.wave}
             </p>
           </div>
         </section>
@@ -266,30 +241,30 @@ export const Home = () => {
         {/* ================= YÖNTEM ================= */}
         <section>
           <div className="wrap">
-            <span className="eyebrow">Yöntem</span>
-            <h2>Tek mantık: Parçala, anla, birleştir.</h2>
+            <span className="eyebrow">{content.method.eyebrow}</span>
+            <h2>{content.method.title}</h2>
             <div className="steps">
               <div className="step">
-                <span className="no">ADIM 1</span>
-                <h3>Parçala</h3>
-                <p className="ex">KARDİYOMİYOPATİ → CARDIO · MYO · PATHY</p>
-                <p>Her terim, morfem adı verilen yapı taşlarına ayrılır.</p>
+                <span className="no">{content.method.step1No}</span>
+                <h3>{content.method.step1Title}</h3>
+                <p className="ex">{content.method.step1Ex}</p>
+                <p>{content.method.step1Desc}</p>
               </div>
               <div className="step">
-                <span className="no">ADIM 2</span>
-                <h3>Anla</h3>
-                <p className="ex">KALP · KAS · HASTALIK</p>
-                <p>Her parçanın tek bir anlamı vardır ve {termCount}+ terimin içinde tekrar eder.</p>
+                <span className="no">{content.method.step2No}</span>
+                <h3>{content.method.step2Title}</h3>
+                <p className="ex">{content.method.step2Ex}</p>
+                <p>{content.method.step2Desc(termCount)}</p>
               </div>
               <div className="step">
-                <span className="no">ADIM 3</span>
-                <h3>Birleştir</h3>
-                <p className="ex">= KALP KASI HASTALIĞI</p>
-                <p>Terim artık hafızanda. Bir daha listeye bakmana gerek yok.</p>
+                <span className="no">{content.method.step3No}</span>
+                <h3>{content.method.step3Title}</h3>
+                <p className="ex">{content.method.step3Ex}</p>
+                <p>{content.method.step3Desc}</p>
               </div>
             </div>
             <p className="logic-close">
-              {totalMorphemes}+ morfemi öğrendiğinde, daha önce hiç görmediğin terimleri bile rahatlıkla okursun. Ezber sana liste kazandırır; mantık sana tıp dili kazandırır.
+              {content.method.logicClose(totalMorphemes)}
             </p>
           </div>
         </section>
@@ -297,67 +272,68 @@ export const Home = () => {
         {/* ================= İÇERİK ================= */}
         <section>
           <div className="wrap">
-            <span className="eyebrow">İçeride Ne Var?</span>
-            <h2>Sayılarla HealthLexMed</h2>
+            <span className="eyebrow">{content.features.eyebrow}</span>
+            <h2>{content.features.title}</h2>
             <div className="stats">
               <div className="stat">
                 <div className="n">{termCount}+</div>
-                <div className="l">Terim</div>
+                <div className="l">{content.features.terms}</div>
               </div>
               <div className="stat">
                 <div className="n">{totalMorphemes}+</div>
-                <div className="l">Morfem</div>
+                <div className="l">{content.features.morphemes}</div>
               </div>
               <div className="stat">
                 <div className="n">10</div>
-                <div className="l">Kategori</div>
+                <div className="l">{content.features.categories}</div>
               </div>
               <div className="stat">
                 <div className="n">4</div>
-                <div className="l">Oyun Modu</div>
+                <div className="l">{content.features.modes}</div>
               </div>
               <div className="stat">
                 <div className="n">2</div>
-                <div className="l">Dil (TR·EN)</div>
+                <div className="l">{content.features.languages}</div>
               </div>
             </div>
             <div className="games">
               <div className="game">
                 <div className="flex items-center gap-2 mb-1">
                   <BookOpen className="w-5 h-5 text-primary" />
-                  <h3>BİLGİ KARTLARI</h3>
+                  <h3>{content.features.game1Title}</h3>
                 </div>
-                <p>Terimi gör, tahmin et ve kartı çevir. Aktif hatırlama tekniğinin ta kendisi.</p>
+                <p>{content.features.game1Desc}</p>
               </div>
               <div className="game">
                 <div className="flex items-center gap-2 mb-1">
                   <Layers className="w-5 h-5 text-primary" />
-                  <h3>EŞLEŞTİRME</h3>
+                  <h3>{content.features.game2Title}</h3>
                 </div>
-                <p>Latince terimleri Türkçe anlamlarıyla süreye karşı eşleştir. Kendi rekorunu kır.</p>
+                <p>{content.features.game2Desc}</p>
               </div>
               <div className="game">
                 <div className="flex items-center gap-2 mb-1">
                   <Trophy className="w-5 h-5 text-primary" />
-                  <h3>QUIZ</h3>
+                  <h3>{content.features.game3Title}</h3>
                 </div>
-                <p>Kategoriye özel dinamik sorular. Her testte çeldiriciler yeniden üretilir.</p>
+                <p>{content.features.game3Desc}</p>
               </div>
               <div className="game">
                 <div className="flex items-center gap-2 mb-1">
                   <Brain className="w-5 h-5 text-primary" />
-                  <h3>MORFEM OYUNU</h3>
+                  <h3>{content.features.game4Title}</h3>
                 </div>
-                <p>Ek ve kökleri birleştirerek terimi kur — az önce yukarıda oynadığın oyunun tamamı.</p>
+                <p>{content.features.game4Desc}</p>
               </div>
             </div>
             <p className="scope-line">
-              Kapsam: Kafatasından ayak bileğine kadar kemikler, eklemler ve hareket terimleri — kategori kategori. Üstelik internet bağlantısı olmasa bile çalışır.
+              {content.features.scopeLine}
             </p>
           </div>
         </section>
 
-        {/* ================= KURUCU ================= */}
+        {/* ================= KURUCU (Şimdilik Gizlendi - İleride Tekrar Açılabilir) ================= */}
+        {/* 
         <section>
           <div className="wrap">
             <span className="eyebrow">Kim Yaptı?</span>
@@ -388,54 +364,54 @@ export const Home = () => {
             </div>
           </div>
         </section>
+        */}
 
-        {/* ================= YORUMLAR ================= */}
+        {/* ================= YORUMLAR / FEEDBACK (Gerçek kullanıcı yorumları geldiğinde tekrar açılmak üzere şimdilik gizlendi) ================= */}
+        {/* 
         <section>
           <div className="wrap">
-            <span className="eyebrow">Kullananlar</span>
-            <h2>Öğrenciler Ne Diyor?</h2>
-            <p className="editor-note">
-              TASLAK — Yayına almadan önce bu 3 yorumu gerçek beta kullanıcı yorumlarıyla değiştirip bu notu kaldırabilirsiniz.
-            </p>
+            <span className="eyebrow">{content.testimonials.eyebrow}</span>
+            <h2>{content.testimonials.title}</h2>
             <div className="quotes">
               <div className="quote">
-                <p>"Eşleştirme oyununda kendi rekorumu kovalarken farkında olmadan 60 terim öğrenmişim."</p>
-                <p className="who">F. — Fizyoterapi, 2. Sınıf</p>
+                <p>{content.testimonials.q1Text}</p>
+                <p className="who">{content.testimonials.q1Who}</p>
               </div>
               <div className="quote">
-                <p>"Anki'de deste hazırlamaktan çalışmaya vakit kalmıyordu. Burada doğrudan açıp çalışmaya başlıyorum."</p>
-                <p className="who">M. — Tıp, 1. Sınıf</p>
+                <p>{content.testimonials.q2Text}</p>
+                <p className="who">{content.testimonials.q2Who}</p>
               </div>
               <div className="quote">
-                <p>"Morfem oyunundan sonra hoca spotta ne sorsa parçalayıp hemen çözüyorum."</p>
-                <p className="who">Z. — Hemşirelik, 1. Sınıf</p>
+                <p>{content.testimonials.q3Text}</p>
+                <p className="who">{content.testimonials.q3Who}</p>
               </div>
             </div>
           </div>
         </section>
+        */}
 
         {/* ================= KARŞILAŞTIRMA ================= */}
         <section>
           <div className="wrap">
-            <span className="eyebrow">Alternatifler</span>
-            <h2>Neden Anki ya da Quizlet Değil?</h2>
+            <span className="eyebrow">{content.comparison.eyebrow}</span>
+            <h2>{content.comparison.title}</h2>
             <div className="table-scroll">
               <table>
                 <thead>
                   <tr>
-                    <th>Özellik</th>
-                    <th>HealthLexMed</th>
+                    <th>{content.comparison.thFeature}</th>
+                    <th>{content.comparison.thHealthlex}</th>
                     <th>
-                      Genel Kart Uygulamaları
+                      {content.comparison.thCards.split('\n')[0]}
                       <br />
-                      (Anki, Quizlet)
+                      {content.comparison.thCards.split('\n')[1]}
                     </th>
-                    <th>PDF & Ders Notları</th>
+                    <th>{content.comparison.thNotes}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Terimleri köklerine ayıran motor</td>
+                    <td>{content.comparison.row1}</td>
                     <td>
                       <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
@@ -447,7 +423,7 @@ export const Home = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Tıp içeriği hazır yüklü</td>
+                    <td>{content.comparison.row2}</td>
                     <td>
                       <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
@@ -459,7 +435,7 @@ export const Home = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Türkçe ⟷ Latince çift dil desteği</td>
+                    <td>{content.comparison.row3}</td>
                     <td>
                       <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
@@ -471,7 +447,7 @@ export const Home = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Tıbba özel 4 farklı oyun modu</td>
+                    <td>{content.comparison.row4}</td>
                     <td>
                       <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
@@ -483,31 +459,19 @@ export const Home = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>İnternetsiz çalışabilme</td>
+                    <td>{content.comparison.row5}</td>
                     <td>
-                      <Check className="w-5 h-5 text-primary mx-auto" />
+                      <span className="font-semibold text-primary">{content.comparison.row5ValHealthlex}</span>
                     </td>
                     <td>
-                      <Check className="w-5 h-5 text-primary mx-auto" />
+                      <span className="text-muted-foreground">{content.comparison.row5ValCards}</span>
                     </td>
                     <td>
-                      <Check className="w-5 h-5 text-primary mx-auto" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Ödeme Modeli</td>
-                    <td>
-                      <span className="font-semibold text-primary">Yıllık abonelik</span>
-                    </td>
-                    <td>
-                      <span className="text-muted-foreground">Abonelik / Saatlerce deste hazırlığı</span>
-                    </td>
-                    <td>
-                      <span className="text-muted-foreground">Ücretsiz (Zaman maliyeti yüksek)</span>
+                      <span className="text-muted-foreground">{content.comparison.row5ValNotes}</span>
                     </td>
                   </tr>
                   <tr>
-                    <td>2 hafta sonra hatırlama oranı</td>
+                    <td>{content.comparison.row6}</td>
                     <td>
                       <Check className="w-5 h-5 text-primary mx-auto" />
                     </td>
@@ -527,98 +491,72 @@ export const Home = () => {
         {/* ================= FİYAT ================= */}
         <section id="fiyat">
           <div className="wrap">
-            <span className="eyebrow">Fiyatlandırma</span>
-            <h2>Yıllık abonelik. Tek seferlik ödeme yok.</h2>
-            <p className="price-topline">Aylık değil yıllık ücretlendirme. Abonelik her yıl otomatik yenilenir.</p>
+            <span className="eyebrow">{content.pricing.eyebrow}</span>
+            <h2>{content.pricing.title}</h2>
+            <p className="price-topline">{content.pricing.topline}</p>
 
             <div className="tiers">
               {/* Temel Paket */}
               <div className="tier">
-                <h3>Temel Paket</h3>
+                <h3>{content.pricing.basicTitle}</h3>
                 <div className="price">{paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}</div>
-                <div className="once">yıllık</div>
+                <div className="once">{content.pricing.basicPeriod}</div>
                 <ul>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>3 kategori: Kemikler, Eklemler, Kas Sistemi</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Bilgi Kartları ve Quiz modları</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>TR ⟷ EN çift dil desteği</span>
-                  </li>
-                  <li className="opacity-40">
-                    <Minus className="w-4 h-4 shrink-0 mt-1" />
-                    <span>Eşleştirme ve Morfem Oyunu yok</span>
-                  </li>
-                  <li className="opacity-40">
-                    <Minus className="w-4 h-4 shrink-0 mt-1" />
-                    <span>İlerleme istatistikleri ve seviye sistemi yok</span>
-                  </li>
-                  <li className="opacity-40">
-                    <Minus className="w-4 h-4 shrink-0 mt-1" />
-                    <span>Morfem kütüphanesi yok</span>
-                  </li>
+                  {content.pricing.basicFeatures.map((feat, idx) => (
+                    <li key={idx} className={feat.active ? '' : 'opacity-40'}>
+                      {feat.active ? (
+                        <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                      ) : (
+                        <Minus className="w-4 h-4 shrink-0 mt-1" />
+                      )}
+                      <span>{feat.text}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="btn-container">
                   <button
                     type="button"
-                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_BASIC, 'Temel Paket', 'basic')}
+                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_BASIC, content.pricing.basicTitle, 'basic')}
                     className="site-btn-secondary w-full text-center"
                   >
-                    Temel Paketi Aç — {paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}
+                    {content.pricing.basicBtn(paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15')}
                   </button>
                 </div>
               </div>
 
               {/* Tam Paket (Öne Çıkan) */}
               <div className="tier hot">
-                <span className="badge">EN ÇOK TERCİH EDİLEN</span>
-                <h3 className="text-primary">Tam Paket</h3>
+                <span className="badge">{content.pricing.proBadge}</span>
+                <h3 className="text-primary">{content.pricing.proTitle}</h3>
                 <div className="price">{paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}</div>
-                <div className="once">yıllık</div>
+                <div className="once">{content.pricing.proPeriod}</div>
                 <ul>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>10 kategorinin tamamı + {totalMorphemes}+ morfem kütüphanesi</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>4 oyun modunun tamamı (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>İlerleme istatistikleri ve seviye sistemi</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>TR ⟷ EN çift dil desteği</span>
-                  </li>
-                  <li>
-                    <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                    <span>Gelecek tüm yeni modüller ve güncellemeler dahil</span>
-                  </li>
+                  {content.pricing.proFeatures(totalMorphemes).map((feat, idx) => (
+                    <li key={idx} className={feat.active ? '' : 'opacity-40'}>
+                      {feat.active ? (
+                        <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
+                      ) : (
+                        <Minus className="w-4 h-4 shrink-0 mt-1" />
+                      )}
+                      <span>{feat.text}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="btn-container">
                   <button
                     type="button"
-                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, 'Tam Paket', 'pro')}
+                    onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, content.pricing.proTitle, 'pro')}
                     className="site-btn-primary w-full text-center"
                   >
-                    Tam Paketi Aç — {paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}
+                    {content.pricing.proBtn(paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20')}
                   </button>
                 </div>
               </div>
             </div>
 
             <div className="after-price">
-              <p className="flow-line">Ödemeni yap → hesabın açılır → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, istediğin an iptal edebilirsin.</p>
-              <p className="expensive-line">
-                Evet, ücretsiz alternatiflerden pahalıyız. Ezberleyip unutmak bedava; bir daha unutmamak yılda 20 dolar.
-              </p>
+              <p className="flow-line">{content.pricing.flowLine}</p>
+              <p className="expensive-line">{content.pricing.expensiveLine}</p>
             </div>
           </div>
         </section>
@@ -627,25 +565,23 @@ export const Home = () => {
       {/* ================= FOOTER ================= */}
       <footer className="lp-footer">
         <div className="wrap">
-          <p className="giant-term">STERNO · CLEIDO · MASTOIDEUS</p>
+          <p className="giant-term">{content.footer.term}</p>
           <div className="giant-meanings">
-            <span>sterno = Göğüs kemiği</span>
-            <span>cleido = Köprücük kemiği</span>
-            <span>mastoid = Kulak arkasındaki çıkıntı</span>
+            {content.footer.meanings.map((meaning, idx) => (
+              <span key={idx}>{meaning}</span>
+            ))}
           </div>
-          <p className="footer-punch">
-            Bu sayfaya girmeden önce bu terimi anlamlandıramıyor olabilirdiniz. Şimdi bir arkadaşınıza gönderin — bakalım o çözebilecek mi?
-          </p>
+          <p className="footer-punch">{content.footer.punch}</p>
           <button
             type="button"
             className="site-btn-primary"
             onClick={() => scrollToSection('fiyat')}
           >
-            Tüm Terimlerin Kilidini Aç
+            {content.footer.ctaBtn}
             <ArrowRight className="w-4 h-4 ml-2" />
           </button>
           <div className="footer-meta">
-            <span>HealthLexMed — Latince tıp terimlerini kök mantığıyla ve oyunlaştırarak öğreten eğitim platformu.</span>
+            <span>{content.footer.meta}</span>
             <span>© 2026 HealthLexMed · healthlexmed.com</span>
           </div>
         </div>

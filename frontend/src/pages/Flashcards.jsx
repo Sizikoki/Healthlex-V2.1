@@ -12,8 +12,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const Flashcards = () => {
+  const { currentLanguage, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
@@ -114,7 +116,10 @@ export const Flashcards = () => {
     } else {
       // Session complete
       saveFlashcardSession(categoryId || 'all', finalLearned, terms.length);
-      toast.success(`Tamamlandı! ${finalLearned}/${terms.length} terim öğrenildi.`);
+      const finishMsg = t('sessionCompleteToast', `Tamamlandı! ${finalLearned}/${terms.length} terim öğrenildi.`)
+        .replace('{learned}', finalLearned)
+        .replace('{total}', terms.length);
+      toast.success(finishMsg);
       navigate('/games');
     }
   };
@@ -132,8 +137,8 @@ export const Flashcards = () => {
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <h3 className="text-xl font-semibold mb-2">Kartlar Yükleniyor...</h3>
-          <p className="text-muted-foreground">Kelimeler veritabanından çekiliyor...</p>
+          <h3 className="text-xl font-semibold mb-2">{t('loadingCards')}</h3>
+          <p className="text-muted-foreground">{t('fetchingTerms')}</p>
         </Card>
       </div>
     );
@@ -143,10 +148,10 @@ export const Flashcards = () => {
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
-          <h3 className="text-xl font-semibold mb-2 text-destructive">Hata</h3>
-          <p className="text-muted-foreground mb-4">Bu kategoriye ait kelime bulunamadı.</p>
+          <h3 className="text-xl font-semibold mb-2 text-destructive">{t('error', 'Hata')}</h3>
+          <p className="text-muted-foreground mb-4">{t('noTermsInCategory')}</p>
           <Button asChild className="gradient-primary">
-            <Link to="/games">Oyunlara Dön</Link>
+            <Link to="/games">{t('backToGames')}</Link>
           </Button>
         </Card>
       </div>
@@ -165,13 +170,13 @@ export const Flashcards = () => {
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Oyunlara Dön
+            {t('backToGames')}
           </Button>
 
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Flashcard</h1>
-              <p className="text-muted-foreground">Kart {currentIndex + 1} / {terms.length}</p>
+              <h1 className="text-2xl sm:text-3xl font-bold">{t('flashcards')}</h1>
+              <p className="text-muted-foreground">{t('cardCount')} {currentIndex + 1} / {terms.length}</p>
             </div>
             <Button variant="outline" size="icon" onClick={handleRestart}>
               <RotateCw className="w-5 h-5" />
@@ -183,11 +188,11 @@ export const Flashcards = () => {
           <div className="flex items-center gap-4 mt-4 text-sm">
             <div className="flex items-center gap-1">
               <Check className="w-4 h-4 text-success" />
-              <span>Öğrenilen: {learnedCount}</span>
+              <span>{t('learnedLabel')}: {learnedCount}</span>
             </div>
             <div className="flex items-center gap-1">
               <X className="w-4 h-4 text-muted-foreground" />
-              <span>Atlanan: {skippedCount}</span>
+              <span>{t('skippedLabel')}: {skippedCount}</span>
             </div>
           </div>
         </div>
@@ -271,7 +276,7 @@ export const Flashcards = () => {
               className="h-16 text-lg"
             >
               <X className="w-5 h-5 mr-2" />
-              Bilmiyorum
+              {t('dontKnow')}
             </Button>
             <Button
               size="lg"
@@ -279,7 +284,7 @@ export const Flashcards = () => {
               className="h-16 text-lg gradient-primary"
             >
               <Check className="w-5 h-5 mr-2" />
-              Biliyorum
+              {t('know')}
             </Button>
           </div>
         )}
@@ -291,7 +296,7 @@ export const Flashcards = () => {
               onClick={handleFlip}
               className="h-16 px-8 text-lg gradient-primary"
             >
-              Kartı Çevir
+              {t('flipCard')}
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
           </div>

@@ -9,35 +9,63 @@ import { saveUser, syncProgressFromFirestore } from '@/utils/storage';
 import { toast } from 'sonner';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '@/firebase/config';
+import { useLanguage } from '@/context/LanguageContext';
 
-// Helper function to translate Firebase auth errors to Turkish
-const getTurkishErrorMessage = (errorCode) => {
-  switch (errorCode) {
-    case 'auth/invalid-email':
-      return 'Geçersiz bir e-posta adresi girdiniz.';
-    case 'auth/user-disabled':
-      return 'Bu kullanıcı hesabı engellenmiştir.';
-    case 'auth/user-not-found':
-      return 'Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.';
-    case 'auth/wrong-password':
-      return 'Hatalı şifre girdiniz. Lütfen tekrar deneyin.';
-    case 'auth/email-already-in-use':
-      return 'Bu e-posta adresi zaten kullanımda.';
-    case 'auth/weak-password':
-      return 'Şifreniz çok zayıf. Şifre en az 6 karakter olmalıdır.';
-    case 'auth/operation-not-allowed':
-      return 'Bu giriş yöntemine izin verilmedi.';
-    case 'auth/too-many-requests':
-      return 'Çok fazla başarısız giriş denemesi yaptınız. Lütfen daha sonra tekrar deneyin.';
-    case 'auth/invalid-credential':
-      return 'E-posta adresi veya şifre hatalı.';
-    default:
-      return 'Bir hata oluştu. Lütfen tekrar deneyin.';
+// Helper function to translate Firebase auth errors
+const getAuthErrorMessage = (errorCode, isTr) => {
+  if (isTr) {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        return 'Geçersiz bir e-posta adresi girdiniz.';
+      case 'auth/user-disabled':
+        return 'Bu kullanıcı hesabı engellenmiştir.';
+      case 'auth/user-not-found':
+        return 'Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.';
+      case 'auth/wrong-password':
+        return 'Hatalı şifre girdiniz. Lütfen tekrar deneyin.';
+      case 'auth/email-already-in-use':
+        return 'Bu e-posta adresi zaten kullanımda.';
+      case 'auth/weak-password':
+        return 'Şifreniz çok zayıf. Şifre en az 6 karakter olmalıdır.';
+      case 'auth/operation-not-allowed':
+        return 'Bu giriş yöntemine izin verilmedi.';
+      case 'auth/too-many-requests':
+        return 'Çok fazla başarısız giriş denemesi yaptınız. Lütfen daha sonra tekrar deneyin.';
+      case 'auth/invalid-credential':
+        return 'E-posta adresi veya şifre hatalı.';
+      default:
+        return 'Bir hata oluştu. Lütfen tekrar deneyin.';
+    }
+  } else {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        return 'You entered an invalid email address.';
+      case 'auth/user-disabled':
+        return 'This user account has been disabled.';
+      case 'auth/user-not-found':
+        return 'No user found with this email address.';
+      case 'auth/wrong-password':
+        return 'Incorrect password. Please try again.';
+      case 'auth/email-already-in-use':
+        return 'This email address is already in use.';
+      case 'auth/weak-password':
+        return 'Password is too weak. Must be at least 6 characters.';
+      case 'auth/operation-not-allowed':
+        return 'This sign-in method is not allowed.';
+      case 'auth/too-many-requests':
+        return 'Too many failed attempts. Please try again later.';
+      case 'auth/invalid-credential':
+        return 'Invalid email address or password.';
+      default:
+        return 'An error occurred. Please try again.';
+    }
   }
 };
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { currentLanguage, t } = useLanguage();
+  const isTr = currentLanguage === 'tr';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,7 +73,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error('Lütfen tüm alanları doldurun');
+      toast.error(t('fillAllFields', 'Lütfen tüm alanları doldurun'));
       return;
     }
 
@@ -65,11 +93,11 @@ export const Login = () => {
       // Synchronize progress from Firestore immediately on login
       await syncProgressFromFirestore();
 
-      toast.success('Giriş başarılı! Hoş geldiniz.');
+      toast.success(t('loginSuccess', 'Giriş başarılı! Hoş geldiniz.'));
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);
-      const message = getTurkishErrorMessage(error.code);
+      const message = getAuthErrorMessage(error.code, isTr);
       toast.error(message);
     } finally {
       setLoading(false);
@@ -85,13 +113,13 @@ export const Login = () => {
               <Activity className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">HealthLexMed'e Giriş Yap</CardTitle>
-          <CardDescription>Hesabınıza erişin ve öğrenmeye devam edin</CardDescription>
+          <CardTitle className="text-2xl font-bold">{t('loginTitle', "HealthLexMed'e Giriş Yap")}</CardTitle>
+          <CardDescription>{t('loginSubtitle', 'Hesabınıza erişin ve öğrenmeye devam edin')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">E-posta</Label>
+              <Label htmlFor="email">{t('email', 'E-posta')}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -107,7 +135,7 @@ export const Login = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Şifre</Label>
+              <Label htmlFor="password">{t('password', 'Şifre')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -123,15 +151,15 @@ export const Login = () => {
             </div>
 
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={loading}>
-              {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+              {loading ? t('loggingIn', 'Giriş Yapılıyor...') : t('login', 'Giriş Yap')}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              Hesabın yok mu?{' '}
+              {t('noAccount', 'Hesabın yok mu?')}{' '}
               <Link to="/register" className="text-primary font-medium hover:underline">
-                Kayıt Ol
+                {t('signUp', 'Kayıt Ol')}
               </Link>
             </p>
           </div>
@@ -143,6 +171,8 @@ export const Login = () => {
 
 export const Register = () => {
   const navigate = useNavigate();
+  const { currentLanguage, t } = useLanguage();
+  const isTr = currentLanguage === 'tr';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -151,7 +181,7 @@ export const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
-      toast.error('Lütfen tüm alanları doldurun');
+      toast.error(t('fillAllFields', 'Lütfen tüm alanları doldurun'));
       return;
     }
 
@@ -176,11 +206,11 @@ export const Register = () => {
       // Synchronize progress from Firestore immediately on registration
       await syncProgressFromFirestore();
 
-      toast.success('Hesap oluşturuldu! Hoş geldiniz.');
+      toast.success(t('registerSuccess', 'Hesap oluşturuldu! Hoş geldiniz.'));
       navigate('/');
     } catch (error) {
       console.error('Registration error:', error);
-      const message = getTurkishErrorMessage(error.code);
+      const message = getAuthErrorMessage(error.code, isTr);
       toast.error(message);
     } finally {
       setLoading(false);
@@ -196,19 +226,19 @@ export const Register = () => {
               <Activity className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">HealthLexMed'e Kayıt Ol</CardTitle>
-          <CardDescription>Ücretsiz hesap oluştur ve öğrenmeye başla</CardDescription>
+          <CardTitle className="text-2xl font-bold">{t('registerTitle', "HealthLexMed'e Kayıt Ol")}</CardTitle>
+          <CardDescription>{t('registerSubtitle', 'Ücretsiz hesap oluştur ve öğrenmeye başla')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleRegister} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Ad Soyad</Label>
+              <Label htmlFor="name">{t('fullName', 'Ad Soyad')}</Label>
               <div className="relative">
                 <UserIcon className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
                   id="name"
                   type="text"
-                  placeholder="Adınız Soyadınız"
+                  placeholder={t('fullNamePlaceholder', 'Adınız Soyadınız')}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="pl-10"
@@ -218,7 +248,7 @@ export const Register = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">E-posta</Label>
+              <Label htmlFor="email">{t('email', 'E-posta')}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
@@ -234,13 +264,13 @@ export const Register = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Şifre</Label>
+              <Label htmlFor="password">{t('password', 'Şifre')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input
                   id="password"
                   type="password"
-                  placeholder="En az 6 karakter"
+                  placeholder={t('passwordPlaceholder', 'En az 6 karakter')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
@@ -250,15 +280,15 @@ export const Register = () => {
             </div>
 
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={loading}>
-              {loading ? 'Hesap Oluşturuluyor...' : 'Hesap Oluştur'}
+              {loading ? t('creatingAccount', 'Hesap Oluşturuluyor...') : t('createAccount', 'Hesap Oluştur')}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              Zaten hesabın var mı?{' '}
+              {t('alreadyHaveAccount', 'Zaten hesabın var mı?')}{' '}
               <Link to="/login" className="text-primary font-medium hover:underline">
-                Giriş Yap
+                {t('login', 'Giriş Yap')}
               </Link>
             </p>
           </div>

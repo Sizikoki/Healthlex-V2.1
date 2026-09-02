@@ -110,13 +110,48 @@ export const Dashboard = () => {
   const activeTotalCount = activeCatTerms.length;
 
   const termsOfTheDay = [
-    { term: 'Malleolus', meaning: 'Ayak bileğinin iç ve dış çıkıntıları; tibia ve fibulanın alt uçlarında yer alır.' },
-    { term: 'Sustentaculum Tali', meaning: 'Topuk kemiğinin aşık kemiğini destekleyen raf benzeri çıkıntısı.' },
-    { term: 'Olecranon', meaning: 'Dirsek ucu çıkıntısı; ulnanın üst ucunda yer alır ve dirseğin arkasını oluşturur.' },
-    { term: 'Symphysis Pubica', meaning: 'Çatı kemiklerinin ön ortadaki birleşme yeri; kıkırdak eklem yapısı.' },
-    { term: 'Acromion', meaning: 'Kürek kemiğinin omuz başını oluşturan en dış çıkıntısı.' },
-    { term: 'Patella', meaning: 'Diz kapağı kemiği; diz eklemini koruyan yassı susamsı kemik.' },
-    { term: 'Processus Styloideus', meaning: 'Şakak kemiğinin veya döner kemiğin altındaki kalem benzeri ince çıkıntı.' }
+    { 
+      term: 'Malleolus', 
+      meaning: currentLanguage === 'en' 
+        ? 'Medial and lateral bony prominences at the ankle joint; located at the lower ends of the tibia and fibula.' 
+        : 'Ayak bileğinin iç ve dış çıkıntıları; tibia ve fibulanın alt uçlarında yer alır.' 
+    },
+    { 
+      term: 'Sustentaculum Tali', 
+      meaning: currentLanguage === 'en'
+        ? 'Shelf-like projection on the calcaneus supporting the talus bone.'
+        : 'Topuk kemiğinin aşık kemiğini destekleyen raf benzeri çıkıntısı.' 
+    },
+    { 
+      term: 'Olecranon', 
+      meaning: currentLanguage === 'en'
+        ? 'Prominence at the elbow tip; located at the upper end of the ulna forming the point of the elbow.'
+        : 'Dirsek ucu çıkıntısı; ulnanın üst ucunda yer alır ve dirseğin arkasını oluşturur.' 
+    },
+    { 
+      term: 'Symphysis Pubica', 
+      meaning: currentLanguage === 'en'
+        ? 'Midline cartilaginous joint uniting the pubic bones anteriorly.'
+        : 'Çatı kemiklerinin ön ortadaki birleşme yeri; kıkırdak eklem yapısı.' 
+    },
+    { 
+      term: 'Acromion', 
+      meaning: currentLanguage === 'en'
+        ? 'Outermost bony process of the scapula forming the peak of the shoulder.'
+        : 'Kürek kemiğinin omuz başını oluşturan en dış çıkıntısı.' 
+    },
+    { 
+      term: 'Patella', 
+      meaning: currentLanguage === 'en'
+        ? 'Kneecap bone; flat sesamoid bone protecting the knee joint.'
+        : 'Diz kapağı kemiği; diz eklemini koruyan yassı susamsı kemik.' 
+    },
+    { 
+      term: 'Processus Styloideus', 
+      meaning: currentLanguage === 'en'
+        ? 'Slender, pointed pen-like bony projection beneath the temporal bone or radius.'
+        : 'Şakak kemiğinin veya döner kemiğin altındaki kalem benzeri ince çıkıntı.' 
+    }
   ];
 
   const todayIndex = new Date().getDate() % termsOfTheDay.length;

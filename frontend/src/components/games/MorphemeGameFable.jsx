@@ -49,9 +49,9 @@ const STRINGS = {
     score: "Score",
     question: "Question",
     targetTerm: "Target Term",
-    builtTerm: "Built Term",
-    emptyHint: "Pick parts from the pool in order: Prefix → Root → Suffix",
-    pool: "Morpheme Pool",
+    builtTerm: "Constructed Term",
+    emptyHint: "Select parts from the pool in order: Prefix, Root, Suffix",
+    pool: "Part Pool",
     confirm: "Confirm Combination",
     correctMsg: "Correct! Great sequence.",
     wrongMsg: "Wrong combination. Sequence reset — try again!",
@@ -92,6 +92,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 1,
     targetLatinTerm: "Dysphagia",
+    englishTerm: "Dysphagia",
     definition: { tr: "Yutma güçlüğü", en: "Difficulty swallowing" },
     correctSequence: [
       P("dys", "dys-", "güçlük, bozukluk", "difficult, impaired", "prefix"),
@@ -107,6 +108,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 2,
     targetLatinTerm: "Sublingualis",
+    englishTerm: "Sublingual",
     definition: { tr: "Dil altı ile ilgili", en: "Under the tongue" },
     correctSequence: [
       P("sub", "sub-", "altında", "under, below", "prefix"),
@@ -122,6 +124,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 3,
     targetLatinTerm: "Gastroenteritis",
+    englishTerm: "Gastroenteritis",
     definition: {
       tr: "Mide ve bağırsak iltihabı",
       en: "Inflammation of stomach and intestines",
@@ -140,6 +143,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 4,
     targetLatinTerm: "Intervertebralis",
+    englishTerm: "Intervertebral",
     definition: { tr: "Omurlar arasında yer alan", en: "Located between vertebrae" },
     correctSequence: [
       P("inter", "inter-", "arasında", "between", "prefix"),
@@ -155,6 +159,7 @@ export const DEFAULT_QUESTIONS = [
   {
     id: 5,
     targetLatinTerm: "Bradycardia",
+    englishTerm: "Bradycardia",
     definition: {
       tr: "Kalp atım hızının yavaşlaması",
       en: "Abnormally slow heart rate",
@@ -327,7 +332,7 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
   const meaning =
     typeof part.meaning === "string"
       ? part.meaning
-      : part.meaning?.[language] ?? part.meaning?.tr ?? "";
+      : (language === "en" ? (part.meaning?.en || part.meaning?.tr) : (part.meaning?.tr || part.meaning?.en)) ?? "";
 
   return (
     <button
@@ -506,8 +511,13 @@ export default function MorphemeGameFable({
           {tr("targetTerm")}
         </p>
         <h2 className="font-serif text-3xl italic tracking-tight text-foreground">
-          {q.targetLatinTerm}
+          {language === "en" && q.englishTerm ? q.englishTerm : q.targetLatinTerm}
         </h2>
+        {language === "en" && q.englishTerm && q.englishTerm.toLowerCase() !== q.targetLatinTerm.toLowerCase() && (
+          <p className="text-xs font-mono text-muted-foreground mt-0.5">
+            Latin: {q.targetLatinTerm}
+          </p>
+        )}
         <p className="mt-1 text-muted-foreground">{loc(q.definition)}</p>
       </div>
 

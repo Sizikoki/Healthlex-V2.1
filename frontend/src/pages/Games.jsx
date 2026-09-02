@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BookOpen, Shuffle, Brain, ArrowRight, Sparkles, Puzzle, UserPlus, Lock } from 'lucide-react';
+import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -274,35 +274,6 @@ export const Games = () => {
               })}
             </div>
 
-            {/* Tips Section */}
-            <Card className="bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-2">
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-primary" />
-                  {t('gameTips')}
-                </h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div>
-                    <div className="text-lg font-semibold mb-2 text-primary">{t('tip1Title')}</div>
-                    <p className="text-sm text-muted-foreground">
-                      {t('tip1Desc')}
-                    </p>
-                  </div>
-                  <div>
-                    <div className="text-lg font-semibold mb-2 text-secondary">{t('tip2Title')}</div>
-                    <p className="text-sm text-muted-foreground">
-                      {t('tip2Desc')}
-                    </p>
-                  </div>
-                  <div>
-                    <div className="text-lg font-semibold mb-2 text-accent">{t('tip3Title')}</div>
-                    <p className="text-sm text-muted-foreground">
-                      {t('tip3Desc')}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </>
         )}
 

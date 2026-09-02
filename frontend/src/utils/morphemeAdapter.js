@@ -95,6 +95,102 @@ export const FALLBACK_DISTRACTORS = [
   { id: 'dis_plasty', text: '-plasty', meaning: SUFFIX_LOOKUP['-plasty'] || { tr: 'cerrahi onarım', en: 'surgical repair' }, partType: 'suffix' },
 ];
 
+export const TR_ANATOMY_TO_EN = {
+  kemik: 'bone',
+  ense: 'back of head, occiput',
+  kama: 'wedge, sphenoid',
+  elek: 'sieve, ethmoid',
+  burun: 'nose',
+  kalbursu: 'sieve-like',
+  kalbur: 'sieve',
+  omur: 'vertebra',
+  dil: 'tongue',
+  kalp: 'heart',
+  damar: 'vessel',
+  mide: 'stomach',
+  bağırsak: 'intestine',
+  kıkırdak: 'cartilage',
+  kas: 'muscle',
+  eklem: 'joint',
+  ayak: 'foot',
+  el: 'hand',
+  kol: 'arm',
+  bacak: 'leg',
+  baş: 'head',
+  kafa: 'head, skull',
+  göz: 'eye',
+  kulak: 'ear',
+  karaciğer: 'liver',
+  akciğer: 'lung',
+  böbrek: 'kidney',
+  deri: 'skin',
+  kan: 'blood',
+  sinir: 'nerve',
+  beyin: 'brain',
+  omurilik: 'spinal cord',
+  ilik: 'bone marrow',
+  göğüs: 'chest',
+  kaburga: 'rib',
+  omurga: 'spine',
+  parmak: 'digit, finger, toe',
+  tarak: 'metatarsal/metacarpal',
+  topuk: 'heel',
+  çene: 'jaw',
+  şakak: 'temple',
+  alın: 'forehead',
+  yanak: 'cheek',
+  elmacık: 'cheekbone',
+  kalça: 'hip',
+  uyluk: 'thigh',
+  diz: 'knee',
+  kaval: 'tibia',
+  baldır: 'calf',
+  omuz: 'shoulder',
+  köprücük: 'clavicle',
+  kürek: 'scapula',
+  boğaz: 'throat',
+  soluk: 'breath',
+  iltihap: 'inflammation',
+  tümör: 'tumor',
+  hastalık: 'disease',
+  ağrı: 'pain',
+  felç: 'paralysis',
+  yokluk: 'absence of',
+  durum: 'condition',
+  ait: 'pertaining to',
+  ilgili: 'pertaining to',
+  yavaş: 'slow',
+  hızlı: 'fast',
+  altında: 'under, below',
+  üstünde: 'above, over',
+  arasında: 'between',
+  içinde: 'within',
+  çevresinde: 'around',
+  ötesinde: 'beyond',
+};
+
+export function resolveMorphemeEn(rootWord, turkishMeaning) {
+  const clean = (rootWord || '').toLowerCase().replace(/^-+|-+$/g, '');
+  if (ROOT_LOOKUP[clean]?.en) return ROOT_LOOKUP[clean].en;
+  if (PREFIX_LOOKUP[clean]?.en) return PREFIX_LOOKUP[clean].en;
+  if (SUFFIX_LOOKUP[clean]?.en) return SUFFIX_LOOKUP[clean].en;
+  if (COMMON_ROOT_DICTIONARY[clean]?.en) return COMMON_ROOT_DICTIONARY[clean].en;
+
+  for (const [key, val] of Object.entries(ROOT_LOOKUP)) {
+    if (key.length >= 3 && (clean.startsWith(key) || key.startsWith(clean))) {
+      if (val?.en) return val.en;
+    }
+  }
+
+  const lowerTr = (turkishMeaning || '').toLowerCase().trim();
+  if (TR_ANATOMY_TO_EN[lowerTr]) return TR_ANATOMY_TO_EN[lowerTr];
+  for (const [trKey, enVal] of Object.entries(TR_ANATOMY_TO_EN)) {
+    if (lowerTr.includes(trKey)) return enVal;
+  }
+
+  return turkishMeaning || clean;
+}
+
 /**
  * Eğik çizgi (/) veya noktalı virgül (;) ile ayrılmış çoklu terimlerden
  * birincil (asıl) terimi ayıklar. (Örn: "Phalanges Pedis / Ossa Digitorum Pedis" -> "Phalanges Pedis")
@@ -226,7 +322,8 @@ export function getTermMorphemes(term) {
         const cParen = rp.indexOf(')', pIdx);
         const meaningText = (cParen !== -1 ? rp.substring(pIdx + 1, cParen) : rp.substring(pIdx + 1)).trim();
         if (rootWord && meaningText) {
-          parentMeaningMap[rootWord] = { tr: meaningText, en: meaningText };
+          const enMeaning = resolveMorphemeEn(rootWord, meaningText);
+          parentMeaningMap[rootWord] = { tr: meaningText, en: enMeaning };
         }
       }
     });
@@ -276,14 +373,16 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
       allParsedParts.push(...sequence);
 
       const targetLatinTerm = getPrimaryLatinTerm(term.term || term.name || `Term #${term.id || idx}`);
+      const englishTerm = term.english || (term.turkish && term.turkish !== term.term ? term.turkish : targetLatinTerm);
       const definition = {
         tr: term.turkishShort || term.turkishDefinition || term.definition || term.turkish || '',
-        en: term.englishDefinition || term.english || term.turkish || targetLatinTerm,
+        en: term.englishDefinition || (term.turkish && term.turkish !== targetLatinTerm ? term.turkish : term.english || targetLatinTerm),
       };
 
       candidateQuestions.push({
         id: term.id || idx + 1,
         targetLatinTerm,
+        englishTerm,
         definition,
         correctSequence: sequence,
         distractors: [],
@@ -300,12 +399,14 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
         const sequence = parseTermToMorphemes(term);
         if (sequence && sequence.length > 0) {
           allParsedParts.push(...sequence);
+          const englishTerm = term.english || (term.turkish && term.turkish !== term.term ? term.turkish : primaryTerm);
           candidateQuestions.push({
             id: term.id || `fb_${idx}`,
             targetLatinTerm: primaryTerm,
+            englishTerm,
             definition: {
               tr: term.turkishShort || term.turkishDefinition || term.definition || '',
-              en: term.englishDefinition || term.english || term.turkish || primaryTerm,
+              en: term.englishDefinition || (term.turkish && term.turkish !== primaryTerm ? term.turkish : term.english || primaryTerm),
             },
             correctSequence: sequence,
             distractors: [],

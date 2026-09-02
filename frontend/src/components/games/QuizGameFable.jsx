@@ -39,11 +39,9 @@ const shuffle = (arr) => {
   return a;
 };
 
-/** Aktif dile göre "anlam" metni. */
-const getMeaningText = (term, language) =>
-  language === 'en'
-    ? (term.turkish || term.definition || '')
-    : (term.turkishShort || term.definition || '');
+/** Soru ve şıklar için tanım/anlam metni (soru ve cevaplar korunur). */
+const getMeaningText = (term) =>
+  (term.turkishShort || term.definition || term.turkishDefinition || '');
 
 /** Metin karşılaştırması için normalizasyon (TR yereli ile). */
 const norm = (s) => (s || '').trim().toLocaleLowerCase('tr');

@@ -11,8 +11,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const MatchGame = () => {
+  const { currentLanguage, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
@@ -186,7 +188,10 @@ export const MatchGame = () => {
           if (matched.length + 1 === cards.length / 2) {
             setGameComplete(true);
             saveMatchScore(categoryId || 'all', elapsedTime, moves + 1);
-            toast.success(`Tebrikler! ${moves + 1} hamle ve ${elapsedTime} saniyede tamamlandı!`);
+            const finishMsg = t('matchToast', `Tebrikler! ${moves + 1} hamle ve ${elapsedTime} saniyede tamamlandı!`)
+              .replace('{moves}', moves + 1)
+              .replace('{time}', elapsedTime);
+            toast.success(finishMsg);
           }
         }, 500);
       } else {
@@ -211,8 +216,8 @@ export const MatchGame = () => {
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <h3 className="text-xl font-semibold mb-2">Oyun Yükleniyor...</h3>
-          <p className="text-muted-foreground">Kelimeler veritabanından çekiliyor...</p>
+          <h3 className="text-xl font-semibold mb-2">{t('loadingCards', 'Oyun Yükleniyor...')}</h3>
+          <p className="text-muted-foreground">{t('fetchingTerms')}</p>
         </Card>
       </div>
     );
@@ -222,10 +227,10 @@ export const MatchGame = () => {
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
-          <h3 className="text-xl font-semibold mb-2 text-destructive">Hata</h3>
-          <p className="text-muted-foreground mb-4">Eşleştirme oyunu için kelime havuzu bulunamadı.</p>
+          <h3 className="text-xl font-semibold mb-2 text-destructive">{t('error', 'Hata')}</h3>
+          <p className="text-muted-foreground mb-4">{t('matchNoTerms')}</p>
           <Button asChild className="gradient-primary">
-            <Link to="/games">Oyunlara Dön</Link>
+            <Link to="/games">{t('backToGames')}</Link>
           </Button>
         </Card>
       </div>
@@ -244,13 +249,13 @@ export const MatchGame = () => {
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Oyunlara Dön
+            {t('backToGames')}
           </Button>
 
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Eşleştirme Oyunu</h1>
-              <p className="text-muted-foreground">Terimleri Türkçe karşılıklarıyla eşleştir</p>
+              <h1 className="text-2xl sm:text-3xl font-bold">{t('matchingGame')}</h1>
+              <p className="text-muted-foreground">{t('matchSubtitle')}</p>
             </div>
             <Button variant="outline" size="icon" onClick={initializeGame}>
               <RotateCw className="w-5 h-5" />
@@ -262,7 +267,7 @@ export const MatchGame = () => {
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-primary" />
                 <div>
-                  <div className="text-xs text-muted-foreground">Süre</div>
+                  <div className="text-xs text-muted-foreground">{t('time')}</div>
                   <div className="text-xl font-bold">{formatTime(elapsedTime)}</div>
                 </div>
               </div>
@@ -271,7 +276,7 @@ export const MatchGame = () => {
               <div className="flex items-center gap-2">
                 <Trophy className="w-5 h-5 text-secondary" />
                 <div>
-                  <div className="text-xs text-muted-foreground">Hamle</div>
+                  <div className="text-xs text-muted-foreground">{t('moves')}</div>
                   <div className="text-xl font-bold">{moves}</div>
                 </div>
               </div>
@@ -280,7 +285,7 @@ export const MatchGame = () => {
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 text-accent">✓</div>
                 <div>
-                  <div className="text-xs text-muted-foreground">Eşleşme</div>
+                  <div className="text-xs text-muted-foreground">{t('matched')}</div>
                   <div className="text-xl font-bold">{matched.length}/{cards.length / 2}</div>
                 </div>
               </div>
@@ -344,25 +349,25 @@ export const MatchGame = () => {
                 <div className="w-20 h-20 bg-gradient-to-br from-success to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Tebrikler!</h2>
-                <p className="text-muted-foreground mb-6">Oyunu başarıyla tamamladın!</p>
+                <h2 className="text-2xl font-bold mb-2">{t('congratulations')}</h2>
+                <p className="text-muted-foreground mb-6">{t('matchCompleteSub')}</p>
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <div className="text-3xl font-bold text-primary">{formatTime(elapsedTime)}</div>
-                    <div className="text-sm text-muted-foreground">Süre</div>
+                    <div className="text-sm text-muted-foreground">{t('time')}</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-secondary">{moves}</div>
-                    <div className="text-sm text-muted-foreground">Hamle</div>
+                    <div className="text-sm text-muted-foreground">{t('moves')}</div>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <Button variant="outline" onClick={initializeGame} className="flex-1">
                     <RotateCw className="w-4 h-4 mr-2" />
-                    Tekrar Oyna
+                    {t('playAgain')}
                   </Button>
                   <Button onClick={() => navigate('/games')} className="flex-1 gradient-primary">
-                    Oyunları Gör
+                    {t('viewGames')}
                   </Button>
                 </div>
               </CardContent>

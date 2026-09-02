@@ -5,7 +5,7 @@ import { getAllTerms } from '@/data/medicalTerms';
 import { useLanguage } from '@/context/LanguageContext';
 
 export const ProgressPage = () => {
-  const { t } = useLanguage();
+  const { currentLanguage, t } = useLanguage();
   const stats = getStats();
   const user = getUser();
   const streak = getStreak();
@@ -28,7 +28,7 @@ export const ProgressPage = () => {
   }, []);
 
   const formatName = (name) => {
-    if (!name) return 'Kullanıcı';
+    if (!name) return currentLanguage === 'en' ? 'User' : 'Kullanıcı';
     return name
       .split(' ')
       .map(word => {
@@ -37,10 +37,10 @@ export const ProgressPage = () => {
       })
       .join(' ');
   };
-  const userName = userIsLoggedIn ? formatName(user?.name) : 'Misafir';
+  const userName = userIsLoggedIn ? formatName(user?.name) : (currentLanguage === 'en' ? 'Guest' : 'Misafir');
 
   const formatDate = (dateStr) => {
-    return new Date(dateStr).toLocaleDateString('tr-TR', {
+    return new Date(dateStr).toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'tr-TR', {
       day: 'numeric',
       month: 'short',
       hour: '2-digit',
@@ -542,29 +542,6 @@ export const ProgressPage = () => {
             </div>
           </section>
 
-          {/* MOTIVATION BANNER */}
-          <section className="mb-0">
-            <div className={`banner bg-gradient-to-r from-[var(--blue-deep)] via-[var(--teal-deep)] to-[var(--gold)] rounded-[18px] p-[40px_32px] color-white text-center transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-              <div className="ic w-[44px] h-[44px] mx-auto mb-[14px] text-white">
-                <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-                  <path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/>
-                  <path d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/>
-                </svg>
-              </div>
-              <h2 className="text-white text-[1.45rem] font-bold mb-[8px]">{t('goodStart')}</h2>
-              <p className="text-[#E7EFEA] text-[0.96rem] m-0 mb-[22px]">
-                {t('motivationSub')}
-              </p>
-              <div className="banner-btns flex justify-center gap-[12px] flex-wrap">
-                <Link to="/quiz" className="btn btn-primary bg-[var(--coral)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-[#a83a26] transition-all">
-                  {t('quizMotivationBtn')} →
-                </Link>
-                <Link to="/study" className="btn btn-outline bg-white/10 text-white border border-white/70 font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px] hover:bg-white/20 transition-all">
-                  {t('studyCardsBtn')}
-                </Link>
-              </div>
-            </div>
-          </section>
 
         </div>
       </main>
