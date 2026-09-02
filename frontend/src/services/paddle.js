@@ -1,9 +1,12 @@
 import { initializePaddle } from '@paddle/paddle-js';
 import { toast } from 'sonner';
+import { auth } from '@/firebase/config';
+import { getUser } from '@/utils/storage';
 
 // Environment variable configurations
-const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'test_6e3b91d057ac064f535d586f588';
-const PADDLE_ENV = (process.env.REACT_APP_PADDLE_ENV || 'sandbox').toLowerCase();
+const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'live_SENIN_CLIENT_TOKENIN';
+const PADDLE_ENV = (process.env.REACT_APP_PADDLE_ENV || 'production').toLowerCase().trim();
+export const PADDLE_DEFAULT_PRICE_ID = process.env.REACT_APP_PADDLE_PRICE_ID || process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_SENIN_PRICE_IDIN';
 
 let paddleInstancePromise = null;
 
@@ -24,7 +27,7 @@ export const getPaddle = async () => {
 
       // Initialize Paddle with environment & client token
       const paddle = await initializePaddle({
-        environment: PADDLE_ENV === 'production' ? 'production' : 'sandbox',
+        environment: (PADDLE_ENV === 'production' || PADDLE_TOKEN.startsWith('live_')) ? 'production' : 'sandbox',
         token: PADDLE_TOKEN,
         eventCallback: (event) => {
           if (process.env.NODE_ENV !== 'production') {
@@ -67,6 +70,7 @@ export const getPaddle = async () => {
       return paddle;
     } catch (error) {
       console.error('[Paddle] Initialization error:', error);
+      paddleInstancePromise = null;
       return null;
     }
   })();
@@ -144,7 +148,7 @@ export const openPaddleCheckout = async ({
   displayMode = 'overlay',
   theme = 'light',
   allowLogout = false
-}) => {
+} = {}) => {
   try {
     const paddle = await getPaddle();
     if (!paddle) {
@@ -152,11 +156,13 @@ export const openPaddleCheckout = async ({
       return;
     }
 
+    const activePriceId = priceId || PADDLE_DEFAULT_PRICE_ID;
+
     // Build line items
     const checkoutItems = items && items.length > 0
       ? items
-      : priceId
-      ? [{ priceId, quantity: 1 }]
+      : activePriceId
+      ? [{ priceId: activePriceId, quantity: 1 }]
       : [];
 
     if (checkoutItems.length === 0) {
@@ -165,7 +171,7 @@ export const openPaddleCheckout = async ({
     }
 
     const checkoutSettings = {
-      displayMode: displayMode || 'overlay', // Varsayılan popup pencere
+      displayMode: displayMode || 'overlay', // Varsayılan popup overlay pencere
       theme: theme || 'light',              // 'light' veya 'dark'
       allowLogout: allowLogout ?? false,    // Oturumu kapatmaya izin verme
       locale: 'tr'
@@ -182,10 +188,14 @@ export const openPaddleCheckout = async ({
       customData
     };
 
+    // Giriş yapmış kullanıcının e-postasını otomatik aktar
+    const activeUser = auth.currentUser || getUser();
+    const resolvedEmail = customerEmail || activeUser?.email;
+
     // Prefill customer email to skip contact screen if available
-    if (customerEmail && typeof customerEmail === 'string' && customerEmail.includes('@')) {
+    if (resolvedEmail && typeof resolvedEmail === 'string' && resolvedEmail.includes('@')) {
       checkoutOptions.customer = {
-        email: customerEmail.trim()
+        email: resolvedEmail.trim()
       };
     }
 

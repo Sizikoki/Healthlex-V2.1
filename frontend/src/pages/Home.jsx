@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import './LandingPage.css';
 
 const PADDLE_PRICE_BASIC = process.env.REACT_APP_PADDLE_PRICE_ID_BASIC || 'pri_01m1a0dry4498ex7bdc34d4twd';
-const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_01m1a0c5kkv836f94g4z81vj0q';
+const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_ID || process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_SENIN_PRICE_IDIN';
 
 export const Home = () => {
   const { currentLanguage } = useLanguage();
@@ -31,8 +31,8 @@ export const Home = () => {
   // Fetch Paddle localized price previews
   useEffect(() => {
     const fetchPrices = async () => {
-      const basicId = PADDLE_PRICE_BASIC || 'pri_01m1a0dry4498ex7bdc34d4twd';
-      const proId = PADDLE_PRICE_PRO || 'pri_01m1a0c5kkv836f94g4z81vj0q';
+      const basicId = PADDLE_PRICE_BASIC;
+      const proId = PADDLE_PRICE_PRO;
 
       const priceIds = [basicId, proId].filter(Boolean);
       if (priceIds.length > 0) {
@@ -48,7 +48,7 @@ export const Home = () => {
     const currentUser = auth.currentUser || getUser();
     const customerEmail = currentUser?.email || undefined;
 
-    const targetPriceId = priceId || (planKey === 'basic' ? 'pri_01m1a0dry4498ex7bdc34d4twd' : 'pri_01m1a0c5kkv836f94g4z81vj0q');
+    const targetPriceId = priceId || (planKey === 'basic' ? PADDLE_PRICE_BASIC : PADDLE_PRICE_PRO);
 
     try {
       const loadingMsg = lang === 'en' ? 'Opening Paddle Checkout...' : 'Paddle Checkout açılıyor...';
@@ -135,11 +135,18 @@ export const Home = () => {
             <div className="flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                className="site-btn-primary"
+                className="site-btn-primary flex items-center"
+                onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, content.pricing.proTitle, 'pro')}
+              >
+                {lang === 'en' ? 'Start 3-Day Free Trial / Buy' : '3 Gün Ücretsiz Dene / Satın Al'}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+              <button
+                type="button"
+                className="site-btn-secondary"
                 onClick={() => scrollToSection('fiyat')}
               >
                 {content.hero.ctaBtn}
-                <ArrowRight className="w-4 h-4 ml-2" />
               </button>
             </div>
             <p className="microline">

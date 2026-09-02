@@ -188,7 +188,7 @@ export const HOME_CONTENT = {
         { active: true, text: 'TR ⟷ EN çift dil desteği' },
         { active: true, text: 'Gelecek tüm yeni modüller ve güncellemeler dahil' }
       ],
-      proBtn: (price) => `Tam Paketi Aç — ${price}`,
+      proBtn: () => '3 Gün Ücretsiz Dene / Satın Al',
       flowLine: 'Ödemeni yap → hesabın açılır → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, istediğin an iptal edebilirsin.',
       expensiveLine: 'Evet, ücretsiz alternatiflerden pahalıyız. Ezberleyip unutmak bedava; bir daha unutmamak yılda 20 dolar.'
     },
@@ -327,7 +327,7 @@ export const HOME_CONTENT = {
         { active: true, text: 'TR ⟷ EN bilingual support' },
         { active: true, text: 'All upcoming modules and updates included' }
       ],
-      proBtn: (price) => `Unlock Pro Plan — ${price}`,
+      proBtn: () => 'Start 3-Day Free Trial / Buy',
       flowLine: 'Complete payment → your account unlocks → start your first category in 2 minutes. Renews automatically annually, cancel anytime.',
       expensiveLine: 'Yes, we cost more than free alternatives. Memorizing and forgetting is free; never forgetting again is $20 a year.'
     },
