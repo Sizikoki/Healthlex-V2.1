@@ -51,7 +51,7 @@ export const CookieBanner = () => {
           <div className="flex-1">
             <div className="flex items-center justify-between gap-2 mb-1.5">
               <h4 className="font-bold text-sm text-foreground flex items-center gap-1.5">
-                {t('cookieBannerTitle', 'Çerez ve Analitik Tercihleriniz 🍪')}
+                {t('cookieBannerTitle', 'Çerez Tercihleriniz')}
               </h4>
               <button
                 type="button"
@@ -64,13 +64,14 @@ export const CookieBanner = () => {
             </div>
 
             <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-              {t('cookieBannerDesc', 'Deneyiminizi geliştirmek ve site performansını anonim olarak ölçümlemek amacıyla Google Analytics (GA4) analitik çerezleri kullanıyoruz.')}{' '}
+              {t('cookieBannerDescPart1', 'Platformumuzda oturumunuzu sürdürmek, dil tercihlerinizi hatırlamak ve deneyiminizi geliştirmek amacıyla çerezler kullanıyoruz. Detaylı bilgi için ')}
               <Link
                 to="/privacy"
-                className="text-primary font-semibold hover:underline inline-flex items-center gap-0.5"
+                className="text-primary font-semibold hover:underline inline"
               >
-                {t('cookieLearnMore', 'Gizlilik ve Çerez Politikamızı İnceleyin')}
+                {t('cookiePolicyLinkText', 'Çerez Politikamızı')}
               </Link>
+              {t('cookieBannerDescPart2', ' inceleyebilirsiniz.')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">

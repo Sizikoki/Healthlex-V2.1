@@ -337,11 +337,12 @@ export const translations = {
     acceptTermsPrefix: "",
     acceptTermsSuffix: "'nı okudum, anladım ve kabul ediyorum.",
     mustAcceptTerms: "Kayıt olabilmek için lütfen Kullanım Koşulları, Gizlilik ve İptal Politikalarını kabul edin.",
-    cookieBannerTitle: "Çerez ve Analitik Tercihleriniz 🍪",
-    cookieBannerDesc: "Deneyiminizi geliştirmek ve site performansını anonim olarak ölçümlemek amacıyla Google Analytics (GA4) analitik çerezleri kullanıyoruz.",
+    cookieBannerTitle: "Çerez Tercihleriniz",
+    cookieBannerDescPart1: "Platformumuzda oturumunuzu sürdürmek, dil tercihlerinizi hatırlamak ve deneyiminizi geliştirmek amacıyla çerezler kullanıyoruz. Detaylı bilgi için ",
+    cookiePolicyLinkText: "Çerez Politikamızı",
+    cookieBannerDescPart2: " inceleyebilirsiniz.",
     cookieAccept: "Tümünü Kabul Et",
-    cookieDecline: "Yalnızca Zorunlu Çerezler (Reddet)",
-    cookieLearnMore: "Gizlilik ve Çerez Politikamızı İnceleyin",
+    cookieDecline: "Yalnızca Zorunlu Çerezler",
   },
   en: {
     // Navigasyon & Menü
@@ -681,10 +682,11 @@ export const translations = {
     acceptTermsPrefix: "I have read, understood, and accept the ",
     acceptTermsSuffix: ".",
     mustAcceptTerms: "Please accept the Terms of Service, Privacy Policy, and Refund Policy to register.",
-    cookieBannerTitle: "Cookie & Analytics Preferences 🍪",
-    cookieBannerDesc: "We use Google Analytics (GA4) analytics cookies to enhance your experience and analyze website traffic anonymously.",
+    cookieBannerTitle: "Cookie Preferences",
+    cookieBannerDescPart1: "We use cookies to maintain your secure session, remember your language preferences, and optimize your learning experience. You can learn more by reviewing our ",
+    cookiePolicyLinkText: "Cookie Policy",
+    cookieBannerDescPart2: ".",
     cookieAccept: "Accept All",
-    cookieDecline: "Essential Only (Decline)",
-    cookieLearnMore: "Review Privacy & Cookie Policy",
+    cookieDecline: "Necessary Only",
   }
 };
