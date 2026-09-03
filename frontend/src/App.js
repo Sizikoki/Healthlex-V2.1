@@ -19,6 +19,8 @@ import { isLoggedIn, syncProgressFromFirestore } from '@/utils/storage';
 import { seedMedicalTerms } from '@/firebase/seeder';
 import { getPaddle } from '@/services/paddle';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { CookieBanner } from '@/components/CookieBanner';
+import { initAnalyticsOnLoad } from '@/services/analytics';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -29,6 +31,7 @@ function App() {
   useEffect(() => {
     seedMedicalTerms();
     getPaddle(); // Pre-warm & initialize Paddle.js with live client-side token
+    initAnalyticsOnLoad(); // Check cookie consent and boot Google Analytics if accepted
     if (isLoggedIn()) {
       syncProgressFromFirestore();
     }
@@ -69,6 +72,7 @@ function App() {
             } />
           </Routes>
           <Toaster position="top-right" richColors />
+          <CookieBanner />
         </div>
       </BrowserRouter>
     </LanguageProvider>

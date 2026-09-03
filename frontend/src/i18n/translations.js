@@ -331,8 +331,17 @@ export const translations = {
     copyEmail: "Adresi Kopyala",
     emailCopied: "E-posta adresi panoya kopyalandı!",
     openEmailApp: "E-posta Uygulamasında Aç",
-    sendDirectMessage: "Doğrudan Destek Talebi İlet",
-    formPaddleNotice: "Mesajı gönderdiğinizde varsayılan e-posta istemciniz help@healthlexmed.com alıcısıyla açılır. Talebinize 24-48 saat içinde dönüş sağlanır."
+    formPaddleNotice: "Mesajı gönderdiğinizde varsayılan e-posta istemciniz help@healthlexmed.com alıcısıyla açılır. Talebinize 24-48 saat içinde dönüş sağlanır.",
+
+    // Kayıt ve Çerez Tercihleri
+    acceptTermsPrefix: "",
+    acceptTermsSuffix: "'nı okudum, anladım ve kabul ediyorum.",
+    mustAcceptTerms: "Kayıt olabilmek için lütfen Kullanım Koşulları, Gizlilik ve İptal Politikalarını kabul edin.",
+    cookieBannerTitle: "Çerez ve Analitik Tercihleriniz 🍪",
+    cookieBannerDesc: "Deneyiminizi geliştirmek ve site performansını anonim olarak ölçümlemek amacıyla Google Analytics (GA4) analitik çerezleri kullanıyoruz.",
+    cookieAccept: "Tümünü Kabul Et",
+    cookieDecline: "Yalnızca Zorunlu Çerezler (Reddet)",
+    cookieLearnMore: "Gizlilik ve Çerez Politikamızı İnceleyin",
   },
   en: {
     // Navigasyon & Menü
@@ -666,7 +675,16 @@ export const translations = {
     copyEmail: "Copy Email",
     emailCopied: "Email address copied to clipboard!",
     openEmailApp: "Open in Email App",
-    sendDirectMessage: "Send Support Inquiry",
-    formPaddleNotice: "Submitting this form opens your default email client addressed to help@healthlexmed.com. You will receive a response within 24-48 hours."
+    formPaddleNotice: "Submitting this form opens your default email client addressed to help@healthlexmed.com. You will receive a response within 24-48 hours.",
+
+    // Registration and Cookie Preferences
+    acceptTermsPrefix: "I have read, understood, and accept the ",
+    acceptTermsSuffix: ".",
+    mustAcceptTerms: "Please accept the Terms of Service, Privacy Policy, and Refund Policy to register.",
+    cookieBannerTitle: "Cookie & Analytics Preferences 🍪",
+    cookieBannerDesc: "We use Google Analytics (GA4) analytics cookies to enhance your experience and analyze website traffic anonymously.",
+    cookieAccept: "Accept All",
+    cookieDecline: "Essential Only (Decline)",
+    cookieLearnMore: "Review Privacy & Cookie Policy",
   }
 };

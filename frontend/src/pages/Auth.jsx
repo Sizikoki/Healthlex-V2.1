@@ -176,12 +176,18 @@ export const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
       toast.error(t('fillAllFields', 'Lütfen tüm alanları doldurun'));
+      return;
+    }
+
+    if (!acceptTerms) {
+      toast.error(t('mustAcceptTerms', 'Kayıt olabilmek için lütfen Kullanım Koşulları, Gizlilik ve İptal Politikalarını kabul edin.'));
       return;
     }
 
@@ -195,11 +201,13 @@ export const Register = () => {
         displayName: name
       });
 
-      // Save user to storage to maintain compatibility with existing tracking features
+      // Save user to storage with legal consent timestamp to maintain compliance
       saveUser({
         uid: user.uid,
         name: name,
         email: email,
+        acceptedTerms: true,
+        acceptedTermsAt: new Date().toISOString(),
         joinDate: user.metadata.creationTime || new Date().toISOString()
       });
 
@@ -277,6 +285,52 @@ export const Register = () => {
                   disabled={loading}
                 />
               </div>
+            </div>
+
+            {/* Legal Agreement Checkbox */}
+            <div className="flex items-start space-x-2.5 pt-1 pb-1">
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-primary shrink-0"
+                disabled={loading}
+                required
+              />
+              <Label
+                htmlFor="acceptTerms"
+                className="text-xs text-muted-foreground leading-relaxed cursor-pointer select-none font-normal"
+              >
+                {t('acceptTermsPrefix', '')}
+                <Link
+                  to="/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  {t('termsOfService', 'Kullanım Koşulları')}
+                </Link>
+                {', '}
+                <Link
+                  to="/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  {t('privacyPolicy', 'Gizlilik Politikası')}
+                </Link>
+                {isTr ? ' ve ' : ' and '}
+                <Link
+                  to="/refund"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  {t('refundPolicy', 'İptal & İade Politikası')}
+                </Link>
+                {t('acceptTermsSuffix', '\'nı okudum, anladım ve kabul ediyorum.')}
+              </Label>
             </div>
 
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={loading}>
