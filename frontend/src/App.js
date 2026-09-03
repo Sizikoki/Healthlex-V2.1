@@ -13,6 +13,7 @@ import { MorphemeGame } from '@/pages/MorphemeGame';
 import { MorphemeExplorer } from '@/pages/MorphemeExplorer';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
+import { Contact } from '@/pages/Contact';
 import { isLoggedIn, syncProgressFromFirestore } from '@/utils/storage';
 import { seedMedicalTerms } from '@/firebase/seeder';
 import { LanguageProvider } from '@/context/LanguageContext';
@@ -51,6 +52,8 @@ function App() {
             <Route path="/morpheme" element={<MorphemeGame />} />
             <Route path="/morphemes" element={<MorphemeExplorer />} />
             <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
             <Route path="/progress" element={<ProgressPage />} />
             <Route path="/profile" element={
               <ProtectedRoute>

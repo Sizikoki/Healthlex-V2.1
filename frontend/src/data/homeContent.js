@@ -203,7 +203,15 @@ export const HOME_CONTENT = {
       ],
       punch: 'Bu sayfaya girmeden önce bu terimi anlamlandıramıyor olabilirdiniz. Şimdi bir arkadaşınıza gönderin — bakalım o çözebilecek mi?',
       ctaBtn: 'Tüm Terimlerin Kilidini Aç',
-      meta: 'HealthLexMed — Latince tıp terimlerini kök mantığıyla ve oyunlaştırarak öğreten eğitim platformu.'
+      meta: 'HealthLexMed — Latince tıp terimlerini kök mantığıyla ve oyunlaştırarak öğreten eğitim platformu.',
+      links: {
+        contact: 'İletişim & Destek',
+        terms: 'Kullanım Koşulları',
+        privacy: 'Gizlilik Politikası',
+        refund: 'İptal ve İade'
+      },
+      supportEmail: 'help@healthlexmed.com',
+      slaNotice: 'Taleplerinize 24-48 saat içinde dönüş sağlanır.'
     }
   },
   en: {
@@ -344,7 +352,15 @@ export const HOME_CONTENT = {
       ],
       punch: 'Before visiting this page, this term might have looked confusing. Now send it to a friend — see if they can solve it!',
       ctaBtn: 'Unlock All Terms',
-      meta: 'HealthLexMed — Educational platform teaching Latin medical terminology through root logic and gamification.'
+      meta: 'HealthLexMed — Educational platform teaching Latin medical terminology through root logic and gamification.',
+      links: {
+        contact: 'Contact & Support',
+        terms: 'Terms of Service',
+        privacy: 'Privacy Policy',
+        refund: 'Refund Policy'
+      },
+      supportEmail: 'help@healthlexmed.com',
+      slaNotice: 'Requests are replied within 24-48 hours.'
     }
   }
 };

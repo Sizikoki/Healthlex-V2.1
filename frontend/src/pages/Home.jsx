@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain } from 'lucide-react';
+import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain, Mail } from 'lucide-react';
 import { getAllTerms } from '@/data/medicalTerms';
 import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { db, auth } from '@/firebase/config';
@@ -587,6 +587,51 @@ export const Home = () => {
             {content.footer.ctaBtn}
             <ArrowRight className="w-4 h-4 ml-2" />
           </button>
+
+          {/* Footer Nav: İletişim/Destek + Sözleşme Yer Tutucuları */}
+          <div className="footer-nav-row">
+            <div className="footer-nav-links">
+              <Link to="/contact" className="footer-nav-link footer-nav-highlight">
+                {content.footer?.links?.contact || (lang === 'tr' ? 'İletişim & Destek' : 'Contact & Support')}
+              </Link>
+              <a
+                href="#terms"
+                onClick={(e) => e.preventDefault()}
+                className="footer-nav-link cursor-pointer"
+                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
+              >
+                {content.footer?.links?.terms || (lang === 'tr' ? 'Kullanım Koşulları' : 'Terms of Service')}
+              </a>
+              <a
+                href="#privacy"
+                onClick={(e) => e.preventDefault()}
+                className="footer-nav-link cursor-pointer"
+                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
+              >
+                {content.footer?.links?.privacy || (lang === 'tr' ? 'Gizlilik Politikası' : 'Privacy Policy')}
+              </a>
+              <a
+                href="#refund"
+                onClick={(e) => e.preventDefault()}
+                className="footer-nav-link cursor-pointer"
+                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
+              >
+                {content.footer?.links?.refund || (lang === 'tr' ? 'İptal ve İade' : 'Refund Policy')}
+              </a>
+            </div>
+
+            <div className="footer-contact-badge">
+              <Mail className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+              <a href="mailto:help@healthlexmed.com" className="footer-email-link">
+                help@healthlexmed.com
+              </a>
+              <span className="footer-dot">·</span>
+              <span className="footer-sla">
+                {content.footer?.slaNotice || (lang === 'tr' ? 'Taleplerinize 24-48 saat içinde dönüş sağlanır' : '24-48h response')}
+              </span>
+            </div>
+          </div>
+
           <div className="footer-meta">
             <span>{content.footer.meta}</span>
             <span>© 2026 HealthLexMed · healthlexmed.com</span>

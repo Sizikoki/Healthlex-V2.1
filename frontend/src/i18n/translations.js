@@ -308,7 +308,21 @@ export const translations = {
     guestLimitCardDesc: "Kayıt olarak sınırsız oyun oynayabilir, ilerlemenizi tüm cihazlarınızda senkronize edebilirsiniz.",
     signUpUnlimited: "Ücretsiz Üye Ol (Sınırsız Erişim)",
     alreadyHaveAccountLogin: "Zaten Hesabım Var, Giriş Yap",
-    backToGamesPage: "Oyunlar Sayfasına Dön"
+    backToGamesPage: "Oyunlar Sayfasına Dön",
+
+    // İletişim & Destek (Contact)
+    contactSupport: "İletişim & Destek",
+    contactSupportDesc: "Sorularınız, teknik destek talepleriniz veya geri bildirimleriniz için bize dilediğiniz zaman ulaşabilirsiniz.",
+    supportEmail: "help@healthlexmed.com",
+    contactSlaNotice: "Taleplerinize 24-48 saat içinde dönüş sağlanır.",
+    termsOfService: "Kullanım Koşulları",
+    privacyPolicy: "Gizlilik Politikası",
+    refundPolicy: "İptal & İade Politikası",
+    copyEmail: "Adresi Kopyala",
+    emailCopied: "E-posta adresi panoya kopyalandı!",
+    openEmailApp: "E-posta Uygulamasında Aç",
+    sendDirectMessage: "Doğrudan Destek Talebi İlet",
+    formPaddleNotice: "Mesajı gönderdiğinizde varsayılan e-posta istemciniz help@healthlexmed.com alıcısıyla açılır. Talebinize 24-48 saat içinde dönüş sağlanır."
   },
   en: {
     // Navigasyon & Menü
@@ -619,6 +633,20 @@ export const translations = {
     guestLimitCardDesc: "By signing up, you can play unlimited games and sync your progress across all devices.",
     signUpUnlimited: "Sign Up Free (Unlimited Access)",
     alreadyHaveAccountLogin: "Already have an account, Log In",
-    backToGamesPage: "Back to Games Page"
+    backToGamesPage: "Back to Games Page",
+
+    // Contact & Support
+    contactSupport: "Contact & Support",
+    contactSupportDesc: "Feel free to reach out to us anytime for questions, technical support, billing, or feedback.",
+    supportEmail: "help@healthlexmed.com",
+    contactSlaNotice: "Requests are replied within 24-48 hours.",
+    termsOfService: "Terms of Service",
+    privacyPolicy: "Privacy Policy",
+    refundPolicy: "Refund Policy",
+    copyEmail: "Copy Email",
+    emailCopied: "Email address copied to clipboard!",
+    openEmailApp: "Open in Email App",
+    sendDirectMessage: "Send Support Inquiry",
+    formPaddleNotice: "Submitting this form opens your default email client addressed to help@healthlexmed.com. You will receive a response within 24-48 hours."
   }
 };
