@@ -151,8 +151,8 @@ export const Contact = () => {
 
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-4">
-                <Sparkles className="w-3.5 h-3.5" />
-                {isTr ? 'Müşteri Deneyimi & Destek Merkezi' : 'Customer Experience & Support'}
+                <HelpCircle className="w-3.5 h-3.5" />
+                {isTr ? 'İletişim & Destek' : 'Contact & Support'}
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground font-serif">
                 {isTr ? 'Nasıl yardımcı olabiliriz?' : 'How can we help you?'}

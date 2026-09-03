@@ -4,9 +4,12 @@ import { auth } from '@/firebase/config';
 import { getUser } from '@/utils/storage';
 
 // Environment variable configurations
-const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'live_SENIN_CLIENT_TOKENIN';
+const PADDLE_TOKEN = process.env.REACT_APP_PADDLE_CLIENT_TOKEN || 'live_66372dae24be5820f1b9b1ea264';
 const PADDLE_ENV = (process.env.REACT_APP_PADDLE_ENV || 'production').toLowerCase().trim();
-export const PADDLE_DEFAULT_PRICE_ID = process.env.REACT_APP_PADDLE_PRICE_ID || process.env.REACT_APP_PADDLE_PRICE_ID_PRO || 'pri_SENIN_PRICE_IDIN';
+
+export const PADDLE_PRICE_BASIC = process.env.REACT_APP_PADDLE_PRICE_BASIC || process.env.REACT_APP_PADDLE_PRICE_ID_BASIC || 'pri_01m1hbbh54214d9yk28739s128';
+export const PADDLE_PRICE_PRO = process.env.REACT_APP_PADDLE_PRICE_PRO || process.env.REACT_APP_PADDLE_PRICE_ID_PRO || process.env.REACT_APP_PADDLE_PRICE_ID || 'pri_01m1hbkgmff67g3mght6w6bj2q';
+export const PADDLE_DEFAULT_PRICE_ID = PADDLE_PRICE_PRO;
 
 let paddleInstancePromise = null;
 
@@ -63,7 +66,11 @@ export const getPaddle = async () => {
         }
       });
 
-      if (!paddle) {
+      if (paddle) {
+        if (typeof window !== 'undefined') {
+          window.Paddle = paddle;
+        }
+      } else {
         console.error('[Paddle] Failed to initialize Paddle instance.');
       }
 
@@ -170,11 +177,12 @@ export const openPaddleCheckout = async ({
       return;
     }
 
+    const currentLang = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en' ? 'en' : 'tr';
     const checkoutSettings = {
       displayMode: displayMode || 'overlay', // Varsayılan popup overlay pencere
       theme: theme || 'light',              // 'light' veya 'dark'
       allowLogout: allowLogout ?? false,    // Oturumu kapatmaya izin verme
-      locale: 'tr'
+      locale: currentLang
     };
 
     // successUrl tanımlanmazsa Paddle kendi başarı ekranını pencere içinde tutar

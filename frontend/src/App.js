@@ -17,6 +17,7 @@ import { Contact } from '@/pages/Contact';
 import { Legal } from '@/pages/Legal';
 import { isLoggedIn, syncProgressFromFirestore } from '@/utils/storage';
 import { seedMedicalTerms } from '@/firebase/seeder';
+import { getPaddle } from '@/services/paddle';
 import { LanguageProvider } from '@/context/LanguageContext';
 import './App.css';
 
@@ -27,6 +28,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   useEffect(() => {
     seedMedicalTerms();
+    getPaddle(); // Pre-warm & initialize Paddle.js with live client-side token
     if (isLoggedIn()) {
       syncProgressFromFirestore();
     }
