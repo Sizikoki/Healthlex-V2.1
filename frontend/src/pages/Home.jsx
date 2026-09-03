@@ -133,17 +133,10 @@ export const Home = () => {
               <button
                 type="button"
                 className="site-btn-primary flex items-center"
-                onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, content.pricing.proTitle, 'pro')}
+                onClick={() => scrollToSection('fiyat')}
               >
                 {lang === 'en' ? 'Start 3-Day Free Trial / Buy' : '3 Gün Ücretsiz Dene / Satın Al'}
                 <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-              <button
-                type="button"
-                className="site-btn-secondary"
-                onClick={() => scrollToSection('fiyat')}
-              >
-                {content.hero.ctaBtn}
               </button>
             </div>
             <p className="microline">
