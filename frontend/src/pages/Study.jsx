@@ -13,6 +13,7 @@ import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
+import { getTermSlug } from '@/utils/termHelper';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -44,17 +45,10 @@ export const Study = () => {
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   const [searchQuery, setSearchQuery] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [allTerms, setAllTerms] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Mobil ekranlarda varsayılan olarak kapalı olsun
-    if (window.innerWidth < 768) {
-      setSidebarOpen(false);
-    }
-  }, []);
 
   useEffect(() => {
     const fetchTerms = async () => {
@@ -169,9 +163,11 @@ export const Study = () => {
           <div>
             {/* Title */}
             <div className="mb-2 pr-28 pt-1">
-              <h3 className="text-lg font-bold leading-tight text-foreground font-serif tracking-tight group-hover:text-primary transition-colors">
-                {formatMedicalTerm(term.term)}
-              </h3>
+              <Link to={`/study/${getTermSlug(term.term)}`} className="block">
+                <h3 className="text-lg font-bold leading-tight text-foreground font-serif tracking-tight hover:text-primary transition-colors cursor-pointer">
+                  {formatMedicalTerm(term.term)}
+                </h3>
+              </Link>
             </div>
 
             {/* EN Label */}
@@ -233,13 +229,21 @@ export const Study = () => {
             )}
           </div>
 
-          {/* Öğrenildi / Öğren Butonu */}
-          <div className="flex items-center justify-center pt-2 border-t border-border/40 mt-auto">
+          {/* Öğrenildi / Öğren Butonu & Detay Linki */}
+          <div className="flex items-center gap-2 pt-2 border-t border-border/40 mt-auto">
+            <Link
+              to={`/study/${getTermSlug(term.term)}`}
+              className="px-3 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-primary hover:bg-muted border border-border/60 transition-colors inline-flex items-center gap-1 shrink-0"
+              title={isTr ? 'Terim detayını ve morfem çözümlemesini gör' : 'View term details'}
+            >
+              <span>{isTr ? 'Detay' : 'Details'}</span>
+              <span>→</span>
+            </Link>
             <button
               onClick={() => handleMarkAsLearned(term.id)}
               data-term-id={term.id}
               data-learned={progress.learned ? 'true' : 'false'}
-              className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                 progress.learned
                   ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 focus:ring-emerald-400'
                   : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 focus:ring-primary'
@@ -330,10 +334,11 @@ export const Study = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg hover:bg-muted transition-colors border border-border"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted transition-colors border border-border text-xs font-semibold text-foreground"
               aria-label="Kategorileri Göster/Gizle"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('categories', 'Kategoriler')}</span>
             </button>
             <div>
               <h1 className="text-xl font-bold">{t(selectedCategory.key, selectedCategory.name)}</h1>

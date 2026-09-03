@@ -23,6 +23,7 @@ import {
   getRelatedMorphemes,
   CATEGORY_NAMES
 } from '@/utils/morphemeHelper';
+import { getTermSlug } from '@/utils/termHelper';
 
 export const MorphemeDetail = () => {
   const { slug } = useParams();
@@ -235,31 +236,37 @@ export const MorphemeDetail = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {relatedTerms.map((term, idx) => (
-                <Card key={idx} className="border-border/80 hover:border-primary/50 transition-colors shadow-xs">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-2 mb-1.5">
-                      <span className="font-bold text-base text-foreground font-serif">
-                        {term.term}
-                      </span>
-                      {term.system && (
-                        <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
-                          {term.system}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="text-xs font-medium text-primary mb-1 font-sans">
-                      {term.turkish || term.english}
-                    </div>
-                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                      {term.turkishDefinition || term.definition}
-                    </p>
-                    {term.roots && (
-                      <div className="mt-2 pt-2 border-t border-border/50 text-[11px] font-mono text-muted-foreground">
-                        {term.roots}
+                <Link
+                  key={idx}
+                  to={`/study/${getTermSlug(term.term)}`}
+                  className="block group"
+                >
+                  <Card className="h-full border-border/80 group-hover:border-primary/50 group-hover:shadow-sm transition-all">
+                    <CardContent className="p-4">
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <span className="font-bold text-base text-foreground font-serif group-hover:text-primary transition-colors">
+                          {term.term}
+                        </span>
+                        {term.system && (
+                          <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
+                            {term.system}
+                          </Badge>
+                        )}
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
+                      <div className="text-xs font-semibold text-primary mb-1 font-sans">
+                        {term.turkish || term.english}
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                        {term.turkishDefinition || term.definition}
+                      </p>
+                      {term.roots && (
+                        <div className="mt-2 pt-2 border-t border-border/50 text-[11px] font-mono text-muted-foreground">
+                          {term.roots}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

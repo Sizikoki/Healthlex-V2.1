@@ -12,6 +12,7 @@ import { Quiz } from '@/pages/Quiz';
 import { MorphemeGame } from '@/pages/MorphemeGame';
 import { MorphemeExplorer } from '@/pages/MorphemeExplorer';
 import { MorphemeDetail } from '@/pages/MorphemeDetail';
+import { TermDetail } from '@/pages/TermDetail';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
 import { Contact } from '@/pages/Contact';
@@ -52,6 +53,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/study" element={<Study />} />
+            <Route path="/study/:slug" element={<TermDetail />} />
+            <Route path="/terms/:slug" element={<TermDetail />} />
             <Route path="/games" element={<Games />} />
             <Route path="/flashcards" element={<Flashcards />} />
             <Route path="/match" element={<MatchGame />} />
