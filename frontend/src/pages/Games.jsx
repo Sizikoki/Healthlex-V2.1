@@ -4,7 +4,7 @@ import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { isLoggedIn, canGuestPlay, getGuestRemainingPlays, GUEST_DAILY_LIMIT } from '@/utils/storage';
+import { isLoggedIn, canGuestPlay, getGuestTrialInfo } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
 import { db } from '@/firebase/config';
@@ -40,7 +40,7 @@ export const Games = () => {
   const navigate = useNavigate();
 
   const userIsLoggedIn = isLoggedIn();
-  const remainingPlays = getGuestRemainingPlays();
+  const trialInfo = getGuestTrialInfo();
 
   // Canlı Firestore / API verilerini çekme ve yerel fallback mekanizması
   useEffect(() => {
@@ -206,7 +206,12 @@ export const Games = () => {
                   <div>
                     <h3 className="font-bold text-base">{t('guestMode')}</h3>
                     <p className="text-sm opacity-90">
-                      {t('guestPlaysRemaining')} <strong className="text-amber-700 dark:text-amber-300 font-bold">{remainingPlays} / {GUEST_DAILY_LIMIT}</strong>
+                      {t('guestPlaysRemaining')}{' '}
+                      <strong className="text-amber-700 dark:text-amber-300 font-bold">
+                        {trialInfo.isExpired
+                          ? t('trialExpired', 'Süre Doldu')
+                          : `${trialInfo.daysLeft} ${t('guestDaysRemaining', 'gün kaldı')}`}
+                      </strong>
                     </p>
                   </div>
                 </div>

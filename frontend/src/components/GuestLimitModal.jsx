@@ -17,10 +17,10 @@ export const GuestLimitModal = ({ isOpen, onClose }) => {
             <Lock className="w-8 h-8 text-white" />
           </div>
           <DialogTitle className="text-2xl font-bold text-gray-900">
-            {t('guestLimitTitle', 'Günlük Oyun Hakkınız Doldu! 🎯')}
+            {t('guestLimitTitle', '3 Günlük Ücretsiz Deneme Süreniz Sona Erdi! 🎯')}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600 mt-2 leading-relaxed">
-            {t('guestLimitDesc', 'Misafir kullanıcılar için günlük 3 ücretsiz oyun oynama hakkı mevcuttur. Bugünkü tüm haklarınızı kullandınız.')}
+            {t('guestLimitDesc', 'Tüm paket içeriklerini ve oyunları keşfetmeniz için sunulan 3 günlük ücretsiz deneme süreniz tamamlandı. Öğrenmeye devam etmek ve ilerlemenizi tüm cihazlarınızda kaydetmek için lütfen ücretsiz kayıt olun.')}
           </DialogDescription>
         </DialogHeader>
 
@@ -28,9 +28,9 @@ export const GuestLimitModal = ({ isOpen, onClose }) => {
           <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold block text-amber-950">
-              {t('guestLimitCardTitle', 'Ücretsiz Üye Olun & Sınırsız Oynayın!')}
+              {t('guestLimitCardTitle', 'Ücretsiz Üye Olun & Öğrenmeye Devam Edin!')}
             </strong>
-            {t('guestLimitCardDesc', 'Kayıt olarak sınırsız oyun oynayabilir, ilerlemenizi tüm cihazlarınızda senkronize edebilirsiniz.')}
+            {t('guestLimitCardDesc', 'Kayıt olarak tüm kelime kartlarına ve oyunlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
           </div>
         </div>
 
@@ -43,7 +43,7 @@ export const GuestLimitModal = ({ isOpen, onClose }) => {
             className="w-full h-12 text-base font-semibold gradient-primary shadow-md hover:shadow-lg transition-all"
           >
             <UserPlus className="w-5 h-5 mr-2" />
-            {t('signUpUnlimited', 'Ücretsiz Üye Ol (Sınırsız Erişim)')}
+            {t('signUpUnlimited', 'Ücretsiz Üye Ol (Öğrenmeye Devam Et)')}
           </Button>
 
           <Button

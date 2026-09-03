@@ -1,14 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import QuizGameFable from '@/components/games/QuizGameFable';
 import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
+import { isLoggedIn, canGuestPlay } from '@/utils/storage';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 export const Quiz = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
   const { currentLanguage, t } = useLanguage();
+  const [showLimitModal, setShowLimitModal] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn() && !canGuestPlay()) {
+      setShowLimitModal(true);
+    }
+  }, []);
 
   const categoryTerms = useMemo(() => {
     return category === 'all'
@@ -24,6 +33,13 @@ export const Quiz = () => {
         language={currentLanguage}
         onBack={() => navigate('/games')}
         t={t}
+      />
+      <GuestLimitModal
+        isOpen={showLimitModal}
+        onClose={() => {
+          setShowLimitModal(false);
+          navigate('/games');
+        }}
       />
     </div>
   );

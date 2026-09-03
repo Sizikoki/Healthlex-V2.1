@@ -54,23 +54,37 @@ export const MatchGame = () => {
       filtered = termsList;
     }
 
+    // Filter terms that have valid match content based on language
+    const isEn = currentLanguage === 'en';
+    const validTerms = filtered.filter(t =>
+      t.term && (isEn ? (t.english || t.turkish || t.turkishShort || t.turkishDefinition) : (t.turkishShort || t.turkishDefinition))
+    );
+    const sourceList = validTerms.length >= 6 ? validTerms : (filtered.length >= 6 ? filtered : termsList);
+
     // Select 6 random terms dynamically
-    const shuffledTerms = [...filtered].sort(() => Math.random() - 0.5);
+    const shuffledTerms = [...sourceList].sort(() => Math.random() - 0.5);
     const selectedTerms = shuffledTerms.slice(0, Math.min(6, shuffledTerms.length));
 
     const gameCards = [];
     selectedTerms.forEach((term, index) => {
+      // Latin Term card
       gameCards.push({
         id: `term-${index}`,
         content: formatMedicalTerm((term.term || '').split(/[\/;]/)[0].trim()), // Latin Term
         pairId: index,
         type: 'term'
       });
+
+      // Target match card: English term in EN mode, Turkish description in TR mode
+      const meaningContent = isEn
+        ? (term.english || term.turkish || term.turkishShort || term.turkishDefinition)
+        : (term.turkishShort || term.turkishDefinition || term.definition);
+
       gameCards.push({
-        id: `turkish-${index}`,
-        content: term.turkishShort || term.definition || term.turkishDefinition,
+        id: `meaning-${index}`,
+        content: meaningContent,
         pairId: index,
-        type: 'turkish'
+        type: 'meaning'
       });
     });
 
@@ -82,7 +96,7 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId]);
+  }, [categoryId, currentLanguage]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
@@ -116,12 +130,14 @@ export const MatchGame = () => {
         const normalized = rawTerms.map(t => ({
           id: t.id,
           term: t.term,
+          turkish: t.turkish || '',
+          english: t.english || t.turkish || '',
           turkishShort: t.turkishShort || '',
           turkishDefinition: t.turkishDefinition || t.definition || '',
           category: t.category || '',
           system: t.system || '',
           subcategory: t.subcategory || ''
-        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition));
+        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition || t.english || t.turkish));
 
         setAllTerms(normalized);
         setupGame(normalized);
@@ -130,12 +146,14 @@ export const MatchGame = () => {
         const localTerms = getAllTerms().map(t => ({
           id: t.id,
           term: t.term,
+          turkish: t.turkish || '',
+          english: t.english || t.turkish || '',
           turkishShort: t.turkishShort || '',
           turkishDefinition: t.definition || '',
           category: t.category || '',
           system: t.system || '',
           subcategory: t.subcategory || ''
-        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition));
+        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition || t.english || t.turkish));
 
         setAllTerms(localTerms);
         setupGame(localTerms);
@@ -329,7 +347,7 @@ export const MatchGame = () => {
                   <div className={`text-center ${card.type === 'term' ? 'font-bold' : 'text-secondary'
                     }`}>
                     <div className="text-xs text-muted-foreground mb-1">
-                      {card.type === 'term' ? '🌐' : '🇹🇷'}
+                      {card.type === 'term' ? '🌐' : (currentLanguage === 'en' ? '🇬🇧' : '🇹🇷')}
                     </div>
                     <div className="text-sm sm:text-base leading-tight">
                       {card.content}

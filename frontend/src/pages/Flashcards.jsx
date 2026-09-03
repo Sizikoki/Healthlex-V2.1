@@ -213,11 +213,15 @@ export const Flashcards = () => {
               className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 bg-gradient-to-br from-primary/5 to-secondary/5"
               style={{ backfaceVisibility: 'hidden' }}
             >
-              <div className="text-sm font-medium text-muted-foreground mb-4">Terim</div>
+              <div className="text-sm font-medium text-muted-foreground mb-4">
+                {t('term', 'Terim')}
+              </div>
               <div className="text-3xl sm:text-4xl font-bold text-center mb-6">
                 {formatMedicalTerm(currentTerm.term)}
               </div>
-              <div className="text-sm text-muted-foreground">Kartı çevirmek için tıkla</div>
+              <div className="text-sm text-muted-foreground">
+                {t('clickToFlip', 'Kartı çevirmek için tıkla')}
+              </div>
             </div>
 
             {/* Back */}
@@ -228,20 +232,26 @@ export const Flashcards = () => {
                 transform: 'rotateY(180deg)'
               }}
             >
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">Türkçe Tanım</div>
+              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">
+                {currentLanguage === 'en' ? t('englishDefinitionLabel', 'Definition / English Meaning') : t('turkishDefinitionLabel', 'Türkçe Tanım')}
+              </div>
               <div className="text-xl sm:text-2xl font-bold text-center text-foreground max-w-md px-2 leading-relaxed mb-4">
-                {currentTerm.turkishDefinition || currentTerm.definition}
+                {currentLanguage === 'en'
+                  ? (currentTerm.englishDefinition || currentTerm.english || currentTerm.turkish || currentTerm.turkishDefinition || currentTerm.definition)
+                  : (currentTerm.turkishDefinition || currentTerm.definition)}
               </div>
 
               {/* Morfem Analizi */}
               {currentTerm && getTermMorphemes(currentTerm).length > 0 && (
                 <div className="mt-2 pt-3 border-t border-border/50 max-w-md w-full text-center">
                   <div className="mb-2 text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
-                    Morfem Yapısı
+                    {t('morphemeStructure', 'Morfem Yapısı')}
                   </div>
                   <div className="flex flex-wrap items-center justify-center gap-1.5">
                     {getTermMorphemes(currentTerm).map((part, idx) => {
-                      const meaningText = part.meaning?.tr || '';
+                      const meaningText = currentLanguage === 'en'
+                        ? (part.meaning?.en || part.meaning?.tr || '')
+                        : (part.meaning?.tr || part.meaning?.en || '');
                       return (
                         <React.Fragment key={idx}>
                           {idx > 0 && (

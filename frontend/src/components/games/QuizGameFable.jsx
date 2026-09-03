@@ -41,8 +41,12 @@ const shuffle = (arr) => {
 };
 
 /** Soru ve şıklar için tanım/anlam metni (soru ve cevaplar korunur). */
-const getMeaningText = (term) =>
-  (term.turkishShort || term.definition || term.turkishDefinition || '');
+const getMeaningText = (term, language = 'tr') => {
+  if (language === 'en') {
+    return (term.english || term.turkish || term.englishDefinition || term.turkishShort || term.definition || '');
+  }
+  return (term.turkishShort || term.definition || term.turkishDefinition || '');
+};
 
 /** Metin karşılaştırması için normalizasyon (TR yereli ile). */
 const norm = (s) => (s || '').trim().toLocaleLowerCase('tr');

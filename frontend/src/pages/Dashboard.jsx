@@ -9,7 +9,7 @@ import { collection, getDocs } from 'firebase/firestore';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { currentLanguage, t } = useLanguage();
   const user = getUser();
   const stats = getStats();
   const streak = getStreak();

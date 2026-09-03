@@ -22,45 +22,48 @@ const getUserStorageKey = (baseKey) => {
   return `${baseKey}_${user.email}`;
 };
 
-// Guest Daily Play Limit Utilities
-export const GUEST_DAILY_LIMIT = 3;
+// Guest 3-Day Trial Limit Utilities (Her iki paket için de 3 günlük misafir deneme süresi)
+export const GUEST_TRIAL_DAYS = 3;
+export const GUEST_TRIAL_MS = GUEST_TRIAL_DAYS * 24 * 60 * 60 * 1000;
 
-export const getGuestPlayInfo = () => {
-  const today = new Date().toISOString().split('T')[0];
-  const data = localStorage.getItem('medterm_guest_daily_plays');
-  if (!data) return { date: today, count: 0 };
-  try {
-    const parsed = JSON.parse(data);
-    if (parsed.date !== today) {
-      return { date: today, count: 0 };
-    }
-    return parsed;
-  } catch (e) {
-    return { date: today, count: 0 };
+export const getGuestTrialInfo = () => {
+  let startTime = localStorage.getItem('medterm_guest_trial_start');
+  if (!startTime) {
+    startTime = Date.now().toString();
+    localStorage.setItem('medterm_guest_trial_start', startTime);
   }
+
+  const startMs = parseInt(startTime, 10) || Date.now();
+  const elapsedMs = Math.max(0, Date.now() - startMs);
+  const remainingMs = Math.max(0, GUEST_TRIAL_MS - elapsedMs);
+  const isExpired = remainingMs <= 0;
+
+  const daysLeft = Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+  const hoursLeft = Math.ceil(remainingMs / (60 * 60 * 1000));
+
+  return {
+    startMs,
+    remainingMs,
+    isExpired,
+    daysLeft,
+    hoursLeft
+  };
 };
 
 export const canGuestPlay = () => {
   if (isLoggedIn()) return true;
-  const info = getGuestPlayInfo();
-  return info.count < GUEST_DAILY_LIMIT;
+  const trial = getGuestTrialInfo();
+  return !trial.isExpired;
 };
 
 export const getGuestRemainingPlays = () => {
   if (isLoggedIn()) return Infinity;
-  const info = getGuestPlayInfo();
-  return Math.max(0, GUEST_DAILY_LIMIT - info.count);
+  const trial = getGuestTrialInfo();
+  return trial.daysLeft;
 };
 
 export const incrementGuestPlay = () => {
-  if (isLoggedIn()) return true;
-  const info = getGuestPlayInfo();
-  if (info.count >= GUEST_DAILY_LIMIT) {
-    return false;
-  }
-  const newInfo = { date: info.date, count: info.count + 1 };
-  localStorage.setItem('medterm_guest_daily_plays', JSON.stringify(newInfo));
-  return true;
+  return canGuestPlay();
 };
 
 // User management

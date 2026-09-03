@@ -1,15 +1,24 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
+import { isLoggedIn, canGuestPlay } from '@/utils/storage';
+import { GuestLimitModal } from '@/components/GuestLimitModal';
 
 export const MorphemeGame = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
   const { currentLanguage, t } = useLanguage();
+  const [showLimitModal, setShowLimitModal] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn() && !canGuestPlay()) {
+      setShowLimitModal(true);
+    }
+  }, []);
 
   const categoryTerms = useMemo(() => {
     return category === 'all'
@@ -28,6 +37,13 @@ export const MorphemeGame = () => {
         language={currentLanguage}
         onBack={() => navigate('/games')}
         t={t}
+      />
+      <GuestLimitModal
+        isOpen={showLimitModal}
+        onClose={() => {
+          setShowLimitModal(false);
+          navigate('/games');
+        }}
       />
     </div>
   );
