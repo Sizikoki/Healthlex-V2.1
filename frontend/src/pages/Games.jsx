@@ -189,6 +189,7 @@ export const Games = () => {
         ) : activeGame === 'quiz' ? (
           <QuizGameFable
             terms={categoryTerms}
+            categoryId={selectedCategory}
             language={currentLanguage}
             onBack={() => setActiveGame(null)}
             t={t}

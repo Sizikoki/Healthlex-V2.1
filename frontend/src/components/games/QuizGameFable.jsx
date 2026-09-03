@@ -7,10 +7,11 @@
 // border-border, bg-muted, gradient-primary) %100 uyumludur.
 // =============================================================================
 
-import React, { useReducer, useEffect, useCallback, useMemo } from 'react';
+import React, { useReducer, useEffect, useCallback, useMemo, useRef } from 'react';
 import {
   ArrowLeft, ArrowRight, Trophy, Check, X, RotateCcw, Zap, Target, BookOpen,
 } from 'lucide-react';
+import { saveQuizScore, updateStreak } from '@/utils/storage';
 
 // ── Ayarlar ──────────────────────────────────────────────────────────────────
 const FEEDBACK_DELAY_MS = 5000; // Geri bildirim süresi (Doğru ve Yanlış için 5 sn)
@@ -259,8 +260,9 @@ const KEYFRAMES = `
 // =============================================================================
 // Bileşen
 // =============================================================================
-export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
+export default function QuizGameFable({ terms, language = 'tr', onBack, t, categoryId = 'all' }) {
   const [model, dispatch] = useReducer(update, initialModel);
+  const hasSavedRef = useRef(false);
 
   const L = TEXT[language] || TEXT.tr;
   const tx = useCallback(
@@ -279,6 +281,7 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
   );
 
   const startRound = useCallback(() => {
+    hasSavedRef.current = false;
     dispatch({
       type: M.SetQuestions,
       questions: adaptTermsToQuizQuestions(terms, { language, roundSize: ROUND_SIZE }),
@@ -288,6 +291,16 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t }) {
   useEffect(() => {
     startRound();
   }, [startRound]);
+
+  // Save quiz score upon completion
+  useEffect(() => {
+    const totalCount = model.questions?.length ?? 0;
+    if (model.state.tag === S.Finished && totalCount > 0 && !hasSavedRef.current) {
+      hasSavedRef.current = true;
+      saveQuizScore(categoryId || 'all', model.correctCount, totalCount);
+      updateStreak();
+    }
+  }, [model.state.tag, categoryId, model.correctCount, model.questions]);
 
   // ── Sub: 5 sn geri bildirim zamanlayıcısı ──────────────────────────────────
   useEffect(() => {

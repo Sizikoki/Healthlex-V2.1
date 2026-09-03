@@ -8,7 +8,7 @@
  *  border-border, bg-muted, gradient-primary) %100 uyumludur.
  * =====================================================================
  */
-import React, { useReducer, useEffect, useMemo, useCallback } from "react";
+import React, { useReducer, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   Check,
   X,
@@ -18,6 +18,7 @@ import {
   Trophy,
   Puzzle,
 } from "lucide-react";
+import { saveMorphemeScore, updateStreak } from "@/utils/storage";
 
 const STRINGS = {
   tr: {
@@ -381,8 +382,10 @@ export default function MorphemeGameFable({
   );
 
   const [model, dispatch] = useReducer(update, questions, init);
+  const hasSavedRef = useRef(false);
 
   useEffect(() => {
+    hasSavedRef.current = false;
     dispatch({ type: "SetQuestions", questions });
   }, [questions]);
 
@@ -408,6 +411,16 @@ export default function MorphemeGameFable({
   const success = checked && model.state.isSuccess;
   const failure = checked && !model.state.isSuccess;
 
+  // Save morpheme score upon completion
+  useEffect(() => {
+    if (finished && total > 0 && !hasSavedRef.current) {
+      hasSavedRef.current = true;
+      const pct = Math.max(0, Math.min(100, Math.round((Math.max(0, model.score) / total) * 100)));
+      saveMorphemeScore(model.score, total, pct);
+      updateStreak();
+    }
+  }, [finished, total, model.score]);
+
   if (finished) {
     return (
       <div className="w-full max-w-3xl mx-auto rounded-3xl border border-border bg-card px-6 py-14 text-center text-card-foreground shadow-xl">
@@ -429,7 +442,10 @@ export default function MorphemeGameFable({
         <div className="mt-8 flex items-center justify-center gap-3">
           <button
             type="button"
-            onClick={() => dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) })}
+            onClick={() => {
+              hasSavedRef.current = false;
+              dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) });
+            }}
             className="flex items-center gap-2 rounded-xl gradient-primary px-5 py-2.5 font-semibold text-primary-foreground transition hover:opacity-90 shadow-md shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <RotateCcw aria-hidden="true" className="h-4 w-4"/>

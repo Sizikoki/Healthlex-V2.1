@@ -20,6 +20,7 @@ export const Quiz = () => {
     <div className="min-h-screen bg-muted/30 py-8 px-4">
       <QuizGameFable
         terms={categoryTerms}
+        categoryId={category}
         language={currentLanguage}
         onBack={() => navigate('/games')}
         t={t}

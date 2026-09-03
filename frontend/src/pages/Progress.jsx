@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
+import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getFlashcardSessions, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -16,6 +16,7 @@ export const ProgressPage = () => {
   const quizScores = getQuizScores().slice(-10).reverse();
   const matchScores = getMatchScores().slice(-10).reverse();
   const morphemeScores = getMorphemeScores().slice(-10).reverse();
+  const flashcardSessions = getFlashcardSessions().slice(-10).reverse();
   const totalTerms = terms.length;
 
   const progressPercentage = Math.round((stats.learnedTerms / totalTerms) * 100);
@@ -533,11 +534,42 @@ export const ProgressPage = () => {
 
               {/* 4. FLASHCARD HISTORY PANEL */}
               <div className={`hist-panel bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] ${activeTab === 'flashcard' ? 'active block' : 'hidden'}`}>
-                <div className="empty-state text-center py-[30px] px-[10px]">
-                  <div className="hist-title font-bold text-[1rem]">{t('noFlashcardYet')}</div>
-                  <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noFlashcardSub')}</p>
-                  <Link to="/study" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('startFlashcards')} →</Link>
+                <div className="hist-head flex justify-between items-start gap-[20px] flex-wrap mb-[18px]">
+                  <div>
+                    <div className="hist-title font-bold text-[1rem] text-[var(--ink)] mb-[2px]">{t('recentFlashcards', 'Son Flashcard Çalışmaları')}</div>
+                    <div className="hist-sub text-[0.84rem] text-[var(--muted)]">{t('last10FlashcardPerf', 'Son 10 flashcard oturumu performansı')}</div>
+                  </div>
                 </div>
+                {flashcardSessions.length > 0 ? (
+                  flashcardSessions.map((session, idx) => {
+                    const pct = session.totalCount > 0 ? Math.round((session.completedCount / session.totalCount) * 100) : 0;
+                    const catObj = catList.find(c => c.id === session.categoryId);
+                    const catName = catObj ? t(catObj.key, catObj.name) : (session.categoryId === 'all' ? t('allCategories', 'Tüm Kategoriler') : (session.categoryId || t('allCategories', 'Tüm Kategoriler')));
+
+                    return (
+                      <div className="hist-item flex justify-between items-center bg-[var(--paper)] rounded-[9px] p-[14px_18px] mb-[10px] last:mb-0" key={idx}>
+                        <div>
+                          <div className="l1 font-semibold text-[0.92rem]">
+                            {session.completedCount} / {session.totalCount} {t('termsLearnedCount', 'terim öğrenildi')}
+                            <span className="text-xs text-[var(--muted)] font-normal ml-2">({catName})</span>
+                          </div>
+                          <div className="l2 text-[0.78rem] text-[var(--muted)] mt-[2px]">{formatDate(session.date)}</div>
+                        </div>
+                        <div className={`score font-serif font-semibold text-[1.15rem] ${
+                          pct >= 70 ? 'score-good text-[var(--teal-deep)]' : 'score-mid text-[var(--gold)]'
+                        }`}>
+                          %{pct}
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="empty-state text-center py-[30px] px-[10px]">
+                    <div className="hist-title font-bold text-[1rem]">{t('noFlashcardYet')}</div>
+                    <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noFlashcardSub')}</p>
+                    <Link to="/flashcards" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('startFlashcards')} →</Link>
+                  </div>
+                )}
               </div>
             </div>
           </section>
