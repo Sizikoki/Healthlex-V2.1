@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import {
   Search,
   BookOpen,
@@ -144,7 +144,7 @@ export const MorphemeExplorer = () => {
       '@id': 'https://healthlexmed.com/morphemes#termset',
       name: 'HealthLexMed Tıbbi Terminoloji Kök ve Ekler Sözlüğü (Medical Morphemes Dictionary)',
       description:
-        'Tıbbi terminolojinin 559 temel yapı taşı: 116 Ön Ek, 318 Kelime Kökü ve 125 Son Ek içeren kapsamlı morfoloji ve kelime çözümleme veritabanı.',
+        `Tıbbi terminolojinin ${allMorphemes.length} temel yapı taşı: ${PREFIXES.length} Ön Ek, ${ROOTS.length} Kelime Kökü ve ${SUFFIXES.length} Son Ek içeren kapsamlı morfoloji ve kelime çözümleme veritabanı.`,
       url: 'https://healthlexmed.com/morphemes',
       inLanguage: ['tr', 'en', 'la'],
       hasDefinedTerm: allMorphemes.map((item) => ({
@@ -266,17 +266,13 @@ export const MorphemeExplorer = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Başlık ve İstatistik Paneli */}
         <header className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide uppercase">
-            <Sparkles className="w-4 h-4" />
-            {isTr ? 'Tıbbi Kelime Mimarisi' : 'Medical Word Architecture'}
-          </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             {isTr ? 'Morfem Keşif Alanı & Sözlüğü' : 'Morpheme Explorer & Lexicon'}
           </h1>
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground">
             {isTr
-              ? 'Tıbbi terimlerin yapı taşlarını oluşturan 559 kök ve eki keşfedin, Türkçe/İngilizce anlamlarını ve kelime formüllerini anında öğrenin.'
-              : 'Explore the 559 building blocks of medical terminology. Search prefixes, roots, and suffixes with dual-language definitions and formulas.'}
+              ? `Tıbbi terimlerin yapı taşlarını oluşturan ${allMorphemes.length} kök ve eki keşfedin, Türkçe/İngilizce anlamlarını ve kelime formüllerini anında öğrenin.`
+              : `Explore the ${allMorphemes.length} building blocks of medical terminology. Search prefixes, roots, and suffixes with dual-language definitions and formulas.`}
           </p>
 
           {/* İstatistik Rozetleri */}
@@ -397,89 +393,107 @@ export const MorphemeExplorer = () => {
         {/* Morfem Kartları Izgarası (Grid) */}
         {paginatedMorphemes.length > 0 ? (
           <section aria-label={isTr ? 'Morfem Kartları' : 'Morpheme Cards'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {paginatedMorphemes.map((item) => (
-              <article
-                key={item.id}
-                itemScope
-                itemType="https://schema.org/DefinedTerm"
-                className="h-full"
-              >
-                {/* Schema.org Microdata Hidden Properties */}
-                <meta itemProp="name" content={item.displayTerm} />
-                <meta itemProp="termCode" content={item.displayTerm} />
-                <meta
-                  itemProp="description"
-                  content={`${item.meaningTr} (${item.meaningEn})${item.example ? ` — Örnek: ${item.example}` : ''}`}
-                />
-                <meta itemProp="inDefinedTermSet" content="https://healthlexmed.com/morphemes#termset" />
+            {paginatedMorphemes.map((item) => {
+              const slug = (item.displayTerm || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
 
-                <Card className="h-full bg-card border border-border hover:border-primary/40 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden group">
-                  <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="space-y-4">
-                      {/* Kart Üst Barı: Başlık ve Rozet */}
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="space-y-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-xl font-bold font-mono tracking-tight text-foreground group-hover:text-primary transition-colors">
-                              {item.displayTerm}
-                            </span>
-                            {getTypeBadge(item.type)}
+              return (
+                <article
+                  key={item.id}
+                  itemScope
+                  itemType="https://schema.org/DefinedTerm"
+                  className="h-full"
+                >
+                  {/* Schema.org Microdata Hidden Properties */}
+                  <meta itemProp="name" content={item.displayTerm} />
+                  <meta itemProp="termCode" content={item.displayTerm} />
+                  <meta
+                    itemProp="description"
+                    content={`${item.meaningTr} (${item.meaningEn})${item.example ? ` — Örnek: ${item.example}` : ''}`}
+                  />
+                  <meta itemProp="inDefinedTermSet" content="https://healthlexmed.com/morphemes#termset" />
+
+                  <Link
+                    to={`/morphemes/${slug}`}
+                    className="block h-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
+                  >
+                    <Card className="h-full bg-card border border-border group-hover:border-primary/50 group-hover:shadow-md group-hover:-translate-y-0.5 rounded-2xl transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer">
+                      <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div className="space-y-4">
+                          {/* Kart Üst Barı: Başlık ve Rozet */}
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="space-y-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xl font-bold font-mono tracking-tight text-foreground group-hover:text-primary transition-colors">
+                                  {item.displayTerm}
+                                </span>
+                                {getTypeBadge(item.type)}
+                              </div>
+                              {item.category && CATEGORY_NAMES[item.category] && (
+                                <p className="text-[0.75rem] font-medium text-muted-foreground">
+                                  {CATEGORY_NAMES[item.category].tr}
+                                </p>
+                              )}
+                            </div>
                           </div>
-                          {item.category && CATEGORY_NAMES[item.category] && (
-                            <p className="text-[0.75rem] font-medium text-muted-foreground">
-                              {CATEGORY_NAMES[item.category].tr}
-                            </p>
-                          )}
-                        </div>
-                      </div>
 
-                      {/* Anlamlar Bölümü */}
-                      <div className="space-y-2 pt-1 border-t border-border/50">
-                        <div className="flex items-start gap-2 text-sm">
-                          <span className="shrink-0 px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold tracking-wider">
-                            TR
-                          </span>
-                          <span className="text-foreground font-medium leading-snug">
-                            {item.meaningTr}
-                          </span>
+                          {/* Anlamlar Bölümü */}
+                          <div className="space-y-2 pt-1 border-t border-border/50">
+                            <div className="flex items-start gap-2 text-sm">
+                              <span className="shrink-0 px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold tracking-wider">
+                                TR
+                              </span>
+                              <span className="text-foreground font-medium leading-snug">
+                                {item.meaningTr}
+                              </span>
+                            </div>
+
+                            <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                              <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold tracking-wider border border-border/50">
+                                EN
+                              </span>
+                              <span className="leading-snug">
+                                {item.meaningEn}
+                              </span>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold tracking-wider border border-border/50">
-                            EN
-                          </span>
-                          <span className="leading-snug">
-                            {item.meaningEn}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Örnek & Çözümleme Formülü Kutusu */}
-                    {(item.example || item.breakdown || item.description) && (
-                      <div className="bg-muted/40 border border-border/60 rounded-xl p-3 space-y-1.5 text-xs mt-3">
-                        {item.example && (
-                          <div className="flex items-center gap-1.5 font-semibold text-primary">
-                            <BookOpen className="w-3.5 h-3.5 shrink-0" />
-                            <span className="truncate">{item.example}</span>
+                        {/* Örnek & Çözümleme Formülü Kutusu */}
+                        {(item.example || item.breakdown || item.description) && (
+                          <div className="bg-muted/40 border border-border/60 rounded-xl p-3 space-y-1.5 text-xs mt-3">
+                            {item.example && (
+                              <div className="flex items-center gap-1.5 font-semibold text-primary">
+                                <BookOpen className="w-3.5 h-3.5 shrink-0" />
+                                <span className="truncate">{item.example}</span>
+                              </div>
+                            )}
+                            {item.breakdown && (
+                              <p className="text-foreground/80 font-mono text-[0.75rem] leading-relaxed break-words bg-background/60 p-2 rounded-lg border border-border/40">
+                                {item.breakdown}
+                              </p>
+                            )}
+                            {item.description && (
+                              <p className="text-muted-foreground text-[0.75rem] leading-relaxed italic">
+                                {item.description}
+                              </p>
+                            )}
                           </div>
                         )}
-                        {item.breakdown && (
-                          <p className="text-foreground/80 font-mono text-[0.75rem] leading-relaxed break-words bg-background/60 p-2 rounded-lg border border-border/40">
-                            {item.breakdown}
-                          </p>
-                        )}
-                        {item.description && (
-                          <p className="text-muted-foreground text-[0.75rem] leading-relaxed italic">
-                            {item.description}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </article>
-            ))}
+
+                        {/* Detay & Terimler Linki */}
+                        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs mt-3">
+                          <span className="font-semibold text-primary group-hover:underline inline-flex items-center gap-1">
+                            {isTr ? 'Kök Detayı & Terimler' : 'Root Details & Terms'}
+                            <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
+                          </span>
+                          <span className="text-[11px] text-muted-foreground font-mono">#{item.type}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </article>
+              );
+            })}
           </section>
         ) : (
           /* Sonuç Bulunamadı Durumu */

@@ -11,6 +11,7 @@ import { MatchGame } from '@/pages/MatchGame';
 import { Quiz } from '@/pages/Quiz';
 import { MorphemeGame } from '@/pages/MorphemeGame';
 import { MorphemeExplorer } from '@/pages/MorphemeExplorer';
+import { MorphemeDetail } from '@/pages/MorphemeDetail';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
 import { Contact } from '@/pages/Contact';
@@ -57,6 +58,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/morpheme" element={<MorphemeGame />} />
             <Route path="/morphemes" element={<MorphemeExplorer />} />
+            <Route path="/morphemes/:slug" element={<MorphemeDetail />} />
             <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
