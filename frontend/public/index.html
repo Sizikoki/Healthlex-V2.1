@@ -7,21 +7,90 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="HealthLexMed - Tıbbi Terimler ve Öğrenme Platformu" />
-    <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-    <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+    <title>HealthLexMed | Tıbbi Terminoloji, Anatomi ve Morfem Oyunları</title>
+    <meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 550+ morfem, 10 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />
+    <meta name="keywords" content="tıbbi terminoloji, tıp terimleri, anatomi ezberleme, morfem analizi, tıbbi terimler sözlüğü, latince tıp terimleri, medical terminology, anatomy flashcards, morpheme games, USMLE terminology" />
+    <meta name="author" content="HealthLexMed" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://healthlexmed.com/" />
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-    <title>HealthLexMed</title>
+    <!-- Open Graph / Facebook / WhatsApp Preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://healthlexmed.com/" />
+    <meta property="og:title" content="HealthLexMed | Tıbbi Terminoloji ve Anatomi Öğrenme Oyunları" />
+    <meta property="og:description" content="550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />
+    <meta property="og:image" content="https://healthlexmed.com/favicon.png" />
+    <meta property="og:site_name" content="HealthLexMed" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter / X Card Preview -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:url" content="https://healthlexmed.com/" />
+    <meta name="twitter:title" content="HealthLexMed | Tıbbi Terminoloji ve Anatomi Öğrenme Oyunları" />
+    <meta name="twitter:description" content="Tıp öğrencileri için interaktif Latince terminoloji, flashcard ve morfem oyunları." />
+    <meta name="twitter:image" content="https://healthlexmed.com/favicon.png" />
+
+    <!-- Structured Data (JSON-LD Schema) for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://healthlexmed.com/#website",
+          "url": "https://healthlexmed.com/",
+          "name": "HealthLexMed",
+          "description": "Tıbbi Terminoloji, Anatomi ve Morfem Öğrenme Platformu",
+          "inLanguage": ["tr-TR", "en-US"]
+        },
+        {
+          "@type": "EducationalApplication",
+          "@id": "https://healthlexmed.com/#app",
+          "name": "HealthLexMed",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "All modern browsers",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "TRY",
+            "description": "3 Günlük Ücretsiz Deneme"
+          },
+          "description": "Tıp ve sağlık bilimleri öğrencileri için Latince tıbbi terminolojiyi morfem (kök/ek) mantığı ve 4 interaktif oyun moduyla öğreten eğitim yazılımı."
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://healthlexmed.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "HealthLexMed nedir ve tıbbi terminolojiyi nasıl öğretir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HealthLexMed, Latince tıp terimlerini ezberletmek yerine köklerine (morfemlerine) ayırarak anlam mantığını öğreten; Bilgi Kartları, Eşleştirme Oyunu, Quiz ve Morfem Çözümleme oyun modları sunan interaktif bir eğitim platformudur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Morfem nedir ve tıp terimlerini öğrenmede neden önemlidir?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Morfem, kelimenin anlam taşıyan en küçük yapı taşıdır (kök, ön ek, son ek). Bir tıp öğrencisi örneğin 'chole' (safra), 'cyst' (kese) ve 'ectomy' (cerrahi çıkarma) morfemlerini öğrendiğinde, yüzlerce farklı terimin anlamını tek tek ezberlemeden kendisi çözebilir."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "HealthLexMed kimler için uygundur?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tıp Fakültesi, Diş Hekimliği, Eczacılık, Hemşirelik, Fizyoterapi ve Rehabilitasyon (FTR) öğrencileri, Tıbbi Dokümantasyon ve Sekreterlik adayları ile USMLE/NCLEX sınavlarına hazırlananlar için uygundur."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">

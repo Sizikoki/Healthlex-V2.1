@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /profile
+Disallow: /dashboard
+Disallow: /panel
+
+# Sitemaps
+Sitemap: https://healthlexmed.com/sitemap.xml
