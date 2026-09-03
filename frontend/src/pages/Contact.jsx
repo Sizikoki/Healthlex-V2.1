@@ -548,31 +548,15 @@ export const Contact = () => {
               <Link to="/contact" className="text-white font-semibold underline-offset-4 underline">
                 {isTr ? 'İletişim & Destek' : 'Contact & Support'}
               </Link>
-              {/* Sözleşmeler için Yer Tutucular (Placeholder) */}
-              <a
-                href="#terms"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-white transition-colors cursor-pointer"
-                title={isTr ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              <Link to="/terms" className="hover:text-white transition-colors">
                 {isTr ? 'Kullanım Koşulları' : 'Terms of Service'}
-              </a>
-              <a
-                href="#privacy"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-white transition-colors cursor-pointer"
-                title={isTr ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              </Link>
+              <Link to="/privacy" className="hover:text-white transition-colors">
                 {isTr ? 'Gizlilik Politikası' : 'Privacy Policy'}
-              </a>
-              <a
-                href="#refund"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-white transition-colors cursor-pointer"
-                title={isTr ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              </Link>
+              <Link to="/refund" className="hover:text-white transition-colors">
                 {isTr ? 'İptal & İade' : 'Refund Policy'}
-              </a>
+              </Link>
             </div>
 
             <div className="text-white/50 text-[11px]">

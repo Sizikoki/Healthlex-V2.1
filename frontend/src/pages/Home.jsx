@@ -594,30 +594,15 @@ export const Home = () => {
               <Link to="/contact" className="footer-nav-link footer-nav-highlight">
                 {content.footer?.links?.contact || (lang === 'tr' ? 'İletişim & Destek' : 'Contact & Support')}
               </Link>
-              <a
-                href="#terms"
-                onClick={(e) => e.preventDefault()}
-                className="footer-nav-link cursor-pointer"
-                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              <Link to="/terms" className="footer-nav-link">
                 {content.footer?.links?.terms || (lang === 'tr' ? 'Kullanım Koşulları' : 'Terms of Service')}
-              </a>
-              <a
-                href="#privacy"
-                onClick={(e) => e.preventDefault()}
-                className="footer-nav-link cursor-pointer"
-                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              </Link>
+              <Link to="/privacy" className="footer-nav-link">
                 {content.footer?.links?.privacy || (lang === 'tr' ? 'Gizlilik Politikası' : 'Privacy Policy')}
-              </a>
-              <a
-                href="#refund"
-                onClick={(e) => e.preventDefault()}
-                className="footer-nav-link cursor-pointer"
-                title={lang === 'tr' ? 'Yakında eklenecek' : 'Coming soon'}
-              >
+              </Link>
+              <Link to="/refund" className="footer-nav-link">
                 {content.footer?.links?.refund || (lang === 'tr' ? 'İptal ve İade' : 'Refund Policy')}
-              </a>
+              </Link>
             </div>
 
             <div className="footer-contact-badge">
