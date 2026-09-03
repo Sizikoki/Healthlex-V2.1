@@ -165,7 +165,7 @@ export const HOME_CONTENT = {
     },
     pricing: {
       eyebrow: 'Fiyatlandırma',
-      title: 'Yıllık abonelik. Tek seferlik ödeme yok.',
+      title: 'Yıllık abonelik.',
       topline: 'Aylık değil yıllık ücretlendirme. Abonelik her yıl otomatik yenilenir.',
       basicTitle: 'Temel Paket',
       basicPrice: '249 TL',
@@ -314,7 +314,7 @@ export const HOME_CONTENT = {
     },
     pricing: {
       eyebrow: 'Pricing',
-      title: 'Annual subscription. No one-time payment.',
+      title: 'Annual subscription.',
       topline: 'Billed annually, not monthly. Subscription renews automatically each year.',
       basicTitle: 'Basic Plan',
       basicPrice: '$15',
