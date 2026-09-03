@@ -184,7 +184,7 @@ export const HOME_CONTENT = {
       proPrice: '499 TL',
       proPeriod: 'yıllık',
       proFeatures: (totalMorphemes) => [
-        { active: true, text: `10 kategorinin tamamı + ${totalMorphemes}+ morfem kütüphanesi` },
+        { active: true, text: `10 kategorinin tamamı + ${totalMorphemes}'den fazla morfem kütüphanesi` },
         { active: true, text: '4 oyun modunun tamamı (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)' },
         { active: true, text: 'İlerleme istatistikleri ve seviye sistemi' },
         { active: true, text: 'TR ⟷ EN çift dil desteği' },
@@ -325,7 +325,7 @@ export const HOME_CONTENT = {
       proPrice: '$20',
       proPeriod: 'annual',
       proFeatures: (totalMorphemes) => [
-        { active: true, text: `All 10 categories + ${totalMorphemes}+ morpheme library` },
+        { active: true, text: `All 10 categories + over ${totalMorphemes} morpheme library` },
         { active: true, text: 'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)' },
         { active: true, text: 'Progress statistics and leveling system' },
         { active: true, text: 'TR ⟷ EN bilingual support' },

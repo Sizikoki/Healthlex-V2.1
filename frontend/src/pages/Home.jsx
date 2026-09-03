@@ -26,7 +26,7 @@ export const Home = () => {
   const [termCount, setTermCount] = useState(() => getAllTerms().length);
   const [paddlePrices, setPaddlePrices] = useState({});
 
-  const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 559 morfem
+  const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 571 morfem
 
   // Fetch Paddle localized price previews
   useEffect(() => {
