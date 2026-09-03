@@ -506,7 +506,7 @@ export const Home = () => {
               {/* Temel Paket */}
               <div className="tier">
                 <h3>{content.pricing.basicTitle}</h3>
-                <div className="price">{paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15'}</div>
+                <div className="price">{content.pricing.basicPrice || paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '249 TL'}</div>
                 <div className="once">{content.pricing.basicPeriod}</div>
                 <ul>
                   {content.pricing.basicFeatures.map((feat, idx) => (
@@ -526,7 +526,7 @@ export const Home = () => {
                     onClick={() => handlePaddleCheckout(PADDLE_PRICE_BASIC, content.pricing.basicTitle, 'basic')}
                     className="site-btn-secondary w-full text-center"
                   >
-                    {content.pricing.basicBtn(paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '$15')}
+                    {content.pricing.basicBtn(content.pricing.basicPrice || paddlePrices[PADDLE_PRICE_BASIC]?.formattedTotal || '249 TL')}
                   </button>
                 </div>
               </div>
@@ -535,7 +535,7 @@ export const Home = () => {
               <div className="tier hot">
                 <span className="badge">{content.pricing.proBadge}</span>
                 <h3 className="text-primary">{content.pricing.proTitle}</h3>
-                <div className="price">{paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20'}</div>
+                <div className="price">{content.pricing.proPrice || paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '499 TL'}</div>
                 <div className="once">{content.pricing.proPeriod}</div>
                 <ul>
                   {content.pricing.proFeatures(totalMorphemes).map((feat, idx) => (
@@ -555,7 +555,7 @@ export const Home = () => {
                     onClick={() => handlePaddleCheckout(PADDLE_PRICE_PRO, content.pricing.proTitle, 'pro')}
                     className="site-btn-primary w-full text-center"
                   >
-                    {content.pricing.proBtn(paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '$20')}
+                    {content.pricing.proBtn(content.pricing.proPrice || paddlePrices[PADDLE_PRICE_PRO]?.formattedTotal || '499 TL')}
                   </button>
                 </div>
               </div>

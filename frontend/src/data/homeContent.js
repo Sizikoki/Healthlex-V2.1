@@ -168,6 +168,7 @@ export const HOME_CONTENT = {
       title: 'Yıllık abonelik. Tek seferlik ödeme yok.',
       topline: 'Aylık değil yıllık ücretlendirme. Abonelik her yıl otomatik yenilenir.',
       basicTitle: 'Temel Paket',
+      basicPrice: '249 TL',
       basicPeriod: 'yıllık',
       basicFeatures: [
         { active: true, text: '3 kategori: Kemikler, Eklemler, Kas Sistemi' },
@@ -177,9 +178,10 @@ export const HOME_CONTENT = {
         { active: false, text: 'İlerleme istatistikleri ve seviye sistemi yok' },
         { active: false, text: 'Morfem kütüphanesi yok' }
       ],
-      basicBtn: (price) => `Temel Paketi Aç — ${price}`,
+      basicBtn: (price) => `Temel Paketi Aç — ${price || '249 TL'}`,
       proBadge: 'EN ÇOK TERCİH EDİLEN',
       proTitle: 'Tam Paket',
+      proPrice: '499 TL',
       proPeriod: 'yıllık',
       proFeatures: (totalMorphemes) => [
         { active: true, text: `10 kategorinin tamamı + ${totalMorphemes}+ morfem kütüphanesi` },
@@ -190,7 +192,7 @@ export const HOME_CONTENT = {
       ],
       proBtn: () => '3 Gün Ücretsiz Dene / Satın Al',
       flowLine: 'Ödemeni yap → hesabın açılır → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, istediğin an iptal edebilirsin.',
-      expensiveLine: 'Evet, ücretsiz alternatiflerden pahalıyız. Ezberleyip unutmak bedava; bir daha unutmamak yılda 20 dolar.'
+      expensiveLine: 'Evet, ücretsiz alternatiflerden pahalıyız. Ezberleyip unutmak bedava; bir daha unutmamak yılda 499 TL.'
     },
     footer: {
       term: 'STERNO · CLEIDO · MASTOIDEUS',
@@ -307,6 +309,7 @@ export const HOME_CONTENT = {
       title: 'Annual subscription. No one-time payment.',
       topline: 'Billed annually, not monthly. Subscription renews automatically each year.',
       basicTitle: 'Basic Plan',
+      basicPrice: '$15',
       basicPeriod: 'annual',
       basicFeatures: [
         { active: true, text: '3 categories: Bones, Joints, Muscular System' },
@@ -316,9 +319,10 @@ export const HOME_CONTENT = {
         { active: false, text: 'No progress statistics or leveling system' },
         { active: false, text: 'No morpheme library' }
       ],
-      basicBtn: (price) => `Unlock Basic Plan — ${price}`,
+      basicBtn: (price) => `Unlock Basic Plan — ${price || '$15'}`,
       proBadge: 'MOST POPULAR',
       proTitle: 'Pro Plan',
+      proPrice: '$20',
       proPeriod: 'annual',
       proFeatures: (totalMorphemes) => [
         { active: true, text: `All 10 categories + ${totalMorphemes}+ morpheme library` },
