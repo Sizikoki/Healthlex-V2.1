@@ -9,7 +9,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { getAnnualPricePreview, openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { getUser } from '@/utils/storage';
 import { useLanguage } from '@/context/LanguageContext';
-import { getHomeDemoRounds, HOME_CONTENT } from '@/data/homeContent';
+import { HOME_CONTENT } from '@/data/homeContent';
+import { LiveMorphemeSplitDemo } from '@/components/LiveMorphemeSplitDemo';
 import { toast } from 'sonner';
 import './LandingPage.css';
 
@@ -18,7 +19,6 @@ export const Home = () => {
   const { currentLanguage } = useLanguage();
   const lang = currentLanguage === 'en' ? 'en' : 'tr';
   const content = HOME_CONTENT[lang] || HOME_CONTENT.tr;
-  const demoRounds = getHomeDemoRounds(lang);
 
   // ── Auth Redirect (Flash-Free) ─────────────────────────────────────────────
   // onAuthStateChanged tamamlanana kadar hiçbir şey render edilmez (flash önleme).
@@ -39,8 +39,6 @@ export const Home = () => {
   }, [navigate]);
   // ────────────────────────────────────────────────────────────────────────────
 
-  const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
-  const [revealedIndices, setRevealedIndices] = useState([]);
   const [termCount, setTermCount] = useState(() => getAllTerms().length);
   const [annualPrice, setAnnualPrice] = useState(null);
   const [isPriceLoading, setIsPriceLoading] = useState(true);
@@ -134,22 +132,6 @@ export const Home = () => {
     fetchTermCount();
   }, []);
 
-  const currentRound = demoRounds[currentRoundIndex] || demoRounds[0];
-  const isAllRevealed = revealedIndices.length === currentRound.chips.length;
-  const isFinalRound = currentRoundIndex === demoRounds.length - 1;
-
-  const handleChipClick = (index) => {
-    if (revealedIndices.includes(index)) return;
-    setRevealedIndices((prev) => [...prev, index]);
-  };
-
-  const handleNextRound = () => {
-    if (currentRoundIndex < demoRounds.length - 1) {
-      setCurrentRoundIndex((prev) => prev + 1);
-      setRevealedIndices([]);
-    }
-  };
-
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -215,75 +197,9 @@ export const Home = () => {
         </section>
 
         {/* ================= DEMO ================= */}
-        <section id="demo" style={{ paddingTop: 0 }}>
+        <section id="demo" className="pt-2 pb-8 sm:pb-12">
           <div className="wrap">
-            <div className="demo-box" aria-live="polite">
-              <p className="demo-progress">
-                <span>{currentRoundIndex + 1}</span> / {demoRounds.length}
-              </p>
-              <p className="demo-term-label">{content.demo.label}</p>
-              <p className="font-bold text-2xl sm:text-3xl text-foreground mb-2 tracking-tight">
-                {currentRound.term}
-              </p>
-              <div className="chips">
-                {currentRound.chips.map((chip, idx) => {
-                  const revealed = revealedIndices.includes(idx);
-                  return (
-                    <button
-                      key={chip.part + idx}
-                      type="button"
-                      className={`chip ${revealed ? 'revealed' : ''}`}
-                      onClick={() => handleChipClick(idx)}
-                    >
-                      {chip.part}
-                      <span className="meaning">{chip.meaning}</span>
-                    </button>
-                  );
-                })}
-              </div>
-              {!isAllRevealed && (
-                <p className="demo-hint">{content.demo.hint}</p>
-              )}
-
-              {isAllRevealed && (
-                <div className="demo-result">
-                  <p>{currentRound.result}</p>
-                  {!isFinalRound && (
-                    <button
-                      className="demo-next"
-                      type="button"
-                      onClick={handleNextRound}
-                    >
-                      {content.demo.nextBtn}
-                    </button>
-                  )}
-                </div>
-              )}
-
-              {isAllRevealed && isFinalRound && (
-                <div className="demo-final">
-                  <p>
-                    {content.demo.finalMsg(termCount, totalMorphemes)}
-                  </p>
-                  <button
-                    type="button"
-                    className="site-btn-primary"
-                    onClick={() => {
-                      if (IS_PAYMENT_ACTIVE) {
-                        scrollToSection('fiyat');
-                      } else {
-                        navigate('/study');
-                      }
-                    }}
-                  >
-                    {IS_PAYMENT_ACTIVE
-                      ? content.demo.finalBtn
-                      : (lang === 'en' ? 'Explore Dictionary' : 'Sözlüğü Keşfet')}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
-                </div>
-              )}
-            </div>
+            <LiveMorphemeSplitDemo />
           </div>
         </section>
 
