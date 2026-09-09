@@ -187,11 +187,18 @@ export default async function handler(req, res) {
         const customerEmail = transaction?.customer?.email || transaction?.customData?.email || transaction?.details?.customer?.email;
         const userId = transaction?.customData?.userId;
         const plan = transaction?.customData?.plan || 'Annual Pro Membership';
+        const planId = (transaction?.customData?.planId || '').toLowerCase();
+        const isBasic = planId === 'basic' || plan.toLowerCase().includes('basic');
+        const isLifetime = planId === 'lifetime' || plan.toLowerCase().includes('lifetime');
+        const isProPlan = !isBasic;
 
         console.log('[Paddle] Transaction Completed. Email:', customerEmail, 'Plan:', plan, 'UserId:', userId);
 
         await updateUserSubscription(userId, customerEmail, {
-          isPro: true,
+          isPro: isProPlan,
+          isBasic: isBasic,
+          isLifetime: isLifetime,
+          planType: isLifetime ? 'lifetime' : (isBasic ? 'basic' : 'pro'),
           subscriptionStatus: 'active',
           plan: plan,
           paddleTransactionId: transaction?.id || null,
@@ -205,12 +212,21 @@ export default async function handler(req, res) {
         const subscription = eventData.data;
         const userId = subscription?.customData?.userId;
         const customerEmail = subscription?.customData?.email || subscription?.customer?.email;
+        const plan = subscription?.customData?.plan || 'Annual Pro Membership';
+        const planId = (subscription?.customData?.planId || '').toLowerCase();
+        const isBasic = planId === 'basic' || plan.toLowerCase().includes('basic');
+        const isLifetime = planId === 'lifetime' || plan.toLowerCase().includes('lifetime');
+        const isProPlan = !isBasic;
 
         console.log('[Paddle] Subscription Active. Customer:', subscription?.customerId, 'Status:', subscription?.status);
 
         await updateUserSubscription(userId, customerEmail, {
-          isPro: true,
+          isPro: isProPlan,
+          isBasic: isBasic,
+          isLifetime: isLifetime,
+          planType: isLifetime ? 'lifetime' : (isBasic ? 'basic' : 'pro'),
           subscriptionStatus: 'active',
+          plan: plan,
           paddleSubscriptionId: subscription?.id || null,
           paddleCustomerId: subscription?.customerId || null
         });

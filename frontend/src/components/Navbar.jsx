@@ -25,7 +25,8 @@ export const Navbar = () => {
   const [firebaseUser, setFirebaseUser] = useState(
     previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
   );
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [isPro, setIsPro] = useState(previewRole === 'pro' || previewRole === 'lifetime');
+  const [isBasic, setIsBasic] = useState(previewRole === 'basic');
   const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
@@ -36,13 +37,15 @@ export const Navbar = () => {
     return () => unsubscribe();
   }, [previewRole]);
 
-  // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
+  // Pro & Temel Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
   useEffect(() => {
     if (previewRole) return;
     const uid = firebaseUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
-      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      const isBasicPlan = localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic');
+      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active'));
+      setIsBasic(isBasicPlan);
       return;
     }
 
@@ -51,13 +54,19 @@ export const Navbar = () => {
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
+          const isBasicPlan = data.isBasic === true || data.subscriptionStatus === 'basic' || (data.plan || '').toLowerCase().includes('basic');
           const proActive =
-            data.isPro === true ||
-            data.subscriptionStatus === 'active' ||
-            data.subscriptionStatus === 'pro';
+            !isBasicPlan && (
+              data.isPro === true ||
+              data.subscriptionStatus === 'active' ||
+              data.subscriptionStatus === 'pro' ||
+              data.isLifetime === true
+            );
           setIsPro(proActive);
+          setIsBasic(isBasicPlan);
         } else {
           setIsPro(false);
+          setIsBasic(false);
         }
       }, (err) => {
         console.warn('[Navbar] Could not read user pro status:', err);
@@ -183,6 +192,10 @@ export const Navbar = () => {
                       <div className="pro-badge flex items-center gap-1.5 bg-gradient-to-r from-amber-500/15 via-yellow-500/20 to-amber-500/15 dark:from-amber-400/20 dark:to-yellow-500/20 border border-amber-500/40 text-amber-700 dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs hover:shadow-sm transition-all select-none">
                         <span className="text-amber-500 dark:text-amber-400 font-black text-sm leading-none">★</span>
                         <span className="tracking-wide">PRO</span>
+                      </div>
+                    ) : isBasic ? (
+                      <div className="basic-badge flex items-center gap-1.5 bg-blue-500/15 border border-blue-500/40 text-blue-700 dark:text-blue-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
+                        <span className="tracking-wide">TEMEL</span>
                       </div>
                     ) : trialState.currentDay >= 3 ? (
                       <div className="trial-badge flex items-center gap-2 bg-[#fff4e6] dark:bg-amber-950/40 border border-[#ffe0b8] dark:border-amber-800 text-[#b45309] dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame } from 'lucide-react';
-import { getStats, getUser, getStreak, logout, formatTurkishName } from '@/utils/storage';
+import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame, Sparkles, Clock } from 'lucide-react';
+import { getStats, getUser, getStreak, logout, formatTurkishName, getUserTrialState } from '@/utils/storage';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,18 +9,37 @@ import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/servic
 import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'sonner';
 
-// --- Abonelik Durumu Kontrolü (Esnek) ---
-// Firestore users/{uid} dokümanındaki aşağıdaki alanlardan herhangi biri
-// Pro'yu ifade ediyorsa kullanıcı Pro sayılır:
-//   - subscriptionStatus === 'active' | 'pro'
-//   - isPro === true
-const resolveIsPro = (userData) => {
-  if (!userData) return false;
-  const status = userData.subscriptionStatus;
-  if (status === 'trial' || status === 'trialing' || status === 'free') return false;
-  if (status === 'active' || status === 'pro') return true;
-  if (userData.isPro === true) return true;
-  return false;
+// --- Kullanıcı Plan Çözümleme ---
+// Plan Seviyeleri: 'lifetime' | 'pro' | 'basic' | 'trial' | 'expired'
+const resolveUserPlan = (userData, trialState, previewRole) => {
+  if (previewRole === 'lifetime') return 'lifetime';
+  if (previewRole === 'pro') return 'pro';
+  if (previewRole === 'basic') return 'basic';
+  if (previewRole === 'trial') return 'trial';
+  if (previewRole === 'expired') return 'expired';
+
+  if (userData) {
+    const planStr = (userData.plan || '').toLowerCase();
+    const status = (userData.subscriptionStatus || '').toLowerCase();
+
+    if (userData.isLifetime === true || planStr.includes('lifetime') || status === 'lifetime') {
+      return 'lifetime';
+    }
+
+    if (userData.isBasic === true || planStr.includes('basic') || status === 'basic') {
+      return 'basic';
+    }
+
+    if (userData.isPro === true || status === 'active' || status === 'pro') {
+      return 'pro';
+    }
+  }
+
+  if (trialState && !trialState.isExpired) {
+    return 'trial';
+  }
+
+  return 'expired';
 };
 
 export const Dashboard = () => {
@@ -39,7 +58,6 @@ export const Dashboard = () => {
   const [firestoreData, setFirestoreData] = useState(
     previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free', displayName: 'Dr. Ahmet Kaya' } : null
   );
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
   const [subLoading, setSubLoading] = useState(!previewRole);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
@@ -71,7 +89,6 @@ export const Dashboard = () => {
         if (snap.exists()) {
           const data = snap.data();
           setFirestoreData(data);
-          setIsPro(resolveIsPro(data));
         }
       } catch (err) {
         console.warn('[Dashboard] Could not fetch subscription status:', err);
@@ -82,8 +99,11 @@ export const Dashboard = () => {
     fetchSubscription();
   }, [authReady, firebaseUser, previewRole]);
 
-  // Kullanıcı bilgileri
+  // Kullanıcı bilgileri ve plan durumu
   const storedUser = getUser();
+  const trialState = getUserTrialState(firebaseUser || storedUser);
+  const currentPlan = resolveUserPlan(firestoreData, trialState, previewRole);
+  const isPro = currentPlan === 'pro' || currentPlan === 'lifetime';
   const rawName =
     firestoreData?.displayName ||
     firestoreData?.name ||
@@ -216,34 +236,65 @@ export const Dashboard = () => {
 
         {/* Abonelik Durumu Kartı */}
         {!subLoading && (
-          isPro ? (
-            <div className="mb-6 flex items-center gap-3 bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/30 rounded-xl px-5 py-3.5 shadow-xs">
-              <Star className="w-5 h-5 text-primary flex-shrink-0 fill-primary" />
-              <div className="min-w-0">
-                <p className="font-bold text-foreground text-sm flex items-center gap-2">
-                  {isTr ? 'Pro Üye' : 'Pro Member'}
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/15 text-primary">PRO</span>
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {isTr ? 'Tüm içeriklere tam erişiminiz var.' : 'You have full access to all content.'}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-4 h-4 text-muted-foreground" />
+          currentPlan === 'lifetime' ? (
+            <div className="mb-6 flex items-center justify-between gap-4 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-indigo-500/10 border border-emerald-500/30 rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-xs">
+                  <Sparkles className="w-5 h-5 fill-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? 'Ücretsiz Plan' : 'Free Plan'}
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">FREE</span>
+                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? 'Ömür Boyu Pro Üye' : 'Lifetime Pro Member'}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                      {isTr ? 'ÖMÜR BOYU' : 'LIFETIME'}
+                    </span>
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground mt-0.5">
                     {isTr
-                      ? "Pro'ya geçerek tüm terimlere ve oyunlara sınırsız erişin."
-                      : 'Upgrade to Pro for unlimited access to all terms and games.'}
+                      ? 'Tüm 10 kategori, 571+ morfem ve 4 oyun moduna süresiz tam erişiminiz aktif.'
+                      : 'You have unlimited lifetime access to all 10 categories, 571+ morphemes, and 4 game modes.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : currentPlan === 'pro' ? (
+            <div className="mb-6 flex items-center justify-between gap-4 bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/30 rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white shadow-xs">
+                  <Star className="w-5 h-5 fill-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? 'Yıllık Pro Üye' : 'Annual Pro Member'}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/15 text-primary border border-primary/30">
+                      PRO
+                    </span>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {isTr
+                      ? 'Tüm 10 kategori, 571+ morfem ve 4 oyun moduna sınırsız tam erişiminiz aktif.'
+                      : 'You have unlimited access to all 10 categories, 571+ morphemes, and 4 game modes.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : currentPlan === 'basic' ? (
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-blue-500/30 rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? 'Temel Plan Üyesi' : 'Basic Plan Member'}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">
+                      {isTr ? 'TEMEL' : 'BASIC'}
+                    </span>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {isTr
+                      ? 'İlk 3 kategori, 100 morfem ve 2 oyun modu (Flashcard & Eşleştirme) aktif.'
+                      : 'First 3 categories, 100 morphemes, and 2 game modes (Flashcards & Matching) unlocked.'}
                   </p>
                 </div>
               </div>
@@ -251,15 +302,74 @@ export const Dashboard = () => {
                 <button
                   onClick={handleUpgrade}
                   disabled={checkoutLoading}
-                  className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm disabled:opacity-60 cursor-pointer"
+                  className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-violet-600 text-white rounded-lg font-semibold text-sm hover:opacity-95 transition-opacity shadow-sm disabled:opacity-60 cursor-pointer"
                 >
-                  <Star className="w-4 h-4" />
+                  <Star className="w-4 h-4 fill-white" />
                   {checkoutLoading
                     ? (isTr ? 'Yükleniyor...' : 'Loading...')
                     : (isTr ? "Pro'ya Yükselt" : 'Upgrade to Pro')}
                   {!checkoutLoading && <ArrowRight className="w-4 h-4" />}
                 </button>
               )}
+            </div>
+          ) : currentPlan === 'trial' ? (
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-amber-400 flex-shrink-0">
+                  <Flame className="w-5 h-5 fill-amber-500" />
+                </div>
+                <div>
+                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? '3 Günlük Ücretsiz Deneme' : '3-Day Free Trial'}
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
+                      <Clock className="w-3 h-3" />
+                      {trialState.currentDay >= 3
+                        ? (isTr ? 'SON GÜN' : 'LAST DAY')
+                        : (isTr ? `${trialState.daysLeft} GÜN KALDI` : `${trialState.daysLeft} DAYS LEFT`)}
+                    </span>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {isTr
+                      ? 'Deneme süreniz boyunca tüm özellikler sınırsız açık. Dilediğiniz zaman paketinizi seçebilirsiniz.'
+                      : 'All features are fully unlocked during your trial. Pick a plan anytime.'}
+                  </p>
+                </div>
+              </div>
+              <Link
+                to="/pricing"
+                className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
+              >
+                <span>{isTr ? 'Tarifeleri İncele' : 'View Plans'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          ) : (
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-muted-foreground flex-shrink-0">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? 'Ücretsiz Plan (Süre Doldu)' : 'Free Plan (Trial Expired)'}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
+                      {isTr ? 'SÜRE DOLDU' : 'EXPIRED'}
+                    </span>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {isTr
+                      ? '3 günlük deneme süreniz sona erdi. Öğrenmeye kesintisiz devam etmek için bir paket seçin.'
+                      : 'Your 3-day trial has ended. Select a plan to continue learning.'}
+                  </p>
+                </div>
+              </div>
+              <Link
+                to="/pricing"
+                className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
+              >
+                <span>{isTr ? 'Paket Seç' : 'Choose Plan'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           )
         )}
