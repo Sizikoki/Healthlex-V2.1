@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getUserTrialState, formatTurkishName } from '@/utils/storage';
@@ -243,16 +243,20 @@ export const PricingView = () => {
   const yr = period === 'yearly';
   const t = TRANSLATIONS[isTr ? 'tr' : 'en'];
 
-  const currentUser = previewRole
-    ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' }
-    : (auth?.currentUser || getUser());
+  const currentUser = useMemo(() => {
+    if (previewRole) {
+      return { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' };
+    }
+    return auth?.currentUser || getUser();
+  }, [previewRole]);
+  const userUid = currentUser?.uid;
   const trialState = getUserTrialState(currentUser);
   const trialDaysLeft = trialState.daysLeft;
 
   // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
   useEffect(() => {
     if (previewRole) return;
-    const uid = currentUser?.uid || auth?.currentUser?.uid;
+    const uid = userUid || auth?.currentUser?.uid;
     if (!uid) {
       const localUser = getUser();
       setIsUserPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
@@ -279,7 +283,7 @@ export const PricingView = () => {
     } catch (e) {
       console.warn('[Pricing] Firestore snapshot error:', e);
     }
-  }, [currentUser, previewRole]);
+  }, [previewRole, userUid]);
 
   const selPlan = t.plans[mobileTab];
   const isMobFree = mobileTab === 0;
