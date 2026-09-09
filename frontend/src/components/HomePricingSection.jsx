@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
-import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { openPaddleCheckout, getPriceIdForPlan, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { auth } from '@/firebase/config';
+import { getUser } from '@/utils/storage';
+import { toast } from 'sonner';
 import { ArrowRight } from 'lucide-react';
 
 const PRICING_CONTENT = {
@@ -164,27 +167,45 @@ export const HomePricingSection = () => {
 
   const handlePlanClick = async (plan) => {
     if (!IS_PAYMENT_ACTIVE) {
-      navigate('/study');
+      toast.info(isTr ? 'Ödeme sistemi yakında aktif olacak.' : 'Payment system coming soon.');
       return;
     }
 
-    if (plan.id === 'pro') {
-      try {
-        setLoadingPlan('pro');
-        await openPaddleCheckout({
-          priceId: PADDLE_PRICE_ID,
-          customData: {
-            plan: 'Annual Pro Membership'
-          }
-        });
-      } catch (err) {
-        console.error('Checkout error:', err);
-        navigate('/pricing');
-      } finally {
-        setLoadingPlan(null);
-      }
-    } else {
-      navigate('/pricing');
+    const currentUser = auth?.currentUser || getUser();
+    if (!currentUser) {
+      const loginMsg = isTr
+        ? 'Satın alma işlemine devam etmek için lütfen önce giriş yapın veya kayıt olun.'
+        : 'Please sign in or register to continue with your purchase.';
+      toast.info(loginMsg, { duration: 4000 });
+      navigate('/login?redirect=/#fiyat');
+      return;
+    }
+
+    const planTitle = plan.id === 'pro'
+      ? 'Annual Pro Membership'
+      : plan.id === 'basic'
+      ? (isYearly ? 'Basic Plan (Yearly)' : 'Basic Plan (Monthly)')
+      : 'Lifetime Membership';
+
+    const priceId = getPriceIdForPlan(plan.id);
+
+    try {
+      setLoadingPlan(plan.id);
+      await openPaddleCheckout({
+        priceId,
+        customerEmail: currentUser?.email || undefined,
+        customData: {
+          plan: planTitle,
+          planId: plan.id,
+          billingPeriod: plan.id === 'lifetime' ? 'lifetime' : (isYearly ? 'yearly' : 'monthly'),
+          userId: currentUser?.uid || 'unknown'
+        }
+      });
+    } catch (err) {
+      console.error('Checkout error:', err);
+      toast.error(isTr ? 'Ödeme başlatılırken bir hata oluştu.' : 'An error occurred while opening checkout.');
+    } finally {
+      setLoadingPlan(null);
     }
   };
 

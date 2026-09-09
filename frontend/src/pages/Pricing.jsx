@@ -4,7 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getUserTrialState, formatTurkishName } from '@/utils/storage';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { toast } from 'sonner';
 
 const TRANSLATIONS = {
@@ -342,13 +342,22 @@ export const PricingView = () => {
       return;
     }
 
+    const planKey = planIndex === 2 ? 'pro' : planIndex === 1 ? 'basic' : 'lifetime';
+    const planTitle = planIndex === 2
+      ? 'Annual Pro Membership'
+      : planIndex === 1
+      ? (yr ? 'Basic Plan (Yearly)' : 'Basic Plan (Monthly)')
+      : 'Lifetime Membership';
+
     setCheckoutLoading(true);
     try {
       await openPaddleCheckout({
-        priceId: PADDLE_PRICE_ID,
+        priceId: getPriceIdForPlan(planKey),
         customerEmail: currentUser?.email || undefined,
         customData: {
-          plan: planIndex === 2 ? 'Annual Pro Membership' : planIndex === 1 ? 'Basic Plan' : 'Lifetime Membership',
+          plan: planTitle,
+          planId: planKey,
+          billingPeriod: planKey === 'lifetime' ? 'lifetime' : (yr ? 'yearly' : 'monthly'),
           userId: currentUser?.uid || 'unknown'
         }
       });

@@ -22,6 +22,22 @@ export const PADDLE_PRICE_ID =
   process.env.REACT_APP_PADDLE_PRICE_PRO ||
   'pri_01m1hbkgmff67g3mght6w6bj2q';
 
+export const PADDLE_PRICE_BASIC =
+  process.env.REACT_APP_PADDLE_PRICE_BASIC ||
+  process.env.PADDLE_PRICE_BASIC ||
+  PADDLE_PRICE_ID;
+
+export const PADDLE_PRICE_LIFETIME =
+  process.env.REACT_APP_PADDLE_PRICE_LIFETIME ||
+  process.env.PADDLE_PRICE_LIFETIME ||
+  PADDLE_PRICE_ID;
+
+export const getPriceIdForPlan = (planId) => {
+  if (planId === 'basic') return PADDLE_PRICE_BASIC;
+  if (planId === 'lifetime') return PADDLE_PRICE_LIFETIME;
+  return PADDLE_PRICE_ID;
+};
+
 // Flag to control active payments (toggle to true once Paddle live account verification is fully approved)
 export const IS_PAYMENT_ACTIVE = true;
 
