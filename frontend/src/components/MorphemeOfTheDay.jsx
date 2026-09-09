@@ -40,7 +40,7 @@ export const MorphemeOfTheDay = ({ className = '' }) => {
 
   return (
     <section
-      className={`relative overflow-hidden rounded-2xl sm:rounded-3xl p-7 sm:p-10 lg:p-11 border border-border bg-card text-card-foreground shadow-xl shadow-primary/5 transition-all duration-300 flex flex-col gap-5 sm:gap-6 ${className}`}
+      className={`relative overflow-hidden rounded-2xl sm:rounded-3xl p-8 sm:p-11 lg:p-12 border border-border bg-card text-card-foreground shadow-xl shadow-primary/5 transition-all duration-300 flex flex-col gap-6 sm:gap-7 ${className}`}
       style={{ fontFamily: "'Outfit', 'Nunito', sans-serif" }}
     >
       {/* Sağ üst hafif Trust Blue ambient glow */}
@@ -51,16 +51,16 @@ export const MorphemeOfTheDay = ({ className = '' }) => {
         }}
       />
 
-      {/* Üst Etiket */}
-      <div className="relative z-10 flex items-center justify-between gap-3">
+      {/* Üst Etiket & Tip Rozeti */}
+      <div className="relative z-10 flex items-center justify-between gap-4 flex-wrap">
         <div
-          className="text-xs sm:text-[13px] font-semibold tracking-wider text-muted-foreground uppercase"
+          className="text-sm sm:text-base font-bold tracking-wider text-foreground uppercase ml-2 sm:ml-4"
           style={{ fontFamily: "'Fira Code', monospace" }}
         >
           {data.label}
         </div>
         <span
-          className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
+          className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 mr-3 sm:mr-6"
           style={{ fontFamily: "'Fira Code', monospace" }}
         >
           {data.type}
@@ -69,31 +69,31 @@ export const MorphemeOfTheDay = ({ className = '' }) => {
 
       {/* Büyük Morfem Başlığı */}
       <div
-        className="relative z-10 text-5xl sm:text-6xl font-bold tracking-tight text-primary leading-none"
+        className="relative z-10 text-5xl sm:text-6xl font-bold tracking-tight text-primary leading-none ml-2 sm:ml-4"
         style={{ fontFamily: "'Fira Code', monospace" }}
       >
         {data.morpheme}
       </div>
 
-      {/* Açıklama */}
-      <p className="relative z-10 text-sm sm:text-base lg:text-[17px] text-muted-foreground leading-relaxed">
+      {/* Açıklama (Kenardan içe alındı, daha dengeli) */}
+      <div className="relative z-10 px-3 sm:px-5 py-2 rounded-xl bg-muted/30 dark:bg-muted/15 border border-border/40 text-sm sm:text-base lg:text-[16.5px] text-muted-foreground leading-relaxed">
         <strong className="text-foreground font-semibold">
           {isTr ? 'İltihap. ' : 'Inflammation. '}
         </strong>
         {isTr
           ? 'Bir organ adının sonuna gelir ve o organın iltihabını bildirir. Tıbbın en sık kullanılan son eki.'
           : 'Attached to an anatomical root to designate inflammation. One of the most frequently used suffixes in medical terminology.'}
-      </p>
+      </div>
 
       {/* Örnek Kelimeler Listesi */}
       <div
-        className="relative z-10 grid gap-3 pt-2 text-sm sm:text-[15px]"
+        className="relative z-10 grid gap-3 px-1 sm:px-3 text-sm sm:text-[15px]"
         style={{ fontFamily: "'Fira Code', monospace" }}
       >
         {data.examples.map((ex, idx) => (
           <div
             key={idx}
-            className="flex items-center justify-between gap-4 py-2.5 px-3 border-b border-border/60 last:border-0 last:pb-0 hover:bg-muted/40 rounded-xl transition-colors"
+            className="flex items-center justify-between gap-4 py-2.5 px-3.5 border-b border-border/60 last:border-0 last:pb-0 hover:bg-muted/40 rounded-xl transition-colors"
           >
             <span className="text-foreground font-semibold text-base sm:text-[17px]">
               {ex.prefix}
@@ -108,15 +108,17 @@ export const MorphemeOfTheDay = ({ className = '' }) => {
         ))}
       </div>
 
-      {/* Buton / Link */}
-      <button
-        type="button"
-        onClick={() => navigate('/morphemes')}
-        className="relative z-10 mt-2 self-start inline-flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold border border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer group"
-      >
-        <span>{data.cta}</span>
-        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-      </button>
+      {/* Buton / Link (Kenardan ortaya doğru kaydırıldı) */}
+      <div className="relative z-10 mt-2 flex justify-start pl-3 sm:pl-6">
+        <button
+          type="button"
+          onClick={() => navigate('/morphemes')}
+          className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold border border-border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer group"
+        >
+          <span>{data.cta}</span>
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+        </button>
+      </div>
     </section>
   );
 };
