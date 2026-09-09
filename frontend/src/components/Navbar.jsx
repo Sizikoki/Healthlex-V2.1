@@ -4,7 +4,8 @@ import { Menu, X, User, LogOut, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getUser, logout, isLoggedIn, getStats, getUserTrialState, formatTurkishName } from '@/utils/storage';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/config';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { auth, db } from '@/firebase/config';
 import { useLanguage } from '@/context/LanguageContext';
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [firebaseUser, setFirebaseUser] = useState(null);
+  const [isPro, setIsPro] = useState(false);
   const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
@@ -27,6 +29,37 @@ export const Navbar = () => {
     });
     return () => unsubscribe();
   }, []);
+
+  // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
+  useEffect(() => {
+    const uid = firebaseUser?.uid || getUser()?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const proActive =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsPro(proActive);
+        } else {
+          setIsPro(false);
+        }
+      }, (err) => {
+        console.warn('[Navbar] Could not read user pro status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Navbar] Firestore snapshot error:', e);
+    }
+  }, [firebaseUser]);
 
   const loggedIn = !!firebaseUser || isLoggedIn();
   const user = getUser();
@@ -139,7 +172,12 @@ export const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="flex items-center gap-[12px] cursor-pointer select-none">
-                    {trialState.currentDay >= 3 ? (
+                    {isPro ? (
+                      <div className="pro-badge flex items-center gap-1.5 bg-gradient-to-r from-amber-500/15 via-yellow-500/20 to-amber-500/15 dark:from-amber-400/20 dark:to-yellow-500/20 border border-amber-500/40 text-amber-700 dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs hover:shadow-sm transition-all select-none">
+                        <span className="text-amber-500 dark:text-amber-400 font-black text-sm leading-none">★</span>
+                        <span className="tracking-wide">PRO</span>
+                      </div>
+                    ) : trialState.currentDay >= 3 ? (
                       <div className="trial-badge flex items-center gap-2 bg-[#fff4e6] dark:bg-amber-950/40 border border-[#ffe0b8] dark:border-amber-800 text-[#b45309] dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
                         <span className="w-2 h-2 rounded-full bg-[#f97316] animate-pulse" />
                         <span>{currentLanguage === 'en' ? 'Trial · Last day' : 'Deneme · Son gün'}</span>
@@ -216,9 +254,16 @@ export const Navbar = () => {
               {loggedIn ? (
                 <>
                   <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="outline" className="w-full justify-start">
-                      <User className="w-4 h-4 mr-2" />
-                      {user?.name || t('myProfile')}
+                    <Button variant="outline" className="w-full justify-between">
+                      <div className="flex items-center">
+                        <User className="w-4 h-4 mr-2" />
+                        {user?.name || t('myProfile')}
+                      </div>
+                      {isPro && (
+                        <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
+                          ★ PRO
+                        </span>
+                      )}
                     </Button>
                   </Link>
                   <Button

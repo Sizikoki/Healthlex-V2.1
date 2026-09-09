@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getStats, getUser, saveUser, getStreak, getQuizScores, getProgress, getMatchScores, getMorphemeScores, logout, clearAllUserData } from '@/utils/storage';
 import { signOut, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { collection, query, where, getDocs, writeBatch } from 'firebase/firestore';
+import { collection, query, where, getDocs, writeBatch, doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '@/firebase/config';
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
@@ -10,6 +10,7 @@ import { useLanguage } from '@/context/LanguageContext';
 export const Profile = () => {
   const navigate = useNavigate();
   const { currentLanguage, setLanguage, t } = useLanguage();
+  const isTr = currentLanguage !== 'en';
   const user = getUser();
   const stats = getStats();
   const streak = getStreak();
@@ -23,6 +24,41 @@ export const Profile = () => {
   const [editEmail, setEditEmail] = useState(user?.email || '');
   const [saveLoading, setSaveLoading] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+
+  // Subscription & Pro State
+  const [isPro, setIsPro] = useState(false);
+  const [userDocData, setUserDocData] = useState(null);
+
+  useEffect(() => {
+    const uid = auth?.currentUser?.uid || user?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setUserDocData(data);
+          const proActive =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsPro(proActive);
+        } else {
+          setIsPro(false);
+        }
+      }, (err) => {
+        console.warn('[Profile] Could not fetch user doc:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Profile] Firestore snapshot error:', e);
+    }
+  }, [user]);
 
   // Toggle States
   const [emailNotifications, setEmailNotifications] = useState(false);
@@ -369,6 +405,92 @@ export const Profile = () => {
               <Link to="/progress" className="font-bold text-[var(--teal-deep)] hover:underline whitespace-nowrap">
                 {t('progressPageLink')}
               </Link>
+            </div>
+          </section>
+
+          {/* SUBSCRIPTION & PLAN SECTION */}
+          <section className="mb-[36px]">
+            <div className="card bg-white border border-[var(--line)] rounded-[var(--radius)] p-[28px]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--line)]">
+                <div>
+                  <div className="eyebrow text-[0.72rem] font-bold text-[var(--teal)] uppercase tracking-wider mb-1">
+                    {isTr ? 'Abonelik & Tarife' : 'Subscription & Plan'}
+                  </div>
+                  <h2 className="font-serif font-semibold text-[1.28rem] text-[var(--ink)] m-0">
+                    {isTr ? 'Üyelik Durumunuz' : 'Your Membership Plan'}
+                  </h2>
+                </div>
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                  {isPro ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      {isTr ? 'Aktif' : 'Active'}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                      {isTr ? 'Ücretsiz Deneme' : 'Free Trial'}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="max-w-xl">
+                  <div className="flex items-center gap-2.5 mb-1.5">
+                    <span className="text-xl">
+                      {isPro ? '⭐' : '⚡'}
+                    </span>
+                    <h3 className="text-[1.1rem] font-bold text-[var(--ink)] m-0">
+                      {isPro
+                        ? (isTr ? 'Yıllık Pro Plan' : 'Annual Pro Plan')
+                        : (isTr ? 'Ücretsiz Deneme (3 Günlük)' : 'Free Trial (3-Day)')}
+                    </h3>
+                  </div>
+                  <p className="text-[0.88rem] text-[var(--muted)] leading-relaxed m-0">
+                    {isPro
+                      ? (isTr
+                          ? 'Tüm tıbbi terminoloji morfemlerine, oyun modlarına ve detaylı analizlere sınırsız erişim.'
+                          : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
+                      : (isTr
+                          ? 'Temel erişimdesiniz. 571 morfem kütüphanesi, 4 oyun modu ve seviye sisteminin tamamına sınırsız erişmek için Pro\'ya geçin.'
+                          : 'You have trial access. Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.')}
+                  </p>
+                  {isPro && (
+                    <p className="text-[0.78rem] text-[var(--muted)] mt-2.5 leading-normal opacity-90">
+                      ℹ️ {isTr
+                        ? 'Abonelik iptali veya fatura detaylarınız için Paddle portalını kullanabilir veya support@healthlexmed.com ile iletişime geçebilirsiniz.'
+                        : 'For cancellation or invoice details, you can use the Paddle portal or contact support@healthlexmed.com.'}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex-shrink-0">
+                  {isPro ? (
+                    <a
+                      href="https://paddle.net"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline inline-flex items-center gap-2 bg-transparent border border-[var(--line)] text-[var(--ink)] hover:bg-[var(--paper-dim)] hover:border-[var(--teal)] transition-all font-semibold rounded-[9px] px-4 py-2.5 text-sm"
+                    >
+                      <svg className="w-4 h-4 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      {isTr ? 'Aboneliği Yönet / İptal Et' : 'Manage / Cancel Subscription'}
+                    </a>
+                  ) : (
+                    <Link
+                      to="/pricing"
+                      className="btn btn-primary inline-flex items-center gap-2 bg-[var(--teal)] text-white hover:bg-[var(--teal-deep)] transition-all font-semibold rounded-[9px] px-5 py-2.5 text-sm shadow-sm"
+                    >
+                      <span>★</span>
+                      {isTr ? "Pro'ya Yükselt →" : 'Upgrade to Pro →'}
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
           </section>
 

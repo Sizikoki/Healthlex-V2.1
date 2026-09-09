@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getUserTrialState, formatTurkishName } from '@/utils/storage';
-import { auth } from '@/firebase/config';
+import { auth, db } from '@/firebase/config';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { toast } from 'sonner';
 
@@ -233,6 +234,7 @@ export const PricingView = () => {
   const [period, setPeriod] = useState('yearly');
   const [mobileTab, setMobileTab] = useState(2); // 0: Ücretsiz, 1: Temel, 2: Pro, 3: Ömür
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [isUserPro, setIsUserPro] = useState(false);
 
   const isTr = currentLanguage === 'tr';
   const yr = period === 'yearly';
@@ -241,6 +243,37 @@ export const PricingView = () => {
   const currentUser = auth?.currentUser || getUser();
   const trialState = getUserTrialState(currentUser);
   const trialDaysLeft = trialState.daysLeft;
+
+  // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
+  useEffect(() => {
+    const uid = currentUser?.uid || auth?.currentUser?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsUserPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const pro =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsUserPro(pro);
+        } else {
+          setIsUserPro(false);
+        }
+      }, (err) => {
+        console.warn('[Pricing] Could not read user pro status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Pricing] Firestore snapshot error:', e);
+    }
+  }, [currentUser]);
 
   const selPlan = t.plans[mobileTab];
   const isMobFree = mobileTab === 0;
@@ -273,6 +306,12 @@ export const PricingView = () => {
   const handlePlanClick = async (planIndex) => {
     if (planIndex === 0) {
       // Ücretsiz Deneme / Devam Ediyor
+      navigate('/dashboard');
+      return;
+    }
+
+    if (planIndex === 2 && isUserPro) {
+      // Zaten Pro üye
       navigate('/dashboard');
       return;
     }
@@ -385,7 +424,7 @@ export const PricingView = () => {
           }`}
         >
           {/* Rozet */}
-          {selPlan.badge && (
+          {selPlan.badge && (!isUserPro || !isMobPro) && (
             <span
               className={`absolute -top-3 left-5 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs ${
                 isMobLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-orange-500'
@@ -394,9 +433,14 @@ export const PricingView = () => {
               {selPlan.badge}
             </span>
           )}
-          {isMobFree && (
+          {isMobFree && !isUserPro && (
             <span className="absolute -top-3 left-5 bg-slate-900 dark:bg-slate-700 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs">
               {t.currentPlan}
+            </span>
+          )}
+          {isMobPro && isUserPro && (
+            <span className="absolute -top-3 left-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs">
+              {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
             </span>
           )}
 
@@ -480,21 +524,27 @@ export const PricingView = () => {
         <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border p-3 sm:p-4 shadow-lg lg:hidden flex flex-col gap-2">
           <button
             onClick={() => handlePlanClick(mobileTab)}
-            disabled={checkoutLoading || isMobFree}
+            disabled={checkoutLoading || (isMobFree && !isUserPro)}
             className={`w-full text-center font-bold text-sm sm:text-base py-3 px-4 rounded-xl transition-all cursor-pointer shadow-sm ${
-              isMobFree
+              (isMobFree && !isUserPro)
                 ? 'bg-muted text-muted-foreground border border-border cursor-default'
+                : (isMobPro && isUserPro)
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100'
                 : isMobPro
                 ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md'
                 : 'bg-primary text-primary-foreground'
             }`}
           >
-            {isMobFree ? selPlan.ctaCurrent : `${selPlan.cta} →`}
+            {isMobFree
+              ? (!isUserPro ? selPlan.ctaCurrent : (isTr ? 'Denemeyi Tamamla' : 'Completed'))
+              : isMobPro && isUserPro
+              ? (isTr ? 'Aktif Planınız (Pro) ✓' : 'Current Plan (Pro) ✓')
+              : `${selPlan.cta} →`}
           </button>
           <div className="text-xs text-muted-foreground text-center">
             {t.noCardNote}{' '}
             <button
-              onClick={() => navigate('/terms')}
+              onClick={() => navigate(currentUser ? '/study' : '/register')}
               className="font-bold text-primary hover:underline cursor-pointer"
             >
               {t.startTrial}
@@ -584,16 +634,21 @@ export const PricingView = () => {
                 }`}
               >
                 {/* Rozetler */}
-                {p.badge && (
+                {p.badge && (!isUserPro || !isPro) && (
                   <span className={`absolute -top-3 left-6 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs ${
                     isLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-amber-500'
                   }`}>
                     {p.badge}
                   </span>
                 )}
-                {isFree && (
+                {isFree && !isUserPro && (
                   <span className="absolute -top-3 left-6 bg-slate-900 dark:bg-slate-700 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs">
                     {t.currentPlan}
+                  </span>
+                )}
+                {isPro && isUserPro && (
+                  <span className="absolute -top-3 left-6 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs">
+                    {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
                   </span>
                 )}
 
@@ -623,16 +678,22 @@ export const PricingView = () => {
                 {/* Buton */}
                 <button
                   onClick={() => handlePlanClick(idx)}
-                  disabled={checkoutLoading || isFree}
+                  disabled={checkoutLoading || (isFree && !isUserPro)}
                   className={`w-full text-center font-bold text-[14px] xl:text-[15px] py-3.5 px-4 rounded-xl transition-all cursor-pointer shadow-xs ${
-                    isFree
+                    (isFree && !isUserPro)
                       ? 'bg-muted text-muted-foreground border border-border cursor-default'
+                      : (isPro && isUserPro)
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 hover:border-emerald-400'
                       : isPro
                       ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md hover:shadow-lg'
                       : 'bg-primary text-primary-foreground hover:opacity-90'
                   }`}
                 >
-                  {isFree ? p.ctaCurrent : p.cta}
+                  {isFree
+                    ? (!isUserPro ? p.ctaCurrent : (isTr ? 'Denemeyi Tamamla' : 'Completed'))
+                    : (isPro && isUserPro)
+                    ? (isTr ? 'Aktif Planınız (Pro) ✓' : 'Current Plan (Pro) ✓')
+                    : p.cta}
                 </button>
 
                 {/* Özellik Maddeleri */}

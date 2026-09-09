@@ -184,7 +184,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       note: learnedTermsCount > 0
         ? `${termsMax - learnedTermsCount} ${isTr ? 'terim kaldı' : 'terms left'}`
         : `${termsMax} ${isTr ? 'terim açık' : 'terms open'}`,
-      route: '/terms'
+      route: '/study'
     },
     {
       name: isTr ? 'Morfemler' : 'Morphemes',
@@ -233,7 +233,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <div className="mt-1.5">
               <button
-                onClick={() => navigate('/terms')}
+                onClick={() => navigate('/study')}
                 className="bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-[15px] py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all cursor-pointer inline-flex items-center gap-2"
               >
                 {isLastDay || learnedTermsCount > 0 ? `${t.resume} →` : `${t.solveFirst} →`}
