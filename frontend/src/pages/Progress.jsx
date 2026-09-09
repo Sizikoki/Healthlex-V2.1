@@ -3,8 +3,64 @@ import { Link } from 'react-router-dom';
 import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getFlashcardSessions, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 import { useLanguage } from '@/context/LanguageContext';
+import { TrialDashboardView } from '@/components/TrialDashboardView';
+import { auth, db } from '@/firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+
+const resolveIsPro = (userData) => {
+  if (!userData) return false;
+  const status = userData.subscriptionStatus;
+  if (status === 'trial' || status === 'trialing' || status === 'free') return false;
+  if (status === 'active' || status === 'pro') return true;
+  if (userData.isPro === true) return true;
+  return false;
+};
 
 export const ProgressPage = () => {
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+
+  const [firebaseUser, setFirebaseUser] = useState(
+    previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
+  );
+  const [firestoreData, setFirestoreData] = useState(
+    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free', displayName: 'Dr. Ahmet Kaya' } : null
+  );
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [subLoading, setSubLoading] = useState(!previewRole);
+
+  useEffect(() => {
+    if (previewRole) return;
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setFirebaseUser(currentUser);
+      if (!currentUser) {
+        setIsPro(false);
+        setSubLoading(false);
+        return;
+      }
+      try {
+        const snap = await getDoc(doc(db, 'users', currentUser.uid));
+        if (snap.exists()) {
+          const data = snap.data();
+          setFirestoreData(data);
+          setIsPro(resolveIsPro(data));
+        } else {
+          const localUser = getUser();
+          setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+        }
+      } catch (err) {
+        console.warn('[Progress] Could not fetch subscription status:', err);
+        const localUser = getUser();
+        setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      } finally {
+        setSubLoading(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [previewRole]);
+
   const { currentLanguage, t } = useLanguage();
   const stats = getStats();
   const user = getUser();
@@ -143,6 +199,19 @@ export const ProgressPage = () => {
       label: `${quizScores.some(s => s.percentage === 100) ? 1 : 0} / 1 quiz`
     }
   ];
+
+  if (subLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-7 h-7 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // Deneme / Free veya Pro olmayan kullanıcılar için yeni dönüştürülen Trial İlerleme görünümünü render et
+  if (!isPro) {
+    return <TrialDashboardView user={firebaseUser} userData={firestoreData} />;
+  }
 
   return (
     <div className="progress-theme min-h-screen bg-[var(--paper)]">
