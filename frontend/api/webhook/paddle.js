@@ -169,6 +169,11 @@ export default async function handler(req, res) {
   try {
     // 🔒 PADDLE-SIGNATURE VERIFICATION
     // Initializes Paddle Node SDK and cryptographically validates the payload using the secret key & signature
+    console.log('[Paddle Webhook Debug] Paddle-Signature Header:', signature);
+    console.log('[Paddle Webhook Debug] rawBody type:', typeof rawBody);
+    console.log('[Paddle Webhook Debug] rawBody length:', rawBody?.length);
+    console.log('[Paddle Webhook Debug] rawBody preview (first 100 chars):', typeof rawBody === 'string' ? rawBody.substring(0, 100) : String(rawBody).substring(0, 100));
+
     const paddle = new Paddle(apiKey, { environment });
     const eventData = await paddle.webhooks.unmarshal(rawBody, webhookSecret, signature);
 
