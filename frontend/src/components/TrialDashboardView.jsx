@@ -8,16 +8,9 @@ import { getUser, getStats, getStreak, getUserTrialState, formatTurkishName } fr
 
 const TRANSLATIONS = {
   tr: {
-    navDashboard: 'Panelim',
-    navStudy: 'Çalışma / Sözlük',
-    navMorphemes: 'Morfemler',
-    navGames: 'Oyunlar',
-    navProgress: 'İlerleme',
-    trialBadge: (days) => `⏳ ${days} gün kaldı`,
-    trialEndedBadge: '⏳ Deneme bitti',
     title: 'İlerlemen',
-    subtitle: 'Seri sürdükçe terimler kalıcılaşıyor. Bugünkü seansı yap, seriyi koru.',
-    todayCta: 'Bugünkü seansı yap →',
+    subtitle: 'Seri sürdükçe terimler kalıcılaşıyor. Bugünkü tekrarı yap, seriyi koru.',
+    todayCta: 'Bugünkü tekrarı yap →',
     streakTitle: 'GÜNLÜK SERİ',
     longestStreak: 'En uzun seri',
     dayStreak: 'gün seri',
@@ -58,12 +51,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} dk`,
     goPro: "Pro'ya geç →",
     proBadge: 'PRO',
-    proLockActivity: '🔒 Haftalık ve aylık aktivite grafiği Pro ile açılır.',
-    proLockBadges: '🔒 Rozetler ve sonraki hedefler Pro ile açılır.',
-    proLockCategories: '🔒 10 kategoride ilerleme takibi Pro ile açılır.',
-    proLockGames: '🔒 4 oyun modunda doğruluk ve oynanış istatistikleri Pro ile açılır.',
-    proLockWeak: '🔒 Zayıf terimler ve tekrar listesi Pro ile açılır.',
-    proLockHistory: '🔒 Seans geçmişi Pro ile açılır.',
+    proLockActivity: 'Haftalık ve aylık aktivite grafiği Pro ile açılır.',
+    proLockBadges: 'Rozetler ve sonraki hedefler Pro ile açılır.',
+    proLockCategories: '10 kategoride ilerleme takibi Pro ile açılır.',
+    proLockGames: '4 oyun modunda doğruluk ve oynanış istatistikleri Pro ile açılır.',
+    proLockWeak: 'Zayıf terimler ve tekrar listesi Pro ile açılır.',
+    proLockHistory: 'Seans geçmişi Pro ile açılır.',
     flashcard: 'Flashcard',
     match: 'Eşleştirme',
     quiz: 'Quiz',
@@ -75,16 +68,9 @@ const TRANSLATIONS = {
     catMuscles: 'Kaslar'
   },
   en: {
-    navDashboard: 'Dashboard',
-    navStudy: 'Study / Glossary',
-    navMorphemes: 'Morphemes',
-    navGames: 'Games',
-    navProgress: 'Progress',
-    trialBadge: (days) => `⏳ ${days} ${days === 1 ? 'day' : 'days'} left`,
-    trialEndedBadge: '⏳ Trial ended',
     title: 'Your Progress',
-    subtitle: 'Consistency is key to mastering medical vocabulary. Complete today’s session to keep your streak alive.',
-    todayCta: 'Start today’s session →',
+    subtitle: 'Consistency is key to mastering medical vocabulary. Complete today’s review to keep your streak alive.',
+    todayCta: 'Start today’s review →',
     streakTitle: 'DAILY STREAK',
     longestStreak: 'Longest streak',
     dayStreak: 'day streak',
@@ -125,12 +111,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} min`,
     goPro: 'Upgrade to Pro →',
     proBadge: 'PRO',
-    proLockActivity: '🔒 Weekly & monthly activity charts unlock with Pro.',
-    proLockBadges: '🔒 Badges and upcoming milestones unlock with Pro.',
-    proLockCategories: '🔒 Progress tracking across 10 categories unlocks with Pro.',
-    proLockGames: '🔒 Accuracy & gameplay stats in all 4 game modes unlock with Pro.',
-    proLockWeak: '🔒 Weak terms & spaced review lists unlock with Pro.',
-    proLockHistory: '🔒 Complete session history unlocks with Pro.',
+    proLockActivity: 'Weekly & monthly activity charts unlock with Pro.',
+    proLockBadges: 'Badges and upcoming milestones unlock with Pro.',
+    proLockCategories: 'Progress tracking across 10 categories unlocks with Pro.',
+    proLockGames: 'Accuracy & gameplay stats in all 4 game modes unlock with Pro.',
+    proLockWeak: 'Weak terms & spaced review lists unlock with Pro.',
+    proLockHistory: 'Complete session history unlocks with Pro.',
     flashcard: 'Flashcards',
     match: 'Matching',
     quiz: 'Quiz',
@@ -176,26 +162,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
     return () => unsubscribe();
   }, []);
 
-  // 2. Dinamik Kullanıcı Adı (Firebase Auth displayName öncelikli)
-  const storedUser = getUser();
-  const rawName =
-    currentUser?.displayName ||
-    propUser?.displayName ||
-    firestoreUser?.displayName ||
-    firestoreUser?.name ||
-    storedUser?.name ||
-    currentUser?.email?.split('@')[0] ||
-    (isTr ? 'Kullanıcı' : 'User');
-
-  const userName = formatTurkishName(rawName);
-  const userInitial = (userName.charAt(0) || 'S').toLocaleUpperCase('tr-TR');
-
-  // 3. Dinamik Deneme Durumu & Kalan Gün
-  const trialState = getUserTrialState(currentUser);
-  const daysLeft = trialState.daysLeft || 2;
-  const isTrialExpired = trialState.isExpired;
-
-  // 4. Dinamik İstatistikler & Seri
+  // 2. Dinamik İstatistikler & Seri
   const stats = getStats() || {};
   const streak = getStreak() || {};
   const currentStreak = Math.max(1, streak.currentStreak || 3);
@@ -203,43 +170,41 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
   const learnedTermsCount = Math.max(12, stats.learnedTerms || 37);
   const termsMax = 100;
 
-  // 5. Dinamik 7 Günlük Hafta Dizisi (Son 7 Gün)
+  // 3. Günlük seriyi Pazartesi gününden başlat Pazar gününde sonlandır
   const weekDays = useMemo(() => {
-    const trNames = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
-    const enNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const trNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+    const enNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const names = isTr ? trNames : enNames;
-    const days = [];
+
     const today = new Date();
+    // Monday-based index: 0 = Mon, 1 = Tue, ..., 6 = Sun
+    const todayMondayIdx = (today.getDay() + 6) % 7;
 
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(today);
-      d.setDate(today.getDate() - i);
-      const dayIdx = d.getDay();
-      const isToday = i === 0;
-      // Aktiflik: Seri sayısına göre son günleri dolu göster
-      const isActive = i < currentStreak;
-      // Dinamik günlük öğrenilen terim sayıları
-      const count = isActive ? (i === 0 ? 11 : i === 1 ? 12 : 14) : '–';
+    return names.map((label, idx) => {
+      const isToday = idx === todayMondayIdx;
+      // Pazartesi'den bugüne kadarki günlerde seriye göre aktif göster
+      const isPastOrToday = idx <= todayMondayIdx;
+      const isActive = isPastOrToday && (todayMondayIdx - idx < currentStreak);
+      const count = isActive ? (idx === todayMondayIdx ? 11 : 12 + idx) : '–';
 
-      days.push({
-        label: names[dayIdx],
+      return {
+        label,
         isToday,
         isActive,
         count
-      });
-    }
-    return days;
+      };
+    });
   }, [isTr, currentStreak]);
 
-  // Aktivite Grafiği Barları
+  // Aktivite Grafiği Barları (Pazartesi -> Pazar)
   const activity7Days = [
-    { label: weekDays[0]?.label || (isTr ? 'Çar' : 'Wed'), val: 0, pct: 0 },
-    { label: weekDays[1]?.label || (isTr ? 'Per' : 'Thu'), val: 0, pct: 0 },
-    { label: weekDays[2]?.label || (isTr ? 'Cum' : 'Fri'), val: 0, pct: 0 },
-    { label: weekDays[3]?.label || (isTr ? 'Cmt' : 'Sat'), val: 0, pct: 0 },
-    { label: weekDays[4]?.label || (isTr ? 'Paz' : 'Sun'), val: 14, pct: 100 },
-    { label: weekDays[5]?.label || (isTr ? 'Pzt' : 'Mon'), val: 12, pct: 86 },
-    { label: weekDays[6]?.label || (isTr ? 'Sal' : 'Tue'), val: 11, pct: 79, active: true }
+    { label: isTr ? 'Pzt' : 'Mon', val: 14, pct: 100 },
+    { label: isTr ? 'Sal' : 'Tue', val: 12, pct: 86 },
+    { label: isTr ? 'Çar' : 'Wed', val: 11, pct: 79, active: true },
+    { label: isTr ? 'Per' : 'Thu', val: 0, pct: 0 },
+    { label: isTr ? 'Cum' : 'Fri', val: 0, pct: 0 },
+    { label: isTr ? 'Cmt' : 'Sat', val: 0, pct: 0 },
+    { label: isTr ? 'Paz' : 'Sun', val: 0, pct: 0 }
   ];
 
   const activity4Weeks = [
@@ -278,7 +243,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       bg: 'from-[#3b82f6] to-[#93c5fd]',
       route: '/flashcards',
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M2 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z" />
         </svg>
       )
@@ -290,7 +255,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       bg: 'from-[#22c55e] to-[#facc15]',
       route: '/match',
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
         </svg>
       )
@@ -302,7 +267,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       bg: 'from-[#f97316] to-[#fcd34d]',
       route: '/quiz',
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 9a3 3 0 1 1 3 3v2M12 17h.01M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
         </svg>
       )
@@ -314,671 +279,520 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       bg: 'from-[#7c3aed] to-[#c084fc]',
       route: '/morpheme',
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 7h6v6H4zM14 7h6v6h-6zM9 17h6v4H9z" />
         </svg>
       )
     }
   ];
 
+  // Yenilenmiş, ferah ve büyük Pro Kilit Kartı Bileşeni
+  const ProLockCard = ({ text }) => (
+    <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 bg-[#f5f7fb]/75 dark:bg-background/75 backdrop-blur-[2px]">
+      <div className="w-full max-w-[560px] bg-[#0f1b33] text-white rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-2xl border border-white/15">
+        <div className="flex items-center gap-3.5 flex-1 text-center sm:text-left">
+          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg tracking-wider uppercase shadow-xs shrink-0">
+            🔒 {t.proBadge}
+          </span>
+          <span className="font-bold text-sm sm:text-[15px] leading-relaxed text-white/95">
+            {text}
+          </span>
+        </div>
+        <button
+          onClick={() => navigate('/pricing')}
+          className="w-full sm:w-auto bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-sm sm:text-[15px] py-3 px-5 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center gap-1.5"
+        >
+          {t.goPro}
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="w-full bg-[#f5f7fb] dark:bg-background text-[#1f2937] dark:text-foreground antialiased min-h-screen">
-      <div className="w-full max-w-[1280px] mx-auto min-w-0 font-sans">
+      {/* Container site standartlarına tam hizalandı (Navbar ile uyumlu max-w-[1720px]) */}
+      <div className="w-full max-w-[1720px] 2xl:max-w-[1840px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex flex-col gap-8 font-sans">
         
-        {/* ── Üst Menü / Fable Header Bar ───────────────────────────────── */}
-        <header className="h-[72px] bg-white dark:bg-card border-b border-[#e5e9f2] dark:border-border flex items-center px-6 sm:px-10 gap-6 sm:gap-9 shadow-xs">
-          {/* Logo */}
-          <div
-            onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-2.5 font-extrabold text-[19px] text-[#0f1b33] dark:text-foreground cursor-pointer select-none"
-          >
-            <i className="w-8 h-8 rounded-[9px] bg-[#2563eb] flex items-center justify-center not-italic text-white shadow-xs">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 12h4l3-8 4 16 3-8h4" />
-              </svg>
-            </i>
-            <span>
-              Health<em className="font-serif italic font-bold text-[19px] text-[#2563eb]">Lex</em>Med
-            </span>
+        {/* ── Başlık ve Bugünkü Tekrarı Yap Butonu ────────────────────── */}
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 pb-2">
+          <div>
+            <h1 className="m-0 font-serif font-semibold text-3xl sm:text-4xl lg:text-[42px] leading-[1.1] text-[#0f1b33] dark:text-foreground tracking-tight">
+              {t.title}
+            </h1>
+            <p className="mt-2.5 font-normal text-base sm:text-[17px] leading-relaxed text-[#6b7a90] dark:text-muted-foreground max-w-3xl">
+              {t.subtitle}
+            </p>
           </div>
-
-          {/* Menü Linkleri */}
-          <nav className="hidden md:flex gap-6 font-semibold text-[15px] text-[#6b7a90] dark:text-muted-foreground flex-1 items-center">
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="hover:text-[#2563eb] transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
-            >
-              {t.navDashboard}
-            </button>
+          <div>
             <button
               onClick={() => navigate('/terms')}
-              className="hover:text-[#2563eb] transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-[15px] py-3.5 px-6 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer"
             >
-              {t.navStudy}
+              {t.todayCta}
             </button>
-            <button
-              onClick={() => navigate('/morphemes')}
-              className="hover:text-[#2563eb] transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
-            >
-              {t.navMorphemes}
-            </button>
-            <button
-              onClick={() => navigate('/games')}
-              className="hover:text-[#2563eb] transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
-            >
-              {t.navGames}
-            </button>
-            <button
-              onClick={() => navigate('/progress')}
-              className="text-[#0f1b33] dark:text-foreground bg-[#f5f7fb] dark:bg-muted py-2 px-3.5 rounded-[9px] -my-2 font-bold cursor-pointer border-0"
-            >
-              {t.navProgress}
-            </button>
-          </nav>
+          </div>
+        </div>
 
-          {/* Deneme Rozeti */}
-          <div className="ml-auto flex items-center gap-3">
-            <button
-              onClick={() => navigate('/pricing')}
-              className="flex items-center gap-1.5 font-extrabold text-[13px] py-2 px-3 rounded-[9px] border bg-[#eef4ff] dark:bg-blue-950/40 border-[#c7d8ff] dark:border-blue-800 text-[#1d4ed8] dark:text-blue-300 hover:opacity-90 transition-all cursor-pointer"
-            >
-              {isTrialExpired ? t.trialEndedBadge : t.trialBadge(daysLeft)}
-            </button>
+        {/* ── Hero Grid: Günlük Seri (Dark Card) & 4 İstatistik ──────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-6">
+          
+          {/* Günlük Seri Koyu Kartı */}
+          <div className="bg-[#0f1b33] rounded-2xl p-6 sm:p-8 text-white flex flex-col justify-between gap-6 shadow-sm">
+            <div className="flex justify-between items-center">
+              <span className="font-extrabold text-xs leading-none tracking-[0.14em] text-[#8fb3ff]">
+                {t.streakTitle}
+              </span>
+              <span className="font-semibold text-sm text-[#b8c4d9]">
+                {t.longestStreak}: {longestStreak}
+              </span>
+            </div>
 
-            {/* Kullanıcı Avatarı */}
-            <div
-              onClick={() => navigate('/profile')}
-              title={userName}
-              className="relative w-9 h-9 rounded-full bg-[#2563eb] text-white flex items-center justify-center font-extrabold text-[15px] cursor-pointer select-none shadow-xs hover:ring-2 hover:ring-primary/40 transition-all"
-            >
-              {userInitial}
-              <b className="absolute -bottom-1.5 -right-2.5 bg-[#0f1b33] text-white font-extrabold text-[9px] leading-none tracking-widest py-0.5 px-1 rounded border-2 border-white dark:border-card not-italic uppercase">
-                {isTr ? 'DENEME' : 'TRIAL'}
+            {/* Büyük Sayaç */}
+            <div className="flex items-baseline gap-3">
+              <b className="font-extrabold text-6xl sm:text-[76px] leading-none">
+                {currentStreak}
               </b>
+              <span className="font-semibold text-xl sm:text-[24px] font-serif text-[#b8c4d9]">
+                {t.dayStreak}
+              </span>
+              <span className="font-bold text-3xl sm:text-[34px] ml-auto">
+                🔥
+              </span>
             </div>
-          </div>
-        </header>
 
-        {/* ── Ana İçerik ─────────────────────────────────────────────── */}
-        <main className="py-7 sm:py-9 px-4 sm:px-10 pb-16 flex flex-col gap-7">
-
-          {/* Başlık ve Bugünkü Seans Butonu */}
-          <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6">
-            <div>
-              <h1 className="m-0 font-serif font-semibold text-3xl sm:text-4xl leading-[1.1] text-[#0f1b33] dark:text-foreground tracking-tight">
-                {t.title}
-              </h1>
-              <p className="mt-2.5 font-normal text-base sm:text-[17px] leading-relaxed text-[#6b7a90] dark:text-muted-foreground max-w-2xl">
-                {t.subtitle}
-              </p>
+            {/* Haftanın 7 Günü: Pazartesi -> Pazar */}
+            <div className="flex gap-2.5">
+              {weekDays.map((d, idx) => (
+                <div key={idx} className="flex-1 flex flex-col gap-2 items-center">
+                  <span
+                    className={`w-full h-10 rounded-xl flex items-center justify-center font-extrabold text-sm transition-all ${
+                      d.isActive
+                        ? 'bg-[#2563eb] text-white shadow-xs'
+                        : 'bg-white/10 text-[#8fb3ff]'
+                    } ${d.isToday ? 'ring-2 ring-[#f97316] ring-offset-2 ring-offset-[#0f1b33]' : ''}`}
+                  >
+                    {d.count}
+                  </span>
+                  <small className="font-bold text-xs text-[#8fb3ff]">
+                    {d.label}
+                  </small>
+                </div>
+              ))}
             </div>
-            <div>
-              <button
-                onClick={() => navigate('/terms')}
-                className="w-full sm:w-auto bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-[15px] py-3 px-5 rounded-[9px] whitespace-nowrap inline-flex items-center justify-center gap-1 shadow-md hover:shadow-lg transition-all cursor-pointer"
-              >
-                {t.todayCta}
-              </button>
-            </div>
-          </div>
 
-          {/* ── Hero Grid: Günlük Seri (Dark Card) & 4 İstatistik ──────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4">
-            
-            {/* Günlük Seri Koyu Kartı */}
-            <div className="bg-[#0f1b33] rounded-[14px] p-6 sm:p-7 text-white flex flex-col justify-between gap-5 shadow-sm">
-              <div className="flex justify-between items-center">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#8fb3ff]">
-                  {t.streakTitle}
-                </span>
-                <span className="font-semibold text-[13px] text-[#b8c4d9]">
-                  {t.longestStreak}: {longestStreak}
-                </span>
+            {/* Sonraki Rozet İlerleme Çubuğu */}
+            <div className="border-t border-white/12 pt-4 flex flex-col gap-2.5">
+              <div className="flex justify-between font-semibold text-sm text-[#b8c4d9]">
+                <span>{t.nextBadgeMilestone}</span>
+                <span>{Math.min(30, currentStreak)} / 30</span>
               </div>
+              <div className="h-2 bg-white/15 rounded-full overflow-hidden">
+                <i
+                  className="block h-full bg-[#5aa9ff] rounded-full transition-all duration-500 not-italic"
+                  style={{ width: `${Math.min(100, Math.round((currentStreak / 30) * 100))}%` }}
+                />
+              </div>
+            </div>
+          </div>
 
-              {/* Büyük Sayaç */}
-              <div className="flex items-baseline gap-3">
-                <b className="font-extrabold text-5xl sm:text-[72px] leading-none">
+          {/* 4'lü İstatistik Izgarası */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {/* Stat 1 */}
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {learnedTermsCount}
+                  <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1.5">
+                    / {termsMax}
+                  </small>
+                </div>
+                <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
+                  {t.learnedTermsLabel}
+                </div>
+              </div>
+              <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
+                {t.trialQuotaLabel}
+              </div>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
                   {currentStreak}
-                </b>
-                <span className="font-semibold text-xl sm:text-[22px] font-serif text-[#b8c4d9]">
-                  {t.dayStreak}
-                </span>
-                <span className="font-bold text-2xl sm:text-[28px] ml-auto">
-                  🔥
-                </span>
+                  <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1.5">
+                    {isTr ? 'gün' : 'days'}
+                  </small>
+                </div>
+                <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
+                  {t.dailyStreakLabel}
+                </div>
+              </div>
+              <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
+                {t.duringTrialLabel}
+              </div>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
+                  11
+                  <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1.5">
+                    {isTr ? 'dk' : 'min'}
+                  </small>
+                </div>
+                <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
+                  {t.avgSessionLabel}
+                </div>
+              </div>
+              <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
+                {t.recentSessionsLabel}
+              </div>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
+                  %72
+                </div>
+                <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
+                  {t.accuracyLabel}
+                </div>
+              </div>
+              <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
+                {t.accuracySubtitle}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── 2'li Izgara 1: Aktivite & Rozetler (Pro Kilitli) ───────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Aktivite Kartı (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <div className="flex justify-between items-center">
+                <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                  {t.activityTitle}
+                </h3>
+                <div className="flex bg-[#f5f7fb] dark:bg-muted border border-[#e5e9f2] dark:border-border rounded-lg p-0.5 font-extrabold text-xs text-[#6b7a90] dark:text-muted-foreground">
+                  <span className={`py-1.5 px-3 rounded-md ${activityRange === '7days' ? 'bg-[#0f1b33] dark:bg-primary text-white' : ''}`}>
+                    {t.last7Days}
+                  </span>
+                  <span className={`py-1.5 px-3 rounded-md ${activityRange === '4weeks' ? 'bg-[#0f1b33] dark:bg-primary text-white' : ''}`}>
+                    {t.last4Weeks}
+                  </span>
+                </div>
               </div>
 
-              {/* Haftanın 7 Günü */}
-              <div className="flex gap-2">
-                {weekDays.map((d, idx) => (
-                  <div key={idx} className="flex-1 flex flex-col gap-1.5 items-center">
-                    <span
-                      className={`w-full h-[34px] rounded-lg flex items-center justify-center font-extrabold text-[13px] transition-all ${
-                        d.isActive
-                          ? 'bg-[#2563eb] text-white'
-                          : 'bg-white/10 text-[#8fb3ff]'
-                      } ${d.isToday ? 'ring-2 ring-[#f97316] ring-offset-2 ring-offset-[#0f1b33]' : ''}`}
-                    >
-                      {d.count}
-                    </span>
-                    <small className="font-bold text-[11px] text-[#8fb3ff]">
-                      {d.label}
-                    </small>
+              {/* Sütun Grafiği */}
+              <div className="flex gap-3 items-end h-[160px] pt-4">
+                {currentBars.map((bar, idx) => (
+                  <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+                    <b className="font-bold text-xs text-[#0f1b33] dark:text-foreground">{bar.val}</b>
+                    <i
+                      className={`w-full rounded-t-[6px] rounded-b-[3px] min-h-[3px] not-italic transition-all duration-300 ${
+                        bar.active ? 'bg-[#2563eb]' : 'bg-[#93c5fd]'
+                      }`}
+                      style={{ height: `${bar.pct}%` }}
+                    />
+                    <small className="font-semibold text-xs text-[#6b7a90] dark:text-muted-foreground">{bar.label}</small>
                   </div>
                 ))}
               </div>
 
-              {/* Sonraki Rozet İlerleme Çubuğu */}
-              <div className="border-t border-white/12 pt-4 flex flex-col gap-2">
-                <div className="flex justify-between font-semibold text-[13px] text-[#b8c4d9]">
-                  <span>{t.nextBadgeMilestone}</span>
-                  <span>{Math.min(30, currentStreak)} / 30</span>
-                </div>
-                <div className="h-1.5 bg-white/15 rounded-full overflow-hidden">
-                  <i
-                    className="block h-full bg-[#5aa9ff] rounded-full transition-all duration-500 not-italic"
-                    style={{ width: `${Math.min(100, Math.round((currentStreak / 30) * 100))}%` }}
-                  />
-                </div>
+              <div className="font-normal text-sm text-[#6b7a90] dark:text-muted-foreground">
+                {activityRange === '7days' ? t.activityNote : t.activityNoteMonth}
               </div>
             </div>
 
-            {/* 4'lü İstatistik Izgarası */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Stat 1 */}
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[22px] flex flex-col justify-between shadow-xs">
-                <div>
-                  <div className="font-extrabold text-2xl sm:text-[30px] leading-none text-[#0f1b33] dark:text-foreground">
-                    {learnedTermsCount}
-                    <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1">
-                      / {termsMax}
-                    </small>
-                  </div>
-                  <div className="font-semibold text-sm text-[#6b7a90] dark:text-muted-foreground mt-1.5">
-                    {t.learnedTermsLabel}
-                  </div>
-                </div>
-                <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-3">
-                  {t.trialQuotaLabel}
-                </div>
-              </div>
-
-              {/* Stat 2 */}
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[22px] flex flex-col justify-between shadow-xs">
-                <div>
-                  <div className="font-extrabold text-2xl sm:text-[30px] leading-none text-[#0f1b33] dark:text-foreground">
-                    {currentStreak}
-                    <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1">
-                      {isTr ? 'gün' : 'days'}
-                    </small>
-                  </div>
-                  <div className="font-semibold text-sm text-[#6b7a90] dark:text-muted-foreground mt-1.5">
-                    {t.dailyStreakLabel}
-                  </div>
-                </div>
-                <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-3">
-                  {t.duringTrialLabel}
-                </div>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[22px] flex flex-col justify-between shadow-xs">
-                <div>
-                  <div className="font-extrabold text-2xl sm:text-[30px] leading-none text-[#0f1b33] dark:text-foreground">
-                    11
-                    <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1">
-                      {isTr ? 'dk' : 'min'}
-                    </small>
-                  </div>
-                  <div className="font-semibold text-sm text-[#6b7a90] dark:text-muted-foreground mt-1.5">
-                    {t.avgSessionLabel}
-                  </div>
-                </div>
-                <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-3">
-                  {t.recentSessionsLabel}
-                </div>
-              </div>
-
-              {/* Stat 4 */}
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[22px] flex flex-col justify-between shadow-xs">
-                <div>
-                  <div className="font-extrabold text-2xl sm:text-[30px] leading-none text-[#0f1b33] dark:text-foreground">
-                    %72
-                  </div>
-                  <div className="font-semibold text-sm text-[#6b7a90] dark:text-muted-foreground mt-1.5">
-                    {t.accuracyLabel}
-                  </div>
-                </div>
-                <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-3">
-                  {t.accuracySubtitle}
-                </div>
-              </div>
-            </div>
-
+            <ProLockCard text={t.proLockActivity} />
           </div>
 
-          {/* ── 2'li Izgara 1: Aktivite & Rozetler (Pro Kilitli) ───────── */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-            {/* Aktivite Kartı (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-3.5 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <div className="flex justify-between items-center">
-                  <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                    {t.activityTitle}
-                  </h3>
-                  <div className="flex bg-[#f5f7fb] dark:bg-muted border border-[#e5e9f2] dark:border-border rounded-lg p-0.5 font-extrabold text-xs text-[#6b7a90] dark:text-muted-foreground">
-                    <span className={`py-1 px-2.5 rounded-md ${activityRange === '7days' ? 'bg-[#0f1b33] dark:bg-primary text-white' : ''}`}>
-                      {t.last7Days}
-                    </span>
-                    <span className={`py-1 px-2.5 rounded-md ${activityRange === '4weeks' ? 'bg-[#0f1b33] dark:bg-primary text-white' : ''}`}>
-                      {t.last4Weeks}
-                    </span>
+          {/* Rozetler Kartı (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <div className="flex justify-between items-center">
+                <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                  {t.badgesTitle}
+                </h3>
+                <span className="font-normal text-sm text-[#6b7a90] dark:text-muted-foreground">
+                  {t.badgesCount}
+                </span>
+              </div>
+
+              {/* Kazanılan Rozetler */}
+              <div className="flex gap-3 flex-wrap">
+                <div className="flex items-center gap-3 bg-[#0f1b33] text-white rounded-xl py-3 px-4 shadow-xs">
+                  <i className="w-8 h-8 rounded-full bg-[#2563eb] flex items-center justify-center font-extrabold text-sm not-italic">
+                    ✓
+                  </i>
+                  <div>
+                    <b className="font-extrabold text-sm block">{t.badgeStreak7}</b>
+                    <small className="font-normal text-xs text-[#b8c4d9]">2 Eyl 2026</small>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 bg-[#0f1b33] text-white rounded-xl py-3 px-4 shadow-xs">
+                  <i className="w-8 h-8 rounded-full bg-[#2563eb] flex items-center justify-center font-extrabold text-sm not-italic">
+                    ✓
+                  </i>
+                  <div>
+                    <b className="font-extrabold text-sm block">{t.badgeTerms50}</b>
+                    <small className="font-normal text-xs text-[#b8c4d9]">30 Ağu 2026</small>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sonraki Hedefler */}
+              <div className="font-extrabold text-xs leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground mt-1 uppercase">
+                {t.nextGoalsTitle}
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex justify-between font-semibold text-sm text-[#3c4858] dark:text-muted-foreground">
+                    <span>{t.goal30Streak}</span>
+                    <span className="text-[#6b7a90]">12 / 30</span>
+                  </div>
+                  <div className="h-2 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
+                    <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '40%' }} />
                   </div>
                 </div>
 
-                {/* Sütun Grafiği */}
-                <div className="flex gap-2.5 items-end h-[150px] pt-4">
-                  {currentBars.map((bar, idx) => (
-                    <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
-                      <b className="font-bold text-xs text-[#0f1b33] dark:text-foreground">{bar.val}</b>
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex justify-between font-semibold text-sm text-[#3c4858] dark:text-muted-foreground">
+                    <span>{t.goal100Terms}</span>
+                    <span className="text-[#6b7a90]">81 / 100</span>
+                  </div>
+                  <div className="h-2 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
+                    <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '81%' }} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex justify-between font-semibold text-sm text-[#3c4858] dark:text-muted-foreground">
+                    <span>{t.goalTrunkBones}</span>
+                    <span className="text-[#6b7a90]">45 / 60</span>
+                  </div>
+                  <div className="h-2 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
+                    <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '75%' }} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex justify-between font-semibold text-sm text-[#3c4858] dark:text-muted-foreground">
+                    <span>{t.goalQuiz90}</span>
+                    <span className="text-[#6b7a90]">%84 / %90</span>
+                  </div>
+                  <div className="h-2 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
+                    <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '93%' }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ProLockCard text={t.proLockBadges} />
+          </div>
+
+        </div>
+
+        {/* ── 2'li Izgara 2: Kategoriye Göre İlerleme & Oyun Modları (Pro Kilitli) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Kategori İlerlemesi (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <div className="flex justify-between items-center">
+                <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                  {t.categoryProgressTitle}
+                </h3>
+                <button
+                  onClick={() => navigate('/terms')}
+                  className="font-bold text-sm text-[#2563eb] dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-0 p-0"
+                >
+                  {t.viewAll}
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-3.5 mt-1">
+                {categories.map((cat, idx) => (
+                  <div key={idx} className="flex items-center gap-4">
+                    <span className="font-semibold text-sm sm:text-base text-[#3c4858] dark:text-muted-foreground w-44 sm:w-56 truncate">
+                      {cat.name}
+                    </span>
+                    <div className="flex-1 h-2.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
                       <i
-                        className={`w-full rounded-t-[6px] rounded-b-[3px] min-h-[3px] not-italic transition-all duration-300 ${
-                          bar.active ? 'bg-[#2563eb]' : 'bg-[#93c5fd]'
-                        }`}
-                        style={{ height: `${bar.pct}%` }}
+                        className="block h-full rounded-full not-italic transition-all duration-500"
+                        style={{ width: `${cat.pct}%`, backgroundColor: cat.color }}
                       />
-                      <small className="font-semibold text-xs text-[#6b7a90] dark:text-muted-foreground">{bar.label}</small>
                     </div>
-                  ))}
-                </div>
-
-                <div className="font-normal text-[13px] text-[#6b7a90] dark:text-muted-foreground">
-                  {activityRange === '7days' ? t.activityNote : t.activityNoteMonth}
-                </div>
-              </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockActivity}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
+                    <b className="font-extrabold text-sm text-[#0f1b33] dark:text-foreground w-12 text-right">
+                      %{cat.pct}
+                    </b>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Rozetler Kartı (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-3.5 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <div className="flex justify-between items-center">
-                  <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                    {t.badgesTitle}
-                  </h3>
-                  <span className="font-normal text-[13px] text-[#6b7a90] dark:text-muted-foreground">
-                    {t.badgesCount}
-                  </span>
-                </div>
-
-                {/* Kazanılan Rozetler */}
-                <div className="flex gap-2.5 flex-wrap">
-                  <div className="flex items-center gap-2.5 bg-[#0f1b33] text-white rounded-[10px] py-2.5 px-3.5 shadow-xs">
-                    <i className="w-7 h-7 rounded-full bg-[#2563eb] flex items-center justify-center font-extrabold text-[13px] not-italic">
-                      ✓
-                    </i>
-                    <div>
-                      <b className="font-extrabold text-[13px] block">{t.badgeStreak7}</b>
-                      <small className="font-normal text-[11px] text-[#b8c4d9]">2 Eyl 2026</small>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 bg-[#0f1b33] text-white rounded-[10px] py-2.5 px-3.5 shadow-xs">
-                    <i className="w-7 h-7 rounded-full bg-[#2563eb] flex items-center justify-center font-extrabold text-[13px] not-italic">
-                      ✓
-                    </i>
-                    <div>
-                      <b className="font-extrabold text-[13px] block">{t.badgeTerms50}</b>
-                      <small className="font-normal text-[11px] text-[#b8c4d9]">30 Ağu 2026</small>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Sonraki Hedefler */}
-                <div className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground mt-1 uppercase">
-                  {t.nextGoalsTitle}
-                </div>
-
-                <div className="flex flex-col gap-2.5">
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex justify-between font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground">
-                      <span>{t.goal30Streak}</span>
-                      <span className="text-[#6b7a90]">12 / 30</span>
-                    </div>
-                    <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
-                      <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '40%' }} />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex justify-between font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground">
-                      <span>{t.goal100Terms}</span>
-                      <span className="text-[#6b7a90]">81 / 100</span>
-                    </div>
-                    <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
-                      <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '81%' }} />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex justify-between font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground">
-                      <span>{t.goalTrunkBones}</span>
-                      <span className="text-[#6b7a90]">45 / 60</span>
-                    </div>
-                    <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
-                      <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '75%' }} />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex justify-between font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground">
-                      <span>{t.goalQuiz90}</span>
-                      <span className="text-[#6b7a90]">%84 / %90</span>
-                    </div>
-                    <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
-                      <i className="block h-full bg-[#2563eb] rounded-full not-italic" style={{ width: '93%' }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockBadges}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
-              </div>
-            </div>
-
+            <ProLockCard text={t.proLockCategories} />
           </div>
 
-          {/* ── 2'li Izgara 2: Kategoriye Göre İlerleme & Oyun Modları (Pro Kilitli) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-            {/* Kategori İlerlemesi (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-3.5 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <div className="flex justify-between items-center">
-                  <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                    {t.categoryProgressTitle}
-                  </h3>
-                  <button
-                    onClick={() => navigate('/terms')}
-                    className="font-bold text-[13px] text-[#2563eb] dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-0 p-0"
-                  >
-                    {t.viewAll}
-                  </button>
-                </div>
+          {/* Oyun Modu İstatistikleri (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                {t.gamesTitle}
+              </h3>
 
-                <div className="flex flex-col gap-3 mt-1">
-                  {categories.map((cat, idx) => (
-                    <div key={idx} className="flex items-center gap-3.5">
-                      <span className="font-semibold text-sm text-[#3c4858] dark:text-muted-foreground w-40 sm:w-48 truncate">
-                        {cat.name}
-                      </span>
-                      <div className="flex-1 h-2 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-1">
+                {gameStats.map((game, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => navigate(game.route)}
+                    className="flex gap-3.5 items-center border border-[#e5e9f2] dark:border-border rounded-xl p-3.5 hover:border-primary/40 transition-colors cursor-pointer"
+                  >
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${game.bg} flex items-center justify-center flex-shrink-0 text-white shadow-xs`}>
+                      {game.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between font-bold text-sm text-[#0f1b33] dark:text-foreground">
+                        <span className="truncate">{game.name}</span>
+                        <span>%{game.pct}</span>
+                      </div>
+                      <div className="font-normal text-xs text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                        {game.playedCount} {t.played}
+                      </div>
+                      <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden mt-2">
                         <i
-                          className="block h-full rounded-full not-italic transition-all duration-500"
-                          style={{ width: `${cat.pct}%`, backgroundColor: cat.color }}
+                          className="block h-full bg-[#2563eb] rounded-full not-italic"
+                          style={{ width: `${game.pct}%` }}
                         />
                       </div>
-                      <b className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground w-10 text-right">
-                        %{cat.pct}
-                      </b>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockCategories}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Oyun Modu İstatistikleri (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-3.5 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                  {t.gamesTitle}
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
-                  {gameStats.map((game, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => navigate(game.route)}
-                      className="flex gap-3 items-center border border-[#e5e9f2] dark:border-border rounded-[10px] p-3 hover:border-primary/40 transition-colors cursor-pointer"
-                    >
-                      <div className={`w-[38px] h-[38px] rounded-[10px] bg-gradient-to-br ${game.bg} flex items-center justify-center flex-shrink-0 text-white shadow-xs`}>
-                        {game.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
-                          <span className="truncate">{game.name}</span>
-                          <span>%{game.pct}</span>
-                        </div>
-                        <div className="font-normal text-xs text-[#6b7a90] dark:text-muted-foreground">
-                          {game.playedCount} {t.played}
-                        </div>
-                        <div className="h-1.5 bg-[#e5e9f2] dark:bg-muted rounded-full overflow-hidden mt-1.5">
-                          <i
-                            className="block h-full bg-[#2563eb] rounded-full not-italic"
-                            style={{ width: `${game.pct}%` }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockGames}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* ── 2'li Izgara 3: Zayıf Terimler & Öğrenme Geçmişi (Pro Kilitli) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-            {/* Zayıf Terimler (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-0 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <div className="flex justify-between items-center mb-2.5">
-                  <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                    {t.weakTermsTitle}
-                  </h3>
-                  <span className="font-normal text-[13px] text-[#6b7a90] dark:text-muted-foreground">
-                    {t.weakTermsNote}
-                  </span>
-                </div>
-
-                {weakTerms.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 py-2.5 border-t border-[#eef1f6] dark:border-border first:border-0">
-                    <div className="flex-1 min-w-0">
-                      <b className="font-bold text-sm text-[#0f1b33] dark:text-foreground block truncate">
-                        {item.term}
-                      </b>
-                      <small className="font-normal text-xs text-[#6b7a90] dark:text-muted-foreground truncate block">
-                        {isTr ? item.tr : item.en}
-                      </small>
-                    </div>
-                    <span className={`font-extrabold text-xs py-1 px-2 rounded-md ${item.isLow ? 'bg-[#fee2e2] text-[#b91c1c]' : 'bg-[#fff4e6] text-[#b45309]'}`}>
-                      %{item.pct}
-                    </span>
-                    <button
-                      onClick={() => navigate('/terms')}
-                      className="font-bold text-[13px] border border-[#e5e9f2] dark:border-border py-1.5 px-3 rounded-lg text-[#0f1b33] dark:text-foreground whitespace-nowrap hover:bg-muted transition-colors cursor-pointer bg-transparent"
-                    >
-                      {t.review}
-                    </button>
                   </div>
                 ))}
               </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockWeak}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
-              </div>
             </div>
 
-            {/* Öğrenme Geçmişi (Kilitli) */}
-            <div className="relative rounded-[14px] overflow-hidden group">
-              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-6 flex flex-col gap-4 shadow-xs filter blur-[4px] pointer-events-none select-none">
-                <h3 className="m-0 font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
-                  {t.historyTitle}
-                </h3>
-
-                {/* Gün 1: BUGÜN */}
-                <div>
-                  <div className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2">
-                    {t.todayGroup}
-                  </div>
-                  <div className="flex items-center gap-3 font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground mb-2">
-                    <i className="w-2 h-2 rounded-full bg-[#3b82f6] flex-shrink-0 not-italic" />
-                    <b className="w-24 sm:w-28 text-[#0f1b33] dark:text-foreground font-bold">{t.flashcard}</b>
-                    <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catTrunkBones}</span>
-                    <span className="text-muted-foreground">{t.termsCount(12)}</span>
-                    <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-12 text-right">{t.minutesCount(9)}</span>
-                  </div>
-                  <div className="flex items-center gap-3 font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground mb-2">
-                    <i className="w-2 h-2 rounded-full bg-[#22c55e] flex-shrink-0 not-italic" />
-                    <b className="w-24 sm:w-28 text-[#0f1b33] dark:text-foreground font-bold">{t.match}</b>
-                    <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catFaceBones}</span>
-                    <span className="text-muted-foreground">%82</span>
-                    <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-12 text-right">{t.minutesCount(6)}</span>
-                  </div>
-                </div>
-
-                {/* Gün 2: DÜN */}
-                <div>
-                  <div className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2">
-                    {t.yesterdayGroup}
-                  </div>
-                  <div className="flex items-center gap-3 font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground mb-2">
-                    <i className="w-2 h-2 rounded-full bg-[#f97316] flex-shrink-0 not-italic" />
-                    <b className="w-24 sm:w-28 text-[#0f1b33] dark:text-foreground font-bold">{t.quiz}</b>
-                    <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catUpperExtremity}</span>
-                    <span className="text-muted-foreground">8 / 10</span>
-                    <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-12 text-right">{t.minutesCount(7)}</span>
-                  </div>
-                </div>
-
-                {/* Gün 3: Geçmiş Gün */}
-                <div>
-                  <div className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2">
-                    {isTr ? '7 EYL' : 'SEP 7'}
-                  </div>
-                  <div className="flex items-center gap-3 font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground mb-2">
-                    <i className="w-2 h-2 rounded-full bg-[#7c3aed] flex-shrink-0 not-italic" />
-                    <b className="w-24 sm:w-28 text-[#0f1b33] dark:text-foreground font-bold">{t.morphemeBuilder}</b>
-                    <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catTrunkBones}</span>
-                    <span className="text-muted-foreground">{t.termsCount(5)}</span>
-                    <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-12 text-right">{t.minutesCount(11)}</span>
-                  </div>
-                  <div className="flex items-center gap-3 font-semibold text-[13px] text-[#3c4858] dark:text-muted-foreground mb-2">
-                    <i className="w-2 h-2 rounded-full bg-[#3b82f6] flex-shrink-0 not-italic" />
-                    <b className="w-24 sm:w-28 text-[#0f1b33] dark:text-foreground font-bold">{t.flashcard}</b>
-                    <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catLowerExtremity}</span>
-                    <span className="text-muted-foreground">{t.termsCount(15)}</span>
-                    <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-12 text-right">{t.minutesCount(12)}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Kilit Katmanı */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 bg-[#f5f7fb]/60 dark:bg-background/60 backdrop-blur-[1px]">
-                <div className="bg-[#0f1b33] text-white rounded-xl py-3.5 px-4.5 flex items-center gap-3 max-w-[440px] shadow-xl border border-white/10">
-                  <b className="font-extrabold text-[10px] leading-none tracking-widest bg-[#2563eb] py-1 px-1.5 rounded text-white flex-shrink-0 not-italic">
-                    {t.proBadge}
-                  </b>
-                  <span className="font-semibold text-[13px] leading-snug flex-1">
-                    {t.proLockHistory}
-                  </span>
-                  <button
-                    onClick={() => navigate('/pricing')}
-                    className="text-[#8fb3ff] hover:text-white font-extrabold text-[13px] whitespace-nowrap cursor-pointer transition-colors flex items-center gap-0.5 bg-transparent border-0 p-0"
-                  >
-                    {t.goPro}
-                  </button>
-                </div>
-              </div>
-            </div>
-
+            <ProLockCard text={t.proLockGames} />
           </div>
 
-        </main>
+        </div>
+
+        {/* ── 2'li Izgara 3: Zayıf Terimler & Öğrenme Geçmişi (Pro Kilitli) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Zayıf Terimler (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-0 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                  {t.weakTermsTitle}
+                </h3>
+                <span className="font-normal text-sm text-[#6b7a90] dark:text-muted-foreground">
+                  {t.weakTermsNote}
+                </span>
+              </div>
+
+              {weakTerms.map((item, idx) => (
+                <div key={idx} className="flex items-center gap-4 py-3 border-t border-[#eef1f6] dark:border-border first:border-0">
+                  <div className="flex-1 min-w-0">
+                    <b className="font-bold text-sm sm:text-base text-[#0f1b33] dark:text-foreground block truncate">
+                      {item.term}
+                    </b>
+                    <small className="font-normal text-xs sm:text-sm text-[#6b7a90] dark:text-muted-foreground truncate block mt-0.5">
+                      {isTr ? item.tr : item.en}
+                    </small>
+                  </div>
+                  <span className={`font-extrabold text-xs sm:text-sm py-1 px-2.5 rounded-lg ${item.isLow ? 'bg-[#fee2e2] text-[#b91c1c]' : 'bg-[#fff4e6] text-[#b45309]'}`}>
+                    %{item.pct}
+                  </span>
+                  <button
+                    onClick={() => navigate('/terms')}
+                    className="font-bold text-xs sm:text-sm border border-[#e5e9f2] dark:border-border py-1.5 px-3.5 rounded-xl text-[#0f1b33] dark:text-foreground whitespace-nowrap hover:bg-muted transition-colors cursor-pointer bg-transparent"
+                  >
+                    {t.review}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <ProLockCard text={t.proLockWeak} />
+          </div>
+
+          {/* Öğrenme Geçmişi (Kilitli) */}
+          <div className="relative rounded-2xl overflow-hidden group">
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 sm:p-7 flex flex-col gap-5 shadow-xs filter blur-[4px] pointer-events-none select-none">
+              <h3 className="m-0 font-extrabold text-base sm:text-lg text-[#0f1b33] dark:text-foreground">
+                {t.historyTitle}
+              </h3>
+
+              {/* Gün 1: BUGÜN */}
+              <div>
+                <div className="font-extrabold text-xs leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2.5">
+                  {t.todayGroup}
+                </div>
+                <div className="flex items-center gap-3.5 font-semibold text-sm text-[#3c4858] dark:text-muted-foreground mb-2.5">
+                  <i className="w-2.5 h-2.5 rounded-full bg-[#3b82f6] flex-shrink-0 not-italic" />
+                  <b className="w-28 sm:w-32 text-[#0f1b33] dark:text-foreground font-bold">{t.flashcard}</b>
+                  <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catTrunkBones}</span>
+                  <span className="text-muted-foreground">{t.termsCount(12)}</span>
+                  <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-14 text-right">{t.minutesCount(9)}</span>
+                </div>
+                <div className="flex items-center gap-3.5 font-semibold text-sm text-[#3c4858] dark:text-muted-foreground mb-2.5">
+                  <i className="w-2.5 h-2.5 rounded-full bg-[#22c55e] flex-shrink-0 not-italic" />
+                  <b className="w-28 sm:w-32 text-[#0f1b33] dark:text-foreground font-bold">{t.match}</b>
+                  <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catFaceBones}</span>
+                  <span className="text-muted-foreground">%82</span>
+                  <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-14 text-right">{t.minutesCount(6)}</span>
+                </div>
+              </div>
+
+              {/* Gün 2: DÜN */}
+              <div>
+                <div className="font-extrabold text-xs leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2.5">
+                  {t.yesterdayGroup}
+                </div>
+                <div className="flex items-center gap-3.5 font-semibold text-sm text-[#3c4858] dark:text-muted-foreground mb-2.5">
+                  <i className="w-2.5 h-2.5 rounded-full bg-[#f97316] flex-shrink-0 not-italic" />
+                  <b className="w-28 sm:w-32 text-[#0f1b33] dark:text-foreground font-bold">{t.quiz}</b>
+                  <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catUpperExtremity}</span>
+                  <span className="text-muted-foreground">8 / 10</span>
+                  <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-14 text-right">{t.minutesCount(7)}</span>
+                </div>
+              </div>
+
+              {/* Gün 3: Geçmiş Gün */}
+              <div>
+                <div className="font-extrabold text-xs leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground mb-2.5">
+                  {isTr ? '7 EYL' : 'SEP 7'}
+                </div>
+                <div className="flex items-center gap-3.5 font-semibold text-sm text-[#3c4858] dark:text-muted-foreground mb-2.5">
+                  <i className="w-2.5 h-2.5 rounded-full bg-[#7c3aed] flex-shrink-0 not-italic" />
+                  <b className="w-28 sm:w-32 text-[#0f1b33] dark:text-foreground font-bold">{t.morphemeBuilder}</b>
+                  <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catTrunkBones}</span>
+                  <span className="text-muted-foreground">{t.termsCount(5)}</span>
+                  <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-14 text-right">{t.minutesCount(11)}</span>
+                </div>
+                <div className="flex items-center gap-3.5 font-semibold text-sm text-[#3c4858] dark:text-muted-foreground mb-2.5">
+                  <i className="w-2.5 h-2.5 rounded-full bg-[#3b82f6] flex-shrink-0 not-italic" />
+                  <b className="w-28 sm:w-32 text-[#0f1b33] dark:text-foreground font-bold">{t.flashcard}</b>
+                  <span className="flex-1 text-[#6b7a90] dark:text-muted-foreground truncate">{t.catLowerExtremity}</span>
+                  <span className="text-muted-foreground">{t.termsCount(15)}</span>
+                  <span className="text-[#9aa6b8] dark:text-muted-foreground/70 w-14 text-right">{t.minutesCount(12)}</span>
+                </div>
+              </div>
+            </div>
+
+            <ProLockCard text={t.proLockHistory} />
+          </div>
+
+        </div>
+
       </div>
     </div>
   );
