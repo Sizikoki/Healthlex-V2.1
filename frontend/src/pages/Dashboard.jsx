@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Star, Flame } from 'lucide-react';
+import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame } from 'lucide-react';
 import { getStats, getUser, getStreak, logout, formatTurkishName } from '@/utils/storage';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
+import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { useLanguage } from '@/context/LanguageContext';
-import { TrialDashboardView } from '@/components/TrialDashboardView';
+import { toast } from 'sonner';
 
 // --- Abonelik Durumu Kontrolü (Esnek) ---
-// Sadece aktif Pro üyeler tam paneli görür; free veya trial durumundaki
-// kullanıcılar TrialDashboardView bileşenine yönlendirilir.
+// Firestore users/{uid} dokümanındaki aşağıdaki alanlardan herhangi biri
+// Pro'yu ifade ediyorsa kullanıcı Pro sayılır:
+//   - subscriptionStatus === 'active' | 'pro'
+//   - isPro === true
 const resolveIsPro = (userData) => {
   if (!userData) return false;
   const status = userData.subscriptionStatus;
@@ -38,6 +41,7 @@ export const Dashboard = () => {
   );
   const [isPro, setIsPro] = useState(previewRole === 'pro');
   const [subLoading, setSubLoading] = useState(!previewRole);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   // Auth Guard
   useEffect(() => {
@@ -104,6 +108,27 @@ export const Dashboard = () => {
     window.location.href = '/login';
   };
 
+  // Paddle Checkout
+  const handleUpgrade = useCallback(async () => {
+    if (!IS_PAYMENT_ACTIVE) {
+      toast.info(isTr ? 'Ödeme sistemi yakında aktif olacak.' : 'Payment system coming soon.');
+      return;
+    }
+    setCheckoutLoading(true);
+    try {
+      await openPaddleCheckout({
+        priceId: PADDLE_PRICE_ID,
+        customerEmail: firebaseUser?.email || storedUser?.email,
+        customData: {
+          plan: 'Annual Pro Membership',
+          userId: firebaseUser?.uid || storedUser?.uid || 'unknown'
+        }
+      });
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }, [firebaseUser, storedUser, isTr]);
+
   // Loading State
   if (!authReady || subLoading) {
     return (
@@ -111,11 +136,6 @@ export const Dashboard = () => {
         <div className="w-7 h-7 border-2 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
-  }
-
-  // Kullanıcı durumu free/trial olduğunda TrialDashboardView bileşenini render et
-  if (!isPro) {
-    return <TrialDashboardView user={firebaseUser} userData={firestoreData} />;
   }
 
   // Quick Actions
@@ -194,19 +214,55 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* Pro Üye Kartı */}
-        <div className="mb-6 flex items-center gap-3 bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/30 rounded-xl px-5 py-3.5 shadow-xs">
-          <Star className="w-5 h-5 text-primary flex-shrink-0 fill-primary" />
-          <div className="min-w-0">
-            <p className="font-bold text-foreground text-sm flex items-center gap-2">
-              {isTr ? 'Pro Üye' : 'Pro Member'}
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/15 text-primary">PRO</span>
-            </p>
-            <p className="text-xs text-muted-foreground">
-              {isTr ? 'Tüm içeriklere tam erişiminiz var.' : 'You have full access to all content.'}
-            </p>
-          </div>
-        </div>
+        {/* Abonelik Durumu Kartı */}
+        {!subLoading && (
+          isPro ? (
+            <div className="mb-6 flex items-center gap-3 bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/30 rounded-xl px-5 py-3.5 shadow-xs">
+              <Star className="w-5 h-5 text-primary flex-shrink-0 fill-primary" />
+              <div className="min-w-0">
+                <p className="font-bold text-foreground text-sm flex items-center gap-2">
+                  {isTr ? 'Pro Üye' : 'Pro Member'}
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/15 text-primary">PRO</span>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {isTr ? 'Tüm içeriklere tam erişiminiz var.' : 'You have full access to all content.'}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-xs">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                  <Zap className="w-4 h-4 text-muted-foreground" />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground text-sm flex items-center gap-2">
+                    {isTr ? 'Ücretsiz Plan' : 'Free Plan'}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">FREE</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {isTr
+                      ? "Pro'ya geçerek tüm terimlere ve oyunlara sınırsız erişin."
+                      : 'Upgrade to Pro for unlimited access to all terms and games.'}
+                  </p>
+                </div>
+              </div>
+              {IS_PAYMENT_ACTIVE && (
+                <button
+                  onClick={handleUpgrade}
+                  disabled={checkoutLoading}
+                  className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm disabled:opacity-60 cursor-pointer"
+                >
+                  <Star className="w-4 h-4" />
+                  {checkoutLoading
+                    ? (isTr ? 'Yükleniyor...' : 'Loading...')
+                    : (isTr ? "Pro'ya Yükselt" : 'Upgrade to Pro')}
+                  {!checkoutLoading && <ArrowRight className="w-4 h-4" />}
+                </button>
+              )}
+            </div>
+          )
+        )}
 
         {/* İstatistik Şeridi */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
@@ -253,3 +309,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard;
