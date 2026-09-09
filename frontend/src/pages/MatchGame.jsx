@@ -5,19 +5,26 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getAllTerms } from '@/data/medicalTerms';
-import { saveMatchScore, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
+import { saveMatchScore, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay, getUser } from '@/utils/storage';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS } from '@/utils/planAccess';
 
 export const MatchGame = () => {
   const { currentLanguage, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
+
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const localUser = getUser();
+  const isPro = previewRole === 'pro' || localUser?.isPro === true || localUser?.subscriptionStatus === 'active';
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
@@ -42,16 +49,38 @@ export const MatchGame = () => {
       incrementGuestPlay();
     }
 
+    let activeCategoryId = categoryId;
+    if (!isPro && categoryId && categoryId !== 'all' && !isCategoryUnlocked(categoryId, isPro)) {
+      activeCategoryId = 'skull_bones';
+      toast.info(
+        currentLanguage === 'en'
+          ? 'This category is exclusive to Pro. Redirecting to an unlocked category...'
+          : 'Bu kategori Pro plana özeldir. Temel planda açık olan kategorilerden biri yükleniyor...'
+      );
+    }
+
     let filtered = termsList;
-    if (categoryId && categoryId !== 'all') {
-      filtered = termsList.filter(t => t.category === categoryId);
+    if (activeCategoryId && activeCategoryId !== 'all') {
+      filtered = termsList.filter(t => t.category === activeCategoryId);
       if (filtered.length === 0) {
-        filtered = termsList.filter(t => t.system === categoryId || t.subcategory === categoryId);
+        filtered = termsList.filter(t => t.system === activeCategoryId || t.subcategory === activeCategoryId);
       }
+    } else if (!isPro) {
+      filtered = termsList.filter(t =>
+        UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+        UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+        UNLOCKED_CATEGORY_IDS.includes(t.system)
+      );
     }
 
     if (filtered.length === 0) {
-      filtered = termsList;
+      filtered = !isPro
+        ? termsList.filter(t =>
+            UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+            UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+            UNLOCKED_CATEGORY_IDS.includes(t.system)
+          )
+        : termsList;
     }
 
     // Filter terms that have valid match content based on language
@@ -59,7 +88,14 @@ export const MatchGame = () => {
     const validTerms = filtered.filter(t =>
       t.term && (isEn ? (t.english || t.turkish || t.turkishShort || t.turkishDefinition) : (t.turkishShort || t.turkishDefinition))
     );
-    const sourceList = validTerms.length >= 6 ? validTerms : (filtered.length >= 6 ? filtered : termsList);
+    const fallbackList = !isPro
+      ? termsList.filter(t =>
+          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.system)
+        )
+      : termsList;
+    const sourceList = validTerms.length >= 6 ? validTerms : (filtered.length >= 6 ? filtered : fallbackList);
 
     // Select 6 random terms dynamically
     const shuffledTerms = [...sourceList].sort(() => Math.random() - 0.5);
@@ -96,7 +132,7 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage]);
+  }, [categoryId, currentLanguage, isPro]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import {
   Search,
   BookOpen,
@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   RotateCcw,
+  Lock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -22,6 +23,11 @@ import {
 } from '@/components/ui/select';
 import { useLanguage } from '@/context/LanguageContext';
 import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
+import { auth, db } from '@/firebase/config';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { getUser } from '@/utils/storage';
+import { isMorphemeUnlocked } from '@/utils/planAccess';
+import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
 const CATEGORY_NAMES = {
@@ -69,9 +75,46 @@ function normalizeSearchText(text) {
 }
 
 export const MorphemeExplorer = () => {
+  const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
   const isTr = currentLanguage === 'tr';
   const [searchParams] = useSearchParams();
+
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+
+  useEffect(() => {
+    if (previewRole) return;
+    const uid = auth?.currentUser?.uid || getUser()?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const proActive =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsPro(proActive);
+        } else {
+          setIsPro(false);
+        }
+      }, (err) => {
+        console.warn('[MorphemeExplorer] Could not check pro status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[MorphemeExplorer] Error checking pro status:', e);
+    }
+  }, [previewRole]);
 
   const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
   const [activeTab, setActiveTab] = useState('all'); // 'all', 'prefix', 'root', 'suffix'
@@ -94,6 +137,7 @@ export const MorphemeExplorer = () => {
     PREFIXES.forEach((p, idx) => {
       list.push({
         id: `p_${idx}`,
+        globalIndex: list.length,
         type: 'prefix',
         displayTerm: p.prefix,
         meaningTr: p.meaningTr,
@@ -108,6 +152,7 @@ export const MorphemeExplorer = () => {
     ROOTS.forEach((r, idx) => {
       list.push({
         id: `r_${idx}`,
+        globalIndex: list.length,
         type: 'root',
         displayTerm: r.root,
         meaningTr: r.meaningTr,
@@ -122,6 +167,7 @@ export const MorphemeExplorer = () => {
     SUFFIXES.forEach((s, idx) => {
       list.push({
         id: `s_${idx}`,
+        globalIndex: list.length,
         type: 'suffix',
         displayTerm: s.suffix,
         meaningTr: s.meaningTr,
@@ -318,6 +364,22 @@ export const MorphemeExplorer = () => {
               {isTr ? 'Son Ekler' : 'Suffixes'} ({SUFFIXES.length})
             </button>
           </div>
+
+          {!isPro && (
+            <div className="max-w-2xl mx-auto p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-3 text-xs sm:text-sm text-amber-900 dark:text-amber-200 shadow-sm">
+              <div className="flex items-center gap-2">
+                <Lock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span>
+                  {isTr
+                    ? 'Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.'
+                    : 'Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.'}
+                </span>
+              </div>
+              <Link to="/pricing" className="shrink-0 font-bold text-amber-700 dark:text-amber-300 hover:underline">
+                {isTr ? "Pro'ya Geç →" : 'Go Pro →'}
+              </Link>
+            </div>
+          )}
         </header>
 
         {/* Arama ve Filtre Kontrol Çubuğu */}
@@ -395,6 +457,19 @@ export const MorphemeExplorer = () => {
           <section aria-label={isTr ? 'Morfem Kartları' : 'Morpheme Cards'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {paginatedMorphemes.map((item) => {
               const slug = (item.displayTerm || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
+              const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro);
+
+              const handleCardClick = (e) => {
+                if (locked) {
+                  e.preventDefault();
+                  toast.info(
+                    isTr
+                      ? 'İlk 100 morfem Temel planda açıktır. 571+ morfemin tamamına erişmek için Pro\'ya geçin.'
+                      : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro to unlock all 571+ morphemes.'
+                  );
+                  navigate('/pricing');
+                }
+              };
 
               return (
                 <article
@@ -413,17 +488,18 @@ export const MorphemeExplorer = () => {
                   <meta itemProp="inDefinedTermSet" content="https://healthlexmed.com/morphemes#termset" />
 
                   <Link
-                    to={`/morphemes/${slug}`}
+                    to={locked ? '/pricing' : `/morphemes/${slug}`}
+                    onClick={handleCardClick}
                     className="block h-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
                   >
-                    <Card className="h-full bg-card border border-border group-hover:border-primary/50 group-hover:shadow-md group-hover:-translate-y-0.5 rounded-2xl transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer">
+                    <Card className={`h-full bg-card border ${locked ? 'border-dashed border-border/80 opacity-85 hover:border-amber-500/50' : 'border-border group-hover:border-primary/50 group-hover:shadow-md group-hover:-translate-y-0.5'} rounded-2xl transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer`}>
                       <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
                         <div className="space-y-4">
                           {/* Kart Üst Barı: Başlık ve Rozet */}
                           <div className="flex items-start justify-between gap-3">
                             <div className="space-y-1 min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-xl font-bold font-mono tracking-tight text-foreground group-hover:text-primary transition-colors">
+                                <span className={`text-xl font-bold font-mono tracking-tight ${locked ? 'text-foreground/75' : 'text-foreground group-hover:text-primary transition-colors'}`}>
                                   {item.displayTerm}
                                 </span>
                                 {getTypeBadge(item.type)}
@@ -434,6 +510,12 @@ export const MorphemeExplorer = () => {
                                 </p>
                               )}
                             </div>
+                            {locked && (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
+                                <Lock className="w-3 h-3" />
+                                Pro
+                              </span>
+                            )}
                           </div>
 
                           {/* Anlamlar Bölümü */}
@@ -482,10 +564,18 @@ export const MorphemeExplorer = () => {
 
                         {/* Detay & Terimler Linki */}
                         <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs mt-3">
-                          <span className="font-semibold text-primary group-hover:underline inline-flex items-center gap-1">
-                            {isTr ? 'Kök Detayı & Terimler' : 'Root Details & Terms'}
-                            <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
-                          </span>
+                          {locked ? (
+                            <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1">
+                              <Lock className="w-3.5 h-3.5" />
+                              {isTr ? 'Pro ile Kilidi Aç' : 'Unlock with Pro'}
+                              <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
+                            </span>
+                          ) : (
+                            <span className="font-semibold text-primary group-hover:underline inline-flex items-center gap-1">
+                              {isTr ? 'Kök Detayı & Terimler' : 'Root Details & Terms'}
+                              <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
+                            </span>
+                          )}
                           <span className="text-[11px] text-muted-foreground font-mono">#{item.type}</span>
                         </div>
                       </CardContent>

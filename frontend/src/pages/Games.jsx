@@ -4,15 +4,17 @@ import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { isLoggedIn, canGuestPlay, getGuestTrialInfo } from '@/utils/storage';
+import { isLoggedIn, canGuestPlay, getGuestTrialInfo, getUser } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
-import { db } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '@/firebase/config';
+import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
+import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS } from '@/utils/planAccess';
+import { toast } from 'sonner';
 
 const GAMES_CATEGORY_KEY = 'healthlex_selected_game_category';
 
@@ -38,6 +40,43 @@ export const Games = () => {
   const [searchParams] = useSearchParams();
   const paramCategory = searchParams.get('category');
 
+  const isTr = currentLanguage !== 'en';
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+
+  useEffect(() => {
+    if (previewRole) return;
+    const uid = auth?.currentUser?.uid || getUser()?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const proActive =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsPro(proActive);
+        } else {
+          setIsPro(false);
+        }
+      }, (err) => {
+        console.warn('[Games] Could not check pro status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Games] Error checking pro status:', e);
+    }
+  }, [previewRole]);
+
   const [selectedCategory, setSelectedCategory] = useState(() => {
     if (paramCategory) return paramCategory;
     try {
@@ -48,6 +87,15 @@ export const Games = () => {
   });
 
   const handleCategoryChange = (val) => {
+    if (!isPro && val !== 'all' && !isCategoryUnlocked(val, isPro)) {
+      toast.info(
+        isTr
+          ? 'Bu kategori Pro üyelere özeldir. Temel pakette ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
+          : 'This category is exclusive to Pro. The first 3 categories are unlocked in the Basic plan.'
+      );
+      navigate('/pricing');
+      return;
+    }
     setSelectedCategory(val);
     try {
       localStorage.setItem(GAMES_CATEGORY_KEY, val);
@@ -58,6 +106,9 @@ export const Games = () => {
 
   useEffect(() => {
     if (paramCategory) {
+      if (!isPro && paramCategory !== 'all' && !isCategoryUnlocked(paramCategory, isPro)) {
+        return;
+      }
       setSelectedCategory((prev) => {
         if (prev !== paramCategory) {
           try {
@@ -70,7 +121,16 @@ export const Games = () => {
         return prev;
       });
     }
-  }, [paramCategory]);
+  }, [paramCategory, isPro]);
+
+  useEffect(() => {
+    if (!isPro && selectedCategory !== 'all' && !isCategoryUnlocked(selectedCategory, isPro)) {
+      setSelectedCategory('all');
+      try {
+        localStorage.setItem(GAMES_CATEGORY_KEY, 'all');
+      } catch (e) {}
+    }
+  }, [isPro, selectedCategory]);
 
   const [activeGame, setActiveGame] = useState(null);
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
@@ -137,11 +197,23 @@ export const Games = () => {
   }, []);
 
   const categoryTerms = useMemo(() => {
-    if (selectedCategory === 'all') {
-      return liveTerms.length > 0 ? liveTerms : getAllTerms();
+    let baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
+
+    // Temel planda oyunlarda sadece açık olan 3 kategorideki terimler gösterilsin
+    if (!isPro) {
+      baseList = baseList.filter(
+        (t) =>
+          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.system)
+      );
     }
 
-    const filtered = liveTerms.filter(
+    if (selectedCategory === 'all') {
+      return baseList;
+    }
+
+    const filtered = baseList.filter(
       (termItem) =>
         termItem.subcategory === selectedCategory ||
         termItem.category === selectedCategory ||
@@ -153,8 +225,17 @@ export const Games = () => {
     }
 
     // Fallback to local category terms
-    return getTermsByCategory(selectedCategory);
-  }, [selectedCategory, liveTerms]);
+    const local = getTermsByCategory(selectedCategory);
+    if (!isPro) {
+      return local.filter(
+        (t) =>
+          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.system)
+      );
+    }
+    return local;
+  }, [selectedCategory, liveTerms, isPro]);
 
   const adaptedQuestions = useMemo(() => {
     return adaptTermsToMorphemeQuestions(categoryTerms);
@@ -200,6 +281,18 @@ export const Games = () => {
   };
 
   const handleGamePlayClick = (e, gameId, gamePath) => {
+    if (!isPro && !isGameUnlocked(gameId, isPro)) {
+      e.preventDefault();
+      const gameObj = games.find((g) => g.id === gameId);
+      toast.info(
+        isTr
+          ? `${gameObj?.title || 'Bu oyun'} modu Pro plana özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.`
+          : `${gameObj?.title || 'This game'} mode is exclusive to Pro. Flashcards and Matching games are available in your Basic plan.`
+      );
+      navigate('/pricing');
+      return;
+    }
+
     if (!userIsLoggedIn && !canGuestPlay()) {
       e.preventDefault();
       setIsLimitModalOpen(true);
@@ -282,11 +375,13 @@ export const Games = () => {
                   <SelectContent>
                     <SelectItem value="all">{t('allCategories')}</SelectItem>
 
-                    {GAME_CATEGORIES.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.id}>
-                        {t(cat.key, cat.name)}
-                      </SelectItem>
-                    ))}
+                    {(isPro ? GAME_CATEGORIES : GAME_CATEGORIES.slice(0, 3)).map((cat) => {
+                      return (
+                        <SelectItem key={cat.id} value={cat.id}>
+                          {t(cat.key, cat.name)}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
               </div>
@@ -296,11 +391,20 @@ export const Games = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {games.map((game) => {
                 const Icon = game.icon;
+                const locked = !isPro && !isGameUnlocked(game.id, isPro);
                 return (
-                  <Card key={game.id} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <Card key={game.id} className={`group transition-all duration-300 ${locked ? 'opacity-90 border-dashed hover:border-amber-500/50' : 'hover:shadow-2xl hover:-translate-y-2'}`}>
                     <CardHeader>
-                      <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${game.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className="w-8 h-8 text-white" />
+                      <div className="flex items-start justify-between">
+                        <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${game.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        {locked && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                            <Lock className="w-3 h-3" />
+                            Pro
+                          </span>
+                        )}
                       </div>
                       <CardTitle className="text-2xl">{game.title}</CardTitle>
                       <CardDescription className="text-base">{game.description}</CardDescription>
@@ -308,10 +412,23 @@ export const Games = () => {
                     <CardContent>
                       <Button
                         onClick={(e) => handleGamePlayClick(e, game.id, game.path)}
-                        className="w-full gradient-primary group-hover:shadow-lg transition-all"
+                        className={`w-full transition-all cursor-pointer ${
+                          locked
+                            ? 'bg-muted hover:bg-amber-500/15 text-foreground border border-border hover:border-amber-500/40'
+                            : 'gradient-primary group-hover:shadow-lg'
+                        }`}
                       >
-                        {t('play')}
-                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        {locked ? (
+                          <>
+                            <Lock className="mr-2 w-4 h-4 text-amber-500" />
+                            {isTr ? 'Pro ile Aç' : 'Unlock with Pro'}
+                          </>
+                        ) : (
+                          <>
+                            {t('play')}
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
                       </Button>
                     </CardContent>
                   </Card>

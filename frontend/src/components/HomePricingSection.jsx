@@ -22,7 +22,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Temel',
-        tag: 'Kütüphanenin tamamı, 2 oyun modu.',
+        tag: 'İlk 3 kategori, 100 morfem, 2 oyun modu.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
@@ -30,11 +30,11 @@ const PRICING_CONTENT = {
         cta: 'Temel’i seç',
         isPro: false,
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
-          ['✓', 'Flashcard ve Eşleştirme'],
+          ['✓', 'İlk 3 kategori · 100 morfem'],
+          ['✓', 'Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Temel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı'],
-          ['–', 'Seviye sistemi ve tekrar']
+          ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
+          ['–', 'Kalan 7 kategori ve morfemler (Kilitli)']
         ]
       },
       {
@@ -95,7 +95,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Basic',
-        tag: 'The full library, 2 game modes.',
+        tag: 'First 3 categories, 100 morphemes, 2 game modes.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
@@ -103,11 +103,11 @@ const PRICING_CONTENT = {
         cta: 'Choose Basic',
         isPro: false,
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
-          ['✓', 'Flashcard and Matching'],
+          ['✓', 'First 3 categories · 100 morphemes'],
+          ['✓', 'Flashcard and Matching games'],
           ['✓', 'Basic progress tracking'],
-          ['–', 'Quiz and Morpheme Builder'],
-          ['–', 'Level system and review']
+          ['–', 'Quiz and Morpheme Builder (Locked)'],
+          ['–', 'Remaining 7 categories & morphemes (Locked)']
         ]
       },
       {

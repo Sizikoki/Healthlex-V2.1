@@ -57,18 +57,18 @@ const TRANSLATIONS = {
       },
       {
         name: 'Temel',
-        tag: 'Kütüphanenin tamamı, 2 oyun modu.',
+        tag: 'İlk 3 kategori, 100 morfem, 2 oyun modu.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
         noteYr: 'Yıllık faturalandırılır · ₺66/ay',
         cta: 'Temel’i seç',
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
-          ['✓', 'Flashcard ve Eşleştirme'],
+          ['✓', 'İlk 3 kategori · 100 morfem'],
+          ['✓', 'Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Temel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı'],
-          ['–', 'Seviye sistemi ve tekrar']
+          ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
+          ['–', 'Kalan 7 kategori ve morfemler (Kilitli)']
         ]
       },
       {
@@ -107,10 +107,10 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Çalışma / Sözlük terimleri', '571+', '571+', '571+', '571+'],
-      ['Morfem kütüphanesi', 'Tümü', 'Tümü', 'Tümü', 'Tümü'],
+      ['Çalışma / Sözlük terimleri', '571+', '100 morfem', '571+', '571+'],
+      ['Morfem kütüphanesi', 'Tümü', 'İlk 3 kategori (100 morfem)', 'Tümü', 'Tümü'],
       ['Flashcard · Eşleştirme', '✓', '✓', '✓', '✓'],
-      ['Quiz · Morfem Yapıcı', '✓ (3 gün)', '–', '✓', '✓'],
+      ['Quiz · Morfem Yapıcı', '✓ (3 gün)', '– (Kilitli)', '✓', '✓'],
       ['İlerleme ve seviye sistemi', '✓ (3 gün)', 'Temel', '✓', '✓'],
       ['Öğrenilen terimlerle tekrar', '✓ (3 gün)', '–', '✓', '✓'],
       ['Gelecek modüller', '–', '–', '✓', '✓'],
@@ -166,18 +166,18 @@ const TRANSLATIONS = {
       },
       {
         name: 'Basic',
-        tag: 'The full library, 2 game modes.',
+        tag: 'First 3 categories, 100 morphemes, 2 game modes.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
         noteYr: 'Billed yearly · ₺66/mo',
         cta: 'Choose Basic',
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
-          ['✓', 'Flashcard and Matching'],
+          ['✓', 'First 3 categories · 100 morphemes'],
+          ['✓', 'Flashcard and Matching games'],
           ['✓', 'Basic progress tracking'],
-          ['–', 'Quiz and Morpheme Builder'],
-          ['–', 'Level system and review']
+          ['–', 'Quiz and Morpheme Builder (Locked)'],
+          ['–', 'Remaining 7 categories & morphemes (Locked)']
         ]
       },
       {
@@ -216,10 +216,10 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Study / Glossary terms', '571+', '571+', '571+', '571+'],
-      ['Morpheme library', 'All', 'All', 'All', 'All'],
+      ['Study / Glossary terms', '571+', '100 morphemes', '571+', '571+'],
+      ['Morpheme library', 'All', 'First 3 categories (100 morphemes)', 'All', 'All'],
       ['Flashcard · Matching', '✓', '✓', '✓', '✓'],
-      ['Quiz · Morpheme Builder', '✓ (3 days)', '–', '✓', '✓'],
+      ['Quiz · Morpheme Builder', '✓ (3 days)', '– (Locked)', '✓', '✓'],
       ['Progress and level system', '✓ (3 days)', 'Basic', '✓', '✓'],
       ['Review with learned terms', '✓ (3 days)', '–', '✓', '✓'],
       ['Future modules', '–', '–', '✓', '✓'],

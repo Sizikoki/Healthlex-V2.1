@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, BookOpen, Menu, X, Sparkles } from 'lucide-react';
+import { Search, BookOpen, Menu, X, Sparkles, Lock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { saveProgress, getTermProgress, isLoggedIn } from '@/utils/storage';
+import { saveProgress, getTermProgress, isLoggedIn, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
-import { db } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '@/firebase/config';
+import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { getTermSlug } from '@/utils/termHelper';
+import { isCategoryUnlocked } from '@/utils/planAccess';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -43,6 +44,42 @@ export const Study = () => {
   const navigate = useNavigate();
   const { currentLanguage, t } = useLanguage();
   const isTr = currentLanguage === 'tr';
+
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+
+  useEffect(() => {
+    if (previewRole) return;
+    const uid = auth?.currentUser?.uid || getUser()?.uid;
+    if (!uid) {
+      const localUser = getUser();
+      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const proActive =
+            data.isPro === true ||
+            data.subscriptionStatus === 'active' ||
+            data.subscriptionStatus === 'pro';
+          setIsPro(proActive);
+        } else {
+          setIsPro(false);
+        }
+      }, (err) => {
+        console.warn('[Study] Could not check pro status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Study] Error checking pro status:', e);
+    }
+  }, [previewRole]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
   const [searchQuery, setSearchQuery] = useState('');
@@ -312,20 +349,36 @@ export const Study = () => {
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategoryId === cat.id;
             const count = categoryCounts[cat.id];
+            const locked = !isPro && !isCategoryUnlocked(cat.id, isPro);
+
             return (
               <button
                 key={cat.id}
                 onClick={() => {
+                  if (locked) {
+                    toast.info(
+                      isTr
+                        ? 'Bu kategori Pro üyelere özeldir. Temel planda ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
+                        : 'This category is exclusive to Pro. The first 3 categories are available in the Basic plan.'
+                    );
+                    navigate('/pricing');
+                    return;
+                  }
                   setSelectedCategoryId(cat.id);
                   setSearchQuery('');
                 }}
                 className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer flex items-center justify-between group ${
                   isSelected
                     ? 'bg-primary text-primary-foreground font-bold shadow-xs'
+                    : locked
+                    ? 'text-muted-foreground/75 hover:bg-muted/50'
                     : 'text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                 }`}
               >
-                <span className="truncate pr-2">{t(cat.key, cat.name)}</span>
+                <span className="truncate pr-2 flex items-center gap-1.5">
+                  {t(cat.key, cat.name)}
+                  {locked && <Lock className="w-3.5 h-3.5 text-amber-500 shrink-0 inline" />}
+                </span>
                 {count !== undefined && (
                   <span
                     className={`text-[11px] font-semibold px-2 py-0.5 rounded-md transition-colors flex-shrink-0 ${
@@ -352,10 +405,21 @@ export const Study = () => {
           <div className="p-2 space-y-1 overflow-y-auto flex-1">
             {CATEGORIES.map((cat) => {
               const count = categoryCounts[cat.id];
+              const locked = !isPro && !isCategoryUnlocked(cat.id, isPro);
               return (
                 <button
                   key={cat.id}
                   onClick={() => {
+                    if (locked) {
+                      toast.info(
+                        isTr
+                          ? 'Bu kategori Pro üyelere özeldir. Temel planda ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
+                          : 'This category is exclusive to Pro. The first 3 categories are available in the Basic plan.'
+                      );
+                      navigate('/pricing');
+                      setMobileDrawerOpen(false);
+                      return;
+                    }
                     setSelectedCategoryId(cat.id);
                     setSearchQuery('');
                     setMobileDrawerOpen(false);
@@ -366,7 +430,10 @@ export const Study = () => {
                       : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }`}
                 >
-                  <span className="truncate pr-2">{t(cat.key, cat.name)}</span>
+                  <span className="truncate pr-2 flex items-center gap-1.5">
+                    {t(cat.key, cat.name)}
+                    {locked && <Lock className="w-3.5 h-3.5 text-amber-500 shrink-0 inline" />}
+                  </span>
                   {count !== undefined && (
                     <span className="text-xs opacity-80">{count}</span>
                   )}

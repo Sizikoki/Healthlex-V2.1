@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
-import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay } from '@/utils/storage';
+import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
@@ -13,12 +13,19 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { useLanguage } from '@/context/LanguageContext';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS } from '@/utils/planAccess';
 
 export const Flashcards = () => {
   const { currentLanguage, t } = useLanguage();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
+
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const localUser = getUser();
+  const isPro = previewRole === 'pro' || localUser?.isPro === true || localUser?.subscriptionStatus === 'active';
 
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,28 +67,60 @@ export const Flashcards = () => {
         rawTerms = getAllTerms();
       }
 
+      let activeCategoryId = categoryId;
+      if (!isPro && categoryId && categoryId !== 'all' && !isCategoryUnlocked(categoryId, isPro)) {
+        activeCategoryId = 'skull_bones';
+        toast.info(
+          currentLanguage === 'en'
+            ? 'This category is exclusive to Pro. Redirecting to an unlocked category...'
+            : 'Bu kategori Pro plana özeldir. Temel planda açık olan kategorilerden biri yükleniyor...'
+        );
+      }
+
       let filteredTerms = rawTerms;
-      if (categoryId && categoryId !== 'all') {
-        filteredTerms = rawTerms.filter(t => t.category === categoryId);
+      if (activeCategoryId && activeCategoryId !== 'all') {
+        filteredTerms = rawTerms.filter(t => t.category === activeCategoryId);
         if (filteredTerms.length === 0) {
-          filteredTerms = rawTerms.filter(t => t.system === categoryId || t.subcategory === categoryId);
+          filteredTerms = rawTerms.filter(t => t.system === activeCategoryId || t.subcategory === activeCategoryId);
         }
+      } else if (!isPro) {
+        filteredTerms = rawTerms.filter(t =>
+          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.system)
+        );
       }
 
       if (filteredTerms.length === 0) {
-        filteredTerms = rawTerms;
+        filteredTerms = !isPro
+          ? rawTerms.filter(t =>
+              UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+              UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+              UNLOCKED_CATEGORY_IDS.includes(t.system)
+            )
+          : rawTerms;
       }
 
       const shuffled = [...filteredTerms].sort(() => Math.random() - 0.5);
       setTerms(shuffled.slice(0, Math.min(20, shuffled.length)));
     } catch (error) {
       console.error('Error fetching terms in Flashcards:', error);
-      const selectedTerms = getRandomTerms(20, categoryId);
+      let selectedTerms = getRandomTerms(20, activeCategoryId);
+      if (!isPro) {
+        selectedTerms = selectedTerms.filter(t =>
+          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
+          UNLOCKED_CATEGORY_IDS.includes(t.system)
+        );
+        if (selectedTerms.length === 0) {
+          selectedTerms = getTermsByCategory('skull_bones').slice(0, 20);
+        }
+      }
       setTerms(selectedTerms);
     } finally {
       setLoading(false);
     }
-  }, [categoryId]);
+  }, [categoryId, isPro, currentLanguage]);
 
   useEffect(() => {
     loadTerms();
