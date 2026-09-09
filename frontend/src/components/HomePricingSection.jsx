@@ -177,7 +177,7 @@ export const HomePricingSection = () => {
         ? 'Satın alma işlemine devam etmek için lütfen önce giriş yapın veya kayıt olun.'
         : 'Please sign in or register to continue with your purchase.';
       toast.info(loginMsg, { duration: 4000 });
-      navigate('/login?redirect=/#fiyat');
+      navigate(`/login?redirect=${encodeURIComponent('/#fiyat')}`);
       return;
     }
 

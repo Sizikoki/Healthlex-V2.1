@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User as UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -122,6 +122,10 @@ export const Login = () => {
   // ?redirect= parametresini oku, yoksa /dashboard
   const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -204,7 +208,10 @@ export const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               {t('noAccount', 'Hesabin yok mu?')}{' '}
-              <Link to="/register" className="text-primary font-medium hover:underline">
+              <Link
+                to={redirectTo && redirectTo !== '/dashboard' ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register'}
+                className="text-primary font-medium hover:underline"
+              >
                 {t('signUp', 'Kayit Ol')}
               </Link>
             </p>
@@ -229,6 +236,13 @@ export const Register = () => {
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
+  // ?redirect= parametresini oku, yoksa /dashboard
+  const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
@@ -247,7 +261,7 @@ export const Register = () => {
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
-      navigate('/dashboard', { replace: true });
+      navigate(redirectTo, { replace: true });
     } catch (error) {
       console.error('Registration error:', error);
       toast.error(getAuthErrorMessage(error.code, isTr));
@@ -264,7 +278,7 @@ export const Register = () => {
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
-      navigate('/dashboard', { replace: true });
+      navigate(redirectTo, { replace: true });
     } catch (error) {
       if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
         console.error('Google register error:', error);
@@ -346,7 +360,10 @@ export const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               {t('alreadyHaveAccount', 'Zaten hesabin var mi?')}{' '}
-              <Link to="/login" className="text-primary font-medium hover:underline">
+              <Link
+                to={redirectTo && redirectTo !== '/dashboard' ? `/login?redirect=${encodeURIComponent(redirectTo)}` : '/login'}
+                className="text-primary font-medium hover:underline"
+              >
                 {t('login', 'Giris Yap')}
               </Link>
             </p>

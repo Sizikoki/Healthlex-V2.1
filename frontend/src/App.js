@@ -99,6 +99,26 @@ const AppFooter = () => {
   return <Footer />;
 };
 
+/**
+ * Automatically scrolls to top on route navigation, or scrolls to element if hash is present.
+ */
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.replace('#', ''));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, hash]);
+
+  return null;
+};
+
 function App() {
   useEffect(() => {
     getPaddle(); // Pre-warm & initialize Paddle.js with live client-side token
@@ -117,7 +137,7 @@ function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
-
+        <ScrollToTop />
         <div className="App min-h-screen bg-background flex flex-col justify-between">
           <Navbar />
           <Routes>
