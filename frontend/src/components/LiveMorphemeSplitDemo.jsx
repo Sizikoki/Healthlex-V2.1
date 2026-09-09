@@ -129,7 +129,7 @@ export const LiveMorphemeSplitDemo = () => {
 
       <section
         id="hlmSplit"
-        className="relative overflow-hidden rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-border bg-card text-card-foreground shadow-xl shadow-primary/5 transition-colors duration-300"
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl py-7 sm:py-10 md:py-12 pl-8 sm:pl-14 md:pl-16 lg:pl-20 pr-6 sm:pr-8 md:pr-10 lg:pr-12 border border-border bg-card text-card-foreground shadow-xl shadow-primary/5 transition-colors duration-300"
         style={{
           fontFamily: "'Outfit', 'Nunito', sans-serif"
         }}
@@ -152,7 +152,7 @@ export const LiveMorphemeSplitDemo = () => {
 
         {/* Üst Meta Bilgisi */}
         <div
-          className="relative z-10 flex justify-between items-center gap-4 flex-wrap text-xs text-muted-foreground tracking-wider uppercase"
+          className="relative z-10 flex justify-between items-center gap-4 flex-wrap text-xs text-muted-foreground tracking-wider uppercase ml-1 sm:ml-2"
           style={{ fontFamily: "'Fira Code', monospace" }}
         >
           <span className="flex items-center gap-2">
@@ -165,7 +165,7 @@ export const LiveMorphemeSplitDemo = () => {
               {currentIndex + 1} / {terms.length}
             </span>
           </span>
-          <span className="text-muted-foreground normal-case tracking-normal text-xs sm:text-[13px] font-medium">
+          <span className="text-muted-foreground normal-case tracking-normal text-xs sm:text-[13px] font-medium ml-auto text-right">
             {isTr ? 'Daha önce görmediğin terimi bile çözersin' : 'Decode any medical term you have never seen before'}
           </span>
         </div>
@@ -173,7 +173,7 @@ export const LiveMorphemeSplitDemo = () => {
         {/* Ana Terim Başlığı */}
         <div
           key={`word-${currentIndex}`}
-          className="hlm-rise relative z-10 mt-6 font-bold tracking-tight text-foreground uppercase"
+          className="hlm-rise relative z-10 mt-6 font-bold tracking-tight text-foreground uppercase ml-1 sm:ml-2"
           style={{
             fontFamily: "'Space Grotesk', 'Playfair Display', sans-serif",
             fontSize: 'clamp(30px, 5vw, 54px)'
@@ -183,7 +183,7 @@ export const LiveMorphemeSplitDemo = () => {
         </div>
 
         {/* Morfem Parçaları (Kök, Ön Ek, Son Ek Kutucukları) */}
-        <div className="relative z-10 flex gap-3 sm:gap-4 mt-6 flex-wrap">
+        <div className="relative z-10 flex gap-3 sm:gap-4 mt-6 flex-wrap ml-1 sm:ml-2">
           {currentTerm.parts.map((p, k) => (
             <div
               key={`part-${currentIndex}-${k}`}
@@ -208,7 +208,7 @@ export const LiveMorphemeSplitDemo = () => {
         {/* Anlam Satırı */}
         <div
           key={`meaning-${currentIndex}`}
-          className="hlm-rise relative z-10 mt-7 text-base sm:text-lg text-foreground flex items-center gap-3 font-medium"
+          className="hlm-rise relative z-10 mt-7 text-base sm:text-lg text-foreground flex items-center gap-3 font-medium ml-1 sm:ml-2"
         >
           <span
             className="text-primary font-bold text-2xl font-mono"
@@ -222,7 +222,7 @@ export const LiveMorphemeSplitDemo = () => {
         </div>
 
         {/* Gösterge Noktaları (Dots Navigasyon) */}
-        <div className="relative z-10 mt-6 flex gap-2 items-center">
+        <div className="relative z-10 mt-6 flex gap-2 items-center ml-1 sm:ml-2">
           {terms.map((t, k) => (
             <button
               key={k}
