@@ -6,14 +6,14 @@ import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { db, auth } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { getAnnualPricePreview, openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { getUser } from '@/utils/storage';
 import { useLanguage } from '@/context/LanguageContext';
 import { HOME_CONTENT } from '@/data/homeContent';
 import { LiveMorphemeSplitDemo } from '@/components/LiveMorphemeSplitDemo';
 import { TermsMarquee } from '@/components/TermsMarquee';
 import { MorphemeOfTheDay } from '@/components/MorphemeOfTheDay';
-import { toast } from 'sonner';
+import { HomePricingSection } from '@/components/HomePricingSection';
 import './LandingPage.css';
 
 export const Home = () => {
@@ -42,72 +42,7 @@ export const Home = () => {
   // ────────────────────────────────────────────────────────────────────────────
 
   const [termCount, setTermCount] = useState(() => getAllTerms().length);
-  const [annualPrice, setAnnualPrice] = useState(null);
-  const [isPriceLoading, setIsPriceLoading] = useState(true);
-
   const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 571 morfem
-
-  // Fetch Paddle localized price preview for Annual Pro Membership
-  useEffect(() => {
-    let isMounted = true;
-    const fetchPrice = async () => {
-      try {
-        setIsPriceLoading(true);
-        const preview = await getAnnualPricePreview(PADDLE_PRICE_ID);
-        if (isMounted && preview?.formattedTotal) {
-          // Direct formatted total from Paddle (no frontend math or rounding)
-          setAnnualPrice(preview.formattedTotal);
-        }
-      } catch (err) {
-        console.warn('[Paddle] Failed to fetch price preview:', err);
-      } finally {
-        if (isMounted) setIsPriceLoading(false);
-      }
-    };
-    fetchPrice();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  // Handle Paddle checkout opening (Overlay + One-Page + Auth Prefill)
-  // Auth Guard: Kullanıcı giriş yapmamışsa Paddle Checkout kesinlikle açılmaz.
-  const handlePaddleCheckout = async () => {
-    const currentUser = auth.currentUser || getUser();
-
-    // Auth Guard — giriş yapılmamışsa checkout'u engelle
-    if (!currentUser) {
-      const loginMsg = lang === 'en'
-        ? 'Please sign in to continue with your purchase.'
-        : 'Satın alma işlemine devam etmek için lütfen giriş yapın.';
-      toast.info(loginMsg, { duration: 4000 });
-      // Ödeme sayfasına geri dönebilmek için redirect parametresi ekle
-      navigate('/login?redirect=' + encodeURIComponent(window.location.pathname + '#fiyat'));
-      return;
-    }
-
-    const customerEmail = currentUser.email || undefined;
-    const userId = currentUser.uid || currentUser.email || undefined;
-
-    try {
-      const loadingMsg = lang === 'en' ? 'Opening Paddle Checkout...' : 'Paddle Checkout açılıyor...';
-      toast.loading(loadingMsg, { id: 'paddle-loading' });
-      await openPaddleCheckout({
-        priceId: PADDLE_PRICE_ID,
-        customerEmail,
-        customData: {
-          plan: 'Annual Pro Membership',
-          userId: userId ?? 'unknown'
-        }
-      });
-      toast.dismiss('paddle-loading');
-    } catch (err) {
-      toast.dismiss('paddle-loading');
-      console.error('Checkout error:', err);
-      const errorMsg = lang === 'en' ? 'Error opening Paddle Checkout.' : 'Paddle Checkout açılırken hata oluştu.';
-      toast.error(errorMsg);
-    }
-  };
 
   useEffect(() => {
     const fetchTermCount = async () => {
@@ -483,98 +418,7 @@ export const Home = () => {
         </section>
 
         {/* ================= FİYAT ================= */}
-        <section id="fiyat">
-          <div className="wrap">
-            <span className="eyebrow">{content.pricing.eyebrow}</span>
-            <h2>{content.pricing.title}</h2>
-            <p className="price-topline">{content.pricing.topline}</p>
-
-            <div className="single-tier-wrap">
-              <div className="tier hot single-tier">
-                <span className="badge">
-                  {IS_PAYMENT_ACTIVE
-                    ? content.pricing.badge
-                    : (lang === 'en' ? 'Launch Special — Early Access' : 'Lansman Dönemi — Erken Erişim')}
-                </span>
-                {IS_PAYMENT_ACTIVE && (
-                  <h3 className="text-primary text-xl font-bold">{content.pricing.planTitle}</h3>
-                )}
-                
-                {IS_PAYMENT_ACTIVE ? (
-                  <>
-                    <div className="price">
-                      {annualPrice || (isPriceLoading ? '...' : (lang === 'en' ? '$40' : '499 TL'))}
-                    </div>
-                    <div className="once">{content.pricing.period}</div>
-                  </>
-                ) : (
-                  <>
-                    <div className="my-3">
-                      <div className="flex items-baseline gap-2.5 flex-wrap">
-                        <span className="font-['Space_Grotesk'] font-extrabold text-3xl sm:text-4xl text-primary tracking-tight">
-                          {lang === 'en' ? 'Free ($0)' : 'Ücretsiz (0 ₺)'}
-                        </span>
-                        <span className="text-muted-foreground line-through text-base sm:text-lg font-medium">
-                          {lang === 'en' ? '$40 / year' : (annualPrice || '499 TL / yıl')}
-                        </span>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
-                          {lang === 'en' ? '🎁 100% Free Access' : '🎁 Erken Erişim Hediyesi'}
-                        </span>
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {lang === 'en' ? 'Temporary launch promotion' : 'Lansmana özel geçici süreyle'}
-                      </div>
-                    </div>
-
-                    <div className="bg-primary/5 border border-primary/20 rounded-xl p-3 sm:p-3.5 my-3 text-xs sm:text-[0.85rem] text-foreground/90 leading-relaxed">
-                      {lang === 'en'
-                        ? 'Explore core modules for free during launch. Pro membership opening soon!'
-                        : 'Lansman boyunca tüm temel modülleri ücretsiz keşfedin. Pro üyelik çok yakında aktif!'}
-                    </div>
-                  </>
-                )}
-
-                <ul>
-                  {content.pricing.features(totalMorphemes).map((feat, idx) => (
-                    <li key={idx} className={feat.active ? '' : 'opacity-40'}>
-                      {feat.active ? (
-                        <Check className="w-4 h-4 text-primary shrink-0 mt-1" />
-                      ) : (
-                        <Minus className="w-4 h-4 shrink-0 mt-1" />
-                      )}
-                      <span>{feat.text}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="btn-container">
-                  <button
-                    type="button"
-                    onClick={IS_PAYMENT_ACTIVE ? handlePaddleCheckout : () => navigate('/study')}
-                    className="site-btn-primary w-full text-center py-3.5 text-base font-bold shadow-lg hover:shadow-primary/25 transition-all flex items-center justify-center gap-2"
-                  >
-                    <span>
-                      {IS_PAYMENT_ACTIVE
-                        ? content.pricing.btnText
-                        : (lang === 'en' ? 'Join Early Access (Explore Free)' : 'Erken Erişime Katıl (Ücretsiz Keşfet)')}
-                    </span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="after-price">
-              <p className="flow-line">
-                {IS_PAYMENT_ACTIVE
-                  ? content.pricing.flowLine
-                  : (lang === 'en'
-                    ? '🚀 No credit card required. Start exploring thousands of Latin medical terms instantly.'
-                    : '🚀 Kredi kartı gerekmez. Binlerce Latince tıp terimini ve oyunları hemen ücretsiz deneyimleyin.')}
-              </p>
-              <p className="expensive-line">{content.pricing.guaranteeLine}</p>
-            </div>
-          </div>
-        </section>
+        <HomePricingSection />
       </main>
 
       {/* ================= FOOTER ================= */}
