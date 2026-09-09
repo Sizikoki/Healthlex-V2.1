@@ -306,13 +306,23 @@ export const PricingView = () => {
   const handlePlanClick = async (planIndex) => {
     if (planIndex === 0) {
       // Ücretsiz Deneme / Devam Ediyor
-      navigate('/dashboard');
+      navigate(currentUser ? '/dashboard' : '/register');
       return;
     }
 
     if (planIndex === 2 && isUserPro) {
       // Zaten Pro üye
       navigate('/dashboard');
+      return;
+    }
+
+    // Auth Guard — Oturumu olmayan misafir kullanıcılar için
+    if (!currentUser) {
+      const loginMsg = isTr
+        ? 'Satın alma işlemine devam etmek için lütfen önce giriş yapın veya kayıt olun.'
+        : 'Please sign in or register to continue with your purchase.';
+      toast.info(loginMsg, { duration: 4000 });
+      navigate('/login?redirect=/pricing');
       return;
     }
 
@@ -329,7 +339,7 @@ export const PricingView = () => {
         customerEmail: currentUser?.email || undefined,
         customData: {
           plan: planIndex === 2 ? 'Annual Pro Membership' : planIndex === 1 ? 'Basic Plan' : 'Lifetime Membership',
-          userId: currentUser?.uid || 'guest'
+          userId: currentUser?.uid || 'unknown'
         }
       });
     } catch (err) {
