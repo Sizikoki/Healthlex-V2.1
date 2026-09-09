@@ -195,9 +195,9 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
     },
     {
       name: isTr ? 'Oyunlar' : 'Games',
-      count: isTr ? '2 / 4 mod' : '2 / 4 modes',
-      w: '50%',
-      note: isTr ? 'Flashcard ve Eşleştirme açık' : 'Flashcard and Matching open',
+      count: isTr ? '4 / 4 mod' : '4 / 4 modes',
+      w: '100%',
+      note: isTr ? '4 oyun modunun tamamı açık' : 'All 4 game modes active',
       route: '/games'
     }
   ];

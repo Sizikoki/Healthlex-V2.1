@@ -459,8 +459,8 @@ export const Profile = () => {
                   {isPro && (
                     <p className="text-[0.78rem] text-[var(--muted)] mt-2.5 leading-normal opacity-90">
                       ℹ️ {isTr
-                        ? 'Abonelik iptali veya fatura detaylarınız için Paddle portalını kullanabilir veya support@healthlexmed.com ile iletişime geçebilirsiniz.'
-                        : 'For cancellation or invoice details, you can use the Paddle portal or contact support@healthlexmed.com.'}
+                        ? 'Abonelik iptali veya fatura detaylarınız için Paddle portalını kullanabilir veya help@healthlexmed.com ile iletişime geçebilirsiniz.'
+                        : 'For cancellation or invoice details, you can use the Paddle portal or contact help@healthlexmed.com.'}
                     </p>
                   )}
                 </div>
