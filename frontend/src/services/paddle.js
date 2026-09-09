@@ -46,6 +46,7 @@ export const PADDLE_PRICE_PRO = PADDLE_PRICE_ID;
 export const PADDLE_DEFAULT_PRICE_ID = PADDLE_PRICE_ID;
 
 let paddleInstancePromise = null;
+let pendingCheckoutPlan = 'pro';
 
 /**
  * Initializes and returns the singleton Paddle.js instance.
@@ -73,13 +74,13 @@ export const getPaddle = async () => {
           if (event?.name === 'checkout.completed') {
             console.log('[Paddle] Checkout completed successfully!', event.data);
             const isEn = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en';
-            toast.success(isEn ? 'Payment successful! Welcome to HealthLexMed Pro 🎉' : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉', {
+            toast.success(isEn ? 'Payment successful! Welcome to HealthLexMed 🎉' : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉', {
               duration: 5000
             });
 
             if (typeof window !== 'undefined') {
               setTimeout(() => {
-                window.location.href = '/welcome';
+                window.location.href = `/welcome?plan=${pendingCheckoutPlan || 'pro'}`;
               }, 600);
             }
           }
@@ -261,8 +262,12 @@ export const openPaddleCheckout = async ({
     }
 
     const activePriceId = priceId || PADDLE_PRICE_ID;
+    pendingCheckoutPlan =
+      customData?.planId ||
+      (activePriceId === PADDLE_PRICE_BASIC ? 'basic' : activePriceId === PADDLE_PRICE_LIFETIME ? 'lifetime' : 'pro');
+
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    const resolvedSuccessUrl = successUrl || (origin ? `${origin}/welcome` : '/welcome');
+    const resolvedSuccessUrl = successUrl || (origin ? `${origin}/welcome?plan=${pendingCheckoutPlan}` : `/welcome?plan=${pendingCheckoutPlan}`);
 
     const checkoutSettings = {
       displayMode: 'overlay',   // Overlay modal checkout

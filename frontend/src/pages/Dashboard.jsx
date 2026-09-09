@@ -141,6 +141,7 @@ export const Dashboard = () => {
         customerEmail: firebaseUser?.email || storedUser?.email,
         customData: {
           plan: 'Annual Pro Membership',
+          planId: 'pro',
           userId: firebaseUser?.uid || storedUser?.uid || 'unknown'
         }
       });

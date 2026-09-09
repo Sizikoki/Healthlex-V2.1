@@ -261,7 +261,8 @@ export const Register = () => {
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
-      navigate(redirectTo, { replace: true });
+      const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
+      navigate(targetDestination, { replace: true });
     } catch (error) {
       console.error('Registration error:', error);
       toast.error(getAuthErrorMessage(error.code, isTr));
@@ -278,7 +279,8 @@ export const Register = () => {
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
-      navigate(redirectTo, { replace: true });
+      const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
+      navigate(targetDestination, { replace: true });
     } catch (error) {
       if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
         console.error('Google register error:', error);
