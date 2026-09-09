@@ -11,6 +11,7 @@ import { getUser } from '@/utils/storage';
 import { useLanguage } from '@/context/LanguageContext';
 import { HOME_CONTENT } from '@/data/homeContent';
 import { LiveMorphemeSplitDemo } from '@/components/LiveMorphemeSplitDemo';
+import { TermsMarquee } from '@/components/TermsMarquee';
 import { toast } from 'sonner';
 import './LandingPage.css';
 
@@ -202,6 +203,9 @@ export const Home = () => {
             <LiveMorphemeSplitDemo />
           </div>
         </section>
+
+        {/* ================= KAYAN TERİM ŞERİDİ ================= */}
+        <TermsMarquee />
 
         {/* ================= PROBLEM ================= */}
         <section className="problem">
