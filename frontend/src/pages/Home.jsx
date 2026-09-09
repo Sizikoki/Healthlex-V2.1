@@ -13,6 +13,7 @@ import { HOME_CONTENT } from '@/data/homeContent';
 import { LiveMorphemeSplitDemo } from '@/components/LiveMorphemeSplitDemo';
 import { TermsMarquee } from '@/components/TermsMarquee';
 import { MorphemeOfTheDay } from '@/components/MorphemeOfTheDay';
+import { TopInfoBar } from '@/components/TopInfoBar';
 import { HomePricingSection } from '@/components/HomePricingSection';
 import './LandingPage.css';
 
@@ -89,6 +90,7 @@ export const Home = () => {
 
   return (
     <div className="landing-page" id="top">
+      <TopInfoBar />
       <main>
         {/* ================= HERO ================= */}
         <section className="hero">
