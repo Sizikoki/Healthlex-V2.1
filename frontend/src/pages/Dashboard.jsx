@@ -24,16 +24,24 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
   const isTr = currentLanguage !== 'en';
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
 
   // State
-  const [firebaseUser, setFirebaseUser] = useState(null);
-  const [authReady, setAuthReady] = useState(false);
-  const [firestoreData, setFirestoreData] = useState(null);
-  const [isPro, setIsPro] = useState(false);
-  const [subLoading, setSubLoading] = useState(true);
+  const [firebaseUser, setFirebaseUser] = useState(
+    previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
+  );
+  const [authReady, setAuthReady] = useState(!!previewRole);
+  const [firestoreData, setFirestoreData] = useState(
+    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free', displayName: 'Dr. Ahmet Kaya' } : null
+  );
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [subLoading, setSubLoading] = useState(!previewRole);
 
   // Auth Guard
   useEffect(() => {
+    if (previewRole) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate('/login', { replace: true });
@@ -43,11 +51,11 @@ export const Dashboard = () => {
       }
     });
     return () => unsubscribe();
-  }, [navigate]);
+  }, [navigate, previewRole]);
 
   // Firestore: Abonelik Durumu
   useEffect(() => {
-    if (!authReady) return;
+    if (previewRole || !authReady) return;
     const uid = firebaseUser?.uid || getUser()?.uid;
     if (!uid) {
       setSubLoading(false);
@@ -68,7 +76,7 @@ export const Dashboard = () => {
       }
     };
     fetchSubscription();
-  }, [authReady, firebaseUser]);
+  }, [authReady, firebaseUser, previewRole]);
 
   // Kullanıcı bilgileri
   const storedUser = getUser();

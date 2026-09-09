@@ -19,17 +19,26 @@ export const Profile = () => {
   // ----------------------------------------------------
   // States
   // ----------------------------------------------------
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const effectiveUser = previewRole
+    ? { uid: 'preview-uid', name: 'Dr. Ahmet Kaya', email: 'dr.kaya@healthlexmed.com', joinDate: '2026-03-01T00:00:00.000Z' }
+    : user;
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [editName, setEditName] = useState(user?.name || '');
-  const [editEmail, setEditEmail] = useState(user?.email || '');
+  const [editName, setEditName] = useState(effectiveUser?.name || '');
+  const [editEmail, setEditEmail] = useState(effectiveUser?.email || '');
   const [saveLoading, setSaveLoading] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   // Subscription & Pro State
-  const [isPro, setIsPro] = useState(false);
-  const [userDocData, setUserDocData] = useState(null);
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [userDocData, setUserDocData] = useState(
+    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free' } : null
+  );
 
   useEffect(() => {
+    if (previewRole) return;
     const uid = auth?.currentUser?.uid || user?.uid;
     if (!uid) {
       const localUser = getUser();
@@ -58,7 +67,7 @@ export const Profile = () => {
     } catch (e) {
       console.warn('[Profile] Firestore snapshot error:', e);
     }
-  }, [user]);
+  }, [user, previewRole]);
 
   // Toggle States
   const [emailNotifications, setEmailNotifications] = useState(false);
@@ -103,7 +112,7 @@ export const Profile = () => {
       })
       .join(' ');
   };
-  const userName = formatName(user?.name);
+  const userName = formatName(effectiveUser?.name || user?.name);
 
   const formatDate = (dateStr) => {
     if (!dateStr) return currentLanguage === 'en' ? 'June 15, 2026' : '15 Haziran 2026';

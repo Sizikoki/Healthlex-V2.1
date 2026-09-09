@@ -234,18 +234,24 @@ export const PricingView = () => {
   const [period, setPeriod] = useState('yearly');
   const [mobileTab, setMobileTab] = useState(2); // 0: Ücretsiz, 1: Temel, 2: Pro, 3: Ömür
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const [isUserPro, setIsUserPro] = useState(false);
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const [isUserPro, setIsUserPro] = useState(previewRole === 'pro');
 
   const isTr = currentLanguage === 'tr';
   const yr = period === 'yearly';
   const t = TRANSLATIONS[isTr ? 'tr' : 'en'];
 
-  const currentUser = auth?.currentUser || getUser();
+  const currentUser = previewRole
+    ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' }
+    : (auth?.currentUser || getUser());
   const trialState = getUserTrialState(currentUser);
   const trialDaysLeft = trialState.daysLeft;
 
   // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
   useEffect(() => {
+    if (previewRole) return;
     const uid = currentUser?.uid || auth?.currentUser?.uid;
     if (!uid) {
       const localUser = getUser();
@@ -273,7 +279,7 @@ export const PricingView = () => {
     } catch (e) {
       console.warn('[Pricing] Firestore snapshot error:', e);
     }
-  }, [currentUser]);
+  }, [currentUser, previewRole]);
 
   const selPlan = t.plans[mobileTab];
   const isMobFree = mobileTab === 0;

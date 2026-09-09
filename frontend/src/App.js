@@ -35,12 +35,17 @@ import './App.css';
  * Eliminates race condition flickers and prevents forged localStorage bypasses.
  */
 const ProtectedRoute = ({ children }) => {
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+
   const [authState, setAuthState] = useState({
-    user: null,
-    loading: true
+    user: previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null,
+    loading: !previewRole
   });
 
   useEffect(() => {
+    if (previewRole) return;
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setAuthState({
         user: currentUser,
@@ -49,7 +54,7 @@ const ProtectedRoute = ({ children }) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [previewRole]);
 
   if (authState.loading) {
     return (

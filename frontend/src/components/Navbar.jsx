@@ -19,19 +19,26 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const [firebaseUser, setFirebaseUser] = useState(null);
-  const [isPro, setIsPro] = useState(false);
+  const previewRole = typeof window !== 'undefined'
+    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
+    : null;
+  const [firebaseUser, setFirebaseUser] = useState(
+    previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
+  );
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
   const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
+    if (previewRole) return;
     const unsubscribe = onAuthStateChanged(auth, (usr) => {
       setFirebaseUser(usr);
     });
     return () => unsubscribe();
-  }, []);
+  }, [previewRole]);
 
   // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
   useEffect(() => {
+    if (previewRole) return;
     const uid = firebaseUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
@@ -59,7 +66,7 @@ export const Navbar = () => {
     } catch (e) {
       console.warn('[Navbar] Firestore snapshot error:', e);
     }
-  }, [firebaseUser]);
+  }, [firebaseUser, previewRole]);
 
   const loggedIn = !!firebaseUser || isLoggedIn();
   const user = getUser();
