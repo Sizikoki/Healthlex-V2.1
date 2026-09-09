@@ -12,6 +12,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { HOME_CONTENT } from '@/data/homeContent';
 import { LiveMorphemeSplitDemo } from '@/components/LiveMorphemeSplitDemo';
 import { TermsMarquee } from '@/components/TermsMarquee';
+import { MorphemeOfTheDay } from '@/components/MorphemeOfTheDay';
 import { toast } from 'sonner';
 import './LandingPage.css';
 
@@ -157,43 +158,50 @@ export const Home = () => {
         {/* ================= HERO ================= */}
         <section className="hero">
           <div className="wrap">
-            <h1>
-              {content.hero.title1}
-              <br />
-              <span className="text-primary">{content.hero.title2}</span>
-            </h1>
-            <p className="sub">
-              {content.hero.sub(termCount)}
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                className="site-btn-primary flex items-center"
-                onClick={() => {
-                  if (IS_PAYMENT_ACTIVE) {
-                    scrollToSection('fiyat');
-                  } else {
-                    navigate('/study');
-                  }
-                }}
-              >
-                {IS_PAYMENT_ACTIVE
-                  ? (content.pricing.btnText || (lang === 'en' ? 'Subscribe Now' : 'Hemen Katıl'))
-                  : (lang === 'en' ? 'Explore Dictionary' : 'Sözlüğü Keşfet')}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="lg:col-span-7">
+                <h1>
+                  {content.hero.title1}
+                  <br />
+                  <span className="text-primary">{content.hero.title2}</span>
+                </h1>
+                <p className="sub">
+                  {content.hero.sub(termCount)}
+                </p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <button
+                    type="button"
+                    className="site-btn-primary flex items-center"
+                    onClick={() => {
+                      if (IS_PAYMENT_ACTIVE) {
+                        scrollToSection('fiyat');
+                      } else {
+                        navigate('/study');
+                      }
+                    }}
+                  >
+                    {IS_PAYMENT_ACTIVE
+                      ? (content.pricing.btnText || (lang === 'en' ? 'Subscribe Now' : 'Hemen Katıl'))
+                      : (lang === 'en' ? 'Explore Dictionary' : 'Sözlüğü Keşfet')}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </button>
+                </div>
+                <p className="microline">
+                  <span>{content.hero.micro1}</span>
+                  <span>·</span>
+                  <span>{content.hero.micro2}</span>
+                </p>
+                <p
+                  className="down"
+                  onClick={() => scrollToSection('demo')}
+                >
+                  {content.hero.scrollProof}
+                </p>
+              </div>
+              <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+                <MorphemeOfTheDay className="w-full max-w-md" />
+              </div>
             </div>
-            <p className="microline">
-              <span>{content.hero.micro1}</span>
-              <span>·</span>
-              <span>{content.hero.micro2}</span>
-            </p>
-            <p
-              className="down"
-              onClick={() => scrollToSection('demo')}
-            >
-              {content.hero.scrollProof}
-            </p>
           </div>
         </section>
 
