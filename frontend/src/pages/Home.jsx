@@ -157,9 +157,9 @@ export const Home = () => {
       <main>
         {/* ================= HERO ================= */}
         <section className="hero">
-          <div className="wrap">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <div className="lg:col-span-7">
+          <div className="wrap !max-w-[1360px] px-4 sm:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-24 items-center">
+              <div className="lg:col-span-6">
                 <h1>
                   {content.hero.title1}
                   <br />
@@ -198,8 +198,8 @@ export const Home = () => {
                   {content.hero.scrollProof}
                 </p>
               </div>
-              <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                <MorphemeOfTheDay className="w-full max-w-md" />
+              <div className="lg:col-span-6 w-full flex justify-center lg:justify-end">
+                <MorphemeOfTheDay className="w-full max-w-xl lg:ml-auto" />
               </div>
             </div>
           </div>
