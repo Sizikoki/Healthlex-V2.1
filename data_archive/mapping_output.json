@@ -1,0 +1,1122 @@
+{
+  "exactUpdatesCount": 116,
+  "belirsizEslesmelerCount": 4,
+  "brandNewCount": 21,
+  "exactUpdates": [
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 246,
+      "term": "Capsula Articularis",
+      "firestoreDocId": "115",
+      "firestoreId": 115,
+      "existingTerm": "Capsula Articularis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 247,
+      "term": "Membrana Synovialis",
+      "firestoreDocId": "116",
+      "firestoreId": 116,
+      "existingTerm": "Membrana Synovialis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 248,
+      "term": "Discus Articularis",
+      "firestoreDocId": "117",
+      "firestoreId": 117,
+      "existingTerm": "Discus Articularis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 249,
+      "term": "Bursa Synovialis",
+      "firestoreDocId": "118",
+      "firestoreId": 118,
+      "existingTerm": "Bursa Synovialis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 250,
+      "term": "Cavitas Glenoidalis",
+      "firestoreDocId": "092",
+      "firestoreId": 92,
+      "existingTerm": "Cavitas Glenoidalis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 251,
+      "term": "Labrum Glenoidale",
+      "firestoreDocId": "114",
+      "firestoreId": 114,
+      "existingTerm": "Labrum Glenoidale"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 252,
+      "term": "Articulatio Humeri",
+      "firestoreDocId": "099",
+      "firestoreId": 99,
+      "existingTerm": "Articulatio Humeri"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 253,
+      "term": "Articulatio Acromioclavicularis",
+      "firestoreDocId": "100",
+      "firestoreId": 100,
+      "existingTerm": "Articulatio Acromioclavicularis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 254,
+      "term": "Articulatio Sternoclavicularis",
+      "firestoreDocId": "101",
+      "firestoreId": 101,
+      "existingTerm": "Articulatio Sternoclavicularis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 255,
+      "term": "Articulatio Cubiti",
+      "firestoreDocId": "102",
+      "firestoreId": 102,
+      "existingTerm": "Articulatio Cubiti"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 256,
+      "term": "Articulatio Humeroulnaris",
+      "firestoreDocId": "103",
+      "firestoreId": 103,
+      "existingTerm": "Articulatio Humeroulnaris"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 257,
+      "term": "Articulatio Humeroradialis",
+      "firestoreDocId": "104",
+      "firestoreId": 104,
+      "existingTerm": "Articulatio Humeroradialis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 258,
+      "term": "Articulatio Radioulnaris Proximalis",
+      "firestoreDocId": "105",
+      "firestoreId": 105,
+      "existingTerm": "Articulatio Radioulnaris Proximalis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 259,
+      "term": "Articulatio Radioulnaris Distalis",
+      "firestoreDocId": "106",
+      "firestoreId": 106,
+      "existingTerm": "Articulatio Radioulnaris Distalis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 260,
+      "term": "Articulatio Radiocarpalis",
+      "firestoreDocId": "107",
+      "firestoreId": 107,
+      "existingTerm": "Articulatio Radiocarpalis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 261,
+      "term": "Articulatio Mediocarpalis",
+      "firestoreDocId": "108",
+      "firestoreId": 108,
+      "existingTerm": "Articulatio Mediocarpalis"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 262,
+      "term": "Articulationes Carpometacarpales",
+      "firestoreDocId": "109",
+      "firestoreId": 109,
+      "existingTerm": "Articulationes Carpometacarpales"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 263,
+      "term": "Articulatio Carpometacarpalis Pollicis",
+      "firestoreDocId": "110",
+      "firestoreId": 110,
+      "existingTerm": "Articulatio Carpometacarpalis Pollicis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 266,
+      "term": "Articulatio Coxae",
+      "firestoreDocId": "127",
+      "firestoreId": 127,
+      "existingTerm": "Articulatio Coxae"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 267,
+      "term": "Acetabulum",
+      "firestoreDocId": "128",
+      "firestoreId": 128,
+      "existingTerm": "Acetabulum"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 268,
+      "term": "Labrum Acetabulare",
+      "firestoreDocId": "129",
+      "firestoreId": 129,
+      "existingTerm": "Labrum Acetabulare"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 269,
+      "term": "Ligamentum Capitis Femoris",
+      "firestoreDocId": "130",
+      "firestoreId": 130,
+      "existingTerm": "Ligamentum Capitis Femoris"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 270,
+      "term": "Articulatio Genus",
+      "firestoreDocId": "131",
+      "firestoreId": 131,
+      "existingTerm": "Articulatio Genus"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 271,
+      "term": "Articulatio Femorotibialis",
+      "firestoreDocId": "132",
+      "firestoreId": 132,
+      "existingTerm": "Articulatio Femorotibialis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 272,
+      "term": "Articulatio Femoropatellaris",
+      "firestoreDocId": "133",
+      "firestoreId": 133,
+      "existingTerm": "Articulatio Femoropatellaris"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 273,
+      "term": "Meniscus Medialis",
+      "firestoreDocId": "134",
+      "firestoreId": 134,
+      "existingTerm": "Meniscus Medialis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 274,
+      "term": "Meniscus Lateralis",
+      "firestoreDocId": "135",
+      "firestoreId": 135,
+      "existingTerm": "Meniscus Lateralis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 275,
+      "term": "Ligamentum Cruciatum Anterius",
+      "firestoreDocId": "136",
+      "firestoreId": 136,
+      "existingTerm": "Ligamentum Cruciatum Anterius"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 276,
+      "term": "Ligamentum Cruciatum Posterius",
+      "firestoreDocId": "137",
+      "firestoreId": 137,
+      "existingTerm": "Ligamentum Cruciatum Posterius"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 277,
+      "term": "Ligamentum Collaterale Tibiale",
+      "firestoreDocId": "138",
+      "firestoreId": 138,
+      "existingTerm": "Ligamentum Collaterale Tibiale"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 278,
+      "term": "Ligamentum Collaterale Fibulare",
+      "firestoreDocId": "139",
+      "firestoreId": 139,
+      "existingTerm": "Ligamentum Collaterale Fibulare"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 279,
+      "term": "Ligamentum Patellae",
+      "firestoreDocId": "140",
+      "firestoreId": 140,
+      "existingTerm": "Ligamentum Patellae"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 280,
+      "term": "Articulatio Tibiofibularis",
+      "firestoreDocId": "141",
+      "firestoreId": 141,
+      "existingTerm": "Articulatio Tibiofibularis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 281,
+      "term": "Articulatio Talocruralis",
+      "firestoreDocId": "142",
+      "firestoreId": 142,
+      "existingTerm": "Articulatio Talocruralis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 282,
+      "term": "Articulatio Subtalaris",
+      "firestoreDocId": "143",
+      "firestoreId": 143,
+      "existingTerm": "Articulatio Subtalaris"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 283,
+      "term": "Articulatio Talocalcaneonavicularis",
+      "firestoreDocId": "144",
+      "firestoreId": 144,
+      "existingTerm": "Articulatio Talocalcaneonavicularis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 284,
+      "term": "Articulatio Calcaneocuboidea",
+      "firestoreDocId": "145",
+      "firestoreId": 145,
+      "existingTerm": "Articulatio Calcaneocuboidea"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 285,
+      "term": "Articulationes Tarsometatarsales",
+      "firestoreDocId": "146",
+      "firestoreId": 146,
+      "existingTerm": "Articulationes Tarsometatarsales"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 286,
+      "term": "Articulationes Metatarsophalangeales",
+      "firestoreDocId": "147",
+      "firestoreId": 147,
+      "existingTerm": "Articulationes Metatarsophalangeales"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 287,
+      "term": "Articulationes Interphalangeales Pedis",
+      "firestoreDocId": "148",
+      "firestoreId": 148,
+      "existingTerm": "Articulationes Interphalangeales Pedis"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 288,
+      "term": "Ligamentum Inguinale",
+      "firestoreDocId": "149",
+      "firestoreId": 149,
+      "existingTerm": "Ligamentum Inguinale"
+    },
+    {
+      "file": "eklem_alt_ekstremite.json",
+      "newJsonId": 289,
+      "term": "Membrana Interossea Cruris",
+      "firestoreDocId": "150",
+      "firestoreId": 150,
+      "existingTerm": "Membrana Interossea Cruris"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 290,
+      "term": "Columna Vertebralis",
+      "firestoreDocId": "015",
+      "firestoreId": 15,
+      "existingTerm": "Columna Vertebralis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 291,
+      "term": "Articulatio Zygapophysialis",
+      "firestoreDocId": "152",
+      "firestoreId": 152,
+      "existingTerm": "Articulatio Zygapophysialis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 292,
+      "term": "Discus Intervertebralis",
+      "firestoreDocId": "153",
+      "firestoreId": 153,
+      "existingTerm": "Discus Intervertebralis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 293,
+      "term": "Nucleus Pulposus",
+      "firestoreDocId": "154",
+      "firestoreId": 154,
+      "existingTerm": "Nucleus Pulposus"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 294,
+      "term": "Annulus Fibrosus",
+      "firestoreDocId": "155",
+      "firestoreId": 155,
+      "existingTerm": "Annulus Fibrosus"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 295,
+      "term": "Ligamentum Longitudinale Anterius",
+      "firestoreDocId": "156",
+      "firestoreId": 156,
+      "existingTerm": "Ligamentum Longitudinale Anterius"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 296,
+      "term": "Ligamentum Longitudinale Posterius",
+      "firestoreDocId": "157",
+      "firestoreId": 157,
+      "existingTerm": "Ligamentum Longitudinale Posterius"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 297,
+      "term": "Ligamentum Flavum",
+      "firestoreDocId": "158",
+      "firestoreId": 158,
+      "existingTerm": "Ligamentum Flavum"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 298,
+      "term": "Ligamentum Interspinale",
+      "firestoreDocId": "159",
+      "firestoreId": 159,
+      "existingTerm": "Ligamentum Interspinale"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 299,
+      "term": "Ligamentum Supraspinale",
+      "firestoreDocId": "160",
+      "firestoreId": 160,
+      "existingTerm": "Ligamentum Supraspinale"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 300,
+      "term": "Articulatio Atlantooccipitalis",
+      "firestoreDocId": "161",
+      "firestoreId": 161,
+      "existingTerm": "Articulatio Atlantooccipitalis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 301,
+      "term": "Articulatio Atlantoaxialis",
+      "firestoreDocId": "162",
+      "firestoreId": 162,
+      "existingTerm": "Articulatio Atlantoaxialis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 302,
+      "term": "Dens Axis",
+      "firestoreDocId": "163",
+      "firestoreId": 163,
+      "existingTerm": "Dens Axis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 303,
+      "term": "Ligamentum Transversum Atlantis",
+      "firestoreDocId": "164",
+      "firestoreId": 164,
+      "existingTerm": "Ligamentum Transversum Atlantis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 304,
+      "term": "Articulatio Sacroiliaca",
+      "firestoreDocId": "165",
+      "firestoreId": 165,
+      "existingTerm": "Articulatio Sacroiliaca"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 305,
+      "term": "Symphysis Pubica",
+      "firestoreDocId": "166",
+      "firestoreId": 166,
+      "existingTerm": "Symphysis Pubica"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 306,
+      "term": "Articulatio Sacrococcygea",
+      "firestoreDocId": "167",
+      "firestoreId": 167,
+      "existingTerm": "Articulatio Sacrococcygea"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 307,
+      "term": "Canalis Vertebralis",
+      "firestoreDocId": "168",
+      "firestoreId": 168,
+      "existingTerm": "Canalis Vertebralis"
+    },
+    {
+      "file": "eklem_omurga.json",
+      "newJsonId": 308,
+      "term": "Foramen Intervertebrale",
+      "firestoreDocId": "169",
+      "firestoreId": 169,
+      "existingTerm": "Foramen Intervertebrale"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 309,
+      "term": "Articulatio Temporomandibularis",
+      "firestoreDocId": "170",
+      "firestoreId": 170,
+      "existingTerm": "Articulatio Temporomandibularis"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 310,
+      "term": "Discus Articularis Temporomandibularis",
+      "firestoreDocId": "171",
+      "firestoreId": 171,
+      "existingTerm": "Discus Articularis Temporomandibularis"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 311,
+      "term": "Fossa Mandibularis",
+      "firestoreDocId": "172",
+      "firestoreId": 172,
+      "existingTerm": "Fossa Mandibularis"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 312,
+      "term": "Caput Mandibulae",
+      "firestoreDocId": "173",
+      "firestoreId": 173,
+      "existingTerm": "Caput Mandibulae"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 313,
+      "term": "Ligamentum Temporomandibulare",
+      "firestoreDocId": "174",
+      "firestoreId": 174,
+      "existingTerm": "Ligamentum Temporomandibulare"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 314,
+      "term": "Sutura Coronalis",
+      "firestoreDocId": "175",
+      "firestoreId": 175,
+      "existingTerm": "Sutura Coronalis"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 315,
+      "term": "Sutura Sagittalis",
+      "firestoreDocId": "176",
+      "firestoreId": 176,
+      "existingTerm": "Sutura Sagittalis"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 316,
+      "term": "Sutura Lambdoidea",
+      "firestoreDocId": "177",
+      "firestoreId": 177,
+      "existingTerm": "Sutura Lambdoidea"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 317,
+      "term": "Sutura Squamosa",
+      "firestoreDocId": "178",
+      "firestoreId": 178,
+      "existingTerm": "Sutura Squamosa"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 318,
+      "term": "Fonticulus Anterior",
+      "firestoreDocId": "179",
+      "firestoreId": 179,
+      "existingTerm": "Fonticulus Anterior"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 319,
+      "term": "Fonticulus Posterior",
+      "firestoreDocId": "180",
+      "firestoreId": 180,
+      "existingTerm": "Fonticulus Posterior"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 320,
+      "term": "Articulationes Costovertebrales",
+      "firestoreDocId": "181",
+      "firestoreId": 181,
+      "existingTerm": "Articulationes Costovertebrales"
+    },
+    {
+      "file": "eklem_kafa_boyun.json",
+      "newJsonId": 321,
+      "term": "Articulationes Sternocostales",
+      "firestoreDocId": "182",
+      "firestoreId": 182,
+      "existingTerm": "Articulationes Sternocostales"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 341,
+      "term": "Verticalis",
+      "firestoreDocId": "219",
+      "firestoreId": 219,
+      "existingTerm": "Verticalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 342,
+      "term": "Horizontalis",
+      "firestoreDocId": "212",
+      "firestoreId": 212,
+      "existingTerm": "Horizontalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 343,
+      "term": "Medianus",
+      "firestoreDocId": "213",
+      "firestoreId": 213,
+      "existingTerm": "Medianus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 344,
+      "term": "Coronalis",
+      "firestoreDocId": "214",
+      "firestoreId": 214,
+      "existingTerm": "Coronalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 345,
+      "term": "Sagittalis",
+      "firestoreDocId": "215",
+      "firestoreId": 215,
+      "existingTerm": "Sagittalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 346,
+      "term": "Dexter",
+      "firestoreDocId": "220",
+      "firestoreId": 220,
+      "existingTerm": "Dexter"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 347,
+      "term": "Sinister",
+      "firestoreDocId": "221",
+      "firestoreId": 221,
+      "existingTerm": "Sinister"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 348,
+      "term": "Intermedius",
+      "firestoreDocId": "230",
+      "firestoreId": 230,
+      "existingTerm": "Intermedius"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 349,
+      "term": "Medialis",
+      "firestoreDocId": "228",
+      "firestoreId": 228,
+      "existingTerm": "Medialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 350,
+      "term": "Lateralis",
+      "firestoreDocId": "229",
+      "firestoreId": 229,
+      "existingTerm": "Lateralis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 351,
+      "term": "Anterior",
+      "firestoreDocId": "222",
+      "firestoreId": 222,
+      "existingTerm": "Anterior"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 352,
+      "term": "Posterior",
+      "firestoreDocId": "223",
+      "firestoreId": 223,
+      "existingTerm": "Posterior"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 353,
+      "term": "Ventralis",
+      "firestoreDocId": "224",
+      "firestoreId": 224,
+      "existingTerm": "Ventralis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 354,
+      "term": "Dorsalis",
+      "firestoreDocId": "225",
+      "firestoreId": 225,
+      "existingTerm": "Dorsalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 355,
+      "term": "Frontalis",
+      "firestoreDocId": "208",
+      "firestoreId": 208,
+      "existingTerm": "Frontalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 356,
+      "term": "Occipitalis",
+      "firestoreDocId": "209",
+      "firestoreId": 209,
+      "existingTerm": "Occipitalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 357,
+      "term": "Superior",
+      "firestoreDocId": "226",
+      "firestoreId": 226,
+      "existingTerm": "Superior"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 358,
+      "term": "Inferior",
+      "firestoreDocId": "227",
+      "firestoreId": 227,
+      "existingTerm": "Inferior"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 359,
+      "term": "Cranialis",
+      "firestoreDocId": "210",
+      "firestoreId": 210,
+      "existingTerm": "Cranialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 360,
+      "term": "Caudalis",
+      "firestoreDocId": "232",
+      "firestoreId": 232,
+      "existingTerm": "Caudalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 361,
+      "term": "Rostralis",
+      "firestoreDocId": "211",
+      "firestoreId": 211,
+      "existingTerm": "Rostralis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 362,
+      "term": "Apicalis",
+      "firestoreDocId": "233",
+      "firestoreId": 233,
+      "existingTerm": "Apicalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 363,
+      "term": "Basalis",
+      "firestoreDocId": "234",
+      "firestoreId": 234,
+      "existingTerm": "Basalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 365,
+      "term": "Medius",
+      "firestoreDocId": "231",
+      "firestoreId": 231,
+      "existingTerm": "Medius"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 366,
+      "term": "Transversus",
+      "firestoreDocId": "216",
+      "firestoreId": 216,
+      "existingTerm": "Transversus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 368,
+      "term": "Longitudinalis",
+      "firestoreDocId": "217",
+      "firestoreId": 217,
+      "existingTerm": "Longitudinalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 369,
+      "term": "Axialis",
+      "firestoreDocId": "218",
+      "firestoreId": 218,
+      "existingTerm": "Axialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 370,
+      "term": "Internus",
+      "firestoreDocId": "236",
+      "firestoreId": 236,
+      "existingTerm": "Internus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 371,
+      "term": "Externus",
+      "firestoreDocId": "235",
+      "firestoreId": 235,
+      "existingTerm": "Externus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 372,
+      "term": "Luminalis",
+      "firestoreDocId": "237",
+      "firestoreId": 237,
+      "existingTerm": "Luminalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 373,
+      "term": "Superficialis",
+      "firestoreDocId": "238",
+      "firestoreId": 238,
+      "existingTerm": "Superficialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 374,
+      "term": "Profundus",
+      "firestoreDocId": "239",
+      "firestoreId": 239,
+      "existingTerm": "Profundus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 375,
+      "term": "Proximalis",
+      "firestoreDocId": "240",
+      "firestoreId": 240,
+      "existingTerm": "Proximalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 376,
+      "term": "Distalis",
+      "firestoreDocId": "241",
+      "firestoreId": 241,
+      "existingTerm": "Distalis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 377,
+      "term": "Centralis",
+      "firestoreDocId": "242",
+      "firestoreId": 242,
+      "existingTerm": "Centralis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 378,
+      "term": "Periphericus",
+      "firestoreDocId": "243",
+      "firestoreId": 243,
+      "existingTerm": "Periphericus"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 379,
+      "term": "Radialis",
+      "firestoreDocId": "202",
+      "firestoreId": 202,
+      "existingTerm": "Radialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 380,
+      "term": "Ulnaris",
+      "firestoreDocId": "203",
+      "firestoreId": 203,
+      "existingTerm": "Ulnaris"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 381,
+      "term": "Fibularis",
+      "firestoreDocId": "206",
+      "firestoreId": 206,
+      "existingTerm": "Fibularis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 382,
+      "term": "Tibialis",
+      "firestoreDocId": "205",
+      "firestoreId": 205,
+      "existingTerm": "Tibialis"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 383,
+      "term": "Palmaris",
+      "firestoreDocId": "204",
+      "firestoreId": 204,
+      "existingTerm": "Palmaris"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 384,
+      "term": "Plantaris",
+      "firestoreDocId": "207",
+      "firestoreId": 207,
+      "existingTerm": "Plantaris"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 264,
+      "term": "Articulationes Metacarpophalangeales",
+      "potentialFirestoreDocId": "111",
+      "potentialFirestoreId": 111,
+      "existingTerm": "Articulationes Metacarpophalangeae",
+      "difference": "Articulationes Metacarpophalangeales (yeni) vs Articulationes Metacarpophalangeae (firestore)"
+    },
+    {
+      "file": "eklem_ust_ekstremite.json",
+      "newJsonId": 265,
+      "term": "Articulationes Interphalangeales Manus",
+      "potentialFirestoreDocId": "112",
+      "potentialFirestoreId": 112,
+      "existingTerm": "Articulationes Interphalangeae Manus",
+      "difference": "Articulationes Interphalangeales Manus (yeni) vs Articulationes Interphalangeae Manus (firestore)"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 385,
+      "term": "Flexor",
+      "potentialFirestoreDocId": "244",
+      "potentialFirestoreId": 244,
+      "existingTerm": "Flexorius",
+      "difference": "Flexor (yeni) vs Flexorius (firestore)"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 386,
+      "term": "Extensor",
+      "potentialFirestoreDocId": "245",
+      "potentialFirestoreId": 245,
+      "existingTerm": "Extensorius",
+      "difference": "Extensor (yeni) vs Extensorius (firestore)"
+    }
+  ],
+  "brandNew": [
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 322,
+      "term": "Musculus Deltoideus",
+      "english": "Deltoid Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 323,
+      "term": "Musculus Supraspinatus",
+      "english": "Supraspinatus Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 324,
+      "term": "Musculus Infraspinatus",
+      "english": "Infraspinatus Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 325,
+      "term": "Musculus Teres Minor",
+      "english": "Teres Minor Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 326,
+      "term": "Musculus Subscapularis",
+      "english": "Subscapularis Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 327,
+      "term": "Musculus Teres Major",
+      "english": "Teres Major Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 328,
+      "term": "Musculus Trapezius",
+      "english": "Trapezius Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 329,
+      "term": "Musculus Latissimus Dorsi",
+      "english": "Latissimus Dorsi Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 330,
+      "term": "Musculus Pectoralis Major",
+      "english": "Pectoralis Major Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 331,
+      "term": "Musculus Pectoralis Minor",
+      "english": "Pectoralis Minor Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 332,
+      "term": "Musculus Serratus Anterior",
+      "english": "Serratus Anterior Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 333,
+      "term": "Musculus Rhomboideus Major",
+      "english": "Rhomboid Major Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 334,
+      "term": "Musculus Rhomboideus Minor",
+      "english": "Rhomboid Minor Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 335,
+      "term": "Musculus Levator Scapulae",
+      "english": "Levator Scapulae Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 336,
+      "term": "Musculus Biceps Brachii",
+      "english": "Biceps Brachii Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 337,
+      "term": "Musculus Brachialis",
+      "english": "Brachialis Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 338,
+      "term": "Musculus Triceps Brachii",
+      "english": "Triceps Brachii Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 339,
+      "term": "Musculus Coracobrachialis",
+      "english": "Coracobrachialis Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "kas_omuz_kol.json",
+      "newJsonId": 340,
+      "term": "Musculus Anconeus",
+      "english": "Anconeus Muscle",
+      "subcategory": "muscle_structures"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 364,
+      "term": "Basilaris",
+      "english": "Basilar",
+      "subcategory": "anatomic_direction"
+    },
+    {
+      "file": "yon_pozisyon_terimleri.json",
+      "newJsonId": 367,
+      "term": "Transversalis",
+      "english": "Transverse",
+      "subcategory": "anatomic_direction"
+    }
+  ]
+}
