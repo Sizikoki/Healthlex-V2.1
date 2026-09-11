@@ -1,0 +1,527 @@
+{
+  "toplamIncelenen": 77,
+  "exactUpdatesCount": 2,
+  "belirsizEslesmelerCount": 24,
+  "brandNewCount": 51,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os temporale",
+      "matchedPart": "Os temporale",
+      "firestoreDocId": "003",
+      "firestoreId": 3,
+      "existingTerm": "Os Temporale",
+      "existingEnglish": "Temporal Bone",
+      "existingSubcategory": "skull_bones"
+    },
+    {
+      "itemNumber": 70,
+      "inputTerm": "Fossa mandibularis",
+      "matchedPart": "Fossa mandibularis",
+      "firestoreDocId": "172",
+      "firestoreId": 172,
+      "existingTerm": "Fossa Mandibularis",
+      "existingEnglish": "Mandibular Fossa",
+      "existingSubcategory": "head_and_neck_joints"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 3,
+      "inputTerm": "Margo occipitalis (Os temporale)",
+      "matchedPart": "Margo occipitalis (Os temporale)",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo occipitalis (Os temporale) vs Occipitalis)"
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Sulcus sinus sigmoidei (Os temporale)",
+      "matchedPart": "Sulcus sinus sigmoidei (Os temporale)",
+      "potentialFirestoreDocId": "434",
+      "potentialFirestoreId": 434,
+      "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+      "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus sigmoidei (Os temporale) vs Sulcus Sinus Sigmoidei Ossis Parietalis)"
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Sulcus arteriae occipitalis",
+      "matchedPart": "Sulcus arteriae occipitalis",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus arteriae occipitalis vs Occipitalis)"
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Facies anterior partis petrosae",
+      "matchedPart": "Facies anterior partis petrosae",
+      "potentialFirestoreDocId": "222",
+      "potentialFirestoreId": 222,
+      "existingTerm": "Anterior",
+      "existingEnglish": "Anterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies anterior partis petrosae vs Anterior)"
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Eminentia arcuata",
+      "matchedPart": "Eminentia arcuata",
+      "potentialFirestoreDocId": "424",
+      "potentialFirestoreId": 424,
+      "existingTerm": "Eminentia",
+      "existingEnglish": "Eminence",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Eminentia arcuata vs Eminentia)"
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Margo superior partis petrosae",
+      "matchedPart": "Margo superior partis petrosae",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo superior partis petrosae vs Superior)"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Sulcus sinus petrosi superioris",
+      "matchedPart": "Sulcus sinus petrosi superioris",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus petrosi superioris vs Superior)"
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Facies posterior partis petrosae",
+      "matchedPart": "Facies posterior partis petrosae",
+      "potentialFirestoreDocId": "223",
+      "potentialFirestoreId": 223,
+      "existingTerm": "Posterior",
+      "existingEnglish": "Posterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies posterior partis petrosae vs Posterior)"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Porus acusticus internus",
+      "matchedPart": "Porus acusticus internus",
+      "potentialFirestoreDocId": "236",
+      "potentialFirestoreId": 236,
+      "existingTerm": "Internus",
+      "existingEnglish": "Internal",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Porus acusticus internus vs Internus)"
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Meatus acusticus internus",
+      "matchedPart": "Meatus acusticus internus",
+      "potentialFirestoreDocId": "236",
+      "potentialFirestoreId": 236,
+      "existingTerm": "Internus",
+      "existingEnglish": "Internal",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Meatus acusticus internus vs Internus)"
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Margo posterior partis petrosae",
+      "matchedPart": "Margo posterior partis petrosae",
+      "potentialFirestoreDocId": "223",
+      "potentialFirestoreId": 223,
+      "existingTerm": "Posterior",
+      "existingEnglish": "Posterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo posterior partis petrosae vs Posterior)"
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Sulcus sinus petrosi inferioris (Os temporale)",
+      "matchedPart": "Sulcus sinus petrosi inferioris (Os temporale)",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus petrosi inferioris (Os temporale) vs Inferior)"
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Incisura jugularis (Os temporale)",
+      "matchedPart": "Incisura jugularis (Os temporale)",
+      "potentialFirestoreDocId": "498",
+      "potentialFirestoreId": 498,
+      "existingTerm": "Incisura Jugularis Ossis Occipitalis",
+      "existingEnglish": "Jugular Notch of Occipital Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Incisura jugularis (Os temporale) vs Incisura Jugularis Ossis Occipitalis)"
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Facies inferior partis petrosae",
+      "matchedPart": "Facies inferior partis petrosae",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies inferior partis petrosae vs Inferior)"
+    },
+    {
+      "itemNumber": 46,
+      "inputTerm": "Processus styloideus (Os temporale)",
+      "matchedPart": "Processus styloideus (Os temporale)",
+      "potentialFirestoreDocId": "040",
+      "potentialFirestoreId": 40,
+      "existingTerm": "Processus Styloideus Radii",
+      "existingEnglish": "Radial Styloid Process",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus styloideus (Os temporale) vs Processus Styloideus Radii)"
+    },
+    {
+      "itemNumber": 53,
+      "inputTerm": "Porus acusticus externus",
+      "matchedPart": "Porus acusticus externus",
+      "potentialFirestoreDocId": "235",
+      "potentialFirestoreId": 235,
+      "existingTerm": "Externus",
+      "existingEnglish": "External",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Porus acusticus externus vs Externus)"
+    },
+    {
+      "itemNumber": 54,
+      "inputTerm": "Meatus acusticus externus",
+      "matchedPart": "Meatus acusticus externus",
+      "potentialFirestoreDocId": "235",
+      "potentialFirestoreId": 235,
+      "existingTerm": "Externus",
+      "existingEnglish": "External",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Meatus acusticus externus vs Externus)"
+    },
+    {
+      "itemNumber": 61,
+      "inputTerm": "Margo parietalis (Os temporale)",
+      "matchedPart": "Margo parietalis (Os temporale)",
+      "potentialFirestoreDocId": "461",
+      "potentialFirestoreId": 461,
+      "existingTerm": "Margo Parietalis Ossis Frontalis",
+      "existingEnglish": "Parietal Margin of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo parietalis (Os temporale) vs Margo Parietalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 63,
+      "inputTerm": "Margo sphenoidalis (Os temporale)",
+      "matchedPart": "Margo sphenoidalis (Os temporale)",
+      "potentialFirestoreDocId": "476",
+      "potentialFirestoreId": 476,
+      "existingTerm": "Margo Sphenoidalis Ossis Frontalis",
+      "existingEnglish": "Sphenoidal Margin of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo sphenoidalis (Os temporale) vs Margo Sphenoidalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 64,
+      "inputTerm": "Facies temporalis (Os temporale)",
+      "matchedPart": "Facies temporalis (Os temporale)",
+      "potentialFirestoreDocId": "460",
+      "potentialFirestoreId": 460,
+      "existingTerm": "Facies Temporalis Ossis Frontalis",
+      "existingEnglish": "Temporal Surface of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies temporalis (Os temporale) vs Facies Temporalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 66,
+      "inputTerm": "Processus zygomaticus (Os temporale)",
+      "matchedPart": "Processus zygomaticus (Os temporale)",
+      "potentialFirestoreDocId": "463",
+      "potentialFirestoreId": 463,
+      "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+      "existingEnglish": "Zygomatic Process of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus zygomaticus (Os temporale) vs Processus Zygomaticus Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 71,
+      "inputTerm": "Facies articularis (Os temporale)",
+      "matchedPart": "Facies articularis (Os temporale)",
+      "potentialFirestoreDocId": "037",
+      "potentialFirestoreId": 37,
+      "existingTerm": "Facies Articularis Carpalis",
+      "existingEnglish": "Carpal Articular Surface",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies articularis (Os temporale) vs Facies Articularis Carpalis)"
+    },
+    {
+      "itemNumber": 72,
+      "inputTerm": "Tuberculum articulare",
+      "matchedPart": "Tuberculum articulare",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum articulare vs Tuber)"
+    },
+    {
+      "itemNumber": 77,
+      "inputTerm": "Facies cerebralis (Os temporale)",
+      "matchedPart": "Facies cerebralis (Os temporale)",
+      "potentialFirestoreDocId": "540",
+      "potentialFirestoreId": 540,
+      "existingTerm": "Facies Cerebralis Ossis Sphenoidalis",
+      "existingEnglish": "Cerebral Surface of Sphenoid Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies cerebralis (Os temporale) vs Facies Cerebralis Ossis Sphenoidalis)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Pars petrosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Processus mastoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Incisura mastoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Foramen mastoideum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Canalis nervi facialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Geniculum canalis nervi facialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Canaliculus chordae tympani",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Apex partis petrosae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Canalis caroticus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Apertura externa canalis carotici",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Apertura interna canalis carotici",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Canaliculi caroticotympanici",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Canalis musculotubarius",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Semicanalis musculi tensoris tympani",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Semicanalis tubae auditivae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Septum canalis musculotubarii",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Tegmen tympani",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Hiatus canalis nervi petrosi majoris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Sulcus nervi petrosi majoris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Hiatus canalis nervi petrosi",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Sulcus nervi petrosi minoris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Impressio trigeminalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Fossa subarcuata",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Canaliculus vestibuli",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Apertura canaliculi vestibuli",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Fossa jugularis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Canaliculus cochleae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 43,
+      "inputTerm": "Apertura canaliculi cochleae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 44,
+      "inputTerm": "Canaliculus mastoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 45,
+      "inputTerm": "Processus intrajugularis (Os temporale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 47,
+      "inputTerm": "Foramen stylomastoideum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 48,
+      "inputTerm": "Canaliculus tympanicus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 49,
+      "inputTerm": "Fossula petrosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 50,
+      "inputTerm": "Cavitas tympani",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 51,
+      "inputTerm": "Pars tympanica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 52,
+      "inputTerm": "Anulus tympanicus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 55,
+      "inputTerm": "Spina tympanica major",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 56,
+      "inputTerm": "Spina tympanica minor",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 57,
+      "inputTerm": "Sulcus tympanicus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 58,
+      "inputTerm": "Incisura tympanica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 59,
+      "inputTerm": "Vagina processus styloidei",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 60,
+      "inputTerm": "Pars squamosa (Os temporale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 62,
+      "inputTerm": "Incisura parietalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 65,
+      "inputTerm": "Sulcus arteriae temporalis mediae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 67,
+      "inputTerm": "Crista supramastoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 68,
+      "inputTerm": "Foveola suprameatica; Foveola suprameatalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 69,
+      "inputTerm": "Spina suprameatica; Spina suprameatalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 73,
+      "inputTerm": "Fissura petrotympanica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 74,
+      "inputTerm": "Fissura petrosquamosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 75,
+      "inputTerm": "Fissura tympanosquamosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 76,
+      "inputTerm": "Fissura tympanomastoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

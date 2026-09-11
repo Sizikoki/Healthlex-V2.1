@@ -1,0 +1,252 @@
+{
+  "toplamIncelenen": 34,
+  "exactUpdatesCount": 3,
+  "belirsizEslesmelerCount": 11,
+  "brandNewCount": 20,
+  "exactUpdates": [
+    {
+      "itemNumber": 23,
+      "inputTerm": "Os lacrimale",
+      "matchedPart": "Os lacrimale",
+      "firestoreDocId": "008",
+      "firestoreId": 8,
+      "existingTerm": "Os Lacrimale",
+      "existingEnglish": "Lacrimal Bone",
+      "existingSubcategory": "face_bones"
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Os nasale",
+      "matchedPart": "Os nasale",
+      "firestoreDocId": "007",
+      "firestoreId": 7,
+      "existingTerm": "Os Nasale",
+      "existingEnglish": "Nasal Bone",
+      "existingSubcategory": "face_bones"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Vomer",
+      "matchedPart": "Vomer",
+      "firestoreDocId": "013",
+      "firestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "existingSubcategory": "face_bones"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os ethmoidale",
+      "matchedPart": "Os ethmoidale",
+      "potentialFirestoreDocId": "006",
+      "potentialFirestoreId": 6,
+      "existingTerm": "Os Ethmoideum",
+      "existingEnglish": "Ethmoid Bone",
+      "aciklama": "Alternatif Latince yazım / varyant (Os ethmoidale vs Os Ethmoideum)"
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Cellulae ethmoidales anteriores",
+      "matchedPart": "Cellulae ethmoidales anteriores",
+      "potentialFirestoreDocId": "222",
+      "potentialFirestoreId": 222,
+      "existingTerm": "Anterior",
+      "existingEnglish": "Anterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Cellulae ethmoidales anteriores vs Anterior)"
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Cellulae ethmoidales posteriores",
+      "matchedPart": "Cellulae ethmoidales posteriores",
+      "potentialFirestoreDocId": "223",
+      "potentialFirestoreId": 223,
+      "existingTerm": "Posterior",
+      "existingEnglish": "Posterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Cellulae ethmoidales posteriores vs Posterior)"
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Concha nasalis superior",
+      "matchedPart": "Concha nasalis superior",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Concha nasalis superior vs Superior)"
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Concha nasalis inferior",
+      "matchedPart": "Concha nasalis inferior",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Concha nasalis inferior vs Inferior)"
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Processus maxillaris",
+      "matchedPart": "Processus maxillaris",
+      "potentialFirestoreDocId": "012",
+      "potentialFirestoreId": 12,
+      "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+      "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus maxillaris vs Processus Maxillaris Conchae Nasalis Inferioris)"
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Crista lacrimalis posterior",
+      "matchedPart": "Crista lacrimalis posterior",
+      "potentialFirestoreDocId": "223",
+      "potentialFirestoreId": 223,
+      "existingTerm": "Posterior",
+      "existingEnglish": "Posterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Crista lacrimalis posterior vs Posterior)"
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Ala vomeris",
+      "matchedPart": "Ala vomeris",
+      "potentialFirestoreDocId": "013",
+      "potentialFirestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Ala vomeris vs Vomer)"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Sulcus vomeris",
+      "matchedPart": "Sulcus vomeris",
+      "potentialFirestoreDocId": "013",
+      "potentialFirestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus vomeris vs Vomer)"
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Crista choanalis vomeris",
+      "matchedPart": "Crista choanalis vomeris",
+      "potentialFirestoreDocId": "013",
+      "potentialFirestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Crista choanalis vomeris vs Vomer)"
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Pars cuneiformis vomeris",
+      "matchedPart": "Pars cuneiformis vomeris",
+      "potentialFirestoreDocId": "013",
+      "potentialFirestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Pars cuneiformis vomeris vs Vomer)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Lamina cribrosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Foramina cribrosa",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Crista galli",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Ala cristae galli",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Lamina perpendicularis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Labyrinthus ethmoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Cellulae ethmoidales mediae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Lamina orbitalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Concha nasalis suprema",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Concha nasalis media",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Bulla ethmoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Processus uncinatus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Infundibulum ethmoidale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Hiatus semilunaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Processus lacrimalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Processus ethmoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Sulcus lacrimalis (Os lacrimale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Hamulus lacrimalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Sulcus ethmoidalis (Os nasale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Foramina nasalia",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

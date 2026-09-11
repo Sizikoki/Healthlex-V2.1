@@ -1,0 +1,356 @@
+{
+  "toplamIncelenen": 54,
+  "exactUpdatesCount": 0,
+  "belirsizEslesmelerCount": 15,
+  "brandNewCount": 39,
+  "exactUpdates": [],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os sphenoidale",
+      "matchedPart": "Os sphenoidale",
+      "potentialFirestoreDocId": "005",
+      "potentialFirestoreId": 5,
+      "existingTerm": "Os Sphenoideum",
+      "existingEnglish": "Sphenoid Bone",
+      "aciklama": "Alternatif Latince yazım / varyant (Os sphenoidale vs Os Sphenoideum)"
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Tuberculum sellae",
+      "matchedPart": "Tuberculum sellae",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum sellae vs Tuber)"
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Processus clinoideus medius",
+      "matchedPart": "Processus clinoideus medius",
+      "potentialFirestoreDocId": "231",
+      "potentialFirestoreId": 231,
+      "existingTerm": "Medius",
+      "existingEnglish": "Middle",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus clinoideus medius vs Medius)"
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Processus clinoideus posterior",
+      "matchedPart": "Processus clinoideus posterior",
+      "potentialFirestoreDocId": "223",
+      "potentialFirestoreId": 223,
+      "existingTerm": "Posterior",
+      "existingEnglish": "Posterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus clinoideus posterior vs Posterior)"
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Processus clinoideus anterior",
+      "matchedPart": "Processus clinoideus anterior",
+      "potentialFirestoreDocId": "222",
+      "potentialFirestoreId": 222,
+      "existingTerm": "Anterior",
+      "existingEnglish": "Anterior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus clinoideus anterior vs Anterior)"
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Fissura orbitalis superior",
+      "matchedPart": "Fissura orbitalis superior",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Fissura orbitalis superior vs Superior)"
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Facies temporalis (Os sphenoidale)",
+      "matchedPart": "Facies temporalis (Os sphenoidale)",
+      "potentialFirestoreDocId": "460",
+      "potentialFirestoreId": 460,
+      "existingTerm": "Facies Temporalis Ossis Frontalis",
+      "existingEnglish": "Temporal Surface of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies temporalis (Os sphenoidale) vs Facies Temporalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Facies maxillaris (Os sphenoidale)",
+      "matchedPart": "Facies maxillaris (Os sphenoidale)",
+      "potentialFirestoreDocId": "010",
+      "potentialFirestoreId": 10,
+      "existingTerm": "Maxilla",
+      "existingEnglish": "Maxilla",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies maxillaris (Os sphenoidale) vs Maxilla)"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Facies orbitalis (Os sphenoidale)",
+      "matchedPart": "Facies orbitalis (Os sphenoidale)",
+      "potentialFirestoreDocId": "472",
+      "potentialFirestoreId": 472,
+      "existingTerm": "Facies Orbitalis Ossis Frontalis",
+      "existingEnglish": "Orbital Surface of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies orbitalis (Os sphenoidale) vs Facies Orbitalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Margo frontalis (Os sphenoidale)",
+      "matchedPart": "Margo frontalis (Os sphenoidale)",
+      "potentialFirestoreDocId": "208",
+      "potentialFirestoreId": 208,
+      "existingTerm": "Frontalis",
+      "existingEnglish": "Frontal",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo frontalis (Os sphenoidale) vs Frontalis)"
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Margo parietalis (Os sphenoidale)",
+      "matchedPart": "Margo parietalis (Os sphenoidale)",
+      "potentialFirestoreDocId": "461",
+      "potentialFirestoreId": 461,
+      "existingTerm": "Margo Parietalis Ossis Frontalis",
+      "existingEnglish": "Parietal Margin of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo parietalis (Os sphenoidale) vs Margo Parietalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Margo squamosus (Os sphenoidale)",
+      "matchedPart": "Margo squamosus (Os sphenoidale)",
+      "potentialFirestoreDocId": "443",
+      "potentialFirestoreId": 443,
+      "existingTerm": "Margo Squamosus Ossis Parietalis",
+      "existingEnglish": "Squamosal Border of Parietal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Margo squamosus (Os sphenoidale) vs Margo Squamosus Ossis Parietalis)"
+    },
+    {
+      "itemNumber": 43,
+      "inputTerm": "Lamina lateralis (Processus pterygoideus)",
+      "matchedPart": "Lamina lateralis (Processus pterygoideus)",
+      "potentialFirestoreDocId": "229",
+      "potentialFirestoreId": 229,
+      "existingTerm": "Lateralis",
+      "existingEnglish": "Lateral",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Lamina lateralis (Processus pterygoideus) vs Lateralis)"
+    },
+    {
+      "itemNumber": 44,
+      "inputTerm": "Lamina medialis (Processus pterygoideus)",
+      "matchedPart": "Lamina medialis (Processus pterygoideus)",
+      "potentialFirestoreDocId": "228",
+      "potentialFirestoreId": 228,
+      "existingTerm": "Medialis",
+      "existingEnglish": "Medial",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Lamina medialis (Processus pterygoideus) vs Medialis)"
+    },
+    {
+      "itemNumber": 50,
+      "inputTerm": "Sulcus vomerovaginalis",
+      "matchedPart": "Sulcus vomerovaginalis",
+      "potentialFirestoreDocId": "013",
+      "potentialFirestoreId": 13,
+      "existingTerm": "Vomer",
+      "existingEnglish": "Vomer",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus vomerovaginalis vs Vomer)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Corpus (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Jugum sphenoidale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Limbus sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Sulcus prechiasmaticus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Sella turcica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Fossa hypophysialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Dorsum sellae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Sulcus caroticus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Lingula sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Crista sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Rostrum sphenoidale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Sinus sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Septum sinuum sphenoidalium",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Apertura sinus sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Concha sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Ala minor",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Canalis opticus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Ala major",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Facies cerebralis (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Facies infratemporalis (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Crista infratemporalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Margo zygomaticus (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Foramen rotundum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Foramen ovale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Foramen venosum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Foramen spinosum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Foramen petrosum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Spina ossis sphenoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Sulcus tubae auditivae; Sulcus tubae auditoriae",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Processus pterygoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 45,
+      "inputTerm": "Incisura pterygoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 46,
+      "inputTerm": "Fossa pterygoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 47,
+      "inputTerm": "Fossa scaphoidea (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 48,
+      "inputTerm": "Processus vaginalis (Os sphenoidale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 49,
+      "inputTerm": "Sulcus palatovaginalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 51,
+      "inputTerm": "Hamulus pterygoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 52,
+      "inputTerm": "Sulcus hamuli pterygoidei",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 53,
+      "inputTerm": "Canalis pterygoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 54,
+      "inputTerm": "Processus pterygospinosus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   BookOpen,
@@ -10,12 +10,15 @@ import {
   Tag,
   Share2,
   CheckCircle2,
-  GraduationCap
+  GraduationCap,
+  Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/context/LanguageContext';
+import { db } from '@/firebase/config';
+import { collection, getDocs } from 'firebase/firestore';
 import {
   findTermBySlug,
   getTermSlug,
@@ -29,7 +32,55 @@ export const TermDetail = () => {
   const { currentLanguage, t } = useLanguage();
   const isTr = currentLanguage === 'tr';
 
-  const term = useMemo(() => findTermBySlug(slug), [slug]);
+  const localTerm = useMemo(() => findTermBySlug(slug), [slug]);
+  const [remoteTerm, setRemoteTerm] = useState(null);
+  const [isSearchingRemote, setIsSearchingRemote] = useState(false);
+
+  useEffect(() => {
+    if (!localTerm && slug) {
+      let isMounted = true;
+      setIsSearchingRemote(true);
+      const fetchFromFirestore = async () => {
+        try {
+          const cleanSlug = decodeURIComponent(slug).toLowerCase().trim();
+          const snap = await getDocs(collection(db, 'terms'));
+          let matched = null;
+          snap.forEach((doc) => {
+            const data = doc.data();
+            if (getTermSlug(data.term) === cleanSlug || String(data.id) === cleanSlug) {
+              matched = {
+                id: data.id,
+                term: data.term,
+                turkish: data.english || data.turkish || '',
+                english: data.english || data.turkish || '',
+                definition: data.turkishDefinition || data.definition || '',
+                turkishDefinition: data.turkishDefinition || data.definition || '',
+                turkishShort: data.turkishShort || '',
+                englishDefinition: data.englishDefinition || '',
+                roots: data.roots || '',
+                category: data.category || '',
+                system: data.system || '',
+                subcategory: data.subcategory || ''
+              };
+            }
+          });
+          if (isMounted && matched) {
+            setRemoteTerm(matched);
+          }
+        } catch (err) {
+          console.warn('Firestore fallback lookup failed:', err);
+        } finally {
+          if (isMounted) setIsSearchingRemote(false);
+        }
+      };
+      fetchFromFirestore();
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [localTerm, slug]);
+
+  const term = localTerm || remoteTerm;
   const relatedTerms = useMemo(() => getRelatedTerms(term, 6), [term]);
   const parsedRoots = useMemo(() => parseRootsToMorphemes(term?.roots), [term]);
 
@@ -53,6 +104,17 @@ export const TermDetail = () => {
       }
     }
   }, [term, isTr]);
+
+  if (isSearchingRemote) {
+    return (
+      <div className="min-h-screen py-24 px-4 max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
+        <Loader2 className="w-10 h-10 text-primary animate-spin mb-4" />
+        <p className="text-muted-foreground text-sm font-medium">
+          {isTr ? 'Terim detayları yükleniyor...' : 'Loading term details...'}
+        </p>
+      </div>
+    );
+  }
 
   if (!term) {
     return (
