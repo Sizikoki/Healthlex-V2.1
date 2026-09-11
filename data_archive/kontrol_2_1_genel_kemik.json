@@ -1,0 +1,466 @@
+{
+  "toplamIncelenen": 43,
+  "exactUpdatesCount": 0,
+  "belirsizEslesmelerCount": 10,
+  "brandNewCount": 33,
+  "exactUpdates": [],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 25,
+      "inputTerm": "Tuberculum",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Tuberculum",
+          "matches": [
+            {
+              "id": 39,
+              "docId": "039",
+              "term": "Tuberculum Dorsale Radii"
+            },
+            {
+              "id": 64,
+              "docId": "064",
+              "term": "Tuberculum Minus"
+            },
+            {
+              "id": 65,
+              "docId": "065",
+              "term": "Tuberculum Majus"
+            },
+            {
+              "id": 86,
+              "docId": "086",
+              "term": "Tuberculum Conoideum"
+            },
+            {
+              "id": 91,
+              "docId": "091",
+              "term": "Tuberculum Supraglenoidale"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Tuberositas",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Tuberositas",
+          "matches": [
+            {
+              "id": 30,
+              "docId": "030",
+              "term": "Tuberositas Radii"
+            },
+            {
+              "id": 46,
+              "docId": "046",
+              "term": "Tuberositas Ulnae"
+            },
+            {
+              "id": 75,
+              "docId": "075",
+              "term": "Tuberositas Deltoidea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Processus",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Processus",
+          "matches": [
+            {
+              "id": 12,
+              "docId": "012",
+              "term": "Processus Maxillaris Conchae Nasalis Inferioris"
+            },
+            {
+              "id": 40,
+              "docId": "040",
+              "term": "Processus Styloideus Radii"
+            },
+            {
+              "id": 43,
+              "docId": "043",
+              "term": "Processus Coronoideus Ulnae"
+            },
+            {
+              "id": 53,
+              "docId": "053",
+              "term": "Processus Styloideus Ulnae"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Epicondylus",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Epicondylus",
+          "matches": [
+            {
+              "id": 80,
+              "docId": "080",
+              "term": "Epicondylus Lateralis Humeri"
+            },
+            {
+              "id": 81,
+              "docId": "081",
+              "term": "Epicondylus Medialis Humeri"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Crista",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Crista",
+          "matches": [
+            {
+              "id": 45,
+              "docId": "045",
+              "term": "Crista Supinatoris"
+            },
+            {
+              "id": 72,
+              "docId": "072",
+              "term": "Crista Tuberculi Majoris"
+            },
+            {
+              "id": 73,
+              "docId": "073",
+              "term": "Crista Tuberculi Minoris"
+            },
+            {
+              "id": 78,
+              "docId": "078",
+              "term": "Crista Supracondylaris Medialis"
+            },
+            {
+              "id": 79,
+              "docId": "079",
+              "term": "Crista Supracondylaris Lateralis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Linea",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Linea",
+          "matches": [
+            {
+              "id": 85,
+              "docId": "085",
+              "term": "Linea Trapezoidea"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Incisura",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Incisura",
+          "matches": [
+            {
+              "id": 38,
+              "docId": "038",
+              "term": "Incisura Ulnaris"
+            },
+            {
+              "id": 42,
+              "docId": "042",
+              "term": "Incisura Trochlearis"
+            },
+            {
+              "id": 44,
+              "docId": "044",
+              "term": "Incisura Radialis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Fossa",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Fossa",
+          "matches": [
+            {
+              "id": 59,
+              "docId": "059",
+              "term": "Fossa Infraspinata"
+            },
+            {
+              "id": 66,
+              "docId": "066",
+              "term": "Fossa Radialis"
+            },
+            {
+              "id": 70,
+              "docId": "070",
+              "term": "Fossa Olecrani"
+            },
+            {
+              "id": 82,
+              "docId": "082",
+              "term": "Fossa Coronoidea"
+            },
+            {
+              "id": 96,
+              "docId": "096",
+              "term": "Fossa Subscapularis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Sulcus",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Sulcus",
+          "matches": [
+            {
+              "id": 71,
+              "docId": "071",
+              "term": "Sulcus Intertubercularis"
+            },
+            {
+              "id": 74,
+              "docId": "074",
+              "term": "Sulcus Nervi Radialis"
+            },
+            {
+              "id": 87,
+              "docId": "087",
+              "term": "Sulcus Musculi Subclavii"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Facies articularis",
+      "aciklama": "Bu genel/kök terim Firestore'da tek başına mevcut değil; fakat bu kelimeyi içeren özel kemik yapıları mevcut.",
+      "ilgiliBilesikTerimler": [
+        {
+          "part": "Facies articularis",
+          "matches": [
+            {
+              "id": 37,
+              "docId": "037",
+              "term": "Facies Articularis Carpalis"
+            },
+            {
+              "id": 84,
+              "docId": "084",
+              "term": "Facies Articularis Acromialis"
+            },
+            {
+              "id": 90,
+              "docId": "090",
+              "term": "Facies Articularis Sternalis"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Pars ossea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 2,
+      "inputTerm": "Substantia corticalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Substantia compacta",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Substantia spongiosa; Substantia trabecularis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Pars cartilaginea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Pars membranacea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Periosteum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Perichondrium",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Skeleton axiale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Skeleton appendiculare",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Os longum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Os breve",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Os planum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Os irregulare",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Os pneumaticum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Os sesamoideum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Diaphysis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Epiphysis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Cartilago epiphysialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Lamina epiphysialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Linea epiphysialis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Metaphysis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Apophysis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Tuber",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Eminentia",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Condylus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Cavitas medullaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Endosteum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Medulla ossium flava",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Medulla ossium rubra",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Foramen nutricium",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Canalis nutricius; Canalis nutriens",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    },
+    {
+      "itemNumber": 43,
+      "inputTerm": "Centrum ossificationis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı hiç bulunmuyor."
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "toplamIncelenen": 19,
+  "exactUpdatesCount": 1,
+  "belirsizEslesmelerCount": 0,
+  "brandNewCount": 18,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os parietale",
+      "matchedPart": "Os parietale",
+      "firestoreDocId": "002",
+      "firestoreId": 2,
+      "existingTerm": "Os Parietale",
+      "existingEnglish": "Parietal Bone",
+      "existingSubcategory": "skull_bones"
+    }
+  ],
+  "belirsizEslesmeler": [],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Facies interna (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Sulcus sinus sigmoidei (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Sulcus sinus sagittalis superioris (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Sulcus arteriae meningeae mediae (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Sulci arteriosi (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Facies externa (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Linea temporalis superior (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Linea temporalis inferior (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Tuber parietale; Eminentia parietalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Margo occipitalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Margo squamosus (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Margo sagittalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Margo frontalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Angulus frontalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Angulus occipitalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Angulus sphenoidalis (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Angulus mastoideus (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Foramen parietale (Os parietale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}
