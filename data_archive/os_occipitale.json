@@ -1,0 +1,362 @@
+[
+  {
+    "id": 481,
+    "term": "Foramen Magnum",
+    "english": "Foramen Magnum",
+    "turkishDefinition": "En büyük kafa deliği; ardkafa kemiğinin ortasında yer alan, medulla oblongata'nın omurilikle devam ettiği büyük açıklık.",
+    "roots": "foramen (delik) + magnus (büyük)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "En büyük kafa deliği",
+    "englishDefinition": "The large opening in the occipital bone through which the medulla oblongata continues as the spinal cord."
+  },
+  {
+    "id": 482,
+    "term": "Basion",
+    "english": "Basion",
+    "turkishDefinition": "Basiyon; foramen magnum'un ön orta noktası, kraniyometrik ölçümlerde referans noktası.",
+    "roots": "basis (taban - Yunanca)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Basiyon",
+    "englishDefinition": "The midpoint of the anterior margin of the foramen magnum, used as a craniometric landmark."
+  },
+  {
+    "id": 483,
+    "term": "Opisthion",
+    "english": "Opisthion",
+    "turkishDefinition": "Opistiyon; foramen magnum'un arka orta noktası, kraniyometrik ölçümlerde referans noktası.",
+    "roots": "opisthen (arkada - Yunanca)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Opistiyon",
+    "englishDefinition": "The midpoint of the posterior margin of the foramen magnum, used as a craniometric landmark."
+  },
+  {
+    "id": 484,
+    "term": "Pars Basilaris Ossis Occipitalis",
+    "english": "Basilar Part of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği taban parçası; foramen magnum'un önünde yer alan, sfenoid kemikle birleşerek klivusu oluşturan kısım.",
+    "roots": "pars (bölüm) + basilaris (tabana ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği taban parçası",
+    "englishDefinition": "The part of the occipital bone anterior to the foramen magnum that joins the sphenoid bone to form the clivus."
+  },
+  {
+    "id": 485,
+    "term": "Clivus",
+    "english": "Clivus",
+    "turkishDefinition": "Yokuş / Klivus; sfenoid kemiğin gövdesi ile ardkafa kemiğinin taban parçasının birleşmesiyle oluşan eğimli yüzey.",
+    "roots": "clivus (yokuş, eğim)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Yokuş / Klivus",
+    "englishDefinition": "The sloped surface formed by the union of the body of the sphenoid bone and the basilar part of the occipital bone."
+  },
+  {
+    "id": 486,
+    "term": "Tuberculum Pharyngeum",
+    "english": "Pharyngeal Tubercle",
+    "turkishDefinition": "Yutak tümsekciği; ardkafa kemiğinin taban parçasının alt yüzünde, yutak duvarının tutunduğu küçük tümsek.",
+    "roots": "tuberculum (küçük tümsek) + pharyngeus (yutağa ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Yutak tümsekciği",
+    "englishDefinition": "A small tubercle on the inferior surface of the basilar part of the occipital bone, providing attachment for the pharyngeal wall."
+  },
+  {
+    "id": 487,
+    "term": "Sulcus Sinus Petrosi Inferioris Ossis Occipitalis",
+    "english": "Groove for Inferior Petrosal Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği alt petroz sinüs oluğu; ardkafa kemiğinin taban parçasının yan kenarında yer alan, alt petroz venöz sinüsün yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + petrosus (taşsı) + inferior (alt) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği alt petroz sinüs oluğu",
+    "englishDefinition": "A groove along the lateral edge of the basilar part of the occipital bone that houses the inferior petrosal sinus."
+  },
+  {
+    "id": 488,
+    "term": "Pars Lateralis Ossis Occipitalis",
+    "english": "Lateral Part of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği yan parçası; foramen magnum'un yanlarında yer alan, oksipital kondilleri taşıyan kısım.",
+    "roots": "pars (bölüm) + lateralis (yan) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği yan parçası",
+    "englishDefinition": "The part of the occipital bone lateral to the foramen magnum that bears the occipital condyles."
+  },
+  {
+    "id": 489,
+    "term": "Squama Occipitalis",
+    "english": "Occipital Squama",
+    "turkishDefinition": "Ardkafa pulu; ardkafa kemiğinin foramen magnum'un arkasında kalan geniş, kavisli plaka şeklindeki kısmı.",
+    "roots": "squama (pul) + occipitalis (ardkafaya ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa pulu",
+    "englishDefinition": "The broad, curved plate-like portion of the occipital bone posterior to the foramen magnum."
+  },
+  {
+    "id": 490,
+    "term": "Margo Mastoideus Ossis Occipitalis",
+    "english": "Mastoid Border of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği mastoid kenarı; ardkafa kemiğinin şakak kemiğinin mastoid parçasıyla birleştiği kenar.",
+    "roots": "margo (kenar) + mastoideus (mastoid bölgeye ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği mastoid kenarı",
+    "englishDefinition": "The border of the occipital bone that articulates with the mastoid part of the temporal bone."
+  },
+  {
+    "id": 491,
+    "term": "Margo Lambdoideus Ossis Occipitalis",
+    "english": "Lambdoid Border of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği lambdoid kenarı; ardkafa kemiğinin duvar kemikleriyle birleşerek lambdoid dikişi oluşturan kenarı.",
+    "roots": "margo (kenar) + lambdoideus (lambda harfi şeklinde) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği lambdoid kenarı",
+    "englishDefinition": "The border of the occipital bone that articulates with the parietal bones to form the lambdoid suture."
+  },
+  {
+    "id": 492,
+    "term": "Os Interparietale",
+    "english": "Interparietal Bone",
+    "turkishDefinition": "İnterparietal kemik; bazı bireylerde ardkafa pulunun üst kısmında ayrı bir kemik olarak kalabilen, embriyonik kaynaklı yapı.",
+    "roots": "os (kemik) + inter (arasında) + parietalis (duvar kemiğine ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "İnterparietal kemik",
+    "englishDefinition": "A variant ossicle that may persist as a separate bone in the upper part of the occipital squama in some individuals."
+  },
+  {
+    "id": 493,
+    "term": "Condylus Occipitalis",
+    "english": "Occipital Condyle",
+    "turkishDefinition": "Ardkafa lokması / kondili; ardkafa kemiğinin yan parçasında yer alan, atlas ile eklemleşen oval kemik çıkıntısı.",
+    "roots": "condylus (lokma, eklem çıkıntısı) + occipitalis (ardkafaya ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa lokması",
+    "englishDefinition": "An oval bony prominence on the lateral part of the occipital bone that articulates with the atlas."
+  },
+  {
+    "id": 494,
+    "term": "Canalis Condylaris",
+    "english": "Condylar Canal",
+    "turkishDefinition": "Kondiler kanal; oksipital kondilin arkasında bazı bireylerde bulunan, emisser ven geçişine izin veren kanal.",
+    "roots": "canalis (kanal) + condylaris (kondile ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Kondiler kanal",
+    "englishDefinition": "A canal posterior to the occipital condyle, present in some individuals, transmitting an emissary vein."
+  },
+  {
+    "id": 495,
+    "term": "Canalis Nervi Hypoglossi",
+    "english": "Hypoglossal Canal",
+    "turkishDefinition": "Dilaltı sinir kanalı; oksipital kondilin üzerinde yer alan, 12. kafa çifti olan hipoglossal sinirin geçtiği kanal.",
+    "roots": "canalis (kanal) + nervus (sinir) + hypoglossus (dil altına ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Dilaltı sinir kanalı",
+    "englishDefinition": "A canal above the occipital condyle through which the hypoglossal nerve (cranial nerve XII) passes."
+  },
+  {
+    "id": 496,
+    "term": "Fossa Condylaris",
+    "english": "Condylar Fossa",
+    "turkishDefinition": "Kondil çukuru; oksipital kondilin arkasında yer alan, kondiler kanal bulunmadığında görülebilen çukur.",
+    "roots": "fossa (çukur) + condylaris (kondile ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Kondil çukuru",
+    "englishDefinition": "A depression posterior to the occipital condyle, sometimes containing the opening of the condylar canal."
+  },
+  {
+    "id": 497,
+    "term": "Tuberculum Jugulare",
+    "english": "Jugular Tubercle",
+    "turkishDefinition": "Juguler tümsekcik; ardkafa kemiğinin taban parçası ile yan parçası arasında yer alan, hipoglossal kanalın üzerindeki kabartı.",
+    "roots": "tuberculum (küçük tümsek) + jugularis (boyun toplardamarına ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Juguler tümsekcik",
+    "englishDefinition": "A small elevation above the hypoglossal canal, located between the basilar and lateral parts of the occipital bone."
+  },
+  {
+    "id": 498,
+    "term": "Incisura Jugularis Ossis Occipitalis",
+    "english": "Jugular Notch of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği juguler çentiği; ardkafa kemiğinin yan parçasında yer alan, şakak kemiğiyle birlikte foramen jugulare'yi oluşturan çentik.",
+    "roots": "incisura (çentik) + jugularis (boyun toplardamarına ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği juguler çentiği",
+    "englishDefinition": "A notch on the lateral part of the occipital bone that, together with the temporal bone, forms the jugular foramen."
+  },
+  {
+    "id": 499,
+    "term": "Processus Jugularis",
+    "english": "Jugular Process",
+    "turkishDefinition": "Boyun toplardamarı çıkıntısı; ardkafa kemiğinin yan parçasının dışa doğru uzanan çıkıntısı.",
+    "roots": "processus (çıkıntı) + jugularis (boyun toplardamarına ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Boyun toplardamarı çıkıntısı",
+    "englishDefinition": "A lateral projection of the occipital bone's lateral part, situated above the jugular notch."
+  },
+  {
+    "id": 500,
+    "term": "Processus Intrajugulans Ossis Occipitalis",
+    "english": "Intrajugular Process of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği intrajuguler çıkıntısı; foramen jugulare'yi kısmen ikiye bölen küçük kemik çıkıntısı.",
+    "roots": "processus (çıkıntı) + intra (içinde) + jugularis (boyun toplardamarına ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği intrajuguler çıkıntısı",
+    "englishDefinition": "A small bony projection that partially divides the jugular foramen, arising from the occipital bone."
+  },
+  {
+    "id": 501,
+    "term": "Protuberantia Occipitalis Externa",
+    "english": "External Occipital Protuberance",
+    "turkishDefinition": "Dış ardkafa tümseği; ardkafa pulunun dış yüzünün orta hattında, ense bağının tutunduğu belirgin kabartı.",
+    "roots": "protuberantia (kabartı) + occipitalis (ardkafaya ait) + externa (dış)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Dış ardkafa tümseği",
+    "englishDefinition": "A prominent midline bump on the external surface of the occipital squama, providing attachment for the nuchal ligament."
+  },
+  {
+    "id": 502,
+    "term": "Crista Occipitalis Externa",
+    "english": "External Occipital Crest",
+    "turkishDefinition": "Dış ardkafa ibiği; dış ardkafa tümseğinden foramen magnum'a uzanan orta hat ibiği.",
+    "roots": "crista (ibik) + occipitalis (ardkafaya ait) + externa (dış)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Dış ardkafa ibiği",
+    "englishDefinition": "A midline ridge extending from the external occipital protuberance to the foramen magnum."
+  },
+  {
+    "id": 503,
+    "term": "Linea Nuchalis Suprema",
+    "english": "Highest Nuchal Line",
+    "turkishDefinition": "En üst ense çizgisi; dış ardkafa tümseğinin üzerinde yer alan, epikranial aponörozun tutunduğu ince çizgi.",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + suprema (en üst)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "En üst ense çizgisi",
+    "englishDefinition": "The uppermost of the curved lines on the external occipital surface, providing attachment for the epicranial aponeurosis."
+  },
+  {
+    "id": 504,
+    "term": "Linea Nuchalis Superior",
+    "english": "Superior Nuchal Line",
+    "turkishDefinition": "Üst ense çizgisi; trapezius ve sternokleidomastoid kaslarının tutunduğu, dış ardkafa tümseğinden yanlara uzanan çizgi.",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + superior (üst)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Üst ense çizgisi",
+    "englishDefinition": "A curved line extending laterally from the external occipital protuberance, providing attachment for the trapezius and sternocleidomastoid muscles."
+  },
+  {
+    "id": 505,
+    "term": "Linea Nuchalis Inferior",
+    "english": "Inferior Nuchal Line",
+    "turkishDefinition": "Alt ense çizgisi; üst ense çizgisinin altında yer alan, boyun kaslarının bir kısmının tutunduğu çizgi.",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + inferior (alt)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Alt ense çizgisi",
+    "englishDefinition": "A curved line below the superior nuchal line, providing attachment for some of the neck muscles."
+  },
+  {
+    "id": 506,
+    "term": "Planum Occipitale",
+    "english": "Occipital Plane",
+    "turkishDefinition": "Ardkafa düzlüğü; dış ardkafa tümseğinin üzerinde kalan, ardkafa pulunun üst-dış kısmı.",
+    "roots": "planum (düzlük) + occipitalis (ardkafaya ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa düzlüğü",
+    "englishDefinition": "The upper-outer part of the occipital squama above the external occipital protuberance."
+  },
+  {
+    "id": 507,
+    "term": "Eminentia Cruciformis",
+    "english": "Cruciform Eminence",
+    "turkishDefinition": "Haçsı kabartı; ardkafa pulunun iç yüzünde, dört çukuru (iki serebral, iki serebellar) birbirinden ayıran haç şeklindeki kabartı.",
+    "roots": "eminentia (kabartı) + cruciformis (haç şeklinde)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Haçsı kabartı",
+    "englishDefinition": "A cross-shaped ridge on the internal surface of the occipital squama that separates the cerebral and cerebellar fossae."
+  },
+  {
+    "id": 508,
+    "term": "Protuberantia Occipitalis Interna",
+    "english": "Internal Occipital Protuberance",
+    "turkishDefinition": "İç ardkafa tümseği; haçsı kabartının merkezinde yer alan, dural venöz sinüslerin birleştiği nokta.",
+    "roots": "protuberantia (kabartı) + occipitalis (ardkafaya ait) + interna (iç)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "İç ardkafa tümseği",
+    "englishDefinition": "The point at the center of the cruciform eminence where the dural venous sinuses converge."
+  },
+  {
+    "id": 509,
+    "term": "Crista Occipitalis Interna",
+    "english": "Internal Occipital Crest",
+    "turkishDefinition": "İç ardkafa ibiği; iç ardkafa tümseğinden foramen magnum'a uzanan, falx cerebelli'nin tutunduğu orta hat ibiği.",
+    "roots": "crista (ibik) + occipitalis (ardkafaya ait) + interna (iç)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "İç ardkafa ibiği",
+    "englishDefinition": "A midline ridge extending from the internal occipital protuberance to the foramen magnum, providing attachment for the falx cerebelli."
+  },
+  {
+    "id": 510,
+    "term": "Sulcus Sinus Transversi Ossis Occipitalis",
+    "english": "Groove for Transverse Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği enine sinüs oluğu; haçsı kabartının yanlara uzanan kollarında yer alan, enine venöz sinüsün yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + transversus (enine) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği enine sinüs oluğu",
+    "englishDefinition": "A groove along the lateral arms of the cruciform eminence that houses the transverse venous sinus."
+  },
+  {
+    "id": 511,
+    "term": "Sulcus Sinus Sigmoidei Ossis Occipitalis",
+    "english": "Groove for Sigmoid Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği sigmoid sinüs oluğu; ardkafa kemiğinin yan parçasında yer alan, sigmoid venöz sinüsün devam ettiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sigmoideus (S şeklinde) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa kemiği sigmoid sinüs oluğu",
+    "englishDefinition": "A groove on the lateral part of the occipital bone that continues the course of the sigmoid venous sinus."
+  },
+  {
+    "id": 512,
+    "term": "Sulcus Sinus Occipitalis",
+    "english": "Groove for Occipital Sinus",
+    "turkishDefinition": "Ardkafa sinüs oluğu; iç ardkafa ibiğinin yanında yer alan, küçük oksipital venöz sinüsün yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + occipitalis (ardkafaya ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Ardkafa sinüs oluğu",
+    "englishDefinition": "A small groove beside the internal occipital crest that houses the occipital venous sinus."
+  },
+  {
+    "id": 513,
+    "term": "Sulcus Sinus Marginalis",
+    "english": "Groove for Marginal Sinus",
+    "turkishDefinition": "Kenar sinüs oluğu; foramen magnum'un kenarı boyunca uzanan, marjinal venöz sinüsün yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + marginalis (kenara ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Kenar sinüs oluğu",
+    "englishDefinition": "A groove along the margin of the foramen magnum that houses the marginal venous sinus."
+  },
+  {
+    "id": 514,
+    "term": "Processus Paramastoideus",
+    "english": "Paramastoid Process",
+    "turkishDefinition": "Paramastoid çıkıntı; ardkafa kemiğinin yan parçasında bazı bireylerde bulunan, atlasın enine çıkıntısına doğru uzanan ek çıkıntı.",
+    "roots": "processus (çıkıntı) + para (yanında) + mastoideus (mastoid bölgeye ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Paramastoid çıkıntı",
+    "englishDefinition": "An accessory projection on the lateral part of the occipital bone, present in some individuals, extending toward the transverse process of the atlas."
+  },
+  {
+    "id": 515,
+    "term": "Fossa Cerebralis",
+    "english": "Cerebral Fossa",
+    "turkishDefinition": "Beyin çukuru; haçsı kabartının üstünde yer alan, beyin loblarını barındıran çukur.",
+    "roots": "fossa (çukur) + cerebralis (beyne ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Beyin çukuru",
+    "englishDefinition": "A depression above the cruciform eminence on the internal surface of the occipital squama that accommodates the cerebral lobes."
+  },
+  {
+    "id": 516,
+    "term": "Fossa Cerebellaris",
+    "english": "Cerebellar Fossa",
+    "turkishDefinition": "Beyincik çukuru; haçsı kabartının altında yer alan, beyincik loblarını barındıran çukur.",
+    "roots": "fossa (çukur) + cerebellaris (beyinciğe ait)",
+    "category": "anatomy", "system": "movement", "subcategory": "skull_bones",
+    "turkishShort": "Beyincik çukuru",
+    "englishDefinition": "A depression below the cruciform eminence on the internal surface of the occipital squama that accommodates the cerebellar lobes."
+  }
+]

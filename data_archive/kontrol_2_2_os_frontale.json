@@ -1,0 +1,187 @@
+{
+  "toplamIncelenen": 31,
+  "exactUpdatesCount": 1,
+  "belirsizEslesmelerCount": 3,
+  "brandNewCount": 27,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os frontale",
+      "matchedPart": "Os frontale",
+      "firestoreDocId": "001",
+      "firestoreId": 1,
+      "existingTerm": "Os Frontale",
+      "existingEnglish": "Frontal Bone",
+      "existingSubcategory": "skull_bones"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 3,
+      "inputTerm": "Facies externa (Os frontale)",
+      "matchedPart": "Facies externa (Os frontale)",
+      "potentialFirestoreDocId": "438",
+      "potentialFirestoreId": 438,
+      "existingTerm": "Facies Externa",
+      "existingEnglish": "External Surface",
+      "aciklama": "Parantez kaldırıldığında birebir eşleşti (Facies externa vs Facies Externa)"
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Facies interna (Os frontale)",
+      "matchedPart": "Facies interna (Os frontale)",
+      "potentialFirestoreDocId": "433",
+      "potentialFirestoreId": 433,
+      "existingTerm": "Facies Interna",
+      "existingEnglish": "Internal Surface",
+      "aciklama": "Parantez kaldırıldığında birebir eşleşti (Facies interna vs Facies Interna)"
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Sulcus sinus sagittalis superior (Os frontale)",
+      "matchedPart": "Sulcus sinus sagittalis superior (Os frontale)",
+      "potentialFirestoreDocId": "435",
+      "potentialFirestoreId": 435,
+      "existingTerm": "Sulcus Sinus Sagittalis Superioris",
+      "existingEnglish": "Groove for Superior Sagittal Sinus",
+      "aciklama": "Kısmi / yakın eşleşme (Sulcus sinus sagittalis superior (Os frontale) vs Sulcus Sinus Sagittalis Superioris)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Squama frontalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Tuber frontale; Eminentia frontalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Arcus superciliaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Glabella",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Sutura frontalis persistens; Sutura metopica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Margo supraorbitalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Incisura supraorbitalis / Foramen supraorbitale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Incisura frontalis / Foramen frontale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Facies temporalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Margo parietalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Linea temporalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Processus zygomaticus (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Crista frontalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Foramen caecum (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Pars nasalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Spina nasalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Margo nasalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Pars orbitalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Facies orbitalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Spina trochlearis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Fovea trochlearis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Fossa glandulae lacrimalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Margo sphenoidalis (Os frontale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Incisura ethmoidalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Sinus frontalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Apertura sinus frontalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Septum sinuum frontalium",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 433,
+    "term": "Facies Interna Ossis Parietalis",
+    "english": "Internal Surface of Parietal Bone",
+    "turkishDefinition": "Duvar kemiği iç yüzü; duvar kemiğinin beyne bakan iç yüzeyi.",
+    "roots": "facies (yüz) + interna (iç) + os parietale (duvar kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Duvar kemiği iç yüzü",
+    "englishDefinition": "The inner surface of the parietal bone, facing the brain."
+  },
+  {
+    "id": 435,
+    "term": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+    "english": "Groove for Superior Sagittal Sinus of Parietal Bone",
+    "turkishDefinition": "Duvar kemiği üst sagittal sinüs oluğu; duvar kemiğinin iç yüzünün orta hattı boyunca uzanan, üst sagittal venöz sinüsün yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sagittalis (ok yönünde) + superior (üst) + os parietale (duvar kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Duvar kemiği üst sagittal sinüs oluğu",
+    "englishDefinition": "A groove along the midline of the internal surface of the parietal bone that houses the superior sagittal sinus."
+  },
+  {
+    "id": 438,
+    "term": "Facies Externa Ossis Parietalis",
+    "english": "External Surface of Parietal Bone",
+    "turkishDefinition": "Duvar kemiği dış yüzü; duvar kemiğinin deri altına bakan dış yüzeyi.",
+    "roots": "facies (yüz) + externa (dış) + os parietale (duvar kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Duvar kemiği dış yüzü",
+    "englishDefinition": "The outer, convex surface of the parietal bone."
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "id": 434,
+    "term": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+    "english": "Groove for Sigmoid Sinus of Parietal Bone",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sigmoideus (S şeklinde) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği sigmoid sinüs oluğu"
+  },
+  {
+    "id": 436,
+    "term": "Sulcus Arteriae Meningeae Mediae Ossis Parietalis",
+    "english": "Groove for Middle Meningeal Artery of Parietal Bone",
+    "roots": "sulcus (oluk) + arteria (atardamar) + meningeus (meninkslere ait) + medius (orta) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği meninks orta arter oluğu"
+  },
+  {
+    "id": 437,
+    "term": "Sulci Arteriosi Ossis Parietalis",
+    "english": "Grooves for Arteries of Parietal Bone",
+    "roots": "sulcus (oluk) + arteriosus (atardamara ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği arter olukları"
+  },
+  {
+    "id": 439,
+    "term": "Linea Temporalis Superior Ossis Parietalis",
+    "english": "Superior Temporal Line of Parietal Bone",
+    "roots": "linea (çizgi) + temporalis (şakağa ait) + superior (üst) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği üst şakak çizgisi"
+  },
+  {
+    "id": 440,
+    "term": "Linea Temporalis Inferior Ossis Parietalis",
+    "english": "Inferior Temporal Line of Parietal Bone",
+    "roots": "linea (çizgi) + temporalis (şakağa ait) + inferior (alt) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alt şakak çizgisi"
+  },
+  {
+    "id": 442,
+    "term": "Margo Occipitalis Ossis Parietalis",
+    "english": "Occipital Border of Parietal Bone",
+    "roots": "margo (kenar) + occipitalis (ardkafaya ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği ardkafa kenarı"
+  },
+  {
+    "id": 443,
+    "term": "Margo Squamosus Ossis Parietalis",
+    "english": "Squamosal Border of Parietal Bone",
+    "roots": "margo (kenar) + squamosus (pullu) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği pullu kenarı"
+  },
+  {
+    "id": 444,
+    "term": "Margo Sagittalis Ossis Parietalis",
+    "english": "Sagittal Border of Parietal Bone",
+    "roots": "margo (kenar) + sagittalis (ok yönünde) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği sagittal kenarı"
+  },
+  {
+    "id": 445,
+    "term": "Margo Frontalis Ossis Parietalis",
+    "english": "Frontal Border of Parietal Bone",
+    "roots": "margo (kenar) + frontalis (alına ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alın kenarı"
+  },
+  {
+    "id": 446,
+    "term": "Angulus Frontalis Ossis Parietalis",
+    "english": "Frontal Angle of Parietal Bone",
+    "roots": "angulus (açı, köşe) + frontalis (alına ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alın açısı"
+  },
+  {
+    "id": 447,
+    "term": "Angulus Occipitalis Ossis Parietalis",
+    "english": "Occipital Angle of Parietal Bone",
+    "roots": "angulus (açı, köşe) + occipitalis (ardkafaya ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği ardkafa açısı"
+  },
+  {
+    "id": 448,
+    "term": "Angulus Sphenoidalis Ossis Parietalis",
+    "english": "Sphenoidal Angle of Parietal Bone",
+    "roots": "angulus (açı, köşe) + sphenoidalis (kama kemiğine ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği kama kemik açısı"
+  },
+  {
+    "id": 449,
+    "term": "Angulus Mastoideus Ossis Parietalis",
+    "english": "Mastoid Angle of Parietal Bone",
+    "roots": "angulus (açı, köşe) + mastoideus (meme şeklinde, mastoid bölgeye ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği mastoid açısı"
+  }
+]

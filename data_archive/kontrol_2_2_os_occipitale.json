@@ -1,0 +1,282 @@
+{
+  "toplamIncelenen": 37,
+  "exactUpdatesCount": 1,
+  "belirsizEslesmelerCount": 16,
+  "brandNewCount": 20,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os occipitale",
+      "matchedPart": "Os occipitale",
+      "firestoreDocId": "004",
+      "firestoreId": 4,
+      "existingTerm": "Os Occipitale",
+      "existingEnglish": "Occipital Bone",
+      "existingSubcategory": "skull_bones"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 5,
+      "inputTerm": "Pars basilaris (Os occipitale)",
+      "matchedPart": "Pars basilaris (Os occipitale)",
+      "potentialFirestoreDocId": "364",
+      "potentialFirestoreId": 364,
+      "existingTerm": "Basilaris",
+      "existingEnglish": "Basilar",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Pars basilaris (Os occipitale) vs Basilaris)"
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Tuberculum pharyngeum",
+      "matchedPart": "Tuberculum pharyngeum",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum pharyngeum vs Tuber)"
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Sulcus sinus petrosi inferioris (Os occipitale)",
+      "matchedPart": "Sulcus sinus petrosi inferioris (Os occipitale)",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus petrosi inferioris (Os occipitale) vs Inferior)"
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Pars lateralis (Os occipitale)",
+      "matchedPart": "Pars lateralis (Os occipitale)",
+      "potentialFirestoreDocId": "229",
+      "potentialFirestoreId": 229,
+      "existingTerm": "Lateralis",
+      "existingEnglish": "Lateral",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Pars lateralis (Os occipitale) vs Lateralis)"
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Squama occipitalis",
+      "matchedPart": "Squama occipitalis",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Squama occipitalis vs Occipitalis)"
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Condylus occipitalis",
+      "matchedPart": "Condylus occipitalis",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Condylus occipitalis vs Occipitalis)"
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Tuberculum jugulare",
+      "matchedPart": "Tuberculum jugulare",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum jugulare vs Tuber)"
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Protuberantia occipitalis externa",
+      "matchedPart": "Protuberantia occipitalis externa",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Protuberantia occipitalis externa vs Occipitalis)"
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Crista occipitalis externa",
+      "matchedPart": "Crista occipitalis externa",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Crista occipitalis externa vs Occipitalis)"
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Linea nuchalis superior",
+      "matchedPart": "Linea nuchalis superior",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Linea nuchalis superior vs Superior)"
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Linea nuchalis inferior",
+      "matchedPart": "Linea nuchalis inferior",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Linea nuchalis inferior vs Inferior)"
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Eminentia cruciformis",
+      "matchedPart": "Eminentia cruciformis",
+      "potentialFirestoreDocId": "424",
+      "potentialFirestoreId": 424,
+      "existingTerm": "Eminentia",
+      "existingEnglish": "Eminence",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Eminentia cruciformis vs Eminentia)"
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Protuberantia occipitalis interna",
+      "matchedPart": "Protuberantia occipitalis interna",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Protuberantia occipitalis interna vs Occipitalis)"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Crista occipitalis interna",
+      "matchedPart": "Crista occipitalis interna",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Crista occipitalis interna vs Occipitalis)"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Sulcus sinus sigmoidei (Os occipitale)",
+      "matchedPart": "Sulcus sinus sigmoidei (Os occipitale)",
+      "potentialFirestoreDocId": "434",
+      "potentialFirestoreId": 434,
+      "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+      "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus sigmoidei (Os occipitale) vs Sulcus Sinus Sigmoidei Ossis Parietalis)"
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Sulcus sinus occipitalis",
+      "matchedPart": "Sulcus sinus occipitalis",
+      "potentialFirestoreDocId": "209",
+      "potentialFirestoreId": 209,
+      "existingTerm": "Occipitalis",
+      "existingEnglish": "Occipital",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Sulcus sinus occipitalis vs Occipitalis)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Foramen magnum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Basion",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Opisthion",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Clivus (Os occipitale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Margo mastoideus (Os occipitale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Margo lambdoideus (Os occipitale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Os interparietale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Canalis condylaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Canalis nervi hypoglossi",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Fossa condylaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Incisura jugularis (Os occipitale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Processus jugularis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Processus intrajugulans (Os occipitale)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Linea nuchalis suprema",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Planum occipitale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Sulcus sinus transversi",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Sulcus sinus marginalis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Processus paramastoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Fossa cerebralis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Fossa cerebellaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}
