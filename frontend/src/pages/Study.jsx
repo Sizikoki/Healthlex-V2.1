@@ -2,13 +2,14 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Menu, X, Sparkles, Lock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { saveProgress, getTermProgress, isLoggedIn, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { auth, db } from '@/firebase/config';
-import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, query, where, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
@@ -87,20 +88,31 @@ export const Study = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [allTerms, setAllTerms] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [allTerms, setAllTerms] = useState(() => getAllTerms());
+  const [loading, setLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(24);
+
+  // Kategori veya arama değiştiğinde gösterilen sayıyı ilk 24'e sıfırla
+  useEffect(() => {
+    setVisibleCount(24);
+  }, [selectedCategoryId, searchQuery]);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchTerms = async () => {
       try {
-        setLoading(true);
         let timeoutId;
         const timeoutPromise = new Promise((_, reject) => {
           timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
         });
 
+        const targetSubcat = selectedCategoryId === 'movement_terms' ? 'motus' : selectedCategoryId;
+        const termsQuery = selectedCategoryId === 'all'
+          ? collection(db, 'terms')
+          : query(collection(db, 'terms'), where('subcategory', '==', targetSubcat));
+
         const querySnapshot = await Promise.race([
-          getDocs(collection(db, 'terms')),
+          getDocs(termsQuery),
           timeoutPromise
         ]);
         if (timeoutId) clearTimeout(timeoutId);
@@ -110,37 +122,45 @@ export const Study = () => {
           rawTerms.push(doc.data());
         });
 
-        if (rawTerms.length === 0) {
-          rawTerms = getAllTerms();
+        if (rawTerms.length > 0 && isMounted) {
+          const normalized = rawTerms.map((termItem) => ({
+            id: termItem.id,
+            term: termItem.term,
+            turkish: termItem.english || termItem.turkish || '',
+            turkishShort: termItem.turkishShort || '',
+            definition: termItem.turkishDefinition || termItem.definition || '',
+            turkishDefinition: termItem.turkishDefinition || termItem.definition || '',
+            english: termItem.english || termItem.turkish || '',
+            englishDefinition: termItem.englishDefinition || termItem.english || '',
+            roots: termItem.roots || '',
+            morphemes: termItem.morphemes || '',
+            category: termItem.category || '',
+            system: termItem.system || '',
+            subcategory: termItem.subcategory === 'motus' ? 'movement_terms' : (termItem.subcategory || ''),
+          }));
+
+          setAllTerms((prev) => {
+            if (selectedCategoryId === 'all') {
+              return normalized.sort((a, b) => Number(a.id) - Number(b.id));
+            }
+            const map = new Map(prev.map((t) => [t.id, t]));
+            normalized.forEach((t) => map.set(t.id, t));
+            return Array.from(map.values()).sort((a, b) => Number(a.id) - Number(b.id));
+          });
         }
-
-        const normalized = rawTerms.map((termItem) => ({
-          id: termItem.id,
-          term: termItem.term,
-          turkish: termItem.english || termItem.turkish || '',
-          turkishShort: termItem.turkishShort || '',
-          definition: termItem.turkishDefinition || termItem.definition || '',
-          turkishDefinition: termItem.turkishDefinition || termItem.definition || '',
-          english: termItem.english || termItem.turkish || '',
-          englishDefinition: termItem.englishDefinition || termItem.english || '',
-          roots: termItem.roots || '',
-          morphemes: termItem.morphemes || '',
-          category: termItem.category || '',
-          system: termItem.system || '',
-          subcategory: termItem.subcategory || '',
-        })).sort((a, b) => Number(a.id) - Number(b.id));
-
-        setAllTerms(normalized);
       } catch (error) {
         console.warn('Live terms fetch error/timeout, using local fallback:', error);
-        setAllTerms(getAllTerms());
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchTerms();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedCategoryId]);
 
   const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
 
@@ -205,9 +225,30 @@ export const Study = () => {
     }
   };
 
-  const renderTermCard = (term) => {
+  const TermCard = React.memo(({
+    term,
+    refreshTrigger,
+    categoryBadgeText,
+    isTr,
+    currentLanguage,
+    t,
+    onMarkAsLearned,
+    onMorphemeClick
+  }) => {
+    const [showMorphemes, setShowMorphemes] = useState(false);
+    const [morphemes, setMorphemes] = useState(null);
+
     const progress = getTermProgress(term.id);
-    const morphemes = getTermMorphemes(term);
+
+    const handleToggleMorphemes = (e) => {
+      e.stopPropagation();
+      if (!showMorphemes && !morphemes) {
+        // Tıklanmadığı sürece hesaplanmaz (Lazy hesaplama)
+        const parsed = getTermMorphemes(term);
+        setMorphemes(parsed);
+      }
+      setShowMorphemes((prev) => !prev);
+    };
 
     return (
       <div
@@ -217,7 +258,7 @@ export const Study = () => {
         {/* Category Badge */}
         <div className="absolute top-3 right-3 z-10">
           <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50">
-            {t(selectedCategory.key, selectedCategory.name)}
+            {categoryBadgeText}
           </span>
         </div>
 
@@ -255,41 +296,54 @@ export const Study = () => {
                 : (term.englishDefinition || term.turkishDefinition || term.definition)}
             </p>
 
-            {/* İnteraktif Morfem Analizi Rozetleri */}
-            {morphemes && morphemes.length > 0 && (
+            {/* İnteraktif Morfem Analizi Rozetleri (Lazy - Tıklanınca Açılır) */}
+            {term.roots && (
               <div className="mb-4 pt-2.5 border-t border-border/50">
-                <div className="mb-2">
-                  <span className="text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
-                    {isTr ? 'Morfem Yapısı' : 'Word Breakdown'}
+                <button
+                  type="button"
+                  onClick={handleToggleMorphemes}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-primary hover:text-primary/80 transition-colors cursor-pointer py-0.5 group/btn"
+                >
+                  <span>{isTr ? 'Morfem Yapısı' : 'Word Breakdown'}</span>
+                  <span className="text-[10px] text-muted-foreground group-hover/btn:text-primary transition-transform">
+                    {showMorphemes ? '▲' : '▼'}
                   </span>
-                </div>
+                </button>
 
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {morphemes.map((part, idx) => {
-                    const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
+                {showMorphemes && (
+                  <div className="flex flex-wrap items-center gap-1.5 mt-2 animate-in fade-in duration-150">
+                    {morphemes && morphemes.length > 0 ? (
+                      morphemes.map((part, idx) => {
+                        const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
 
-                    return (
-                      <React.Fragment key={part.id || idx}>
-                        {idx > 0 && (
-                          <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => handleMorphemeClick(part)}
-                          title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
-                        >
-                          <span className="font-semibold text-foreground">{part.text}</span>
-                          {meaningText && (
-                            <span className="text-[10.5px] font-sans font-normal text-muted-foreground max-w-[120px] truncate">
-                              ({meaningText})
-                            </span>
-                          )}
-                        </button>
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
+                        return (
+                          <React.Fragment key={part.id || idx}>
+                            {idx > 0 && (
+                              <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => onMorphemeClick(part)}
+                              title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
+                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
+                            >
+                              <span className="font-semibold text-foreground">{part.text}</span>
+                              {meaningText && (
+                                <span className="text-[10.5px] font-sans font-normal text-muted-foreground max-w-[120px] truncate">
+                                  ({meaningText})
+                                </span>
+                              )}
+                            </button>
+                          </React.Fragment>
+                        );
+                      })
+                    ) : (
+                      <span className="text-xs text-muted-foreground italic">
+                        {isTr ? 'Morfem çözümlenemedi' : 'No morpheme breakdown'}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -305,10 +359,10 @@ export const Study = () => {
               <span>→</span>
             </Link>
             <button
-              onClick={() => handleMarkAsLearned(term.id)}
+              onClick={() => onMarkAsLearned(term.id)}
               data-term-id={term.id}
               data-learned={progress.learned ? 'true' : 'false'}
-              className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
                 progress.learned
                   ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 focus:ring-emerald-400'
                   : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 focus:ring-primary'
@@ -329,7 +383,21 @@ export const Study = () => {
         </div>
       </div>
     );
-  };
+  });
+
+  const renderTermCard = (term) => (
+    <TermCard
+      key={`${term.id}-${refreshTrigger}`}
+      term={term}
+      refreshTrigger={refreshTrigger}
+      categoryBadgeText={t(selectedCategory.key, selectedCategory.name)}
+      isTr={isTr}
+      currentLanguage={currentLanguage}
+      t={t}
+      onMarkAsLearned={handleMarkAsLearned}
+      onMorphemeClick={handleMorphemeClick}
+    />
+  );
 
   return (
     <div className="min-h-screen bg-muted/30 flex">
@@ -514,9 +582,28 @@ export const Study = () => {
             </div>
           ) : (
             /* Standart Liste Görünümü */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {terms.map(renderTermCard)}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {terms.slice(0, visibleCount).map(renderTermCard)}
+              </div>
+              {terms.length > visibleCount && (
+                <div className="flex flex-col items-center justify-center pt-8 pb-4">
+                  <p className="text-xs text-muted-foreground mb-3">
+                    {isTr
+                      ? `${terms.length} terimden ${Math.min(visibleCount, terms.length)} tanesi gösteriliyor`
+                      : `Showing ${Math.min(visibleCount, terms.length)} of ${terms.length} terms`}
+                  </p>
+                  <Button
+                    onClick={() => setVisibleCount((prev) => prev + 24)}
+                    variant="outline"
+                    size="lg"
+                    className="px-8 font-semibold rounded-xl border-primary/30 hover:bg-primary/10 text-primary shadow-xs transition-all cursor-pointer"
+                  >
+                    {isTr ? 'Daha Fazla Göster (+24)' : 'Show More (+24)'}
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

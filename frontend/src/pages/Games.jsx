@@ -8,7 +8,7 @@ import { isLoggedIn, canGuestPlay, getGuestTrialInfo, getUser } from '@/utils/st
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
 import { auth, db } from '@/firebase/config';
-import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, query, where, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
@@ -155,8 +155,13 @@ export const Games = () => {
           timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
         });
 
+        const targetSubcat = selectedCategory === 'movement_terms' ? 'motus' : selectedCategory;
+        const termsQuery = selectedCategory === 'all'
+          ? collection(db, 'terms')
+          : query(collection(db, 'terms'), where('subcategory', '==', targetSubcat));
+
         const querySnapshot = await Promise.race([
-          getDocs(collection(db, 'terms')),
+          getDocs(termsQuery),
           timeoutPromise
         ]);
         if (timeoutId) clearTimeout(timeoutId);
@@ -180,9 +185,17 @@ export const Games = () => {
             morphemes: termItem.morphemes || '',
             category: termItem.category || '',
             system: termItem.system || '',
-            subcategory: termItem.subcategory || '',
-          })).sort((a, b) => Number(a.id) - Number(b.id));
-          setLiveTerms(normalized);
+            subcategory: termItem.subcategory === 'motus' ? 'movement_terms' : (termItem.subcategory || ''),
+          }));
+
+          setLiveTerms((prev) => {
+            if (selectedCategory === 'all') {
+              return normalized.sort((a, b) => Number(a.id) - Number(b.id));
+            }
+            const map = new Map(prev.map((t) => [t.id, t]));
+            normalized.forEach((t) => map.set(t.id, t));
+            return Array.from(map.values()).sort((a, b) => Number(a.id) - Number(b.id));
+          });
         }
       } catch (error) {
         console.warn('Live terms fetch error/timeout, using local fallback:', error);
@@ -196,7 +209,7 @@ export const Games = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [selectedCategory]);
 
   const categoryTerms = useMemo(() => {
     let baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
