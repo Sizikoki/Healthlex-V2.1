@@ -28,6 +28,7 @@ const GAME_CATEGORIES = [
   { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar' },
   { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri' },
   { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri' },
 ];
