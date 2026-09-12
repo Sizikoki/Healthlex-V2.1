@@ -225,13 +225,6 @@ export default async function handler(req, res) {
   // Verify signature - unmarshal performs HMAC-SHA256 check
   let eventData;
   try {
-    // TEMP DEBUG - remove after fixing secret mismatch
-    console.log('[Paddle Debug] Secret length:', webhookSecret.length);
-    console.log('[Paddle Debug] Secret start:', webhookSecret.substring(0, 8));
-    console.log('[Paddle Debug] Secret end:', webhookSecret.substring(webhookSecret.length - 4));
-    console.log('[Paddle Debug] Signature header present:', !!signature);
-    console.log('[Paddle Debug] Raw body length:', rawBody?.length);
-    console.log('[Paddle Debug] Environment:', environment);
     const paddle = new Paddle(apiKey || 'placeholder', { environment });
     eventData = await paddle.webhooks.unmarshal(rawBody, webhookSecret, signature);
   } catch (e) {
