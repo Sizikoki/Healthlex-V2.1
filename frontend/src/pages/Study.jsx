@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Menu, X, Sparkles, Lock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -42,6 +42,162 @@ const UPPER_EXTREMITY_GROUPS = [
   { name: 'Ulna', ids: [23, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53] },
   { name: 'Ossa Manus', ids: [24, 25, 26, 54, 55, 56, 57, 58] }
 ];
+
+const TermCard = React.memo(({
+  term,
+  isLearned,
+  isExpanded,
+  morphemes,
+  onToggleMorphemes,
+  categoryBadgeText,
+  isTr,
+  currentLanguage,
+  t,
+  onMarkAsLearned,
+  onMorphemeClick
+}) => {
+  return (
+    <div
+      className="group relative bg-card text-card-foreground rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-border flex flex-col justify-between min-h-[260px]"
+    >
+      {/* Category Badge */}
+      <div className="absolute top-3 right-3 z-10">
+        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50">
+          {categoryBadgeText}
+        </span>
+      </div>
+
+      {/* Card body */}
+      <div className="p-5 flex flex-col h-full justify-between">
+        <div>
+          {/* Title */}
+          <div className="mb-2 pr-28 pt-1">
+            <Link to={`/study/${getTermSlug(term.term)}`} className="block">
+              <h3 className="text-lg font-bold leading-tight text-foreground font-serif tracking-tight hover:text-primary transition-colors cursor-pointer">
+                {formatMedicalTerm(term.term)}
+              </h3>
+            </Link>
+          </div>
+
+          {/* EN Label */}
+          {(term.english || term.turkish) && (
+            <div className="flex items-baseline gap-2 mb-3">
+              <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[9px] font-bold tracking-wider border border-border/50">
+                EN
+              </span>
+              <span className="text-xs font-medium text-muted-foreground leading-snug">
+                {term.english || term.turkish}
+              </span>
+            </div>
+          )}
+
+          {/* Divider */}
+          <div className="w-full h-px bg-border/60 mb-3" />
+
+          {/* Definition */}
+          <p className="text-sm text-foreground/90 leading-relaxed mb-4 line-clamp-3">
+            {isTr
+              ? (term.turkishDefinition || term.definition)
+              : (term.englishDefinition || term.turkishDefinition || term.definition)}
+          </p>
+        </div>
+
+        {/* Dynamic spacer pushes morphemes & footer cleanly to bottom */}
+        <div className="flex-1" />
+
+        {/* İnteraktif Morfem Analizi Rozetleri (Lazy - Tıklanınca Açılır) */}
+        {term.roots && (
+          <div className="mb-3 pt-2.5 border-t border-border/50">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleMorphemes(term);
+              }}
+              className="inline-flex items-center gap-1.5 text-[11px] font-bold text-primary hover:text-primary/80 transition-colors cursor-pointer py-0.5 group/btn"
+            >
+              <span>{isTr ? 'Morfem Yapısı' : 'Word Breakdown'}</span>
+              <span className="text-[10px] text-muted-foreground group-hover/btn:text-primary transition-transform">
+                {isExpanded ? '▲' : '▼'}
+              </span>
+            </button>
+
+            {isExpanded && (
+              <div className="flex flex-wrap items-center gap-1.5 mt-2 animate-in fade-in duration-150">
+                {morphemes && morphemes.length > 0 ? (
+                  morphemes.map((part, idx) => {
+                    const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
+
+                    return (
+                      <React.Fragment key={part.id || idx}>
+                        {idx > 0 && (
+                          <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => onMorphemeClick(part)}
+                          title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
+                        >
+                          <span className="font-semibold text-foreground">{part.text}</span>
+                          {meaningText && (
+                            <span
+                              title={meaningText}
+                              className="text-[10.5px] font-sans font-normal text-muted-foreground max-w-[200px] truncate"
+                            >
+                              ({meaningText})
+                            </span>
+                          )}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })
+                ) : (
+                  <span className="text-xs text-muted-foreground italic">
+                    {isTr ? 'Morfem çözümlenemedi' : 'No morpheme breakdown'}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Öğrenildi / Öğren Butonu & Detay Linki */}
+        <div className="flex items-center gap-2 pt-2 border-t border-border/40">
+          <Link
+            to={`/study/${getTermSlug(term.term)}`}
+            className="px-3 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-primary hover:bg-muted border border-border/60 transition-colors inline-flex items-center gap-1 shrink-0"
+            title={isTr ? 'Terim detayını ve morfem çözümlemesini gör' : 'View term details'}
+          >
+            <span>{isTr ? 'Detay' : 'Details'}</span>
+            <span>→</span>
+          </Link>
+          <button
+            onClick={() => onMarkAsLearned(term.id)}
+            data-term-id={term.id}
+            data-learned={isLearned ? 'true' : 'false'}
+            className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
+              isLearned
+                ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 focus:ring-emerald-400'
+                : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 focus:ring-primary'
+            }`}
+          >
+            {isLearned ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>{t('learned')}</span>
+              </>
+            ) : (
+              <span>{t('markLearned')}</span>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+});
 
 export const Study = () => {
   const navigate = useNavigate();
@@ -91,10 +247,13 @@ export const Study = () => {
   const [allTerms, setAllTerms] = useState(() => getAllTerms());
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(24);
+  const [expandedCardIds, setExpandedCardIds] = useState(() => new Set());
+  const [morphemesCache, setMorphemesCache] = useState({});
 
-  // Kategori veya arama değiştiğinde gösterilen sayıyı ilk 24'e sıfırla
+  // Kategori veya arama değiştiğinde gösterilen sayıyı ilk 24'e ve açık kartları sıfırla
   useEffect(() => {
     setVisibleCount(24);
+    setExpandedCardIds(new Set());
   }, [selectedCategoryId, searchQuery]);
 
   useEffect(() => {
@@ -225,171 +384,31 @@ export const Study = () => {
     }
   };
 
-  const TermCard = React.memo(({
-    term,
-    refreshTrigger,
-    categoryBadgeText,
-    isTr,
-    currentLanguage,
-    t,
-    onMarkAsLearned,
-    onMorphemeClick
-  }) => {
-    const [showMorphemes, setShowMorphemes] = useState(false);
-    const [morphemes, setMorphemes] = useState(null);
-
-    const progress = getTermProgress(term.id);
-
-    const handleToggleMorphemes = (e) => {
-      e.stopPropagation();
-      if (!showMorphemes && !morphemes) {
-        // Tıklanmadığı sürece hesaplanmaz (Lazy hesaplama)
-        const parsed = getTermMorphemes(term);
-        setMorphemes(parsed);
+  const handleToggleMorphemes = useCallback((term) => {
+    setExpandedCardIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(term.id)) {
+        next.delete(term.id);
+      } else {
+        next.add(term.id);
       }
-      setShowMorphemes((prev) => !prev);
-    };
+      return next;
+    });
 
-    return (
-      <div
-        key={`${term.id}-${refreshTrigger}`}
-        className="group relative bg-card text-card-foreground rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-border flex flex-col justify-between min-h-[260px]"
-      >
-        {/* Category Badge */}
-        <div className="absolute top-3 right-3 z-10">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50">
-            {categoryBadgeText}
-          </span>
-        </div>
-
-        {/* Card body */}
-        <div className="p-5 flex flex-col h-full justify-between">
-          <div>
-            {/* Title */}
-            <div className="mb-2 pr-28 pt-1">
-              <Link to={`/study/${getTermSlug(term.term)}`} className="block">
-                <h3 className="text-lg font-bold leading-tight text-foreground font-serif tracking-tight hover:text-primary transition-colors cursor-pointer">
-                  {formatMedicalTerm(term.term)}
-                </h3>
-              </Link>
-            </div>
-
-            {/* EN Label */}
-            {(term.english || term.turkish) && (
-              <div className="flex items-baseline gap-2 mb-3">
-                <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[9px] font-bold tracking-wider border border-border/50">
-                  EN
-                </span>
-                <span className="text-xs font-medium text-muted-foreground leading-snug">
-                  {term.english || term.turkish}
-                </span>
-              </div>
-            )}
-
-            {/* Divider */}
-            <div className="w-full h-px bg-border/60 mb-3" />
-
-            {/* Definition */}
-            <p className="text-sm text-foreground/90 leading-relaxed mb-4 line-clamp-3">
-              {isTr
-                ? (term.turkishDefinition || term.definition)
-                : (term.englishDefinition || term.turkishDefinition || term.definition)}
-            </p>
-
-            {/* İnteraktif Morfem Analizi Rozetleri (Lazy - Tıklanınca Açılır) */}
-            {term.roots && (
-              <div className="mb-4 pt-2.5 border-t border-border/50">
-                <button
-                  type="button"
-                  onClick={handleToggleMorphemes}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-primary hover:text-primary/80 transition-colors cursor-pointer py-0.5 group/btn"
-                >
-                  <span>{isTr ? 'Morfem Yapısı' : 'Word Breakdown'}</span>
-                  <span className="text-[10px] text-muted-foreground group-hover/btn:text-primary transition-transform">
-                    {showMorphemes ? '▲' : '▼'}
-                  </span>
-                </button>
-
-                {showMorphemes && (
-                  <div className="flex flex-wrap items-center gap-1.5 mt-2 animate-in fade-in duration-150">
-                    {morphemes && morphemes.length > 0 ? (
-                      morphemes.map((part, idx) => {
-                        const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
-
-                        return (
-                          <React.Fragment key={part.id || idx}>
-                            {idx > 0 && (
-                              <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
-                            )}
-                            <button
-                              type="button"
-                              onClick={() => onMorphemeClick(part)}
-                              title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
-                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
-                            >
-                              <span className="font-semibold text-foreground">{part.text}</span>
-                              {meaningText && (
-                                <span className="text-[10.5px] font-sans font-normal text-muted-foreground max-w-[120px] truncate">
-                                  ({meaningText})
-                                </span>
-                              )}
-                            </button>
-                          </React.Fragment>
-                        );
-                      })
-                    ) : (
-                      <span className="text-xs text-muted-foreground italic">
-                        {isTr ? 'Morfem çözümlenemedi' : 'No morpheme breakdown'}
-                      </span>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Öğrenildi / Öğren Butonu & Detay Linki */}
-          <div className="flex items-center gap-2 pt-2 border-t border-border/40 mt-auto">
-            <Link
-              to={`/study/${getTermSlug(term.term)}`}
-              className="px-3 py-2 rounded-xl text-xs font-semibold text-muted-foreground hover:text-primary hover:bg-muted border border-border/60 transition-colors inline-flex items-center gap-1 shrink-0"
-              title={isTr ? 'Terim detayını ve morfem çözümlemesini gör' : 'View term details'}
-            >
-              <span>{isTr ? 'Detay' : 'Details'}</span>
-              <span>→</span>
-            </Link>
-            <button
-              onClick={() => onMarkAsLearned(term.id)}
-              data-term-id={term.id}
-              data-learned={progress.learned ? 'true' : 'false'}
-              className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer ${
-                progress.learned
-                  ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 focus:ring-emerald-400'
-                  : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 focus:ring-primary'
-              }`}
-            >
-              {progress.learned ? (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                  <span>{t('learned')}</span>
-                </>
-              ) : (
-                <span>{t('markLearned')}</span>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  });
+    setMorphemesCache((prev) => {
+      if (prev[term.id]) return prev;
+      return { ...prev, [term.id]: getTermMorphemes(term) };
+    });
+  }, []);
 
   const renderTermCard = (term) => (
     <TermCard
-      key={`${term.id}-${refreshTrigger}`}
+      key={term.id}
       term={term}
-      refreshTrigger={refreshTrigger}
+      isLearned={getTermProgress(term.id).learned}
+      isExpanded={expandedCardIds.has(term.id)}
+      morphemes={morphemesCache[term.id]}
+      onToggleMorphemes={handleToggleMorphemes}
       categoryBadgeText={t(selectedCategory.key, selectedCategory.name)}
       isTr={isTr}
       currentLanguage={currentLanguage}
@@ -573,7 +592,7 @@ export const Study = () => {
                         {groupTerms.length}
                       </span>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                       {groupTerms.map(renderTermCard)}
                     </div>
                   </div>
@@ -583,7 +602,7 @@ export const Study = () => {
           ) : (
             /* Standart Liste Görünümü */
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 {terms.slice(0, visibleCount).map(renderTermCard)}
               </div>
               {terms.length > visibleCount && (

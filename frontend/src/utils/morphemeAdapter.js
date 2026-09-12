@@ -303,7 +303,70 @@ export function decomposeWord(wordText, parentMeaningMap = {}) {
 }
 
 /**
+ * Latince kelimelerin çekim ve hal eklerini normalize ederek kök formunu çıkarır.
+ * (örn. "ossis" ~ "os", "frontalis" ~ "frontale", "sphenoidalis" ~ "sphenoidale", "petrosa" ~ "petrosus")
+ */
+export function normalizeLatinStem(word) {
+  if (!word || typeof word !== 'string') return '';
+  let w = word.toLowerCase().trim().replace(/^[^\w\u00C0-\u017F]+|[^\w\u00C0-\u017F]+$/g, '');
+  if (!w) return '';
+
+  // Kemik / Kemikler istisnası: os, ossis, ossa, ossium -> 'os'
+  if (/^oss?(is|a|ium)?$/.test(w)) {
+    return 'os';
+  }
+
+  // -oidalis, -oidale, -oideus, -oidea, -oideum, -oidei, -oides -> 'oid'
+  w = w.replace(/(oidalis|oidale|oideus|oidea|oideum|oidei|oides)$/, 'oid');
+
+  // Adjectives / genitives / inflections:
+  // -alis, -ale, -aris, -are, -ibus, -orum, -arum, -ium
+  w = w.replace(/(alis|ale|aris|are|ibus|orum|arum|ium)$/, '');
+
+  // Comparative adjectives:
+  // -ioris, -iorem, -ioribus, -iores, -ior, -ius
+  w = w.replace(/(ioris|iorem|ioribus|iores|ior|ius)$/, '');
+
+  // Latin nominal and adjectival case endings:
+  // -us, -um, -is, -es, -ae, -am, -os, -as, -em
+  w = w.replace(/(us|um|is|es|ae|am|os|as|em)$/, '');
+
+  // Trailing single vowel endings: -a, -e, -i, -o, -u (kök uzunluğu > 3 ise)
+  if (w.length > 3) {
+    w = w.replace(/[aeiou]$/, '');
+  }
+
+  return w;
+}
+
+/**
+ * Terimden alınan ardışık kelimelerin (subWords), roots alanından çözümlenen
+ * bir kök girdisiyle (entry) birebir veya kök-normalize eşleşip eşleşmediğini kontrol eder.
+ */
+export function matchWordsWithEntry(subWords, entry) {
+  if (!subWords || !entry || subWords.length !== entry.wordCount) return false;
+
+  const subStr = subWords.join(' ').toLowerCase().replace(/^[^\w\u00C0-\u017F\s]+|[^\w\u00C0-\u017F\s]+$/g, '');
+  if (subStr === entry.rawKey) return true;
+
+  for (let j = 0; j < subWords.length; j++) {
+    const w = subWords[j].toLowerCase().replace(/^[^\w\u00C0-\u017F]+|[^\w\u00C0-\u017F]+$/g, '');
+    const ew = entry.words[j];
+    if (w === ew) continue;
+
+    const stemW = normalizeLatinStem(w);
+    const stemE = entry.normalizedStems[j];
+    if (stemW && stemE && stemW === stemE) continue;
+
+    return false;
+  }
+  return true;
+}
+
+/**
  * Terim nesnesini morfem dizisine dönüştürür (Çalışma ve Bilgi kartları için tüm parçaları döner).
+ * Önce ardışık kelime gruplarını (n-gram) roots alanıyla yaklaşık eşleştirir;
+ * eşleşirse tek parça gösterir, parçalanma fallback'ine düşmez.
  */
 export function getTermMorphemes(term) {
   if (!term) return [];
@@ -311,42 +374,111 @@ export function getTermMorphemes(term) {
   const primaryTermName = getPrimaryLatinTerm(rawTermName);
   if (!primaryTermName) return [];
 
-  // Build parent meaning map from term.roots (e.g. "os (kemik) + occiput (ense)")
+  // 1. roots alanını yapısal kök girdilerine dönüştür
   const parentMeaningMap = {};
+  const rootEntries = [];
+
   if (term.roots && typeof term.roots === 'string') {
     const rawRootParts = term.roots.split(/\+|\;/).map((p) => p.trim()).filter(Boolean);
     rawRootParts.forEach((rp) => {
       const pIdx = rp.indexOf('(');
       if (pIdx !== -1) {
-        const rootWord = rp.substring(0, pIdx).trim().toLowerCase().replace(/^-+|-+$/g, '');
+        const rawKey = rp.substring(0, pIdx).trim().toLowerCase().replace(/^-+|-+$/g, '');
         const cParen = rp.indexOf(')', pIdx);
         const meaningText = (cParen !== -1 ? rp.substring(pIdx + 1, cParen) : rp.substring(pIdx + 1)).trim();
-        if (rootWord && meaningText) {
-          const enMeaning = resolveMorphemeEn(rootWord, meaningText);
-          parentMeaningMap[rootWord] = { tr: meaningText, en: enMeaning };
+        if (rawKey && meaningText) {
+          const enMeaning = resolveMorphemeEn(rawKey, meaningText);
+          const entryWords = rawKey.split(/\s+/).map((w) => w.trim().toLowerCase()).filter(Boolean);
+
+          rootEntries.push({
+            rawKey,
+            words: entryWords,
+            wordCount: entryWords.length,
+            normalizedStems: entryWords.map((w) => normalizeLatinStem(w)),
+            meaning: { tr: meaningText, en: enMeaning },
+          });
+
+          parentMeaningMap[rawKey] = { tr: meaningText, en: enMeaning };
         }
       }
     });
   }
 
-  // Split clean primary term name into words (e.g. "Phalanges Pedis" -> ["Phalanges", "Pedis"])
+  // 2. Terimin Latince adını kelimelerine ayır
   const words = primaryTermName.split(/\s+/).map((w) => w.trim()).filter(Boolean);
   if (words.length === 0) return [];
 
   const sequence = [];
+  let i = 0;
 
-  words.forEach((word, wordIdx) => {
-    const parts = decomposeWord(word, parentMeaningMap);
+  while (i < words.length) {
+    let matched = false;
+
+    // A. Önce ardışık kelime gruplarıyla eşleşme dene (en uzundan 2 kelimeye doğru: n-gram)
+    const maxWindow = Math.min(words.length - i, 4);
+    for (let k = maxWindow; k >= 2; k--) {
+      const subWords = words.slice(i, i + k);
+      const matchingEntry = rootEntries.find((entry) => matchWordsWithEntry(subWords, entry));
+      if (matchingEntry) {
+        sequence.push({
+          id: `t_${term.id || 'term'}_w${i}_k${k}_${Math.random().toString(36).substr(2, 4)}`,
+          text: matchingEntry.rawKey,
+          meaning: matchingEntry.meaning,
+          partType: 'root',
+          wordIndex: i,
+        });
+        i += k;
+        matched = true;
+        break;
+      }
+    }
+
+    if (matched) continue;
+
+    // B. Tek kelimeli eşleşme (k = 1, roots alanındaki girdilerle)
+    const currentWord = words[i];
+    const subWords = [currentWord];
+    const singleMatchingEntry = rootEntries.find((entry) => matchWordsWithEntry(subWords, entry));
+    if (singleMatchingEntry) {
+      sequence.push({
+        id: `t_${term.id || 'term'}_w${i}_k1_${Math.random().toString(36).substr(2, 4)}`,
+        text: currentWord.toLowerCase(),
+        meaning: singleMatchingEntry.meaning,
+        partType: 'root',
+        wordIndex: i,
+      });
+      i += 1;
+      continue;
+    }
+
+    // C. MorphemesData sözlüğünde doğrudan tam kök araması
+    const lowerWord = currentWord.toLowerCase().replace(/^[^\w\u00C0-\u017F]+|[^\w\u00C0-\u017F]+$/g, '');
+    const directRootMeta = ROOT_LOOKUP[lowerWord] || COMMON_ROOT_DICTIONARY[lowerWord];
+    if (directRootMeta) {
+      sequence.push({
+        id: `t_${term.id || 'term'}_w${i}_direct_${Math.random().toString(36).substr(2, 4)}`,
+        text: lowerWord,
+        meaning: { tr: directRootMeta.tr || lowerWord, en: directRootMeta.en || lowerWord },
+        partType: 'root',
+        wordIndex: i,
+      });
+      i += 1;
+      continue;
+    }
+
+    // D. Fallback: decomposeWord (otomatik ön ek / kök / son ek heceleme)
+    const parts = decomposeWord(currentWord, parentMeaningMap);
     parts.forEach((p, partIdx) => {
       sequence.push({
-        id: `t_${term.id || 'term'}_w${wordIdx}_p${partIdx}_${Math.random().toString(36).substr(2, 4)}`,
+        id: `t_${term.id || 'term'}_w${i}_p${partIdx}_${Math.random().toString(36).substr(2, 4)}`,
         text: p.text,
         meaning: p.meaning,
         partType: p.partType,
-        wordIndex: wordIdx,
+        wordIndex: i,
       });
     });
-  });
+    i += 1;
+  }
 
   return sequence;
 }
