@@ -246,11 +246,15 @@ export const PricingView = () => {
           setUserData(data);
           setIsUserPro(checkIsPro(data));
         } else {
-          setUserData(null);
-          setIsUserPro(false);
+          const local = getUser();
+          setUserData(local);
+          setIsUserPro(checkIsPro(local));
         }
       }, (err) => {
         console.warn('[Pricing] Could not read user pro status:', err);
+        const local = getUser();
+        setUserData(local);
+        setIsUserPro(checkIsPro(local));
       });
       return () => unsub();
     } catch (e) {
