@@ -1,4 +1,4 @@
-﻿import { Paddle, Environment } from '@paddle/paddle-node-sdk';
+import { Paddle, Environment } from '@paddle/paddle-node-sdk';
 import admin from 'firebase-admin';
 
 function getFirebaseAdmin() {
@@ -110,7 +110,7 @@ export default async function handler(req, res) {
   try {
     const paddle = new Paddle(apiKey, { environment });
 
-    console.log([Paddle Upgrade] Updating subscription  to Pro price ...);
+    console.log(`[Paddle Upgrade] Updating subscription ${targetSubId} to Pro price ${proPriceId}...`);
 
     const updatedSubscription = await paddle.subscriptions.update(targetSubId, {
       items: [
