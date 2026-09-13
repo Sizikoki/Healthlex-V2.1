@@ -257,16 +257,26 @@ export const FAQ = () => {
     };
   }, [faqList, isTr]);
 
+  // Schema.org FAQPage JSON-LD <head> Enjeksiyonu
+  useEffect(() => {
+    const scriptId = 'healthlex-faq-schema-jsonld';
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schemaFaqJsonLd);
+
+    return () => {
+      const el = document.getElementById(scriptId);
+      if (el) el.remove();
+    };
+  }, [schemaFaqJsonLd]);
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col justify-between">
-      {/* Schema.org FAQPage JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaFaqJsonLd).replace(/</g, '\\u003c')
-        }}
-      />
-
       <div className="w-full">
         {/* Üst Başlık & Hero Banner */}
         <section className="border-b border-border bg-gradient-to-b from-card to-background py-12 md:py-16">
