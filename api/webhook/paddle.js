@@ -294,11 +294,21 @@ export default async function handler(req, res) {
         const sub = eventData.data;
         const status = sub?.status;
         console.log('[Paddle] subscription.updated status:', status);
+        const item = sub?.items?.[0];
+        const priceId = (item?.price?.id || '').toLowerCase();
+        const customPlanId = (sub?.customData?.planId || '').toLowerCase();
+        const basicPriceId = (process.env.PADDLE_PRICE_BASIC || '').toLowerCase();
+        const isBasic = priceId === basicPriceId || customPlanId === 'basic';
+        const isPro = !isBasic && (status === 'active' || status === 'trialing');
+
         await updateUserSubscription(
           sub?.customData?.userId,
           sub?.customData?.email || sub?.customer?.email,
           {
-            isPro: status === 'active' || status === 'trialing',
+            isPro,
+            isBasic,
+            planType: isBasic ? 'basic' : 'pro',
+            plan: isBasic ? 'Basic Membership' : 'Annual Pro Membership',
             subscriptionStatus: status || 'updated',
             paddleSubscriptionId: sub?.id || null,
             ...(status === 'active' || status === 'trialing' ? { pastDueSince: null } : {})

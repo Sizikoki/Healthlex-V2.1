@@ -136,27 +136,84 @@ export const Dashboard = () => {
     window.location.href = '/login';
   };
 
-  // Paddle Checkout
+  // Paddle Subscription Upgrade or Checkout
   const handleUpgrade = useCallback(async () => {
     if (!IS_PAYMENT_ACTIVE) {
       toast.info(isTr ? 'Ödeme sistemi yakında aktif olacak.' : 'Payment system coming soon.');
       return;
     }
+
+    const userId = firebaseUser?.uid || storedUser?.uid;
+    const email = firebaseUser?.email || storedUser?.email;
+    const paddleSubId = firestoreData?.paddleSubscriptionId || storedUser?.paddleSubscriptionId;
+
+    // Eğer mevcut bir Paddle aboneliği varsa: İkinci abonelik yaratmak yerine Paddle Subscriptions Update API ile güncelle
+    if (paddleSubId) {
+      const confirmUpgrade = window.confirm(
+        isTr
+          ? "Temel plandan Pro plana yükseltileceksiniz. Kalan süreniz mahsup edilerek fark tutarı kayıtlı kartınızdan tahsil edilecektir. Onaylıyor musunuz?"
+          : "You will upgrade from Basic to Pro. Unused time will be prorated and charged to your card on file. Proceed?"
+      );
+      if (!confirmUpgrade) return;
+
+      setCheckoutLoading(true);
+      try {
+        const response = await fetch('/api/subscription/upgrade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId,
+            customerEmail: email,
+            subscriptionId: paddleSubId
+          })
+        });
+
+        const data = await response.json();
+        if (response.ok && data.success) {
+          toast.success(
+            isTr
+              ? "Tebrikler! Planınız başarıyla Pro'ya yükseltildi 🎉"
+              : "Congratulations! Your plan has been upgraded to Pro 🎉"
+          );
+          return;
+        } else {
+          console.warn('[Upgrade] Direct subscription update returned error:', data);
+          toast.error(
+            data.message ||
+            (isTr
+              ? "Abonelik güncellenirken bir hata oluştu. Lütfen tekrar deneyin."
+              : "An error occurred while updating subscription. Please try again.")
+          );
+        }
+      } catch (err) {
+        console.error('[Upgrade] Error calling upgrade API:', err);
+        toast.error(
+          isTr
+            ? "Bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyiniz."
+            : "Connection error. Please try again later."
+        );
+      } finally {
+        setCheckoutLoading(false);
+      }
+      return;
+    }
+
+    // paddleSubscriptionId bulunamadıysa checkout aç
     setCheckoutLoading(true);
     try {
       await openPaddleCheckout({
         priceId: PADDLE_PRICE_ID,
-        customerEmail: firebaseUser?.email || storedUser?.email,
+        customerEmail: email,
         customData: {
           plan: 'Annual Pro Membership',
           planId: 'pro',
-          userId: firebaseUser?.uid || storedUser?.uid || 'unknown'
+          userId: userId || 'unknown'
         }
       });
     } finally {
       setCheckoutLoading(false);
     }
-  }, [firebaseUser, storedUser, isTr]);
+  }, [firebaseUser, storedUser, firestoreData, isTr]);
 
   // Loading State
   if (!authReady || subLoading) {
