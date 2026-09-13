@@ -14,6 +14,7 @@ import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
+import { getTermSlug } from '@/utils/termHelper';
 import { isCategoryUnlocked, checkIsPro } from '@/utils/planAccess';
 
 // Sabit kategori listesi
