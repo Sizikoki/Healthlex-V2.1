@@ -19,10 +19,10 @@ const TRANSLATIONS = {
     daysLeft: 'gün kaldı',
     currentPlan: 'MEVCUT PLAN',
     title: 'Sana uygun tarifeyi seç',
-    sub: 'Ücretsiz 3 gün boyunca dene. Sana uygun tarifeyi seç.',
+    sub: 'Temel ve Pro için 3 gün ₺0 deneme süresi. Dilediğin an tek tıkla iptal et.',
     titleVisitor: 'Terimleri parçala, anla, birleştir.',
-    subVisitor: '3 gün ücretsiz dene, kart bilgisi gerekmez. Sonra sana uygun tarifeyle devam et.',
-    noCardNote: 'Kart bilgisi gerekmez.',
+    subVisitor: 'Temel ve Pro için 3 gün ₺0 deneme. Dilediğin an tek tıkla iptal et, 3 gün sonra yıllık faturalandırılır.',
+    noCardNote: 'Bugün ₺0 çekilir · Dilediğin an iptal et.',
     startTrial: '3 gün ücretsiz dene',
     save: '2 ay bedava',
     tabNames: ['Ücretsiz', 'Temel', 'Pro', 'Ömür'],
@@ -61,8 +61,8 @@ const TRANSLATIONS = {
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
-        noteYr: 'Yıllık faturalandırılır · ₺66/ay',
-        cta: 'Temel’i seç',
+        noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
+        cta: '3 Gün Ücretsiz Dene',
         feats: [
           ['✓', 'İlk 3 kategori · 100 morfem'],
           ['✓', 'Flashcard ve Eşleştirme oyunları'],
@@ -78,9 +78,9 @@ const TRANSLATIONS = {
         mo: null,
         yrp: '₺2.000',
         old: '₺4.500',
-        noteYr: 'Yıllık faturalandırılır · ₺167/ay',
+        noteYr: '3 gün ücretsiz · Sonra ₺2.000/yıl (₺167/ay)',
         noteMo: 'Sadece yıllık · ₺167/ay',
-        cta: "Pro'ya geç",
+        cta: '3 Gün Ücretsiz Dene',
         feats: [
           ['✓', '10 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
@@ -95,8 +95,8 @@ const TRANSLATIONS = {
         badge: 'SINIRLI SÜRE · %25',
         old: '₺8.000',
         once: '₺5.990',
-        note: 'Tek ödeme · Süresiz erişim',
-        cta: 'Ömür boyu al',
+        note: 'Tek ödeme · Deneme süresi yoktur (Doğrudan satın alma)',
+        cta: 'Ömür Boyu Satın Al',
         feats: [
           ['✓', '10 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
@@ -128,10 +128,10 @@ const TRANSLATIONS = {
     daysLeft: 'days left',
     currentPlan: 'CURRENT PLAN',
     title: 'Pick the plan that fits',
-    sub: 'Try free for 3 days. Choose the plan that fits you.',
+    sub: '3-day $0 trial for Basic and Pro. Cancel anytime in one click.',
     titleVisitor: 'Split, understand, rebuild terms.',
-    subVisitor: 'Try 3 days free, no card required. Then continue with the plan that fits you.',
-    noCardNote: 'No card required.',
+    subVisitor: '3 days $0 trial for Basic and Pro. Cancel anytime in 1 click, billed annually after 3 days.',
+    noCardNote: '$0 billed today · Cancel anytime in one click.',
     startTrial: 'Try 3 days free',
     save: '2 months free',
     tabNames: ['Free', 'Basic', 'Pro', 'Lifetime'],
@@ -152,7 +152,7 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Free Trial',
-        tag: 'Full access for 3 days, no card required.',
+        tag: 'Full access for 3 days, cancel anytime.',
         note: 'Ends automatically after 3 days',
         cta: 'Start trial',
         ctaCurrent: 'Current Plan',
@@ -170,8 +170,8 @@ const TRANSLATIONS = {
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
-        noteYr: 'Billed yearly · ₺66/mo',
-        cta: 'Choose Basic',
+        noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
+        cta: 'Start 3-Day Free Trial',
         feats: [
           ['✓', 'First 3 categories · 100 morphemes'],
           ['✓', 'Flashcard and Matching games'],
@@ -187,9 +187,9 @@ const TRANSLATIONS = {
         mo: null,
         yrp: '₺2,000',
         old: '₺4,500',
-        noteYr: 'Billed yearly · ₺167/mo',
+        noteYr: '3 days free · Then ₺2,000/yr (₺167/mo)',
         noteMo: 'Yearly only · ₺167/mo',
-        cta: 'Go Pro',
+        cta: 'Start 3-Day Free Trial',
         feats: [
           ['✓', '10 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
@@ -204,8 +204,8 @@ const TRANSLATIONS = {
         badge: 'LIMITED TIME · 25% OFF',
         old: '₺8,000',
         once: '₺5,990',
-        note: 'One payment · Lifetime access',
-        cta: 'Get Lifetime',
+        note: 'One payment · No trial period (Direct purchase)',
+        cta: 'Buy Lifetime Plan',
         feats: [
           ['✓', '10 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
@@ -328,8 +328,8 @@ export const PricingView = () => {
     // Auth Guard — Oturumu olmayan misafir kullanıcılar için
     if (!currentUser) {
       const loginMsg = isTr
-        ? 'Satın alma işlemine devam etmek için lütfen önce giriş yapın veya kayıt olun.'
-        : 'Please sign in or register to continue with your purchase.';
+        ? 'İşleme devam etmek için lütfen önce giriş yapın veya ücretsiz hesap oluşturun.'
+        : 'Please sign in or create a free account to continue.';
       toast.info(loginMsg, { duration: 4000 });
       navigate('/login?redirect=/pricing');
       return;

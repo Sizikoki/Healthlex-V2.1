@@ -44,7 +44,7 @@ export const Navbar = () => {
     if (!uid) {
       const localUser = getUser();
       const isBasicPlan = localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic');
-      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active'));
+      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active' || localUser?.subscriptionStatus === 'trialing'));
       setIsBasic(isBasicPlan);
       return;
     }
@@ -60,6 +60,7 @@ export const Navbar = () => {
               data.isPro === true ||
               data.subscriptionStatus === 'active' ||
               data.subscriptionStatus === 'pro' ||
+              data.subscriptionStatus === 'trialing' ||
               data.isLifetime === true
             );
           setIsPro(proActive);

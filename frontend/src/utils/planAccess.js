@@ -16,14 +16,58 @@ export const LOCKED_GAMES = [
   'morpheme'
 ];
 
+export const PAST_DUE_GRACE_PERIOD_MS = 5 * 24 * 60 * 60 * 1000; // 5 tam gün ek süre
+
+/**
+ * Kullanıcının ödeme gecikmesi durumunu ve 5 günlük ek süresini kontrol eder
+ */
+export const getPastDueState = (userData) => {
+  if (!userData) return { isPastDue: false, isWithinGracePeriod: false, daysLeft: 0 };
+  const status = (userData.subscriptionStatus || '').toLowerCase();
+  if (status !== 'past_due') return { isPastDue: false, isWithinGracePeriod: false, daysLeft: 0 };
+
+  const pastDueSince = userData.pastDueSince ? new Date(userData.pastDueSince).getTime() : Date.now();
+  const elapsed = Math.max(0, Date.now() - pastDueSince);
+  const remainingMs = Math.max(0, PAST_DUE_GRACE_PERIOD_MS - elapsed);
+  const isWithinGracePeriod = remainingMs > 0;
+  const daysLeft = Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+
+  return {
+    isPastDue: true,
+    isWithinGracePeriod,
+    daysLeft,
+    pastDueSince
+  };
+};
+
 /**
  * Kullanıcının Pro (Tam erişim) durumunda olup olmadığını belirler
  */
 export const checkIsPro = (userData) => {
   if (!userData) return false;
-  const status = userData.subscriptionStatus;
-  if (status === 'trial' || status === 'trialing' || status === 'free') return false;
-  if (status === 'active' || status === 'pro') return true;
+
+  // Ömür boyu VIP
+  if (userData.isLifetime === true) return true;
+
+  // Temel plan ise Pro değildir
+  if (userData.isBasic === true) return false;
+
+  const status = (userData.subscriptionStatus || '').toLowerCase();
+
+  // Kart gecikmesi (past_due) - 5 günlük ek süre kuralı
+  if (status === 'past_due') {
+    const { isWithinGracePeriod } = getPastDueState(userData);
+    return isWithinGracePeriod && userData.isPro === true;
+  }
+
+  // İptal edilmiş veya süresi bitmiş
+  if (status === 'canceled' || status === 'free') return false;
+
+  // Paddle deneme (trialing) veya aktif (active) abonelik
+  if (status === 'active' || status === 'pro' || status === 'trialing') {
+    return userData.isPro === true || !userData.isBasic;
+  }
+
   if (userData.isPro === true) return true;
   return false;
 };

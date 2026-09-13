@@ -11,7 +11,7 @@ const PRICING_CONTENT = {
   tr: {
     eyebrow: 'TARİFELER',
     title: 'Sana uygun tarifeyi seç',
-    sub: 'Tüm kütüphaneye ve oyunlara eriş. İster yıllık, ister tek seferde ömür boyu.',
+    sub: 'Temel ve Pro için 3 gün ₺0 deneme süresi. Dilediğin an iptal et.',
     monthly: 'Aylık',
     yearly: 'Yıllık',
     saveBadge: '%55',
@@ -29,8 +29,8 @@ const PRICING_CONTENT = {
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
-        noteYr: 'Yıllık faturalandırılır · ₺66/ay',
-        cta: 'Temel’i seç',
+        noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
+        cta: '3 Gün Ücretsiz Dene',
         isPro: false,
         feats: [
           ['✓', 'İlk 3 kategori · 100 morfem'],
@@ -48,9 +48,9 @@ const PRICING_CONTENT = {
         mo: null,
         yrp: '₺2.000',
         old: '₺4.500',
-        noteYr: 'Yıllık faturalandırılır · ₺167/ay',
+        noteYr: '3 gün ücretsiz · Sonra ₺2.000/yıl (₺167/ay)',
         noteMo: 'Sadece yıllık · ₺167/ay',
-        cta: "Pro'ya geç",
+        cta: '3 Gün Ücretsiz Dene',
         isPro: true,
         feats: [
           ['✓', '10 kategori · 571+ morfem'],
@@ -67,8 +67,8 @@ const PRICING_CONTENT = {
         badge: 'SINIRLI SÜRE · %25',
         old: '₺8.000',
         once: '₺5.990',
-        note: 'Tek ödeme · Süresiz erişim',
-        cta: 'Ömür boyu al',
+        note: 'Tek ödeme · Deneme süresi yoktur (Doğrudan satın alma)',
+        cta: 'Ömür Boyu Satın Al',
         isPro: false,
         isLife: true,
         feats: [
@@ -84,7 +84,7 @@ const PRICING_CONTENT = {
   en: {
     eyebrow: 'PRICING',
     title: 'Pick the plan that fits',
-    sub: 'Full access to library and games. Choose yearly or pay once for lifetime.',
+    sub: '3-day $0 trial for Basic and Pro. Cancel anytime in 1 click.',
     monthly: 'Monthly',
     yearly: 'Yearly',
     saveBadge: '55% OFF',
@@ -102,8 +102,8 @@ const PRICING_CONTENT = {
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
-        noteYr: 'Billed yearly · ₺66/mo',
-        cta: 'Choose Basic',
+        noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
+        cta: 'Start 3-Day Free Trial',
         isPro: false,
         feats: [
           ['✓', 'First 3 categories · 100 morphemes'],
@@ -121,9 +121,9 @@ const PRICING_CONTENT = {
         mo: null,
         yrp: '₺2,000',
         old: '₺4,500',
-        noteYr: 'Billed yearly · ₺167/mo',
+        noteYr: '3 days free · Then ₺2,000/yr (₺167/mo)',
         noteMo: 'Yearly only · ₺167/mo',
-        cta: 'Go Pro',
+        cta: 'Start 3-Day Free Trial',
         isPro: true,
         feats: [
           ['✓', '10 categories · 571+ morphemes'],
@@ -140,8 +140,8 @@ const PRICING_CONTENT = {
         badge: 'LIMITED TIME · 25% OFF',
         old: '₺8,000',
         once: '₺5,990',
-        note: 'One payment · Lifetime access',
-        cta: 'Get Lifetime',
+        note: 'One payment · No trial period (Direct purchase)',
+        cta: 'Buy Lifetime Plan',
         isPro: false,
         isLife: true,
         feats: [
@@ -173,8 +173,8 @@ export const HomePricingSection = () => {
     const currentUser = auth?.currentUser || getUser();
     if (!currentUser) {
       const loginMsg = isTr
-        ? 'Satın alma işlemine devam etmek için lütfen önce giriş yapın veya kayıt olun.'
-        : 'Please sign in or register to continue with your purchase.';
+        ? 'İşleme devam etmek için lütfen önce giriş yapın veya ücretsiz hesap oluşturun.'
+        : 'Please sign in or create a free account to continue.';
       toast.info(loginMsg, { duration: 4000 });
       navigate(`/login?redirect=${encodeURIComponent('/#fiyat')}`);
       return;

@@ -6,6 +6,7 @@ import { collection, query, where, getDocs, writeBatch, doc, onSnapshot } from '
 import { auth, db } from '@/firebase/config';
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
+import { checkIsPro } from '@/utils/planAccess';
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export const Profile = () => {
     const uid = auth?.currentUser?.uid || user?.uid;
     if (!uid) {
       const localUser = getUser();
-      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      setIsPro(checkIsPro(localUser));
       return;
     }
 
@@ -52,11 +53,7 @@ export const Profile = () => {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setUserDocData(data);
-          const proActive =
-            data.isPro === true ||
-            data.subscriptionStatus === 'active' ||
-            data.subscriptionStatus === 'pro';
-          setIsPro(proActive);
+          setIsPro(checkIsPro(data));
         } else {
           setIsPro(false);
         }

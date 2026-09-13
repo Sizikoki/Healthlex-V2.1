@@ -26,7 +26,7 @@ import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getUser } from '@/utils/storage';
-import { isMorphemeUnlocked } from '@/utils/planAccess';
+import { isMorphemeUnlocked, checkIsPro } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
@@ -90,7 +90,7 @@ export const MorphemeExplorer = () => {
     const uid = auth?.currentUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
-      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      setIsPro(checkIsPro(localUser));
       return;
     }
 
@@ -98,12 +98,7 @@ export const MorphemeExplorer = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          const proActive =
-            data.isPro === true ||
-            data.subscriptionStatus === 'active' ||
-            data.subscriptionStatus === 'pro';
-          setIsPro(proActive);
+          setIsPro(checkIsPro(docSnap.data()));
         } else {
           setIsPro(false);
         }

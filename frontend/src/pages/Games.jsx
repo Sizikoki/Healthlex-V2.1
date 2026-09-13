@@ -13,7 +13,7 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS } from '@/utils/planAccess';
+import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 const GAMES_CATEGORY_KEY = 'healthlex_selected_game_category';
@@ -53,7 +53,7 @@ export const Games = () => {
     const uid = auth?.currentUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
-      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      setIsPro(checkIsPro(localUser));
       return;
     }
 
@@ -61,12 +61,7 @@ export const Games = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          const proActive =
-            data.isPro === true ||
-            data.subscriptionStatus === 'active' ||
-            data.subscriptionStatus === 'pro';
-          setIsPro(proActive);
+          setIsPro(checkIsPro(docSnap.data()));
         } else {
           setIsPro(false);
         }

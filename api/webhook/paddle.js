@@ -275,13 +275,17 @@ export default async function handler(req, res) {
         const pid = (sub?.customData?.planId || '').toLowerCase();
         const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
         const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
-        console.log('[Paddle] subscription.created customer:', sub?.customerId);
+        const status = sub?.status || 'active';
+        console.log('[Paddle] subscription.created customer:', sub?.customerId, 'status:', status);
         await updateUserSubscription(uid, email, {
           isPro: !isBasic, isBasic, isLifetime,
           planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
-          subscriptionStatus: 'active', plan,
+          subscriptionStatus: status, plan,
           paddleSubscriptionId: sub?.id || null,
-          paddleCustomerId: sub?.customerId || null
+          paddleCustomerId: sub?.customerId || null,
+          trialStartDate: sub?.currentBillingPeriod?.startsAt || new Date().toISOString(),
+          trialEndDate: sub?.nextBilledAt || null,
+          pastDueSince: null
         });
         break;
       }
@@ -296,7 +300,8 @@ export default async function handler(req, res) {
           {
             isPro: status === 'active' || status === 'trialing',
             subscriptionStatus: status || 'updated',
-            paddleSubscriptionId: sub?.id || null
+            paddleSubscriptionId: sub?.id || null,
+            ...(status === 'active' || status === 'trialing' ? { pastDueSince: null } : {})
           }
         );
         break;
@@ -319,7 +324,10 @@ export default async function handler(req, res) {
         await updateUserSubscription(
           sub?.customData?.userId,
           sub?.customData?.email || sub?.customer?.email,
-          { subscriptionStatus: 'past_due' }
+          {
+            subscriptionStatus: 'past_due',
+            pastDueSince: new Date().toISOString()
+          }
         );
         break;
       }

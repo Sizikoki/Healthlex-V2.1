@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS } from '@/utils/planAccess';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro } from '@/utils/planAccess';
 
 export const MatchGame = () => {
   const { currentLanguage, t } = useLanguage();
@@ -24,7 +24,7 @@ export const MatchGame = () => {
     ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
     : null;
   const localUser = getUser();
-  const isPro = previewRole === 'pro' || localUser?.isPro === true || localUser?.subscriptionStatus === 'active';
+  const isPro = previewRole === 'pro' || checkIsPro(localUser);
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);

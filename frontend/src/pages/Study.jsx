@@ -14,8 +14,7 @@ import { getAllTerms } from '@/data/medicalTerms';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
-import { getTermSlug } from '@/utils/termHelper';
-import { isCategoryUnlocked } from '@/utils/planAccess';
+import { isCategoryUnlocked, checkIsPro } from '@/utils/planAccess';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -214,7 +213,7 @@ export const Study = () => {
     const uid = auth?.currentUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
-      setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      setIsPro(checkIsPro(localUser));
       return;
     }
 
@@ -222,12 +221,7 @@ export const Study = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          const proActive =
-            data.isPro === true ||
-            data.subscriptionStatus === 'active' ||
-            data.subscriptionStatus === 'pro';
-          setIsPro(proActive);
+          setIsPro(checkIsPro(docSnap.data()));
         } else {
           setIsPro(false);
         }

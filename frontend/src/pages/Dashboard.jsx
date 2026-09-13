@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame, Sparkles, Clock } from 'lucide-react';
 import { getStats, getUser, getStreak, logout, formatTurkishName, getUserTrialState } from '@/utils/storage';
+import { getPastDueState } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -30,8 +31,16 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
       return 'basic';
     }
 
-    if (userData.isPro === true || status === 'active' || status === 'pro') {
+    if (userData.isPro === true || status === 'active' || status === 'pro' || status === 'trialing') {
       return 'pro';
+    }
+
+    if (status === 'past_due') {
+      const pastDue = getPastDueState(userData);
+      if (pastDue.isWithinGracePeriod) {
+        return userData.isBasic ? 'basic' : 'pro';
+      }
+      return 'expired';
     }
   }
 
@@ -103,6 +112,7 @@ export const Dashboard = () => {
   const storedUser = getUser();
   const trialState = getUserTrialState(firebaseUser || storedUser);
   const currentPlan = resolveUserPlan(firestoreData, trialState, previewRole);
+  const pastDueState = getPastDueState(firestoreData);
   const isPro = currentPlan === 'pro' || currentPlan === 'lifetime';
   const rawName =
     firestoreData?.displayName ||
@@ -234,6 +244,41 @@ export const Dashboard = () => {
             </button>
           </div>
         </div>
+
+        {/* Ödeme Gecikmesi / 5 Günlük Ek Süre (Grace Period) Uyarısı */}
+        {!subLoading && pastDueState.isPastDue && (
+          <div className={`mb-6 rounded-xl p-4 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs ${
+            pastDueState.isWithinGracePeriod
+              ? 'bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-200'
+              : 'bg-destructive/10 border-destructive/40 text-destructive'
+          }`}>
+            <div className="flex items-start sm:items-center gap-3">
+              <span className="text-2xl flex-shrink-0">{pastDueState.isWithinGracePeriod ? '⚠️' : '🚫'}</span>
+              <div>
+                <p className="font-bold text-sm">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
+                    : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
+                </p>
+                <p className="text-xs opacity-90 mt-0.5">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr
+                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
+                        : `Your subscription renewal failed. Please update your payment method within ${pastDueState.daysLeft} days to avoid service interruption.`)
+                    : (isTr
+                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin veya yeni bir plan seçin.'
+                        : 'Access is restricted because the 5-day grace period has expired. Please update your card or choose a plan.')}
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/pricing"
+              className="flex-shrink-0 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
+            >
+              {isTr ? 'Kartı Güncelle' : 'Update Card'}
+            </Link>
+          </div>
+        )}
 
         {/* Abonelik Durumu Kartı */}
         {!subLoading && (

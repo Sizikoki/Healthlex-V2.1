@@ -5,7 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { isLoggedIn, canGuestPlay, getUser } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
-import { isGameUnlocked } from '@/utils/planAccess';
+import { isGameUnlocked, checkIsPro } from '@/utils/planAccess';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { toast } from 'sonner';
@@ -25,7 +25,7 @@ export const Quiz = () => {
       if (previewRole === 'pro') return true;
       if (previewRole === 'basic') return false;
       const local = getUser();
-      return local?.isPro === true || local?.subscriptionStatus === 'active' || local?.subscriptionStatus === 'pro';
+      return checkIsPro(local);
     } catch (e) {
       return false;
     }
@@ -41,8 +41,7 @@ export const Quiz = () => {
     try {
       const unsub = onSnapshot(doc(db, 'users', uid), (snap) => {
         if (snap.exists()) {
-          const data = snap.data();
-          setIsPro(data.isPro === true || data.subscriptionStatus === 'active' || data.subscriptionStatus === 'pro');
+          setIsPro(checkIsPro(snap.data()));
         }
       });
       return () => unsub();
