@@ -1,0 +1,4374 @@
+{
+  "toplamIncelenen": 61,
+  "exactUpdatesCount": 2,
+  "belirsizEslesmelerCount": 54,
+  "brandNewCount": 5,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Maxilla",
+      "matchedPart": "Maxilla",
+      "firestoreDocId": "010",
+      "firestoreId": 10,
+      "existingTerm": "Maxilla",
+      "existingEnglish": "Maxilla",
+      "existingSubcategory": "face_bones"
+    },
+    {
+      "itemNumber": 43,
+      "inputTerm": "Os palatinum",
+      "matchedPart": "Os palatinum",
+      "firestoreDocId": "011",
+      "firestoreId": 11,
+      "existingTerm": "Os Palatinum",
+      "existingEnglish": "Palatine Bone",
+      "existingSubcategory": "face_bones"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Corpus maxillae",
+      "coreTerm": "Corpus maxillae",
+      "coreTokens": [
+        "corpus",
+        "maxillae"
+      ],
+      "potentialMatchCount": 3,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "517",
+          "firestoreId": 517,
+          "existingTerm": "Corpus Ossis Sphenoidalis",
+          "existingEnglish": "Body of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "corpus"
+          ]
+        },
+        {
+          "firestoreDocId": "684",
+          "firestoreId": 684,
+          "existingTerm": "Corpus Mandibulae",
+          "existingEnglish": "Body of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "corpus"
+          ]
+        },
+        {
+          "firestoreDocId": "721",
+          "firestoreId": 721,
+          "existingTerm": "Corpus Ossis Hyoidei",
+          "existingEnglish": "Body of Hyoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "corpus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 3 terim mevcut."
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Facies orbitalis (Maxilla)",
+      "coreTerm": "Facies orbitalis",
+      "coreTokens": [
+        "facies",
+        "orbitalis"
+      ],
+      "potentialMatchCount": 34,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "472",
+          "firestoreId": 472,
+          "existingTerm": "Facies Orbitalis Ossis Frontalis",
+          "existingEnglish": "Orbital Surface of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "facies",
+            "orbitalis"
+          ]
+        },
+        {
+          "firestoreDocId": "545",
+          "firestoreId": 545,
+          "existingTerm": "Facies Orbitalis Ossis Sphenoidalis",
+          "existingEnglish": "Orbital Surface of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "facies",
+            "orbitalis"
+          ]
+        },
+        {
+          "firestoreDocId": "676",
+          "firestoreId": 676,
+          "existingTerm": "Facies Orbitalis Ossis Zygomatici",
+          "existingEnglish": "Orbital Surface of Zygomatic Bone",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "facies",
+            "orbitalis"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 34 terim mevcut."
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Canalis infraorbitalis",
+      "coreTerm": "Canalis infraorbitalis",
+      "coreTokens": [
+        "canalis",
+        "infraorbitalis"
+      ],
+      "potentialMatchCount": 16,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "168",
+          "firestoreId": 168,
+          "existingTerm": "Canalis Vertebralis",
+          "existingEnglish": "Vertebral Canal (Spinal Canal)",
+          "existingSubcategory": "spine_joints",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "431",
+          "firestoreId": 431,
+          "existingTerm": "Canalis Nutricius",
+          "existingEnglish": "Nutrient Canal",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "494",
+          "firestoreId": 494,
+          "existingTerm": "Canalis Condylaris",
+          "existingEnglish": "Condylar Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "495",
+          "firestoreId": 495,
+          "existingTerm": "Canalis Nervi Hypoglossi",
+          "existingEnglish": "Hypoglossal Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "536",
+          "firestoreId": 536,
+          "existingTerm": "Canalis Opticus",
+          "existingEnglish": "Optic Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "568",
+          "firestoreId": 568,
+          "existingTerm": "Canalis Pterygoideus",
+          "existingEnglish": "Pterygoid Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "577",
+          "firestoreId": 577,
+          "existingTerm": "Canalis Nervi Facialis",
+          "existingEnglish": "Facial Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        },
+        {
+          "firestoreDocId": "578",
+          "firestoreId": 578,
+          "existingTerm": "Geniculum Canalis Nervi Facialis",
+          "existingEnglish": "Geniculum of Facial Canal",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "canalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 16 terim mevcut."
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Sulcus infraorbitalis",
+      "coreTerm": "Sulcus infraorbitalis",
+      "coreTokens": [
+        "sulcus",
+        "infraorbitalis"
+      ],
+      "potentialMatchCount": 30,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "071",
+          "firestoreId": 71,
+          "existingTerm": "Sulcus Intertubercularis",
+          "existingEnglish": "Intertubercular Sulcus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "074",
+          "firestoreId": 74,
+          "existingTerm": "Sulcus Nervi Radialis",
+          "existingEnglish": "Radial Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "087",
+          "firestoreId": 87,
+          "existingTerm": "Sulcus Musculi Subclavii",
+          "existingEnglish": "Subclavian Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "434",
+          "firestoreId": 434,
+          "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+          "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "435",
+          "firestoreId": 435,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "436",
+          "firestoreId": 436,
+          "existingTerm": "Sulcus Arteriae Meningeae Mediae Ossis Parietalis",
+          "existingEnglish": "Groove for Middle Meningeal Artery of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "466",
+          "firestoreId": 466,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Frontalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "487",
+          "firestoreId": 487,
+          "existingTerm": "Sulcus Sinus Petrosi Inferioris Ossis Occipitalis",
+          "existingEnglish": "Groove for Inferior Petrosal Sinus of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 30 terim mevcut."
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Margo infraorbitalis (Maxilla)",
+      "coreTerm": "Margo infraorbitalis",
+      "coreTokens": [
+        "margo",
+        "infraorbitalis"
+      ],
+      "potentialMatchCount": 27,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "031",
+          "firestoreId": 31,
+          "existingTerm": "Margo Anterior Radii",
+          "existingEnglish": "Anterior Border of Radius / Anterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "033",
+          "firestoreId": 33,
+          "existingTerm": "Margo Interosseus Radii",
+          "existingEnglish": "Interosseous Border of Radius / Interosseous Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "034",
+          "firestoreId": 34,
+          "existingTerm": "Margo Posterior Radii",
+          "existingEnglish": "Posterior Border of Radius / Posterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "048",
+          "firestoreId": 48,
+          "existingTerm": "Margo Interosseus Ulnae",
+          "existingEnglish": "Interosseous Border of Ulna / Interosseous Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "049",
+          "firestoreId": 49,
+          "existingTerm": "Margo Anterior Ulnae",
+          "existingEnglish": "Anterior Border of Ulna / Anterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "050",
+          "firestoreId": 50,
+          "existingTerm": "Margo Posterior Ulnae",
+          "existingEnglish": "Posterior Border of Ulna / Posterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "095",
+          "firestoreId": 95,
+          "existingTerm": "Margo Lateralis Scapulae",
+          "existingEnglish": "Lateral Border of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "097",
+          "firestoreId": 97,
+          "existingTerm": "Margo Medialis Scapulae",
+          "existingEnglish": "Medial Border of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 27 terim mevcut."
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Facies anterior (Maxilla)",
+      "coreTerm": "Facies anterior",
+      "coreTokens": [
+        "facies",
+        "anterior"
+      ],
+      "potentialMatchCount": 37,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies",
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies",
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "589",
+          "firestoreId": 589,
+          "existingTerm": "Facies Anterior Partis Petrosae",
+          "existingEnglish": "Anterior Surface of Petrous Part",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "facies",
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "031",
+          "firestoreId": 31,
+          "existingTerm": "Margo Anterior Radii",
+          "existingEnglish": "Anterior Border of Radius / Anterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "049",
+          "firestoreId": 49,
+          "existingTerm": "Margo Anterior Ulnae",
+          "existingEnglish": "Anterior Border of Ulna / Anterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 37 terim mevcut."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Foramen infraorbitale",
+      "coreTerm": "Foramen infraorbitale",
+      "coreTokens": [
+        "foramen",
+        "infraorbitale"
+      ],
+      "potentialMatchCount": 17,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "169",
+          "firestoreId": 169,
+          "existingTerm": "Foramen Intervertebrale",
+          "existingEnglish": "Intervertebral Foramen",
+          "existingSubcategory": "spine_joints",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "430",
+          "firestoreId": 430,
+          "existingTerm": "Foramen Nutricium",
+          "existingEnglish": "Nutrient Foramen",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "450",
+          "firestoreId": 450,
+          "existingTerm": "Foramen Parietale",
+          "existingEnglish": "Parietal Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "467",
+          "firestoreId": 467,
+          "existingTerm": "Foramen Caecum",
+          "existingEnglish": "Foramen Caecum",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "481",
+          "firestoreId": 481,
+          "existingTerm": "Foramen Magnum",
+          "existingEnglish": "Foramen Magnum",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "550",
+          "firestoreId": 550,
+          "existingTerm": "Foramen Rotundum",
+          "existingEnglish": "Foramen Rotundum",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "551",
+          "firestoreId": 551,
+          "existingTerm": "Foramen Ovale",
+          "existingEnglish": "Foramen Ovale",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        },
+        {
+          "firestoreDocId": "552",
+          "firestoreId": 552,
+          "existingTerm": "Foramen Venosum",
+          "existingEnglish": "Sphenoidal Emissary Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramen"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 17 terim mevcut."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Fossa canina",
+      "coreTerm": "Fossa canina",
+      "coreTokens": [
+        "fossa",
+        "canina"
+      ],
+      "potentialMatchCount": 17,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "059",
+          "firestoreId": 59,
+          "existingTerm": "Fossa Infraspinata",
+          "existingEnglish": "Infraspinous Fossa",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "066",
+          "firestoreId": 66,
+          "existingTerm": "Fossa Radialis",
+          "existingEnglish": "Radial Fossa",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "070",
+          "firestoreId": 70,
+          "existingTerm": "Fossa Olecrani",
+          "existingEnglish": "Olecranon Fossa",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "082",
+          "firestoreId": 82,
+          "existingTerm": "Fossa Coronoidea",
+          "existingEnglish": "Coronoid Fossa",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "096",
+          "firestoreId": 96,
+          "existingTerm": "Fossa Subscapularis",
+          "existingEnglish": "Subscapular Fossa",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "172",
+          "firestoreId": 172,
+          "existingTerm": "Fossa Mandibularis",
+          "existingEnglish": "Mandibular Fossa",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "475",
+          "firestoreId": 475,
+          "existingTerm": "Fossa Glandulae Lacrimalis",
+          "existingEnglish": "Fossa for Lacrimal Gland",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        },
+        {
+          "firestoreDocId": "496",
+          "firestoreId": 496,
+          "existingTerm": "Fossa Condylaris",
+          "existingEnglish": "Condylar Fossa",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "fossa"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 17 terim mevcut."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Incisura nasalis (Maxilla)",
+      "coreTerm": "Incisura nasalis",
+      "coreTokens": [
+        "incisura",
+        "nasalis"
+      ],
+      "potentialMatchCount": 24,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "038",
+          "firestoreId": 38,
+          "existingTerm": "Incisura Ulnaris",
+          "existingEnglish": "Ulnar Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "042",
+          "firestoreId": 42,
+          "existingTerm": "Incisura Trochlearis",
+          "existingEnglish": "Trochlear Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "044",
+          "firestoreId": 44,
+          "existingTerm": "Incisura Radialis",
+          "existingEnglish": "Radial Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "458",
+          "firestoreId": 458,
+          "existingTerm": "Incisura Supraorbitalis",
+          "existingEnglish": "Supraorbital Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "459",
+          "firestoreId": 459,
+          "existingTerm": "Incisura Frontalis",
+          "existingEnglish": "Frontal Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "468",
+          "firestoreId": 468,
+          "existingTerm": "Pars Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Part of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "469",
+          "firestoreId": 469,
+          "existingTerm": "Spina Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Spine of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 24 terim mevcut."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Spina nasalis anterior",
+      "coreTerm": "Spina nasalis anterior",
+      "coreTokens": [
+        "spina",
+        "nasalis",
+        "anterior"
+      ],
+      "potentialMatchCount": 27,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "469",
+          "firestoreId": 469,
+          "existingTerm": "Spina Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Spine of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "spina",
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "031",
+          "firestoreId": 31,
+          "existingTerm": "Margo Anterior Radii",
+          "existingEnglish": "Anterior Border of Radius / Anterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "049",
+          "firestoreId": 49,
+          "existingTerm": "Margo Anterior Ulnae",
+          "existingEnglish": "Anterior Border of Ulna / Anterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "179",
+          "firestoreId": 179,
+          "existingTerm": "Fonticulus Anterior",
+          "existingEnglish": "Anterior Fontanelle",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "222",
+          "firestoreId": 222,
+          "existingTerm": "Anterior",
+          "existingEnglish": "Anterior",
+          "existingSubcategory": "anatomic_direction",
+          "sharedWords": [
+            "anterior"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 27 terim mevcut."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Sutura zygomaticomaxillaris",
+      "coreTerm": "Sutura zygomaticomaxillaris",
+      "coreTokens": [
+        "sutura",
+        "zygomaticomaxillaris"
+      ],
+      "potentialMatchCount": 5,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "175",
+          "firestoreId": 175,
+          "existingTerm": "Sutura Coronalis",
+          "existingEnglish": "Coronal Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "176",
+          "firestoreId": 176,
+          "existingTerm": "Sutura Sagittalis",
+          "existingEnglish": "Sagittal Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "177",
+          "firestoreId": 177,
+          "existingTerm": "Sutura Lambdoidea",
+          "existingEnglish": "Lambdoid Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "178",
+          "firestoreId": 178,
+          "existingTerm": "Sutura Squamosa",
+          "existingEnglish": "Squamous Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "456",
+          "firestoreId": 456,
+          "existingTerm": "Sutura Frontalis Persistens",
+          "existingEnglish": "Persistent Frontal Suture; Metopic Suture",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sutura"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 5 terim mevcut."
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Facies infratemporalis (Maxilla)",
+      "coreTerm": "Facies infratemporalis",
+      "coreTokens": [
+        "facies",
+        "infratemporalis"
+      ],
+      "potentialMatchCount": 32,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "542",
+          "firestoreId": 542,
+          "existingTerm": "Facies Infratemporalis Ossis Sphenoidalis",
+          "existingEnglish": "Infratemporal Surface of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "facies",
+            "infratemporalis"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 32 terim mevcut."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Foramina alveolaria",
+      "coreTerm": "Foramina alveolaria",
+      "coreTokens": [
+        "foramina",
+        "alveolaria"
+      ],
+      "potentialMatchCount": 3,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "646",
+          "firestoreId": 646,
+          "existingTerm": "Foramina Cribrosa",
+          "existingEnglish": "Cribriform Foramina",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        },
+        {
+          "firestoreDocId": "669",
+          "firestoreId": 669,
+          "existingTerm": "Foramina Nasalia",
+          "existingEnglish": "Nasal Foramina",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        },
+        {
+          "firestoreDocId": "703",
+          "firestoreId": 703,
+          "existingTerm": "Juga Alveolaria Mandibulae",
+          "existingEnglish": "Alveolar Yokes of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "alveolaria"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 3 terim mevcut."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Tuber maxillae; Eminentia maxillae",
+      "coreTerm": "Tuber maxillae; Eminentia maxillae",
+      "coreTokens": [
+        "tuber",
+        "maxillae",
+        "eminentia"
+      ],
+      "potentialMatchCount": 6,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "423",
+          "firestoreId": 423,
+          "existingTerm": "Tuber",
+          "existingEnglish": "Tuber; Tuberosity",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "tuber"
+          ]
+        },
+        {
+          "firestoreDocId": "424",
+          "firestoreId": 424,
+          "existingTerm": "Eminentia",
+          "existingEnglish": "Eminence",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "eminentia"
+          ]
+        },
+        {
+          "firestoreDocId": "441",
+          "firestoreId": 441,
+          "existingTerm": "Tuber Parietale",
+          "existingEnglish": "Parietal Tuber",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "tuber"
+          ]
+        },
+        {
+          "firestoreDocId": "453",
+          "firestoreId": 453,
+          "existingTerm": "Tuber Frontale",
+          "existingEnglish": "Frontal Tuber",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "tuber"
+          ]
+        },
+        {
+          "firestoreDocId": "507",
+          "firestoreId": 507,
+          "existingTerm": "Eminentia Cruciformis",
+          "existingEnglish": "Cruciform Eminence",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "eminentia"
+          ]
+        },
+        {
+          "firestoreDocId": "591",
+          "firestoreId": 591,
+          "existingTerm": "Eminentia Arcuata",
+          "existingEnglish": "Arcuate Eminence",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "eminentia"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 6 terim mevcut."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Facies nasalis (Maxilla)",
+      "coreTerm": "Facies nasalis",
+      "coreTokens": [
+        "facies",
+        "nasalis"
+      ],
+      "potentialMatchCount": 42,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 42 terim mevcut."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Sulcus lacrimalis (Maxilla)",
+      "coreTerm": "Sulcus lacrimalis",
+      "coreTokens": [
+        "sulcus",
+        "lacrimalis"
+      ],
+      "potentialMatchCount": 34,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "666",
+          "firestoreId": 666,
+          "existingTerm": "Sulcus Lacrimalis Ossis Lacrimalis",
+          "existingEnglish": "Lacrimal Groove of Lacrimal Bone",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "sulcus",
+            "lacrimalis"
+          ]
+        },
+        {
+          "firestoreDocId": "071",
+          "firestoreId": 71,
+          "existingTerm": "Sulcus Intertubercularis",
+          "existingEnglish": "Intertubercular Sulcus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "074",
+          "firestoreId": 74,
+          "existingTerm": "Sulcus Nervi Radialis",
+          "existingEnglish": "Radial Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "087",
+          "firestoreId": 87,
+          "existingTerm": "Sulcus Musculi Subclavii",
+          "existingEnglish": "Subclavian Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "434",
+          "firestoreId": 434,
+          "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+          "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "435",
+          "firestoreId": 435,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "436",
+          "firestoreId": 436,
+          "existingTerm": "Sulcus Arteriae Meningeae Mediae Ossis Parietalis",
+          "existingEnglish": "Groove for Middle Meningeal Artery of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "466",
+          "firestoreId": 466,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Frontalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 34 terim mevcut."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Crista conchalis (Maxilla)",
+      "coreTerm": "Crista conchalis",
+      "coreTokens": [
+        "crista",
+        "conchalis"
+      ],
+      "potentialMatchCount": 15,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "502",
+          "firestoreId": 502,
+          "existingTerm": "Crista Occipitalis Externa",
+          "existingEnglish": "External Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "509",
+          "firestoreId": 509,
+          "existingTerm": "Crista Occipitalis Interna",
+          "existingEnglish": "Internal Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 15 terim mevcut."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Margo lacrimalis (Maxilla)",
+      "coreTerm": "Margo lacrimalis",
+      "coreTokens": [
+        "margo",
+        "lacrimalis"
+      ],
+      "potentialMatchCount": 32,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "031",
+          "firestoreId": 31,
+          "existingTerm": "Margo Anterior Radii",
+          "existingEnglish": "Anterior Border of Radius / Anterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "033",
+          "firestoreId": 33,
+          "existingTerm": "Margo Interosseus Radii",
+          "existingEnglish": "Interosseous Border of Radius / Interosseous Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "034",
+          "firestoreId": 34,
+          "existingTerm": "Margo Posterior Radii",
+          "existingEnglish": "Posterior Border of Radius / Posterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "048",
+          "firestoreId": 48,
+          "existingTerm": "Margo Interosseus Ulnae",
+          "existingEnglish": "Interosseous Border of Ulna / Interosseous Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "049",
+          "firestoreId": 49,
+          "existingTerm": "Margo Anterior Ulnae",
+          "existingEnglish": "Anterior Border of Ulna / Anterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "050",
+          "firestoreId": 50,
+          "existingTerm": "Margo Posterior Ulnae",
+          "existingEnglish": "Posterior Border of Ulna / Posterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "095",
+          "firestoreId": 95,
+          "existingTerm": "Margo Lateralis Scapulae",
+          "existingEnglish": "Lateral Border of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        },
+        {
+          "firestoreDocId": "097",
+          "firestoreId": 97,
+          "existingTerm": "Margo Medialis Scapulae",
+          "existingEnglish": "Medial Border of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "margo"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 32 terim mevcut."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Hiatus maxillaris",
+      "coreTerm": "Hiatus maxillaris",
+      "coreTokens": [
+        "hiatus",
+        "maxillaris"
+      ],
+      "potentialMatchCount": 5,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "maxillaris"
+          ]
+        },
+        {
+          "firestoreDocId": "544",
+          "firestoreId": 544,
+          "existingTerm": "Facies Maxillaris Ossis Sphenoidalis",
+          "existingEnglish": "Maxillary Surface of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "maxillaris"
+          ]
+        },
+        {
+          "firestoreDocId": "592",
+          "firestoreId": 592,
+          "existingTerm": "Hiatus Canalis Nervi Petrosi Majoris",
+          "existingEnglish": "Hiatus for Greater Petrosal Nerve",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "hiatus"
+          ]
+        },
+        {
+          "firestoreDocId": "594",
+          "firestoreId": 594,
+          "existingTerm": "Hiatus Canalis Nervi Petrosi",
+          "existingEnglish": "Hiatus for Lesser Petrosal Nerve",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "hiatus"
+          ]
+        },
+        {
+          "firestoreDocId": "661",
+          "firestoreId": 661,
+          "existingTerm": "Hiatus Semilunaris",
+          "existingEnglish": "Semilunar Hiatus",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "hiatus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 5 terim mevcut."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Sulcus palatinus major (Maxilla)",
+      "coreTerm": "Sulcus palatinus major",
+      "coreTokens": [
+        "sulcus",
+        "palatinus",
+        "major"
+      ],
+      "potentialMatchCount": 35,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "071",
+          "firestoreId": 71,
+          "existingTerm": "Sulcus Intertubercularis",
+          "existingEnglish": "Intertubercular Sulcus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "074",
+          "firestoreId": 74,
+          "existingTerm": "Sulcus Nervi Radialis",
+          "existingEnglish": "Radial Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "087",
+          "firestoreId": 87,
+          "existingTerm": "Sulcus Musculi Subclavii",
+          "existingEnglish": "Subclavian Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "327",
+          "firestoreId": 327,
+          "existingTerm": "Musculus Teres Major",
+          "existingEnglish": "Teres Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "330",
+          "firestoreId": 330,
+          "existingTerm": "Musculus Pectoralis Major",
+          "existingEnglish": "Pectoralis Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "333",
+          "firestoreId": 333,
+          "existingTerm": "Musculus Rhomboideus Major",
+          "existingEnglish": "Rhomboid Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "434",
+          "firestoreId": 434,
+          "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+          "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "435",
+          "firestoreId": 435,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 35 terim mevcut."
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Sinus maxillaris",
+      "coreTerm": "Sinus maxillaris",
+      "coreTokens": [
+        "sinus",
+        "maxillaris"
+      ],
+      "potentialMatchCount": 17,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "maxillaris"
+          ]
+        },
+        {
+          "firestoreDocId": "434",
+          "firestoreId": 434,
+          "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+          "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "435",
+          "firestoreId": 435,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "466",
+          "firestoreId": 466,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Frontalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "478",
+          "firestoreId": 478,
+          "existingTerm": "Sinus Frontalis",
+          "existingEnglish": "Frontal Sinus",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "479",
+          "firestoreId": 479,
+          "existingTerm": "Apertura Sinus Frontalis",
+          "existingEnglish": "Opening of Frontal Sinus",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "487",
+          "firestoreId": 487,
+          "existingTerm": "Sulcus Sinus Petrosi Inferioris Ossis Occipitalis",
+          "existingEnglish": "Groove for Inferior Petrosal Sinus of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        },
+        {
+          "firestoreDocId": "510",
+          "firestoreId": 510,
+          "existingTerm": "Sulcus Sinus Transversi Ossis Occipitalis",
+          "existingEnglish": "Groove for Transverse Sinus of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sinus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 17 terim mevcut."
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Processus frontalis (Maxilla)",
+      "coreTerm": "Processus frontalis",
+      "coreTokens": [
+        "processus",
+        "frontalis"
+      ],
+      "potentialMatchCount": 50,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus",
+            "frontalis"
+          ]
+        },
+        {
+          "firestoreDocId": "678",
+          "firestoreId": 678,
+          "existingTerm": "Processus Frontalis Ossis Zygomatici",
+          "existingEnglish": "Frontal Process of Zygomatic Bone",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus",
+            "frontalis"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "208",
+          "firestoreId": 208,
+          "existingTerm": "Frontalis",
+          "existingEnglish": "Frontal",
+          "existingSubcategory": "anatomic_direction",
+          "sharedWords": [
+            "frontalis"
+          ]
+        },
+        {
+          "firestoreDocId": "445",
+          "firestoreId": 445,
+          "existingTerm": "Margo Frontalis Ossis Parietalis",
+          "existingEnglish": "Frontal Border of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "frontalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 50 terim mevcut."
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Crista lacrimalis anterior",
+      "coreTerm": "Crista lacrimalis anterior",
+      "coreTokens": [
+        "crista",
+        "lacrimalis",
+        "anterior"
+      ],
+      "potentialMatchCount": 28,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "665",
+          "firestoreId": 665,
+          "existingTerm": "Crista Lacrimalis Posterior",
+          "existingEnglish": "Posterior Lacrimal Crest",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "crista",
+            "lacrimalis"
+          ]
+        },
+        {
+          "firestoreDocId": "031",
+          "firestoreId": 31,
+          "existingTerm": "Margo Anterior Radii",
+          "existingEnglish": "Anterior Border of Radius / Anterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "049",
+          "firestoreId": 49,
+          "existingTerm": "Margo Anterior Ulnae",
+          "existingEnglish": "Anterior Border of Ulna / Anterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "anterior"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 28 terim mevcut."
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Incisura lacrimalis (Maxilla)",
+      "coreTerm": "Incisura lacrimalis",
+      "coreTokens": [
+        "incisura",
+        "lacrimalis"
+      ],
+      "potentialMatchCount": 18,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "038",
+          "firestoreId": 38,
+          "existingTerm": "Incisura Ulnaris",
+          "existingEnglish": "Ulnar Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "042",
+          "firestoreId": 42,
+          "existingTerm": "Incisura Trochlearis",
+          "existingEnglish": "Trochlear Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "044",
+          "firestoreId": 44,
+          "existingTerm": "Incisura Radialis",
+          "existingEnglish": "Radial Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "458",
+          "firestoreId": 458,
+          "existingTerm": "Incisura Supraorbitalis",
+          "existingEnglish": "Supraorbital Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "459",
+          "firestoreId": 459,
+          "existingTerm": "Incisura Frontalis",
+          "existingEnglish": "Frontal Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "475",
+          "firestoreId": 475,
+          "existingTerm": "Fossa Glandulae Lacrimalis",
+          "existingEnglish": "Fossa for Lacrimal Gland",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lacrimalis"
+          ]
+        },
+        {
+          "firestoreDocId": "477",
+          "firestoreId": 477,
+          "existingTerm": "Incisura Ethmoidalis",
+          "existingEnglish": "Ethmoidal Notch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "498",
+          "firestoreId": 498,
+          "existingTerm": "Incisura Jugularis Ossis Occipitalis",
+          "existingEnglish": "Jugular Notch of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 18 terim mevcut."
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Crista ethmoidalis (Maxilla)",
+      "coreTerm": "Crista ethmoidalis",
+      "coreTokens": [
+        "crista",
+        "ethmoidalis"
+      ],
+      "potentialMatchCount": 22,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "477",
+          "firestoreId": 477,
+          "existingTerm": "Incisura Ethmoidalis",
+          "existingEnglish": "Ethmoidal Notch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "ethmoidalis"
+          ]
+        },
+        {
+          "firestoreDocId": "502",
+          "firestoreId": 502,
+          "existingTerm": "Crista Occipitalis Externa",
+          "existingEnglish": "External Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 22 terim mevcut."
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Processus zygomaticus (Maxilla)",
+      "coreTerm": "Processus zygomaticus",
+      "coreTokens": [
+        "processus",
+        "zygomaticus"
+      ],
+      "potentialMatchCount": 29,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus",
+            "zygomaticus"
+          ]
+        },
+        {
+          "firestoreDocId": "634",
+          "firestoreId": 634,
+          "existingTerm": "Processus Zygomaticus Ossis Temporalis",
+          "existingEnglish": "Zygomatic Process of Temporal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus",
+            "zygomaticus"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "499",
+          "firestoreId": 499,
+          "existingTerm": "Processus Jugularis",
+          "existingEnglish": "Jugular Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "500",
+          "firestoreId": 500,
+          "existingTerm": "Processus Intrajugulans Ossis Occipitalis",
+          "existingEnglish": "Intrajugular Process of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 29 terim mevcut."
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Processus palatinus",
+      "coreTerm": "Processus palatinus",
+      "coreTokens": [
+        "processus",
+        "palatinus"
+      ],
+      "potentialMatchCount": 28,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "499",
+          "firestoreId": 499,
+          "existingTerm": "Processus Jugularis",
+          "existingEnglish": "Jugular Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "500",
+          "firestoreId": 500,
+          "existingTerm": "Processus Intrajugulans Ossis Occipitalis",
+          "existingEnglish": "Intrajugular Process of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "514",
+          "firestoreId": 514,
+          "existingTerm": "Processus Paramastoideus",
+          "existingEnglish": "Paramastoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 28 terim mevcut."
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Crista nasalis (Maxilla)",
+      "coreTerm": "Crista nasalis",
+      "coreTokens": [
+        "crista",
+        "nasalis"
+      ],
+      "potentialMatchCount": 26,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "468",
+          "firestoreId": 468,
+          "existingTerm": "Pars Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Part of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 26 terim mevcut."
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Sutura incisiva",
+      "coreTerm": "Sutura incisiva",
+      "coreTokens": [
+        "sutura",
+        "incisiva"
+      ],
+      "potentialMatchCount": 5,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "175",
+          "firestoreId": 175,
+          "existingTerm": "Sutura Coronalis",
+          "existingEnglish": "Coronal Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "176",
+          "firestoreId": 176,
+          "existingTerm": "Sutura Sagittalis",
+          "existingEnglish": "Sagittal Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "177",
+          "firestoreId": 177,
+          "existingTerm": "Sutura Lambdoidea",
+          "existingEnglish": "Lambdoid Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "178",
+          "firestoreId": 178,
+          "existingTerm": "Sutura Squamosa",
+          "existingEnglish": "Squamous Suture",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "sutura"
+          ]
+        },
+        {
+          "firestoreDocId": "456",
+          "firestoreId": 456,
+          "existingTerm": "Sutura Frontalis Persistens",
+          "existingEnglish": "Persistent Frontal Suture; Metopic Suture",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sutura"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 5 terim mevcut."
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Sulci palatini",
+      "coreTerm": "Sulci palatini",
+      "coreTokens": [
+        "sulci",
+        "palatini"
+      ],
+      "potentialMatchCount": 1,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "437",
+          "firestoreId": 437,
+          "existingTerm": "Sulci Arteriosi Ossis Parietalis",
+          "existingEnglish": "Grooves for Arteries of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulci"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 1 terim mevcut."
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Processus alveolaris (Maxilla)",
+      "coreTerm": "Processus alveolaris",
+      "coreTokens": [
+        "processus",
+        "alveolaris"
+      ],
+      "potentialMatchCount": 30,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "499",
+          "firestoreId": 499,
+          "existingTerm": "Processus Jugularis",
+          "existingEnglish": "Jugular Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "500",
+          "firestoreId": 500,
+          "existingTerm": "Processus Intrajugulans Ossis Occipitalis",
+          "existingEnglish": "Intrajugular Process of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "514",
+          "firestoreId": 514,
+          "existingTerm": "Processus Paramastoideus",
+          "existingEnglish": "Paramastoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 30 terim mevcut."
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Arcus alveolaris (Maxilla)",
+      "coreTerm": "Arcus alveolaris",
+      "coreTokens": [
+        "arcus",
+        "alveolaris"
+      ],
+      "potentialMatchCount": 3,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "699",
+          "firestoreId": 699,
+          "existingTerm": "Arcus Alveolaris Mandibulae",
+          "existingEnglish": "Alveolar Arch of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "arcus",
+            "alveolaris"
+          ]
+        },
+        {
+          "firestoreDocId": "454",
+          "firestoreId": 454,
+          "existingTerm": "Arcus Superciliaris",
+          "existingEnglish": "Superciliary Arch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "arcus"
+          ]
+        },
+        {
+          "firestoreDocId": "698",
+          "firestoreId": 698,
+          "existingTerm": "Pars Alveolaris Mandibulae",
+          "existingEnglish": "Alveolar Part of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "alveolaris"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 3 terim mevcut."
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Alveoli dentales (Maxilla)",
+      "coreTerm": "Alveoli dentales",
+      "coreTokens": [
+        "alveoli",
+        "dentales"
+      ],
+      "potentialMatchCount": 1,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "700",
+          "firestoreId": 700,
+          "existingTerm": "Alveoli Dentales Mandibulae",
+          "existingEnglish": "Dental Alveoli of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "alveoli",
+            "dentales"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 1 terim mevcut."
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Septa interalveolaria (Maxilla)",
+      "coreTerm": "Septa interalveolaria",
+      "coreTokens": [
+        "septa",
+        "interalveolaria"
+      ],
+      "potentialMatchCount": 2,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "701",
+          "firestoreId": 701,
+          "existingTerm": "Septa Interalveolaria Mandibulae",
+          "existingEnglish": "Interalveolar Septa of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "septa",
+            "interalveolaria"
+          ]
+        },
+        {
+          "firestoreDocId": "702",
+          "firestoreId": 702,
+          "existingTerm": "Septa Interradicularia Mandibulae",
+          "existingEnglish": "Interradicular Septa of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "septa"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 2 terim mevcut."
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Septa interradicularia (Maxilla)",
+      "coreTerm": "Septa interradicularia",
+      "coreTokens": [
+        "septa",
+        "interradicularia"
+      ],
+      "potentialMatchCount": 2,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "702",
+          "firestoreId": 702,
+          "existingTerm": "Septa Interradicularia Mandibulae",
+          "existingEnglish": "Interradicular Septa of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "septa",
+            "interradicularia"
+          ]
+        },
+        {
+          "firestoreDocId": "701",
+          "firestoreId": 701,
+          "existingTerm": "Septa Interalveolaria Mandibulae",
+          "existingEnglish": "Interalveolar Septa of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "septa"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 2 terim mevcut."
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Juga alveolaria (Maxilla)",
+      "coreTerm": "Juga alveolaria",
+      "coreTokens": [
+        "juga",
+        "alveolaria"
+      ],
+      "potentialMatchCount": 1,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "703",
+          "firestoreId": 703,
+          "existingTerm": "Juga Alveolaria Mandibulae",
+          "existingEnglish": "Alveolar Yokes of Mandible",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "juga",
+            "alveolaria"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 1 terim mevcut."
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Foramina incisiva",
+      "coreTerm": "Foramina incisiva",
+      "coreTokens": [
+        "foramina",
+        "incisiva"
+      ],
+      "potentialMatchCount": 2,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "646",
+          "firestoreId": 646,
+          "existingTerm": "Foramina Cribrosa",
+          "existingEnglish": "Cribriform Foramina",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        },
+        {
+          "firestoreDocId": "669",
+          "firestoreId": 669,
+          "existingTerm": "Foramina Nasalia",
+          "existingEnglish": "Nasal Foramina",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 2 terim mevcut."
+    },
+    {
+      "itemNumber": 44,
+      "inputTerm": "Lamina perpendicularis (Os palatinum)",
+      "coreTerm": "Lamina perpendicularis",
+      "coreTokens": [
+        "lamina",
+        "perpendicularis"
+      ],
+      "potentialMatchCount": 6,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "649",
+          "firestoreId": 649,
+          "existingTerm": "Lamina Perpendicularis Ossis Ethmoidalis",
+          "existingEnglish": "Perpendicular Plate of Ethmoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina",
+            "perpendicularis"
+          ]
+        },
+        {
+          "firestoreDocId": "419",
+          "firestoreId": 419,
+          "existingTerm": "Lamina Epiphysialis",
+          "existingEnglish": "Epiphysial Plate; Growth Plate",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "558",
+          "firestoreId": 558,
+          "existingTerm": "Lamina Lateralis Processus Pterygoidei",
+          "existingEnglish": "Lateral Plate of Pterygoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "559",
+          "firestoreId": 559,
+          "existingTerm": "Lamina Medialis Processus Pterygoidei",
+          "existingEnglish": "Medial Plate of Pterygoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "645",
+          "firestoreId": 645,
+          "existingTerm": "Lamina Cribrosa",
+          "existingEnglish": "Cribriform Plate",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "654",
+          "firestoreId": 654,
+          "existingTerm": "Lamina Orbitalis Ossis Ethmoidalis",
+          "existingEnglish": "Orbital Plate of Ethmoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 6 terim mevcut."
+    },
+    {
+      "itemNumber": 45,
+      "inputTerm": "Facies nasalis (Os palatinum)",
+      "coreTerm": "Facies nasalis",
+      "coreTokens": [
+        "facies",
+        "nasalis"
+      ],
+      "potentialMatchCount": 42,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 42 terim mevcut."
+    },
+    {
+      "itemNumber": 46,
+      "inputTerm": "Facies maxillaris (Os palatinum)",
+      "coreTerm": "Facies maxillaris",
+      "coreTokens": [
+        "facies",
+        "maxillaris"
+      ],
+      "potentialMatchCount": 32,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "544",
+          "firestoreId": 544,
+          "existingTerm": "Facies Maxillaris Ossis Sphenoidalis",
+          "existingEnglish": "Maxillary Surface of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "facies",
+            "maxillaris"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "maxillaris"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 32 terim mevcut."
+    },
+    {
+      "itemNumber": 47,
+      "inputTerm": "Incisura sphenopalatina",
+      "coreTerm": "Incisura sphenopalatina",
+      "coreTokens": [
+        "incisura",
+        "sphenopalatina"
+      ],
+      "potentialMatchCount": 13,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "038",
+          "firestoreId": 38,
+          "existingTerm": "Incisura Ulnaris",
+          "existingEnglish": "Ulnar Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "042",
+          "firestoreId": 42,
+          "existingTerm": "Incisura Trochlearis",
+          "existingEnglish": "Trochlear Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "044",
+          "firestoreId": 44,
+          "existingTerm": "Incisura Radialis",
+          "existingEnglish": "Radial Notch",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "458",
+          "firestoreId": 458,
+          "existingTerm": "Incisura Supraorbitalis",
+          "existingEnglish": "Supraorbital Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "459",
+          "firestoreId": 459,
+          "existingTerm": "Incisura Frontalis",
+          "existingEnglish": "Frontal Notch; Foramen",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "477",
+          "firestoreId": 477,
+          "existingTerm": "Incisura Ethmoidalis",
+          "existingEnglish": "Ethmoidal Notch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "498",
+          "firestoreId": 498,
+          "existingTerm": "Incisura Jugularis Ossis Occipitalis",
+          "existingEnglish": "Jugular Notch of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        },
+        {
+          "firestoreDocId": "560",
+          "firestoreId": 560,
+          "existingTerm": "Incisura Pterygoidea",
+          "existingEnglish": "Pterygoid Notch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "incisura"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 13 terim mevcut."
+    },
+    {
+      "itemNumber": 48,
+      "inputTerm": "Sulcus palatinus major (Os palatinum)",
+      "coreTerm": "Sulcus palatinus major",
+      "coreTokens": [
+        "sulcus",
+        "palatinus",
+        "major"
+      ],
+      "potentialMatchCount": 35,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "071",
+          "firestoreId": 71,
+          "existingTerm": "Sulcus Intertubercularis",
+          "existingEnglish": "Intertubercular Sulcus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "074",
+          "firestoreId": 74,
+          "existingTerm": "Sulcus Nervi Radialis",
+          "existingEnglish": "Radial Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "087",
+          "firestoreId": 87,
+          "existingTerm": "Sulcus Musculi Subclavii",
+          "existingEnglish": "Subclavian Groove",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "327",
+          "firestoreId": 327,
+          "existingTerm": "Musculus Teres Major",
+          "existingEnglish": "Teres Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "330",
+          "firestoreId": 330,
+          "existingTerm": "Musculus Pectoralis Major",
+          "existingEnglish": "Pectoralis Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "333",
+          "firestoreId": 333,
+          "existingTerm": "Musculus Rhomboideus Major",
+          "existingEnglish": "Rhomboid Major Muscle",
+          "existingSubcategory": "muscle_structures",
+          "sharedWords": [
+            "major"
+          ]
+        },
+        {
+          "firestoreDocId": "434",
+          "firestoreId": 434,
+          "existingTerm": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+          "existingEnglish": "Groove for Sigmoid Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        },
+        {
+          "firestoreDocId": "435",
+          "firestoreId": 435,
+          "existingTerm": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+          "existingEnglish": "Groove for Superior Sagittal Sinus of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sulcus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 35 terim mevcut."
+    },
+    {
+      "itemNumber": 49,
+      "inputTerm": "Processus pyramidalis",
+      "coreTerm": "Processus pyramidalis",
+      "coreTokens": [
+        "processus",
+        "pyramidalis"
+      ],
+      "potentialMatchCount": 28,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "499",
+          "firestoreId": 499,
+          "existingTerm": "Processus Jugularis",
+          "existingEnglish": "Jugular Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "500",
+          "firestoreId": 500,
+          "existingTerm": "Processus Intrajugulans Ossis Occipitalis",
+          "existingEnglish": "Intrajugular Process of Occipital Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "514",
+          "firestoreId": 514,
+          "existingTerm": "Processus Paramastoideus",
+          "existingEnglish": "Paramastoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 28 terim mevcut."
+    },
+    {
+      "itemNumber": 51,
+      "inputTerm": "Crista conchalis (Os palatinum)",
+      "coreTerm": "Crista conchalis",
+      "coreTokens": [
+        "crista",
+        "conchalis"
+      ],
+      "potentialMatchCount": 15,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "502",
+          "firestoreId": 502,
+          "existingTerm": "Crista Occipitalis Externa",
+          "existingEnglish": "External Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "509",
+          "firestoreId": 509,
+          "existingTerm": "Crista Occipitalis Interna",
+          "existingEnglish": "Internal Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 15 terim mevcut."
+    },
+    {
+      "itemNumber": 52,
+      "inputTerm": "Crista ethmoidalis (Os palatinum)",
+      "coreTerm": "Crista ethmoidalis",
+      "coreTokens": [
+        "crista",
+        "ethmoidalis"
+      ],
+      "potentialMatchCount": 22,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "477",
+          "firestoreId": 477,
+          "existingTerm": "Incisura Ethmoidalis",
+          "existingEnglish": "Ethmoidal Notch",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "ethmoidalis"
+          ]
+        },
+        {
+          "firestoreDocId": "502",
+          "firestoreId": 502,
+          "existingTerm": "Crista Occipitalis Externa",
+          "existingEnglish": "External Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 22 terim mevcut."
+    },
+    {
+      "itemNumber": 53,
+      "inputTerm": "Processus orbitalis",
+      "coreTerm": "Processus orbitalis",
+      "coreTokens": [
+        "processus",
+        "orbitalis"
+      ],
+      "potentialMatchCount": 34,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "471",
+          "firestoreId": 471,
+          "existingTerm": "Pars Orbitalis Ossis Frontalis",
+          "existingEnglish": "Orbital Part of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "orbitalis"
+          ]
+        },
+        {
+          "firestoreDocId": "472",
+          "firestoreId": 472,
+          "existingTerm": "Facies Orbitalis Ossis Frontalis",
+          "existingEnglish": "Orbital Surface of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "orbitalis"
+          ]
+        },
+        {
+          "firestoreDocId": "499",
+          "firestoreId": 499,
+          "existingTerm": "Processus Jugularis",
+          "existingEnglish": "Jugular Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 34 terim mevcut."
+    },
+    {
+      "itemNumber": 54,
+      "inputTerm": "Processus sphenoidalis (Os palatinum)",
+      "coreTerm": "Processus sphenoidalis",
+      "coreTokens": [
+        "processus",
+        "sphenoidalis"
+      ],
+      "potentialMatchCount": 52,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "563",
+          "firestoreId": 563,
+          "existingTerm": "Processus Vaginalis Ossis Sphenoidalis",
+          "existingEnglish": "Vaginal Process of Sphenoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus",
+            "sphenoidalis"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "040",
+          "firestoreId": 40,
+          "existingTerm": "Processus Styloideus Radii",
+          "existingEnglish": "Radial Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "043",
+          "firestoreId": 43,
+          "existingTerm": "Processus Coronoideus Ulnae",
+          "existingEnglish": "Coronoid Process of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "053",
+          "firestoreId": 53,
+          "existingTerm": "Processus Styloideus Ulnae",
+          "existingEnglish": "Ulnar Styloid Process",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "448",
+          "firestoreId": 448,
+          "existingTerm": "Angulus Sphenoidalis Ossis Parietalis",
+          "existingEnglish": "Sphenoidal Angle of Parietal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sphenoidalis"
+          ]
+        },
+        {
+          "firestoreDocId": "463",
+          "firestoreId": 463,
+          "existingTerm": "Processus Zygomaticus Ossis Frontalis",
+          "existingEnglish": "Zygomatic Process of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "processus"
+          ]
+        },
+        {
+          "firestoreDocId": "476",
+          "firestoreId": 476,
+          "existingTerm": "Margo Sphenoidalis Ossis Frontalis",
+          "existingEnglish": "Sphenoidal Margin of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "sphenoidalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 52 terim mevcut."
+    },
+    {
+      "itemNumber": 55,
+      "inputTerm": "Lamina horizontalis",
+      "coreTerm": "Lamina horizontalis",
+      "coreTokens": [
+        "lamina",
+        "horizontalis"
+      ],
+      "potentialMatchCount": 7,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "212",
+          "firestoreId": 212,
+          "existingTerm": "Horizontalis",
+          "existingEnglish": "Horizontal",
+          "existingSubcategory": "anatomic_direction",
+          "sharedWords": [
+            "horizontalis"
+          ]
+        },
+        {
+          "firestoreDocId": "419",
+          "firestoreId": 419,
+          "existingTerm": "Lamina Epiphysialis",
+          "existingEnglish": "Epiphysial Plate; Growth Plate",
+          "existingSubcategory": "bone_structures",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "558",
+          "firestoreId": 558,
+          "existingTerm": "Lamina Lateralis Processus Pterygoidei",
+          "existingEnglish": "Lateral Plate of Pterygoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "559",
+          "firestoreId": 559,
+          "existingTerm": "Lamina Medialis Processus Pterygoidei",
+          "existingEnglish": "Medial Plate of Pterygoid Process",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "645",
+          "firestoreId": 645,
+          "existingTerm": "Lamina Cribrosa",
+          "existingEnglish": "Cribriform Plate",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "649",
+          "firestoreId": 649,
+          "existingTerm": "Lamina Perpendicularis Ossis Ethmoidalis",
+          "existingEnglish": "Perpendicular Plate of Ethmoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        },
+        {
+          "firestoreDocId": "654",
+          "firestoreId": 654,
+          "existingTerm": "Lamina Orbitalis Ossis Ethmoidalis",
+          "existingEnglish": "Orbital Plate of Ethmoid Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "lamina"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 7 terim mevcut."
+    },
+    {
+      "itemNumber": 56,
+      "inputTerm": "Facies nasalis (Lamina horizontalis)",
+      "coreTerm": "Facies nasalis",
+      "coreTokens": [
+        "facies",
+        "nasalis"
+      ],
+      "potentialMatchCount": 42,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 42 terim mevcut."
+    },
+    {
+      "itemNumber": 57,
+      "inputTerm": "Facies palatina",
+      "coreTerm": "Facies palatina",
+      "coreTokens": [
+        "facies",
+        "palatina"
+      ],
+      "potentialMatchCount": 31,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "032",
+          "firestoreId": 32,
+          "existingTerm": "Facies Anterior Radii",
+          "existingEnglish": "Anterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "036",
+          "firestoreId": 36,
+          "existingTerm": "Facies Lateralis Radii",
+          "existingEnglish": "Lateral Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "037",
+          "firestoreId": 37,
+          "existingTerm": "Facies Articularis Carpalis",
+          "existingEnglish": "Carpal Articular Surface",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "047",
+          "firestoreId": 47,
+          "existingTerm": "Facies Anterior Ulnae",
+          "existingEnglish": "Anterior Surface of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        },
+        {
+          "firestoreDocId": "076",
+          "firestoreId": 76,
+          "existingTerm": "Facies Anterolateralis Humeri",
+          "existingEnglish": "Anterolateral Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "facies"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 31 terim mevcut."
+    },
+    {
+      "itemNumber": 58,
+      "inputTerm": "Foramina palatina minora (Os palatinum)",
+      "coreTerm": "Foramina palatina minora",
+      "coreTokens": [
+        "foramina",
+        "palatina",
+        "minora"
+      ],
+      "potentialMatchCount": 2,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "646",
+          "firestoreId": 646,
+          "existingTerm": "Foramina Cribrosa",
+          "existingEnglish": "Cribriform Foramina",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        },
+        {
+          "firestoreDocId": "669",
+          "firestoreId": 669,
+          "existingTerm": "Foramina Nasalia",
+          "existingEnglish": "Nasal Foramina",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "foramina"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 2 terim mevcut."
+    },
+    {
+      "itemNumber": 59,
+      "inputTerm": "Spina nasalis posterior",
+      "coreTerm": "Spina nasalis posterior",
+      "coreTokens": [
+        "spina",
+        "nasalis",
+        "posterior"
+      ],
+      "potentialMatchCount": 29,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "469",
+          "firestoreId": 469,
+          "existingTerm": "Spina Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Spine of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "spina",
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "034",
+          "firestoreId": 34,
+          "existingTerm": "Margo Posterior Radii",
+          "existingEnglish": "Posterior Border of Radius / Posterior Margin",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "posterior"
+          ]
+        },
+        {
+          "firestoreDocId": "035",
+          "firestoreId": 35,
+          "existingTerm": "Facies Posterior Radii",
+          "existingEnglish": "Posterior Surface of Radius",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "posterior"
+          ]
+        },
+        {
+          "firestoreDocId": "050",
+          "firestoreId": 50,
+          "existingTerm": "Margo Posterior Ulnae",
+          "existingEnglish": "Posterior Border of Ulna / Posterior Margin of Ulna",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "posterior"
+          ]
+        },
+        {
+          "firestoreDocId": "060",
+          "firestoreId": 60,
+          "existingTerm": "Facies Posterior Scapulae",
+          "existingEnglish": "Posterior Surface of Scapula",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "posterior"
+          ]
+        },
+        {
+          "firestoreDocId": "069",
+          "firestoreId": 69,
+          "existingTerm": "Facies Posterior Humeri",
+          "existingEnglish": "Posterior Surface of Humerus",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "posterior"
+          ]
+        },
+        {
+          "firestoreDocId": "180",
+          "firestoreId": 180,
+          "existingTerm": "Fonticulus Posterior",
+          "existingEnglish": "Posterior Fontanelle",
+          "existingSubcategory": "head_and_neck_joints",
+          "sharedWords": [
+            "posterior"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 29 terim mevcut."
+    },
+    {
+      "itemNumber": 60,
+      "inputTerm": "Crista nasalis (Os palatinum)",
+      "coreTerm": "Crista nasalis",
+      "coreTokens": [
+        "crista",
+        "nasalis"
+      ],
+      "potentialMatchCount": 26,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "012",
+          "firestoreId": 12,
+          "existingTerm": "Processus Maxillaris Conchae Nasalis Inferioris",
+          "existingEnglish": "Maxillary Process of Inferior Nasal Concha",
+          "existingSubcategory": "face_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        },
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "468",
+          "firestoreId": 468,
+          "existingTerm": "Pars Nasalis Ossis Frontalis",
+          "existingEnglish": "Nasal Part of Frontal Bone",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "nasalis"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 26 terim mevcut."
+    },
+    {
+      "itemNumber": 61,
+      "inputTerm": "Crista palatina",
+      "coreTerm": "Crista palatina",
+      "coreTokens": [
+        "crista",
+        "palatina"
+      ],
+      "potentialMatchCount": 15,
+      "potentialMatches": [
+        {
+          "firestoreDocId": "045",
+          "firestoreId": 45,
+          "existingTerm": "Crista Supinatoris",
+          "existingEnglish": "Supinator Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "072",
+          "firestoreId": 72,
+          "existingTerm": "Crista Tuberculi Majoris",
+          "existingEnglish": "Crest of Greater Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "073",
+          "firestoreId": 73,
+          "existingTerm": "Crista Tuberculi Minoris",
+          "existingEnglish": "Crest of Lesser Tubercle",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "078",
+          "firestoreId": 78,
+          "existingTerm": "Crista Supracondylaris Medialis",
+          "existingEnglish": "Medial Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "079",
+          "firestoreId": 79,
+          "existingTerm": "Crista Supracondylaris Lateralis",
+          "existingEnglish": "Lateral Supracondylar Crest",
+          "existingSubcategory": "upper_extremity_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "465",
+          "firestoreId": 465,
+          "existingTerm": "Crista Frontalis",
+          "existingEnglish": "Frontal Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "502",
+          "firestoreId": 502,
+          "existingTerm": "Crista Occipitalis Externa",
+          "existingEnglish": "External Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        },
+        {
+          "firestoreDocId": "509",
+          "firestoreId": 509,
+          "existingTerm": "Crista Occipitalis Interna",
+          "existingEnglish": "Internal Occipital Crest",
+          "existingSubcategory": "skull_bones",
+          "sharedWords": [
+            "crista"
+          ]
+        }
+      ],
+      "aciklama": "Firestore'da tam eşleşme yok, ancak ortak kelime(ler) içeren 15 terim mevcut."
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 15,
+      "inputTerm": "Canales alveolares",
+      "coreTerm": "Canales alveolares",
+      "aciklama": "Firestore veritabanında bu terimle örtüşen hiçbir kelime bulunamadı."
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Os incisivum; Premaxilla",
+      "coreTerm": "Os incisivum; Premaxilla",
+      "aciklama": "Firestore veritabanında bu terimle örtüşen hiçbir kelime bulunamadı."
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Canales incisivi",
+      "coreTerm": "Canales incisivi",
+      "aciklama": "Firestore veritabanında bu terimle örtüşen hiçbir kelime bulunamadı."
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Spinae palatinae",
+      "coreTerm": "Spinae palatinae",
+      "aciklama": "Firestore veritabanında bu terimle örtüşen hiçbir kelime bulunamadı."
+    },
+    {
+      "itemNumber": 50,
+      "inputTerm": "Canales palatini minores",
+      "coreTerm": "Canales palatini minores",
+      "aciklama": "Firestore veritabanında bu terimle örtüşen hiçbir kelime bulunamadı."
+    }
+  ]
+}

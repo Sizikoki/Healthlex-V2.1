@@ -1,0 +1,326 @@
+{
+  "toplamIncelenen": 61,
+  "gercekCakismaCount": 2,
+  "kesinYeniCount": 59,
+  "gercekCakisma": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Maxilla",
+      "qualifiedTerm": "Maxilla",
+      "matchedPart": "Maxilla",
+      "firestoreDocId": "010",
+      "firestoreId": 10,
+      "existingTerm": "Maxilla",
+      "existingEnglish": "Maxilla",
+      "existingSubcategory": "face_bones"
+    },
+    {
+      "itemNumber": 43,
+      "inputTerm": "Os palatinum",
+      "qualifiedTerm": "Os Palatinum",
+      "matchedPart": "Os Palatinum",
+      "firestoreDocId": "011",
+      "firestoreId": 11,
+      "existingTerm": "Os Palatinum",
+      "existingEnglish": "Palatine Bone",
+      "existingSubcategory": "face_bones"
+    }
+  ],
+  "kesinYeni": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Corpus maxillae",
+      "qualifiedTerm": "Corpus Maxillae"
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Facies orbitalis (Maxilla)",
+      "qualifiedTerm": "Facies Orbitalis Maxillae"
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Canalis infraorbitalis",
+      "qualifiedTerm": "Canalis İnfraorbitalis"
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Sulcus infraorbitalis",
+      "qualifiedTerm": "Sulcus İnfraorbitalis"
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Margo infraorbitalis (Maxilla)",
+      "qualifiedTerm": "Margo İnfraorbitalis Maxillae"
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Facies anterior (Maxilla)",
+      "qualifiedTerm": "Facies Anterior Maxillae"
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Foramen infraorbitale",
+      "qualifiedTerm": "Foramen İnfraorbitale"
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Fossa canina",
+      "qualifiedTerm": "Fossa Canina"
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Incisura nasalis (Maxilla)",
+      "qualifiedTerm": "Incisura Nasalis Maxillae"
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Spina nasalis anterior",
+      "qualifiedTerm": "Spina Nasalis Anterior"
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Sutura zygomaticomaxillaris",
+      "qualifiedTerm": "Sutura Zygomaticomaxillaris"
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Facies infratemporalis (Maxilla)",
+      "qualifiedTerm": "Facies İnfratemporalis Maxillae"
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Foramina alveolaria",
+      "qualifiedTerm": "Foramina Alveolaria"
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Canales alveolares",
+      "qualifiedTerm": "Canales Alveolares"
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Tuber maxillae; Eminentia maxillae",
+      "qualifiedTerm": "Tuber Maxillae; Eminentia Maxillae"
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Facies nasalis (Maxilla)",
+      "qualifiedTerm": "Facies Nasalis Maxillae"
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Sulcus lacrimalis (Maxilla)",
+      "qualifiedTerm": "Sulcus Lacrimalis Maxillae"
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Crista conchalis (Maxilla)",
+      "qualifiedTerm": "Crista Conchalis Maxillae"
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Margo lacrimalis (Maxilla)",
+      "qualifiedTerm": "Margo Lacrimalis Maxillae"
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Hiatus maxillaris",
+      "qualifiedTerm": "Hiatus Maxillaris"
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Sulcus palatinus major (Maxilla)",
+      "qualifiedTerm": "Sulcus Palatinus Major Maxillae"
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Sinus maxillaris",
+      "qualifiedTerm": "Sinus Maxillaris"
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Processus frontalis (Maxilla)",
+      "qualifiedTerm": "Processus Frontalis Maxillae"
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Crista lacrimalis anterior",
+      "qualifiedTerm": "Crista Lacrimalis Anterior"
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Incisura lacrimalis (Maxilla)",
+      "qualifiedTerm": "Incisura Lacrimalis Maxillae"
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Crista ethmoidalis (Maxilla)",
+      "qualifiedTerm": "Crista Ethmoidalis Maxillae"
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Processus zygomaticus (Maxilla)",
+      "qualifiedTerm": "Processus Zygomaticus Maxillae"
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Processus palatinus",
+      "qualifiedTerm": "Processus Palatinus"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Crista nasalis (Maxilla)",
+      "qualifiedTerm": "Crista Nasalis Maxillae"
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Os incisivum; Premaxilla",
+      "qualifiedTerm": "Os İncisivum; Premaxilla"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Canales incisivi",
+      "qualifiedTerm": "Canales İncisivi"
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Sutura incisiva",
+      "qualifiedTerm": "Sutura İncisiva"
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Spinae palatinae",
+      "qualifiedTerm": "Spinae Palatinae"
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Sulci palatini",
+      "qualifiedTerm": "Sulci Palatini"
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Processus alveolaris (Maxilla)",
+      "qualifiedTerm": "Processus Alveolaris Maxillae"
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Arcus alveolaris (Maxilla)",
+      "qualifiedTerm": "Arcus Alveolaris Maxillae"
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Alveoli dentales (Maxilla)",
+      "qualifiedTerm": "Alveoli Dentales Maxillae"
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Septa interalveolaria (Maxilla)",
+      "qualifiedTerm": "Septa İnteralveolaria Maxillae"
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Septa interradicularia (Maxilla)",
+      "qualifiedTerm": "Septa İnterradicularia Maxillae"
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Juga alveolaria (Maxilla)",
+      "qualifiedTerm": "Juga Alveolaria Maxillae"
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Foramina incisiva",
+      "qualifiedTerm": "Foramina İncisiva"
+    },
+    {
+      "itemNumber": 44,
+      "inputTerm": "Lamina perpendicularis (Os palatinum)",
+      "qualifiedTerm": "Lamina Perpendicularis Ossis Palatini"
+    },
+    {
+      "itemNumber": 45,
+      "inputTerm": "Facies nasalis (Os palatinum)",
+      "qualifiedTerm": "Facies Nasalis Ossis Palatini"
+    },
+    {
+      "itemNumber": 46,
+      "inputTerm": "Facies maxillaris (Os palatinum)",
+      "qualifiedTerm": "Facies Maxillaris Ossis Palatini"
+    },
+    {
+      "itemNumber": 47,
+      "inputTerm": "Incisura sphenopalatina",
+      "qualifiedTerm": "Incisura Sphenopalatina"
+    },
+    {
+      "itemNumber": 48,
+      "inputTerm": "Sulcus palatinus major (Os palatinum)",
+      "qualifiedTerm": "Sulcus Palatinus Major Ossis Palatini"
+    },
+    {
+      "itemNumber": 49,
+      "inputTerm": "Processus pyramidalis",
+      "qualifiedTerm": "Processus Pyramidalis"
+    },
+    {
+      "itemNumber": 50,
+      "inputTerm": "Canales palatini minores",
+      "qualifiedTerm": "Canales Palatini Minores"
+    },
+    {
+      "itemNumber": 51,
+      "inputTerm": "Crista conchalis (Os palatinum)",
+      "qualifiedTerm": "Crista Conchalis Ossis Palatini"
+    },
+    {
+      "itemNumber": 52,
+      "inputTerm": "Crista ethmoidalis (Os palatinum)",
+      "qualifiedTerm": "Crista Ethmoidalis Ossis Palatini"
+    },
+    {
+      "itemNumber": 53,
+      "inputTerm": "Processus orbitalis",
+      "qualifiedTerm": "Processus Orbitalis"
+    },
+    {
+      "itemNumber": 54,
+      "inputTerm": "Processus sphenoidalis (Os palatinum)",
+      "qualifiedTerm": "Processus Sphenoidalis Ossis Palatini"
+    },
+    {
+      "itemNumber": 55,
+      "inputTerm": "Lamina horizontalis",
+      "qualifiedTerm": "Lamina Horizontalis"
+    },
+    {
+      "itemNumber": 56,
+      "inputTerm": "Facies nasalis (Lamina horizontalis)",
+      "qualifiedTerm": "Facies Nasalis (lamina Horizontalis)"
+    },
+    {
+      "itemNumber": 57,
+      "inputTerm": "Facies palatina",
+      "qualifiedTerm": "Facies Palatina"
+    },
+    {
+      "itemNumber": 58,
+      "inputTerm": "Foramina palatina minora (Os palatinum)",
+      "qualifiedTerm": "Foramina Palatina Minora Ossis Palatini"
+    },
+    {
+      "itemNumber": 59,
+      "inputTerm": "Spina nasalis posterior",
+      "qualifiedTerm": "Spina Nasalis Posterior"
+    },
+    {
+      "itemNumber": 60,
+      "inputTerm": "Crista nasalis (Os palatinum)",
+      "qualifiedTerm": "Crista Nasalis Ossis Palatini"
+    },
+    {
+      "itemNumber": 61,
+      "inputTerm": "Crista palatina",
+      "qualifiedTerm": "Crista Palatina"
+    }
+  ]
+}

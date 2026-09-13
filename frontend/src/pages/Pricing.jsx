@@ -231,7 +231,6 @@ const TRANSLATIONS = {
 export const PricingView = () => {
   const navigate = useNavigate();
   const { currentLanguage, setLanguage } = useLanguage();
-  const [period, setPeriod] = useState('yearly');
   const [mobileTab, setMobileTab] = useState(2); // 0: Ücretsiz, 1: Temel, 2: Pro, 3: Ömür
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const previewRole = typeof window !== 'undefined'
@@ -240,7 +239,7 @@ export const PricingView = () => {
   const [isUserPro, setIsUserPro] = useState(previewRole === 'pro');
 
   const isTr = currentLanguage === 'tr';
-  const yr = period === 'yearly';
+  const yr = true;
   const t = TRANSLATIONS[isTr ? 'tr' : 'en'];
 
   const currentUser = useMemo(() => {
@@ -346,7 +345,7 @@ export const PricingView = () => {
     const planTitle = planIndex === 2
       ? 'Annual Pro Membership'
       : planIndex === 1
-      ? (yr ? 'Basic Plan (Yearly)' : 'Basic Plan (Monthly)')
+      ? 'Basic Plan (Yearly)'
       : 'Lifetime Membership';
 
     setCheckoutLoading(true);
@@ -357,7 +356,7 @@ export const PricingView = () => {
         customData: {
           plan: planTitle,
           planId: planKey,
-          billingPeriod: planKey === 'lifetime' ? 'lifetime' : (yr ? 'yearly' : 'monthly'),
+          billingPeriod: planKey === 'lifetime' ? 'lifetime' : 'yearly',
           userId: currentUser?.uid || 'unknown'
         }
       });
@@ -496,24 +495,10 @@ export const PricingView = () => {
             <span className="text-xs text-muted-foreground">{mobNote}</span>
           </div>
 
-          {/* Aylık / Yıllık Toggle (Temel veya Pro için) */}
+          {/* Sadece Yıllık Seçeneği (Temel veya Pro için) */}
           {(isMobBasic || isMobPro) && (
-            <div
-              onClick={() => setPeriod(yr ? 'monthly' : 'yearly')}
-              className="flex bg-muted/60 border border-border rounded-xl p-1 font-bold text-xs cursor-pointer select-none"
-            >
-              <span
-                className={`flex-1 py-2 text-center rounded-lg transition-all ${
-                  !yr ? 'bg-card text-foreground shadow-xs' : 'text-muted-foreground'
-                }`}
-              >
-                {t.monthly}
-              </span>
-              <span
-                className={`flex-1 py-2 text-center rounded-lg transition-all ${
-                  yr ? 'bg-card text-foreground shadow-xs' : 'text-muted-foreground'
-                }`}
-              >
+            <div className="flex bg-muted/60 border border-border rounded-xl p-1 font-bold text-xs select-none">
+              <span className="flex-1 py-2 text-center rounded-lg bg-card text-foreground shadow-xs flex items-center justify-center gap-1.5 font-bold">
                 {t.yearly} · {t.save}
               </span>
             </div>
@@ -596,25 +581,9 @@ export const PricingView = () => {
             {t.sub}
           </p>
 
-          {/* Aylık / Yıllık Toggle Butonu */}
-          <div
-            onClick={() => setPeriod(yr ? 'monthly' : 'yearly')}
-            className="flex bg-card border border-border rounded-xl p-1.5 font-extrabold text-sm cursor-pointer mt-3 shadow-xs select-none"
-            role="button"
-            tabIndex={0}
-          >
-            <span
-              className={`py-2 px-5 rounded-lg transition-all ${
-                !yr ? 'bg-primary text-primary-foreground shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {t.monthly}
-            </span>
-            <span
-              className={`py-2 px-5 rounded-lg transition-all flex items-center gap-2 ${
-                yr ? 'bg-primary text-primary-foreground shadow-xs font-bold' : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
+          {/* Sadece Yıllık Seçeneği Rozeti */}
+          <div className="inline-flex bg-card border border-border rounded-xl p-1.5 font-extrabold text-sm shadow-xs select-none mt-3">
+            <span className="py-2 px-5 rounded-lg bg-primary text-primary-foreground shadow-xs font-bold flex items-center gap-2">
               {t.yearly}
               <span className="text-[11px] font-extrabold bg-amber-500 text-white px-2 py-0.5 rounded-full shadow-xs">
                 %55
@@ -631,9 +600,9 @@ export const PricingView = () => {
             const isPro = idx === 2;
             const isLife = idx === 3;
 
-            let price = p.mo;
-            let per = t.perMo;
-            let note = p.noteMo;
+            let price = p.yrp;
+            let per = t.perYr;
+            let note = p.noteYr;
 
             if (isFree) {
               price = t.free;
@@ -646,11 +615,11 @@ export const PricingView = () => {
             } else if (isPro) {
               price = p.yrp;
               per = t.perYr;
-              note = yr ? p.noteYr : p.noteMo;
+              note = p.noteYr;
             } else if (isBasic) {
-              price = yr ? p.yrp : p.mo;
-              per = yr ? t.perYr : t.perMo;
-              note = yr ? p.noteYr : p.noteMo;
+              price = p.yrp;
+              per = t.perYr;
+              note = p.noteYr;
             }
 
             return (

@@ -3,7 +3,9 @@ import admin from 'firebase-admin';
 
 /**
  * Vercel Serverless Configuration:
- * Disable automatic body parsing to allow raw signature verification
+ * MUST disable body parsing so we receive the raw bytes for HMAC verification.
+ * If bodyParser is enabled, the body is pre-parsed and the raw bytes are lost,
+ * which causes paddle.webhooks.unmarshal() to fail signature verification.
  */
 export const config = {
   api: {
@@ -11,134 +13,174 @@ export const config = {
   }
 };
 
-/**
- * Helper to safely initialize Firebase Admin SDK (Singleton)
- */
-function getFirebaseAdmin() {
-  if (admin.apps && admin.apps.length > 0) {
-    return admin.app();
-  }
+// ---------------------------------------------------------------------------
+// Firebase Admin - singleton initializer
+// ---------------------------------------------------------------------------
 
-  // 1. Env variable with full JSON string (FIREBASE_SERVICE_ACCOUNT_KEY or FIREBASE_ADMIN_CREDENTIALS)
-  const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_KEY || process.env.FIREBASE_ADMIN_CREDENTIALS;
+function getFirebaseAdmin() {
+  if (admin.apps && admin.apps.length > 0) return admin.app();
+
+  // Strategy 1: full service-account JSON in one env var
+  const serviceAccountJson =
+    process.env.FIREBASE_SERVICE_ACCOUNT_KEY || process.env.FIREBASE_ADMIN_CREDENTIALS;
   if (serviceAccountJson) {
     try {
-      const parsed = typeof serviceAccountJson === 'string' ? JSON.parse(serviceAccountJson) : serviceAccountJson;
+      const parsed = typeof serviceAccountJson === 'string'
+        ? JSON.parse(serviceAccountJson)
+        : serviceAccountJson;
       return admin.initializeApp({
         credential: admin.credential.cert(parsed),
         projectId: parsed.project_id || process.env.FIREBASE_PROJECT_ID || 'healthlexmed'
       });
-    } catch (e) {
-      console.error('[Firebase Admin] Error parsing service account JSON:', e);
-    }
+    } catch (e) { console.error('[Firebase Admin] JSON parse error:', e); }
   }
 
-  // 2. Split env vars: FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY, FIREBASE_PROJECT_ID
+  // Strategy 2: individual env vars
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const privateKey = (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n');
-  const projectId = process.env.FIREBASE_PROJECT_ID || process.env.REACT_APP_FIREBASE_PROJECT_ID || 'healthlexmed';
+  const projectId = process.env.FIREBASE_PROJECT_ID
+    || process.env.REACT_APP_FIREBASE_PROJECT_ID
+    || 'healthlexmed';
 
   if (clientEmail && privateKey) {
     try {
       return admin.initializeApp({
-        credential: admin.credential.cert({
-          projectId,
-          clientEmail,
-          privateKey
-        }),
+        credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
         projectId
       });
-    } catch (e) {
-      console.error('[Firebase Admin] Error initializing with individual env vars:', e);
-    }
+    } catch (e) { console.error('[Firebase Admin] Init error:', e); }
   }
 
-  // 3. Fallback: Google Application Default Credentials
-  try {
-    return admin.initializeApp({
-      projectId
-    });
-  } catch (err) {
-    console.error('[Firebase Admin] Fallback initialization error:', err);
-    return null;
-  }
+  // Strategy 3: Application Default Credentials
+  try { return admin.initializeApp({ projectId }); }
+  catch (err) { console.error('[Firebase Admin] Fallback error:', err); return null; }
 }
 
+// ---------------------------------------------------------------------------
+// Firestore helpers
+// ---------------------------------------------------------------------------
+
 /**
- * Updates a user's subscription status in Firestore safely.
- * Matches by userId (UID) first; falls back to customerEmail if userId not found.
+ * Upserts subscription/access fields on a Firestore user doc.
+ * Lookup: UID first, then email fallback.
+ * Uses merge:true so unrelated fields are never overwritten.
  */
 async function updateUserSubscription(userId, customerEmail, updateFields) {
   try {
     const adminApp = getFirebaseAdmin();
-    if (!adminApp) {
-      console.error('[Paddle Webhook Error] Firebase Admin could not be initialized.');
-      return false;
-    }
-
+    if (!adminApp) { console.error('[Paddle Webhook] Firebase Admin init failed'); return false; }
     const db = admin.firestore();
-    let targetDocRef = null;
+    let ref = null;
 
-    // 1. Check direct userId (UID)
-    if (userId && typeof userId === 'string' && userId !== 'unknown' && userId.trim() !== '') {
+    if (userId && typeof userId === 'string' && userId.trim() && userId !== 'unknown') {
       const docRef = db.collection('users').doc(userId.trim());
-      const docSnap = await docRef.get();
-      if (docSnap.exists) {
-        targetDocRef = docRef;
-      }
+      const snap = await docRef.get();
+      if (snap.exists) ref = docRef;
     }
-
-    // 2. Fallback to customerEmail query if doc wasn't found by userId
-    if (!targetDocRef && customerEmail && typeof customerEmail === 'string' && customerEmail.includes('@')) {
-      const cleanEmail = customerEmail.toLowerCase().trim();
-      const snap = await db.collection('users').where('email', '==', cleanEmail).limit(1).get();
-      if (!snap.empty) {
-        targetDocRef = snap.docs[0].ref;
-      }
+    if (!ref && customerEmail && customerEmail.includes('@')) {
+      const q = await db.collection('users')
+        .where('email', '==', customerEmail.toLowerCase().trim())
+        .limit(1).get();
+      if (!q.empty) ref = q.docs[0].ref;
     }
-
-    if (targetDocRef) {
-      await targetDocRef.set({
-        ...updateFields,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-      console.log(`[Paddle Webhook] Firestore user updated successfully: ${targetDocRef.id}`, updateFields);
+    if (ref) {
+      await ref.set(
+        { ...updateFields, updatedAt: admin.firestore.FieldValue.serverTimestamp() },
+        { merge: true }
+      );
+      console.log('[Paddle Webhook] User updated:', ref.id, updateFields);
       return true;
-    } else {
-      console.warn(`[Paddle Webhook] No matching Firestore user found for UID: ${userId}, Email: ${customerEmail}`);
-      return false;
     }
+    console.warn('[Paddle Webhook] No user found. UID:', userId, 'Email:', customerEmail);
+    return false;
+  } catch (err) { console.error('[Paddle Webhook] Firestore error:', err); return false; }
+}
+
+/**
+ * Upserts a Paddle customer record in the paddle_customers collection.
+ * Keyed on Paddle customer ID - safe to replay.
+ */
+async function upsertCustomer(customerId, fields) {
+  if (!customerId) return;
+  try {
+    const app = getFirebaseAdmin();
+    if (!app) return;
+    await admin.firestore()
+      .collection('paddle_customers').doc(customerId)
+      .set(
+        { ...fields, updatedAt: admin.firestore.FieldValue.serverTimestamp() },
+        { merge: true }
+      );
+    console.log('[Paddle Webhook] Customer upserted:', customerId);
+  } catch (err) { console.error('[Paddle Webhook] Customer upsert error:', err); }
+}
+
+// ---------------------------------------------------------------------------
+// Raw-body reader
+// ---------------------------------------------------------------------------
+
+/**
+ * Reads raw UTF-8 request body.
+ *
+ * CRITICAL: Pass the exact raw bytes to paddle.webhooks.unmarshal().
+ * Do NOT JSON.parse/re-stringify the body - the byte representation changes
+ * and HMAC verification will fail on every single request.
+ */
+async function getRawBody(req) {
+  if (req.rawBody && typeof req.rawBody === 'string') return req.rawBody;
+  if (typeof req.body === 'string') return req.body;
+  // Do NOT: return JSON.stringify(req.body) - this breaks HMAC
+
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (c) => chunks.push(typeof c === 'string' ? Buffer.from(c) : c));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Idempotency guard
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns true if this Paddle event was already processed; marks it if not.
+ * Paddle delivers at-least-once and events can arrive out of order.
+ * Keyed on eventData.eventId in the paddle_webhook_events collection.
+ */
+async function isAlreadyProcessed(db, eventId) {
+  if (!eventId || !db) return false;
+  const ref = db.collection('paddle_webhook_events').doc(eventId);
+  try {
+    const snap = await ref.get();
+    if (snap.exists) { console.log('[Paddle] Duplicate ignored:', eventId); return true; }
+    await ref.set({
+      processedAt: admin.firestore.FieldValue.serverTimestamp(),
+      expireAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30-day TTL
+    });
+    return false;
   } catch (err) {
-    console.error('[Paddle Webhook] Error updating Firestore:', err);
+    // If Firestore is unreachable, proceed rather than drop the event
+    console.warn('[Paddle] Idempotency check failed (proceeding):', err.message);
     return false;
   }
 }
 
-/**
- * Helper to safely extract raw request body as UTF-8 string
- */
-async function getRawBody(req) {
-  if (req.rawBody && typeof req.rawBody === 'string') {
-    return req.rawBody;
-  }
-  if (typeof req.body === 'string') {
-    return req.body;
-  }
-  if (req.body && typeof req.body === 'object') {
-    return JSON.stringify(req.body);
-  }
-
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    req.on('data', (chunk) => chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk));
-    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-    req.on('error', (err) => reject(err));
-  });
-}
+// ---------------------------------------------------------------------------
+// Main handler
+// ---------------------------------------------------------------------------
 
 /**
- * Paddle Webhook Handler (Vercel Serverless Function)
- * Route: /api/webhook/paddle
+ * Paddle Webhook Handler - Vercel Serverless Function
+ * Route: POST /api/webhook/paddle
+ *
+ * Security checklist:
+ *  - bodyParser: false preserves raw bytes needed for HMAC
+ *  - Verified with PADDLE_WEBHOOK_SECRET_KEY (the SIGNING SECRET, not the API key)
+ *  - Returns 400 on bad signature so Paddle keeps retrying (2xx = stop retrying)
+ *  - Idempotency guard on eventId prevents double-processing on retries
+ *  - All Firestore writes are merge upserts - safe to replay
+ *  - Returns 500 on handler errors so Paddle retries the valid-but-failed event
  */
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -147,150 +189,179 @@ export default async function handler(req, res) {
   }
 
   const signature = req.headers['paddle-signature'] || req.headers['Paddle-Signature'] || '';
-  const webhookSecret = (process.env.PADDLE_WEBHOOK_SECRET_KEY || process.env.PADDLE_WEBHOOK_KEY || '').trim();
-  const apiKey = (process.env.PADDLE_API_KEY || process.env.PADDLE_SERVER_API_KEY || 'placeholder_api_key').trim();
-  const environment = (process.env.PADDLE_ENV || 'production').toLowerCase().trim() === 'production'
+
+  // Use the WEBHOOK SIGNING SECRET from Paddle Dashboard > Developer Tools > Notifications.
+  // This is NOT the same value as your Paddle API key.
+  const webhookSecret = (
+    process.env.PADDLE_WEBHOOK_SECRET_KEY ||
+    process.env.PADDLE_WEBHOOK_KEY ||
+    ''
+  ).trim();
+
+  const apiKey = (
+    process.env.PADDLE_API_KEY ||
+    process.env.PADDLE_SERVER_API_KEY ||
+    ''
+  ).trim();
+
+  const environment = (process.env.PADDLE_ENV || 'production').toLowerCase() === 'production'
     ? Environment.production
     : Environment.sandbox;
 
   if (!webhookSecret) {
-    console.error('[Paddle Webhook Error] PADDLE_WEBHOOK_SECRET_KEY is missing in environment variables.');
-    return res.status(500).json({ error: 'Server webhook secret configuration missing' });
+    console.error('[Paddle Webhook] PADDLE_WEBHOOK_SECRET_KEY is not set.');
+    return res.status(500).json({ error: 'Webhook secret not configured on server' });
   }
 
+  // Read raw body - must be done before any parsing
   let rawBody;
   try {
     rawBody = await getRawBody(req);
-  } catch (readErr) {
-    console.error('[Paddle Webhook Error] Failed to read request body stream:', readErr);
+  } catch (e) {
+    console.error('[Paddle Webhook] Failed to read body:', e);
     return res.status(400).json({ error: 'Could not read request body' });
   }
 
+  // Verify signature - unmarshal performs HMAC-SHA256 check
+  let eventData;
   try {
-    // 🔒 PADDLE-SIGNATURE VERIFICATION
-    console.log('[Paddle Webhook Debug] Paddle-Signature Header:', signature);
-    console.log('[Paddle Webhook Debug] rawBody type:', typeof rawBody);
-    console.log('[Paddle Webhook Debug] rawBody length:', rawBody?.length);
-    console.log('[Paddle Webhook Debug] rawBody preview (first 100 chars):', typeof rawBody === 'string' ? rawBody.substring(0, 100) : String(rawBody).substring(0, 100));
+    const paddle = new Paddle(apiKey || 'placeholder', { environment });
+    eventData = await paddle.webhooks.unmarshal(rawBody, webhookSecret, signature);
+  } catch (e) {
+    // Return 400, NOT 2xx - a 2xx response tells Paddle the delivery succeeded
+    // and it stops all retry attempts. 4xx keeps Paddle retrying.
+    console.error('[Paddle Webhook] Signature verification failed:', e.message);
+    return res.status(400).json({ error: 'Invalid webhook signature', details: e.message });
+  }
 
-    const paddle = new Paddle(apiKey, { environment });
-    const eventData = await paddle.webhooks.unmarshal(rawBody, webhookSecret, signature);
+  console.log('[Paddle Webhook] Verified:', eventData.eventType, '| eventId:', eventData.eventId);
 
-    console.log('[Paddle Webhook Verified] Event:', eventData.eventType);
+  // Idempotency guard - prevent double-processing on Paddle retries
+  const adminApp = getFirebaseAdmin();
+  const db = adminApp ? admin.firestore() : null;
+  if (await isAlreadyProcessed(db, eventData.eventId)) {
+    return res.status(200).json({ success: true, duplicate: true, eventId: eventData.eventId });
+  }
 
-    // Handle distinct subscription & transaction event types
+  // Route to typed handlers
+  try {
     switch (eventData.eventType) {
       case 'transaction.completed':
       case 'transaction.paid': {
-        const transaction = eventData.data;
-        const customerEmail = transaction?.customer?.email || transaction?.customData?.email || transaction?.details?.customer?.email;
-        const userId = transaction?.customData?.userId;
-        const plan = transaction?.customData?.plan || 'Annual Pro Membership';
-        const planId = (transaction?.customData?.planId || '').toLowerCase();
-        const isBasic = planId === 'basic' || plan.toLowerCase().includes('basic');
-        const isLifetime = planId === 'lifetime' || plan.toLowerCase().includes('lifetime');
-        const isProPlan = !isBasic;
-
-        console.log('[Paddle] Transaction Completed. Email:', customerEmail, 'Plan:', plan, 'UserId:', userId);
-
-        await updateUserSubscription(userId, customerEmail, {
-          isPro: isProPlan,
-          isBasic: isBasic,
-          isLifetime: isLifetime,
-          planType: isLifetime ? 'lifetime' : (isBasic ? 'basic' : 'pro'),
-          subscriptionStatus: 'active',
-          plan: plan,
-          paddleTransactionId: transaction?.id || null,
-          paddleCustomerId: transaction?.customerId || null
+        const tx = eventData.data;
+        const email = tx?.customer?.email || tx?.customData?.email || tx?.details?.customer?.email;
+        const uid = tx?.customData?.userId;
+        const plan = tx?.customData?.plan || 'Annual Pro Membership';
+        const pid = (tx?.customData?.planId || '').toLowerCase();
+        const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
+        const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
+        console.log('[Paddle] transaction.completed email:', email, 'plan:', plan);
+        await updateUserSubscription(uid, email, {
+          isPro: !isBasic, isBasic, isLifetime,
+          planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
+          subscriptionStatus: 'active', plan,
+          paddleTransactionId: tx?.id || null,
+          paddleCustomerId: tx?.customerId || null
         });
         break;
       }
 
       case 'subscription.created':
       case 'subscription.activated': {
-        const subscription = eventData.data;
-        const userId = subscription?.customData?.userId;
-        const customerEmail = subscription?.customData?.email || subscription?.customer?.email;
-        const plan = subscription?.customData?.plan || 'Annual Pro Membership';
-        const planId = (subscription?.customData?.planId || '').toLowerCase();
-        const isBasic = planId === 'basic' || plan.toLowerCase().includes('basic');
-        const isLifetime = planId === 'lifetime' || plan.toLowerCase().includes('lifetime');
-        const isProPlan = !isBasic;
-
-        console.log('[Paddle] Subscription Active. Customer:', subscription?.customerId, 'Status:', subscription?.status);
-
-        await updateUserSubscription(userId, customerEmail, {
-          isPro: isProPlan,
-          isBasic: isBasic,
-          isLifetime: isLifetime,
-          planType: isLifetime ? 'lifetime' : (isBasic ? 'basic' : 'pro'),
-          subscriptionStatus: 'active',
-          plan: plan,
-          paddleSubscriptionId: subscription?.id || null,
-          paddleCustomerId: subscription?.customerId || null
+        const sub = eventData.data;
+        const email = sub?.customData?.email || sub?.customer?.email;
+        const uid = sub?.customData?.userId;
+        const plan = sub?.customData?.plan || 'Annual Pro Membership';
+        const pid = (sub?.customData?.planId || '').toLowerCase();
+        const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
+        const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
+        console.log('[Paddle] subscription.created customer:', sub?.customerId);
+        await updateUserSubscription(uid, email, {
+          isPro: !isBasic, isBasic, isLifetime,
+          planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
+          subscriptionStatus: 'active', plan,
+          paddleSubscriptionId: sub?.id || null,
+          paddleCustomerId: sub?.customerId || null
         });
         break;
       }
 
       case 'subscription.updated': {
-        const subscription = eventData.data;
-        const userId = subscription?.customData?.userId;
-        const customerEmail = subscription?.customData?.email || subscription?.customer?.email;
-        const status = subscription?.status;
-        const isActive = status === 'active' || status === 'trialing';
-
-        console.log('[Paddle] Subscription Updated. Status:', status);
-
-        await updateUserSubscription(userId, customerEmail, {
-          isPro: isActive,
-          subscriptionStatus: status || 'updated',
-          paddleSubscriptionId: subscription?.id || null
-        });
+        const sub = eventData.data;
+        const status = sub?.status;
+        console.log('[Paddle] subscription.updated status:', status);
+        await updateUserSubscription(
+          sub?.customData?.userId,
+          sub?.customData?.email || sub?.customer?.email,
+          {
+            isPro: status === 'active' || status === 'trialing',
+            subscriptionStatus: status || 'updated',
+            paddleSubscriptionId: sub?.id || null
+          }
+        );
         break;
       }
 
       case 'subscription.canceled': {
-        const subscription = eventData.data;
-        const userId = subscription?.customData?.userId;
-        const customerEmail = subscription?.customData?.email || subscription?.customer?.email;
-
-        console.log('[Paddle] Subscription Canceled. ID:', subscription?.id);
-
-        await updateUserSubscription(userId, customerEmail, {
-          isPro: false,
-          subscriptionStatus: 'canceled',
-          paddleSubscriptionId: subscription?.id || null
-        });
+        const sub = eventData.data;
+        console.log('[Paddle] subscription.canceled id:', sub?.id);
+        await updateUserSubscription(
+          sub?.customData?.userId,
+          sub?.customData?.email || sub?.customer?.email,
+          { isPro: false, subscriptionStatus: 'canceled', paddleSubscriptionId: sub?.id || null }
+        );
         break;
       }
 
       case 'subscription.past_due': {
-        const subscription = eventData.data;
-        const userId = subscription?.customData?.userId;
-        const customerEmail = subscription?.customData?.email || subscription?.customer?.email;
+        const sub = eventData.data;
+        console.warn('[Paddle] subscription.past_due id:', sub?.id);
+        await updateUserSubscription(
+          sub?.customData?.userId,
+          sub?.customData?.email || sub?.customer?.email,
+          { subscriptionStatus: 'past_due' }
+        );
+        break;
+      }
 
-        console.warn('[Paddle] Subscription Past Due. ID:', subscription?.id);
+      case 'customer.created': {
+        const c = eventData.data;
+        console.log('[Paddle] customer.created id:', c?.id);
+        await upsertCustomer(c?.id, {
+          paddleCustomerId: c?.id,
+          email: c?.email || null,
+          name: c?.name || null,
+          createdAt: c?.createdAt || null
+        });
+        break;
+      }
 
-        await updateUserSubscription(userId, customerEmail, {
-          subscriptionStatus: 'past_due'
+      case 'customer.updated': {
+        const c = eventData.data;
+        console.log('[Paddle] customer.updated id:', c?.id);
+        await upsertCustomer(c?.id, {
+          paddleCustomerId: c?.id,
+          email: c?.email || null,
+          name: c?.name || null
         });
         break;
       }
 
       default:
-        console.log('[Paddle] Received unhandled event type:', eventData.eventType);
+        // Safely ignore all other event types.
+        // Still return 2xx so Paddle does not keep retrying events we intentionally skip.
+        console.log('[Paddle Webhook] Ignored event type:', eventData.eventType);
     }
-
-    return res.status(200).json({
-      success: true,
-      eventType: eventData.eventType,
-      receivedAt: new Date().toISOString()
-    });
-  } catch (error) {
-    console.error('❌ [Paddle Webhook] Invalid Paddle Signature or parsing failure:', error.message);
-    return res.status(400).json({
-      error: 'Invalid Paddle webhook signature',
-      details: error.message
-    });
+  } catch (err) {
+    console.error('[Paddle Webhook] Handler error for', eventData.eventType, ':', err);
+    // Return 500 so Paddle retries - our handler failed but the request was valid
+    return res.status(500).json({ error: 'Webhook handler error', details: err.message });
   }
+
+  return res.status(200).json({
+    success: true,
+    eventType: eventData.eventType,
+    eventId: eventData.eventId,
+    receivedAt: new Date().toISOString()
+  });
 }

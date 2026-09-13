@@ -1,0 +1,102 @@
+{
+  "toplamIncelenen": 11,
+  "exactUpdatesCount": 1,
+  "belirsizEslesmelerCount": 6,
+  "brandNewCount": 4,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Os zygomaticum",
+      "matchedPart": "Os zygomaticum",
+      "firestoreDocId": "009",
+      "firestoreId": 9,
+      "existingTerm": "Os Zygomaticum",
+      "existingEnglish": "Zygomatic Bone",
+      "existingSubcategory": "face_bones"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Facies lateralis (Os zygomaticum)",
+      "matchedPart": "Facies lateralis (Os zygomaticum)",
+      "potentialFirestoreDocId": "036",
+      "potentialFirestoreId": 36,
+      "existingTerm": "Facies Lateralis Radii",
+      "existingEnglish": "Lateral Surface of Radius",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies lateralis (Os zygomaticum) vs Facies Lateralis Radii)"
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Facies temporalis (Os zygomaticum)",
+      "matchedPart": "Facies temporalis (Os zygomaticum)",
+      "potentialFirestoreDocId": "460",
+      "potentialFirestoreId": 460,
+      "existingTerm": "Facies Temporalis Ossis Frontalis",
+      "existingEnglish": "Temporal Surface of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies temporalis (Os zygomaticum) vs Facies Temporalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Facies orbitalis (Os zygomaticum)",
+      "matchedPart": "Facies orbitalis (Os zygomaticum)",
+      "potentialFirestoreDocId": "472",
+      "potentialFirestoreId": 472,
+      "existingTerm": "Facies Orbitalis Ossis Frontalis",
+      "existingEnglish": "Orbital Surface of Frontal Bone",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Facies orbitalis (Os zygomaticum) vs Facies Orbitalis Ossis Frontalis)"
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Processus frontalis (Os zygomaticum)",
+      "matchedPart": "Processus frontalis (Os zygomaticum)",
+      "potentialFirestoreDocId": "208",
+      "potentialFirestoreId": 208,
+      "existingTerm": "Frontalis",
+      "existingEnglish": "Frontal",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus frontalis (Os zygomaticum) vs Frontalis)"
+    },
+    {
+      "itemNumber": 7,
+      "inputTerm": "Tuberculum orbitale",
+      "matchedPart": "Tuberculum orbitale",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum orbitale vs Tuber)"
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Tuberculum marginale",
+      "matchedPart": "Tuberculum marginale",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum marginale vs Tuber)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 5,
+      "inputTerm": "Processus temporalis (Os zygomaticum)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Foramen zygomaticoorbitale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Foramen zygomaticofaciale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Foramen zygomaticotemporale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

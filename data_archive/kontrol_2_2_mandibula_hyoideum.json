@@ -1,0 +1,327 @@
+{
+  "toplamIncelenen": 42,
+  "exactUpdatesCount": 2,
+  "belirsizEslesmelerCount": 19,
+  "brandNewCount": 21,
+  "exactUpdates": [
+    {
+      "itemNumber": 1,
+      "inputTerm": "Mandibula",
+      "matchedPart": "Mandibula",
+      "firestoreDocId": "014",
+      "firestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "existingSubcategory": "face_bones"
+    },
+    {
+      "itemNumber": 36,
+      "inputTerm": "Caput mandibulae; Condylus mandibulae",
+      "matchedPart": "Caput mandibulae",
+      "firestoreDocId": "173",
+      "firestoreId": 173,
+      "existingTerm": "Caput Mandibulae",
+      "existingEnglish": "Head of Mandible (Mandibular Condyle)",
+      "existingSubcategory": "head_and_neck_joints"
+    }
+  ],
+  "belirsizEslesmeler": [
+    {
+      "itemNumber": 2,
+      "inputTerm": "Corpus mandibulae",
+      "matchedPart": "Corpus mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Corpus mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 3,
+      "inputTerm": "Basis mandibulae",
+      "matchedPart": "Basis mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Basis mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 4,
+      "inputTerm": "Symphysis mandibulae",
+      "matchedPart": "Symphysis mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Symphysis mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 5,
+      "inputTerm": "Protuberantia mentalis",
+      "matchedPart": "Protuberantia mentalis",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Protuberantia mentalis vs Tuber)"
+    },
+    {
+      "itemNumber": 6,
+      "inputTerm": "Tuberculum mentale",
+      "matchedPart": "Tuberculum mentale",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberculum mentale vs Tuber)"
+    },
+    {
+      "itemNumber": 10,
+      "inputTerm": "Spina mentalis superior",
+      "matchedPart": "Spina mentalis superior",
+      "potentialFirestoreDocId": "226",
+      "potentialFirestoreId": 226,
+      "existingTerm": "Superior",
+      "existingEnglish": "Superior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Spina mentalis superior vs Superior)"
+    },
+    {
+      "itemNumber": 11,
+      "inputTerm": "Spina mentalis inferior",
+      "matchedPart": "Spina mentalis inferior",
+      "potentialFirestoreDocId": "227",
+      "potentialFirestoreId": 227,
+      "existingTerm": "Inferior",
+      "existingEnglish": "Inferior",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Spina mentalis inferior vs Inferior)"
+    },
+    {
+      "itemNumber": 13,
+      "inputTerm": "Torus mandibularis",
+      "matchedPart": "Torus mandibularis",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Torus mandibularis vs Mandibula)"
+    },
+    {
+      "itemNumber": 15,
+      "inputTerm": "Fovea submandibularis",
+      "matchedPart": "Fovea submandibularis",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Fovea submandibularis vs Mandibula)"
+    },
+    {
+      "itemNumber": 24,
+      "inputTerm": "Ramus mandibulae",
+      "matchedPart": "Ramus mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Ramus mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 25,
+      "inputTerm": "Angulus mandibulae",
+      "matchedPart": "Angulus mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Angulus mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 26,
+      "inputTerm": "Tuberositas masseterica",
+      "matchedPart": "Tuberositas masseterica",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberositas masseterica vs Tuber)"
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Tuberositas pterygoidea",
+      "matchedPart": "Tuberositas pterygoidea",
+      "potentialFirestoreDocId": "423",
+      "potentialFirestoreId": 423,
+      "existingTerm": "Tuber",
+      "existingEnglish": "Tuber; Tuberosity",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Tuberositas pterygoidea vs Tuber)"
+    },
+    {
+      "itemNumber": 28,
+      "inputTerm": "Foramen mandibulae",
+      "matchedPart": "Foramen mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Foramen mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 29,
+      "inputTerm": "Lingula mandibulae",
+      "matchedPart": "Lingula mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Lingula mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 30,
+      "inputTerm": "Canalis mandibulae",
+      "matchedPart": "Canalis mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Canalis mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 32,
+      "inputTerm": "Processus coronoideus (Mandibula)",
+      "matchedPart": "Processus coronoideus (Mandibula)",
+      "potentialFirestoreDocId": "043",
+      "potentialFirestoreId": 43,
+      "existingTerm": "Processus Coronoideus Ulnae",
+      "existingEnglish": "Coronoid Process of Ulna",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Processus coronoideus (Mandibula) vs Processus Coronoideus Ulnae)"
+    },
+    {
+      "itemNumber": 34,
+      "inputTerm": "Incisura mandibulae",
+      "matchedPart": "Incisura mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Incisura mandibulae vs Mandibula)"
+    },
+    {
+      "itemNumber": 37,
+      "inputTerm": "Collum mandibulae",
+      "matchedPart": "Collum mandibulae",
+      "potentialFirestoreDocId": "014",
+      "potentialFirestoreId": 14,
+      "existingTerm": "Mandibula",
+      "existingEnglish": "Mandible",
+      "aciklama": "Benzer/ilişkili yapı mevcut (Collum mandibulae vs Mandibula)"
+    }
+  ],
+  "brandNew": [
+    {
+      "itemNumber": 7,
+      "inputTerm": "Foramen mentale",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 8,
+      "inputTerm": "Linea obliqua (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 9,
+      "inputTerm": "Fossa digastrica",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 12,
+      "inputTerm": "Linea mylohyoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 14,
+      "inputTerm": "Fovea sublingualis",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 16,
+      "inputTerm": "Pars alveolaris (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 17,
+      "inputTerm": "Arcus alveolaris (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 18,
+      "inputTerm": "Alveoli dentales (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Septa interalveolaria (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Septa interradicularia (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 21,
+      "inputTerm": "Juga alveolaria (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Trigonum retromolare",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Fossa retromolaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 31,
+      "inputTerm": "Sulcus mylohyoideus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 33,
+      "inputTerm": "Crista temporalis (Mandibula)",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 35,
+      "inputTerm": "Processus condylaris",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 38,
+      "inputTerm": "Fovea pterygoidea",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 39,
+      "inputTerm": "Os hyoideum",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 40,
+      "inputTerm": "Corpus ossis hyoidei",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 41,
+      "inputTerm": "Cornu minus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    },
+    {
+      "itemNumber": 42,
+      "inputTerm": "Cornu majus",
+      "aciklama": "Firestore veritabanında bu terim veya varyantı bulunmuyor."
+    }
+  ]
+}

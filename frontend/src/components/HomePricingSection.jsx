@@ -11,7 +11,7 @@ const PRICING_CONTENT = {
   tr: {
     eyebrow: 'TARİFELER',
     title: 'Sana uygun tarifeyi seç',
-    sub: 'Tüm kütüphaneye ve oyunlara eriş. İster aylık, ister yıllık, ister tek seferde ömür boyu.',
+    sub: 'Tüm kütüphaneye ve oyunlara eriş. İster yıllık, ister tek seferde ömür boyu.',
     monthly: 'Aylık',
     yearly: 'Yıllık',
     saveBadge: '%55',
@@ -84,7 +84,7 @@ const PRICING_CONTENT = {
   en: {
     eyebrow: 'PRICING',
     title: 'Pick the plan that fits',
-    sub: 'Full access to library and games. Choose monthly, yearly, or pay once for lifetime.',
+    sub: 'Full access to library and games. Choose yearly or pay once for lifetime.',
     monthly: 'Monthly',
     yearly: 'Yearly',
     saveBadge: '55% OFF',
@@ -161,8 +161,7 @@ export const HomePricingSection = () => {
   const { currentLanguage } = useLanguage();
   const isTr = currentLanguage !== 'en';
   const t = PRICING_CONTENT[isTr ? 'tr' : 'en'];
-  const [period, setPeriod] = useState('yearly');
-  const isYearly = period === 'yearly';
+  const isYearly = true;
   const [loadingPlan, setLoadingPlan] = useState(null);
 
   const handlePlanClick = async (plan) => {
@@ -184,7 +183,7 @@ export const HomePricingSection = () => {
     const planTitle = plan.id === 'pro'
       ? 'Annual Pro Membership'
       : plan.id === 'basic'
-      ? (isYearly ? 'Basic Plan (Yearly)' : 'Basic Plan (Monthly)')
+      ? 'Basic Plan (Yearly)'
       : 'Lifetime Membership';
 
     const priceId = getPriceIdForPlan(plan.id);
@@ -197,7 +196,7 @@ export const HomePricingSection = () => {
         customData: {
           plan: planTitle,
           planId: plan.id,
-          billingPeriod: plan.id === 'lifetime' ? 'lifetime' : (isYearly ? 'yearly' : 'monthly'),
+          billingPeriod: plan.id === 'lifetime' ? 'lifetime' : 'yearly',
           userId: currentUser?.uid || 'unknown'
         }
       });
@@ -222,29 +221,9 @@ export const HomePricingSection = () => {
             {t.sub}
           </p>
 
-          {/* Aylık / Yıllık Seçici */}
-          <div
-            onClick={() => setPeriod(isYearly ? 'monthly' : 'yearly')}
-            className="inline-flex bg-card border border-border rounded-xl p-1.5 font-bold text-sm cursor-pointer mt-4 shadow-xs select-none"
-            role="button"
-            tabIndex={0}
-          >
-            <span
-              className={`py-2 px-5 rounded-lg transition-all ${
-                !isYearly
-                  ? 'bg-primary text-primary-foreground shadow-xs font-bold'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {t.monthly}
-            </span>
-            <span
-              className={`py-2 px-5 rounded-lg transition-all flex items-center gap-2 ${
-                isYearly
-                  ? 'bg-primary text-primary-foreground shadow-xs font-bold'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
+          {/* Sadece Yıllık Seçeneği */}
+          <div className="inline-flex bg-card border border-border rounded-xl p-1.5 font-bold text-sm mt-4 shadow-xs select-none">
+            <span className="py-2 px-5 rounded-lg bg-primary text-primary-foreground shadow-xs font-bold flex items-center gap-2">
               {t.yearly}
               <span className="text-[11px] font-extrabold bg-amber-500 text-white px-2 py-0.5 rounded-full shadow-xs">
                 {t.saveBadge}
@@ -259,9 +238,9 @@ export const HomePricingSection = () => {
             const isPro = p.isPro;
             const isLife = p.isLife;
 
-            let price = isYearly ? p.yrp : p.mo;
-            let per = isYearly ? t.perYr : t.perMo;
-            let note = isYearly ? p.noteYr : p.noteMo;
+            let price = p.yrp;
+            let per = t.perYr;
+            let note = p.noteYr;
 
             if (isLife) {
               price = p.once;
@@ -270,7 +249,7 @@ export const HomePricingSection = () => {
             } else if (isPro) {
               price = p.yrp;
               per = t.perYr;
-              note = isYearly ? p.noteYr : p.noteMo;
+              note = p.noteYr;
             }
 
             return (
