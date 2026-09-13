@@ -176,29 +176,45 @@ export const Dashboard = () => {
               : "Congratulations! Your plan has been upgraded to Pro 🎉"
           );
           return;
+        }
+
+        // SADECE "NO_SUBSCRIPTION" hatasında checkout'a fallback yap
+        if (data.error === 'NO_SUBSCRIPTION') {
+          console.warn('[Upgrade] No active subscription found, redirecting to checkout:', data);
+          toast.info(
+            isTr
+              ? "Aktif bir abonelik bulunamadı, yeni abonelik ekranına yönlendiriliyorsunuz..."
+              : "No active subscription found, opening checkout..."
+          );
+          // Alt kısımdaki checkout adımına devam etmesine izin verilir
         } else {
-          console.warn('[Upgrade] Direct subscription update returned error:', data);
+          // Diğer TÜM hatalarda (network, rate limit, Paddle API, sunucu hatası):
+          // Kesinlikle yeni checkout AÇMA, sadece hata bildir ve durdur!
+          console.error('[Upgrade] Upgrade API error (new checkout strictly blocked):', data);
           toast.error(
             data.message ||
             (isTr
-              ? "Abonelik güncellenirken bir hata oluştu. Lütfen tekrar deneyin."
+              ? "Abonelik güncellenirken bir sorun oluştu. Lütfen tekrar deneyin."
               : "An error occurred while updating subscription. Please try again.")
           );
+          return;
         }
       } catch (err) {
-        console.error('[Upgrade] Error calling upgrade API:', err);
+        // Network / bağlantı hatasında da ASLA yeni checkout açma
+        console.error('[Upgrade] Network error calling upgrade API:', err);
         toast.error(
           isTr
             ? "Bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyiniz."
             : "Connection error. Please try again later."
         );
+        return;
       } finally {
         setCheckoutLoading(false);
       }
-      return;
     }
 
-    // paddleSubscriptionId bulunamadıysa checkout aç
+    // Checkout açma adımı: SADECE kullanıcının hiç paddleSubscriptionId'si yoksa
+    // veya backend açıkça 'NO_SUBSCRIPTION' döndüyse çalışır.
     setCheckoutLoading(true);
     try {
       await openPaddleCheckout({

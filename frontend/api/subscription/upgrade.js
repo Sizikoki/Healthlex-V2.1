@@ -146,7 +146,12 @@ export default async function handler(req, res) {
     console.error('[Paddle Upgrade] Error updating subscription:', error);
     return res.status(500).json({
       error: 'UPGRADE_FAILED',
-      message: error?.message || 'Failed to update subscription in Paddle'
+      message: error?.message || 'Failed to update subscription in Paddle',
+      code: error?.code,
+      detail: error?.detail,
+      keyPrefix: apiKey ? `${apiKey.slice(0, 8)}...` : 'NONE',
+      keyLength: apiKey ? apiKey.length : 0,
+      env: environment === Environment.production ? 'production' : 'sandbox'
     });
   }
 }
