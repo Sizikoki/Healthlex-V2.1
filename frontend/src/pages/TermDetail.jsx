@@ -156,7 +156,7 @@ export const TermDetail = () => {
           "name": term.term,
           "alternateName": enTranslation,
           "description": primaryDefinition,
-          "url": `https://healthlexmed.com/study/${getTermSlug(term.term)}`
+          "url": `https://www.healthlexmed.com/study/${getTermSlug(term.term)}`
         }).replace(/</g, '\\u003c')
       }} />
 

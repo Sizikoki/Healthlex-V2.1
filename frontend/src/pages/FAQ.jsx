@@ -239,12 +239,12 @@ export const FAQ = () => {
     return {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      '@id': 'https://healthlexmed.com/faq#faqpage',
+      '@id': 'https://www.healthlexmed.com/faq#faqpage',
       'name': isTr ? 'HealthLexMed Sıkça Sorulan Sorular (SSS)' : 'HealthLexMed Frequently Asked Questions (FAQ)',
       'description': isTr
         ? 'HealthLexMed tıbbi terminoloji öğrenme platformu hakkında fiyatlandırma, ücretsiz deneme, mobil kullanım ve tıp kaynakları sıkça sorulan sorular.'
         : 'Frequently asked questions about HealthLexMed medical terminology learning platform, pricing, free trial, mobile usage, and medical sources.',
-      'url': 'https://healthlexmed.com/faq',
+      'url': 'https://www.healthlexmed.com/faq',
       'inLanguage': isTr ? 'tr-TR' : 'en-US',
       'mainEntity': faqList.map((item) => ({
         '@type': 'Question',

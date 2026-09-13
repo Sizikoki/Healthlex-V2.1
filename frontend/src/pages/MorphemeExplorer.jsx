@@ -182,18 +182,18 @@ export const MorphemeExplorer = () => {
     return {
       '@context': 'https://schema.org',
       '@type': 'DefinedTermSet',
-      '@id': 'https://healthlexmed.com/morphemes#termset',
+      '@id': 'https://www.healthlexmed.com/morphemes#termset',
       name: 'HealthLexMed Tıbbi Terminoloji Kök ve Ekler Sözlüğü (Medical Morphemes Dictionary)',
       description:
         `Tıbbi terminolojinin ${allMorphemes.length} temel yapı taşı: ${PREFIXES.length} Ön Ek, ${ROOTS.length} Kelime Kökü ve ${SUFFIXES.length} Son Ek içeren kapsamlı morfoloji ve kelime çözümleme veritabanı.`,
-      url: 'https://healthlexmed.com/morphemes',
+      url: 'https://www.healthlexmed.com/morphemes',
       inLanguage: ['tr', 'en', 'la'],
       hasDefinedTerm: allMorphemes.map((item) => ({
         '@type': 'DefinedTerm',
         termCode: item.displayTerm,
         name: item.displayTerm,
         description: `${item.meaningTr} (${item.meaningEn})${item.example ? ` — Örnek: ${item.example}` : ''}`,
-        inDefinedTermSet: 'https://healthlexmed.com/morphemes#termset',
+        inDefinedTermSet: 'https://www.healthlexmed.com/morphemes#termset',
       })),
     };
   }, [allMorphemes]);
@@ -480,7 +480,7 @@ export const MorphemeExplorer = () => {
                     itemProp="description"
                     content={`${item.meaningTr} (${item.meaningEn})${item.example ? ` — Örnek: ${item.example}` : ''}`}
                   />
-                  <meta itemProp="inDefinedTermSet" content="https://healthlexmed.com/morphemes#termset" />
+                  <meta itemProp="inDefinedTermSet" content="https://www.healthlexmed.com/morphemes#termset" />
 
                   <Link
                     to={locked ? '/pricing' : `/morphemes/${slug}`}

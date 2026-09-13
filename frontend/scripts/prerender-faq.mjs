@@ -20,10 +20,10 @@ const indexHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 const faqSchemaJson = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "@id": "https://healthlexmed.com/faq#faqpage",
+  "@id": "https://www.healthlexmed.com/faq#faqpage",
   "name": "HealthLexMed Sıkça Sorulan Sorular (SSS)",
   "description": "HealthLexMed tıbbi terminoloji platformu hakkında fiyatlandırma, ücretsiz deneme, mobil kullanım ve tıp kaynakları sıkça sorulan sorular.",
-  "url": "https://healthlexmed.com/faq",
+  "url": "https://www.healthlexmed.com/faq",
   "inLanguage": "tr-TR",
   "mainEntity": [
     {
@@ -126,7 +126,17 @@ faqHtml = faqHtml.replace(
 
 faqHtml = faqHtml.replace(
   /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/i,
-  '<link rel="canonical" href="https://healthlexmed.com/faq" />'
+  '<link rel="canonical" href="https://www.healthlexmed.com/faq" />'
+);
+
+faqHtml = faqHtml.replace(
+  /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/i,
+  '<meta property="og:url" content="https://www.healthlexmed.com/faq" />'
+);
+
+faqHtml = faqHtml.replace(
+  /<meta\s+(name|property)="twitter:url"\s+content=".*?"\s*\/?>/gi,
+  '<meta $1="twitter:url" content="https://www.healthlexmed.com/faq" />'
 );
 
 // Inject FAQPage JSON-LD right before </head>

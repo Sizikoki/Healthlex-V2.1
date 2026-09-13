@@ -12,4 +12,4 @@ Disallow: /dashboard
 Disallow: /panel
 
 # Sitemaps
-Sitemap: https://healthlexmed.com/sitemap.xml
+Sitemap: https://www.healthlexmed.com/sitemap.xml

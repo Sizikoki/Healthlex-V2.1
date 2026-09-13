@@ -14,7 +14,7 @@ async function generateSitemap() {
   const { getAllTerms } = await import('../src/data/medicalTerms.js');
 
   const today = new Date().toISOString().split('T')[0];
-  const baseUrl = 'https://healthlexmed.com';
+  const baseUrl = 'https://www.healthlexmed.com';
 
   // 1. Static Core Pages
   const staticPages = [
