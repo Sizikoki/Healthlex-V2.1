@@ -31,10 +31,55 @@ export const Profile = () => {
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   // Subscription & Pro State
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
-  const [userDocData, setUserDocData] = useState(
-    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free' } : null
-  );
+  const [isPro, setIsPro] = useState(previewRole === 'pro' || previewRole === 'lifetime');
+  const [userDocData, setUserDocData] = useState(() => {
+    if (previewRole === 'lifetime') {
+      return { isLifetime: true, isPro: true, planType: 'lifetime', subscriptionStatus: 'active' };
+    }
+    if (previewRole === 'basic') {
+      return { isBasic: true, isPro: false, planType: 'basic', subscriptionStatus: 'active' };
+    }
+    if (previewRole === 'pro') {
+      return { isPro: true, planType: 'pro', subscriptionStatus: 'active' };
+    }
+    return null;
+  });
+
+  const effectiveUserData = userDocData || getUser();
+  const subStatus = (effectiveUserData?.subscriptionStatus || '').toLowerCase();
+  const planName = (effectiveUserData?.planType || effectiveUserData?.plan || '').toLowerCase();
+
+  const isLifetime =
+    previewRole === 'lifetime' ||
+    effectiveUserData?.isLifetime === true ||
+    planName.includes('lifetime') ||
+    subStatus === 'lifetime';
+
+  const isBasic =
+    !isLifetime &&
+    (previewRole === 'basic' ||
+      effectiveUserData?.isBasic === true ||
+      planName.includes('basic') ||
+      subStatus === 'basic');
+
+  const isProPlan =
+    !isLifetime &&
+    !isBasic &&
+    (previewRole === 'pro' ||
+      effectiveUserData?.isPro === true ||
+      isPro ||
+      subStatus === 'active' ||
+      subStatus === 'trialing' ||
+      subStatus === 'pro');
+
+  // Aktif yinelenen abonelik (Temel veya Pro; Ömür Boyu hariç):
+  const hasActiveSubscription =
+    !isLifetime &&
+    (subStatus === 'active' ||
+      subStatus === 'trialing' ||
+      subStatus === 'past_due' ||
+      (previewRole && (previewRole === 'pro' || previewRole === 'basic')) ||
+      Boolean(effectiveUserData?.paddleSubscriptionId));
 
   useEffect(() => {
     if (previewRole) return;
@@ -425,7 +470,12 @@ export const Profile = () => {
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 self-start sm:self-auto">
-                  {isPro ? (
+                  {isLifetime ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/30">
+                      <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                      {isTr ? 'Ömür Boyu VIP' : 'Lifetime VIP'}
+                    </span>
+                  ) : hasActiveSubscription ? (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                       {isTr ? 'Aktif' : 'Active'}
@@ -443,24 +493,36 @@ export const Profile = () => {
                 <div className="max-w-xl">
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <span className="text-xl">
-                      {isPro ? '⭐' : '⚡'}
+                      {isLifetime ? '👑' : isProPlan ? '⭐' : isBasic ? '⚡' : '🌱'}
                     </span>
                     <h3 className="text-[1.1rem] font-bold text-[var(--ink)] m-0">
-                      {isPro
+                      {isLifetime
+                        ? (isTr ? 'Ömür Boyu Plan' : 'Lifetime Plan')
+                        : isProPlan
                         ? (isTr ? 'Yıllık Pro Plan' : 'Annual Pro Plan')
+                        : isBasic
+                        ? (isTr ? 'Temel Plan' : 'Basic Plan')
                         : (isTr ? 'Ücretsiz Deneme (3 Günlük)' : 'Free Trial (3-Day)')}
                     </h3>
                   </div>
                   <p className="text-[0.88rem] text-[var(--muted)] leading-relaxed m-0">
-                    {isPro
+                    {isLifetime
+                      ? (isTr
+                          ? 'Tüm tıbbi terminoloji morfemlerine, 4 oyun moduna ve gelecekte eklenecek tüm özelliklere süresiz ömür boyu erişim.'
+                          : 'Unlimited lifetime access to all medical terminology morphemes, game modes, and all future updates.')
+                      : isProPlan
                       ? (isTr
                           ? 'Tüm tıbbi terminoloji morfemlerine, oyun modlarına ve detaylı analizlere sınırsız erişim.'
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
+                      : isBasic
+                      ? (isTr
+                          ? 'Temel plandasınız: İlk 3 kategori (100 morfem) ve Flashcard & Eşleştirme oyunları açık. Tüm içerikler için Pro\'ya geçebilirsiniz.'
+                          : 'You are on the Basic plan: First 3 categories (100 morphemes) and Flashcard & Match games unlocked. Upgrade to Pro for full access.')
                       : (isTr
                           ? 'Temel erişimdesiniz. 571 morfem kütüphanesi, 4 oyun modu ve seviye sisteminin tamamına sınırsız erişmek için Pro\'ya geçin.'
                           : 'You have trial access. Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.')}
                   </p>
-                  {isPro && (
+                  {hasActiveSubscription && (
                     <p className="text-[0.78rem] text-[var(--muted)] mt-2.5 leading-normal opacity-90">
                       ℹ️ {isTr
                         ? 'Abonelik iptali veya fatura detaylarınız için Paddle portalını kullanabilir veya help@healthlexmed.com ile iletişime geçebilirsiniz.'
@@ -469,8 +531,8 @@ export const Profile = () => {
                   )}
                 </div>
 
-                <div className="flex-shrink-0">
-                  {isPro ? (
+                <div className="flex-shrink-0 flex flex-wrap items-center gap-2.5">
+                  {hasActiveSubscription && (
                     <a
                       href="https://paddle.net"
                       target="_blank"
@@ -484,7 +546,19 @@ export const Profile = () => {
                       </svg>
                       {isTr ? 'Aboneliği Yönet / İptal Et' : 'Manage / Cancel Subscription'}
                     </a>
-                  ) : (
+                  )}
+
+                  {isBasic && (
+                    <Link
+                      to="/pricing"
+                      className="btn btn-primary inline-flex items-center gap-2 bg-[var(--teal)] text-white hover:bg-[var(--teal-deep)] transition-all font-semibold rounded-[9px] px-5 py-2.5 text-sm shadow-sm"
+                    >
+                      <span>★</span>
+                      {isTr ? "Pro'ya Yükselt →" : 'Upgrade to Pro →'}
+                    </Link>
+                  )}
+
+                  {!hasActiveSubscription && !isLifetime && (
                     <Link
                       to="/pricing"
                       className="btn btn-primary inline-flex items-center gap-2 bg-[var(--teal)] text-white hover:bg-[var(--teal-deep)] transition-all font-semibold rounded-[9px] px-5 py-2.5 text-sm shadow-sm"
