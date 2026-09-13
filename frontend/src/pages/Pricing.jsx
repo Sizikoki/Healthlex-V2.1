@@ -207,6 +207,7 @@ export const PricingView = () => {
   const [mobileTab, setMobileTab] = useState(1); // 0: Temel, 1: Pro, 2: Ömür
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const previewRole = getPreviewRole();
+  const [userData, setUserData] = useState(null);
   const [isUserPro, setIsUserPro] = useState(previewRole === 'pro');
 
   const isTr = currentLanguage === 'tr';
@@ -223,12 +224,16 @@ export const PricingView = () => {
   const trialState = getUserTrialState(currentUser);
   const trialDaysLeft = trialState.daysLeft;
 
-  // Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
+  // Plan ve Pro Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
   useEffect(() => {
-    if (previewRole) return;
+    if (previewRole) {
+      setUserData({ isPro: previewRole === 'pro', isBasic: previewRole === 'basic' });
+      return;
+    }
     const uid = userUid || auth?.currentUser?.uid;
     if (!uid) {
       const localUser = getUser();
+      setUserData(localUser);
       setIsUserPro(checkIsPro(localUser));
       return;
     }
@@ -237,8 +242,11 @@ export const PricingView = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          setIsUserPro(checkIsPro(docSnap.data()));
+          const data = docSnap.data();
+          setUserData(data);
+          setIsUserPro(checkIsPro(data));
         } else {
+          setUserData(null);
           setIsUserPro(false);
         }
       }, (err) => {
@@ -249,6 +257,35 @@ export const PricingView = () => {
       console.warn('[Pricing] Firestore snapshot error:', e);
     }
   }, [previewRole, userUid]);
+
+  // Kullanıcının mevcut planının tespiti (subscriptionStatus, plan, isLifetime, isBasic, isPro)
+  const userCurrentPlan = useMemo(() => {
+    const data = userData || (currentUser?.uid ? currentUser : null) || getUser() || {};
+    
+    // 1. Ömür Boyu VIP (tek seferlik ödeme, süresiz tam erişim)
+    const isLifetime = data.isLifetime === true || 
+      data.planType === 'lifetime' || 
+      (data.plan || '').toLowerCase().includes('lifetime') || 
+      (data.plan || '').toLowerCase().includes('ömür');
+    if (isLifetime) return 'lifetime';
+
+    const subStatus = (data.subscriptionStatus || '').toLowerCase();
+    const isBasicFlag = data.isBasic === true || data.planType === 'basic' || (data.plan || '').toLowerCase().includes('basic') || (data.plan || '').toLowerCase().includes('temel');
+    const isProFlag = data.isPro === true || data.planType === 'pro' || (data.plan || '').toLowerCase().includes('pro');
+
+    // Aktif abonelik kontrolü
+    const hasActiveSubscription = subStatus === 'active' || subStatus === 'trialing' || subStatus === 'past_due' || isBasicFlag || isProFlag;
+    if (!hasActiveSubscription || subStatus === 'canceled' || subStatus === 'free') {
+      return null;
+    }
+
+    if (isBasicFlag && !isProFlag) return 'basic';
+    if (isProFlag) return 'pro';
+    if ((data.plan || '').toLowerCase().includes('basic') || (data.plan || '').toLowerCase().includes('temel')) return 'basic';
+    if ((data.plan || '').toLowerCase().includes('pro')) return 'pro';
+
+    return null;
+  }, [userData, currentUser]);
 
   const selPlan = t.plans[mobileTab] || t.plans[0];
   const isMobBasic = mobileTab === 0;
@@ -273,7 +310,19 @@ export const PricingView = () => {
     mobNote = selPlan.noteYr;
   }
 
+  const isCurrentMobilePlan =
+    (mobileTab === 0 && userCurrentPlan === 'basic') ||
+    (mobileTab === 1 && userCurrentPlan === 'pro') ||
+    (mobileTab === 2 && userCurrentPlan === 'lifetime');
+
   const handlePlanClick = async (planIndex) => {
+    const clickedPlanKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
+    if (userCurrentPlan === clickedPlanKey) {
+      // Zaten bu plana sahip, tekrar satın almaya izin verme
+      navigate('/dashboard');
+      return;
+    }
+
     if (planIndex === 1 && isUserPro) {
       // Zaten Pro üye
       navigate('/dashboard');
@@ -407,19 +456,20 @@ export const PricingView = () => {
           }`}
         >
           {/* Rozet */}
-          {selPlan.badge && (!isUserPro || !isMobPro) && (
-            <span
-              className={`absolute -top-3 left-5 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs ${
-                isMobLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-orange-500'
-              }`}
-            >
-              {selPlan.badge}
-            </span>
-          )}
-          {isMobPro && isUserPro && (
+          {isCurrentMobilePlan ? (
             <span className="absolute -top-3 left-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs">
               {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
             </span>
+          ) : (
+            selPlan.badge && (
+              <span
+                className={`absolute -top-3 left-5 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs ${
+                  isMobLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-orange-500'
+                }`}
+              >
+                {selPlan.badge}
+              </span>
+            )
           )}
 
           <div>
@@ -488,17 +538,17 @@ export const PricingView = () => {
         <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border p-3 sm:p-4 shadow-lg lg:hidden flex flex-col gap-2">
           <button
             onClick={() => handlePlanClick(mobileTab)}
-            disabled={checkoutLoading}
-            className={`w-full text-center font-bold text-sm sm:text-base py-3 px-4 rounded-xl transition-all cursor-pointer shadow-sm ${
-              (isMobPro && isUserPro)
-                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100'
+            disabled={checkoutLoading || isCurrentMobilePlan}
+            className={`w-full text-center font-bold text-sm sm:text-base py-3 px-4 rounded-xl transition-all shadow-sm ${
+              isCurrentMobilePlan
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
                 : isMobPro
-                ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md'
-                : 'bg-primary text-primary-foreground'
+                ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md cursor-pointer'
+                : 'bg-primary text-primary-foreground cursor-pointer'
             }`}
           >
-            {isMobPro && isUserPro
-              ? (isTr ? 'Aktif Planınız (Pro) ✓' : 'Current Plan (Pro) ✓')
+            {isCurrentMobilePlan
+              ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
               : `${selPlan.cta} →`}
           </button>
           <div className="text-xs text-muted-foreground text-center">
@@ -563,6 +613,11 @@ export const PricingView = () => {
               note = p.noteYr;
             }
 
+            const isCardCurrentPlan =
+              (idx === 0 && userCurrentPlan === 'basic') ||
+              (idx === 1 && userCurrentPlan === 'pro') ||
+              (idx === 2 && userCurrentPlan === 'lifetime');
+
             return (
               <div
                 key={idx}
@@ -573,17 +628,18 @@ export const PricingView = () => {
                 }`}
               >
                 {/* Rozetler */}
-                {p.badge && (!isUserPro || !isPro) && (
-                  <span className={`absolute -top-3 left-6 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs ${
-                    isLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-amber-500'
-                  }`}>
-                    {p.badge}
-                  </span>
-                )}
-                {isPro && isUserPro && (
+                {isCardCurrentPlan ? (
                   <span className="absolute -top-3 left-6 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs">
                     {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
                   </span>
+                ) : (
+                  p.badge && (
+                    <span className={`absolute -top-3 left-6 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs ${
+                      isLife ? 'bg-gradient-to-r from-blue-600 to-indigo-600' : 'bg-amber-500'
+                    }`}>
+                      {p.badge}
+                    </span>
+                  )
                 )}
 
                 <div>
@@ -612,17 +668,17 @@ export const PricingView = () => {
                 {/* Buton */}
                 <button
                   onClick={() => handlePlanClick(idx)}
-                  disabled={checkoutLoading}
-                  className={`w-full text-center font-bold text-[14px] xl:text-[15px] py-3.5 px-4 rounded-xl transition-all cursor-pointer shadow-xs ${
-                    (isPro && isUserPro)
-                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 hover:border-emerald-400'
+                  disabled={checkoutLoading || isCardCurrentPlan}
+                  className={`w-full text-center font-bold text-[14px] xl:text-[15px] py-3.5 px-4 rounded-xl transition-all shadow-xs ${
+                    isCardCurrentPlan
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
                       : isPro
-                      ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md hover:shadow-lg'
-                      : 'bg-primary text-primary-foreground hover:opacity-90'
+                      ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md hover:shadow-lg cursor-pointer'
+                      : 'bg-primary text-primary-foreground hover:opacity-90 cursor-pointer'
                   }`}
                 >
-                  {(isPro && isUserPro)
-                    ? (isTr ? 'Aktif Planınız (Pro) ✓' : 'Current Plan (Pro) ✓')
+                  {isCardCurrentPlan
+                    ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
                     : p.cta}
                 </button>
 
