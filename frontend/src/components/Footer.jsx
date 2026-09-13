@@ -94,7 +94,7 @@ export const Footer = () => {
                 {t.about}
               </Link>
               <Link
-                to="/contact"
+                to="/faq"
                 className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
               >
                 {t.faq}
@@ -223,7 +223,7 @@ export const Footer = () => {
               {t.about}
             </Link>
             <Link
-              to="/contact"
+              to="/faq"
               className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
             >
               {t.faq}

@@ -27,6 +27,7 @@ async function generateSitemap() {
     { loc: `${baseUrl}/quiz`, priority: '0.8', changefreq: 'weekly' },
     { loc: `${baseUrl}/morpheme`, priority: '0.8', changefreq: 'weekly' },
     { loc: `${baseUrl}/progress`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${baseUrl}/faq`, priority: '0.8', changefreq: 'weekly' },
     { loc: `${baseUrl}/contact`, priority: '0.7', changefreq: 'monthly' },
     { loc: `${baseUrl}/terms`, priority: '0.5', changefreq: 'monthly' },
     { loc: `${baseUrl}/privacy`, priority: '0.5', changefreq: 'monthly' },

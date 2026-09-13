@@ -10,6 +10,7 @@ import {
   HelpCircle,
   MessageSquare,
   ArrowLeft,
+  ArrowRight,
   ChevronDown,
   Sparkles,
   ExternalLink
@@ -467,6 +468,15 @@ export const Contact = () => {
                       </div>
                     );
                   })}
+                  <div className="pt-2 text-center">
+                    <Link
+                      to="/faq"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                    >
+                      {isTr ? 'Tüm Sıkça Sorulan Soruları Görüntüle (10 Soru)' : 'View All Frequently Asked Questions (10 Questions)'}
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
 

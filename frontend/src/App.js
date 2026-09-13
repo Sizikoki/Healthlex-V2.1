@@ -18,6 +18,7 @@ import { TermDetail } from '@/pages/TermDetail';
 import { ProgressPage } from '@/pages/Progress';
 import { Profile } from '@/pages/Profile';
 import { Contact } from '@/pages/Contact';
+import { FAQ } from '@/pages/FAQ';
 import { Legal } from '@/pages/Legal';
 import { Pricing } from '@/pages/Pricing';
 import { Welcome } from '@/pages/Welcome';
@@ -164,7 +165,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
             <Route path="/hakkinda" element={<Navigate to="/contact" replace />} />
-            <Route path="/sss" element={<Navigate to="/contact" replace />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/sss" element={<Navigate to="/faq" replace />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/terms" element={<Legal activeDoc="terms" />} />
             <Route path="/kullanim-kosullari" element={<Navigate to="/terms" replace />} />
