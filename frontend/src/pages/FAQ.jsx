@@ -259,6 +259,10 @@ export const FAQ = () => {
 
   // Schema.org FAQPage JSON-LD <head> Enjeksiyonu
   useEffect(() => {
+    // Sayfa zaten prerender edilmişse veya statik script varsa duplikasyonu önle
+    if (document.getElementById('prerendered-faq-schema')) {
+      return;
+    }
     const scriptId = 'healthlex-faq-schema-jsonld';
     let script = document.getElementById(scriptId);
     if (!script) {
