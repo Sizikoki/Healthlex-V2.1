@@ -49,11 +49,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'INVALID_REQUEST', message: 'Missing user identification or subscription ID' });
   }
 
-  const apiKey = (
+  let apiKey = (
     process.env.PADDLE_API_KEY ||
     process.env.PADDLE_SERVER_API_KEY ||
     ''
   ).trim();
+  apiKey = apiKey.replace(/^Bearer\s+/i, '').replace(/^["']|["']$/g, '').trim();
 
   const environment = (process.env.PADDLE_ENV || 'production').toLowerCase() === 'production'
     ? Environment.production
