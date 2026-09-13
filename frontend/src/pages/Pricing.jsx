@@ -5,7 +5,7 @@ import { getUser, getUserTrialState, formatTurkishName } from '@/utils/storage';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
-import { checkIsPro } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 const TRANSLATIONS = {
@@ -206,9 +206,7 @@ export const PricingView = () => {
   const { currentLanguage, setLanguage } = useLanguage();
   const [mobileTab, setMobileTab] = useState(1); // 0: Temel, 1: Pro, 2: Ömür
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const [isUserPro, setIsUserPro] = useState(previewRole === 'pro');
 
   const isTr = currentLanguage === 'tr';

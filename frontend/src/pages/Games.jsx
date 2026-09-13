@@ -13,7 +13,7 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro } from '@/utils/planAccess';
+import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 const GAMES_CATEGORY_KEY = 'healthlex_selected_game_category';
@@ -43,9 +43,7 @@ export const Games = () => {
   const paramCategory = searchParams.get('category');
 
   const isTr = currentLanguage !== 'en';
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
 
   useEffect(() => {

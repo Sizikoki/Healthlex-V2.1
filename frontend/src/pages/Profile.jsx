@@ -6,7 +6,7 @@ import { collection, query, where, getDocs, writeBatch, doc, onSnapshot } from '
 import { auth, db } from '@/firebase/config';
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
-import { checkIsPro } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -20,9 +20,7 @@ export const Profile = () => {
   // ----------------------------------------------------
   // States
   // ----------------------------------------------------
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const effectiveUser = previewRole
     ? { uid: 'preview-uid', name: 'Dr. Ahmet Kaya', email: 'dr.kaya@healthlexmed.com', joinDate: '2026-03-01T00:00:00.000Z' }
     : user;

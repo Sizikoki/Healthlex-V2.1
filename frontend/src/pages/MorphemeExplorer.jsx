@@ -26,7 +26,7 @@ import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getUser } from '@/utils/storage';
-import { isMorphemeUnlocked, checkIsPro } from '@/utils/planAccess';
+import { isMorphemeUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
@@ -80,9 +80,7 @@ export const MorphemeExplorer = () => {
   const isTr = currentLanguage === 'tr';
   const [searchParams] = useSearchParams();
 
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
 
   useEffect(() => {

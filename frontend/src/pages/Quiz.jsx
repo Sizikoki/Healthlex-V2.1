@@ -5,7 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { isLoggedIn, canGuestPlay, getUser } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
-import { isGameUnlocked, checkIsPro } from '@/utils/planAccess';
+import { isGameUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { toast } from 'sonner';
@@ -19,9 +19,7 @@ export const Quiz = () => {
 
   const [isPro, setIsPro] = useState(() => {
     try {
-      const previewRole = typeof window !== 'undefined'
-        ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-        : null;
+      const previewRole = getPreviewRole();
       if (previewRole === 'pro') return true;
       if (previewRole === 'basic') return false;
       const local = getUser();
@@ -32,9 +30,7 @@ export const Quiz = () => {
   });
 
   useEffect(() => {
-    const previewRole = typeof window !== 'undefined'
-      ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-      : null;
+    const previewRole = getPreviewRole();
     if (previewRole) return;
     const uid = auth?.currentUser?.uid || getUser()?.uid;
     if (!uid) return;

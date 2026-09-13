@@ -7,6 +7,7 @@ import { TrialDashboardView } from '@/components/TrialDashboardView';
 import { auth, db } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { getPreviewRole } from '@/utils/planAccess';
 
 const resolveIsPro = (userData) => {
   if (!userData) return false;
@@ -18,9 +19,7 @@ const resolveIsPro = (userData) => {
 };
 
 export const ProgressPage = () => {
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
 
   const [firebaseUser, setFirebaseUser] = useState(
     previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null

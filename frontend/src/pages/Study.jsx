@@ -15,7 +15,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { getTermSlug } from '@/utils/termHelper';
-import { isCategoryUnlocked, checkIsPro } from '@/utils/planAccess';
+import { isCategoryUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -204,9 +204,7 @@ export const Study = () => {
   const { currentLanguage, t } = useLanguage();
   const isTr = currentLanguage === 'tr';
 
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
 
   useEffect(() => {

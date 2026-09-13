@@ -29,6 +29,7 @@ import { getPaddle } from '@/services/paddle';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { CookieBanner } from '@/components/CookieBanner';
 import { initAnalyticsOnLoad } from '@/services/analytics';
+import { getPreviewRole } from '@/utils/planAccess';
 import './App.css';
 
 /**
@@ -36,9 +37,7 @@ import './App.css';
  * Eliminates race condition flickers and prevents forged localStorage bypasses.
  */
 const ProtectedRoute = ({ children }) => {
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
 
   const [authState, setAuthState] = useState({
     user: previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null,

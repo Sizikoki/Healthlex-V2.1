@@ -13,7 +13,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { useLanguage } from '@/context/LanguageContext';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro } from '@/utils/planAccess';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 
 export const Flashcards = () => {
   const { currentLanguage, t } = useLanguage();
@@ -21,9 +21,7 @@ export const Flashcards = () => {
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
 
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
   const localUser = getUser();
   const isPro = previewRole === 'pro' || checkIsPro(localUser);
 

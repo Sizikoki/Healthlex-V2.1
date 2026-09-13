@@ -96,3 +96,37 @@ export const isGameUnlocked = (gameId, isPro) => {
   if (isPro) return true;
   return UNLOCKED_GAMES.includes(gameId);
 };
+
+/**
+ * Test / Preview rolü:
+ * Geliştirme/test kolaylığı sağlamak için URL parametresi (?previewRole=pro/basic) veya localStorage'dan okunur.
+ * GÜVENLİK KURALI:
+ * Canlı / üretim ortamında (production build veya canlı domain) TAMAMEN devre dışıdır, her zaman null döner.
+ * Yalnızca localhost ortamında geliştirme/test amaçlı çalışır.
+ */
+export const getPreviewRole = () => {
+  if (typeof window === 'undefined') return null;
+
+  // 1. Production build ortamında kesinlikle devre dışı
+  if (process.env.NODE_ENV === 'production') return null;
+
+  // 2. Canlı domain / IP kontrolü (yalnızca yerel geliştirme ortamında izin verilir)
+  try {
+    const hostname = window.location.hostname;
+    const isLocalhost =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '[::1]' ||
+      hostname === '0.0.0.0';
+
+    if (!isLocalhost) return null;
+
+    return (
+      new URLSearchParams(window.location.search).get('previewRole') ||
+      localStorage.getItem('healthlex_preview_role') ||
+      null
+    );
+  } catch (e) {
+    return null;
+  }
+};

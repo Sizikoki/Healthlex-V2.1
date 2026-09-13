@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame, Sparkles, Clock } from 'lucide-react';
 import { getStats, getUser, getStreak, logout, formatTurkishName, getUserTrialState } from '@/utils/storage';
-import { getPastDueState } from '@/utils/planAccess';
+import { getPastDueState, getPreviewRole } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -55,9 +55,7 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
   const isTr = currentLanguage !== 'en';
-  const previewRole = typeof window !== 'undefined'
-    ? (new URLSearchParams(window.location.search).get('previewRole') || localStorage.getItem('healthlex_preview_role'))
-    : null;
+  const previewRole = getPreviewRole();
 
   // State
   const [firebaseUser, setFirebaseUser] = useState(
