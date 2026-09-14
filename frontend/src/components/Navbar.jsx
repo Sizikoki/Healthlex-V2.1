@@ -24,12 +24,28 @@ export const Navbar = () => {
   const [firebaseUser, setFirebaseUser] = useState(
     previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
   );
+  const [userData, setUserData] = useState(
+    previewRole === 'trial' ? { subscriptionStatus: 'trialing', isTrial: true } : null
+  );
   const [isPro, setIsPro] = useState(previewRole === 'pro' || previewRole === 'lifetime');
   const [isBasic, setIsBasic] = useState(previewRole === 'basic');
   const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
-    if (previewRole) return;
+    if (previewRole) {
+      if (previewRole === 'pro' || previewRole === 'lifetime') {
+        setIsPro(true);
+        setIsBasic(false);
+      } else if (previewRole === 'basic') {
+        setIsPro(false);
+        setIsBasic(true);
+      } else if (previewRole === 'trial') {
+        setIsPro(false);
+        setIsBasic(false);
+        setUserData({ subscriptionStatus: 'trialing', isTrial: true });
+      }
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (usr) => {
       setFirebaseUser(usr);
     });
@@ -42,8 +58,9 @@ export const Navbar = () => {
     const uid = firebaseUser?.uid || getUser()?.uid;
     if (!uid) {
       const localUser = getUser();
+      setUserData(localUser);
       const isBasicPlan = localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic');
-      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active' || localUser?.subscriptionStatus === 'trialing'));
+      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active'));
       setIsBasic(isBasicPlan);
       return;
     }
@@ -53,18 +70,15 @@ export const Navbar = () => {
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
+          setUserData(data);
           const isBasicPlan = data.isBasic === true || data.subscriptionStatus === 'basic' || (data.plan || '').toLowerCase().includes('basic');
-          const proActive =
-            !isBasicPlan && (
-              data.isPro === true ||
-              data.subscriptionStatus === 'active' ||
-              data.subscriptionStatus === 'pro' ||
-              data.subscriptionStatus === 'trialing' ||
-              data.isLifetime === true
-            );
-          setIsPro(proActive);
+          const isLifetime = data.isLifetime === true || (data.plan || '').toLowerCase().includes('lifetime');
+          const status = (data.subscriptionStatus || '').toLowerCase();
+          const isPaidPro = !isBasicPlan && (data.isPro === true || status === 'active' || status === 'pro' || isLifetime);
+          setIsPro(isPaidPro);
           setIsBasic(isBasicPlan);
         } else {
+          setUserData(null);
           setIsPro(false);
           setIsBasic(false);
         }
@@ -80,7 +94,13 @@ export const Navbar = () => {
   const loggedIn = !!firebaseUser || isLoggedIn();
   const user = getUser();
   const stats = loggedIn ? getStats() : null;
-  const trialState = getUserTrialState(user || firebaseUser);
+  const currentUserObj = userData || user || firebaseUser;
+  const trialState = getUserTrialState(
+    previewRole === 'trial'
+      ? { ...currentUserObj, subscriptionStatus: 'trialing', isTrial: true }
+      : currentUserObj
+  );
+  const isTrialActive = trialState.hasTrial && trialState.isActive && !trialState.isExpired;
   const trialDaysLeft = trialState.daysLeft;
   const formattedUserName = formatTurkishName(
     firebaseUser?.displayName || user?.name || firebaseUser?.email?.split('@')[0] || user?.email?.split('@')[0]
@@ -197,17 +217,19 @@ export const Navbar = () => {
                       <div className="basic-badge flex items-center gap-1.5 bg-blue-500/15 border border-blue-500/40 text-blue-700 dark:text-blue-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
                         <span className="tracking-wide">TEMEL</span>
                       </div>
-                    ) : trialState.currentDay >= 3 ? (
-                      <div className="trial-badge flex items-center gap-2 bg-[#fff4e6] dark:bg-amber-950/40 border border-[#ffe0b8] dark:border-amber-800 text-[#b45309] dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
-                        <span className="w-2 h-2 rounded-full bg-[#f97316] animate-pulse" />
-                        <span>{currentLanguage === 'en' ? 'Trial · Last day' : 'Deneme · Son gün'}</span>
-                      </div>
-                    ) : (
-                      <div className="trial-badge flex items-center gap-2 bg-[#e8f0fe] dark:bg-blue-950/40 border border-[#c7d9fb] dark:border-blue-800 text-[#1d4ed8] dark:text-blue-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
-                        <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
-                        <span>{currentLanguage === 'en' ? `Trial · ${trialDaysLeft} days left` : `Deneme · ${trialDaysLeft} gün kaldı`}</span>
-                      </div>
-                    )}
+                    ) : isTrialActive ? (
+                      trialDaysLeft <= 1 ? (
+                        <div className="trial-badge flex items-center gap-2 bg-[#fff4e6] dark:bg-amber-950/40 border border-[#ffe0b8] dark:border-amber-800 text-[#b45309] dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
+                          <span className="w-2 h-2 rounded-full bg-[#f97316] animate-pulse" />
+                          <span>{currentLanguage === 'en' ? 'Trial · Last day' : 'Deneme · Son gün'}</span>
+                        </div>
+                      ) : (
+                        <div className="trial-badge flex items-center gap-2 bg-[#e8f0fe] dark:bg-blue-950/40 border border-[#c7d9fb] dark:border-blue-800 text-[#1d4ed8] dark:text-blue-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs">
+                          <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
+                          <span>{currentLanguage === 'en' ? `Trial · ${trialDaysLeft} days left` : `Deneme · ${trialDaysLeft} gün kaldı`}</span>
+                        </div>
+                      )
+                    ) : null}
                     <div className="avatar w-[36px] h-[36px] rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-[0.95rem] shadow-xs">
                       {userInitial}
                     </div>
@@ -279,11 +301,21 @@ export const Navbar = () => {
                         <User className="w-4 h-4 mr-2" />
                         {user?.name || t('myProfile')}
                       </div>
-                      {isPro && (
+                      {isPro ? (
                         <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
                           ★ PRO
                         </span>
-                      )}
+                      ) : isBasic ? (
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-700 dark:text-blue-300">
+                          TEMEL
+                        </span>
+                      ) : isTrialActive ? (
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
+                          {currentLanguage === 'en'
+                            ? (trialDaysLeft <= 1 ? 'Trial · Last day' : `Trial · ${trialDaysLeft}d`)
+                            : (trialDaysLeft <= 1 ? 'Deneme · Son gün' : `Deneme · ${trialDaysLeft} gün`)}
+                        </span>
+                      ) : null}
                     </Button>
                   </Link>
                   <Button

@@ -31,7 +31,14 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
       return 'basic';
     }
 
-    if (userData.isPro === true || status === 'active' || status === 'pro' || status === 'trialing') {
+    if (status === 'trialing' || userData.isTrial === true) {
+      if (trialState && !trialState.isExpired && trialState.isActive) {
+        return 'trial';
+      }
+      return 'expired';
+    }
+
+    if (userData.isPro === true || status === 'active' || status === 'pro') {
       return 'pro';
     }
 
@@ -44,7 +51,7 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
     }
   }
 
-  if (trialState && !trialState.isExpired) {
+  if (trialState && trialState.hasTrial && trialState.isActive && !trialState.isExpired) {
     return 'trial';
   }
 

@@ -126,36 +126,103 @@ export const formatTurkishName = (name) => {
     .join(' ');
 };
 
-// ── Kullanıcı 3 Günlük Deneme Durumu (Dinamik) ───────────────────────────────
+// ── Kullanıcı 3 Günlük Deneme Durumu (Dinamik & Gerçekçi) ───────────────────
 export const getUserTrialState = (currentUser) => {
   const user = currentUser || getUser() || auth?.currentUser;
-  const storageKey = user?.uid ? `healthlex_trial_start_${user.uid}` : 'healthlex_user_trial_start';
-  let startTime = localStorage.getItem(storageKey);
-
-  if (!startTime) {
-    if (user?.joinDate || user?.metadata?.creationTime) {
-      startTime = new Date(user.joinDate || user.metadata.creationTime).getTime().toString();
-    } else {
-      startTime = Date.now().toString();
-    }
-    localStorage.setItem(storageKey, startTime);
+  if (!user) {
+    return {
+      hasTrial: false,
+      isActive: false,
+      isExpired: false,
+      daysLeft: 0,
+      currentDay: 0,
+      endDate: null,
+      remainingMs: 0
+    };
   }
 
-  const startMs = parseInt(startTime, 10) || Date.now();
-  const trialDurationMs = 3 * 24 * 60 * 60 * 1000;
-  const elapsedMs = Math.max(0, Date.now() - startMs);
-  const remainingMs = Math.max(0, trialDurationMs - elapsedMs);
-  const daysLeft = Math.max(1, Math.min(3, Math.ceil(remainingMs / (24 * 60 * 60 * 1000))));
-  const currentDay = Math.min(3, Math.max(1, 4 - daysLeft));
-  const endDate = new Date(startMs + trialDurationMs);
+  // 1. Kullanıcı GERÇEKTEN bir deneme planına girdi mi?
+  // - Paddle abonelik durumu 'trialing' ise
+  // - Firestore veya local kullanıcıda isTrial / isTrialing bayrağı varsa
+  // - Gerçek bir trialEndDate alanı tanımlanmışsa
+  // - Geliştirici/test önizlemesi (previewRole === 'trial')
+  const status = (user.subscriptionStatus || '').toLowerCase();
+  const hasTrial =
+    status === 'trialing' ||
+    user.isTrial === true ||
+    user.isTrialing === true ||
+    !!user.trialEndDate ||
+    user.previewRole === 'trial';
+
+  if (!hasTrial) {
+    return {
+      hasTrial: false,
+      isActive: false,
+      isExpired: false,
+      daysLeft: 0,
+      currentDay: 0,
+      endDate: null,
+      remainingMs: 0
+    };
+  }
+
+  // 2. Gerçek bitiş tarihini (endDate) hesapla
+  let endMs = null;
+  if (user.trialEndDate) {
+    if (typeof user.trialEndDate.toDate === 'function') {
+      endMs = user.trialEndDate.toDate().getTime();
+    } else if (typeof user.trialEndDate === 'number') {
+      endMs = user.trialEndDate;
+    } else if (user.trialEndDate.seconds) {
+      endMs = user.trialEndDate.seconds * 1000;
+    } else {
+      const parsed = new Date(user.trialEndDate).getTime();
+      if (!isNaN(parsed)) endMs = parsed;
+    }
+  }
+
+  // trialEndDate henüz yazılmamışsa ama trialStartDate varsa (3 gün ekle)
+  if (!endMs && user.trialStartDate) {
+    const start = new Date(user.trialStartDate).getTime();
+    if (!isNaN(start)) {
+      endMs = start + (3 * 24 * 60 * 60 * 1000);
+    }
+  }
+
+  // Local storage fallback (sadece gerçekten trial bayrağı olan kullanıcılar için)
+  const storageKey = user.uid ? `healthlex_trial_start_${user.uid}` : 'healthlex_user_trial_start';
+  if (!endMs) {
+    const storedStart = localStorage.getItem(storageKey);
+    if (storedStart) {
+      const parsed = parseInt(storedStart, 10);
+      if (!isNaN(parsed)) endMs = parsed + (3 * 24 * 60 * 60 * 1000);
+    }
+  }
+
+  // Deneme yeni başladıysa ve endMs hala yoksa şu andan itibaren 3 gün başlat
+  if (!endMs) {
+    const now = Date.now();
+    endMs = now + (3 * 24 * 60 * 60 * 1000);
+    localStorage.setItem(storageKey, now.toString());
+  }
+
+  const now = Date.now();
+  const remainingMs = Math.max(0, endMs - now);
+  const isExpired = remainingMs <= 0;
+
+  // Kalan gün sayısı: Süre dolmuşsa kesin 0, dolmamışsa yukarı yuvarla (1, 2 veya 3)
+  const daysLeft = isExpired ? 0 : Math.min(3, Math.max(1, Math.ceil(remainingMs / (24 * 60 * 60 * 1000))));
+  const currentDay = isExpired ? 4 : Math.min(3, Math.max(1, 4 - daysLeft));
+  const endDate = new Date(endMs);
 
   return {
-    startMs,
-    remainingMs,
+    hasTrial: true,
+    isActive: !isExpired,
+    isExpired,
     daysLeft,
     currentDay,
     endDate,
-    isExpired: remainingMs <= 0
+    remainingMs
   };
 };
 
