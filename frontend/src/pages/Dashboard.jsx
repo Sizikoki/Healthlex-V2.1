@@ -368,8 +368,8 @@ export const Dashboard = () => {
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {isTr
-                      ? 'Tüm 10 kategori, 571+ morfem ve 4 oyun moduna süresiz tam erişiminiz aktif.'
-                      : 'You have unlimited lifetime access to all 10 categories, 571+ morphemes, and 4 game modes.'}
+                      ? 'Tüm 13 kategori, 571+ morfem ve 4 oyun moduna süresiz tam erişiminiz aktif.'
+                      : 'You have unlimited lifetime access to all 13 categories, 571+ morphemes, and 4 game modes.'}
                   </p>
                 </div>
               </div>
@@ -389,8 +389,8 @@ export const Dashboard = () => {
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {isTr
-                      ? 'Tüm 10 kategori, 571+ morfem ve 4 oyun moduna sınırsız tam erişiminiz aktif.'
-                      : 'You have unlimited access to all 10 categories, 571+ morphemes, and 4 game modes.'}
+                      ? 'Tüm 13 kategori, 571+ morfem ve 4 oyun moduna sınırsız tam erişiminiz aktif.'
+                      : 'You have unlimited access to all 13 categories, 571+ morphemes, and 4 game modes.'}
                   </p>
                 </div>
               </div>

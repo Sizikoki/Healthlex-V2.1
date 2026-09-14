@@ -37,7 +37,7 @@ const PRICING_CONTENT = {
           ['✓', 'Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Temel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
-          ['–', 'Kalan 7 kategori ve morfemler (Kilitli)']
+          ['–', 'Kalan 10 kategori ve morfemler (Kilitli)']
         ]
       },
       {
@@ -53,7 +53,7 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: true,
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
+          ['✓', '13 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -72,7 +72,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
+          ['✓', '13 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -110,7 +110,7 @@ const PRICING_CONTENT = {
           ['✓', 'Flashcard and Matching games'],
           ['✓', 'Basic progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Locked)'],
-          ['–', 'Remaining 7 categories & morphemes (Locked)']
+          ['–', 'Remaining 10 categories & morphemes (Locked)']
         ]
       },
       {
@@ -126,7 +126,7 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: true,
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
+          ['✓', '13 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -145,7 +145,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
+          ['✓', '13 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],

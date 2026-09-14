@@ -54,7 +54,7 @@ const TRANSLATIONS = {
           ['✓', 'Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Temel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
-          ['–', 'Kalan 7 kategori ve morfemler (Kilitli)']
+          ['–', 'Kalan 10 kategori ve morfemler (Kilitli)']
         ]
       },
       {
@@ -68,7 +68,7 @@ const TRANSLATIONS = {
         noteMo: 'Sadece yıllık · ₺167/ay',
         cta: '3 Gün Ücretsiz Dene',
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
+          ['✓', '13 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -84,7 +84,7 @@ const TRANSLATIONS = {
         note: 'Tek ödeme · Deneme süresi yoktur (Doğrudan satın alma)',
         cta: 'Ömür Boyu Satın Al',
         feats: [
-          ['✓', '10 kategori · 571+ morfem'],
+          ['✓', '13 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -94,7 +94,7 @@ const TRANSLATIONS = {
     ],
     rows: [
       ['Çalışma / Sözlük terimleri', '100 morfem', '571+', '571+'],
-      ['Morfem kütüphanesi', 'İlk 3 kategori (100 morfem)', 'Tümü (10 kategori)', 'Tümü (10 kategori)'],
+      ['Morfem kütüphanesi', 'İlk 3 kategori (100 morfem)', 'Tümü (13 kategori)', 'Tümü (13 kategori)'],
       ['Flashcard · Eşleştirme', '✓', '✓', '✓'],
       ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
       ['İlerleme ve seviye sistemi', 'Temel', '✓', '✓'],
@@ -149,7 +149,7 @@ const TRANSLATIONS = {
           ['✓', 'Flashcard and Matching games'],
           ['✓', 'Basic progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Locked)'],
-          ['–', 'Remaining 7 categories & morphemes (Locked)']
+          ['–', 'Remaining 10 categories & morphemes (Locked)']
         ]
       },
       {
@@ -163,7 +163,7 @@ const TRANSLATIONS = {
         noteMo: 'Yearly only · ₺167/mo',
         cta: 'Start 3-Day Free Trial',
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
+          ['✓', '13 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -179,7 +179,7 @@ const TRANSLATIONS = {
         note: 'One payment · No trial period (Direct purchase)',
         cta: 'Buy Lifetime Plan',
         feats: [
-          ['✓', '10 categories · 571+ morphemes'],
+          ['✓', '13 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -189,7 +189,7 @@ const TRANSLATIONS = {
     ],
     rows: [
       ['Study / Glossary terms', '100 morphemes', '571+', '571+'],
-      ['Morpheme library', 'First 3 categories (100 morphemes)', 'All (10 categories)', 'All (10 categories)'],
+      ['Morpheme library', 'First 3 categories (100 morphemes)', 'All (13 categories)', 'All (13 categories)'],
       ['Flashcard · Matching', '✓', '✓', '✓'],
       ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],
       ['Progress and level system', 'Basic', '✓', '✓'],

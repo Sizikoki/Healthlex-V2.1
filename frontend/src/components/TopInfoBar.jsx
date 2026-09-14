@@ -5,21 +5,21 @@ const BAR_ITEMS = {
   tr: [
     '571+ MORFEM',
     '245+ TERİM',
-    '10 KATEGORİ',
+    '13 KATEGORİ',
     '4 OYUN MODU',
     'TR ⇄ EN',
     'SINIRLI SÜRE: PRO %55 İNDİRİM',
-    'ÜCRETSİZ 3 GÜN · KART GEREKMEZ',
+    '3 GÜN ÜCRETSİZ DENE · DİLEDİĞİN AN İPTAL ET',
     'TEK TIKLA İPTAL'
   ],
   en: [
     '571+ MORPHEMES',
     '245+ TERMS',
-    '10 CATEGORIES',
+    '13 CATEGORIES',
     '4 GAME MODES',
     'TR ⇄ EN',
     'LIMITED TIME: PRO 55% OFF',
-    'FREE 3-DAY TRIAL · NO CARD REQUIRED',
+    'TRY 3 DAYS FREE · CANCEL ANYTIME',
     'CANCEL IN ONE CLICK'
   ]
 };

@@ -89,10 +89,10 @@ export const Welcome = () => {
           badge: 'ÖMÜR BOYU VIP ÜYELİK',
           title: 'Tebrikler, HealthLexMed Ömür Boyu VIP Üyeliğe Hoş Geldiniz! 👑',
           subtitle:
-            'Tek seferlik ödemeniz başarıyla tamamlandı. Artık HealthLexMed’in tüm 10 kategorisine, 571’den fazla morfemine ve gelecekte eklenecek tüm yeni modüllere ÖMÜR BOYU sınırsız erişim hakkınız var.',
+            'Tek seferlik ödemeniz başarıyla tamamlandı. Artık HealthLexMed’in tüm 13 kategorisine, 571’den fazla morfemine ve gelecekte eklenecek tüm yeni modüllere ÖMÜR BOYU sınırsız erişim hakkınız var.',
           featuresTitle: 'Ömür Boyu VIP Üyeliğinizle Kilidi Açılan Özellikler',
           features: [
-            '10 anatomik kategorinin tamamına ömür boyu sınırsız erişim (Kemikler, Kaslar, Eklemler vb.)',
+            '13 anatomik kategorinin tamamına ömür boyu sınırsız erişim (Kemikler, Kaslar, Eklemler vb.)',
             '571+ morfem, kök ve ek kütüphanesinin tamamı',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı analitikleri, çalışma serisi ve seviye sistemi',
@@ -109,10 +109,10 @@ export const Welcome = () => {
           badge: 'LIFETIME VIP MEMBERSHIP',
           title: 'Congratulations, Welcome to HealthLexMed Lifetime VIP! 👑',
           subtitle:
-            'Your one-time payment is complete. You now have LIFETIME unlimited access to all 10 categories, over 571 morphemes, and all future modules with zero recurring fees.',
+            'Your one-time payment is complete. You now have LIFETIME unlimited access to all 13 categories, over 571 morphemes, and all future modules with zero recurring fees.',
           featuresTitle: 'Features Unlocked With Lifetime Membership',
           features: [
-            'Lifetime unlimited access to all 10 anatomical categories (Bones, Muscles, Joints, etc.)',
+            'Lifetime unlimited access to all 13 anatomical categories (Bones, Muscles, Joints, etc.)',
             'Full library of 571+ morphemes, roots, and affixes',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal progress stats, study streaks, and leveling system',
@@ -138,10 +138,10 @@ export const Welcome = () => {
           badge: 'YILLIK PRO AKTİF',
           title: 'Tebrikler, HealthLexMed Pro’ya Hoş Geldiniz! 🚀',
           subtitle:
-            'Yıllık Pro Üyeliğiniz başarıyla aktif edildi. 1 yıl boyunca tüm 10 kategori, 571’den fazla morfem ve 4 oyun modunun tamamı sınırsız olarak kullanımınıza hazır.',
+            'Yıllık Pro Üyeliğiniz başarıyla aktif edildi. 1 yıl boyunca tüm 13 kategori, 571’den fazla morfem ve 4 oyun modunun tamamı sınırsız olarak kullanımınıza hazır.',
           featuresTitle: 'Aboneliğinizle Kilidi Açılan Özellikler',
           features: [
-            '10 anatomik kategorinin tamamı (Kemikler, Kaslar, Eklemler vb.)',
+            '13 anatomik kategorinin tamamı (Kemikler, Kaslar, Eklemler vb.)',
             '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı istatistikleri, çalışma serisi ve seviye sistemi',
@@ -158,10 +158,10 @@ export const Welcome = () => {
           badge: 'ANNUAL PRO ACTIVE',
           title: 'Congratulations, Welcome to HealthLexMed Pro! 🚀',
           subtitle:
-            'Your Annual Pro Membership is now active. All 10 categories, over 571 morphemes, and all 4 interactive game modes are fully unlocked for 1 year.',
+            'Your Annual Pro Membership is now active. All 13 categories, over 571 morphemes, and all 4 interactive game modes are fully unlocked for 1 year.',
           featuresTitle: 'Features Unlocked With Your Membership',
           features: [
-            'All 10 anatomical categories (Bones, Muscles, Joints, etc.)',
+            'All 13 anatomical categories (Bones, Muscles, Joints, etc.)',
             'Unlimited access to 571+ morphemes, roots, and affixes library',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal progress stats, study streaks, and leveling system',
@@ -200,7 +200,7 @@ export const Welcome = () => {
           ctaStudy: 'Çalışmaya Başla',
           ctaGames: 'Oyun Modlarını Keşfet',
           ctaDashboard: 'Panelime Git',
-          upgradeHint: 'Tüm 10 kategori ve 4 oyun moduna mı ihtiyacınız var?',
+          upgradeHint: 'Tüm 13 kategori ve 4 oyun moduna mı ihtiyacınız var?',
           upgradeCta: "Pro'ya Yükselt",
           footerNote:
             'Abonelik faturanız e-posta adresinize Paddle tarafından iletilmiştir. Daha fazla kategori ve oyun için dilediğiniz zaman Pro plana geçebilirsiniz.'
@@ -222,7 +222,7 @@ export const Welcome = () => {
           ctaStudy: 'Start Studying',
           ctaGames: 'Explore Game Modes',
           ctaDashboard: 'Go to Dashboard',
-          upgradeHint: 'Need all 10 categories and all 4 game modes?',
+          upgradeHint: 'Need all 13 categories and all 4 game modes?',
           upgradeCta: 'Upgrade to Pro',
           footerNote:
             'Your subscription receipt has been emailed by Paddle. You can upgrade to Pro anytime for more categories and games.'
@@ -240,10 +240,10 @@ export const Welcome = () => {
           badge: '3 GÜNLÜK ÜCRETSİZ DENEME',
           title: 'HealthLexMed’e Hoş Geldiniz! ⏱️',
           subtitle:
-            '3 günlük ücretsiz deneme süreniz başladı! Kredi kartı gerekmeden tüm 10 kategori, 571’den fazla morfem ve 4 oyun modunun tamamını 3 gün boyunca sınırsızca deneyimleyebilirsiniz.',
+            '3 günlük ücretsiz deneme süreniz başladı! Dilediğiniz an tek tıkla iptal edebilir, tüm 13 kategori, 571’den fazla morfem ve 4 oyun modunun tamamını 3 gün boyunca sınırsızca deneyimleyebilirsiniz.',
           featuresTitle: 'Deneme Süresince Sınırsız Keşfedebileceğiniz Özellikler',
           features: [
-            '10 anatomik kategorinin tamamı (Kemikler, Kaslar, Eklemler vb.)',
+            '13 anatomik kategorinin tamamı (Kemikler, Kaslar, Eklemler vb.)',
             '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı analitikleri ve çalışma serisi',
@@ -262,10 +262,10 @@ export const Welcome = () => {
           badge: '3-DAY FREE TRIAL ACTIVE',
           title: 'Welcome to HealthLexMed! ⏱️',
           subtitle:
-            'Your 3-day free trial has started! Enjoy full, unrestricted access to all 10 categories, 571+ morphemes, and all 4 interactive games for 3 days — no credit card required.',
+            'Your 3-day free trial has started! Enjoy full, unrestricted access to all 13 categories, 571+ morphemes, and all 4 interactive games for 3 days — cancel anytime in one click.',
           featuresTitle: 'Features Unlocked During Your Trial',
           features: [
-            'All 10 anatomical categories (Bones, Muscles, Joints, etc.)',
+            'All 13 anatomical categories (Bones, Muscles, Joints, etc.)',
             'Unlimited access to 571+ morphemes, roots, and affixes',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal learning analytics and study streak',

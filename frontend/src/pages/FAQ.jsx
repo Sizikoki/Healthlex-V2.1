@@ -43,7 +43,7 @@ export const FAQ = () => {
             category: 'content',
             icon: BookOpen,
             q: 'Hangi kategoriler ücretsiz, hangileri Pro/ücretli?',
-            a: 'Misafir ve Temel üyelik planında ilk 3 anatomik kategori ve 100 temel morfem (Flashcard ve Eşleştirme oyunlarıyla) sunulmaktadır. Pro üyelikte ise 10 anatomik kategorinin tamamı, 571+ morfem, tüm kelime formülleri, Quiz ve Morfem Çözümleme oyun modları ile akıllı tekrar sistemi sınırsız kullanıma açılır.'
+            a: 'Misafir ve Temel üyelik planında ilk 3 anatomik kategori ve 100 temel morfem (Flashcard ve Eşleştirme oyunlarıyla) sunulmaktadır. Pro üyelikte ise 13 anatomik kategorinin tamamı, 571+ morfem, tüm kelime formülleri, Quiz ve Morfem Çözümleme oyun modları ile akıllı tekrar sistemi sınırsız kullanıma açılır.'
           },
           {
             id: 'register',
@@ -115,7 +115,7 @@ export const FAQ = () => {
             category: 'content',
             icon: BookOpen,
             q: 'Which categories are free and which are Pro/paid?',
-            a: 'Free guest exploration and the Basic tier include the first 3 anatomical categories and 100 core morphemes with Flashcard and Matching games. Pro membership unlocks all 10 categories, 571+ morphemes, word building formulas, Quiz & Morpheme Solver game modes, and intelligent review algorithms.'
+            a: 'Free guest exploration and the Basic tier include the first 3 anatomical categories and 100 core morphemes with Flashcard and Matching games. Pro membership unlocks all 13 categories, 571+ morphemes, word building formulas, Quiz & Morpheme Solver game modes, and intelligent review algorithms.'
           },
           {
             id: 'register',

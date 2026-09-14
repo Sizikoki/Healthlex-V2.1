@@ -39,7 +39,7 @@ const faqSchemaJson = {
       "name": "Hangi kategoriler ücretsiz, hangileri Pro/ücretli?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Misafir ve Temel üyelik planında ilk 3 anatomik kategori ve 100 temel morfem (Flashcard ve Eşleştirme oyunlarıyla) sunulmaktadır. Pro üyelikte ise 10 anatomik kategorinin tamamı, 571+ morfem, tüm kelime formülleri, Quiz ve Morfem Çözümleme oyun modları ile akıllı tekrar sistemi sınırsız kullanıma açılır."
+        "text": "Misafir ve Temel üyelik planında ilk 3 anatomik kategori ve 100 temel morfem (Flashcard ve Eşleştirme oyunlarıyla) sunulmaktadır. Pro üyelikte ise 13 anatomik kategorinin tamamı, 571+ morfem, tüm kelime formülleri, Quiz ve Morfem Çözümleme oyun modları ile akıllı tekrar sistemi sınırsız kullanıma açılır."
       }
     },
     {
