@@ -139,6 +139,14 @@ export const Login = () => {
       saveUser({ uid: user.uid, name: user.displayName || email.split('@')[0], email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(t('loginSuccess', 'Giris basarili! Hos geldiniz.'));
+      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+      })();
+      if (chosenPlan) {
+        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
+        return;
+      }
       navigate(redirectTo, { replace: true });
     } catch (error) {
       console.error('Login error:', error);
@@ -156,6 +164,14 @@ export const Login = () => {
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
+      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+      })();
+      if (chosenPlan) {
+        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
+        return;
+      }
       navigate(redirectTo, { replace: true });
     } catch (error) {
       if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
@@ -209,7 +225,7 @@ export const Login = () => {
             <p className="text-sm text-muted-foreground">
               {t('noAccount', 'Hesabin yok mu?')}{' '}
               <Link
-                to={redirectTo && redirectTo !== '/dashboard' ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register'}
+                to={window.location.search ? `/register${window.location.search}` : (redirectTo && redirectTo !== '/dashboard' ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register')}
                 className="text-primary font-medium hover:underline"
               >
                 {t('signUp', 'Kayit Ol')}
@@ -261,6 +277,14 @@ export const Register = () => {
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
+      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+      })();
+      if (chosenPlan) {
+        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
+        return;
+      }
       const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
       navigate(targetDestination, { replace: true });
     } catch (error) {
@@ -279,6 +303,14 @@ export const Register = () => {
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       await syncProgressFromFirestore();
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
+      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+      })();
+      if (chosenPlan) {
+        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
+        return;
+      }
       const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
       navigate(targetDestination, { replace: true });
     } catch (error) {
@@ -363,7 +395,7 @@ export const Register = () => {
             <p className="text-sm text-muted-foreground">
               {t('alreadyHaveAccount', 'Zaten hesabin var mi?')}{' '}
               <Link
-                to={redirectTo && redirectTo !== '/dashboard' ? `/login?redirect=${encodeURIComponent(redirectTo)}` : '/login'}
+                to={window.location.search ? `/login${window.location.search}` : (redirectTo && redirectTo !== '/dashboard' ? `/login?redirect=${encodeURIComponent(redirectTo)}` : '/login')}
                 className="text-primary font-medium hover:underline"
               >
                 {t('login', 'Giris Yap')}

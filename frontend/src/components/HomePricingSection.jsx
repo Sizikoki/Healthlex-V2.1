@@ -172,11 +172,14 @@ export const HomePricingSection = () => {
 
     const currentUser = auth?.currentUser || getUser();
     if (!currentUser) {
+      try {
+        sessionStorage.setItem('healthlex_selected_plan', plan.id);
+      } catch (e) {}
       const loginMsg = isTr
-        ? 'İşleme devam etmek için lütfen önce giriş yapın veya ücretsiz hesap oluşturun.'
-        : 'Please sign in or create a free account to continue.';
+        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluşturun veya giriş yapın.'
+        : 'Please create a free account or sign in to continue.';
       toast.info(loginMsg, { duration: 4000 });
-      navigate(`/login?redirect=${encodeURIComponent('/#fiyat')}`);
+      navigate(`/register?plan=${plan.id}&redirect=${encodeURIComponent('/pricing')}`);
       return;
     }
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getUserTrialState, formatTurkishName } from '@/utils/storage';
 import { auth, db } from '@/firebase/config';
+import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
@@ -214,11 +215,19 @@ export const PricingView = () => {
   const yr = true;
   const t = TRANSLATIONS[isTr ? 'tr' : 'en'];
 
-  const currentUser = useMemo(() => {
+  const [currentUser, setCurrentUser] = useState(() => {
     if (previewRole) {
       return { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' };
     }
     return auth?.currentUser || getUser();
+  });
+
+  useEffect(() => {
+    if (previewRole) return;
+    const unsub = onAuthStateChanged(auth, (usr) => {
+      setCurrentUser(usr || getUser());
+    });
+    return () => unsub();
   }, [previewRole]);
   const userUid = currentUser?.uid;
   const trialState = getUserTrialState(currentUser);
@@ -335,11 +344,14 @@ export const PricingView = () => {
 
     // Auth Guard — Oturumu olmayan misafir kullanıcılar için
     if (!currentUser) {
+      try {
+        sessionStorage.setItem('healthlex_selected_plan', clickedPlanKey);
+      } catch (e) {}
       const loginMsg = isTr
-        ? 'İşleme devam etmek için lütfen önce giriş yapın veya ücretsiz hesap oluşturun.'
-        : 'Please sign in or create a free account to continue.';
+        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluşturun veya giriş yapın.'
+        : 'Please create a free account or sign in to continue.';
       toast.info(loginMsg, { duration: 4000 });
-      navigate('/login?redirect=/pricing');
+      navigate(`/register?plan=${clickedPlanKey}&redirect=${encodeURIComponent('/pricing')}`);
       return;
     }
 
@@ -374,6 +386,37 @@ export const PricingView = () => {
       setCheckoutLoading(false);
     }
   };
+
+  // Kayıt sonrası seçili planla gelindiğinde otomatik checkout başlatma
+  useEffect(() => {
+    if (!currentUser || checkoutLoading) return;
+    const params = new URLSearchParams(window.location.search);
+    let planToCheckout = params.get('checkout');
+    if (!planToCheckout) {
+      try {
+        planToCheckout = sessionStorage.getItem('healthlex_selected_plan');
+      } catch (e) {}
+    }
+
+    if (planToCheckout) {
+      try {
+        sessionStorage.removeItem('healthlex_selected_plan');
+      } catch (e) {}
+
+      if (params.has('checkout')) {
+        params.delete('checkout');
+        const remaining = params.toString();
+        const newUrl = window.location.pathname + (remaining ? `?${remaining}` : '');
+        window.history.replaceState({}, '', newUrl);
+      }
+
+      const planIndex = planToCheckout === 'basic' ? 0 : planToCheckout === 'lifetime' ? 2 : 1;
+      setTimeout(() => {
+        handlePlanClick(planIndex);
+      }, 400);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased transition-colors flex flex-col justify-between">
