@@ -1,0 +1,14 @@
+[
+  {
+    "id": 12,
+    "term": "Processus Maxillaris Conchae Nasalis Inferioris",
+    "english": "Maxillary Process of Inferior Nasal Concha",
+    "subcategory": "face_bones"
+  },
+  {
+    "id": 534,
+    "term": "Concha Sphenoidalis",
+    "english": "Sphenoidal Concha",
+    "subcategory": "skull_bones"
+  }
+]
