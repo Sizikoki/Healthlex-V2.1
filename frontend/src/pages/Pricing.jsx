@@ -754,9 +754,6 @@ export const PricingView = () => {
             <span className="border border-border bg-card rounded px-2 py-0.5 font-bold text-xs text-foreground">
               MC
             </span>
-            <span className="border border-border bg-card rounded px-2 py-0.5 font-bold text-xs text-foreground">
-              TROY
-            </span>
           </span>
         </div>
       </div>
