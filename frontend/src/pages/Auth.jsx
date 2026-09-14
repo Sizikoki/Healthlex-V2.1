@@ -11,6 +11,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfi
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from '@/firebase/config';
 import { useLanguage } from '@/context/LanguageContext';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 // ── Firestore Kullanici Belgesi Olustur / Kontrol Et ─────────────────────────
 // users/{uid} belgesi yoksa otomatik olusturur.
@@ -124,6 +125,7 @@ export const Login = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    updateCanonicalUrl('https://www.healthlexmed.com/login');
   }, []);
 
   const handleLogin = async (e) => {
@@ -257,6 +259,7 @@ export const Register = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    updateCanonicalUrl('https://www.healthlexmed.com/register');
   }, []);
 
   const handleRegister = async (e) => {
