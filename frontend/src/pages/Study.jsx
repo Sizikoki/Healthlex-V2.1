@@ -516,7 +516,7 @@ export const Study = () => {
             </button>
             <div>
               <h1 className="text-xl font-bold font-serif text-foreground">{t(selectedCategory.key, selectedCategory.name)}</h1>
-              <p className="text-xs text-muted-foreground">{terms.length} {t('termsCount')}</p>
+              <p className="text-xs text-muted-foreground">{terms.length} {t('termsCount', isTr ? 'terim' : 'terms')}</p>
             </div>
           </div>
 
