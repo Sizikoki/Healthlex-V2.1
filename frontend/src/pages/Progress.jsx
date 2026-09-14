@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getFlashcardSessions, getUser, getStreak, getProgress, isLoggedIn } from '@/utils/storage';
+import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getFlashcardSessions, getUser, getStreak, getProgress, isLoggedIn, getUserTrialState } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
 import { useLanguage } from '@/context/LanguageContext';
 import { TrialDashboardView } from '@/components/TrialDashboardView';
 import { auth, db } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, checkIsBasic, getPreviewRole } from '@/utils/planAccess';
 
 const resolveIsPro = (userData) => {
   if (!userData) return false;
-  const status = userData.subscriptionStatus;
-  if (status === 'trial' || status === 'trialing' || status === 'free') return false;
+  if (userData.isLifetime === true) return true;
+  if (userData.isBasic === true) return false;
+  const status = (userData.subscriptionStatus || '').toLowerCase();
+  if (status === 'trial' || status === 'trialing') {
+    const trial = getUserTrialState(userData);
+    return trial.isActive;
+  }
+  if (status === 'canceled' || status === 'free') return false;
   if (status === 'active' || status === 'pro') return true;
   if (userData.isPro === true) return true;
   return false;
@@ -209,8 +215,14 @@ export const ProgressPage = () => {
     );
   }
 
-  // Deneme / Free veya Pro olmayan kullanıcılar için yeni dönüştürülen Trial İlerleme görünümünü render et
-  if (!isPro) {
+  const effectiveData = firestoreData || user;
+  const trialState = getUserTrialState(effectiveData || firebaseUser);
+  const isTrialActive = trialState?.isActive === true;
+  const isBasic = checkIsBasic(effectiveData) || previewRole === 'basic';
+  const hasAccess = isPro || isBasic || isTrialActive;
+
+  // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
+  if (!hasAccess) {
     return <TrialDashboardView user={firebaseUser} userData={firestoreData} />;
   }
 
