@@ -43,18 +43,18 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Temel',
-        tag: 'İlk 3 kategori, 100 morfem, 2 oyun modu.',
+        tag: '13 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
         noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
         cta: '3 Gün Ücretsiz Dene',
         feats: [
-          ['✓', 'İlk 3 kategori · 100 morfem'],
-          ['✓', 'Flashcard ve Eşleştirme oyunları'],
-          ['✓', 'Temel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
-          ['–', 'Kalan 10 kategori ve morfemler (Kilitli)']
+          ['✓', '13 anatomik kategori · 100 morfem'],
+          ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
+          ['✓', 'Kişisel ilerleme takibi'],
+          ['–', 'Quiz ve Morfem Yapıcı (Pro)'],
+          ['–', 'Tüm 571+ morfem havuzu (Pro)']
         ]
       },
       {
@@ -93,9 +93,9 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Çalışma / Sözlük terimleri', '100 morfem', '571+', '571+'],
-      ['Morfem kütüphanesi', 'İlk 3 kategori (100 morfem)', 'Tümü (13 kategori)', 'Tümü (13 kategori)'],
-      ['Flashcard · Eşleştirme', '✓', '✓', '✓'],
+      ['Çalışma / Sözlük terimleri', '13 Kategori (Tümü açık)', '13 Kategori (Tümü açık)', '13 Kategori (Tümü açık)'],
+      ['Morfem kütüphanesi', '100 morfem', '571+ (Tümü)', '571+ (Tümü)'],
+      ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız', 'Sınırsız'],
       ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
       ['İlerleme ve seviye sistemi', 'Temel', '✓', '✓'],
       ['Öğrenilen terimlerle tekrar', '–', '✓', '✓'],
@@ -138,18 +138,18 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Basic',
-        tag: 'First 3 categories, 100 morphemes, 2 game modes.',
+        tag: '13 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
         noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
         cta: 'Start 3-Day Free Trial',
         feats: [
-          ['✓', 'First 3 categories · 100 morphemes'],
-          ['✓', 'Flashcard and Matching games'],
-          ['✓', 'Basic progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Locked)'],
-          ['–', 'Remaining 10 categories & morphemes (Locked)']
+          ['✓', '13 anatomical categories · 100 morphemes'],
+          ['✓', 'Unlimited Flashcards and Matching games'],
+          ['✓', 'Personal progress tracking'],
+          ['–', 'Quiz and Morpheme Builder (Pro)'],
+          ['–', 'Full 571+ morpheme library (Pro)']
         ]
       },
       {
@@ -188,9 +188,9 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Study / Glossary terms', '100 morphemes', '571+', '571+'],
-      ['Morpheme library', 'First 3 categories (100 morphemes)', 'All (13 categories)', 'All (13 categories)'],
-      ['Flashcard · Matching', '✓', '✓', '✓'],
+      ['Study / Glossary terms', 'All 13 Categories Unlocked', 'All 13 Categories Unlocked', 'All 13 Categories Unlocked'],
+      ['Morpheme library', '100 morphemes', '571+ (All)', '571+ (All)'],
+      ['Flashcard · Matching', 'Unlimited', 'Unlimited', 'Unlimited'],
       ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],
       ['Progress and level system', 'Basic', '✓', '✓'],
       ['Review with learned terms', '–', '✓', '✓'],

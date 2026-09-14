@@ -535,8 +535,8 @@ export const Profile = () => {
                       : isTrialActive
                       ? (isBasic
                           ? (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. İlk 3 kategori, 100 morfem ve Flashcard & Eşleştirme oyunları açık.'
-                              : 'You are on a 3-day free trial. First 3 categories, 100 morphemes, and Flashcard & Match games unlocked.')
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 13 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 13 categories, 571+ morphemes, and 4 game modes.')
                           : (isTr
                               ? '3 günlük ücretsiz deneme sürecindesiniz. 13 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
                               : 'You are on a 3-day free trial. Full access to all 13 categories, 571+ morphemes, and 4 game modes.'))
@@ -546,8 +546,8 @@ export const Profile = () => {
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
                       : isBasic
                       ? (isTr
-                          ? 'Temel plandasınız: İlk 3 kategori (100 morfem) ve Flashcard & Eşleştirme oyunları açık. Tüm içerikler için Pro\'ya geçebilirsiniz.'
-                          : 'You are on the Basic plan: First 3 categories (100 morphemes) and Flashcard & Match games unlocked. Upgrade to Pro for full access.')
+                          ? 'Temel plandasınız: 13 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 571+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
+                          : 'You are on the Basic plan: 13 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 571+ morphemes and Quiz.')
                       : (isTr
                           ? 'Temel erişimdesiniz. 571 morfem kütüphanesi, 4 oyun modu ve seviye sisteminin tamamına sınırsız erişmek için Pro\'ya geçin.'
                           : 'You have trial access. Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.')}

@@ -25,7 +25,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Temel',
-        tag: 'İlk 3 kategori, 100 morfem, 2 oyun modu.',
+        tag: '13 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
@@ -33,11 +33,11 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: false,
         feats: [
-          ['✓', 'İlk 3 kategori · 100 morfem'],
-          ['✓', 'Flashcard ve Eşleştirme oyunları'],
-          ['✓', 'Temel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Kilitli)'],
-          ['–', 'Kalan 10 kategori ve morfemler (Kilitli)']
+          ['✓', '13 anatomik kategori · 100 morfem'],
+          ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
+          ['✓', 'Kişisel ilerleme takibi'],
+          ['–', 'Quiz ve Morfem Yapıcı (Pro)'],
+          ['–', 'Tüm 571+ morfem havuzu (Pro)']
         ]
       },
       {
@@ -98,7 +98,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Basic',
-        tag: 'First 3 categories, 100 morphemes, 2 game modes.',
+        tag: '13 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
@@ -106,11 +106,11 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: false,
         feats: [
-          ['✓', 'First 3 categories · 100 morphemes'],
-          ['✓', 'Flashcard and Matching games'],
-          ['✓', 'Basic progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Locked)'],
-          ['–', 'Remaining 10 categories & morphemes (Locked)']
+          ['✓', '13 anatomical categories · 100 morphemes'],
+          ['✓', 'Unlimited Flashcards and Matching games'],
+          ['✓', 'Personal progress tracking'],
+          ['–', 'Quiz and Morpheme Builder (Pro)'],
+          ['–', 'Full 571+ morpheme library (Pro)']
         ]
       },
       {

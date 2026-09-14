@@ -187,10 +187,10 @@ export const Welcome = () => {
           badge: 'TEMEL PLAN AKTİF',
           title: 'Tebrikler, HealthLexMed Temel Plana Hoş Geldiniz! 🎯',
           subtitle:
-            'Temel Plan aboneliğiniz başarıyla aktif edildi. Temel anatomi kategorileri ve öğrenme araçlarıyla medikal terminolojiye sağlam bir adım attınız.',
+            'Temel Plan aboneliğiniz başarıyla aktif edildi. 13 anatomi kategorisinin tamamı, 100 temel morfem ve sınırsız oyun modlarıyla terminolojiye sağlam bir adım attınız.',
           featuresTitle: 'Temel Planınızla Açılan Özellikler',
           features: [
-            'İlk 3 temel kategoriye tam erişim (Kafatası, Yüz ve Gövde Kemikleri)',
+            '13 anatomi kategorisinin ve tıbbi terimlerin tamamına erişim',
             'En çok kullanılan 100 morfem, kök ve ek kütüphanesi',
             '2 temel oyun modu (Bilgi Kartları & Eşleştirme Oyunu)',
             'Kişisel ilerleme takibi ve temel başarı istatistikleri',
@@ -200,19 +200,19 @@ export const Welcome = () => {
           ctaStudy: 'Çalışmaya Başla',
           ctaGames: 'Oyun Modlarını Keşfet',
           ctaDashboard: 'Panelime Git',
-          upgradeHint: 'Tüm 13 kategori ve 4 oyun moduna mı ihtiyacınız var?',
+          upgradeHint: 'Tüm 571+ morfem, Quiz ve Morfem Yapıcı modlarına mı ihtiyacınız var?',
           upgradeCta: "Pro'ya Yükselt",
           footerNote:
-            'Abonelik faturanız e-posta adresinize Paddle tarafından iletilmiştir. Daha fazla kategori ve oyun için dilediğiniz zaman Pro plana geçebilirsiniz.'
+            'Abonelik faturanız e-posta adresinize Paddle tarafından iletilmiştir. 571+ morfem ve tüm oyun modları için dilediğiniz zaman Pro plana geçebilirsiniz.'
         },
         en: {
           badge: 'BASIC PLAN ACTIVE',
           title: 'Congratulations, Welcome to HealthLexMed Basic! 🎯',
           subtitle:
-            'Your Basic Plan is now active. Take a solid first step into medical terminology with core anatomy categories and interactive study tools.',
+            'Your Basic Plan is now active. Take a solid first step into medical terminology with all 13 anatomy categories, 100 core morphemes, and unlimited study games.',
           featuresTitle: 'Features Unlocked With Basic Plan',
           features: [
-            'Full access to the first 3 core categories (Cranial, Facial, and Trunk Bones)',
+            'Full access to all 13 anatomy categories and glossary terms',
             'Top 100 high-yield morphemes, roots, and affixes library',
             '2 core game modes (Flashcards & Matching Game)',
             'Personal progress tracking and core study stats',
@@ -222,10 +222,10 @@ export const Welcome = () => {
           ctaStudy: 'Start Studying',
           ctaGames: 'Explore Game Modes',
           ctaDashboard: 'Go to Dashboard',
-          upgradeHint: 'Need all 13 categories and all 4 game modes?',
+          upgradeHint: 'Need all 571+ morphemes, Quiz, and Morpheme Builder?',
           upgradeCta: 'Upgrade to Pro',
           footerNote:
-            'Your subscription receipt has been emailed by Paddle. You can upgrade to Pro anytime for more categories and games.'
+            'Your subscription receipt has been emailed by Paddle. Upgrade to Pro anytime to unlock all 571+ morphemes and advanced games.'
         }
       }
     },

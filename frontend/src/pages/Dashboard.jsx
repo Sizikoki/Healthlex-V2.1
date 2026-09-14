@@ -417,8 +417,8 @@ export const Dashboard = () => {
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {isTr
-                      ? 'İlk 3 kategori, 100 morfem ve 2 oyun modu (Flashcard & Eşleştirme) aktif.'
-                      : 'First 3 categories, 100 morphemes, and 2 game modes (Flashcards & Matching) unlocked.'}
+                      ? '13 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme aktif.'
+                      : '13 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.'}
                   </p>
                 </div>
               </div>

@@ -36,10 +36,10 @@ const faqSchemaJson = {
     },
     {
       "@type": "Question",
-      "name": "Hangi kategoriler ücretsiz, hangileri Pro/ücretli?",
+      "name": "Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Misafir ve Temel üyelik planında ilk 3 anatomik kategori ve 100 temel morfem (Flashcard ve Eşleştirme oyunlarıyla) sunulmaktadır. Pro üyelikte ise 13 anatomik kategorinin tamamı, 571+ morfem, tüm kelime formülleri, Quiz ve Morfem Çözümleme oyun modları ile akıllı tekrar sistemi sınırsız kullanıma açılır."
+        "text": "13 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 100 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsiniz."
       }
     },
     {
