@@ -15,6 +15,7 @@ import { TermsMarquee } from '@/components/TermsMarquee';
 import { MorphemeOfTheDay } from '@/components/MorphemeOfTheDay';
 import { TopInfoBar } from '@/components/TopInfoBar';
 import { HomePricingSection } from '@/components/HomePricingSection';
+import { updateCanonicalUrl } from '@/utils/seo';
 import './LandingPage.css';
 
 export const Home = () => {
@@ -27,6 +28,10 @@ export const Home = () => {
   // onAuthStateChanged tamamlanana kadar hiçbir şey render edilmez (flash önleme).
   // Giriş yapmış kullanıcı /dashboard'a yönlendirilir.
   const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/');
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {

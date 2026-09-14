@@ -25,6 +25,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, isLoggedIn } from '@/utils/storage';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 const CONTACT_EMAIL = 'help@healthlexmed.com';
 
@@ -48,6 +49,7 @@ export const Contact = () => {
     document.title = isTr
       ? 'İletişim & Destek | HealthLexMed'
       : 'Contact & Support | HealthLexMed';
+    updateCanonicalUrl('https://www.healthlexmed.com/contact');
   }, [isTr]);
 
   const handleCopyEmail = () => {

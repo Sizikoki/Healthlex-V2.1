@@ -14,6 +14,7 @@ import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { useLanguage } from '@/context/LanguageContext';
 import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Flashcards = () => {
   const { currentLanguage, t } = useLanguage();
@@ -122,6 +123,7 @@ export const Flashcards = () => {
   }, [categoryId, isPro, currentLanguage]);
 
   useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/flashcards');
     loadTerms();
     updateStreak();
   }, [loadTerms]);

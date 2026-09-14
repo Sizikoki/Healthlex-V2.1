@@ -18,6 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/context/LanguageContext';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 export const FAQ = () => {
   const { currentLanguage } = useLanguage();
@@ -26,6 +27,14 @@ export const FAQ = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [openItems, setOpenItems] = useState({ 0: true, 1: true });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = isTr
+      ? 'Sıkça Sorulan Sorular (SSS) | HealthLexMed'
+      : 'Frequently Asked Questions (FAQ) | HealthLexMed';
+    updateCanonicalUrl('https://www.healthlexmed.com/faq');
+  }, [isTr]);
 
   // Soru-Cevap Veritabanı (10 Soru, TR ve EN)
   const faqList = useMemo(() => {

@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/context/LanguageContext';
 import { LEGAL_CONTENT } from '@/data/legalContent';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 const CONTACT_EMAIL = 'help@healthlexmed.com';
 
@@ -42,6 +43,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = `${doc.shortTitle} | HealthLexMed`;
+    updateCanonicalUrl(`https://www.healthlexmed.com/${activeKey}`);
   }, [activeKey, doc.shortTitle, lang]);
 
   const navItems = [

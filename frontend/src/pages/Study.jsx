@@ -16,6 +16,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { getTermSlug } from '@/utils/termHelper';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -206,6 +207,10 @@ export const Study = () => {
 
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
+
+  useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/study');
+  }, []);
 
   useEffect(() => {
     if (previewRole) return;

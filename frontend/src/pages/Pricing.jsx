@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
 const TRANSLATIONS = {
@@ -221,6 +222,10 @@ export const PricingView = () => {
     }
     return auth?.currentUser || getUser();
   });
+
+  useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/pricing');
+  }, []);
 
   useEffect(() => {
     if (previewRole) return;

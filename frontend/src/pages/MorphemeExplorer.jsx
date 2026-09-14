@@ -27,6 +27,7 @@ import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getUser } from '@/utils/storage';
 import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
@@ -83,6 +84,10 @@ export const MorphemeExplorer = () => {
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
   const [isBasic, setIsBasic] = useState(previewRole === 'basic');
+
+  useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/morphemes');
+  }, []);
 
   useEffect(() => {
     if (previewRole) return;

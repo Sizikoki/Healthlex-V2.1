@@ -13,6 +13,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { useLanguage } from '@/context/LanguageContext';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 export const MatchGame = () => {
   const { currentLanguage, t } = useLanguage();
@@ -36,6 +37,7 @@ export const MatchGame = () => {
   const [showGuestModal, setShowGuestModal] = useState(false);
 
   useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/match');
     if (!isLoggedIn()) {
       toast.info(
         currentLanguage === 'en'

@@ -8,6 +8,7 @@ import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { isGameUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
 export const Quiz = () => {
@@ -30,6 +31,7 @@ export const Quiz = () => {
   });
 
   useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/quiz');
     const previewRole = getPreviewRole();
     if (previewRole) return;
     const uid = auth?.currentUser?.uid || getUser()?.uid;

@@ -14,6 +14,7 @@ import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
 import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
 const GAMES_CATEGORY_KEY = 'healthlex_selected_game_category';
@@ -45,6 +46,10 @@ export const Games = () => {
   const isTr = currentLanguage !== 'en';
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
+
+  useEffect(() => {
+    updateCanonicalUrl('https://www.healthlexmed.com/games');
+  }, []);
 
   useEffect(() => {
     if (previewRole) return;
