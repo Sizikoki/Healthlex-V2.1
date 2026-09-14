@@ -197,7 +197,7 @@ export const Login = () => {
               <Label htmlFor="password">{t('password', 'Sifre')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                <Input id="password" type="password" placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-10" disabled={isAnyLoading} />
+                <Input id="password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-10" disabled={isAnyLoading} />
               </div>
             </div>
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={isAnyLoading}>
