@@ -102,15 +102,22 @@ export const MorphemeExplorer = () => {
           setIsPro(checkIsPro(data));
           setIsBasic(checkIsBasic(data));
         } else {
-          setIsPro(false);
-          setIsBasic(false);
+          const localUser = getUser();
+          setIsPro(checkIsPro(localUser));
+          setIsBasic(checkIsBasic(localUser));
         }
       }, (err) => {
         console.warn('[MorphemeExplorer] Could not check pro status:', err);
+        const localUser = getUser();
+        setIsPro(checkIsPro(localUser));
+        setIsBasic(checkIsBasic(localUser));
       });
       return () => unsub();
     } catch (e) {
       console.warn('[MorphemeExplorer] Error checking pro status:', e);
+      const localUser = getUser();
+      setIsPro(checkIsPro(localUser));
+      setIsBasic(checkIsBasic(localUser));
     }
   }, [previewRole]);
 
