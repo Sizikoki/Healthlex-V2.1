@@ -84,7 +84,7 @@ export const TermDetail = () => {
   const relatedTerms = useMemo(() => getRelatedTerms(term, 6), [term]);
   const parsedRoots = useMemo(() => parseRootsToMorphemes(term?.roots), [term]);
 
-  // Dynamic SEO Title and Meta Description
+  // Dynamic SEO Title, Meta Description and Canonical URL
   useEffect(() => {
     if (term) {
       const enName = term.turkish || term.english || '';
@@ -102,8 +102,26 @@ export const TermDetail = () => {
             : `What is ${term.term} (${enName})? Morpheme breakdown: ${term.roots || ''}. Medical definition, anatomical relationships, and flashcard learning.`
         );
       }
+
+      // Update Canonical Link and OpenGraph URL
+      const termSlug = getTermSlug(term.term) || slug;
+      const canonicalUrl = `https://www.healthlexmed.com/study/${termSlug}`;
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', canonicalUrl);
+      } else {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        canonicalLink.setAttribute('href', canonicalUrl);
+        document.head.appendChild(canonicalLink);
+      }
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.setAttribute('content', canonicalUrl);
+      }
     }
-  }, [term, isTr]);
+  }, [term, slug, isTr]);
 
   if (isSearchingRemote) {
     return (

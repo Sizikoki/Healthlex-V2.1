@@ -39,7 +39,7 @@ export const MorphemeDetail = () => {
     ? (CATEGORY_NAMES[morpheme.category]?.[currentLanguage] || morpheme.category)
     : '';
 
-  // SEO & Head Title update dynamically
+  // SEO & Head Title, Meta Description and Canonical URL update dynamically
   useEffect(() => {
     if (morpheme) {
       const termName = morpheme.displayTerm.split(/[/;]/)[0].trim();
@@ -58,8 +58,26 @@ export const MorphemeDetail = () => {
             : `What does the medical root ${termName} mean? Breakdown, prefixes, suffixes, meanings (${morpheme.meaningEn}), and medical terminology examples.`
         );
       }
+
+      // Update Canonical Link and OpenGraph URL
+      const morphemeSlug = morpheme.slug || slug;
+      const canonicalUrl = `https://www.healthlexmed.com/morphemes/${morphemeSlug}`;
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (canonicalLink) {
+        canonicalLink.setAttribute('href', canonicalUrl);
+      } else {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        canonicalLink.setAttribute('href', canonicalUrl);
+        document.head.appendChild(canonicalLink);
+      }
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.setAttribute('content', canonicalUrl);
+      }
     }
-  }, [morpheme, isTr]);
+  }, [morpheme, slug, isTr]);
 
   if (!morpheme) {
     return (
