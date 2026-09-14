@@ -70,11 +70,19 @@ export const getPaddle = async () => {
             console.log('[Paddle Event]', event?.name, event);
           }
 
-          // Ödeme Başarılı Bildirimi ve /welcome sayfasına yönlendirme
+          // Ödeme veya Deneme Başarılı Bildirimi ve /welcome sayfasına yönlendirme
           if (event?.name === 'checkout.completed') {
             console.log('[Paddle] Checkout completed successfully!', event.data);
             const isEn = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en';
-            toast.success(isEn ? 'Payment successful! Welcome to HealthLexMed 🎉' : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉', {
+            const isTrial = pendingCheckoutPlan !== 'lifetime';
+            const msgTr = isTrial
+              ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
+              : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
+            const msgEn = isTrial
+              ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
+              : 'Payment successful! Welcome to HealthLexMed 🎉';
+
+            toast.success(isEn ? msgEn : msgTr, {
               duration: 5000
             });
 
