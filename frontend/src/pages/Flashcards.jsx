@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
-import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay, getUser } from '@/utils/storage';
+import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, getFlashcardGuestDailyInfo, incrementFlashcardGuestPlay, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
@@ -35,12 +35,13 @@ export const Flashcards = () => {
 
   const loadTerms = useCallback(async () => {
     if (!isLoggedIn()) {
-      if (!canGuestPlay()) {
+      const guestDaily = getFlashcardGuestDailyInfo();
+      if (!guestDaily.canPlay) {
         setShowGuestModal(true);
         setLoading(false);
         return;
       }
-      incrementGuestPlay();
+      incrementFlashcardGuestPlay();
     }
 
     try {
@@ -359,6 +360,10 @@ export const Flashcards = () => {
       <GuestLimitModal
         isOpen={showGuestModal}
         onClose={() => setShowGuestModal(false)}
+        title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
+        description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı seansı yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
+        cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
+        cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
       />
     </div>
   );
