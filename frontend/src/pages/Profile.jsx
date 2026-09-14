@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getStats, getUser, saveUser, getStreak, getQuizScores, getProgress, getMatchScores, getMorphemeScores, logout, clearAllUserData } from '@/utils/storage';
+import { getStats, getUser, saveUser, getStreak, getQuizScores, getProgress, getMatchScores, getMorphemeScores, logout, clearAllUserData, getUserTrialState } from '@/utils/storage';
 import { signOut, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, query, where, getDocs, writeBatch, doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '@/firebase/config';
@@ -62,6 +62,14 @@ export const Profile = () => {
       planName.includes('basic') ||
       subStatus === 'basic');
 
+  const trialState = getUserTrialState(
+    previewRole === 'trial'
+      ? { ...effectiveUserData, subscriptionStatus: 'trialing', isTrial: true }
+      : effectiveUserData
+  );
+  const isTrialActive = trialState.hasTrial && trialState.isActive && !trialState.isExpired;
+  const trialDaysLeft = trialState.daysLeft;
+
   const isProPlan =
     !isLifetime &&
     !isBasic &&
@@ -69,7 +77,6 @@ export const Profile = () => {
       effectiveUserData?.isPro === true ||
       isPro ||
       subStatus === 'active' ||
-      subStatus === 'trialing' ||
       subStatus === 'pro');
 
   // Aktif yinelenen abonelik (Temel veya Pro; Ömür Boyu hariç):
@@ -475,15 +482,26 @@ export const Profile = () => {
                       <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
                       {isTr ? 'Ömür Boyu VIP' : 'Lifetime VIP'}
                     </span>
-                  ) : hasActiveSubscription ? (
+                  ) : isTrialActive ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                      {trialDaysLeft <= 1
+                        ? (isTr ? 'Deneme (Son gün)' : 'Trial (Last day)')
+                        : (isTr ? `Deneme (${trialDaysLeft} gün kaldı)` : `Trial (${trialDaysLeft} days left)`)}
+                    </span>
+                  ) : isBasic ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-700 dark:text-blue-300 border border-blue-500/30">
+                      <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                      {isTr ? 'Temel · Aktif' : 'Basic · Active'}
+                    </span>
+                  ) : isProPlan ? (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                       {isTr ? 'Aktif' : 'Active'}
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
-                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                      {isTr ? 'Ücretsiz Deneme' : 'Free Trial'}
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-muted text-muted-foreground border border-border">
+                      {isTr ? 'Ücretsiz Hesap' : 'Free Account'}
                     </span>
                   )}
                 </div>
@@ -493,16 +511,20 @@ export const Profile = () => {
                 <div className="max-w-xl">
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <span className="text-xl">
-                      {isLifetime ? '👑' : isProPlan ? '⭐' : isBasic ? '⚡' : '🌱'}
+                      {isLifetime ? '👑' : isProPlan ? '⭐' : isBasic ? '⚡' : isTrialActive ? '⏳' : '🌱'}
                     </span>
                     <h3 className="text-[1.1rem] font-bold text-[var(--ink)] m-0">
                       {isLifetime
                         ? (isTr ? 'Ömür Boyu Plan' : 'Lifetime Plan')
+                        : isTrialActive
+                        ? (isBasic
+                            ? (isTr ? 'Temel Plan (Ücretsiz Deneme)' : 'Basic Plan (Free Trial)')
+                            : (isTr ? 'Pro Plan (Ücretsiz Deneme)' : 'Pro Plan (Free Trial)'))
                         : isProPlan
                         ? (isTr ? 'Yıllık Pro Plan' : 'Annual Pro Plan')
                         : isBasic
-                        ? (isTr ? 'Temel Plan' : 'Basic Plan')
-                        : (isTr ? 'Ücretsiz Deneme (3 Günlük)' : 'Free Trial (3-Day)')}
+                        ? (isTr ? 'Temel Plan Üyesi' : 'Basic Plan Member')
+                        : (isTr ? 'Ücretsiz Plan' : 'Free Plan')}
                     </h3>
                   </div>
                   <p className="text-[0.88rem] text-[var(--muted)] leading-relaxed m-0">
@@ -510,6 +532,14 @@ export const Profile = () => {
                       ? (isTr
                           ? 'Tüm tıbbi terminoloji morfemlerine, 4 oyun moduna ve gelecekte eklenecek tüm özelliklere süresiz ömür boyu erişim.'
                           : 'Unlimited lifetime access to all medical terminology morphemes, game modes, and all future updates.')
+                      : isTrialActive
+                      ? (isBasic
+                          ? (isTr
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. İlk 3 kategori, 100 morfem ve Flashcard & Eşleştirme oyunları açık.'
+                              : 'You are on a 3-day free trial. First 3 categories, 100 morphemes, and Flashcard & Match games unlocked.')
+                          : (isTr
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. 13 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 13 categories, 571+ morphemes, and 4 game modes.'))
                       : isProPlan
                       ? (isTr
                           ? 'Tüm tıbbi terminoloji morfemlerine, oyun modlarına ve detaylı analizlere sınırsız erişim.'
@@ -548,17 +578,7 @@ export const Profile = () => {
                     </a>
                   )}
 
-                  {isBasic && (
-                    <Link
-                      to="/pricing"
-                      className="btn btn-primary inline-flex items-center gap-2 bg-[var(--teal)] text-white hover:bg-[var(--teal-deep)] transition-all font-semibold rounded-[9px] px-5 py-2.5 text-sm shadow-sm"
-                    >
-                      <span>★</span>
-                      {isTr ? "Pro'ya Yükselt →" : 'Upgrade to Pro →'}
-                    </Link>
-                  )}
-
-                  {!hasActiveSubscription && !isLifetime && (
+                  {!isLifetime && !isProPlan && (
                     <Link
                       to="/pricing"
                       className="btn btn-primary inline-flex items-center gap-2 bg-[var(--teal)] text-white hover:bg-[var(--teal-deep)] transition-all font-semibold rounded-[9px] px-5 py-2.5 text-sm shadow-sm"
