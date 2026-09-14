@@ -74,7 +74,10 @@ export const getPaddle = async () => {
           if (event?.name === 'checkout.completed') {
             console.log('[Paddle] Checkout completed successfully!', event.data);
             const isEn = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en';
-            const isTrial = pendingCheckoutPlan !== 'lifetime';
+            const planId = pendingCheckoutPlan || event?.data?.custom_data?.planId;
+            const totalVal = event?.data?.totals?.total;
+            const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
+            const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge || pendingCheckoutPlan !== 'lifetime');
             const msgTr = isTrial
               ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
               : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
@@ -88,8 +91,8 @@ export const getPaddle = async () => {
 
             if (typeof window !== 'undefined') {
               setTimeout(() => {
-                window.location.href = `/welcome?plan=${pendingCheckoutPlan || 'pro'}`;
-              }, 600);
+                window.location.href = `/welcome?plan=${planId || pendingCheckoutPlan || 'pro'}`;
+              }, 1800);
             }
           }
 
@@ -119,6 +122,25 @@ export const getPaddle = async () => {
       if (paddle) {
         if (typeof window !== 'undefined') {
           window.Paddle = paddle;
+          window.__triggerPaddleCheckoutCompleted = (plan = 'basic', mockData = {}) => {
+            pendingCheckoutPlan = plan;
+            const isEn = localStorage.getItem('healthlex_lang') === 'en';
+            const planId = plan;
+            const totalVal = mockData?.totals?.total;
+            const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
+            const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge);
+            const msgTr = isTrial
+              ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
+              : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
+            const msgEn = isTrial
+              ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
+              : 'Payment successful! Welcome to HealthLexMed 🎉';
+
+            toast.success(isEn ? msgEn : msgTr, { duration: 5000 });
+            setTimeout(() => {
+              window.location.href = `/welcome?plan=${planId}`;
+            }, 1800);
+          };
         }
       } else {
         console.error('[Paddle] Failed to initialize Paddle instance.');
