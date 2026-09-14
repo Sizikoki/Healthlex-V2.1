@@ -120,7 +120,7 @@ export default async function handler(req, res) {
           quantity: 1
         }
       ],
-      prorationBillingMode: 'prorated_immediately',
+      prorationBillingMode: 'do_not_bill',
       onPaymentFailure: 'prevent_change'
     });
 
@@ -140,7 +140,14 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       subscriptionId: updatedSubscription?.id,
-      status: updatedSubscription?.status
+      status: updatedSubscription?.status,
+      items: updatedSubscription?.items?.map(i => ({
+        priceId: i.price?.id,
+        name: i.price?.name,
+        quantity: i.quantity,
+        amount: i.price?.unitPrice?.amount,
+        currencyCode: i.price?.unitPrice?.currencyCode
+      }))
     });
   } catch (error) {
     console.error('[Paddle Upgrade] Error updating subscription:', error);
