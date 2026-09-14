@@ -122,7 +122,7 @@ export default async function handler(req, res) {
           quantity: 1
         }
       ],
-      prorationBillingMode: 'prorated_immediately',
+      prorationBillingMode: 'do_not_bill',
       onPaymentFailure: 'prevent_change'
     });
 
