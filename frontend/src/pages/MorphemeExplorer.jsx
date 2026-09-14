@@ -26,7 +26,7 @@ import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getUser } from '@/utils/storage';
-import { isMorphemeUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole } from '@/utils/planAccess';
 import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
@@ -82,6 +82,7 @@ export const MorphemeExplorer = () => {
 
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [isBasic, setIsBasic] = useState(previewRole === 'basic');
 
   useEffect(() => {
     if (previewRole) return;
@@ -89,6 +90,7 @@ export const MorphemeExplorer = () => {
     if (!uid) {
       const localUser = getUser();
       setIsPro(checkIsPro(localUser));
+      setIsBasic(checkIsBasic(localUser));
       return;
     }
 
@@ -96,9 +98,12 @@ export const MorphemeExplorer = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          setIsPro(checkIsPro(docSnap.data()));
+          const data = docSnap.data();
+          setIsPro(checkIsPro(data));
+          setIsBasic(checkIsBasic(data));
         } else {
           setIsPro(false);
+          setIsBasic(false);
         }
       }, (err) => {
         console.warn('[MorphemeExplorer] Could not check pro status:', err);
@@ -450,16 +455,24 @@ export const MorphemeExplorer = () => {
           <section aria-label={isTr ? 'Morfem Kartları' : 'Morpheme Cards'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {paginatedMorphemes.map((item) => {
               const slug = (item.displayTerm || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
-              const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro);
+              const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro, isBasic);
 
               const handleCardClick = (e) => {
                 if (locked) {
                   e.preventDefault();
-                  toast.info(
-                    isTr
-                      ? 'İlk 100 morfem Temel planda açıktır. 571+ morfemin tamamına erişmek için Pro\'ya geçin.'
-                      : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro to unlock all 571+ morphemes.'
-                  );
+                  if (!isBasic) {
+                    toast.info(
+                      isTr
+                        ? 'İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro\'ya geçin.'
+                        : 'The first 24 morphemes are open for guests. Upgrade to Basic for 100 morphemes or Pro for all 571.'
+                    );
+                  } else {
+                    toast.info(
+                      isTr
+                        ? 'İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro\'ya geçin.'
+                        : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro to unlock all 571 morphemes.'
+                    );
+                  }
                   navigate('/pricing');
                 }
               };
@@ -506,7 +519,7 @@ export const MorphemeExplorer = () => {
                             {locked && (
                               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
                                 <Lock className="w-3 h-3" />
-                                Pro
+                                {!isBasic && item.globalIndex < 100 ? 'Temel / Pro' : 'Pro'}
                               </span>
                             )}
                           </div>
@@ -560,7 +573,7 @@ export const MorphemeExplorer = () => {
                           {locked ? (
                             <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1">
                               <Lock className="w-3.5 h-3.5" />
-                              {isTr ? 'Pro ile Kilidi Aç' : 'Unlock with Pro'}
+                              {isTr ? 'Kilidi Aç' : 'Unlock'}
                               <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                           ) : (

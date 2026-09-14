@@ -4,6 +4,7 @@ export const UNLOCKED_CATEGORY_IDS = [
   'trunk_bones'
 ];
 
+export const MAX_GUEST_MORPHEMES = 24;
 export const MAX_BASIC_MORPHEMES = 100;
 
 export const UNLOCKED_GAMES = [
@@ -38,6 +39,23 @@ export const getPastDueState = (userData) => {
     daysLeft,
     pastDueSince
   };
+};
+
+/**
+ * Kullanıcının Temel planda olup olmadığını belirler
+ */
+export const checkIsBasic = (userData) => {
+  if (!userData) return false;
+  if (userData.isLifetime === true) return false;
+  const planStr = (userData.plan || '').toLowerCase();
+  const status = (userData.subscriptionStatus || '').toLowerCase();
+  return (
+    userData.isBasic === true ||
+    userData.planType === 'basic' ||
+    planStr.includes('basic') ||
+    planStr.includes('temel') ||
+    status === 'basic'
+  );
 };
 
 /**
@@ -82,11 +100,15 @@ export const isCategoryUnlocked = (categoryId, isPro) => {
 };
 
 /**
- * Morfemin kullanıcı için açık olup olmadığını kontrol eder (Temel pakette ilk 100 morfem açık)
+ * Morfemin kullanıcı için açık olup olmadığını kontrol eder:
+ * - Pro/Ömür Boyu: tüm morfemler (571+) açık
+ * - Temel plan (isBasic true): ilk 100 morfem açık
+ * - Misafir (giriş yapmamış): ilk 24 morfem açık
  */
-export const isMorphemeUnlocked = (index, isPro) => {
+export const isMorphemeUnlocked = (index, isPro, isBasic = false) => {
   if (isPro) return true;
-  return index < MAX_BASIC_MORPHEMES;
+  if (isBasic) return index < MAX_BASIC_MORPHEMES;
+  return index < MAX_GUEST_MORPHEMES;
 };
 
 /**
