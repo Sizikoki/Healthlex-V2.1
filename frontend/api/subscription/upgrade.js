@@ -56,7 +56,9 @@ export default async function handler(req, res) {
   ).trim();
   apiKey = apiKey.replace(/^Bearer\s+/i, '').replace(/^["']|["']$/g, '').trim();
 
-  const environment = (process.env.PADDLE_ENV || 'production').toLowerCase() === 'production'
+  const isExplicitProduction = (process.env.PADDLE_ENV || '').toLowerCase() === 'production';
+  const isKeyProduction = apiKey.startsWith('pdl_live_');
+  const environment = (isExplicitProduction || isKeyProduction)
     ? Environment.production
     : Environment.sandbox;
 
@@ -156,8 +158,6 @@ export default async function handler(req, res) {
       message: error?.message || 'Failed to update subscription in Paddle',
       code: error?.code,
       detail: error?.detail,
-      keyPrefix: apiKey ? `${apiKey.slice(0, 8)}...` : 'NONE',
-      keyLength: apiKey ? apiKey.length : 0,
       env: environment === Environment.production ? 'production' : 'sandbox'
     });
   }

@@ -204,7 +204,9 @@ export default async function handler(req, res) {
     ''
   ).trim();
 
-  const environment = (process.env.PADDLE_ENV || 'production').toLowerCase() === 'production'
+  const isExplicitProduction = (process.env.PADDLE_ENV || '').toLowerCase() === 'production';
+  const isKeyProduction = apiKey.startsWith('pdl_live_');
+  const environment = (isExplicitProduction || isKeyProduction)
     ? Environment.production
     : Environment.sandbox;
 
