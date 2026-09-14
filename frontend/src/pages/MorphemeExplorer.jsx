@@ -262,6 +262,39 @@ export const MorphemeExplorer = () => {
     return filteredMorphemes.slice(startIndex, startIndex + itemsPerPage);
   }, [filteredMorphemes, currentPage, itemsPerPage]);
 
+  const handlePageChange = (pageNum) => {
+    setCurrentPage(pageNum);
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {}
+  };
+
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages = [];
+    pages.push(1);
+
+    if (currentPage > 3) {
+      pages.push('ellipsis-start');
+    }
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (currentPage < totalPages - 2) {
+      pages.push('ellipsis-end');
+    }
+
+    pages.push(totalPages);
+    return pages;
+  };
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setSelectedCategory('all');
@@ -623,30 +656,50 @@ export const MorphemeExplorer = () => {
 
         {/* Sayfalama Kontrolleri (Pagination) */}
         {totalPages > 1 && (
-          <nav aria-label={isTr ? 'Sayfalama' : 'Pagination'} className="flex flex-wrap items-center justify-center gap-2 pt-4">
+          <nav aria-label={isTr ? 'Sayfalama' : 'Pagination'} className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-6 pb-2">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
               disabled={currentPage === 1}
-              className="rounded-xl"
+              className="rounded-xl px-3 h-9"
             >
               <ChevronLeft className="w-4 h-4 mr-1" />
               {isTr ? 'Önceki' : 'Previous'}
             </Button>
 
-            <div className="flex items-center gap-1">
-              <span className="text-xs font-semibold px-3 py-1.5 bg-card border border-border rounded-xl text-foreground">
-                {isTr ? `Sayfa ${currentPage} / ${totalPages}` : `Page ${currentPage} of ${totalPages}`}
-              </span>
+            <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center">
+              {getPageNumbers().map((pageItem, idx) => {
+                if (typeof pageItem === 'string') {
+                  return (
+                    <span key={`ellipsis-${idx}`} className="px-2 py-1 text-muted-foreground text-sm font-bold select-none">
+                      ...
+                    </span>
+                  );
+                }
+                const isActive = pageItem === currentPage;
+                return (
+                  <button
+                    key={pageItem}
+                    onClick={() => handlePageChange(pageItem)}
+                    className={`min-w-[36px] h-9 px-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center justify-center border ${
+                      isActive
+                        ? 'bg-primary text-primary-foreground border-primary shadow-sm font-bold'
+                        : 'bg-card border-border text-foreground hover:bg-muted hover:border-border/80'
+                    }`}
+                  >
+                    {pageItem}
+                  </button>
+                );
+              })}
             </div>
 
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="rounded-xl"
+              className="rounded-xl px-3 h-9"
             >
               {isTr ? 'Sonraki' : 'Next'}
               <ChevronRight className="w-4 h-4 ml-1" />
