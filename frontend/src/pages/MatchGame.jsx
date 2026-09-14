@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getAllTerms } from '@/data/medicalTerms';
-import { saveMatchScore, updateStreak, isLoggedIn, canGuestPlay, incrementGuestPlay, getUser } from '@/utils/storage';
+import { saveMatchScore, updateStreak, isLoggedIn, getUser } from '@/utils/storage';
+import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
-import { toast } from 'sonner';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
-import { useLanguage } from '@/context/LanguageContext';
 import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const MatchGame = () => {
   const { currentLanguage, t } = useLanguage();
@@ -35,16 +35,24 @@ export const MatchGame = () => {
   const [loading, setLoading] = useState(true);
   const [showGuestModal, setShowGuestModal] = useState(false);
 
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      toast.info(
+        currentLanguage === 'en'
+          ? 'Matching game requires a free account. Please register to play.'
+          : 'Eşleştirme oyunu kayıtlı kullanıcılara özeldir. Oynamak için lütfen ücretsiz kayıt olun.'
+      );
+      navigate('/register');
+    }
+  }, [navigate, currentLanguage]);
+
   const setupGame = useCallback((termsList) => {
     if (!termsList || termsList.length === 0) return;
 
     if (!isLoggedIn()) {
-      if (!canGuestPlay()) {
-        setShowGuestModal(true);
-        setLoading(false);
-        return;
-      }
-      incrementGuestPlay();
+      setLoading(false);
+      navigate('/register');
+      return;
     }
 
     let activeCategoryId = categoryId;
@@ -130,7 +138,7 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage, isPro]);
+  }, [categoryId, currentLanguage, isPro, navigate]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
@@ -264,6 +272,10 @@ export const MatchGame = () => {
   };
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
+
+  if (!isLoggedIn()) {
+    return null;
+  }
 
   if (loading) {
     return (

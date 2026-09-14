@@ -301,6 +301,17 @@ export const Games = () => {
       return;
     }
 
+    if (!userIsLoggedIn && gameId === 'match') {
+      e.preventDefault();
+      toast.info(
+        isTr
+          ? 'Eşleştirme oyunu kayıtlı kullanıcılara özeldir. Oynamak için lütfen ücretsiz kayıt olun.'
+          : 'Matching game requires an account. Please register to play.'
+      );
+      navigate('/register');
+      return;
+    }
+
     if (!userIsLoggedIn && !canGuestPlay()) {
       e.preventDefault();
       setIsLimitModalOpen(true);
