@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, BookOpen, Menu, X, Sparkles, Lock } from 'lucide-react';
+import { Search, BookOpen, Menu, X, Sparkles } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -15,7 +15,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { getTermSlug } from '@/utils/termHelper';
-import { isCategoryUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 
 // Sabit kategori listesi
 const CATEGORIES = [
@@ -431,35 +431,22 @@ export const Study = () => {
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategoryId === cat.id;
             const count = categoryCounts[cat.id];
-            const locked = !isPro && !isCategoryUnlocked(cat.id, isPro);
 
             return (
               <button
                 key={cat.id}
                 onClick={() => {
-                  if (locked) {
-                    toast.info(
-                      isTr
-                        ? 'Bu kategori Pro üyelere özeldir. Temel planda ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
-                        : 'This category is exclusive to Pro. The first 3 categories are available in the Basic plan.'
-                    );
-                    navigate('/pricing');
-                    return;
-                  }
                   setSelectedCategoryId(cat.id);
                   setSearchQuery('');
                 }}
                 className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer flex items-center justify-between group ${
                   isSelected
                     ? 'bg-primary text-primary-foreground font-bold shadow-xs'
-                    : locked
-                    ? 'text-muted-foreground/75 hover:bg-muted/50'
                     : 'text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                 }`}
               >
                 <span className="truncate pr-2 flex items-center gap-1.5">
                   {t(cat.key, cat.name)}
-                  {locked && <Lock className="w-3.5 h-3.5 text-amber-500 shrink-0 inline" />}
                 </span>
                 {count !== undefined && (
                   <span
@@ -487,21 +474,10 @@ export const Study = () => {
           <div className="p-2 space-y-1 overflow-y-auto flex-1">
             {CATEGORIES.map((cat) => {
               const count = categoryCounts[cat.id];
-              const locked = !isPro && !isCategoryUnlocked(cat.id, isPro);
               return (
                 <button
                   key={cat.id}
                   onClick={() => {
-                    if (locked) {
-                      toast.info(
-                        isTr
-                          ? 'Bu kategori Pro üyelere özeldir. Temel planda ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
-                          : 'This category is exclusive to Pro. The first 3 categories are available in the Basic plan.'
-                      );
-                      navigate('/pricing');
-                      setMobileDrawerOpen(false);
-                      return;
-                    }
                     setSelectedCategoryId(cat.id);
                     setSearchQuery('');
                     setMobileDrawerOpen(false);
@@ -514,7 +490,6 @@ export const Study = () => {
                 >
                   <span className="truncate pr-2 flex items-center gap-1.5">
                     {t(cat.key, cat.name)}
-                    {locked && <Lock className="w-3.5 h-3.5 text-amber-500 shrink-0 inline" />}
                   </span>
                   {count !== undefined && (
                     <span className="text-xs opacity-80">{count}</span>
