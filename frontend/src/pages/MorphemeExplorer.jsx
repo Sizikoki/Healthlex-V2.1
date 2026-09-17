@@ -413,9 +413,13 @@ export const MorphemeExplorer = () => {
               <div className="flex items-center gap-2">
                 <Lock className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                 <span>
-                  {isTr
-                    ? 'Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.'
-                    : 'Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.'}
+                  {isBasic
+                    ? (isTr
+                        ? 'Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.'
+                        : 'Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.')
+                    : (isTr
+                        ? 'Misafir Modu: İlk 24 morfem açık. 100 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.'
+                        : 'Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 100 or Pro for all 571+.')}
                 </span>
               </div>
               <Link to="/pricing" className="shrink-0 font-bold text-amber-700 dark:text-amber-300 hover:underline">
@@ -543,82 +547,107 @@ export const MorphemeExplorer = () => {
                     onClick={handleCardClick}
                     className="block h-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
                   >
-                    <Card className={`h-full bg-card border ${locked ? 'border-dashed border-border/80 opacity-85 hover:border-amber-500/50' : 'border-border group-hover:border-primary/50 group-hover:shadow-md group-hover:-translate-y-0.5'} rounded-2xl transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer`}>
-                      <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
-                        <div className="space-y-4">
-                          {/* Kart Üst Barı: Başlık ve Rozet */}
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="space-y-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <span className={`text-xl font-bold font-mono tracking-tight ${locked ? 'text-foreground/75' : 'text-foreground group-hover:text-primary transition-colors'}`}>
-                                  {item.displayTerm}
-                                </span>
-                                {getTypeBadge(item.type)}
-                              </div>
-                              {item.category && CATEGORY_NAMES[item.category] && (
-                                <p className="text-[0.75rem] font-medium text-muted-foreground">
-                                  {CATEGORY_NAMES[item.category]?.[currentLanguage] || CATEGORY_NAMES[item.category]?.tr}
-                                </p>
-                              )}
-                            </div>
-                            {locked && (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
-                                <Lock className="w-3 h-3" />
-                                {!isBasic && item.globalIndex < 100 ? 'Temel / Pro' : 'Pro'}
+                    <Card className={`h-full bg-card border ${locked ? 'border-amber-500/30 hover:border-amber-500/60 shadow-sm' : 'border-border group-hover:border-primary/50'} rounded-2xl transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer group-hover:shadow-md group-hover:-translate-y-0.5`}>
+                      <CardContent className="p-5 flex-1 flex flex-col justify-between">
+                        {/* Kart Üst Barı: Başlık, Tür Rozeti ve Kilit Göstergesi (Her Zaman Net ve Okunabilir) */}
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <div className="space-y-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-xl font-bold font-mono tracking-tight text-foreground group-hover:text-primary transition-colors">
+                                {item.displayTerm}
                               </span>
+                              {getTypeBadge(item.type)}
+                            </div>
+                            {item.category && CATEGORY_NAMES[item.category] && (
+                              <p className="text-[0.75rem] font-medium text-muted-foreground">
+                                {CATEGORY_NAMES[item.category]?.[currentLanguage] || CATEGORY_NAMES[item.category]?.tr}
+                              </p>
                             )}
                           </div>
-
-                          {/* Anlamlar Bölümü */}
-                          <div className="space-y-2 pt-1 border-t border-border/50">
-                            <div className="flex items-start gap-2 text-sm">
-                              <span className="shrink-0 px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold tracking-wider">
-                                TR
-                              </span>
-                              <span className="text-foreground font-medium leading-snug">
-                                {item.meaningTr}
-                              </span>
-                            </div>
-
-                            <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                              <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold tracking-wider border border-border/50">
-                                EN
-                              </span>
-                              <span className="leading-snug">
-                                {item.meaningEn}
-                              </span>
-                            </div>
-                          </div>
+                          {locked && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
+                              <Lock className="w-3 h-3" />
+                              Pro
+                            </span>
+                          )}
                         </div>
 
-                        {/* Örnek & Çözümleme Formülü Kutusu */}
-                        {(item.example || item.breakdown || item.description) && (
-                          <div className="bg-muted/40 border border-border/60 rounded-xl p-3 space-y-1.5 text-xs mt-3">
-                            {item.example && (
-                              <div className="flex items-center gap-1.5 font-semibold text-primary">
-                                <BookOpen className="w-3.5 h-3.5 shrink-0" />
-                                <span className="truncate">{item.example}</span>
+                        {/* Orta Kısım: Öğretici İçerik (Kilitliyse Bulanıklaştırılır) ve CTA Rozeti */}
+                        <div className="relative flex-1 flex flex-col justify-between min-h-[140px] my-1 overflow-hidden rounded-xl">
+                          {/* Asıl Öğretici Kısımlar: Anlamlar, Örnekler, Formüller */}
+                          <div
+                            className={`space-y-3 transition-all duration-200 ${
+                              locked
+                                ? 'select-none pointer-events-none opacity-40 blur-[6px]'
+                                : ''
+                            }`}
+                            style={locked ? { filter: 'blur(6px)' } : undefined}
+                            aria-hidden={locked ? 'true' : undefined}
+                          >
+                            {/* Anlamlar Bölümü */}
+                            <div className="space-y-2 pt-1 border-t border-border/50">
+                              <div className="flex items-start gap-2 text-sm">
+                                <span className="shrink-0 px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold tracking-wider">
+                                  TR
+                                </span>
+                                <span className="text-foreground font-medium leading-snug">
+                                  {item.meaningTr}
+                                </span>
+                              </div>
+
+                              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <span className="shrink-0 px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-bold tracking-wider border border-border/50">
+                                  EN
+                                </span>
+                                <span className="leading-snug">
+                                  {item.meaningEn}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Örnek & Çözümleme Formülü Kutusu */}
+                            {(item.example || item.breakdown || item.description) && (
+                              <div className="bg-muted/40 border border-border/60 rounded-xl p-3 space-y-1.5 text-xs">
+                                {item.example && (
+                                  <div className="flex items-center gap-1.5 font-semibold text-primary">
+                                    <BookOpen className="w-3.5 h-3.5 shrink-0" />
+                                    <span className="truncate">{item.example}</span>
+                                  </div>
+                                )}
+                                {item.breakdown && (
+                                  <p className="text-foreground/80 font-mono text-[0.75rem] leading-relaxed break-words bg-background/60 p-2 rounded-lg border border-border/40">
+                                    {item.breakdown}
+                                  </p>
+                                )}
+                                {item.description && (
+                                  <p className="text-muted-foreground text-[0.75rem] leading-relaxed italic">
+                                    {item.description}
+                                  </p>
+                                )}
                               </div>
                             )}
-                            {item.breakdown && (
-                              <p className="text-foreground/80 font-mono text-[0.75rem] leading-relaxed break-words bg-background/60 p-2 rounded-lg border border-border/40">
-                                {item.breakdown}
-                              </p>
-                            )}
-                            {item.description && (
-                              <p className="text-muted-foreground text-[0.75rem] leading-relaxed italic">
-                                {item.description}
-                              </p>
-                            )}
                           </div>
-                        )}
 
-                        {/* Detay & Terimler Linki */}
-                        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs mt-3">
+                          {/* Kilit Rozeti (CTA) - Bulanık İçeriğin Üzerinde */}
+                          {locked && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-3 z-10 bg-background/20 backdrop-blur-[1px] rounded-xl">
+                              <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md border border-amber-300 group-hover:scale-105 transition-all duration-200">
+                                <Lock className="w-4 h-4 shrink-0 stroke-[2.5]" />
+                                <span>{isTr ? "Pro'da Aç" : "Unlock with Pro"}</span>
+                              </div>
+                              <span className="text-[11px] font-medium text-muted-foreground mt-1.5 select-none">
+                                {isTr ? 'Anlam ve detaylar kilitli' : 'Meaning & details locked'}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Kart Alt Barı: Detay & Terimler Linki */}
+                        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs mt-2">
                           {locked ? (
-                            <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1">
+                            <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 group-hover:underline">
                               <Lock className="w-3.5 h-3.5" />
-                              {isTr ? 'Kilidi Aç' : 'Unlock'}
+                              {isTr ? "Pro'ya Geçin" : 'Upgrade to Pro'}
                               <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                           ) : (
