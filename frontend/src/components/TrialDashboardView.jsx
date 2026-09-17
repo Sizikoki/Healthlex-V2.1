@@ -52,12 +52,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} dk`,
     goPro: "Pro'ya geç →",
     proBadge: 'PRO',
-    proLockActivity: 'Haftalık ve aylık aktivite grafiği Pro ile açılır.',
-    proLockBadges: 'Rozetler ve sonraki hedefler Pro ile açılır.',
-    proLockCategories: '13 kategoride ilerleme takibi Pro ile açılır.',
-    proLockGames: '4 oyun modunda doğruluk ve oynanış istatistikleri Pro ile açılır.',
-    proLockWeak: 'Zayıf terimler ve tekrar listesi Pro ile açılır.',
-    proLockHistory: 'Seans geçmişi Pro ile açılır.',
+    proLockActivity: 'Haftalık ve aylık aktivite grafiği Temel veya Pro plan ile açılır.',
+    proLockBadges: 'Rozetler ve sonraki hedefler Temel veya Pro plan ile açılır.',
+    proLockCategories: '13 kategoride ilerleme takibi Temel veya Pro plan ile açılır.',
+    proLockGames: 'Flashcard ve Eşleştirme Temel\'de; 4 modun tüm istatistikleri Pro ile açılır.',
+    proLockWeak: 'Zayıf terim analizi ve akıllı tekrar listesi Pro ile açılır.',
+    proLockHistory: 'Çalışma geçmişi Temel veya Pro ile açılır.',
     flashcard: 'Flashcard',
     match: 'Eşleştirme',
     quiz: 'Quiz',
@@ -112,12 +112,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} min`,
     goPro: 'Upgrade to Pro →',
     proBadge: 'PRO',
-    proLockActivity: 'Weekly & monthly activity charts unlock with Pro.',
-    proLockBadges: 'Badges and upcoming milestones unlock with Pro.',
-    proLockCategories: 'Progress tracking across 13 categories unlocks with Pro.',
-    proLockGames: 'Accuracy & gameplay stats in all 4 game modes unlock with Pro.',
-    proLockWeak: 'Weak terms & spaced review lists unlock with Pro.',
-    proLockHistory: 'Complete session history unlocks with Pro.',
+    proLockActivity: 'Weekly & monthly activity charts unlock with Basic or Pro.',
+    proLockBadges: 'Badges and upcoming milestones unlock with Basic or Pro.',
+    proLockCategories: 'Progress tracking across 13 categories unlocks with Basic or Pro.',
+    proLockGames: 'Flashcard & Matching stats unlock with Basic; all 4 game modes unlock with Pro.',
+    proLockWeak: 'Weak terms analysis and smart review lists unlock with Pro.',
+    proLockHistory: 'Study history unlocks with Basic or Pro.',
     flashcard: 'Flashcards',
     match: 'Matching',
     quiz: 'Quiz',
@@ -293,27 +293,36 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
     }
   ];
 
-  // Yenilenmiş, ferah ve büyük Pro Kilit Kartı Bileşeni
-  const ProLockCard = ({ text }) => (
-    <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 bg-[#f5f7fb]/75 dark:bg-background/75 backdrop-blur-[2px]">
-      <div className="w-full max-w-[560px] bg-[#0f1b33] text-white rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-2xl border border-white/15">
-        <div className="flex items-center gap-3.5 flex-1 text-center sm:text-left">
-          <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-lg tracking-wider uppercase shadow-xs shrink-0">
-            🔒 {t.proBadge}
-          </span>
-          <span className="font-bold text-sm sm:text-[15px] leading-relaxed text-white/95">
-            {text}
-          </span>
+  // Yenilenmiş, ferah ve dinamik Kilit Kartı Bileşeni
+  const ProLockCard = ({ text, badge = 'PRO', ctaText = null }) => {
+    const isBasicOrBoth = badge.includes('TEMEL') || badge.includes('BASIC');
+    const badgeBg = isBasicOrBoth
+      ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white'
+      : 'bg-gradient-to-r from-amber-500 via-purple-600 to-violet-600 text-white';
+
+    const buttonText = ctaText || (isBasicOrBoth ? (isTr ? 'Plan Seç →' : 'Choose Plan →') : t.goPro);
+
+    return (
+      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 bg-[#f5f7fb]/75 dark:bg-background/75 backdrop-blur-[2px]">
+        <div className="w-full max-w-[580px] bg-[#0f1b33] text-white rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-2xl border border-white/15">
+          <div className="flex items-center gap-3.5 flex-1 text-center sm:text-left">
+            <span className={`${badgeBg} font-extrabold text-xs px-3 py-1.5 rounded-lg tracking-wider uppercase shadow-xs shrink-0 whitespace-nowrap`}>
+              🔒 {badge}
+            </span>
+            <span className="font-bold text-sm sm:text-[15px] leading-relaxed text-white/95">
+              {text}
+            </span>
+          </div>
+          <button
+            onClick={() => navigate('/pricing')}
+            className="w-full sm:w-auto bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-sm sm:text-[15px] py-3 px-5 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center gap-1.5"
+          >
+            {buttonText}
+          </button>
         </div>
-        <button
-          onClick={() => navigate('/pricing')}
-          className="w-full sm:w-auto bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white font-bold text-sm sm:text-[15px] py-3 px-5 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center justify-center gap-1.5"
-        >
-          {t.goPro}
-        </button>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="w-full bg-[#f5f7fb] dark:bg-background text-[#1f2937] dark:text-foreground antialiased min-h-screen">
@@ -527,7 +536,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               </div>
             </div>
 
-            <ProLockCard text={t.proLockActivity} />
+            <ProLockCard
+              text={t.proLockActivity}
+              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
+            />
           </div>
 
           {/* Rozetler Kartı (Kilitli) */}
@@ -612,7 +625,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               </div>
             </div>
 
-            <ProLockCard text={t.proLockBadges} />
+            <ProLockCard
+              text={t.proLockBadges}
+              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
+            />
           </div>
 
         </div>
@@ -655,7 +672,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               </div>
             </div>
 
-            <ProLockCard text={t.proLockCategories} />
+            <ProLockCard
+              text={t.proLockCategories}
+              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
+            />
           </div>
 
           {/* Oyun Modu İstatistikleri (Kilitli) */}
@@ -695,7 +716,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               </div>
             </div>
 
-            <ProLockCard text={t.proLockGames} />
+            <ProLockCard
+              text={t.proLockGames}
+              badge={isTr ? 'TEMEL / PRO' : 'BASIC / PRO'}
+              ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
+            />
           </div>
 
         </div>
@@ -738,7 +763,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               ))}
             </div>
 
-            <ProLockCard text={t.proLockWeak} />
+            <ProLockCard
+              text={t.proLockWeak}
+              badge="PRO"
+              ctaText={t.goPro}
+            />
           </div>
 
           {/* Öğrenme Geçmişi (Kilitli) */}
@@ -805,7 +834,11 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
               </div>
             </div>
 
-            <ProLockCard text={t.proLockHistory} />
+            <ProLockCard
+              text={t.proLockHistory}
+              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
+            />
           </div>
 
         </div>
