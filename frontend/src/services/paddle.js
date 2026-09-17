@@ -122,25 +122,27 @@ export const getPaddle = async () => {
       if (paddle) {
         if (typeof window !== 'undefined') {
           window.Paddle = paddle;
-          window.__triggerPaddleCheckoutCompleted = (plan = 'basic', mockData = {}) => {
-            pendingCheckoutPlan = plan;
-            const isEn = localStorage.getItem('healthlex_lang') === 'en';
-            const planId = plan;
-            const totalVal = mockData?.totals?.total;
-            const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
-            const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge);
-            const msgTr = isTrial
-              ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
-              : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
-            const msgEn = isTrial
-              ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
-              : 'Payment successful! Welcome to HealthLexMed 🎉';
+          if (process.env.NODE_ENV !== 'production') {
+            window.__triggerPaddleCheckoutCompleted = (plan = 'basic', mockData = {}) => {
+              pendingCheckoutPlan = plan;
+              const isEn = localStorage.getItem('healthlex_lang') === 'en';
+              const planId = plan;
+              const totalVal = mockData?.totals?.total;
+              const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
+              const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge);
+              const msgTr = isTrial
+                ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
+                : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
+              const msgEn = isTrial
+                ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
+                : 'Payment successful! Welcome to HealthLexMed 🎉';
 
-            toast.success(isEn ? msgEn : msgTr, { duration: 5000 });
-            setTimeout(() => {
-              window.location.href = `/welcome?plan=${planId}`;
-            }, 1800);
-          };
+              toast.success(isEn ? msgEn : msgTr, { duration: 5000 });
+              setTimeout(() => {
+                window.location.href = `/welcome?plan=${planId}`;
+              }, 1800);
+            };
+          }
         }
       } else {
         console.error('[Paddle] Failed to initialize Paddle instance.');
