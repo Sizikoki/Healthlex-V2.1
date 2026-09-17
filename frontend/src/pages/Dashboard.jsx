@@ -117,7 +117,8 @@ export const Dashboard = () => {
 
   // Kullanıcı bilgileri ve plan durumu
   const storedUser = getUser();
-  const trialState = getUserTrialState(firebaseUser || storedUser);
+  const effectiveUserData = { ...(storedUser || {}), ...(firestoreData || {}), ...(firebaseUser || {}) };
+  const trialState = getUserTrialState(effectiveUserData);
   const currentPlan = resolveUserPlan(firestoreData, trialState, previewRole);
   const pastDueState = getPastDueState(firestoreData);
   const isPro = currentPlan === 'pro' || currentPlan === 'lifetime';
