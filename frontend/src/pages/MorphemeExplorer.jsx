@@ -636,7 +636,7 @@ export const MorphemeExplorer = () => {
                                 <span>{isTr ? "Pro'da Aç" : "Unlock with Pro"}</span>
                               </div>
                               <span className="text-[11px] font-medium text-muted-foreground mt-1.5 select-none">
-                                {isTr ? 'Anlam ve detaylar kilitli' : 'Meaning & details locked'}
+                                {isTr ? 'Detaylar kilitli' : 'Details locked'}
                               </span>
                             </div>
                           )}
