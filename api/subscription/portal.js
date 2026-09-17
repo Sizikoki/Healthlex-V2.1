@@ -130,8 +130,8 @@ export default async function handler(req, res) {
 
   // ── 4. Paddle Customer Portal Session Oluştur ──────────────────────────────────
   try {
-    const requestBody = targetSubId ? { subscriptionIds: [targetSubId] } : {};
-    const portalSession = await paddle.customerPortalSessions.create(targetCustomerId, requestBody);
+    const subIdsArray = targetSubId ? [targetSubId] : [];
+    const portalSession = await paddle.customerPortalSessions.create(targetCustomerId, subIdsArray);
 
     const subUrls = portalSession?.urls?.subscriptions || [];
     const matchedSubUrl = subUrls.find(s => s.id === targetSubId) || subUrls[0];
