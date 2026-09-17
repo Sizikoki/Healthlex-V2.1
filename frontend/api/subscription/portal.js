@@ -90,14 +90,16 @@ export default async function handler(req, res) {
   const subscriptionId = userDoc.paddleSubscriptionId;
   const customerId = userDoc.paddleCustomerId;
 
-  const apiKey = process.env.PADDLE_API_KEY || process.env.REACT_APP_PADDLE_API_KEY;
+  let apiKey = (process.env.PADDLE_API_KEY || process.env.PADDLE_SERVER_API_KEY || process.env.REACT_APP_PADDLE_API_KEY || '').trim();
+  apiKey = apiKey.replace(/^Bearer\s+/i, '').replace(/^["']|["']$/g, '').trim();
+
   if (!apiKey) {
     console.error('[Portal] Missing PADDLE_API_KEY');
     return res.status(500).json({ error: 'SERVER_CONFIG_ERROR', message: 'Payment gateway unconfigured' });
   }
 
-  const paddleEnv = process.env.PADDLE_ENV || process.env.REACT_APP_PADDLE_ENV || 'production';
-  const environment = paddleEnv === 'sandbox' ? Environment.sandbox : Environment.production;
+  const isProduction = (process.env.PADDLE_ENV || '').toLowerCase() === 'production' || apiKey.startsWith('pdl_live_');
+  const environment = isProduction ? Environment.production : Environment.sandbox;
   const paddle = new Paddle(apiKey, { environment });
 
   // ── 3. Customer ID Belirleme ──────────────────────────────────────────────────
