@@ -25,7 +25,7 @@ export const PADDLE_PRICE_ID =
 export const PADDLE_PRICE_BASIC =
   process.env.REACT_APP_PADDLE_PRICE_BASIC ||
   process.env.PADDLE_PRICE_BASIC ||
-  PADDLE_PRICE_ID;
+  'pri_01m2c1yyzta4wwxdwf6h5mbyh7';
 
 export const PADDLE_PRICE_LIFETIME =
   process.env.REACT_APP_PADDLE_PRICE_LIFETIME ||

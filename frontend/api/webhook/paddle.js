@@ -299,7 +299,7 @@ export default async function handler(req, res) {
         const item = sub?.items?.[0];
         const priceId = (item?.price?.id || '').toLowerCase();
         const customPlanId = (sub?.customData?.planId || '').toLowerCase();
-        const basicPriceId = (process.env.PADDLE_PRICE_BASIC || '').toLowerCase();
+        const basicPriceId = (process.env.PADDLE_PRICE_BASIC || 'pri_01m2c1yyzta4wwxdwf6h5mbyh7').toLowerCase();
         const isBasic = priceId === basicPriceId || customPlanId === 'basic';
         const isPro = !isBasic && (status === 'active' || status === 'trialing');
 

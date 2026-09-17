@@ -193,8 +193,8 @@ export default async function handler(req, res) {
     console.log(`[Upgrade] Success: sub ${updatedSubscription?.id} status: ${updatedSubscription?.status}`);
 
     // Firestore planı güncelle — targetPriceId üzerinden plan tipini belirle
-    const PRICE_PRO = process.env.PADDLE_PRICE_ID || process.env.REACT_APP_PADDLE_PRICE_ID;
-    const PRICE_BASIC = process.env.PADDLE_PRICE_BASIC || process.env.REACT_APP_PADDLE_PRICE_BASIC;
+    const PRICE_PRO = process.env.PADDLE_PRICE_ID || process.env.REACT_APP_PADDLE_PRICE_ID || 'pri_01m1hbkgmff67g3mght6w6bj2q';
+    const PRICE_BASIC = process.env.PADDLE_PRICE_BASIC || process.env.REACT_APP_PADDLE_PRICE_BASIC || 'pri_01m2c1yyzta4wwxdwf6h5mbyh7';
     const isNowPro = targetPriceId === PRICE_PRO;
     const isNowBasic = targetPriceId === PRICE_BASIC;
 
