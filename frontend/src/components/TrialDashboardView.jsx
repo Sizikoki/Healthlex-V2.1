@@ -5,6 +5,7 @@ import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getStats, getStreak, getUserTrialState, formatTurkishName } from '@/utils/storage';
+import { getAllTerms } from '@/data/medicalTerms';
 
 const TRANSLATIONS = {
   tr: {
@@ -165,10 +166,16 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
   // 2. Dinamik İstatistikler & Seri
   const stats = getStats() || {};
   const streak = getStreak() || {};
-  const currentStreak = Math.max(1, streak.currentStreak || 3);
-  const longestStreak = Math.max(currentStreak, streak.longestStreak || 3);
-  const learnedTermsCount = Math.max(12, stats.learnedTerms || 37);
-  const termsMax = 100;
+  const currentStreak = streak.currentStreak || 0;
+  const longestStreak = Math.max(currentStreak, streak.longestStreak || 0);
+  const learnedTermsCount = stats.learnedTerms || 0;
+  const termsMax = getAllTerms().length || 571;
+
+  // Gerçek doğruluk oranı: quiz ortalama skoru (0 quiz varsa null)
+  const realAccuracy = (stats.quizzesTaken || 0) > 0 ? (stats.averageQuizScore || 0) : null;
+
+  // Ortalama oturum süresi: sistemde takip edilmiyor → null
+  const avgSessionMin = null;
 
   // 3. Günlük seriyi Pazartesi gününden başlat Pazar gününde sonlandır
   const weekDays = useMemo(() => {
@@ -185,7 +192,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
       // Pazartesi'den bugüne kadarki günlerde seriye göre aktif göster
       const isPastOrToday = idx <= todayMondayIdx;
       const isActive = isPastOrToday && (todayMondayIdx - idx < currentStreak);
-      const count = isActive ? (idx === todayMondayIdx ? 11 : 12 + idx) : '–';
+      const count = isActive ? '✓' : '–';
 
       return {
         label,
@@ -437,17 +444,23 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
             <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
               <div>
                 <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
-                  11
-                  <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1.5">
-                    {isTr ? 'dk' : 'min'}
-                  </small>
+                  {avgSessionMin !== null ? (
+                    <>
+                      {avgSessionMin}
+                      <small className="font-bold text-sm text-[#6b7a90] dark:text-muted-foreground ml-1.5">
+                        {isTr ? 'dk' : 'min'}
+                      </small>
+                    </>
+                  ) : (
+                    <span className="text-2xl text-[#9aa6b8] dark:text-muted-foreground/60">–</span>
+                  )}
                 </div>
                 <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
                   {t.avgSessionLabel}
                 </div>
               </div>
               <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
-                {t.recentSessionsLabel}
+                {avgSessionMin !== null ? t.recentSessionsLabel : (isTr ? 'Henüz veri yok' : 'No data yet')}
               </div>
             </div>
 
@@ -455,14 +468,18 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
             <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-2xl p-6 flex flex-col justify-between shadow-xs">
               <div>
                 <div className="font-extrabold text-3xl sm:text-[32px] leading-none text-[#0f1b33] dark:text-foreground">
-                  %72
+                  {realAccuracy !== null ? (
+                    <>%{realAccuracy}</>
+                  ) : (
+                    <span className="text-2xl text-[#9aa6b8] dark:text-muted-foreground/60">–</span>
+                  )}
                 </div>
                 <div className="font-semibold text-sm sm:text-base text-[#6b7a90] dark:text-muted-foreground mt-2">
                   {t.accuracyLabel}
                 </div>
               </div>
               <div className="font-normal text-xs text-[#9aa6b8] dark:text-muted-foreground/80 mt-4">
-                {t.accuracySubtitle}
+                {realAccuracy !== null ? t.accuracySubtitle : (isTr ? 'Henüz veri yok' : 'No data yet')}
               </div>
             </div>
           </div>
