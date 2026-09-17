@@ -40,6 +40,51 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
   const activeKey = getActiveKey();
   const doc = content[activeKey] || content.terms;
 
+  // Markdown formatındaki [Bağlantı Metni](/hedef) bağlantılarını JSX <Link>'e dönüştüren yardımcı fonksiyon
+  const renderFormattedText = (text) => {
+    if (typeof text !== 'string') return text;
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    if (!linkRegex.test(text)) return text;
+
+    const parts = [];
+    let lastIdx = 0;
+    let match;
+    linkRegex.lastIndex = 0;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      if (match.index > lastIdx) {
+        parts.push(text.substring(lastIdx, match.index));
+      }
+      const [, label, target] = match;
+      if (target.startsWith('/')) {
+        parts.push(
+          <Link key={match.index} to={target} className="text-primary font-semibold hover:underline">
+            {label}
+          </Link>
+        );
+      } else {
+        parts.push(
+          <a
+            key={match.index}
+            href={target}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary font-semibold hover:underline"
+          >
+            {label}
+          </a>
+        );
+      }
+      lastIdx = linkRegex.lastIndex;
+    }
+
+    if (lastIdx < text.length) {
+      parts.push(text.substring(lastIdx));
+    }
+
+    return parts;
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = `${doc.shortTitle} | HealthLexMed`;
@@ -283,7 +328,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
                             <div className="space-y-1.5 text-xs sm:text-sm">
                               {sec.content?.map((paragraph, pIdx) => (
                                 <p key={pIdx} className="leading-relaxed">
-                                  {paragraph}
+                                  {renderFormattedText(paragraph)}
                                 </p>
                               ))}
                             </div>
@@ -295,7 +340,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
                       {!sec.isAlert && sec.content && (
                         <div className="space-y-2">
                           {sec.content.map((paragraph, pIdx) => (
-                            <p key={pIdx}>{paragraph}</p>
+                            <p key={pIdx}>{renderFormattedText(paragraph)}</p>
                           ))}
                         </div>
                       )}
@@ -305,7 +350,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
                         <ul className="list-disc list-inside space-y-1.5 pl-2">
                           {sec.bullets.map((bullet, bIdx) => (
                             <li key={bIdx} className="leading-relaxed">
-                              {bullet}
+                              {renderFormattedText(bullet)}
                             </li>
                           ))}
                         </ul>
@@ -374,7 +419,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
                           {sub.bullets && (
                             <ul className="list-disc list-inside space-y-1.5 pl-2">
                               {sub.bullets.map((b, bIdx) => (
-                                <li key={bIdx}>{b}</li>
+                                <li key={bIdx}>{renderFormattedText(b)}</li>
                               ))}
                             </ul>
                           )}

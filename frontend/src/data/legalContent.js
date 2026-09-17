@@ -66,7 +66,8 @@ export const LEGAL_CONTENT = {
                 'Alt seviye bir plana geçiş (örneğin Pro\'dan Temel\'e) talep edildiğinde, değişiklik mevcut faturalandırma döneminin SONUNDA yürürlüğe girer. Dönem sonuna kadar mevcut planınızın tüm özelliklerinden yararlanmaya devam edersiniz.',
                 'Bu geçiş için kısmi iade yapılmaz; ödemesi yapılmış mevcut dönem değişmeden kalır.',
                 'Üst seviye bir plana geçiş (örneğin Temel\'den Pro\'ya) talep edildiğinde, fark tutarı kalan süre oranında hesaplanarak anında tahsil edilir ve yeni plan derhal aktif olur.',
-                'Ömür Boyu pakete geçişte mevcut yıllık aboneliğiniz iptal edilir; kullanılmamış süre için ayrıca bir iade yapılmaz.'
+                'Ömür Boyu pakete geçişte mevcut yıllık aboneliğiniz iptal edilir; kullanılmamış süre için ayrıca bir iade yapılmaz.',
+                'İade şartları ve istisnalara ilişkin detaylar için [İptal ve İade Politikası](/refund) belgesine bakınız.'
               ]
             }
           ]
@@ -220,6 +221,14 @@ export const LEGAL_CONTENT = {
             'Kullanıcının rızası dışındaki yetkisiz kart işlemleri.'
           ],
           extraNotice: 'İade taleplerinizi Sipariş Numarası (Order ID) ile birlikte help@healthlexmed.com adresine veya doğrudan paddle.net portalına iletebilirsiniz. İadeler onaylandığında 5-10 iş günü içinde ödeme yapılan karta aktarılır.'
+        },
+        {
+          id: 'plan_changes_refund',
+          title: '4. PLAN DEĞİŞİKLİKLERİNDE İADE DURUMU',
+          bullets: [
+            'Alt seviye bir plana geçişte (örn. Pro\'dan Temel\'e) veya Ömür Boyu pakete geçişte, bu maddenin yukarısında belirtilen istisnai teknik iade koşulları (teknik arıza, mükerrer fatura, yetkisiz işlem) dışında kısmi iade yapılmaz. Detaylı kurallar için [Kullanım Koşulları](/terms)\'ndaki "Plan Değişiklikleri ve İade Politikası" bölümüne bakınız.',
+            'Üst seviye bir plana geçişte (örn. Temel\'den Pro\'ya) tahsil edilen fark tutarı için de aynı istisnai koşullar dışında iade yapılmaz.'
+          ]
         }
       ]
     }
@@ -291,7 +300,8 @@ export const LEGAL_CONTENT = {
                 'When downgrading to a lower-tier plan (e.g., from Pro to Basic), the change takes effect at the END of the current billing period. You will continue to enjoy all features of your current plan until the end of the period.',
                 'No partial refund is provided for this downgrade; the paid current billing period remains unchanged.',
                 'When upgrading to a higher-tier plan (e.g., from Basic to Pro), the price difference is calculated on a pro-rata basis for the remaining time and billed immediately, activating the new plan right away.',
-                'When transitioning to the Lifetime package, your existing annual recurring subscription is cancelled immediately; no partial refund is issued for unused time.'
+                'When transitioning to the Lifetime package, your existing annual recurring subscription is cancelled immediately; no partial refund is issued for unused time.',
+                'For detailed refund conditions and exceptions, please refer to our [Refund & Cancellation Policy](/refund).'
               ]
             }
           ]
@@ -445,6 +455,14 @@ export const LEGAL_CONTENT = {
             'Unauthorized transaction claims substantiated outside user authorization.'
           ],
           extraNotice: 'To file a refund request, contact help@healthlexmed.com including your Order ID, or submit it directly at paddle.net. Approved refunds will be credited back to your original payment card within 5-10 business days.'
+        },
+        {
+          id: 'plan_changes_refund',
+          title: '4. REFUND CONDITIONS ON PLAN CHANGES',
+          bullets: [
+            'When downgrading to a lower-tier plan (e.g., from Pro to Basic) or transitioning to the Lifetime package, no partial refund is issued, except under the exceptional technical refund conditions specified above (technical outages, duplicate billing, unauthorized transactions). For comprehensive rules, please consult the "Plan Changes and Refund Policy" section in our [Terms of Service](/terms).',
+            'Any price difference collected when upgrading to a higher-tier plan (e.g., from Basic to Pro) is likewise non-refundable except under the same exceptional technical circumstances.'
+          ]
         }
       ]
     }
