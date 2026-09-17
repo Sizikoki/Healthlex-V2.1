@@ -239,6 +239,40 @@ export const Profile = () => {
     toast.success(t('dataDownloaded', 'Verileriniz JSON olarak indirildi.'));
   };
 
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  const handleOpenPortal = async () => {
+    try {
+      setPortalLoading(true);
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        toast.error(isTr ? 'Oturum açmanız gerekiyor.' : 'You must be logged in.');
+        return;
+      }
+
+      const idToken = await currentUser.getIdToken();
+      const res = await fetch('/api/subscription/portal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`
+        }
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success || !data.url) {
+        throw new Error(data.message || 'Customer portal URL could not be generated.');
+      }
+
+      // Kişiye özel Paddle müşteri portalına yönlendir
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('[Profile] Customer portal error:', err);
+      toast.error(isTr ? 'Abonelik portalı açılamadı: ' + err.message : 'Could not open portal: ' + err.message);
+      setPortalLoading(false);
+    }
+  };
+
   const handleDeleteAccount = async () => {
     const confirmation = window.confirm(
       t('deleteAccountConfirm', 'Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.')
@@ -563,19 +597,25 @@ export const Profile = () => {
 
                 <div className="flex-shrink-0 flex flex-wrap items-center gap-2.5">
                   {hasActiveSubscription && (
-                    <a
-                      href="https://paddle.net"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline inline-flex items-center gap-2 bg-transparent border border-[var(--line)] text-[var(--ink)] hover:bg-[var(--paper-dim)] hover:border-[var(--teal)] transition-all font-semibold rounded-[9px] px-4 py-2.5 text-sm"
+                    <button
+                      type="button"
+                      onClick={handleOpenPortal}
+                      disabled={portalLoading}
+                      className="btn btn-outline inline-flex items-center gap-2 bg-transparent border border-[var(--line)] text-[var(--ink)] hover:bg-[var(--paper-dim)] hover:border-[var(--teal)] transition-all font-semibold rounded-[9px] px-4 py-2.5 text-sm cursor-pointer disabled:opacity-50"
                     >
-                      <svg className="w-4 h-4 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                      {isTr ? 'Aboneliği Yönet / İptal Et' : 'Manage / Cancel Subscription'}
-                    </a>
+                      {portalLoading ? (
+                        <div className="w-4 h-4 border-2 border-[var(--teal)] border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <svg className="w-4 h-4 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      )}
+                      {portalLoading
+                        ? (isTr ? 'Portal Açılıyor...' : 'Opening Portal...')
+                        : (isTr ? 'Aboneliği Yönet / İptal Et' : 'Manage / Cancel Subscription')}
+                    </button>
                   )}
 
                   {!isLifetime && !isProPlan && (
