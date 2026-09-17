@@ -356,23 +356,32 @@ export const Study = () => {
     : filteredTerms;
 
   const handleMarkAsLearned = (termId) => {
-    const progress = getTermProgress(termId);
-    const newStatus = !progress.learned;
-    saveProgress(termId, newStatus);
-    if (!isLoggedIn()) {
-      toast.info(
-        newStatus
-          ? (isTr ? 'Terim öğrenildi! (Misafir Modu: İlerlemeniz bu cihazda saklanır)' : 'Term learned! (Guest Mode: Progress saved locally)')
-          : (isTr ? 'Öğrenildi işareti kaldırıldı' : 'Unmarked as learned')
-      );
-    } else {
-      toast.success(
-        newStatus
-          ? (isTr ? 'Terim öğrenildi olarak işaretlendi!' : 'Term marked as learned!')
-          : (isTr ? 'Öğrenildi işareti kaldırıldı' : 'Unmarked as learned')
-      );
+    try {
+      if (termId === undefined || termId === null) {
+        console.error('[Study] handleMarkAsLearned: invalid termId provided:', termId);
+        return;
+      }
+      const progress = getTermProgress(termId);
+      const newStatus = !progress.learned;
+      saveProgress(termId, newStatus);
+      if (!isLoggedIn()) {
+        toast.info(
+          newStatus
+            ? (isTr ? 'Terim öğrenildi! (Misafir Modu: İlerlemeniz bu cihazda saklanır)' : 'Term learned! (Guest Mode: Progress saved locally)')
+            : (isTr ? 'Öğrenildi işareti kaldırıldı' : 'Unmarked as learned')
+        );
+      } else {
+        toast.success(
+          newStatus
+            ? (isTr ? 'Terim öğrenildi olarak işaretlendi!' : 'Term marked as learned!')
+            : (isTr ? 'Öğrenildi işareti kaldırıldı' : 'Unmarked as learned')
+        );
+      }
+      setRefreshTrigger(prev => prev + 1);
+    } catch (err) {
+      console.error('[Study] Unexpected error in handleMarkAsLearned:', err, 'termId:', termId);
+      toast.error(isTr ? 'İlerleme kaydedilirken bir hata oluştu.' : 'An error occurred while saving progress.');
     }
-    setRefreshTrigger(prev => prev + 1);
   };
 
   const handleMorphemeClick = (part) => {

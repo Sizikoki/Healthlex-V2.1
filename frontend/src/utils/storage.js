@@ -464,41 +464,46 @@ export const clearAllUserData = async (currentUser) => {
 
 // Progress tracking
 export const saveProgress = async (termId, isLearned) => {
-  const key = getUserStorageKey(STORAGE_KEYS.PROGRESS);
-  if (!key) return; // Fallback
-
-  const user = getUser();
-  const userIdentifier = auth?.currentUser?.uid || user?.uid;
-
-  // 1. Update local storage cache immediately for fast UI feedback
-  const progress = getProgress();
-  progress[termId] = {
-    learned: isLearned,
-    lastReviewed: new Date().toISOString(),
-    reviewCount: (progress[termId]?.reviewCount || 0) + 1
-  };
-  localStorage.setItem(key, JSON.stringify(progress));
-
-  // 2. Synchronize to Firestore in the background (only if user logged in)
-  if (userIdentifier) {
-    try {
-      const docId = `${userIdentifier}_${termId}`;
-      const progressDocRef = doc(db, 'user_progress', docId);
-
-      if (isLearned) {
-        await setDoc(progressDocRef, {
-          userId: userIdentifier,
-          termId: termId,
-          status: 'learned',
-          lastReviewed: new Date().toISOString(),
-          reviewCount: progress[termId].reviewCount
-        });
-      } else {
-        await deleteDoc(progressDocRef);
-      }
-    } catch (error) {
-      console.error('Error syncing progress to Firestore:', error);
+  try {
+    const key = getUserStorageKey(STORAGE_KEYS.PROGRESS);
+    if (!key) {
+      console.error('[storage] saveProgress: Failed to determine user storage key for termId:', termId);
+      return;
     }
+
+    // 1. Update local storage cache immediately for fast UI feedback
+    const progress = getProgress();
+    progress[termId] = {
+      learned: isLearned,
+      lastReviewed: new Date().toISOString(),
+      reviewCount: (progress[termId]?.reviewCount || 0) + 1
+    };
+    localStorage.setItem(key, JSON.stringify(progress));
+
+    // 2. Synchronize to Firestore in the background (only if user is actually authenticated with Firebase Auth)
+    const currentUid = auth?.currentUser?.uid;
+    if (currentUid) {
+      try {
+        const docId = `${currentUid}_${termId}`;
+        const progressDocRef = doc(db, 'user_progress', docId);
+
+        if (isLearned) {
+          await setDoc(progressDocRef, {
+            userId: currentUid,
+            termId: termId,
+            status: 'learned',
+            lastReviewed: new Date().toISOString(),
+            reviewCount: progress[termId].reviewCount
+          });
+        } else {
+          await deleteDoc(progressDocRef);
+        }
+      } catch (error) {
+        console.error('[storage] Error syncing progress to Firestore for termId:', termId, error);
+      }
+    }
+  } catch (err) {
+    console.error('[storage] Critical error in saveProgress for termId:', termId, err);
   }
 };
 

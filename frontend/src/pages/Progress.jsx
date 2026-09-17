@@ -152,8 +152,11 @@ export const ProgressPage = () => {
   const categoriesWithProgress = catList.map(cat => {
     const catTerms = terms.filter(t => t.category === cat.id || t.subcategory === cat.id);
     const learnedCatTerms = catTerms.filter(t => progress[t.id]?.learned);
-    const pct = catTerms.length > 0 ? Math.round((learnedCatTerms.length / catTerms.length) * 100) : 0;
-    return { ...cat, pct };
+    const learnedCount = learnedCatTerms.length;
+    const totalCount = catTerms.length;
+    const exactPct = totalCount > 0 ? (learnedCount / totalCount) * 100 : 0;
+    const pct = learnedCount > 0 ? Math.max(1, Math.round(exactPct)) : 0;
+    return { ...cat, pct, learnedCount, totalCount };
   });
 
   const achievements = [
@@ -220,11 +223,6 @@ export const ProgressPage = () => {
   const isTrialActive = trialState?.isActive === true;
   const isBasic = checkIsBasic(effectiveData) || previewRole === 'basic';
   const hasAccess = isPro || isBasic || isTrialActive;
-
-  // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
-  if (!hasAccess) {
-    return <TrialDashboardView user={firebaseUser} userData={firestoreData} />;
-  }
 
   return (
     <div className="progress-theme min-h-screen bg-[var(--paper)]">
@@ -412,8 +410,13 @@ export const ProgressPage = () => {
                         style={{ width: inProp ? `${cat.pct}%` : '0%' }}
                       ></div>
                     </div>
-                    <div className="cat-pct w-[44px] text-right font-mono text-[0.82rem] text-[var(--muted)] flex-shrink-0">
-                      %{cat.pct}
+                    <div className="cat-pct min-w-[95px] text-right font-mono text-[0.82rem] text-[var(--muted)] flex-shrink-0 flex items-center justify-end gap-2">
+                      <span className="text-xs font-semibold text-[var(--ink)]">
+                        {cat.learnedCount}/{cat.totalCount}
+                      </span>
+                      <span className="w-10 text-right font-bold text-[var(--teal-deep)]">
+                        %{cat.pct}
+                      </span>
                     </div>
                   </div>
                 );
