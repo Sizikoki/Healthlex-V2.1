@@ -222,7 +222,13 @@ export const ProgressPage = () => {
   const trialState = getUserTrialState(effectiveData || firebaseUser);
   const isTrialActive = trialState?.isActive === true;
   const isBasic = checkIsBasic(effectiveData) || previewRole === 'basic';
-  const hasAccess = isPro || isBasic || isTrialActive;
+  const effectiveIsPro = isPro || checkIsPro(effectiveData) || resolveIsPro(effectiveData) || previewRole === 'pro';
+  const hasAccess = effectiveIsPro || isBasic || isTrialActive;
+
+  // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
+  if (!hasAccess) {
+    return <TrialDashboardView user={firebaseUser} userData={firestoreData} />;
+  }
 
   return (
     <div className="progress-theme min-h-screen bg-[var(--paper)]">
