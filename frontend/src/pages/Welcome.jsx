@@ -49,16 +49,15 @@ export const Welcome = () => {
     return () => unsubscribe();
   }, []);
 
-  // Determine active plan (from query param or fallback to current user status)
+  // Determine active plan: gerçek subscriptionStatus === 'trialing' durumu en yüksek önceliktir
   const activePlanKey = useMemo(() => {
-    const urlPlan = searchParams.get('plan')?.toLowerCase();
-    if (urlPlan && ['lifetime', 'pro', 'basic', 'trial'].includes(urlPlan)) {
-      return urlPlan;
-    }
-
+    // 1. Gerçek veritabanı deneme durumu (URL'den bağımsız)
     if (firestoreData) {
-      const planStr = (firestoreData.plan || '').toLowerCase();
       const status = (firestoreData.subscriptionStatus || '').toLowerCase();
+      if (status === 'trialing') {
+        return 'trial';
+      }
+      const planStr = (firestoreData.plan || '').toLowerCase();
       if (firestoreData.isLifetime === true || planStr.includes('lifetime') || status === 'lifetime') {
         return 'lifetime';
       }
@@ -70,6 +69,13 @@ export const Welcome = () => {
       }
     }
 
+    // 2. URL Query Parametre kontrolü (kayıt/checkout yönlendirmesi için)
+    const urlPlan = searchParams.get('plan')?.toLowerCase();
+    if (urlPlan && ['lifetime', 'pro', 'basic', 'trial'].includes(urlPlan)) {
+      return urlPlan;
+    }
+
+    // 3. Yerel trialState kontrolü
     const storedUser = getUser();
     const trialState = getUserTrialState(currentUser || storedUser);
     if (trialState?.isActive) return 'trial';
