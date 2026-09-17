@@ -1,33 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { getTermCount, getInitialTermCount } from '@/services/termCountService';
 
-const BAR_ITEMS = {
-  tr: [
+export const TopInfoBar = ({ variant = 'primary' }) => {
+  const { currentLanguage } = useLanguage();
+  const isTr = currentLanguage !== 'en';
+  const [count, setCount] = useState(getInitialTermCount);
+
+  useEffect(() => {
+    let isMounted = true;
+    getTermCount().then((val) => {
+      if (isMounted && typeof val === 'number') {
+        setCount(val);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const items = isTr ? [
     '571+ MORFEM',
-    '245+ TERİM',
+    `${count}+ TERİM`,
     '13 KATEGORİ',
     '4 OYUN MODU',
     'TR ⇄ EN',
     'SINIRLI SÜRE: PRO %55 İNDİRİM',
     '3 GÜN ÜCRETSİZ DENE · DİLEDİĞİN AN İPTAL ET',
     'TEK TIKLA İPTAL'
-  ],
-  en: [
+  ] : [
     '571+ MORPHEMES',
-    '245+ TERMS',
+    `${count}+ TERMS`,
     '13 CATEGORIES',
     '4 GAME MODES',
     'TR ⇄ EN',
     'LIMITED TIME: PRO 55% OFF',
     'TRY 3 DAYS FREE · CANCEL ANYTIME',
     'CANCEL IN ONE CLICK'
-  ]
-};
+  ];
 
-export const TopInfoBar = ({ variant = 'primary' }) => {
-  const { currentLanguage } = useLanguage();
-  const isTr = currentLanguage !== 'en';
-  const items = BAR_ITEMS[isTr ? 'tr' : 'en'];
 
   // Renk teması: 'red' (orijinal kırmızı) veya 'primary' (sitenin tıp mavisi)
   const bgClass =

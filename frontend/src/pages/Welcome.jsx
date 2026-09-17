@@ -17,6 +17,8 @@ import { getUser, getUserTrialState } from '@/utils/storage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
+import { getTermCount, getInitialTermCount } from '@/services/termCountService';
+
 
 export const Welcome = () => {
   const [searchParams] = useSearchParams();
@@ -83,7 +85,21 @@ export const Welcome = () => {
     return 'pro'; // Safe default
   }, [searchParams, firestoreData, currentUser]);
 
-  const planConfigs = {
+  const [termCount, setTermCount] = useState(getInitialTermCount);
+
+  useEffect(() => {
+    let isMounted = true;
+    getTermCount().then((val) => {
+      if (isMounted && typeof val === 'number') {
+        setTermCount(val);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const planConfigs = useMemo(() => ({
     lifetime: {
       color: 'amber',
       iconBg: 'bg-amber-500/10 border-amber-500/25 text-amber-500 shadow-amber-500/10',
@@ -95,10 +111,10 @@ export const Welcome = () => {
           badge: 'ÖMÜR BOYU VIP ÜYELİK',
           title: 'Tebrikler, HealthLexMed Ömür Boyu VIP Üyeliğe Hoş Geldiniz! 👑',
           subtitle:
-            'Tek seferlik ödemeniz başarıyla tamamlandı. Artık HealthLexMed’in tüm 13 kategorisine, 590 tıbbi terimine, 571’den fazla morfemine ve gelecekte eklenecek tüm yeni modüllere ÖMÜR BOYU sınırsız erişim hakkınız var.',
+            `Tek seferlik ödemeniz başarıyla tamamlandı. Artık HealthLexMed’in tüm 13 kategorisine, ${termCount} tıbbi terimine, 571’den fazla morfemine ve gelecekte eklenecek tüm yeni modüllere ÖMÜR BOYU sınırsız erişim hakkınız var.`,
           featuresTitle: 'Ömür Boyu VIP Üyeliğinizle Kilidi Açılan Özellikler',
           features: [
-            '13 anatomik kategorinin tamamına ömür boyu sınırsız erişim (590 tıbbi terim)',
+            `13 anatomik kategorinin tamamına ömür boyu sınırsız erişim (${termCount} tıbbi terim)`,
             '571+ morfem, kök ve ek kütüphanesinin tamamı',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı analitikleri, çalışma serisi ve seviye sistemi',
@@ -115,10 +131,10 @@ export const Welcome = () => {
           badge: 'LIFETIME VIP MEMBERSHIP',
           title: 'Congratulations, Welcome to HealthLexMed Lifetime VIP! 👑',
           subtitle:
-            'Your one-time payment is complete. You now have LIFETIME unlimited access to all 13 categories, 590 medical terms, over 571 morphemes, and all future modules with zero recurring fees.',
+            `Your one-time payment is complete. You now have LIFETIME unlimited access to all 13 categories, ${termCount} medical terms, over 571 morphemes, and all future modules with zero recurring fees.`,
           featuresTitle: 'Features Unlocked With Lifetime Membership',
           features: [
-            'Lifetime unlimited access to all 13 anatomical categories (590 medical terms)',
+            `Lifetime unlimited access to all 13 anatomical categories (${termCount} medical terms)`,
             'Full library of 571+ morphemes, roots, and affixes',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal progress stats, study streaks, and leveling system',
@@ -144,10 +160,10 @@ export const Welcome = () => {
           badge: 'YILLIK PRO AKTİF',
           title: 'Tebrikler, HealthLexMed Pro’ya Hoş Geldiniz! 🚀',
           subtitle:
-            'Yıllık Pro Üyeliğiniz başarıyla aktif edildi. 1 yıl boyunca tüm 13 kategori, 590 tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamı sınırsız olarak kullanımınıza hazır.',
+            `Yıllık Pro Üyeliğiniz başarıyla aktif edildi. 1 yıl boyunca tüm 13 kategori, ${termCount} tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamı sınırsız olarak kullanımınıza hazır.`,
           featuresTitle: 'Aboneliğinizle Kilidi Açılan Özellikler',
           features: [
-            '13 anatomik kategorinin tamamı (590 tıbbi terim)',
+            `13 anatomik kategorinin tamamı (${termCount} tıbbi terim)`,
             '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı istatistikleri, çalışma serisi ve seviye sistemi',
@@ -164,10 +180,10 @@ export const Welcome = () => {
           badge: 'ANNUAL PRO ACTIVE',
           title: 'Congratulations, Welcome to HealthLexMed Pro! 🚀',
           subtitle:
-            'Your Annual Pro Membership is now active. All 13 categories, 590 medical terms, over 571 morphemes, and all 4 interactive game modes are fully unlocked for 1 year.',
+            `Your Annual Pro Membership is now active. All 13 categories, ${termCount} medical terms, over 571 morphemes, and all 4 interactive game modes are fully unlocked for 1 year.`,
           featuresTitle: 'Features Unlocked With Your Membership',
           features: [
-            'All 13 anatomical categories (590 medical terms)',
+            `All 13 anatomical categories (${termCount} medical terms)`,
             'Unlimited access to 571+ morphemes, roots, and affixes library',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal progress stats, study streaks, and leveling system',
@@ -246,10 +262,10 @@ export const Welcome = () => {
           badge: '3 GÜNLÜK ÜCRETSİZ DENEME',
           title: 'HealthLexMed’e Hoş Geldiniz! ⏱️',
           subtitle:
-            '3 günlük ücretsiz deneme süreniz başladı! Dilediğiniz an tek tıkla iptal edebilir, tüm 13 kategori, 590 tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamını 3 gün boyunca sınırsızca deneyimleyebilirsiniz.',
+            `3 günlük ücretsiz deneme süreniz başladı! Dilediğiniz an tek tıkla iptal edebilir, tüm 13 kategori, ${termCount} tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamını 3 gün boyunca sınırsızca deneyimleyebilirsiniz.`,
           featuresTitle: 'Deneme Süresince Sınırsız Keşfedebileceğiniz Özellikler',
           features: [
-            '13 anatomik kategorinin tamamı (590 tıbbi terim)',
+            `13 anatomik kategorinin tamamı (${termCount} tıbbi terim)`,
             '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
             '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
             'Kişisel başarı analitikleri ve çalışma serisi',
@@ -268,10 +284,10 @@ export const Welcome = () => {
           badge: '3-DAY FREE TRIAL ACTIVE',
           title: 'Welcome to HealthLexMed! ⏱️',
           subtitle:
-            'Your 3-day free trial has started! Enjoy full, unrestricted access to all 13 categories, 590 medical terms, 571+ morphemes, and all 4 interactive games for 3 days — cancel anytime in one click.',
+            `Your 3-day free trial has started! Enjoy full, unrestricted access to all 13 categories, ${termCount} medical terms, 571+ morphemes, and all 4 interactive games for 3 days — cancel anytime in one click.`,
           featuresTitle: 'Features Unlocked During Your Trial',
           features: [
-            'All 13 anatomical categories (590 medical terms)',
+            `All 13 anatomical categories (${termCount} medical terms)`,
             'Unlimited access to 571+ morphemes, roots, and affixes',
             'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
             'Personal learning analytics and study streak',
@@ -288,7 +304,7 @@ export const Welcome = () => {
         }
       }
     }
-  };
+  }), [termCount]);
 
   const currentConfig = planConfigs[activePlanKey] || planConfigs.pro;
   const t = currentConfig.content[lang] || currentConfig.content.tr;

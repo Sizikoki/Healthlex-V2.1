@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain, Mail } from 'lucide-react';
-import { getAllTerms } from '@/data/medicalTerms';
+import { getTermCount, getInitialTermCount } from '@/services/termCountService';
 import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
-import { db, auth } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { getUser } from '@/utils/storage';
@@ -47,32 +46,19 @@ export const Home = () => {
   }, [navigate]);
   // ────────────────────────────────────────────────────────────────────────────
 
-  const [termCount, setTermCount] = useState(() => getAllTerms().length);
+  const [termCount, setTermCount] = useState(getInitialTermCount);
   const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 571 morfem
 
   useEffect(() => {
-    const fetchTermCount = async () => {
-      try {
-        let timeoutId;
-        const timeoutPromise = new Promise((_, reject) => {
-          timeoutId = setTimeout(() => reject(new Error('Firestore timeout')), 3000);
-        });
-
-        const querySnapshot = await Promise.race([
-          getDocs(collection(db, 'terms')),
-          timeoutPromise
-        ]);
-        if (timeoutId) clearTimeout(timeoutId);
-
-        if (querySnapshot && querySnapshot.size > 0) {
-          setTermCount(querySnapshot.size);
-        }
-      } catch (error) {
-        console.warn('Using local terms count fallback:', error);
+    let isMounted = true;
+    getTermCount().then((count) => {
+      if (isMounted && typeof count === 'number') {
+        setTermCount(count);
       }
+    });
+    return () => {
+      isMounted = false;
     };
-
-    fetchTermCount();
   }, []);
 
   const scrollToSection = (id) => {
