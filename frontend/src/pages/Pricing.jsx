@@ -6,9 +6,11 @@ import { auth, db } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { changePlan } from '@/services/subscriptionService';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
+
 
 const TRANSLATIONS = {
   tr: {
@@ -335,14 +337,9 @@ export const PricingView = () => {
 
   const handlePlanClick = async (planIndex) => {
     const clickedPlanKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
-    if (userCurrentPlan === clickedPlanKey) {
-      // Zaten bu plana sahip, tekrar satın almaya izin verme
-      navigate('/dashboard');
-      return;
-    }
 
-    if (planIndex === 1 && isUserPro) {
-      // Zaten Pro üye
+    if (userCurrentPlan === clickedPlanKey) {
+      // Zaten bu planda, tekrar satın almaya izin verme
       navigate('/dashboard');
       return;
     }
@@ -360,28 +357,83 @@ export const PricingView = () => {
       return;
     }
 
-    // Ücretli Planlar (Temel, Pro, Ömür Boyu)
     if (!IS_PAYMENT_ACTIVE) {
       toast.info(isTr ? 'Ödeme sistemi yakında aktif olacak.' : 'Payment system coming soon.');
       return;
     }
 
-    const planKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
-    const planTitle = planIndex === 1
+    // Kullanıcının mevcut aktif aboneliği varsa → merkezi changePlan servisi
+    const hasActiveSub = !!(userData?.paddleSubscriptionId);
+    if (hasActiveSub && userCurrentPlan && clickedPlanKey !== userCurrentPlan) {
+      // Downgrade onayı
+      const currentRank = { basic: 1, pro: 2, lifetime: 3 }[userCurrentPlan] || 0;
+      const targetRank  = { basic: 1, pro: 2, lifetime: 3 }[clickedPlanKey]  || 0;
+
+      if (targetRank < currentRank && clickedPlanKey !== 'lifetime') {
+        const confirmed = window.confirm(
+          isTr
+            ? `${userCurrentPlan === 'pro' ? 'Pro' : 'mevcut'} planınızdan Temel plana düşürüleceksiniz. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musunuz?`
+            : `You will downgrade to the Basic plan. The new price takes effect at the end of your current billing period. No immediate refund. Proceed?`
+        );
+        if (!confirmed) return;
+      }
+
+      if (clickedPlanKey === 'lifetime' && userData?.paddleSubscriptionId) {
+        const confirmed = window.confirm(
+          isTr
+            ? 'Mevcut yıllık aboneliğiniz ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan süreniz için iade yapılmayacak. Onaylıyor musunuz?'
+            : 'Your current subscription will be cancelled immediately and the Lifetime checkout will open. No refund for unused time. Proceed?'
+        );
+        if (!confirmed) return;
+      }
+
+      setCheckoutLoading(true);
+      try {
+        // auth.currentUser — Pricing'de firebaseUser state yok, doğrudan auth.currentUser kullanılır
+        const firebaseUser = auth.currentUser;
+        const result = await changePlan({
+          firebaseUser,
+          firestoreData: userData,
+          targetPlanKey: clickedPlanKey,
+          currentPlanKey: userCurrentPlan,
+          isTr
+        });
+
+        if (result.success && !result.requiresCheckout) {
+          toast.success(
+            isTr
+              ? 'Planınız başarıyla değiştirildi 🎉'
+              : 'Your plan has been updated successfully 🎉'
+          );
+        } else if (!result.success && result.error) {
+          toast.error(result.error);
+        }
+        // requiresCheckout = true → openPaddleCheckout servis içinde zaten açıldı
+      } catch (err) {
+        console.error('[Pricing] Plan change error:', err);
+        toast.error(isTr ? 'Beklenmeyen bir hata oluştu.' : 'An unexpected error occurred.');
+      } finally {
+        setCheckoutLoading(false);
+      }
+      return;
+    }
+
+    // Yeni kullanıcı (abonelik yok) veya ilk kez satın alma → doğrudan checkout
+    const planTitle = clickedPlanKey === 'pro'
       ? 'Annual Pro Membership'
-      : planIndex === 0
+      : clickedPlanKey === 'basic'
       ? 'Basic Plan (Yearly)'
       : 'Lifetime Membership';
 
     setCheckoutLoading(true);
     try {
       await openPaddleCheckout({
-        priceId: getPriceIdForPlan(planKey),
+        priceId: getPriceIdForPlan(clickedPlanKey),
         customerEmail: currentUser?.email || undefined,
         customData: {
           plan: planTitle,
-          planId: planKey,
-          billingPeriod: planKey === 'lifetime' ? 'lifetime' : 'yearly',
+          planId: clickedPlanKey,
+          billingPeriod: clickedPlanKey === 'lifetime' ? 'lifetime' : 'yearly',
           userId: currentUser?.uid || 'unknown'
         }
       });
@@ -391,6 +443,7 @@ export const PricingView = () => {
       setCheckoutLoading(false);
     }
   };
+
 
   // Kayıt sonrası seçili planla gelindiğinde otomatik checkout başlatma
   useEffect(() => {

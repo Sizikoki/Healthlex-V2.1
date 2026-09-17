@@ -6,9 +6,11 @@ import { getPastDueState, getPreviewRole } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
-import { openPaddleCheckout, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
+import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
 import { toast } from 'sonner';
+
 
 // --- Kullanıcı Plan Çözümleme ---
 // Plan Seviyeleri: 'lifetime' | 'pro' | 'basic' | 'trial' | 'expired'
@@ -143,100 +145,70 @@ export const Dashboard = () => {
     window.location.href = '/login';
   };
 
-  // Paddle Subscription Upgrade or Checkout
-  const handleUpgrade = useCallback(async () => {
+  // Plan Değişikliği (Yükseltme / Düşürme / Lifetime) — Tek Merkezi Mantık
+  const handlePlanChange = useCallback(async (targetPlanKey) => {
     if (!IS_PAYMENT_ACTIVE) {
       toast.info(isTr ? 'Ödeme sistemi yakında aktif olacak.' : 'Payment system coming soon.');
       return;
     }
 
-    const userId = firebaseUser?.uid || storedUser?.uid;
-    const email = firebaseUser?.email || storedUser?.email;
-    const paddleSubId = firestoreData?.paddleSubscriptionId || storedUser?.paddleSubscriptionId;
-
-    // Eğer mevcut bir Paddle aboneliği varsa: İkinci abonelik yaratmak yerine Paddle Subscriptions Update API ile güncelle
-    if (paddleSubId) {
-      const confirmUpgrade = window.confirm(
-        isTr
-          ? "Temel plandan Pro plana yükseltileceksiniz. Kalan süreniz mahsup edilerek fark tutarı kayıtlı kartınızdan tahsil edilecektir. Onaylıyor musunuz?"
-          : "You will upgrade from Basic to Pro. Unused time will be prorated and charged to your card on file. Proceed?"
-      );
-      if (!confirmUpgrade) return;
-
-      setCheckoutLoading(true);
-      try {
-        const response = await fetch('/api/subscription/upgrade', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId,
-            customerEmail: email,
-            subscriptionId: paddleSubId
-          })
-        });
-
-        const data = await response.json();
-        if (response.ok && data.success) {
-          toast.success(
-            isTr
-              ? "Tebrikler! Planınız başarıyla Pro'ya yükseltildi 🎉"
-              : "Congratulations! Your plan has been upgraded to Pro 🎉"
-          );
-          return;
-        }
-
-        // SADECE "NO_SUBSCRIPTION" hatasında checkout'a fallback yap
-        if (data.error === 'NO_SUBSCRIPTION') {
-          console.warn('[Upgrade] No active subscription found, redirecting to checkout:', data);
-          toast.info(
-            isTr
-              ? "Aktif bir abonelik bulunamadı, yeni abonelik ekranına yönlendiriliyorsunuz..."
-              : "No active subscription found, opening checkout..."
-          );
-          // Alt kısımdaki checkout adımına devam etmesine izin verilir
-        } else {
-          // Diğer TÜM hatalarda (network, rate limit, Paddle API, sunucu hatası):
-          // Kesinlikle yeni checkout AÇMA, sadece hata bildir ve durdur!
-          console.error('[Upgrade] Upgrade API error (new checkout strictly blocked):', data);
-          toast.error(
-            data.message ||
-            (isTr
-              ? "Abonelik güncellenirken bir sorun oluştu. Lütfen tekrar deneyin."
-              : "An error occurred while updating subscription. Please try again.")
-          );
-          return;
-        }
-      } catch (err) {
-        // Network / bağlantı hatasında da ASLA yeni checkout açma
-        console.error('[Upgrade] Network error calling upgrade API:', err);
-        toast.error(
-          isTr
-            ? "Bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyiniz."
-            : "Connection error. Please try again later."
-        );
-        return;
-      } finally {
-        setCheckoutLoading(false);
-      }
+    // Kullanıcı zaten bu planda
+    if (targetPlanKey === currentPlan) {
+      navigate('/pricing');
+      return;
     }
 
-    // Checkout açma adımı: SADECE kullanıcının hiç paddleSubscriptionId'si yoksa
-    // veya backend açıkça 'NO_SUBSCRIPTION' döndüyse çalışır.
+    // Downgrade onayı
+    const currentRank = { basic: 1, pro: 2, lifetime: 3 }[currentPlan] || 0;
+    const targetRank  = { basic: 1, pro: 2, lifetime: 3 }[targetPlanKey] || 0;
+    if (targetRank < currentRank && targetPlanKey !== 'lifetime') {
+      const confirmed = window.confirm(
+        isTr
+          ? `${currentPlan === 'pro' ? 'Pro' : 'mevcut'} planınızdan Temel plana düşürüleceksiniz. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musunuz?`
+          : `You will downgrade to the Basic plan. The new price takes effect at the end of your current billing period. No immediate refund. Proceed?`
+      );
+      if (!confirmed) return;
+    }
+
+    // Lifetime onayı
+    if (targetPlanKey === 'lifetime' && firestoreData?.paddleSubscriptionId) {
+      const confirmed = window.confirm(
+        isTr
+          ? 'Mevcut yıllık aboneliğiniz ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan Pro süreniz için iade yapılmayacak. Onaylıyor musunuz?'
+          : 'Your current subscription will be cancelled immediately and the Lifetime purchase screen will open. No refund for unused Pro time. Proceed?'
+      );
+      if (!confirmed) return;
+    }
+
     setCheckoutLoading(true);
     try {
-      await openPaddleCheckout({
-        priceId: PADDLE_PRICE_ID,
-        customerEmail: email,
-        customData: {
-          plan: 'Annual Pro Membership',
-          planId: 'pro',
-          userId: userId || 'unknown'
-        }
+      const result = await changePlan({
+        firebaseUser,
+        firestoreData,
+        targetPlanKey,
+        currentPlanKey: currentPlan,
+        isTr
       });
+
+      if (result.success && !result.requiresCheckout) {
+        toast.success(
+          isTr
+            ? `Planınız başarıyla değiştirildi 🎉`
+            : `Your plan has been updated successfully 🎉`
+        );
+      } else if (!result.success && result.error) {
+        toast.error(result.error);
+      }
+      // requiresCheckout = true → openPaddleCheckout zaten servis içinde açıldı
     } finally {
       setCheckoutLoading(false);
     }
-  }, [firebaseUser, storedUser, firestoreData, isTr]);
+  }, [firebaseUser, firestoreData, currentPlan, isTr, navigate]);
+
+  // Geriye dönük uyumluluk: Dashboard'daki "Pro'ya Yükselt" butonu
+  const handleUpgrade = useCallback(() => handlePlanChange('pro'), [handlePlanChange]);
+
+
 
   // Loading State
   if (!authReady || subLoading) {
