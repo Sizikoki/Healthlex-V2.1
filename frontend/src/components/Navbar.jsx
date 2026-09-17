@@ -27,19 +27,27 @@ export const Navbar = () => {
   const [userData, setUserData] = useState(
     previewRole === 'trial' ? { subscriptionStatus: 'trialing', isTrial: true } : null
   );
-  const [isPro, setIsPro] = useState(previewRole === 'pro' || previewRole === 'lifetime');
+  const [isPro, setIsPro] = useState(previewRole === 'pro');
   const [isBasic, setIsBasic] = useState(previewRole === 'basic');
+  const [isLifetime, setIsLifetime] = useState(previewRole === 'lifetime');
   const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     if (previewRole) {
-      if (previewRole === 'pro' || previewRole === 'lifetime') {
+      if (previewRole === 'lifetime') {
+        setIsLifetime(true);
+        setIsPro(false);
+        setIsBasic(false);
+      } else if (previewRole === 'pro') {
+        setIsLifetime(false);
         setIsPro(true);
         setIsBasic(false);
       } else if (previewRole === 'basic') {
+        setIsLifetime(false);
         setIsPro(false);
         setIsBasic(true);
       } else if (previewRole === 'trial') {
+        setIsLifetime(false);
         setIsPro(false);
         setIsBasic(false);
         setUserData({ subscriptionStatus: 'trialing', isTrial: true });
@@ -59,8 +67,11 @@ export const Navbar = () => {
     if (!uid) {
       const localUser = getUser();
       setUserData(localUser);
-      const isBasicPlan = localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic');
-      setIsPro(!isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active'));
+      const isLifetimePlan = localUser?.isLifetime === true || localUser?.planType === 'lifetime' || (localUser?.plan || '').toLowerCase().includes('lifetime') || (localUser?.plan || '').toLowerCase().includes('ömür');
+      const isBasicPlan = !isLifetimePlan && (localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic'));
+      const isProPlan = !isLifetimePlan && !isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+      setIsLifetime(isLifetimePlan);
+      setIsPro(isProPlan);
       setIsBasic(isBasicPlan);
       return;
     }
@@ -71,14 +82,16 @@ export const Navbar = () => {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setUserData(data);
-          const isBasicPlan = data.isBasic === true || data.subscriptionStatus === 'basic' || (data.plan || '').toLowerCase().includes('basic');
-          const isLifetime = data.isLifetime === true || (data.plan || '').toLowerCase().includes('lifetime');
+          const isLifetimePlan = data.isLifetime === true || data.planType === 'lifetime' || (data.plan || '').toLowerCase().includes('lifetime') || (data.plan || '').toLowerCase().includes('ömür');
+          const isBasicPlan = !isLifetimePlan && (data.isBasic === true || data.subscriptionStatus === 'basic' || (data.plan || '').toLowerCase().includes('basic'));
           const status = (data.subscriptionStatus || '').toLowerCase();
-          const isPaidPro = !isBasicPlan && (data.isPro === true || status === 'active' || status === 'pro' || isLifetime);
+          const isPaidPro = !isLifetimePlan && !isBasicPlan && (data.isPro === true || status === 'active' || status === 'pro');
+          setIsLifetime(isLifetimePlan);
           setIsPro(isPaidPro);
           setIsBasic(isBasicPlan);
         } else {
           setUserData(null);
+          setIsLifetime(false);
           setIsPro(false);
           setIsBasic(false);
         }
@@ -208,7 +221,12 @@ export const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="flex items-center gap-[12px] cursor-pointer select-none">
-                    {isPro ? (
+                    {isLifetime ? (
+                      <div className="lifetime-badge flex items-center gap-1.5 bg-gradient-to-r from-purple-500/15 via-indigo-500/20 to-purple-500/15 dark:from-purple-400/20 dark:to-indigo-500/20 border border-purple-500/40 text-purple-700 dark:text-purple-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs hover:shadow-sm transition-all select-none">
+                        <span className="text-purple-500 dark:text-purple-400 font-black text-sm leading-none">👑</span>
+                        <span className="tracking-wide">{currentLanguage === 'en' ? 'LIFETIME' : 'ÖMÜR BOYU'}</span>
+                      </div>
+                    ) : isPro ? (
                       <div className="pro-badge flex items-center gap-1.5 bg-gradient-to-r from-amber-500/15 via-yellow-500/20 to-amber-500/15 dark:from-amber-400/20 dark:to-yellow-500/20 border border-amber-500/40 text-amber-700 dark:text-amber-300 font-extrabold text-[13px] px-3 py-1.5 rounded-[9px] whitespace-nowrap shadow-xs hover:shadow-sm transition-all select-none">
                         <span className="text-amber-500 dark:text-amber-400 font-black text-sm leading-none">★</span>
                         <span className="tracking-wide">PRO</span>
@@ -301,7 +319,11 @@ export const Navbar = () => {
                         <User className="w-4 h-4 mr-2" />
                         {user?.name || t('myProfile')}
                       </div>
-                      {isPro ? (
+                      {isLifetime ? (
+                        <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300">
+                          👑 {currentLanguage === 'en' ? 'LIFETIME' : 'ÖMÜR BOYU'}
+                        </span>
+                      ) : isPro ? (
                         <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
                           ★ PRO
                         </span>

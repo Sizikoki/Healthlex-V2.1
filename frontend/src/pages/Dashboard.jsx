@@ -371,6 +371,12 @@ export const Dashboard = () => {
                       ? 'Tüm 13 kategori, 571+ morfem ve 4 oyun moduna sınırsız tam erişiminiz aktif.'
                       : 'You have unlimited access to all 13 categories, 571+ morphemes, and 4 game modes.'}
                   </p>
+                  {trialState.isActive && (
+                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
+                      <span>⏳</span>
+                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -392,6 +398,12 @@ export const Dashboard = () => {
                       ? '13 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme aktif.'
                       : '13 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.'}
                   </p>
+                  {trialState.isActive && (
+                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
+                      <span>⏳</span>
+                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
+                    </div>
+                  )}
                 </div>
               </div>
               {IS_PAYMENT_ACTIVE && (
@@ -429,6 +441,12 @@ export const Dashboard = () => {
                       ? 'Deneme süreniz boyunca tüm özellikler sınırsız açık. Dilediğiniz zaman paketinizi seçebilirsiniz.'
                       : 'All features are fully unlocked during your trial. Pick a plan anytime.'}
                   </p>
+                  {trialState.isActive && (
+                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
+                      <span>⏳</span>
+                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
+                    </div>
+                  )}
                 </div>
               </div>
               <Link

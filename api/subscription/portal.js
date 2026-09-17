@@ -1,41 +1,7 @@
 import { Paddle, Environment } from '@paddle/paddle-node-sdk';
 import admin from 'firebase-admin';
+import { getFirebaseAdmin } from '../_lib/firebaseAdmin.js';
 
-function getFirebaseAdmin() {
-  if (admin.apps && admin.apps.length > 0) return admin.app();
-
-  const serviceAccountJson =
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY || process.env.FIREBASE_ADMIN_CREDENTIALS;
-  if (serviceAccountJson) {
-    try {
-      const parsed = typeof serviceAccountJson === 'string'
-        ? JSON.parse(serviceAccountJson)
-        : serviceAccountJson;
-      return admin.initializeApp({
-        credential: admin.credential.cert(parsed),
-        projectId: parsed.project_id || process.env.FIREBASE_PROJECT_ID || 'healthlexmed'
-      });
-    } catch (e) { console.error('[Firebase Admin] JSON parse error:', e); }
-  }
-
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n');
-  const projectId = process.env.FIREBASE_PROJECT_ID
-    || process.env.REACT_APP_FIREBASE_PROJECT_ID
-    || 'healthlexmed';
-
-  if (clientEmail && privateKey) {
-    try {
-      return admin.initializeApp({
-        credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
-        projectId
-      });
-    } catch (e) { console.error('[Firebase Admin] Init error:', e); }
-  }
-
-  try { return admin.initializeApp({ projectId }); }
-  catch (err) { console.error('[Firebase Admin] Fallback error:', err); return null; }
-}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

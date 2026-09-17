@@ -338,6 +338,11 @@ export const PricingView = () => {
   const handlePlanClick = async (planIndex) => {
     const clickedPlanKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
 
+    if (userCurrentPlan === 'lifetime') {
+      toast.info(isTr ? 'Zaten Ömür Boyu VIP üyeliğiniz bulunmaktadır.' : 'You already have Lifetime VIP access.');
+      return;
+    }
+
     if (userCurrentPlan === clickedPlanKey) {
       // Zaten bu planda, tekrar satın almaya izin verme
       navigate('/dashboard');
@@ -641,21 +646,31 @@ export const PricingView = () => {
 
         {/* Mobil Alt Yapışkan CTA Alanı */}
         <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border p-3 sm:p-4 shadow-lg lg:hidden flex flex-col gap-2">
-          <button
-            onClick={() => handlePlanClick(mobileTab)}
-            disabled={checkoutLoading || isCurrentMobilePlan}
-            className={`w-full text-center font-bold text-sm sm:text-base py-3 px-4 rounded-xl transition-all shadow-sm ${
-              isCurrentMobilePlan
-                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
-                : isMobPro
-                ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md cursor-pointer'
-                : 'bg-primary text-primary-foreground cursor-pointer'
-            }`}
-          >
-            {isCurrentMobilePlan
-              ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
-              : `${selPlan.cta} →`}
-          </button>
+          {(() => {
+            const isMobLifetimeLocked = userCurrentPlan === 'lifetime' && mobileTab < 2;
+
+            return (
+              <button
+                onClick={() => handlePlanClick(mobileTab)}
+                disabled={checkoutLoading || isCurrentMobilePlan || isMobLifetimeLocked}
+                className={`w-full text-center font-bold text-sm sm:text-base py-3 px-4 rounded-xl transition-all shadow-sm ${
+                  isCurrentMobilePlan
+                    ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
+                    : isMobLifetimeLocked
+                    ? 'bg-muted text-muted-foreground border border-border cursor-not-allowed opacity-75'
+                    : isMobPro
+                    ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md cursor-pointer'
+                    : 'bg-primary text-primary-foreground cursor-pointer'
+                }`}
+              >
+                {isCurrentMobilePlan
+                  ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
+                  : isMobLifetimeLocked
+                  ? (isTr ? 'Zaten Ömür Boyu Erişiminiz Var' : 'Already Have Lifetime Access')
+                  : `${selPlan.cta} →`}
+              </button>
+            );
+          })()}
           <div className="text-xs text-muted-foreground text-center">
             {t.noCardNote}{' '}
             <button
@@ -723,6 +738,8 @@ export const PricingView = () => {
               (idx === 1 && userCurrentPlan === 'pro') ||
               (idx === 2 && userCurrentPlan === 'lifetime');
 
+            const isCardLifetimeLocked = userCurrentPlan === 'lifetime' && idx < 2;
+
             return (
               <div
                 key={idx}
@@ -773,10 +790,12 @@ export const PricingView = () => {
                 {/* Buton */}
                 <button
                   onClick={() => handlePlanClick(idx)}
-                  disabled={checkoutLoading || isCardCurrentPlan}
+                  disabled={checkoutLoading || isCardCurrentPlan || isCardLifetimeLocked}
                   className={`w-full text-center font-bold text-[14px] xl:text-[15px] py-3.5 px-4 rounded-xl transition-all shadow-xs ${
                     isCardCurrentPlan
                       ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
+                      : isCardLifetimeLocked
+                      ? 'bg-muted text-muted-foreground border border-border cursor-not-allowed opacity-75'
                       : isPro
                       ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md hover:shadow-lg cursor-pointer'
                       : 'bg-primary text-primary-foreground hover:opacity-90 cursor-pointer'
@@ -784,6 +803,8 @@ export const PricingView = () => {
                 >
                   {isCardCurrentPlan
                     ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
+                    : isCardLifetimeLocked
+                    ? (isTr ? 'Zaten Ömür Boyu Erişiminiz Var' : 'Already Have Lifetime Access')
                     : p.cta}
                 </button>
 

@@ -256,6 +256,9 @@ export const Register = () => {
 
   // ?redirect= parametresini oku, yoksa /dashboard
   const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
+  const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+    try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+  })();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -340,6 +343,38 @@ export const Register = () => {
           <CardTitle className="text-2xl font-bold">{t('registerTitle', "HealthLexMed'e Kayit Ol")}</CardTitle>
           <CardDescription>{t('registerSubtitle', 'Ucretsiz hesap olustur ve ogrenmeye basla')}</CardDescription>
         </CardHeader>
+        {chosenPlan && (
+          <div className="mx-6 mb-3 p-3 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm font-semibold shadow-xs bg-muted/60 border-border">
+            {chosenPlan === 'lifetime' ? (
+              <div className="flex items-center gap-2 text-purple-700 dark:text-purple-300">
+                <span className="text-base">👑</span>
+                <span>
+                  {isTr
+                    ? 'Seçilen plan: Ömür Boyu · ₺5.990 tek ödeme'
+                    : 'Selected plan: Lifetime · ₺5,990 one-time'}
+                </span>
+              </div>
+            ) : chosenPlan === 'pro' ? (
+              <div className="flex items-center gap-2 text-primary">
+                <span className="text-base">⭐</span>
+                <span>
+                  {isTr
+                    ? 'Seçilen plan: Pro · 3 Gün Ücretsiz Dene (Sonra ₺2.000/yıl)'
+                    : 'Selected plan: Pro · 3-Day Free Trial (Then ₺2,000/yr)'}
+                </span>
+              </div>
+            ) : chosenPlan === 'basic' ? (
+              <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                <span className="text-base">⚡</span>
+                <span>
+                  {isTr
+                    ? 'Seçilen plan: Temel · 3 Gün Ücretsiz Dene (Sonra ₺790/yıl)'
+                    : 'Selected plan: Basic · 3-Day Free Trial (Then ₺790/yr)'}
+                </span>
+              </div>
+            ) : null}
+          </div>
+        )}
         <CardContent>
           <GoogleButton onClick={handleGoogleRegister} loading={googleLoading} isTr={isTr} />
           <Divider isTr={isTr} withEmail={true} />

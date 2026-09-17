@@ -187,11 +187,40 @@ export const getUserTrialState = (currentUser) => {
       daysLeft: 0,
       currentDay: 0,
       endDate: null,
-      remainingMs: 0
+      nextBilledAt: null,
+      remainingMs: 0,
+      formattedEndDate: () => '',
+      formattedBillingDate: () => '',
+      amountText: () => '',
+      summaryText: () => ''
     };
   }
 
-  // 1. Kullanıcı GERÇEKTEN bir deneme planına girdi mi?
+  // Ömür Boyu üyeliklerde deneme/fatura asla olamaz
+  const isLifetime =
+    user.isLifetime === true ||
+    user.planType === 'lifetime' ||
+    (user.plan || '').toLowerCase().includes('lifetime') ||
+    (user.plan || '').toLowerCase().includes('ömür');
+
+  if (isLifetime) {
+    return {
+      hasTrial: false,
+      isActive: false,
+      isExpired: false,
+      daysLeft: 0,
+      currentDay: 0,
+      endDate: null,
+      nextBilledAt: null,
+      remainingMs: 0,
+      formattedEndDate: () => '',
+      formattedBillingDate: () => '',
+      amountText: () => '',
+      summaryText: () => ''
+    };
+  }
+
+  // 1. Kullanıcı GERÇEKTEN bir deneme planında mı?
   // - Paddle abonelik durumu 'trialing' ise
   // - Firestore veya local kullanıcıda isTrial / isTrialing bayrağı varsa
   // - Gerçek bir trialEndDate alanı tanımlanmışsa
@@ -212,7 +241,12 @@ export const getUserTrialState = (currentUser) => {
       daysLeft: 0,
       currentDay: 0,
       endDate: null,
-      remainingMs: 0
+      nextBilledAt: null,
+      remainingMs: 0,
+      formattedEndDate: () => '',
+      formattedBillingDate: () => '',
+      amountText: () => '',
+      summaryText: () => ''
     };
   }
 
@@ -265,6 +299,53 @@ export const getUserTrialState = (currentUser) => {
   const currentDay = isExpired ? 4 : Math.min(3, Math.max(1, 4 - daysLeft));
   const endDate = new Date(endMs);
 
+  let nextBilledAt = endDate;
+  if (user.nextBilledAt) {
+    if (typeof user.nextBilledAt.toDate === 'function') {
+      nextBilledAt = user.nextBilledAt.toDate();
+    } else {
+      const parsed = new Date(user.nextBilledAt);
+      if (!isNaN(parsed.getTime())) nextBilledAt = parsed;
+    }
+  }
+
+  const isBasic =
+    user.isBasic === true ||
+    user.planType === 'basic' ||
+    (user.plan || '').toLowerCase().includes('basic') ||
+    (user.plan || '').toLowerCase().includes('temel');
+
+  const formattedEndDate = (lang = 'tr') => {
+    return endDate.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const formattedBillingDate = (lang = 'tr') => {
+    return nextBilledAt.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const amountText = (isTr = true) => {
+    if (isBasic) {
+      return isTr ? '₺790/yıl' : '₺790/yr';
+    }
+    return isTr ? '₺2.000/yıl' : '₺2,000/yr';
+  };
+
+  const summaryText = (lang = 'tr') => {
+    const isTr = lang === 'tr';
+    if (isTr) {
+      return `Deneme bitişi: ${formattedEndDate('tr')} · İlk tahsilat: ${formattedBillingDate('tr')} · Tutar: ${amountText(true)}`;
+    }
+    return `Trial ends: ${formattedEndDate('en')} · First billing: ${formattedBillingDate('en')} · Amount: ${amountText(false)}`;
+  };
+
   return {
     hasTrial: true,
     isActive: !isExpired,
@@ -272,7 +353,12 @@ export const getUserTrialState = (currentUser) => {
     daysLeft,
     currentDay,
     endDate,
-    remainingMs
+    nextBilledAt,
+    remainingMs,
+    formattedEndDate,
+    formattedBillingDate,
+    amountText,
+    summaryText
   };
 };
 

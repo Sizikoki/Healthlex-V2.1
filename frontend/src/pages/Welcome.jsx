@@ -310,45 +310,13 @@ export const Welcome = () => {
   const t = currentConfig.content[lang] || currentConfig.content.tr;
   const MainIcon = currentConfig.MainIcon;
 
-  // Compute Trial End Date & First Billing Date
+  // Compute Trial End Date & First Billing Date from single source of truth
   const storedUser = getUser();
-  const trialState = getUserTrialState(currentUser || storedUser);
+  const effectiveUserObj = { ...(storedUser || {}), ...(firestoreData || {}), ...(currentUser || {}) };
+  const trialState = getUserTrialState(effectiveUserObj);
 
-  const trialEndDateObj = useMemo(() => {
-    if (trialState?.endDate) return trialState.endDate;
-    if (firestoreData?.trialEndDate) {
-      if (typeof firestoreData.trialEndDate.toDate === 'function') {
-        return firestoreData.trialEndDate.toDate();
-      }
-      const parsed = new Date(firestoreData.trialEndDate);
-      if (!isNaN(parsed.getTime())) return parsed;
-    }
-    const daysRemainingMs = trialState?.remainingMs || 3 * 24 * 60 * 60 * 1000;
-    return new Date(Date.now() + daysRemainingMs);
-  }, [trialState, firestoreData]);
-
-  const trialEndFormatted = trialEndDateObj.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-
-  const nextBilledAtObj = useMemo(() => {
-    if (firestoreData?.nextBilledAt) {
-      if (typeof firestoreData.nextBilledAt.toDate === 'function') {
-        return firestoreData.nextBilledAt.toDate();
-      }
-      const parsed = new Date(firestoreData.nextBilledAt);
-      if (!isNaN(parsed.getTime())) return parsed;
-    }
-    return trialEndDateObj;
-  }, [firestoreData, trialEndDateObj]);
-
-  const nextBilledFormatted = nextBilledAtObj.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
+  const trialEndFormatted = trialState.formattedEndDate(lang);
+  const nextBilledFormatted = trialState.formattedBillingDate(lang);
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-background">
@@ -379,7 +347,7 @@ export const Welcome = () => {
         </p>
 
         {/* Trial Billing & Schedule Info Card */}
-        {activePlanKey === 'trial' && (
+        {trialState.isActive && (
           <div className="bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 rounded-2xl p-5 sm:p-6 mb-6 text-left shadow-xs">
             <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-bold text-sm mb-3">
               <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
@@ -405,8 +373,8 @@ export const Welcome = () => {
             </div>
             <p className="text-xs text-muted-foreground mt-3 leading-relaxed mb-0">
               ℹ️ {lang === 'tr'
-                ? 'Deneme süresi dolmadan önce dilediğiniz an tek tıkla iptal edebilirsiniz. İptal etmeniz durumunda kartınızdan hiçbir ücret tahsil edilmez.'
-                : 'You can cancel anytime in one click before the trial ends. If you cancel, your card will not be charged.'}
+                ? `Deneme süresi (${trialEndFormatted}) dolmadan önce dilediğiniz an tek tıkla iptal edebilirsiniz. İptal etmeniz durumunda kartınızdan hiçbir ücret tahsil edilmez.`
+                : `You can cancel anytime in one click before your trial ends on ${trialEndFormatted}. If you cancel, your card will not be charged.`}
             </p>
           </div>
         )}

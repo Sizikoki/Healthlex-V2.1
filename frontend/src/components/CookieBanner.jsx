@@ -37,7 +37,7 @@ export const CookieBanner = () => {
     <div
       role="region"
       aria-label="Cookie Consent"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-[hlxFadeUp_0.35s_ease-out]"
+      className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-50 animate-[hlxFadeUp_0.35s_ease-out]"
     >
       <div className="bg-card/95 backdrop-blur-md text-card-foreground border border-border/80 shadow-2xl rounded-2xl p-5 sm:p-6 relative overflow-hidden">
         {/* Top subtle decorative accent */}

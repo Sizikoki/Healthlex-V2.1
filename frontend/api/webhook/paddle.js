@@ -13,48 +13,8 @@ export const config = {
   }
 };
 
-// ---------------------------------------------------------------------------
-// Firebase Admin - singleton initializer
-// ---------------------------------------------------------------------------
+import { getFirebaseAdmin } from '../_lib/firebaseAdmin.js';
 
-function getFirebaseAdmin() {
-  if (admin.apps && admin.apps.length > 0) return admin.app();
-
-  // Strategy 1: full service-account JSON in one env var
-  const serviceAccountJson =
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY || process.env.FIREBASE_ADMIN_CREDENTIALS;
-  if (serviceAccountJson) {
-    try {
-      const parsed = typeof serviceAccountJson === 'string'
-        ? JSON.parse(serviceAccountJson)
-        : serviceAccountJson;
-      return admin.initializeApp({
-        credential: admin.credential.cert(parsed),
-        projectId: parsed.project_id || process.env.FIREBASE_PROJECT_ID || 'healthlexmed'
-      });
-    } catch (e) { console.error('[Firebase Admin] JSON parse error:', e); }
-  }
-
-  // Strategy 2: individual env vars
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n');
-  const projectId = process.env.FIREBASE_PROJECT_ID
-    || process.env.REACT_APP_FIREBASE_PROJECT_ID
-    || 'healthlexmed';
-
-  if (clientEmail && privateKey) {
-    try {
-      return admin.initializeApp({
-        credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
-        projectId
-      });
-    } catch (e) { console.error('[Firebase Admin] Init error:', e); }
-  }
-
-  // Strategy 3: Application Default Credentials
-  try { return admin.initializeApp({ projectId }); }
-  catch (err) { console.error('[Firebase Admin] Fallback error:', err); return null; }
-}
 
 // ---------------------------------------------------------------------------
 // Firestore helpers
@@ -257,13 +217,53 @@ export default async function handler(req, res) {
         const pid = (tx?.customData?.planId || '').toLowerCase();
         const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
         const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
-        console.log('[Paddle] transaction.completed email:', email, 'plan:', plan);
+        console.log('[Paddle] transaction.completed email:', email, 'plan:', plan, 'isLifetime:', isLifetime);
+
+        // Ömür Boyu satın alındığında: Kullanıcının mevcut yıllık aboneliği varsa Paddle'dan iptal et
+        if (isLifetime) {
+          try {
+            const adminApp = getFirebaseAdmin();
+            if (adminApp) {
+              const db = admin.firestore();
+              let userDocSnap = null;
+              if (uid && typeof uid === 'string' && uid.trim() && uid !== 'unknown') {
+                const docRef = db.collection('users').doc(uid.trim());
+                userDocSnap = await docRef.get();
+              }
+              if ((!userDocSnap || !userDocSnap.exists) && email && email.includes('@')) {
+                const q = await db.collection('users')
+                  .where('email', '==', email.toLowerCase().trim())
+                  .limit(1).get();
+                if (!q.empty) userDocSnap = q.docs[0];
+              }
+
+              const existingSubId = userDocSnap?.exists ? userDocSnap.data()?.paddleSubscriptionId : null;
+              if (existingSubId) {
+                console.log(`[Paddle Webhook] Cancelling existing recurring subscription ${existingSubId} for Lifetime transition.`);
+                try {
+                  const paddleClient = new Paddle(apiKey || 'placeholder', { environment });
+                  await paddleClient.subscriptions.cancel(existingSubId, { effectiveFrom: 'immediately' });
+                  console.log(`[Paddle Webhook] Successfully cancelled subscription ${existingSubId}`);
+                } catch (cancelErr) {
+                  console.warn(`[Paddle Webhook] Could not cancel subscription ${existingSubId}:`, cancelErr.message);
+                }
+              }
+            }
+          } catch (lookupErr) {
+            console.warn('[Paddle Webhook] Lifetime subscription check error:', lookupErr.message);
+          }
+        }
+
         await updateUserSubscription(uid, email, {
-          isPro: !isBasic, isBasic, isLifetime,
+          isPro: !isBasic,
+          isBasic,
+          isLifetime,
           planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
-          subscriptionStatus: 'active', plan,
+          subscriptionStatus: 'active',
+          plan,
           paddleTransactionId: tx?.id || null,
-          paddleCustomerId: tx?.customerId || null
+          paddleCustomerId: tx?.customerId || null,
+          ...(isLifetime ? { paddleSubscriptionId: null } : {})
         });
         break;
       }
