@@ -58,6 +58,17 @@ export const LEGAL_CONTENT = {
             'PLATFORM, yıllık abonelik modeli (Temel Plan ve Tam Plan) ile hizmet sunmaktadır. Güncel fiyatlar sitede ve ödeme ekranında ilan edildiği gibidir.',
             'Yeni kullanıcılara tanımlanan 3 günlük ücretsiz deneme süresi boyunca paket özellikleri kısıtlamasız kullanılabilir. Deneme süresi bitmeden önce aboneliğin sonlandırılması halinde kullanıcıdan hiçbir ücret tahsil edilmez.',
             'İptal edilmeyen abonelikler, deneme süresi sonunda ve takip eden her yıl dönümünde otomatik olarak yenilenir.'
+          ],
+          subsections: [
+            {
+              title: 'Plan Değişiklikleri ve İade Politikası',
+              bullets: [
+                'Alt seviye bir plana geçiş (örneğin Pro\'dan Temel\'e) talep edildiğinde, değişiklik mevcut faturalandırma döneminin SONUNDA yürürlüğe girer. Dönem sonuna kadar mevcut planınızın tüm özelliklerinden yararlanmaya devam edersiniz.',
+                'Bu geçiş için kısmi iade yapılmaz; ödemesi yapılmış mevcut dönem değişmeden kalır.',
+                'Üst seviye bir plana geçiş (örneğin Temel\'den Pro\'ya) talep edildiğinde, fark tutarı kalan süre oranında hesaplanarak anında tahsil edilir ve yeni plan derhal aktif olur.',
+                'Ömür Boyu pakete geçişte mevcut yıllık aboneliğiniz iptal edilir; kullanılmamış süre için ayrıca bir iade yapılmaz.'
+              ]
+            }
           ]
         },
         {
@@ -272,6 +283,17 @@ export const LEGAL_CONTENT = {
             'The PLATFORM provides services based on an annual subscription model (Basic Plan and Full Plan). Current pricing is displayed transparently on the website and checkout screens.',
             'During the 3-day free trial provided to new users, all plan features are accessible without restriction. If the subscription is cancelled before the trial ends, no charge will be made ($0.00).',
             'Subscriptions not cancelled before the trial expires will automatically renew at the end of the trial period and annually thereafter.'
+          ],
+          subsections: [
+            {
+              title: 'Plan Changes and Refund Policy',
+              bullets: [
+                'When downgrading to a lower-tier plan (e.g., from Pro to Basic), the change takes effect at the END of the current billing period. You will continue to enjoy all features of your current plan until the end of the period.',
+                'No partial refund is provided for this downgrade; the paid current billing period remains unchanged.',
+                'When upgrading to a higher-tier plan (e.g., from Basic to Pro), the price difference is calculated on a pro-rata basis for the remaining time and billed immediately, activating the new plan right away.',
+                'When transitioning to the Lifetime package, your existing annual recurring subscription is cancelled immediately; no partial refund is issued for unused time.'
+              ]
+            }
           ]
         },
         {
