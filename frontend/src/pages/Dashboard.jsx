@@ -103,14 +103,16 @@ const FREE_DASHBOARD_CATEGORIES = [
 ];
 
 const FREE_DASHBOARD_MORPHEMES = [
-  { name: 'oste/o-', meaningTr: 'kemik', meaningEn: 'bone', unblurred: true },
-  { name: '-itis', meaningTr: 'iltihap', meaningEn: 'inflammation', unblurred: true },
-  { name: 'cardi/o-', meaningTr: 'kalp', meaningEn: 'heart', unblurred: true },
-  { name: 'arthr/o-', meaningTr: 'eklem', meaningEn: 'joint', unblurred: true },
-  { name: 'my/o-', meaningTr: 'kas', meaningEn: 'muscle', unblurred: true },
-  { name: '-ectomy', meaningTr: 'cerrahi çıkarma', meaningEn: 'surgical removal', unblurred: false },
-  { name: '-plasty', meaningTr: 'onarım, şekillendirme', meaningEn: 'surgical repair', unblurred: false },
-  { name: 'neur/o-', meaningTr: 'sinir', meaningEn: 'nerve', unblurred: false }
+  // Açık 24 morfem havuzundan seçilen 5 açık morfem (Ön Ekler)
+  { name: 'bi-', slug: 'bi', meaningTr: 'iki, çift', meaningEn: 'two, double', unblurred: true },
+  { name: 'hemi-', slug: 'hemi', meaningTr: 'yarı, yarım', meaningEn: 'half, one-sided', unblurred: true },
+  { name: 'mono-', slug: 'mono', meaningTr: 'tek, bir', meaningEn: 'single, one', unblurred: true },
+  { name: 'multi-', slug: 'multi', meaningTr: 'çok, birden fazla', meaningEn: 'many, multiple', unblurred: true },
+  { name: 'poly-', slug: 'poly', meaningTr: 'çok, aşırı miktarda', meaningEn: 'many, excessive', unblurred: true },
+  // Geriye kalan kilitli morfem havuzundan seçilen 3 kilitli morfem (Kökler & Son Ekler)
+  { name: 'oste/o-', slug: 'osteo', meaningTr: 'kemik', meaningEn: 'bone', unblurred: false },
+  { name: 'cardi/o-', slug: 'cardio', meaningTr: 'kalp', meaningEn: 'heart', unblurred: false },
+  { name: '-itis', slug: 'itis', meaningTr: 'iltihap, yangı', meaningEn: 'inflammation', unblurred: false }
 ];
 
 const FREE_DASHBOARD_LOCKED_GAMES = [
@@ -407,7 +409,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
                 {FREE_DASHBOARD_MORPHEMES.map((m, idx) => {
                   const meaningText = isTr ? m.meaningTr : m.meaningEn;
                   const targetUrl = m.unblurred
-                    ? `/morphemes?search=${encodeURIComponent(m.name.replace(/[^a-zA-Z]/g, ''))}`
+                    ? (m.slug ? `/morphemes/${m.slug}` : `/morphemes?search=${encodeURIComponent(m.name.replace(/[^a-zA-Z]/g, ''))}`)
                     : '/pricing';
 
                   return (
