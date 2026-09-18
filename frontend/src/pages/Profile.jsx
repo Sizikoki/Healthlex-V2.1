@@ -365,6 +365,12 @@ export const Profile = () => {
       : [...pinnedBadges, badgeId];
     setPinnedBadges(updated);
     savePreferences({ pinnedBadges: updated });
+
+    if (isAlreadyPinned) {
+      toast.info(isTr ? 'Rozet vitrinden kaldırıldı.' : 'Badge removed from showcase.');
+    } else {
+      toast.success(isTr ? 'Rozet vitrine eklendi!' : 'Badge pinned to showcase!');
+    }
   };
 
   const handleToggleEmail = () => {
@@ -676,16 +682,43 @@ export const Profile = () => {
                   return (
                     <div 
                       key={badge.id} 
-                      className="showcase-item relative bg-[var(--paper)] border border-[var(--line)] rounded-[11px] p-[18px_12px] text-center"
-                      style={{ opacity: badge.unlocked ? 1 : 0.5 }}
+                      onClick={() => badge.unlocked && handleTogglePin(badge.id)}
+                      className={`showcase-item relative rounded-[11px] p-[18px_12px] text-center transition-all ${
+                        badge.unlocked 
+                          ? `cursor-pointer select-none hover:shadow-md ${
+                              isPinned 
+                                ? 'bg-amber-50/40 border-2 border-[var(--gold)] shadow-xs' 
+                                : 'bg-[var(--paper)] border border-[var(--line)] hover:border-[var(--teal)]'
+                            }` 
+                          : 'bg-[var(--paper)] border border-[var(--line)] opacity-50 cursor-not-allowed select-none'
+                      }`}
+                      title={
+                        badge.unlocked 
+                          ? (isPinned 
+                              ? (isTr ? 'Vitrinden kaldırmak için tıklayın' : 'Click to remove from showcase') 
+                              : (isTr ? 'Vitrine eklemek için tıklayın' : 'Click to add to showcase')) 
+                          : (isTr ? 'Bu rozet henüz kazanılmadı' : 'Badge not unlocked yet')
+                      }
                     >
-                      <div className="ic text-[1.6rem] mb-[8px]">{badge.icon}</div>
-                      <div className="nm text-[0.8rem] font-semibold text-[var(--ink)]">{badge.name}</div>
+                      <div className="ic text-[1.6rem] mb-[6px] transform transition-transform group-hover:scale-110">{badge.icon}</div>
+                      <div className="nm text-[0.8rem] font-semibold text-[var(--ink)] leading-tight">{badge.name}</div>
+                      <div className="text-[0.68rem] font-medium mt-1.5">
+                        {badge.unlocked ? (
+                          isPinned ? (
+                            <span className="text-[var(--gold)] font-bold">★ {isTr ? 'Vitrinde' : 'In Showcase'}</span>
+                          ) : (
+                            <span className="text-[var(--muted)] hover:text-[var(--teal)]">+ {isTr ? 'Vitrine Ekle' : 'Pin'}</span>
+                          )
+                        ) : (
+                          <span className="text-[var(--muted)] opacity-60">🔒 {isTr ? 'Kilitli' : 'Locked'}</span>
+                        )}
+                      </div>
                       {badge.unlocked && (
                         <div 
-                          onClick={() => handleTogglePin(badge.id)}
-                          className={`pin-toggle absolute top-[8px] right-[8px] w-[22px] h-[22px] rounded-full flex items-center justify-center border border-[var(--line)] transition-all cursor-pointer ${
-                            isPinned ? 'pinned bg-[var(--gold)] border-[var(--gold)]' : 'bg-white'
+                          className={`pin-toggle absolute top-[8px] right-[8px] w-[22px] h-[22px] rounded-full flex items-center justify-center border transition-all pointer-events-none ${
+                            isPinned 
+                              ? 'pinned bg-[var(--gold)] border-[var(--gold)] text-white shadow-xs' 
+                              : 'bg-white border-[var(--line)] text-[var(--muted)]'
                           }`}
                         >
                           <svg className="w-[11px] h-[11px]" viewBox="0 0 24 24" fill="currentColor">
