@@ -7,6 +7,8 @@ import { auth, db } from '@/firebase/config';
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { generateProgressPdf } from '@/utils/generateProgressPdf';
+import { getAllTerms } from '@/data/medicalTerms';
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -220,9 +222,41 @@ export const Profile = () => {
     }
   };
 
-  const handleExportData = () => {
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+
+  const handleExportPdf = async () => {
+    try {
+      setIsExportingPdf(true);
+      toast.loading(isTr ? 'İlerleme raporunuz PDF olarak hazırlanıyor...' : 'Generating progress report PDF...', { id: 'export-pdf-toast' });
+
+      const terms = getAllTerms();
+      const planTitle = isLifetime ? 'Ömür Boyu (Lifetime)' : isProPlan ? 'Pro Plan' : isBasic ? 'Temel Plan' : isTrialActive ? 'Deneme (Trial)' : 'Ücretsiz (Guest)';
+
+      await generateProgressPdf({
+        user: effectiveUser,
+        stats,
+        streak,
+        progress: getProgress(),
+        terms,
+        quizScores: getQuizScores(),
+        matchScores: getMatchScores(),
+        morphemeScores: getMorphemeScores(),
+        planName: planTitle,
+        isTr
+      });
+
+      toast.success(isTr ? 'PDF raporu başarıyla indirildi!' : 'PDF report downloaded successfully!', { id: 'export-pdf-toast' });
+    } catch (err) {
+      console.error('[Profile] PDF export error:', err);
+      toast.error(isTr ? 'PDF raporu oluşturulurken bir hata oluştu.' : 'Failed to generate PDF report.', { id: 'export-pdf-toast' });
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
+
+  const handleExportJson = () => {
     const data = {
-      user,
+      user: effectiveUser,
       stats,
       progress: getProgress(),
       quizScores: getQuizScores(),
@@ -233,10 +267,11 @@ export const Profile = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `healthlex_data_${user?.uid || 'user'}.json`;
+    const cleanName = (effectiveUser?.name || 'user').replace(/[\s\/\\]+/g, '_');
+    link.download = `HealthLex-Ham-Veri-${cleanName}.json`;
     link.click();
     URL.revokeObjectURL(url);
-    toast.success(t('dataDownloaded', 'Verileriniz JSON olarak indirildi.'));
+    toast.success(t('dataDownloaded', 'Ham verileriniz JSON olarak indirildi.'));
   };
 
   const [portalLoading, setPortalLoading] = useState(false);
@@ -793,14 +828,39 @@ export const Profile = () => {
               {/* Export Data */}
               <div className="setting-row flex justify-between items-center gap-[16px] py-[16px] last:border-none">
                 <div>
-                  <div className="setting-label text-[0.92rem] font-semibold text-[var(--ink)]">{t('downloadData')}</div>
-                  <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5">{t('downloadDataSub')}</div>
+                  <div className="setting-label text-[0.92rem] font-semibold text-[var(--ink)]">
+                    {isTr ? 'İlerleme Raporunu İndir (PDF)' : 'Download Progress Report (PDF)'}
+                  </div>
+                  <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5 max-w-[420px]">
+                    {isTr 
+                      ? '13 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerinizi içeren resmi PDF raporu.' 
+                      : 'Official PDF report containing 13 categories, learned terms, badges, and study stats.'}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleExportJson}
+                    className="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal)] underline mt-1.5 inline-block cursor-pointer transition-colors"
+                  >
+                    {isTr ? '⚙ Gelişmiş: Ham Verilerimi İndir (JSON)' : '⚙ Advanced: Download Raw Data (JSON)'}
+                  </button>
                 </div>
                 <button 
-                  onClick={handleExportData}
-                  className="btn btn-outline bg-transparent border border-[var(--line)] hover:bg-[var(--paper-dim)] transition-all font-semibold rounded-[9px]"
+                  type="button"
+                  onClick={handleExportPdf}
+                  disabled={isExportingPdf}
+                  className="btn btn-outline bg-transparent border border-[var(--teal)] text-[var(--teal-deep)] hover:bg-[var(--teal)] hover:text-white transition-all font-semibold rounded-[9px] px-4 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 flex-shrink-0 shadow-xs"
                 >
-                  {t('download')}
+                  {isExportingPdf ? (
+                    <>
+                      <div className="w-3.5 h-3.5 border-2 border-[var(--teal-deep)] border-t-transparent rounded-full animate-spin"></div>
+                      <span>{isTr ? 'Hazırlanıyor...' : 'Generating...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>📄</span>
+                      <span>{isTr ? 'PDF Raporu İndir' : 'Download PDF'}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>
