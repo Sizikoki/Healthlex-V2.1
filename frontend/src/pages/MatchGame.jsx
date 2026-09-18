@@ -10,7 +10,6 @@ import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
-import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
@@ -41,11 +40,12 @@ export const MatchGame = () => {
     if (!userLoggedIn) {
       toast.info(
         currentLanguage === 'en'
-          ? 'Matching game requires a free account. Please register to play.'
-          : 'Eşleştirme oyunu kayıtlı kullanıcılara özeldir. Oynamak için lütfen ücretsiz kayıt olun.'
+          ? 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
+          : 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
       );
+      navigate('/pricing');
     }
-  }, [userLoggedIn, currentLanguage]);
+  }, [userLoggedIn, currentLanguage, navigate]);
 
   const setupGame = useCallback((termsList) => {
     if (!termsList || termsList.length === 0) return;
@@ -276,18 +276,7 @@ export const MatchGame = () => {
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
   if (!userLoggedIn) {
-    return (
-      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
-        <GuestLimitModal
-          isOpen={true}
-          onClose={() => navigate('/games')}
-          title={t('guestMatchLockedTitle', 'Eşleştirme Oyunu Kayıtlı Kullanıcılara Özeldir! 🎯')}
-          description={t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarınızı kaydetmek için lütfen ücretsiz kayıt olun.')}
-          cardTitle={t('guestMatchCardTitle', 'Ücretsiz Üye Olun & Eşleştirmeye Başlayın')}
-          cardDesc={t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına sınırsız erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')}
-        />
-      </div>
-    );
+    return null;
   }
 
   if (loading) {

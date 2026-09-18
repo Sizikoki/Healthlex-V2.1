@@ -309,8 +309,12 @@ export const Games = () => {
 
     if (!userIsLoggedIn && gameId === 'match') {
       e.preventDefault();
-      setModalMode('match');
-      setIsLimitModalOpen(true);
+      toast.info(
+        isTr
+          ? 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
+          : 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
+      );
+      navigate('/pricing');
       return;
     }
 
@@ -434,13 +438,9 @@ export const Games = () => {
                           <Icon className="w-8 h-8 text-white" />
                         </div>
                         {locked && (
-                          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold border ${
-                            isLockedForGuest
-                              ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30'
-                              : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30'
-                          }`}>
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                             <Lock className="w-3 h-3" />
-                            {isLockedForGuest ? t('accountRequired', 'Üyelik Gerekli') : 'Pro'}
+                            {isLockedForGuest ? (isTr ? 'Temel' : 'Basic') : 'Pro'}
                           </span>
                         )}
                       </div>
@@ -460,7 +460,7 @@ export const Games = () => {
                           <>
                             <Lock className="mr-2 w-4 h-4 text-amber-500" />
                             {isLockedForGuest
-                              ? t('registerToPlay', 'Kayıt Ol & Oyna')
+                              ? (isTr ? 'Temel ve Üzeri ile Aç' : 'Unlock with Basic & Above')
                               : (isTr ? 'Pro ile Aç' : 'Unlock with Pro')}
                           </>
                         ) : (
