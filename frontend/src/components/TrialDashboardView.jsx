@@ -52,12 +52,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} dk`,
     goPro: "Pro'ya geç →",
     proBadge: 'PRO',
-    proLockActivity: 'Haftalık ve aylık aktivite grafiği Temel veya Pro plan ile açılır.',
-    proLockBadges: 'Rozetler ve sonraki hedefler Temel veya Pro plan ile açılır.',
-    proLockCategories: '13 kategoride ilerleme takibi Temel veya Pro plan ile açılır.',
-    proLockGames: 'Flashcard ve Eşleştirme Temel\'de; 4 modun tüm istatistikleri Pro ile açılır.',
-    proLockWeak: 'Zayıf terim analizi ve akıllı tekrar listesi Pro ile açılır.',
-    proLockHistory: 'Çalışma geçmişi Temel veya Pro ile açılır.',
+    proLockActivity: 'Haftalık ve aylık aktivite grafiği Temel plan ve üzeri planlarda açılır.',
+    proLockBadges: 'Rozetler ve sonraki hedefler Temel plan ve üzeri planlarda açılır.',
+    proLockCategories: '13 kategoride ilerleme takibi Temel plan ve üzeri planlarda açılır.',
+    proLockGames: 'Flashcard ve Eşleştirme Temel\'de; 4 modun tüm istatistikleri Pro ve üzeri planlarda açılır.',
+    proLockWeak: 'Zayıf terim analizi ve akıllı tekrar listesi Pro plan ve üzeri planlarda açılır.',
+    proLockHistory: 'Çalışma geçmişi Temel plan ve üzeri planlarda açılır.',
     flashcard: 'Flashcard',
     match: 'Eşleştirme',
     quiz: 'Quiz',
@@ -112,12 +112,12 @@ const TRANSLATIONS = {
     minutesCount: (m) => `${m} min`,
     goPro: 'Upgrade to Pro →',
     proBadge: 'PRO',
-    proLockActivity: 'Weekly & monthly activity charts unlock with Basic or Pro.',
-    proLockBadges: 'Badges and upcoming milestones unlock with Basic or Pro.',
-    proLockCategories: 'Progress tracking across 13 categories unlocks with Basic or Pro.',
-    proLockGames: 'Flashcard & Matching stats unlock with Basic; all 4 game modes unlock with Pro.',
-    proLockWeak: 'Weak terms analysis and smart review lists unlock with Pro.',
-    proLockHistory: 'Study history unlocks with Basic or Pro.',
+    proLockActivity: 'Weekly & monthly activity charts unlock with Basic plan and above.',
+    proLockBadges: 'Badges and upcoming milestones unlock with Basic plan and above.',
+    proLockCategories: 'Progress tracking across 13 categories unlocks with Basic plan and above.',
+    proLockGames: 'Flashcard & Matching stats with Basic; all 4 game modes unlock with Pro and above.',
+    proLockWeak: 'Weak terms analysis and smart review lists unlock with Pro plan and above.',
+    proLockHistory: 'Study history unlocks with Basic plan and above.',
     flashcard: 'Flashcards',
     match: 'Matching',
     quiz: 'Quiz',
@@ -538,7 +538,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockActivity}
-              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -627,7 +627,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockBadges}
-              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -674,7 +674,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockCategories}
-              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -765,7 +765,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockWeak}
-              badge="PRO"
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={t.goPro}
             />
           </div>
@@ -836,7 +836,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockHistory}
-              badge={isTr ? 'TEMEL & PRO' : 'BASIC & PRO'}
+              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>

@@ -52,8 +52,8 @@ export const Quiz = () => {
     if (!isGameUnlocked('quiz', isPro)) {
       toast.info(
         currentLanguage === 'en'
-          ? 'Quiz mode is exclusive to Pro members. Flashcards and Matching games are available in your Basic plan.'
-          : 'Quiz modu Pro plana özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.'
+          ? 'Quiz mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.'
+          : 'Quiz modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.'
       );
       navigate('/pricing');
     }

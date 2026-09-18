@@ -512,14 +512,14 @@ export const MorphemeExplorer = () => {
                   if (!isBasic) {
                     toast.info(
                       isTr
-                        ? 'İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro\'ya geçin.'
-                        : 'The first 24 morphemes are open for guests. Upgrade to Basic for 100 morphemes or Pro for all 571.'
+                        ? 'İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
+                        : 'The first 24 morphemes are open for guests. Upgrade to Basic for 100 morphemes or Pro and above for all 571.'
                     );
                   } else {
                     toast.info(
                       isTr
-                        ? 'İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro\'ya geçin.'
-                        : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro to unlock all 571 morphemes.'
+                        ? 'İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
+                        : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro and above to unlock all 571 morphemes.'
                     );
                   }
                   navigate('/pricing');
@@ -567,7 +567,7 @@ export const MorphemeExplorer = () => {
                           {locked && (
                             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
                               <Lock className="w-3 h-3" />
-                              Pro
+                              {isBasic ? (isTr ? 'Pro ve Üzeri' : 'Pro & Above') : (isTr ? 'Temel ve Üzeri' : 'Basic & Above')}
                             </span>
                           )}
                         </div>

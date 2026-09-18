@@ -299,8 +299,8 @@ export const Games = () => {
       const gameObj = games.find((g) => g.id === gameId);
       toast.info(
         isTr
-          ? `${gameObj?.title || 'Bu oyun'} modu Pro plana özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.`
-          : `${gameObj?.title || 'This game'} mode is exclusive to Pro. Flashcards and Matching games are available in your Basic plan.`
+          ? `${gameObj?.title || 'Bu oyun'} modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.`
+          : `${gameObj?.title || 'This game'} mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.`
       );
       navigate('/pricing');
       return;

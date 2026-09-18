@@ -53,8 +53,8 @@ export const MorphemeGame = () => {
     if (!isGameUnlocked('morpheme', isPro)) {
       toast.info(
         currentLanguage === 'en'
-          ? 'Morpheme Builder mode is exclusive to Pro members. Flashcards and Matching games are available in your Basic plan.'
-          : 'Morfem Yapıcı oyunu Pro plana özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.'
+          ? 'Morpheme Builder mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.'
+          : 'Morfem Yapıcı oyunu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.'
       );
       navigate('/pricing');
     }
