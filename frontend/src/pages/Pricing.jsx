@@ -24,9 +24,9 @@ const TRANSLATIONS = {
     daysLeft: 'gün kaldı',
     currentPlan: 'MEVCUT PLAN',
     title: 'Sana uygun tarifeyi seç',
-    sub: 'Temel ve Pro için 3 gün ₺0 deneme süresi. Dilediğin an tek tıkla iptal et.',
+    sub: 'Abonelik planlarında 3 gün ₺0 deneme süresi. Dilediğin an tek tıkla iptal et.',
     titleVisitor: 'Terimleri parçala, anla, birleştir.',
-    subVisitor: 'Temel ve Pro için 3 gün ₺0 deneme. Dilediğin an tek tıkla iptal et, 3 gün sonra yıllık faturalandırılır.',
+    subVisitor: 'Abonelik planlarında 3 gün ₺0 deneme. Dilediğin an tek tıkla iptal et, 3 gün sonra yıllık faturalandırılır.',
     noCardNote: 'Bugün ₺0 çekilir · Dilediğin an iptal et.',
     startTrial: '3 gün ücretsiz dene',
     save: '2 ay bedava',
@@ -57,8 +57,8 @@ const TRANSLATIONS = {
           ['✓', '13 anatomik kategori · 100 morfem'],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Pro)'],
-          ['–', 'Tüm 571+ morfem havuzu (Pro)']
+          ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
+          ['–', 'Tüm 571+ morfem havuzu (Pro ve üzeri)']
         ]
       },
       {
@@ -119,9 +119,9 @@ const TRANSLATIONS = {
     daysLeft: 'days left',
     currentPlan: 'CURRENT PLAN',
     title: 'Pick the plan that fits',
-    sub: '3-day $0 trial for Basic and Pro. Cancel anytime in one click.',
+    sub: '3-day $0 trial on subscription plans. Cancel anytime in one click.',
     titleVisitor: 'Split, understand, rebuild terms.',
-    subVisitor: '3 days $0 trial for Basic and Pro. Cancel anytime in 1 click, billed annually after 3 days.',
+    subVisitor: '3 days $0 trial on subscription plans. Cancel anytime in 1 click, billed annually after 3 days.',
     noCardNote: '$0 billed today · Cancel anytime in one click.',
     startTrial: 'Try 3 days free',
     save: '2 months free',
@@ -152,8 +152,8 @@ const TRANSLATIONS = {
           ['✓', '13 anatomical categories · 100 morphemes'],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Pro)'],
-          ['–', 'Full 571+ morpheme library (Pro)']
+          ['–', 'Quiz and Morpheme Builder (Pro & above)'],
+          ['–', 'Full 571+ morpheme library (Pro & above)']
         ]
       },
       {

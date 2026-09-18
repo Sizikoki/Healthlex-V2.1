@@ -11,7 +11,7 @@ const PRICING_CONTENT = {
   tr: {
     eyebrow: 'TARİFELER',
     title: 'Sana uygun tarifeyi seç',
-    sub: 'Temel ve Pro için 3 gün ₺0 deneme süresi. Dilediğin an iptal et.',
+    sub: 'Abonelik planlarında 3 gün ₺0 deneme süresi. Dilediğin an iptal et.',
     monthly: 'Aylık',
     yearly: 'Yıllık',
     saveBadge: '%55',
@@ -36,8 +36,8 @@ const PRICING_CONTENT = {
           ['✓', '13 anatomik kategori · 100 morfem'],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Pro)'],
-          ['–', 'Tüm 571+ morfem havuzu (Pro)']
+          ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
+          ['–', 'Tüm 571+ morfem havuzu (Pro ve üzeri)']
         ]
       },
       {
@@ -84,7 +84,7 @@ const PRICING_CONTENT = {
   en: {
     eyebrow: 'PRICING',
     title: 'Pick the plan that fits',
-    sub: '3-day $0 trial for Basic and Pro. Cancel anytime in 1 click.',
+    sub: '3-day $0 trial on subscription plans. Cancel anytime in 1 click.',
     monthly: 'Monthly',
     yearly: 'Yearly',
     saveBadge: '55% OFF',
@@ -109,8 +109,8 @@ const PRICING_CONTENT = {
           ['✓', '13 anatomical categories · 100 morphemes'],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Pro)'],
-          ['–', 'Full 571+ morpheme library (Pro)']
+          ['–', 'Quiz and Morpheme Builder (Pro & above)'],
+          ['–', 'Full 571+ morpheme library (Pro & above)']
         ]
       },
       {
