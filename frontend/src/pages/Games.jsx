@@ -13,7 +13,7 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isGameUnlockedForGuest, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { isGameUnlocked, isGameUnlockedForGuest, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -92,15 +92,6 @@ export const Games = () => {
   });
 
   const handleCategoryChange = (val) => {
-    if (!isPro && val !== 'all' && !isCategoryUnlocked(val, isPro)) {
-      toast.info(
-        isTr
-          ? 'Bu kategori Pro üyelere özeldir. Temel pakette ilk 3 kategori (Kafatası, Yüz ve Gövde Kemikleri) açıktır.'
-          : 'This category is exclusive to Pro. The first 3 categories are unlocked in the Basic plan.'
-      );
-      navigate('/pricing');
-      return;
-    }
     setSelectedCategory(val);
     try {
       localStorage.setItem(GAMES_CATEGORY_KEY, val);
@@ -111,9 +102,6 @@ export const Games = () => {
 
   useEffect(() => {
     if (paramCategory) {
-      if (!isPro && paramCategory !== 'all' && !isCategoryUnlocked(paramCategory, isPro)) {
-        return;
-      }
       setSelectedCategory((prev) => {
         if (prev !== paramCategory) {
           try {
@@ -126,16 +114,7 @@ export const Games = () => {
         return prev;
       });
     }
-  }, [paramCategory, isPro]);
-
-  useEffect(() => {
-    if (!isPro && selectedCategory !== 'all' && !isCategoryUnlocked(selectedCategory, isPro)) {
-      setSelectedCategory('all');
-      try {
-        localStorage.setItem(GAMES_CATEGORY_KEY, 'all');
-      } catch (e) {}
-    }
-  }, [isPro, selectedCategory]);
+  }, [paramCategory]);
 
   const [activeGame, setActiveGame] = useState(null);
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
@@ -216,17 +195,7 @@ export const Games = () => {
   }, [selectedCategory]);
 
   const categoryTerms = useMemo(() => {
-    let baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
-
-    // Temel planda oyunlarda sadece açık olan 3 kategorideki terimler gösterilsin
-    if (!isPro) {
-      baseList = baseList.filter(
-        (t) =>
-          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.system)
-      );
-    }
+    const baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
 
     if (selectedCategory === 'all') {
       return baseList;
@@ -244,17 +213,8 @@ export const Games = () => {
     }
 
     // Fallback to local category terms
-    const local = getTermsByCategory(selectedCategory);
-    if (!isPro) {
-      return local.filter(
-        (t) =>
-          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.system)
-      );
-    }
-    return local;
-  }, [selectedCategory, liveTerms, isPro]);
+    return getTermsByCategory(selectedCategory);
+  }, [selectedCategory, liveTerms]);
 
   const adaptedQuestions = useMemo(() => {
     return adaptTermsToMorphemeQuestions(categoryTerms);
@@ -416,7 +376,7 @@ export const Games = () => {
                   <SelectContent>
                     <SelectItem value="all">{t('allCategories')}</SelectItem>
 
-                    {(isPro ? GAME_CATEGORIES : GAME_CATEGORIES.slice(0, 3)).map((cat) => {
+                    {GAME_CATEGORIES.map((cat) => {
                       return (
                         <SelectItem key={cat.id} value={cat.id}>
                           {t(cat.key, cat.name)}
