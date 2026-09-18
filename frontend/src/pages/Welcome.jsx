@@ -588,7 +588,7 @@ export const Welcome = () => {
             </Link>
             <Link
               to={bannerConfig.primaryLink}
-              className="text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] px-5 py-3 rounded-[10px] shadow-sm transition-all"
+              className="text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] px-6 py-3 rounded-[10px] shadow-sm transition-all whitespace-nowrap"
             >
               {bannerConfig.primaryText}
             </Link>

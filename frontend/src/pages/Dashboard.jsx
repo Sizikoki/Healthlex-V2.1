@@ -529,9 +529,10 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
 
           <Link
             to="/pricing"
-            className="w-full sm:w-auto text-center bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] px-4.5 py-3 rounded-[10px] shrink-0 transition-colors shadow-xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[15px] px-7 py-3.5 rounded-[10px] shrink-0 whitespace-nowrap transition-all shadow-xs"
           >
-            {isTr ? 'Tarifeleri gör →' : 'View plans →'}
+            <span>{isTr ? 'Tarifeleri gör' : 'View plans'}</span>
+            <span className="text-base leading-none">→</span>
           </Link>
         </div>
       </div>
