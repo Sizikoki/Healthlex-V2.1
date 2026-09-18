@@ -1,38 +1,43 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import {
-  CheckCircle2,
-  Sparkles,
-  BookOpen,
-  Gamepad2,
-  ArrowRight,
-  Crown,
-  Clock,
-  Target,
-  LayoutDashboard,
-  Zap
-} from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { getUser, getUserTrialState } from '@/utils/storage';
+import { getUser } from '@/utils/storage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
-
+import { checkIsPro, checkIsBasic, checkHasPaidPlan } from '@/utils/planAccess';
+import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Welcome = () => {
   const [searchParams] = useSearchParams();
   const { currentLanguage } = useLanguage();
+  const isTr = currentLanguage !== 'en';
+
   const [firestoreData, setFirestoreData] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
-  const lang = currentLanguage === 'en' ? 'en' : 'tr';
+  const [termCount, setTermCount] = useState(getInitialTermCount);
 
-  // Scroll to top on mount
+  // Scroll to top & set canonical SEO URL on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateCanonicalUrl('https://www.healthlexmed.com/welcome');
   }, []);
 
-  // Listen to auth state and fetch user doc from firestore
+  // Fetch dynamic term count
+  useEffect(() => {
+    let isMounted = true;
+    getTermCount().then((val) => {
+      if (isMounted && typeof val === 'number') {
+        setTermCount(val);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Listen to auth state and fetch user doc from Firestore
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -51,395 +56,448 @@ export const Welcome = () => {
     return () => unsubscribe();
   }, []);
 
-  // Determine active plan: gerçek subscriptionStatus === 'trialing' durumu en yüksek önceliktir
-  const activePlanKey = useMemo(() => {
-    // 1. Gerçek veritabanı deneme durumu (URL'den bağımsız)
-    if (firestoreData) {
-      const status = (firestoreData.subscriptionStatus || '').toLowerCase();
-      if (status === 'trialing') {
-        return 'trial';
-      }
-      const planStr = (firestoreData.plan || '').toLowerCase();
-      if (firestoreData.isLifetime === true || planStr.includes('lifetime') || status === 'lifetime') {
-        return 'lifetime';
-      }
-      if (firestoreData.isBasic === true || planStr.includes('basic') || status === 'basic') {
-        return 'basic';
-      }
-      if (firestoreData.isPro === true || status === 'active' || status === 'pro') {
-        return 'pro';
-      }
+  // User object and membership status
+  const storedUser = useMemo(() => getUser(), []);
+  const effectiveUser = useMemo(
+    () => ({ ...(storedUser || {}), ...(firestoreData || {}), ...(currentUser || {}) }),
+    [storedUser, firestoreData, currentUser]
+  );
+
+  const isPro = useMemo(() => checkIsPro(effectiveUser), [effectiveUser]);
+  const isBasic = useMemo(() => checkIsBasic(effectiveUser), [effectiveUser]);
+  const hasPaidPlan = useMemo(
+    () => checkHasPaidPlan(effectiveUser) || isPro || isBasic || searchParams.get('plan') === 'pro' || searchParams.get('plan') === 'basic' || searchParams.get('plan') === 'lifetime',
+    [effectiveUser, isPro, isBasic, searchParams]
+  );
+
+  // Dynamic user greeting name
+  const userName = useMemo(() => {
+    const rawName =
+      currentUser?.displayName ||
+      firestoreData?.name ||
+      firestoreData?.displayName ||
+      storedUser?.name ||
+      '';
+    if (!rawName) return '';
+    const first = rawName.trim().split(/\s+/)[0];
+    return first ? first.charAt(0).toLocaleUpperCase('tr-TR') + first.slice(1) : '';
+  }, [currentUser, firestoreData, storedUser]);
+
+  // Header texts
+  const badgeText = useMemo(() => {
+    if (effectiveUser?.isLifetime || searchParams.get('plan') === 'lifetime') {
+      return isTr ? 'HOŞ GELDİN · ÖMÜR BOYU VIP' : 'WELCOME · LIFETIME VIP';
+    }
+    if (isPro || searchParams.get('plan') === 'pro') {
+      return isTr ? 'HOŞ GELDİN · PRO HESAP' : 'WELCOME · PRO ACCOUNT';
+    }
+    if (isBasic || searchParams.get('plan') === 'basic') {
+      return isTr ? 'HOŞ GELDİN · TEMEL PLAN' : 'WELCOME · BASIC PLAN';
+    }
+    return isTr ? 'HOŞ GELDİN · MİSAFİR HESAP' : 'WELCOME · GUEST ACCOUNT';
+  }, [effectiveUser, isPro, isBasic, searchParams, isTr]);
+
+  const greetingTitle = useMemo(() => {
+    if (userName) {
+      return isTr ? `Hesabın hazır, ${userName}.` : `Your account is ready, ${userName}.`;
+    }
+    return isTr ? 'Hesabın hazır.' : 'Your account is ready.';
+  }, [userName, isTr]);
+
+  const greetingSubtitle = useMemo(() => {
+    if (isPro || effectiveUser?.isLifetime) {
+      return isTr
+        ? 'Pro üyeliğin aktif edildi. Kütüphanenin tamamını, tüm 571+ morfemi ve 4 oyun modunun hepsini sınırsızca kullanabilirsin. Aşağıda tüm ayrıcalıklarını görebilirsin.'
+        : 'Your Pro membership is active. Enjoy full unrestricted access to all terms, 571+ morphemes, and 4 game modes. Review your privileges below.';
+    }
+    if (isBasic) {
+      return isTr
+        ? 'Temel planın aktif edildi. Tüm kategoriler, 100 temel morfem ve sınırsız Flashcard & Eşleştirme oyunları kullanımına hazır. Aşağıda detayları görebilirsin.'
+        : 'Your Basic plan is active. All categories, 100 core morphemes, and unlimited Flashcard & Matching games are ready. Review your plan below.';
+    }
+    return isTr
+      ? 'Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.'
+      : 'You are currently logged in as a guest. You can explore most of the library for free; games and the morpheme list are limited. Below you can see what and how much you can access.';
+  }, [isPro, effectiveUser, isBasic, isTr]);
+
+  // 3 Quotas Cards
+  const quotas = useMemo(() => {
+    const termsVal = termCount ? `${termCount}+` : '590+';
+    if (isPro || effectiveUser?.isLifetime) {
+      return [
+        {
+          label: isTr ? 'TERİM' : 'TERMS',
+          v: termsVal,
+          unit: isTr ? 'terim detayı' : 'medical terms',
+          note: isTr
+            ? 'Tüm terim sayfaları tam içerik, köken ve detaylarla sınırsız görüntülenir.'
+            : 'All term pages display full content, origins, and explanations with zero limits.'
+        },
+        {
+          label: isTr ? 'MORFEM' : 'MORPHEMES',
+          v: '571+',
+          unit: isTr ? 'morfem (tamamı)' : 'morphemes (full)',
+          note: isTr
+            ? 'Ön ek, kök ve son ek kütüphanesinin tamamı sınırsız açık.'
+            : 'All 571+ prefixes, roots, and suffixes completely unlocked.'
+        },
+        {
+          label: isTr ? 'OYUNLAR' : 'GAMES',
+          v: '∞',
+          unit: isTr ? 'sınırsız oyun' : 'unlimited plays',
+          note: isTr
+            ? '4 oyun modu (Flashcard, Eşleştirme, Quiz, Morfem Yapıcı) sınırsız açık.'
+            : 'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Builder) open.'
+        }
+      ];
     }
 
-    // 2. URL Query Parametre kontrolü (kayıt/checkout yönlendirmesi için)
-    const urlPlan = searchParams.get('plan')?.toLowerCase();
-    if (urlPlan && ['lifetime', 'pro', 'basic', 'trial'].includes(urlPlan)) {
-      return urlPlan;
+    if (isBasic) {
+      return [
+        {
+          label: isTr ? 'TERİM' : 'TERMS',
+          v: termsVal,
+          unit: isTr ? 'terim detayı' : 'medical terms',
+          note: isTr
+            ? 'Tüm tıp kategorilerindeki terim sayfaları tam içerikle görüntülenir.'
+            : 'Term pages across all medical categories display full content.'
+        },
+        {
+          label: isTr ? 'MORFEM' : 'MORPHEMES',
+          v: '100',
+          unit: isTr ? '/ 571+ morfem' : '/ 571+ morphemes',
+          note: isTr
+            ? 'En çok kullanılan ilk 100 morfem açık. İleri seviye morfemler Pro gerektirir.'
+            : 'Top 100 core morphemes unlocked. Advanced morphemes require Pro.'
+        },
+        {
+          label: isTr ? 'OYUNLAR' : 'GAMES',
+          v: '∞',
+          unit: isTr ? 'sınırsız oyun' : 'unlimited plays',
+          note: isTr
+            ? 'Flashcard ve Eşleştirme modları sınırsız; Quiz ve Morfem Yapıcı Pro plandadır.'
+            : 'Flashcards and Matching modes unlimited; Quiz and Morpheme Builder in Pro.'
+        }
+      ];
     }
 
-    // 3. Yerel trialState kontrolü
-    const storedUser = getUser();
-    const trialState = getUserTrialState(currentUser || storedUser);
-    if (trialState?.isActive) return 'trial';
-
-    return 'pro'; // Safe default
-  }, [searchParams, firestoreData, currentUser]);
-
-  const [termCount, setTermCount] = useState(getInitialTermCount);
-
-  useEffect(() => {
-    let isMounted = true;
-    getTermCount().then((val) => {
-      if (isMounted && typeof val === 'number') {
-        setTermCount(val);
+    // Default Guest / Free User Quotas
+    return [
+      {
+        label: isTr ? 'TERİM' : 'TERMS',
+        v: termsVal,
+        unit: isTr ? 'terim detayı' : 'medical terms',
+        note: isTr
+          ? 'Link veya aramayla açılan terim sayfaları tam içerikle görüntülenir.'
+          : 'Term pages opened via search or links display full content.'
+      },
+      {
+        label: isTr ? 'MORFEM' : 'MORPHEMES',
+        v: '24',
+        unit: isTr ? '/ 571+ morfem' : '/ 571+ morphemes',
+        note: isTr
+          ? 'İlk 24 morfem açık; gerisinde ad görünür, anlam ve detay bulanık.'
+          : 'First 24 morphemes open; remaining show name with blurred meaning.'
+      },
+      {
+        label: isTr ? 'FLASHCARD' : 'FLASHCARDS',
+        v: '5',
+        unit: isTr ? 'oyun / gün' : 'games / day',
+        note: isTr
+          ? 'Günlük hak her gece yenilenir. Diğer oyunlar kilitli.'
+          : 'Daily plays refresh every midnight. Other games are locked.'
       }
-    });
-    return () => {
-      isMounted = false;
+    ];
+  }, [termCount, isPro, isBasic, effectiveUser, isTr]);
+
+  // Feature Comparison Table Rows
+  const rows = useMemo(() => {
+    const termsCountStr = termCount ? `${termCount}` : '590';
+
+    if (isTr) {
+      if (isPro || effectiveUser?.isLifetime) {
+        return [
+          { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: 'Sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },
+          { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Tanım, köken ve örnekler açık', pro: 'Tüm terimler' },
+          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '571+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '571+ morfem' },
+          { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Kişisel tekrar algoritması aktif', pro: 'Sınırsız' },
+          { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Açık' },
+          { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Açık' },
+          { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'open', limit: 'Sınırsız', sub: 'Tüm seviyeler açık', pro: 'Açık' },
+          { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: 'open', limit: 'Aktif', sub: 'Tüm başarılar ve istatistikler', pro: 'Açık' }
+        ];
+      }
+
+      if (isBasic) {
+        return [
+          { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: 'Sınırsız gezinme', sub: 'Kilit yok, tüm kategoriler açık', pro: 'Sınırsız' },
+          { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Tanım, köken ve örnekler açık', pro: 'Tüm terimler' },
+          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '571+ morfem' },
+          { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Limitsiz kart çalışması', pro: 'Sınırsız' },
+          { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Temel plan ile sınırsız açık', pro: 'Açık' },
+          { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
+          { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
+          { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: 'part', limit: 'Temel takip', sub: 'Gelişmiş analitikler Pro’da', pro: 'Açık' }
+        ];
+      }
+
+      // Guest / Free default
+      return [
+        { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: 'Sınırsız gezinme', sub: 'Kilit yok, tüm kategoriler açık', pro: 'Sınırsız' },
+        { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Tanım, köken ve örnekler açık', pro: 'Tüm terimler' },
+        { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '571+ morfem' },
+        { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'part', limit: 'Günde 5 oyun', sub: 'Her gece yenilenir', pro: 'Sınırsız' },
+        { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık (Temel ile de)' },
+        { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
+        { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
+        { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' }
+      ];
+    }
+
+    // English Rows
+    if (isPro || effectiveUser?.isLifetime) {
+      return [
+        { name: 'Categories', desc: '13 medical categories', type: 'open', limit: 'Unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' },
+        { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
+        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '571+ morphemes open', sub: 'Full library unlocked', pro: '571+ morphemes' },
+        { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Adaptive algorithm active', pro: 'Unlimited' },
+        { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Unlocked across all categories', pro: 'Unlocked' },
+        { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'open', limit: 'Unlimited', sub: 'All difficulty levels', pro: 'Unlocked' },
+        { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'open', limit: 'Unlimited', sub: 'All levels unlocked', pro: 'Unlocked' },
+        { name: 'Progress & Streaks', desc: 'Daily reviews & streaks', type: 'open', limit: 'Active', sub: 'Full analytics & achievements', pro: 'Unlocked' }
+      ];
+    }
+
+    if (isBasic) {
+      return [
+        { name: 'Categories', desc: '13 medical categories', type: 'open', limit: 'Unlimited browsing', sub: 'No lock, all categories open', pro: 'Unlimited' },
+        { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
+        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '571+ morphemes' },
+        { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
+        { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Fully unlocked with Basic plan', pro: 'Unlocked' },
+        { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
+        { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
+        { name: 'Progress & Streaks', desc: 'Daily reviews & streaks', type: 'part', limit: 'Core tracking', sub: 'Advanced analytics in Pro', pro: 'Unlocked' }
+      ];
+    }
+
+    return [
+      { name: 'Categories', desc: '13 medical categories', type: 'open', limit: 'Unlimited browsing', sub: 'No lock, all categories open', pro: 'Unlimited' },
+      { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
+      { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '571+ morphemes' },
+      { name: 'Flashcards', desc: 'Spaced repetition with cards', type: 'part', limit: '5 games per day', sub: 'Refreshes every midnight', pro: 'Unlimited' },
+      { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked (Also with Basic)' },
+      { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
+      { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
+      { name: 'Progress & Streaks', desc: 'Daily review, streak & leveling', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' }
+    ];
+  }, [termCount, isTr, isPro, isBasic, effectiveUser]);
+
+  // Style helper for table badges & indicators
+  const getRowStyle = (type) => {
+    switch (type) {
+      case 'open':
+        return {
+          sym: '✓',
+          badgeBg: '#e8f0ff',
+          badgeFg: '#2563eb',
+          badgeClass: 'bg-[#e8f0ff] text-[#2563eb] dark:bg-blue-900/30 dark:text-blue-400',
+          fgClass: 'text-[#0f1b33] dark:text-foreground'
+        };
+      case 'part':
+        return {
+          sym: '~',
+          badgeBg: '#fff4e6',
+          badgeFg: '#b45309',
+          badgeClass: 'bg-[#fff4e6] text-[#b45309] dark:bg-amber-900/30 dark:text-amber-400',
+          fgClass: 'text-[#0f1b33] dark:text-foreground'
+        };
+      case 'lock':
+      default:
+        return {
+          sym: '🔒',
+          badgeBg: '#f5f7fb',
+          badgeFg: '#6b7a90',
+          badgeClass: 'bg-[#f5f7fb] text-[#6b7a90] dark:bg-slate-800 dark:text-slate-400',
+          fgClass: 'text-[#6b7a90] dark:text-muted-foreground'
+        };
+    }
+  };
+
+  // Bottom Banner Content
+  const bannerConfig = useMemo(() => {
+    if (isPro || effectiveUser?.isLifetime) {
+      return {
+        title: isTr ? 'Tüm içerikler hesabında aktif!' : 'All content is active on your account!',
+        subtitle: isTr
+          ? '13 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
+          : 'Enjoy unlimited access to all categories, 571+ morphemes, and 4 game modes.',
+        secondaryText: isTr ? 'Panelime Git' : 'Go to Dashboard',
+        secondaryLink: '/dashboard',
+        primaryText: isTr ? 'Çalışmaya Başla →' : 'Start Studying →',
+        primaryLink: '/study'
+      };
+    }
+
+    if (isBasic) {
+      return {
+        title: isTr ? 'Daha fazlası için Pro’ya yükselt' : 'Upgrade to Pro for more',
+        subtitle: isTr
+          ? '571+ morfem, Quiz ve Morfem Yapıcı için dilediğin zaman Pro plana geçebilirsin.'
+          : 'Upgrade to Pro anytime to unlock all 571+ morphemes and advanced games.',
+        secondaryText: isTr ? 'Çalışmaya Başla' : 'Start Studying',
+        secondaryLink: '/study',
+        primaryText: isTr ? 'Pro’ya Yükselt →' : 'Upgrade to Pro →',
+        primaryLink: '/pricing'
+      };
+    }
+
+    return {
+      title: isTr ? 'Tamamını açmak için bir plan seç' : 'Choose a plan to unlock everything',
+      subtitle: isTr
+        ? 'Temel ₺790/yıl · Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
+        : 'Basic ₺790/yr · Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time',
+      secondaryText: isTr ? 'Misafir olarak devam et' : 'Continue as guest',
+      secondaryLink: '/study',
+      primaryText: isTr ? 'Tarifeleri gör →' : 'View plans →',
+      primaryLink: '/pricing'
     };
-  }, []);
-
-  const planConfigs = useMemo(() => ({
-    lifetime: {
-      color: 'amber',
-      iconBg: 'bg-amber-500/10 border-amber-500/25 text-amber-500 shadow-amber-500/10',
-      badgeClass: 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/25',
-      checkClass: 'text-amber-500',
-      MainIcon: Crown,
-      content: {
-        tr: {
-          badge: 'ÖMÜR BOYU VIP ÜYELİK',
-          title: 'Tebrikler, HealthLexMed Ömür Boyu VIP Üyeliğe Hoş Geldiniz! 👑',
-          subtitle:
-            `Tek seferlik ödemeniz başarıyla tamamlandı. Artık HealthLexMed’in tüm 13 kategorisine, ${termCount} tıbbi terimine, 571’den fazla morfemine ve gelecekte eklenecek tüm yeni modüllere ÖMÜR BOYU sınırsız erişim hakkınız var.`,
-          featuresTitle: 'Ömür Boyu VIP Üyeliğinizle Kilidi Açılan Özellikler',
-          features: [
-            `13 anatomik kategorinin tamamına ömür boyu sınırsız erişim (${termCount} tıbbi terim)`,
-            '571+ morfem, kök ve ek kütüphanesinin tamamı',
-            '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
-            'Kişisel başarı analitikleri, çalışma serisi ve seviye sistemi',
-            'Gelecekte eklenecek tüm yeni modüller ve güncellemeler (Ek ücret yok)',
-            'Öncelikli kalıcı VIP erişim ve çift dilli (TR ⟷ EN) destek'
-          ],
-          ctaStudy: 'Çalışmaya Başla',
-          ctaGames: 'Oyun Modlarını Keşfet',
-          ctaDashboard: 'Panelime Git',
-          footerNote:
-            'Faturanız ve sipariş detayları e-posta adresinize Paddle tarafından iletilmiştir. Üyeliğinizi dilediğiniz an profilinizden veya panelinizden inceleyebilirsiniz.'
-        },
-        en: {
-          badge: 'LIFETIME VIP MEMBERSHIP',
-          title: 'Congratulations, Welcome to HealthLexMed Lifetime VIP! 👑',
-          subtitle:
-            `Your one-time payment is complete. You now have LIFETIME unlimited access to all 13 categories, ${termCount} medical terms, over 571 morphemes, and all future modules with zero recurring fees.`,
-          featuresTitle: 'Features Unlocked With Lifetime Membership',
-          features: [
-            `Lifetime unlimited access to all 13 anatomical categories (${termCount} medical terms)`,
-            'Full library of 571+ morphemes, roots, and affixes',
-            'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
-            'Personal progress stats, study streaks, and leveling system',
-            'All upcoming modules, exam sets, and updates (No extra charge)',
-            'Permanent VIP status and priority bilingual support'
-          ],
-          ctaStudy: 'Start Studying',
-          ctaGames: 'Explore Game Modes',
-          ctaDashboard: 'Go to Dashboard',
-          footerNote:
-            'Your receipt and order details have been sent to your email address by Paddle. You can review your membership anytime from your profile or dashboard.'
-        }
-      }
-    },
-    pro: {
-      color: 'primary',
-      iconBg: 'bg-primary/10 border-primary/25 text-primary shadow-primary/10',
-      badgeClass: 'bg-primary/15 text-primary border border-primary/25',
-      checkClass: 'text-primary',
-      MainIcon: Sparkles,
-      content: {
-        tr: {
-          badge: 'YILLIK PRO AKTİF',
-          title: 'Tebrikler, HealthLexMed Pro’ya Hoş Geldiniz! 🚀',
-          subtitle:
-            `Yıllık Pro Üyeliğiniz başarıyla aktif edildi. 1 yıl boyunca tüm 13 kategori, ${termCount} tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamı sınırsız olarak kullanımınıza hazır.`,
-          featuresTitle: 'Aboneliğinizle Kilidi Açılan Özellikler',
-          features: [
-            `13 anatomik kategorinin tamamı (${termCount} tıbbi terim)`,
-            '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
-            '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
-            'Kişisel başarı istatistikleri, çalışma serisi ve seviye sistemi',
-            'TR ⟷ EN çift dilli arayüz ve terim eşlemeleri',
-            '1 yıl boyunca eklenecek tüm güncellemeler ve yeni terimler'
-          ],
-          ctaStudy: 'Çalışmaya Başla',
-          ctaGames: 'Oyun Modlarını Keşfet',
-          ctaDashboard: 'Panelime Git',
-          footerNote:
-            'Faturanız ve ödeme detayları e-posta adresinize Paddle tarafından iletilmiştir. Dilediğiniz zaman profil sayfanızdan veya destek ekibimizden yardım alabilirsiniz.'
-        },
-        en: {
-          badge: 'ANNUAL PRO ACTIVE',
-          title: 'Congratulations, Welcome to HealthLexMed Pro! 🚀',
-          subtitle:
-            `Your Annual Pro Membership is now active. All 13 categories, ${termCount} medical terms, over 571 morphemes, and all 4 interactive game modes are fully unlocked for 1 year.`,
-          featuresTitle: 'Features Unlocked With Your Membership',
-          features: [
-            `All 13 anatomical categories (${termCount} medical terms)`,
-            'Unlimited access to 571+ morphemes, roots, and affixes library',
-            'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
-            'Personal progress stats, study streaks, and leveling system',
-            'TR ⟷ EN bilingual interface and terminology matching',
-            'All upcoming modules, exam sets, and feature updates for 1 year'
-          ],
-          ctaStudy: 'Start Studying',
-          ctaGames: 'Explore Game Modes',
-          ctaDashboard: 'Go to Dashboard',
-          footerNote:
-            'Your receipt and order details have been sent to your email address by Paddle. You can reach out to support or review your settings anytime from your profile.'
-        }
-      }
-    },
-    basic: {
-      color: 'blue',
-      iconBg: 'bg-blue-500/10 border-blue-500/25 text-blue-500 shadow-blue-500/10',
-      badgeClass: 'bg-blue-500/15 text-blue-700 dark:text-blue-400 border border-blue-500/25',
-      checkClass: 'text-blue-500',
-      MainIcon: Target,
-      content: {
-        tr: {
-          badge: 'TEMEL PLAN AKTİF',
-          title: 'Tebrikler, HealthLexMed Temel Plana Hoş Geldiniz! 🎯',
-          subtitle:
-            'Temel Plan aboneliğiniz başarıyla aktif edildi. 13 anatomi kategorisinin tamamı, 100 temel morfem ve sınırsız oyun modlarıyla terminolojiye sağlam bir adım attınız.',
-          featuresTitle: 'Temel Planınızla Açılan Özellikler',
-          features: [
-            '13 anatomi kategorisinin ve tıbbi terimlerin tamamına erişim',
-            'En çok kullanılan 100 morfem, kök ve ek kütüphanesi',
-            '2 temel oyun modu (Bilgi Kartları & Eşleştirme Oyunu)',
-            'Kişisel ilerleme takibi ve temel başarı istatistikleri',
-            'TR ⟷ EN çift dilli arayüz ve terim telaffuzları',
-            'Dilediğiniz an tek tıkla Pro plana yükseltme imkanı'
-          ],
-          ctaStudy: 'Çalışmaya Başla',
-          ctaGames: 'Oyun Modlarını Keşfet',
-          ctaDashboard: 'Panelime Git',
-          upgradeHint: 'Tüm 571+ morfem, Quiz ve Morfem Yapıcı modlarına mı ihtiyacınız var?',
-          upgradeCta: "Pro'ya Yükselt",
-          footerNote:
-            'Abonelik faturanız e-posta adresinize Paddle tarafından iletilmiştir. 571+ morfem ve tüm oyun modları için dilediğiniz zaman Pro plana geçebilirsiniz.'
-        },
-        en: {
-          badge: 'BASIC PLAN ACTIVE',
-          title: 'Congratulations, Welcome to HealthLexMed Basic! 🎯',
-          subtitle:
-            'Your Basic Plan is now active. Take a solid first step into medical terminology with all 13 anatomy categories, 100 core morphemes, and unlimited study games.',
-          featuresTitle: 'Features Unlocked With Basic Plan',
-          features: [
-            'Full access to all 13 anatomy categories and glossary terms',
-            'Top 100 high-yield morphemes, roots, and affixes library',
-            '2 core game modes (Flashcards & Matching Game)',
-            'Personal progress tracking and core study stats',
-            'TR ⟷ EN bilingual interface and audio pronunciations',
-            'Option to upgrade to Pro anytime with a single click'
-          ],
-          ctaStudy: 'Start Studying',
-          ctaGames: 'Explore Game Modes',
-          ctaDashboard: 'Go to Dashboard',
-          upgradeHint: 'Need all 571+ morphemes, Quiz, and Morpheme Builder?',
-          upgradeCta: 'Upgrade to Pro',
-          footerNote:
-            'Your subscription receipt has been emailed by Paddle. Upgrade to Pro anytime to unlock all 571+ morphemes and advanced games.'
-        }
-      }
-    },
-    trial: {
-      color: 'indigo',
-      iconBg: 'bg-indigo-500/10 border-indigo-500/25 text-indigo-500 shadow-indigo-500/10',
-      badgeClass: 'bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-500/25',
-      checkClass: 'text-indigo-500',
-      MainIcon: Clock,
-      content: {
-        tr: {
-          badge: '3 GÜNLÜK ÜCRETSİZ DENEME',
-          title: 'HealthLexMed’e Hoş Geldiniz! ⏱️',
-          subtitle:
-            `3 günlük ücretsiz deneme süreniz başladı! Dilediğiniz an tek tıkla iptal edebilir, tüm 13 kategori, ${termCount} tıbbi terim, 571’den fazla morfem ve 4 oyun modunun tamamını 3 gün boyunca sınırsızca deneyimleyebilirsiniz.`,
-          featuresTitle: 'Deneme Süresince Sınırsız Keşfedebileceğiniz Özellikler',
-          features: [
-            `13 anatomik kategorinin tamamı (${termCount} tıbbi terim)`,
-            '571+ morfem, kök ve ek kütüphanesine sınırsız erişim',
-            '4 oyun modunun tümü (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)',
-            'Kişisel başarı analitikleri ve çalışma serisi',
-            'TR ⟷ EN çift dilli arayüz ve sesli telaffuzlar',
-            '3 gün boyunca tamamen ücretsiz ve taahhütsüz tam deneyim'
-          ],
-          ctaStudy: 'Hemen Öğrenmeye Başla',
-          ctaGames: 'Oyun Modlarını Dene',
-          ctaDashboard: 'Panelime Git',
-          upgradeHint: 'Deneme süreniz boyunca avantajlı paket fiyatlarını inceleyebilirsiniz:',
-          upgradeCta: 'Tarifeleri İncele',
-          footerNote:
-            '3 günlük deneme süreniz dolduğunda ilerlemeniz saklanır. Öğrenmeye devam etmek için dilediğiniz zaman uygun bir paket seçebilirsiniz.'
-        },
-        en: {
-          badge: '3-DAY FREE TRIAL ACTIVE',
-          title: 'Welcome to HealthLexMed! ⏱️',
-          subtitle:
-            `Your 3-day free trial has started! Enjoy full, unrestricted access to all 13 categories, ${termCount} medical terms, 571+ morphemes, and all 4 interactive games for 3 days — cancel anytime in one click.`,
-          featuresTitle: 'Features Unlocked During Your Trial',
-          features: [
-            `All 13 anatomical categories (${termCount} medical terms)`,
-            'Unlimited access to 571+ morphemes, roots, and affixes',
-            'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)',
-            'Personal learning analytics and study streak',
-            'TR ⟷ EN bilingual interface and pronunciation support',
-            '100% free and risk-free trial for 3 days'
-          ],
-          ctaStudy: 'Start Studying Now',
-          ctaGames: 'Try Game Modes',
-          ctaDashboard: 'Go to Dashboard',
-          upgradeHint: 'Explore available membership plans anytime during your trial:',
-          upgradeCta: 'View Pricing Plans',
-          footerNote:
-            'Your progress is saved when your 3-day trial ends. You can choose a plan anytime to continue learning.'
-        }
-      }
-    }
-  }), [termCount]);
-
-  const currentConfig = planConfigs[activePlanKey] || planConfigs.pro;
-  const t = currentConfig.content[lang] || currentConfig.content.tr;
-  const MainIcon = currentConfig.MainIcon;
-
-  // Compute Trial End Date & First Billing Date from single source of truth
-  const storedUser = getUser();
-  const effectiveUserObj = { ...(storedUser || {}), ...(firestoreData || {}), ...(currentUser || {}) };
-  const trialState = getUserTrialState(effectiveUserObj);
-
-  const trialEndFormatted = trialState.formattedEndDate(lang);
-  const nextBilledFormatted = trialState.formattedBillingDate(lang);
+  }, [isPro, isBasic, effectiveUser, isTr]);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-2xl w-full text-center">
-        {/* Animated Celebration Icon */}
-        <div
-          className={`mx-auto flex items-center justify-center w-20 h-20 rounded-full border-2 mb-6 shadow-lg animate-in fade-in zoom-in duration-300 ${currentConfig.iconBg}`}
-        >
-          <MainIcon className="w-10 h-10" />
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-10 sm:py-14 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased">
+      <div className="w-full max-w-[960px] flex flex-col gap-9">
+        {/* Header Section */}
+        <div className="flex flex-col gap-3 text-left">
+          <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+            {badgeText}
+          </span>
+          <h1 className="m-0 font-semibold text-3xl sm:text-[44px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+            {greetingTitle}
+          </h1>
+          <p className="m-0 font-normal text-base sm:text-[17px] sm:leading-[1.5] text-[#6b7a90] dark:text-muted-foreground max-w-[720px]">
+            {greetingSubtitle}
+          </p>
         </div>
 
-        {/* Badge */}
-        <div
-          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 ${currentConfig.badgeClass}`}
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          {t.badge}
-        </div>
-
-        {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-4 font-serif">
-          {t.title}
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-          {t.subtitle}
-        </p>
-
-        {/* Trial Billing & Schedule Info Card */}
-        {trialState.isActive && (
-          <div className="bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/30 rounded-2xl p-5 sm:p-6 mb-6 text-left shadow-xs">
-            <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-bold text-sm mb-3">
-              <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-              <span>{lang === 'tr' ? 'Deneme Süresi & Faturalandırma Takvimi' : 'Trial Period & Billing Schedule'}</span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm">
-              <div className="p-3 bg-card/80 border border-border/60 rounded-xl">
-                <span className="text-muted-foreground block text-[0.8rem] mb-0.5">
-                  {lang === 'tr' ? 'Deneme Bitiş Tarihi' : 'Trial End Date'}
-                </span>
-                <span className="font-bold text-foreground text-sm sm:text-base text-amber-700 dark:text-amber-400">
-                  {trialEndFormatted}
-                </span>
-              </div>
-              <div className="p-3 bg-card/80 border border-border/60 rounded-xl">
-                <span className="text-muted-foreground block text-[0.8rem] mb-0.5">
-                  {lang === 'tr' ? 'İlk Faturalandırma Tarihi' : 'First Billing Date'}
-                </span>
-                <span className="font-bold text-foreground text-sm sm:text-base text-emerald-700 dark:text-emerald-400">
-                  {nextBilledFormatted}
-                </span>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground mt-3 leading-relaxed mb-0">
-              ℹ️ {lang === 'tr'
-                ? `Deneme süresi (${trialEndFormatted}) dolmadan önce dilediğiniz an tek tıkla iptal edebilirsiniz. İptal etmeniz durumunda kartınızdan hiçbir ücret tahsil edilmez.`
-                : `You can cancel anytime in one click before your trial ends on ${trialEndFormatted}. If you cancel, your card will not be charged.`}
-            </p>
-          </div>
-        )}
-
-        {/* Unlocked Features Card */}
-        <div className="bg-card border border-border/70 rounded-2xl p-6 sm:p-8 text-left mb-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-foreground/80 mb-4">
-            {t.featuresTitle}
-          </h2>
-          <ul className="space-y-3">
-            {t.features.map((feat, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-foreground/90">
-                <CheckCircle2 className={`w-5 h-5 shrink-0 mt-0.5 ${currentConfig.checkClass}`} />
-                <span>{feat}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Upgrade / Pricing Banner for Basic & Trial */}
-        {t.upgradeHint && (
-          <div className="flex items-center justify-between flex-wrap gap-2 px-4 py-3 rounded-xl bg-muted/50 border border-border/60 text-xs sm:text-sm text-muted-foreground mb-6 text-left">
-            <span>{t.upgradeHint}</span>
-            <Link
-              to="/pricing"
-              className="inline-flex items-center gap-1 font-semibold text-primary hover:underline shrink-0"
+        {/* 3 Quota Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {quotas.map((q, idx) => (
+            <div
+              key={idx}
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-[22px_24px] flex flex-col gap-2 shadow-xs transition-all hover:border-[#2563eb]/40"
             >
-              <Zap className="w-3.5 h-3.5" />
-              {t.upgradeCta} →
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {q.label}
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-extrabold text-3xl sm:text-[34px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {q.v}
+                </span>
+                <span className="font-semibold text-sm text-[#6b7a90] dark:text-muted-foreground">
+                  {q.unit}
+                </span>
+              </div>
+              <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground">
+                {q.note}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Feature Comparison Table */}
+        <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] overflow-hidden shadow-xs">
+          <div className="overflow-x-auto">
+            <div className="min-w-[560px] sm:min-w-0">
+              {/* Table Column Headers */}
+              <div className="grid grid-cols-[1.3fr_1.4fr_1fr] px-6 py-3.5 bg-[#f9fafc] dark:bg-muted/40 border-b border-[#e5e9f2] dark:border-border font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                <span>{isTr ? 'ÖZELLİK' : 'FEATURE'}</span>
+                <span>
+                  {isTr
+                    ? hasPaidPlan
+                      ? 'SENİN PLANIN'
+                      : 'MİSAFİR SINIRI'
+                    : hasPaidPlan
+                    ? 'YOUR PLAN'
+                    : 'GUEST LIMIT'}
+                </span>
+                <span>PRO</span>
+              </div>
+
+              {/* Table Rows */}
+              <div className="divide-y divide-[#eef1f6] dark:divide-border/60">
+                {rows.map((r, idx) => {
+                  const s = getRowStyle(r.type);
+                  return (
+                    <div
+                      key={idx}
+                      className="grid grid-cols-[1.3fr_1.4fr_1fr] px-6 py-4 items-center gap-4 hover:bg-[#fafbfc] dark:hover:bg-muted/20 transition-colors"
+                    >
+                      {/* Column 1: Name & Desc */}
+                      <div>
+                        <div className="font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground leading-snug">
+                          {r.name}
+                        </div>
+                        <div className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                          {r.desc}
+                        </div>
+                      </div>
+
+                      {/* Column 2: Status / Limit with Badge Icon */}
+                      <div className="flex gap-2.5 items-start">
+                        <span
+                          className={`shrink-0 w-[22px] h-[22px] rounded-[6px] grid place-items-center font-extrabold text-[12px] leading-none select-none ${s.badgeClass}`}
+                        >
+                          {s.sym}
+                        </span>
+                        <div>
+                          <div className={`font-bold text-[14px] leading-[1.35] ${s.fgClass}`}>
+                            {r.limit}
+                          </div>
+                          <div className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                            {r.sub}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Column 3: Pro Column */}
+                      <div className="font-semibold text-[14px] text-[#2563eb] dark:text-blue-400">
+                        {r.pro}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA Banner */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[14px] p-6 sm:p-[24px_28px] text-white gap-6 shadow-md">
+          <div className="text-left">
+            <div className="font-semibold text-xl leading-snug font-['Lora',Georgia,serif]">
+              {bannerConfig.title}
+            </div>
+            <div className="font-normal text-sm text-[#b8c4d9] mt-1">
+              {bannerConfig.subtitle}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap sm:flex-nowrap gap-2.5 shrink-0 w-full sm:w-auto">
+            <Link
+              to={bannerConfig.secondaryLink}
+              className="flex-1 sm:flex-initial text-center bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-bold text-[15px] px-[18px] py-3 rounded-[10px] transition-all"
+            >
+              {bannerConfig.secondaryText}
+            </Link>
+            <Link
+              to={bannerConfig.primaryLink}
+              className="flex-1 sm:flex-initial text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] px-5 py-3 rounded-[10px] shadow-sm transition-all"
+            >
+              {bannerConfig.primaryText}
             </Link>
           </div>
-        )}
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-          <Link
-            to="/study"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-base bg-primary text-primary-foreground shadow-md hover:opacity-95 hover:shadow-primary/25 transition-all"
-          >
-            <BookOpen className="w-5 h-5" />
-            {t.ctaStudy}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-
-          <Link
-            to="/games"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-base bg-card border border-border text-foreground hover:bg-muted/50 transition-all"
-          >
-            <Gamepad2 className="w-5 h-5 text-primary" />
-            {t.ctaGames}
-          </Link>
-
-          <Link
-            to="/dashboard"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground transition-all"
-          >
-            <LayoutDashboard className="w-4 h-4" />
-            {t.ctaDashboard}
-          </Link>
         </div>
-
-        {/* Footer info note */}
-        <p className="text-xs text-muted-foreground max-w-lg mx-auto leading-relaxed">
-          {t.footerNote}
-        </p>
       </div>
     </div>
   );
