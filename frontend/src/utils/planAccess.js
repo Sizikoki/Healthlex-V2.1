@@ -120,6 +120,15 @@ export const isGameUnlocked = (gameId, isPro) => {
 };
 
 /**
+ * Oyun modunun misafir (giriş yapmamış) kullanıcı için açık olup olmadığını kontrol eder.
+ * Misafir kullanıcılar yalnızca Flashcard moduna (günlük 5 oyun kotası ile) erişebilir;
+ * Eşleştirme, Quiz ve Morfem oyunları misafir kullanıcılara kapalıdır.
+ */
+export const isGameUnlockedForGuest = (gameId) => {
+  return gameId === 'flashcards';
+};
+
+/**
  * Test / Preview rolü:
  * Geliştirme/test kolaylığı sağlamak için URL parametresi (?previewRole=pro/basic) veya localStorage'dan okunur.
  * GÜVENLİK KURALI:

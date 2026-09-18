@@ -13,7 +13,7 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { isGameUnlocked, isGameUnlockedForGuest, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -134,6 +134,7 @@ export const Games = () => {
 
   const [activeGame, setActiveGame] = useState(null);
   const [isLimitModalOpen, setIsLimitModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState('general'); // 'match' | 'flashcards' | 'general'
   const [liveTerms, setLiveTerms] = useState(() => getAllTerms());
   const [, setIsLoadingTerms] = useState(false);
   const navigate = useNavigate();
@@ -308,12 +309,8 @@ export const Games = () => {
 
     if (!userIsLoggedIn && gameId === 'match') {
       e.preventDefault();
-      toast.info(
-        isTr
-          ? 'Eşleştirme oyunu kayıtlı kullanıcılara özeldir. Oynamak için lütfen ücretsiz kayıt olun.'
-          : 'Matching game requires an account. Please register to play.'
-      );
-      navigate('/register');
+      setModalMode('match');
+      setIsLimitModalOpen(true);
       return;
     }
 
@@ -321,6 +318,7 @@ export const Games = () => {
       const guestDaily = getFlashcardGuestDailyInfo();
       if (!guestDaily.canPlay) {
         e.preventDefault();
+        setModalMode('flashcards');
         setIsLimitModalOpen(true);
         return;
       }
@@ -328,6 +326,7 @@ export const Games = () => {
 
     if (!userIsLoggedIn && !canGuestPlay()) {
       e.preventDefault();
+      setModalMode('general');
       setIsLimitModalOpen(true);
       return;
     }
@@ -424,7 +423,9 @@ export const Games = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {games.map((game) => {
                 const Icon = game.icon;
-                const locked = !isPro && !isGameUnlocked(game.id, isPro);
+                const isLockedForPro = !isPro && !isGameUnlocked(game.id, isPro);
+                const isLockedForGuest = !userIsLoggedIn && !isGameUnlockedForGuest(game.id);
+                const locked = isLockedForPro || isLockedForGuest;
                 return (
                   <Card key={game.id} className={`group transition-all duration-300 ${locked ? 'opacity-90 border-dashed hover:border-amber-500/50' : 'hover:shadow-2xl hover:-translate-y-2'}`}>
                     <CardHeader>
@@ -433,9 +434,13 @@ export const Games = () => {
                           <Icon className="w-8 h-8 text-white" />
                         </div>
                         {locked && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                          <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold border ${
+                            isLockedForGuest
+                              ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30'
+                              : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30'
+                          }`}>
                             <Lock className="w-3 h-3" />
-                            Pro
+                            {isLockedForGuest ? t('accountRequired', 'Üyelik Gerekli') : 'Pro'}
                           </span>
                         )}
                       </div>
@@ -454,7 +459,9 @@ export const Games = () => {
                         {locked ? (
                           <>
                             <Lock className="mr-2 w-4 h-4 text-amber-500" />
-                            {isTr ? 'Pro ile Aç' : 'Unlock with Pro'}
+                            {isLockedForGuest
+                              ? t('registerToPlay', 'Kayıt Ol & Oyna')
+                              : (isTr ? 'Pro ile Aç' : 'Unlock with Pro')}
                           </>
                         ) : (
                           <>
@@ -476,22 +483,30 @@ export const Games = () => {
           isOpen={isLimitModalOpen}
           onClose={() => setIsLimitModalOpen(false)}
           title={
-            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+            modalMode === 'match'
+              ? t('guestMatchLockedTitle', 'Eşleştirme Oyunu Kayıtlı Kullanıcılara Özeldir! 🎯')
+              : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')
               : undefined
           }
           description={
-            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+            modalMode === 'match'
+              ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarınızı kaydetmek için lütfen ücretsiz kayıt olun.')
+              : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')
               : undefined
           }
           cardTitle={
-            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+            modalMode === 'match'
+              ? t('guestMatchCardTitle', 'Ücretsiz Üye Olun & Eşleştirmeye Başlayın')
+              : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')
               : undefined
           }
           cardDesc={
-            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+            modalMode === 'match'
+              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına sınırsız erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')
+              : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')
               : undefined
           }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -35,7 +35,6 @@ export const MatchGame = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showGuestModal, setShowGuestModal] = useState(false);
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/match');
@@ -277,7 +276,18 @@ export const MatchGame = () => {
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
   if (!userLoggedIn) {
-    return <Navigate to="/register" replace />;
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <GuestLimitModal
+          isOpen={true}
+          onClose={() => navigate('/games')}
+          title={t('guestMatchLockedTitle', 'Eşleştirme Oyunu Kayıtlı Kullanıcılara Özeldir! 🎯')}
+          description={t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarınızı kaydetmek için lütfen ücretsiz kayıt olun.')}
+          cardTitle={t('guestMatchCardTitle', 'Ücretsiz Üye Olun & Eşleştirmeye Başlayın')}
+          cardDesc={t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına sınırsız erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')}
+        />
+      </div>
+    );
   }
 
   if (loading) {
@@ -444,10 +454,6 @@ export const MatchGame = () => {
           </div>
         )}
       </div>
-      <GuestLimitModal
-        isOpen={showGuestModal}
-        onClose={() => setShowGuestModal(false)}
-      />
     </div>
   );
 };
