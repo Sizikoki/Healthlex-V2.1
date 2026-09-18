@@ -4,7 +4,7 @@ import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { isLoggedIn, canGuestPlay, getGuestTrialInfo, getUser } from '@/utils/storage';
+import { isLoggedIn, canGuestPlay, getGuestTrialInfo, getFlashcardGuestDailyInfo, getUser } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
 import { auth, db } from '@/firebase/config';
@@ -317,6 +317,15 @@ export const Games = () => {
       return;
     }
 
+    if (!userIsLoggedIn && gameId === 'flashcards') {
+      const guestDaily = getFlashcardGuestDailyInfo();
+      if (!guestDaily.canPlay) {
+        e.preventDefault();
+        setIsLimitModalOpen(true);
+        return;
+      }
+    }
+
     if (!userIsLoggedIn && !canGuestPlay()) {
       e.preventDefault();
       setIsLimitModalOpen(true);
@@ -466,6 +475,26 @@ export const Games = () => {
         <GuestLimitModal
           isOpen={isLimitModalOpen}
           onClose={() => setIsLimitModalOpen(false)}
+          title={
+            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+              ? t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')
+              : undefined
+          }
+          description={
+            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+              ? t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')
+              : undefined
+          }
+          cardTitle={
+            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+              ? t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')
+              : undefined
+          }
+          cardDesc={
+            !userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay
+              ? t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')
+              : undefined
+          }
         />
 
       </div>

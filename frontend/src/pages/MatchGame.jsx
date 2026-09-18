@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -24,6 +24,7 @@ export const MatchGame = () => {
   const previewRole = getPreviewRole();
   const localUser = getUser();
   const isPro = previewRole === 'pro' || checkIsPro(localUser);
+  const userLoggedIn = isLoggedIn();
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
@@ -38,15 +39,14 @@ export const MatchGame = () => {
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/match');
-    if (!isLoggedIn()) {
+    if (!userLoggedIn) {
       toast.info(
         currentLanguage === 'en'
           ? 'Matching game requires a free account. Please register to play.'
           : 'Eşleştirme oyunu kayıtlı kullanıcılara özeldir. Oynamak için lütfen ücretsiz kayıt olun.'
       );
-      navigate('/register');
     }
-  }, [navigate, currentLanguage]);
+  }, [userLoggedIn, currentLanguage]);
 
   const setupGame = useCallback((termsList) => {
     if (!termsList || termsList.length === 0) return;
@@ -147,6 +147,7 @@ export const MatchGame = () => {
   }, [setupGame, allTerms]);
 
   useEffect(() => {
+    if (!userLoggedIn) return;
     const fetchTerms = async () => {
       try {
         setLoading(true);
@@ -210,7 +211,7 @@ export const MatchGame = () => {
 
     fetchTerms();
     updateStreak();
-  }, [categoryId, setupGame]);
+  }, [categoryId, setupGame, userLoggedIn]);
 
 
 
@@ -275,8 +276,8 @@ export const MatchGame = () => {
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
-  if (!isLoggedIn()) {
-    return null;
+  if (!userLoggedIn) {
+    return <Navigate to="/register" replace />;
   }
 
   if (loading) {

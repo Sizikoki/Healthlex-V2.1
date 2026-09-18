@@ -31,8 +31,10 @@ export const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [showGuestModal, setShowGuestModal] = useState(false);
+  const isGuest = !isLoggedIn();
+  const initialGuestInfo = isGuest ? getFlashcardGuestDailyInfo() : { canPlay: true };
+  const [loading, setLoading] = useState(initialGuestInfo.canPlay);
+  const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
 
   const loadTerms = useCallback(async () => {
     if (!isLoggedIn()) {
@@ -184,19 +186,22 @@ export const Flashcards = () => {
     );
   }
 
-  if (showGuestModal) {
-    return (
-      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
-        <GuestLimitModal
-          isOpen={true}
-          onClose={() => navigate('/games')}
-          title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
-          description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
-          cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
-          cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
-        />
-      </div>
-    );
+  if (!isLoggedIn()) {
+    const dailyInfo = getFlashcardGuestDailyInfo();
+    if (!dailyInfo.canPlay || showGuestModal) {
+      return (
+        <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+          <GuestLimitModal
+            isOpen={true}
+            onClose={() => navigate('/games')}
+            title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
+            description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
+            cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
+            cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
+          />
+        </div>
+      );
+    }
   }
 
   if (terms.length === 0) {
@@ -374,14 +379,6 @@ export const Flashcards = () => {
           </div>
         )}
       </div>
-      <GuestLimitModal
-        isOpen={showGuestModal}
-        onClose={() => setShowGuestModal(false)}
-        title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
-        description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
-        cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
-        cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
-      />
     </div>
   );
 };
