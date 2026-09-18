@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   BookOpen,
@@ -15,7 +15,8 @@ import {
   Sparkles,
   Clock,
   Search,
-  Lock
+  Lock,
+  ChevronRight
 } from 'lucide-react';
 import {
   getStats,
@@ -34,6 +35,7 @@ import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
+import { getTermsByCategory } from '@/data/medicalTerms';
 import { toast } from 'sonner';
 
 // --- Kullanıcı Plan Çözümleme ---
@@ -85,45 +87,77 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
 };
 
 const FREE_DASHBOARD_CATEGORIES = [
-  { id: 'skull_bones', name: 'Kafatası Kemikleri', n: 42 },
-  { id: 'face_bones', name: 'Yüz Kemikleri', n: 31 },
-  { id: 'trunk_bones', name: 'Gövde Kemikleri', n: 38 },
-  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', n: 46 },
-  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri', n: 27 },
-  { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', n: 44 },
-  { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri', n: 29 },
-  { id: 'spine_joints', name: 'Omurga Eklemleri', n: 22 },
-  { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri', n: 18 },
-  { id: 'muscle_structures', name: 'Kas ve Kasla İlişkili Yapılar', n: 64 },
-  { id: 'bone_structures', name: 'Kemik / İskelet Yapıları', n: 35 },
-  { id: 'movement_terms', name: 'Hareket Terimleri', n: 26 },
-  { id: 'anatomic_direction', name: 'Anatomik Yön Terimleri', n: 24 }
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', enName: 'Skull Bones', defaultCount: 42 },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', enName: 'Face Bones', defaultCount: 31 },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', enName: 'Trunk Bones', defaultCount: 38 },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Extremite Kemikleri', enName: 'Upper Extremity Bones', defaultCount: 46 },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri', enName: 'Upper Extremity Joints', defaultCount: 27 },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Extremite Kemikleri', enName: 'Lower Extremity Bones', defaultCount: 44 },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', enName: 'Lower Extremity Joints', defaultCount: 29 },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', enName: 'Spine Joints', defaultCount: 22 },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', enName: 'Head and Neck Joints', defaultCount: 18 },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', enName: 'Muscles & Related Structures', defaultCount: 64 },
+  { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', enName: 'Bone & Skeletal Structures', defaultCount: 35 },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', enName: 'Movement Terms', defaultCount: 26 },
+  { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri', enName: 'Anatomical Direction', defaultCount: 24 }
 ];
 
 const FREE_DASHBOARD_MORPHEMES = [
-  { name: 'oste/o-', meaning: 'kemik', unblurred: true },
-  { name: '-itis', meaning: 'iltihap', unblurred: true },
-  { name: 'cardi/o-', meaning: 'kalp', unblurred: true },
-  { name: 'arthr/o-', meaning: 'eklem', unblurred: true },
-  { name: 'my/o-', meaning: 'kas', unblurred: true },
-  { name: '-ectomy', meaning: 'cerrahi çıkarma', unblurred: false },
-  { name: '-plasty', meaning: 'onarım, şekillendirme', unblurred: false },
-  { name: 'neur/o-', meaning: 'sinir', unblurred: false }
+  { name: 'oste/o-', meaningTr: 'kemik', meaningEn: 'bone', unblurred: true },
+  { name: '-itis', meaningTr: 'iltihap', meaningEn: 'inflammation', unblurred: true },
+  { name: 'cardi/o-', meaningTr: 'kalp', meaningEn: 'heart', unblurred: true },
+  { name: 'arthr/o-', meaningTr: 'eklem', meaningEn: 'joint', unblurred: true },
+  { name: 'my/o-', meaningTr: 'kas', meaningEn: 'muscle', unblurred: true },
+  { name: '-ectomy', meaningTr: 'cerrahi çıkarma', meaningEn: 'surgical removal', unblurred: false },
+  { name: '-plasty', meaningTr: 'onarım, şekillendirme', meaningEn: 'surgical repair', unblurred: false },
+  { name: 'neur/o-', meaningTr: 'sinir', meaningEn: 'nerve', unblurred: false }
 ];
 
 const FREE_DASHBOARD_LOCKED_GAMES = [
-  { name: 'Eşleştirme', plan: 'Temel ve üzeri ile açılır', enPlan: 'Unlocked with Basic & above' },
-  { name: 'Quiz', plan: 'Pro ve üzeri gerekir', enPlan: 'Requires Pro & above' },
-  { name: 'Morfem Yapıcı', plan: 'Pro ve üzeri gerekir', enPlan: 'Requires Pro & above' }
+  {
+    id: 'match',
+    name: 'Eşleştirme',
+    enName: 'Matching Game',
+    plan: 'Temel ve üzeri ile açılır',
+    enPlan: 'Unlocked with Basic & above'
+  },
+  {
+    id: 'quiz',
+    name: 'Quiz',
+    enName: 'Quiz Mode',
+    plan: 'Pro ve üzeri gerekir',
+    enPlan: 'Requires Pro & above'
+  },
+  {
+    id: 'morpheme',
+    name: 'Morfem Yapıcı',
+    enName: 'Morpheme Builder',
+    plan: 'Pro ve üzeri gerekir',
+    enPlan: 'Requires Pro & above'
+  }
 ];
 
 // =============================================================================
-// YENİ KAYITLI MİSAFİR / ÜCRETSİZ KULLANICI İÇİN ÖZEL PANEL (8a Şablonu)
+// YENİ KAYITLI MİSAFİR / ÜCRETSİZ KULLANICI İÇİN DİNAMİK PANEL (8a Şablonu)
 // =============================================================================
-const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo }) => {
+const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, todayFormatted }) => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [recentTerms, setRecentTerms] = useState([]);
+
+  // Dinamik Son Bakılan Terimler (localStorage)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('healthlex_recent_terms');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setRecentTerms(parsed.slice(0, 4));
+        }
+      }
+    } catch (e) {}
+  }, []);
 
   // ⌘K / Ctrl+K Kısayol Tuşu Dinleyicisi
   useEffect(() => {
@@ -135,6 +169,20 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo })
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Dinamik Kategori Terim Sayıları
+  const catCounts = useMemo(() => {
+    const counts = {};
+    FREE_DASHBOARD_CATEGORIES.forEach((cat) => {
+      try {
+        const terms = getTermsByCategory(cat.id);
+        counts[cat.id] = terms && terms.length > 0 ? terms.length : cat.defaultCount;
+      } catch (e) {
+        counts[cat.id] = cat.defaultCount;
+      }
+    });
+    return counts;
   }, []);
 
   const handleSearchSubmit = (e) => {
@@ -188,9 +236,16 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo })
         {/* Üst Karşılama Başlığı ve Arama Kutusu */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-5 lg:gap-8">
           <div className="flex flex-col gap-2 text-left">
-            <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-              {isTr ? `PANELİM · ${streakDays}. GÜN` : `DASHBOARD · DAY ${streakDays}`}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? `PANELİM · ${streakDays}. GÜN` : `DASHBOARD · DAY ${streakDays}`}
+              </span>
+              {todayFormatted && (
+                <span className="text-[12px] text-[#6b7a90] dark:text-muted-foreground hidden sm:inline opacity-80">
+                  · {todayFormatted}
+                </span>
+              )}
+            </div>
             <h1 className="m-0 font-semibold text-2xl sm:text-[36px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
               {isTr
                 ? `Merhaba ${userName || 'Öğrenci'}, nereden başlayalım?`
@@ -260,33 +315,68 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo })
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {FREE_DASHBOARD_CATEGORIES.map((cat) => (
-                <Link
-                  key={cat.id}
-                  to={`/study?category=${cat.id}`}
-                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 sm:px-4 sm:py-3.5 flex justify-between items-center gap-3 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all"
-                >
-                  <span className="font-bold text-[14px] leading-[1.3] truncate">
-                    {cat.name}
-                  </span>
-                  <span className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground shrink-0">
-                    {cat.n} {isTr ? 'terim' : 'terms'}
-                  </span>
-                </Link>
-              ))}
+              {FREE_DASHBOARD_CATEGORIES.map((cat) => {
+                const count = catCounts[cat.id] || cat.defaultCount;
+                const displayName = isTr ? cat.name : cat.enName;
+                return (
+                  <Link
+                    key={cat.id}
+                    to={`/study?category=${cat.id}`}
+                    className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 sm:px-4 sm:py-3.5 flex justify-between items-center gap-3 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all group"
+                  >
+                    <span className="font-bold text-[14px] leading-[1.3] truncate group-hover:text-[#2563eb] transition-colors">
+                      {displayName}
+                    </span>
+                    <span className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground shrink-0">
+                      {count} {isTr ? 'terim' : 'terms'}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
 
-            {/* Son Bakılan Terimler Kutusu */}
-            <div className="bg-white dark:bg-card border border-dashed border-[#d5dbe7] dark:border-border/80 rounded-[12px] p-5 flex flex-col gap-1.5">
-              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
-              </span>
-              <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/80">
-                {isTr
-                  ? 'Henüz bir terime bakmadın. Yukarıdan arayabilir veya bir kategoriden başlayabilirsin.'
-                  : 'You have not viewed any terms yet. Search above or start from a category.'}
-              </span>
-            </div>
+            {/* Son Bakılan Terimler Bölümü */}
+            {recentTerms.length > 0 ? (
+              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-4 sm:p-5 flex flex-col gap-3 shadow-xs">
+                <div className="flex justify-between items-center">
+                  <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                    {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+                  </span>
+                  <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                    {isTr ? 'Sözlük →' : 'Glossary →'}
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {recentTerms.map((rt, idx) => (
+                    <Link
+                      key={idx}
+                      to={`/study/${rt.slug || rt.term}`}
+                      className="bg-[#f9fafc] dark:bg-muted/30 border border-[#e5e9f2] dark:border-border/60 hover:border-[#2563eb]/40 rounded-[9px] p-2.5 flex justify-between items-center gap-2 transition-all group"
+                    >
+                      <span className="font-bold text-[13px] text-[#0f1b33] dark:text-foreground truncate group-hover:text-[#2563eb]">
+                        {rt.term}
+                      </span>
+                      {rt.turkish && (
+                        <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground truncate max-w-[110px]">
+                          {rt.turkish}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white dark:bg-card border border-dashed border-[#d5dbe7] dark:border-border/80 rounded-[12px] p-5 flex flex-col gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+                </span>
+                <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/80">
+                  {isTr
+                    ? 'Henüz bir terime bakmadın. Yukarıdan arayabilir veya bir kategoriden başlayabilirsin.'
+                    : 'You have not viewed any terms yet. Search above or start from a category.'}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* SÜTUN 2: MORFEMLER (1fr) */}
@@ -314,26 +404,35 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo })
 
               {/* 8 Örnek Morfem Listesi (Kilitliler Bulanık) */}
               <div className="flex flex-col gap-1.5">
-                {FREE_DASHBOARD_MORPHEMES.map((m, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex justify-between items-center gap-2.5 px-2.5 py-2 rounded-[8px] transition-colors ${
-                      m.unblurred
-                        ? 'bg-[#f9fafc] dark:bg-muted/30'
-                        : 'bg-[#f5f7fb] dark:bg-muted/15'
-                    }`}
-                  >
-                    <span className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground font-mono">
-                      {m.name}
-                    </span>
-                    <span
-                      className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground select-none"
-                      style={{ filter: m.unblurred ? 'none' : 'blur(4px)' }}
+                {FREE_DASHBOARD_MORPHEMES.map((m, idx) => {
+                  const meaningText = isTr ? m.meaningTr : m.meaningEn;
+                  const targetUrl = m.unblurred
+                    ? `/morphemes?search=${encodeURIComponent(m.name.replace(/[^a-zA-Z]/g, ''))}`
+                    : '/pricing';
+
+                  return (
+                    <Link
+                      key={idx}
+                      to={targetUrl}
+                      title={m.unblurred ? `${m.name}: ${meaningText}` : (isTr ? 'Bu morfem Pro planda açıktır' : 'Unlocked in Pro plan')}
+                      className={`flex justify-between items-center gap-2.5 px-2.5 py-2 rounded-[8px] transition-colors ${
+                        m.unblurred
+                          ? 'bg-[#f9fafc] dark:bg-muted/30 hover:bg-[#e8f0ff] dark:hover:bg-primary/15'
+                          : 'bg-[#f5f7fb] dark:bg-muted/15 hover:bg-[#f0f4f9]'
+                      }`}
                     >
-                      {m.meaning}
-                    </span>
-                  </div>
-                ))}
+                      <span className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground font-mono">
+                        {m.name}
+                      </span>
+                      <span
+                        className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground select-none"
+                        style={{ filter: m.unblurred ? 'none' : 'blur(4px)' }}
+                      >
+                        {meaningText}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
 
               <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
@@ -392,15 +491,15 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo })
 
             {/* Kilitli Oyunlar Listesi */}
             <div className="flex flex-col gap-2">
-              {FREE_DASHBOARD_LOCKED_GAMES.map((g, idx) => (
+              {FREE_DASHBOARD_LOCKED_GAMES.map((g) => (
                 <Link
-                  key={idx}
+                  key={g.id}
                   to="/pricing"
-                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3 sm:px-3.5 sm:py-3 flex justify-between items-center gap-2.5 opacity-85 hover:opacity-100 hover:border-[#2563eb]/40 transition-all"
+                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3 sm:px-3.5 sm:py-3 flex justify-between items-center gap-2.5 opacity-85 hover:opacity-100 hover:border-[#2563eb]/40 transition-all group"
                 >
                   <div>
-                    <div className="font-extrabold text-[14px] text-[#0f1b33] dark:text-foreground">
-                      {g.name}
+                    <div className="font-extrabold text-[14px] text-[#0f1b33] dark:text-foreground group-hover:text-[#2563eb] transition-colors">
+                      {isTr ? g.name : g.enName}
                     </div>
                     <div className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
                       {isTr ? g.plan : g.enPlan}
@@ -623,6 +722,7 @@ export const Dashboard = () => {
         termCount={termCount}
         isTr={isTr}
         flashcardInfo={flashcardInfo}
+        todayFormatted={todayFormatted}
       />
     );
   }

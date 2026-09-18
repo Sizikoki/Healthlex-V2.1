@@ -116,6 +116,20 @@ export const TermDetail = () => {
         document.head.appendChild(canonicalLink);
       }
 
+      // Save to recently viewed terms in localStorage
+      try {
+        const raw = localStorage.getItem('healthlex_recent_terms');
+        const list = raw ? JSON.parse(raw) : [];
+        const filtered = list.filter(item => item.slug !== termSlug && item.term !== term.term);
+        filtered.unshift({
+          term: term.term,
+          slug: termSlug,
+          turkish: term.turkish || term.english || '',
+          category: term.category || term.subcategory || ''
+        });
+        localStorage.setItem('healthlex_recent_terms', JSON.stringify(filtered.slice(0, 6)));
+      } catch (e) {}
+
       const ogUrl = document.querySelector('meta[property="og:url"]');
       if (ogUrl) {
         ogUrl.setAttribute('content', canonicalUrl);
