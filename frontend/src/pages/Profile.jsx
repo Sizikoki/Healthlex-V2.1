@@ -797,20 +797,6 @@ export const Profile = () => {
                 </div>
               </div>
 
-              {/* Email Notifications Settings */}
-              <div className="setting-row flex justify-between items-center gap-[16px] py-[16px] border-b border-[var(--line)]">
-                <div>
-                  <div className="setting-label text-[0.92rem] font-semibold text-[var(--ink)]">{t('emailNotificationsTitle')}</div>
-                  <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5">{t('emailNotificationsSub')}</div>
-                </div>
-                <button 
-                  onClick={handleToggleEmail}
-                  className={`toggle w-[42px] h-[24px] rounded-[14px] relative flex-shrink-0 transition-all ${
-                    emailNotifications ? 'on bg-[var(--teal)]' : 'bg-[var(--line)]'
-                  }`}
-                ></button>
-              </div>
-
               {/* Security: Change Password */}
               <div className="setting-row flex justify-between items-center gap-[16px] py-[16px] border-b border-[var(--line)]">
                 <div>
