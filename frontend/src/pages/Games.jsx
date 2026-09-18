@@ -13,7 +13,7 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isGameUnlockedForGuest, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { isGameUnlocked, isGameUnlockedForGuest, isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -46,6 +46,7 @@ export const Games = () => {
   const isTr = currentLanguage !== 'en';
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic');
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/games');
@@ -57,6 +58,7 @@ export const Games = () => {
     if (!uid) {
       const localUser = getUser();
       setIsPro(checkIsPro(localUser));
+      setHasPlan(checkHasPaidPlan(localUser));
       return;
     }
 
@@ -64,16 +66,19 @@ export const Games = () => {
       const userDocRef = doc(db, 'users', uid);
       const unsub = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
-          setIsPro(checkIsPro(docSnap.data()));
+          const data = docSnap.data();
+          setIsPro(checkIsPro(data));
+          setHasPlan(checkHasPaidPlan(data));
         } else {
           setIsPro(false);
+          setHasPlan(false);
         }
       }, (err) => {
-        console.warn('[Games] Could not check pro status:', err);
+        console.warn('[Games] Could not check pro/plan status:', err);
       });
       return () => unsub();
     } catch (e) {
-      console.warn('[Games] Error checking pro status:', e);
+      console.warn('[Games] Error checking pro/plan status:', e);
     }
   }, [previewRole]);
 
@@ -295,24 +300,24 @@ export const Games = () => {
   };
 
   const handleGamePlayClick = (e, gameId, gamePath) => {
-    if (!isPro && !isGameUnlocked(gameId, isPro)) {
+    if (!hasPlan && gameId === 'match') {
+      e.preventDefault();
+      toast.info(
+        isTr
+          ? 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
+          : 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
+      );
+      navigate('/pricing');
+      return;
+    }
+
+    if (!isGameUnlocked(gameId, isPro, hasPlan)) {
       e.preventDefault();
       const gameObj = games.find((g) => g.id === gameId);
       toast.info(
         isTr
           ? `${gameObj?.title || 'Bu oyun'} modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.`
           : `${gameObj?.title || 'This game'} mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.`
-      );
-      navigate('/pricing');
-      return;
-    }
-
-    if (!userIsLoggedIn && gameId === 'match') {
-      e.preventDefault();
-      toast.info(
-        isTr
-          ? 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
-          : 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
       );
       navigate('/pricing');
       return;
@@ -427,9 +432,8 @@ export const Games = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {games.map((game) => {
                 const Icon = game.icon;
-                const isLockedForPro = !isPro && !isGameUnlocked(game.id, isPro);
-                const isLockedForGuest = !userIsLoggedIn && !isGameUnlockedForGuest(game.id);
-                const locked = isLockedForPro || isLockedForGuest;
+                const locked = !isGameUnlocked(game.id, isPro, hasPlan);
+                const isMatch = game.id === 'match';
                 return (
                   <Card key={game.id} className={`group transition-all duration-300 ${locked ? 'opacity-90 border-dashed hover:border-amber-500/50' : 'hover:shadow-2xl hover:-translate-y-2'}`}>
                     <CardHeader>
@@ -440,7 +444,7 @@ export const Games = () => {
                         {locked && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                             <Lock className="w-3 h-3" />
-                            {isLockedForGuest ? (isTr ? 'Temel' : 'Basic') : 'Pro'}
+                            {isMatch ? (isTr ? 'Temel' : 'Basic') : 'Pro'}
                           </span>
                         )}
                       </div>
@@ -459,7 +463,7 @@ export const Games = () => {
                         {locked ? (
                           <>
                             <Lock className="mr-2 w-4 h-4 text-amber-500" />
-                            {isLockedForGuest
+                            {isMatch
                               ? (isTr ? 'Temel ve Üzeri ile Aç' : 'Unlock with Basic & Above')
                               : (isTr ? 'Pro ile Aç' : 'Unlock with Pro')}
                           </>

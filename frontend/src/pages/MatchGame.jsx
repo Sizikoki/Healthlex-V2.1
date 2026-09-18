@@ -7,10 +7,10 @@ import { Progress } from '@/components/ui/progress';
 import { getAllTerms } from '@/data/medicalTerms';
 import { saveMatchScore, updateStreak, isLoggedIn, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
-import { db } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '@/firebase/config';
+import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
 
@@ -22,8 +22,9 @@ export const MatchGame = () => {
 
   const previewRole = getPreviewRole();
   const localUser = getUser();
-  const isPro = previewRole === 'pro' || checkIsPro(localUser);
-  const userLoggedIn = isLoggedIn();
+  const [isPro, setIsPro] = useState(previewRole === 'pro' || checkIsPro(localUser));
+  const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(localUser));
+  const [checkingPlan, setCheckingPlan] = useState(!previewRole && Boolean(auth?.currentUser?.uid || localUser?.uid));
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
@@ -36,8 +37,42 @@ export const MatchGame = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (previewRole) {
+      setCheckingPlan(false);
+      return;
+    }
+    const uid = auth?.currentUser?.uid || getUser()?.uid;
+    if (!uid) {
+      setHasPlan(false);
+      setCheckingPlan(false);
+      return;
+    }
+
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setIsPro(checkIsPro(data));
+          setHasPlan(checkHasPaidPlan(data));
+        } else {
+          setIsPro(false);
+          setHasPlan(false);
+        }
+        setCheckingPlan(false);
+      }, (err) => {
+        console.warn('[MatchGame] Error checking plan:', err);
+        setCheckingPlan(false);
+      });
+      return () => unsub();
+    } catch (e) {
+      setCheckingPlan(false);
+    }
+  }, [previewRole]);
+
+  useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/match');
-    if (!userLoggedIn) {
+    if (!checkingPlan && !hasPlan) {
       toast.info(
         currentLanguage === 'en'
           ? 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
@@ -45,14 +80,14 @@ export const MatchGame = () => {
       );
       navigate('/pricing');
     }
-  }, [userLoggedIn, currentLanguage, navigate]);
+  }, [checkingPlan, hasPlan, currentLanguage, navigate]);
 
   const setupGame = useCallback((termsList) => {
     if (!termsList || termsList.length === 0) return;
 
-    if (!isLoggedIn()) {
+    if (!hasPlan) {
       setLoading(false);
-      navigate('/register');
+      navigate('/pricing');
       return;
     }
 
@@ -139,14 +174,14 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage, isPro, navigate]);
+  }, [categoryId, currentLanguage, isPro, hasPlan, navigate]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
   }, [setupGame, allTerms]);
 
   useEffect(() => {
-    if (!userLoggedIn) return;
+    if (checkingPlan || !hasPlan) return;
     const fetchTerms = async () => {
       try {
         setLoading(true);
@@ -210,7 +245,7 @@ export const MatchGame = () => {
 
     fetchTerms();
     updateStreak();
-  }, [categoryId, setupGame, userLoggedIn]);
+  }, [categoryId, setupGame, checkingPlan, hasPlan]);
 
 
 
@@ -275,7 +310,19 @@ export const MatchGame = () => {
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
-  if (!userLoggedIn) {
+  if (checkingPlan) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-8 text-center shadow-xl">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <h3 className="text-xl font-semibold mb-2">{t('loadingCards', 'Oyun Yükleniyor...')}</h3>
+          <p className="text-muted-foreground">{t('fetchingTerms')}</p>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!hasPlan) {
     return null;
   }
 

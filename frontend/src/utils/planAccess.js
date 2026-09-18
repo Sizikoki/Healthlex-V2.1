@@ -112,11 +112,27 @@ export const isMorphemeUnlocked = (index, isPro, isBasic = false) => {
 };
 
 /**
- * Oyun modunun kullanıcı için açık olup olmadığını kontrol eder (Temel pakette Flashcard & Eşleştirme açık, Quiz & Morfem Yapıcı kapalı)
+ * Kullanıcının herhangi bir ücretli plana (Temel, Pro veya Ömür Boyu) sahip olup olmadığını kontrol eder.
+ * Giriş yapmamış misafirler veya hesap oluşturup henüz bir plan satın almamış (ücretsiz) kullanıcılar false döner.
  */
-export const isGameUnlocked = (gameId, isPro) => {
+export const checkHasPaidPlan = (userData) => {
+  if (!userData) return false;
+  const preview = getPreviewRole();
+  if (preview === 'pro' || preview === 'basic') return true;
+  return checkIsBasic(userData) || checkIsPro(userData) || userData.isLifetime === true;
+};
+
+/**
+ * Oyun modunun kullanıcı için açık olup olmadığını kontrol eder:
+ * - Pro / Ömür Boyu: Tüm oyunlar açık (Flashcard, Eşleştirme, Quiz, Morfem)
+ * - Temel plan (hasPlan: true): Flashcard & Eşleştirme açık, Quiz & Morfem kapalı
+ * - Misafir veya Plan almamış ücretsiz kullanıcı (hasPlan: false): Yalnızca Flashcard açık, Eşleştirme, Quiz & Morfem kapalı
+ */
+export const isGameUnlocked = (gameId, isPro, hasPlan = false) => {
   if (isPro) return true;
-  return UNLOCKED_GAMES.includes(gameId);
+  if (gameId === 'flashcards') return true;
+  if (gameId === 'match') return Boolean(hasPlan);
+  return false;
 };
 
 /**
