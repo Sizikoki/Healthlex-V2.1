@@ -1,7 +1,31 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BookOpen, Gamepad2, CreditCard, Layers, BarChart3, LogOut, User, ArrowRight, Zap, Star, Flame, Sparkles, Clock } from 'lucide-react';
-import { getStats, getUser, getStreak, logout, formatTurkishName, getUserTrialState } from '@/utils/storage';
+import {
+  BookOpen,
+  Gamepad2,
+  CreditCard,
+  Layers,
+  BarChart3,
+  LogOut,
+  User,
+  ArrowRight,
+  Zap,
+  Star,
+  Flame,
+  Sparkles,
+  Clock,
+  Search,
+  Lock
+} from 'lucide-react';
+import {
+  getStats,
+  getUser,
+  getStreak,
+  logout,
+  formatTurkishName,
+  getUserTrialState,
+  getFlashcardGuestDailyInfo
+} from '@/utils/storage';
 import { getPastDueState, getPreviewRole } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
@@ -9,8 +33,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
+import { getTermCount, getInitialTermCount } from '@/services/termCountService';
 import { toast } from 'sonner';
-
 
 // --- Kullanıcı Plan Çözümleme ---
 // Plan Seviyeleri: 'lifetime' | 'pro' | 'basic' | 'trial' | 'expired'
@@ -60,6 +84,365 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
   return 'expired';
 };
 
+const FREE_DASHBOARD_CATEGORIES = [
+  { id: 'skull_bones', name: 'Kafatası Kemikleri', n: 42 },
+  { id: 'face_bones', name: 'Yüz Kemikleri', n: 31 },
+  { id: 'trunk_bones', name: 'Gövde Kemikleri', n: 38 },
+  { id: 'upper_extremity_bones', name: 'Üst Extremite Kemikleri', n: 46 },
+  { id: 'upper_extremity_joints', name: 'Üst Ekstremite Eklemleri', n: 27 },
+  { id: 'lower_extremity_bones', name: 'Alt Extremite Kemikleri', n: 44 },
+  { id: 'lower_extremity_joints', name: 'Alt Ekstremite Eklemleri', n: 29 },
+  { id: 'spine_joints', name: 'Omurga Eklemleri', n: 22 },
+  { id: 'head_and_neck_joints', name: 'Kafa ve Boyun Eklemleri', n: 18 },
+  { id: 'muscle_structures', name: 'Kas ve Kasla İlişkili Yapılar', n: 64 },
+  { id: 'bone_structures', name: 'Kemik / İskelet Yapıları', n: 35 },
+  { id: 'movement_terms', name: 'Hareket Terimleri', n: 26 },
+  { id: 'anatomic_direction', name: 'Anatomik Yön Terimleri', n: 24 }
+];
+
+const FREE_DASHBOARD_MORPHEMES = [
+  { name: 'oste/o-', meaning: 'kemik', unblurred: true },
+  { name: '-itis', meaning: 'iltihap', unblurred: true },
+  { name: 'cardi/o-', meaning: 'kalp', unblurred: true },
+  { name: 'arthr/o-', meaning: 'eklem', unblurred: true },
+  { name: 'my/o-', meaning: 'kas', unblurred: true },
+  { name: '-ectomy', meaning: 'cerrahi çıkarma', unblurred: false },
+  { name: '-plasty', meaning: 'onarım, şekillendirme', unblurred: false },
+  { name: 'neur/o-', meaning: 'sinir', unblurred: false }
+];
+
+const FREE_DASHBOARD_LOCKED_GAMES = [
+  { name: 'Eşleştirme', plan: 'Temel ve üzeri ile açılır', enPlan: 'Unlocked with Basic & above' },
+  { name: 'Quiz', plan: 'Pro ve üzeri gerekir', enPlan: 'Requires Pro & above' },
+  { name: 'Morfem Yapıcı', plan: 'Pro ve üzeri gerekir', enPlan: 'Requires Pro & above' }
+];
+
+// =============================================================================
+// YENİ KAYITLI MİSAFİR / ÜCRETSİZ KULLANICI İÇİN ÖZEL PANEL (8a Şablonu)
+// =============================================================================
+const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo }) => {
+  const navigate = useNavigate();
+  const searchInputRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // ⌘K / Ctrl+K Kısayol Tuşu Dinleyicisi
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/study?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/study');
+    }
+  };
+
+  const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 1;
+  const remainingPlays = flashcardInfo?.playsRemaining ?? 5;
+  const totalPlays = flashcardInfo?.maxPlays ?? 5;
+  const termsVal = termCount ? String(termCount) : '590';
+
+  const quotas = [
+    {
+      label: isTr ? 'TERİM' : 'TERMS',
+      v: termsVal,
+      unit: isTr ? 'detay sayfası' : 'detail pages',
+      note: isTr ? 'Link veya aramayla tam içerik' : 'Full content via link or search',
+      borderClass: 'border-l-0'
+    },
+    {
+      label: isTr ? 'MORFEM' : 'MORPHEMES',
+      v: '24',
+      unit: isTr ? '/ 571 açık' : '/ 571 open',
+      note: isTr ? 'Gerisi ad görünür, anlam bulanık' : 'Remaining name visible, meaning blurred',
+      borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
+    },
+    {
+      label: isTr ? 'FLASHCARD' : 'FLASHCARDS',
+      v: `${remainingPlays} / ${totalPlays}`,
+      unit: isTr ? 'bugün' : 'today',
+      note: isTr ? 'Günlük hak her gece yenilenir' : 'Daily plays refresh every midnight',
+      borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
+    },
+    {
+      label: isTr ? 'KATEGORİ' : 'CATEGORIES',
+      v: '13',
+      unit: isTr ? 'açık' : 'open',
+      note: isTr ? 'Sınırsız gezinme, kilit yok' : 'Unlimited browsing, zero locks',
+      borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
+    }
+  ];
+
+  return (
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-11 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased">
+      <div className="w-full max-w-[1120px] flex flex-col gap-7 sm:gap-8">
+        {/* Üst Karşılama Başlığı ve Arama Kutusu */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-5 lg:gap-8">
+          <div className="flex flex-col gap-2 text-left">
+            <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              {isTr ? `PANELİM · ${streakDays}. GÜN` : `DASHBOARD · DAY ${streakDays}`}
+            </span>
+            <h1 className="m-0 font-semibold text-2xl sm:text-[36px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+              {isTr
+                ? `Merhaba ${userName || 'Öğrenci'}, nereden başlayalım?`
+                : `Hello ${userName || 'Student'}, where shall we start?`}
+            </h1>
+          </div>
+
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex items-center gap-2.5 bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] px-4 w-full lg:w-[420px] h-[50px] shrink-0 shadow-xs focus-within:border-[#2563eb] transition-all"
+          >
+            <Search className="w-4 h-4 text-[#6b7a90] shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={
+                isTr
+                  ? 'Terim veya morfem ara… örn. “os frontale”'
+                  : 'Search terms or morphemes… e.g. "os frontale"'
+              }
+              className="bg-transparent border-none outline-hidden text-[14px] sm:text-[15px] font-normal text-[#0f1b33] dark:text-foreground placeholder:text-[#9aa6ba] w-full"
+            />
+            <span className="font-bold text-[11px] text-[#6b7a90] dark:text-muted-foreground border border-[#e5e9f2] dark:border-border rounded-[5px] px-1.5 py-0.5 select-none shrink-0">
+              ⌘K
+            </span>
+          </form>
+        </div>
+
+        {/* 4'lü Kota ve Limit Özet Şeridi */}
+        <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[18px_24px] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 shadow-xs">
+          {quotas.map((q, idx) => (
+            <div
+              key={idx}
+              className={`flex flex-col gap-1.5 text-left ${q.borderClass}`}
+            >
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {q.label}
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-extrabold text-2xl sm:text-[26px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {q.v}
+                </span>
+                <span className="font-semibold text-[13px] text-[#6b7a90] dark:text-muted-foreground">
+                  {q.unit}
+                </span>
+              </div>
+              <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
+                {q.note}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* 3 Ana Sütun Bölümü (Kategoriler | Morfemler | Oyunlar) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr_1fr] gap-5 items-start">
+          {/* SÜTUN 1: KATEGORİLER (1.6fr) */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'KATEGORİLER · 13' : 'CATEGORIES · 13'}
+              </span>
+              <Link to="/study" className="font-bold text-[13px] text-[#2563eb] hover:underline">
+                {isTr ? 'Tümünü gör →' : 'View all →'}
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {FREE_DASHBOARD_CATEGORIES.map((cat) => (
+                <Link
+                  key={cat.id}
+                  to={`/study?category=${cat.id}`}
+                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 sm:px-4 sm:py-3.5 flex justify-between items-center gap-3 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all"
+                >
+                  <span className="font-bold text-[14px] leading-[1.3] truncate">
+                    {cat.name}
+                  </span>
+                  <span className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground shrink-0">
+                    {cat.n} {isTr ? 'terim' : 'terms'}
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Son Bakılan Terimler Kutusu */}
+            <div className="bg-white dark:bg-card border border-dashed border-[#d5dbe7] dark:border-border/80 rounded-[12px] p-5 flex flex-col gap-1.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+              </span>
+              <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/80">
+                {isTr
+                  ? 'Henüz bir terime bakmadın. Yukarıdan arayabilir veya bir kategoriden başlayabilirsin.'
+                  : 'You have not viewed any terms yet. Search above or start from a category.'}
+              </span>
+            </div>
+          </div>
+
+          {/* SÜTUN 2: MORFEMLER (1fr) */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'MORFEMLER' : 'MORPHEMES'}
+              </span>
+              <Link to="/morphemes" className="font-bold text-[13px] text-[#2563eb] hover:underline">
+                {isTr ? 'Listeye git →' : 'Go to list →'}
+              </Link>
+            </div>
+
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[18px] flex flex-col gap-3 shadow-xs">
+              {/* Morfem İlerleme Çubuğu */}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
+                  <span>{isTr ? '24 / 571 açık' : '24 / 571 open'}</span>
+                  <span className="text-[#6b7a90] dark:text-muted-foreground">%4</span>
+                </div>
+                <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
+                  <div className="w-[4.2%] h-full bg-[#2563eb]" />
+                </div>
+              </div>
+
+              {/* 8 Örnek Morfem Listesi (Kilitliler Bulanık) */}
+              <div className="flex flex-col gap-1.5">
+                {FREE_DASHBOARD_MORPHEMES.map((m, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex justify-between items-center gap-2.5 px-2.5 py-2 rounded-[8px] transition-colors ${
+                      m.unblurred
+                        ? 'bg-[#f9fafc] dark:bg-muted/30'
+                        : 'bg-[#f5f7fb] dark:bg-muted/15'
+                    }`}
+                  >
+                    <span className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground font-mono">
+                      {m.name}
+                    </span>
+                    <span
+                      className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground select-none"
+                      style={{ filter: m.unblurred ? 'none' : 'blur(4px)' }}
+                    >
+                      {m.meaning}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
+                {isTr
+                  ? 'Kilitli morfemlerde ad görünür, anlam ve detay bulanıktır.'
+                  : 'In locked morphemes name is visible, meaning and details are blurred.'}
+              </span>
+            </div>
+          </div>
+
+          {/* SÜTUN 3: OYUNLAR (1fr) */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'OYUNLAR' : 'GAMES'}
+              </span>
+              <Link to="/games" className="font-bold text-[13px] text-[#2563eb] hover:underline">
+                {isTr ? 'Oyunlar →' : 'Games →'}
+              </Link>
+            </div>
+
+            {/* Aktif Flashcard Kartı (Koyu Zemin) */}
+            <div className="bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[14px] p-4 sm:p-[18px] text-white flex flex-col gap-3 shadow-md">
+              <div className="flex justify-between items-center">
+                <span className="font-extrabold text-[15px]">Flashcard</span>
+                <span className="font-extrabold text-[12px] bg-white/15 px-2 py-1 rounded-[6px]">
+                  {remainingPlays} / {totalPlays} {isTr ? 'hak' : 'plays'}
+                </span>
+              </div>
+
+              {/* 5 Hak Gösterge Çubuğu (Pips) */}
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`flex-1 h-[5px] rounded-[3px] transition-colors ${
+                      i < remainingPlays ? 'bg-[#5aa9ff]' : 'bg-white/20'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <span className="font-normal text-[13px] leading-[1.45] text-[#b8c4d9]">
+                {isTr
+                  ? `Bugün ${remainingPlays} oyun oynayabilirsin. Hak her gece yenilenir.`
+                  : `You can play ${remainingPlays} games today. Plays refresh every midnight.`}
+              </span>
+
+              <Link
+                to="/flashcards"
+                className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[14px] py-2.5 px-3 rounded-[9px] shadow-xs transition-all"
+              >
+                {isTr ? 'Bir oyun başlat' : 'Start a game'}
+              </Link>
+            </div>
+
+            {/* Kilitli Oyunlar Listesi */}
+            <div className="flex flex-col gap-2">
+              {FREE_DASHBOARD_LOCKED_GAMES.map((g, idx) => (
+                <Link
+                  key={idx}
+                  to="/pricing"
+                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3 sm:px-3.5 sm:py-3 flex justify-between items-center gap-2.5 opacity-85 hover:opacity-100 hover:border-[#2563eb]/40 transition-all"
+                >
+                  <div>
+                    <div className="font-extrabold text-[14px] text-[#0f1b33] dark:text-foreground">
+                      {g.name}
+                    </div>
+                    <div className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                      {isTr ? g.plan : g.enPlan}
+                    </div>
+                  </div>
+                  <span className="font-extrabold text-[11px] leading-none tracking-[0.06em] px-2 py-1.5 rounded-[6px] bg-[#f5f7fb] dark:bg-muted text-[#6b7a90] dark:text-muted-foreground shrink-0 select-none">
+                    🔒 {isTr ? 'KİLİTLİ' : 'LOCKED'}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Alt Fiyatlandırma / Paket Seçme Çubuğu */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[20px_24px] gap-4 sm:gap-6 shadow-xs text-left">
+          <div>
+            <div className="font-semibold text-lg font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
+              {isTr ? 'Tamamını açmak için bir plan seç' : 'Choose a plan to unlock everything'}
+            </div>
+            <div className="font-normal text-[13px] text-[#6b7a90] dark:text-muted-foreground mt-1">
+              {isTr
+                ? 'Temel ₺790/yıl · Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
+                : 'Basic ₺790/yr · Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time'}
+            </div>
+          </div>
+
+          <Link
+            to="/pricing"
+            className="w-full sm:w-auto text-center bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] px-4.5 py-3 rounded-[10px] shrink-0 transition-colors shadow-xs"
+          >
+            {isTr ? 'Tarifeleri gör →' : 'View plans →'}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =============================================================================
+// ANA DASHBOARD BİLEŞENİ
+// =============================================================================
 export const Dashboard = () => {
   const navigate = useNavigate();
   const { currentLanguage } = useLanguage();
@@ -76,6 +459,20 @@ export const Dashboard = () => {
   );
   const [subLoading, setSubLoading] = useState(!previewRole);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [termCount, setTermCount] = useState(getInitialTermCount);
+
+  // Term count fetching
+  useEffect(() => {
+    let isMounted = true;
+    getTermCount().then((val) => {
+      if (isMounted && typeof val === 'number') {
+        setTermCount(val);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Auth Guard
   useEffect(() => {
@@ -121,7 +518,8 @@ export const Dashboard = () => {
   const trialState = getUserTrialState(effectiveUserData);
   const currentPlan = resolveUserPlan(firestoreData, trialState, previewRole);
   const pastDueState = getPastDueState(firestoreData);
-  const isPro = currentPlan === 'pro' || currentPlan === 'lifetime';
+  const hasPaidPlan = currentPlan === 'pro' || currentPlan === 'lifetime' || currentPlan === 'basic';
+
   const rawName =
     firestoreData?.displayName ||
     firestoreData?.name ||
@@ -134,6 +532,7 @@ export const Dashboard = () => {
   const userName = formatTurkishName(rawName);
   const stats = getStats();
   const streak = getStreak();
+  const flashcardInfo = getFlashcardGuestDailyInfo();
 
   const todayFormatted = new Date().toLocaleDateString(isTr ? 'tr-TR' : 'en-US', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
@@ -153,13 +552,11 @@ export const Dashboard = () => {
       return;
     }
 
-    // Kullanıcı zaten bu planda
     if (targetPlanKey === currentPlan) {
       navigate('/pricing');
       return;
     }
 
-    // Downgrade onayı
     const currentRank = { basic: 1, pro: 2, lifetime: 3 }[currentPlan] || 0;
     const targetRank  = { basic: 1, pro: 2, lifetime: 3 }[targetPlanKey] || 0;
     if (targetRank < currentRank && targetPlanKey !== 'lifetime') {
@@ -171,7 +568,6 @@ export const Dashboard = () => {
       if (!confirmed) return;
     }
 
-    // Lifetime onayı
     if (targetPlanKey === 'lifetime' && firestoreData?.paddleSubscriptionId) {
       const confirmed = window.confirm(
         isTr
@@ -200,16 +596,12 @@ export const Dashboard = () => {
       } else if (!result.success && result.error) {
         toast.error(result.error);
       }
-      // requiresCheckout = true → openPaddleCheckout zaten servis içinde açıldı
     } finally {
       setCheckoutLoading(false);
     }
   }, [firebaseUser, firestoreData, currentPlan, isTr, navigate]);
 
-  // Geriye dönük uyumluluk: Dashboard'daki "Pro'ya Yükselt" butonu
   const handleUpgrade = useCallback(() => handlePlanChange('pro'), [handlePlanChange]);
-
-
 
   // Loading State
   if (!authReady || subLoading) {
@@ -220,7 +612,24 @@ export const Dashboard = () => {
     );
   }
 
-  // Quick Actions
+  // ─────────────────────────────────────────────────────────────────────────────
+  // ÜCRETSİZ / MİSAFİR KAYITLI KULLANICI İÇİN ÖZEL PANEL (8a TASARIMI)
+  // ─────────────────────────────────────────────────────────────────────────────
+  if (!hasPaidPlan) {
+    return (
+      <FreeUserDashboard
+        userName={userName}
+        streak={streak}
+        termCount={termCount}
+        isTr={isTr}
+        flashcardInfo={flashcardInfo}
+      />
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // ÜCRETLİ ABONE (PRO / TEMEL / LIFETIME) İÇİN GELİŞMİŞ PANEL
+  // ─────────────────────────────────────────────────────────────────────────────
   const quickActions = [
     {
       icon: <BookOpen className="w-6 h-6" />,
@@ -262,7 +671,6 @@ export const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-
         {/* Top Bar: Hoş Geldin + Profil / Çıkış */}
         <div className="flex items-start justify-between gap-4 mb-8">
           <div className="min-w-0">
@@ -421,72 +829,7 @@ export const Dashboard = () => {
                 </button>
               )}
             </div>
-          ) : currentPlan === 'trial' ? (
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-amber-400 flex-shrink-0">
-                  <Flame className="w-5 h-5 fill-amber-500" />
-                </div>
-                <div>
-                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? '3 Günlük Ücretsiz Deneme' : '3-Day Free Trial'}
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
-                      <Clock className="w-3 h-3" />
-                      {trialState.currentDay >= 3
-                        ? (isTr ? 'SON GÜN' : 'LAST DAY')
-                        : (isTr ? `${trialState.daysLeft} GÜN KALDI` : `${trialState.daysLeft} DAYS LEFT`)}
-                    </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isTr
-                      ? 'Deneme süreniz boyunca tüm özellikler sınırsız açık. Dilediğiniz zaman paketinizi seçebilirsiniz.'
-                      : 'All features are fully unlocked during your trial. Pick a plan anytime.'}
-                  </p>
-                  {trialState.isActive && (
-                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                      <span>⏳</span>
-                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <Link
-                to="/pricing"
-                className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
-              >
-                <span>{isTr ? 'Tarifeleri İncele' : 'View Plans'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          ) : (
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-border rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-muted-foreground flex-shrink-0">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? 'Ücretsiz Plan (Süre Doldu)' : 'Free Plan (Trial Expired)'}
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground border border-border">
-                      {isTr ? 'SÜRE DOLDU' : 'EXPIRED'}
-                    </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isTr
-                      ? '3 günlük deneme süreniz sona erdi. Öğrenmeye kesintisiz devam etmek için bir paket seçin.'
-                      : 'Your 3-day trial has ended. Select a plan to continue learning.'}
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="/pricing"
-                className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
-              >
-                <span>{isTr ? 'Paket Seç' : 'Choose Plan'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          )
+          ) : null
         )}
 
         {/* İstatistik Şeridi */}
