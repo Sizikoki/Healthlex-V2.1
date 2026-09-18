@@ -186,22 +186,19 @@ export const Flashcards = () => {
     );
   }
 
-  if (!isLoggedIn()) {
-    const dailyInfo = getFlashcardGuestDailyInfo();
-    if (!dailyInfo.canPlay || showGuestModal) {
-      return (
-        <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
-          <GuestLimitModal
-            isOpen={true}
-            onClose={() => navigate('/games')}
-            title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
-            description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
-            cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
-            cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
-          />
-        </div>
-      );
-    }
+  if (showGuestModal) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <GuestLimitModal
+          isOpen={true}
+          onClose={() => navigate('/games')}
+          title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
+          description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
+          cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
+          cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
+        />
+      </div>
+    );
   }
 
   if (terms.length === 0) {
