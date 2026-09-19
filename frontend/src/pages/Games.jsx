@@ -457,21 +457,25 @@ export const Games = () => {
             modalMode === 'match'
               ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarınızı kaydetmek için lütfen ücretsiz kayıt olun.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')
+              ? (userIsLoggedIn
+                  ? t('userFlashcardDailyLimitDesc', 'Günlük en fazla 5 kelime kartı çalışması hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.')
+                  : t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen planınızı yükseltin.'))
               : undefined
           }
           cardTitle={
             modalMode === 'match'
               ? t('guestMatchCardTitle', 'Ücretsiz Üye Olun & Eşleştirmeye Başlayın')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')
+              ? (userIsLoggedIn ? t('upgradePlanCardTitle', 'Planınızı Yükseltin') : t('guestLimitCardTitle', 'Ücretsiz Üye Olun'))
               : undefined
           }
           cardDesc={
             modalMode === 'match'
-              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına sınırsız erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')
+              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')
+              ? (userIsLoggedIn
+                  ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
+                  : t('guestLimitCardDesc', 'Üye olarak ilerlemenizi senkronize edebilir ve platform özelliklerinden faydalanabilirsiniz.'))
               : undefined
           }
         />

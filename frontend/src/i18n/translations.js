@@ -329,12 +329,18 @@ export const translations = {
 
     // GuestLimitModal
     guestLimitTitle: "3 Günlük Ücretsiz Deneme Süreniz Sona Erdi! 🎯",
-    guestLimitDesc: "Tüm platform içeriklerini ve oyunları keşfetmeniz için sunulan 3 günlük ücretsiz deneme süreniz tamamlandı. Öğrenmeye devam etmek ve ilerlemenizi tüm cihazlarınızda kaydetmek için lütfen ücretsiz kayıt olun.",
-    guestLimitCardTitle: "Ücretsiz Üye Olun & Öğrenmeye Devam Edin!",
-    guestLimitCardDesc: "Kayıt olarak tüm kelime kartlarına ve oyunlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.",
-    signUpUnlimited: "Ücretsiz Üye Ol (Öğrenmeye Devam Et)",
+    guestLimitDesc: "Tüm platform içeriklerini ve oyunları keşfetmeniz için sunulan deneme süreniz veya günlük hakkınız tamamlandı. Sınırsız pratik yapmak için lütfen planınızı yükseltin.",
+    guestLimitCardTitle: "Ücretsiz Üye Olun",
+    guestLimitCardDesc: "Kayıt olarak ilerlemenizi senkronize edebilir ve platform özelliklerinden faydalanabilirsiniz.",
+    upgradePlanCardTitle: "Planınızı Yükseltin",
+    upgradePlanCardDesc: "Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.",
+    upgradePlanBtn: "Planınızı Yükseltin",
+    signUpFree: "Ücretsiz Üye Ol",
+    signUpUnlimited: "Ücretsiz Üye Ol",
     alreadyHaveAccountLogin: "Zaten Hesabım Var, Giriş Yap",
     backToGamesPage: "Oyunlar Sayfasına Dön",
+    userFlashcardDailyLimitDesc: "Günlük kelime kartı çalışma hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.",
+    userFlashcardRestartLimitDesc: "Günlük yeniden başlatma hakkınız doldu. Sınırsız pratik yapmak için lütfen planınızı yükseltin.",
 
     // İletişim & Destek (Contact)
     contactSupport: "İletişim & Destek",
@@ -690,12 +696,18 @@ export const translations = {
 
     // GuestLimitModal
     guestLimitTitle: "Your 3-Day Free Trial Has Ended! 🎯",
-    guestLimitDesc: "Your 3-day free trial to explore all platform contents and games has ended. Please sign up free to continue learning and save your progress across all your devices.",
-    guestLimitCardTitle: "Sign Up Free & Continue Learning!",
-    guestLimitCardDesc: "By signing up, you can continue practicing terms, playing games, and syncing your progress across all your devices.",
-    signUpUnlimited: "Sign Up Free (Continue Learning)",
+    guestLimitDesc: "Your trial period or daily limit to explore platform content and games has ended. Please upgrade your plan for unlimited practice.",
+    guestLimitCardTitle: "Sign Up Free",
+    guestLimitCardDesc: "Create an account to sync your progress and access platform features.",
+    upgradePlanCardTitle: "Upgrade Your Plan",
+    upgradePlanCardDesc: "Upgrade to Basic or Pro to get unlimited access to all flashcards and games.",
+    upgradePlanBtn: "Upgrade Plan",
+    signUpFree: "Sign Up Free",
+    signUpUnlimited: "Sign Up Free",
     alreadyHaveAccountLogin: "Already have an account, Log In",
     backToGamesPage: "Back to Games Page",
+    userFlashcardDailyLimitDesc: "Your daily flashcard limit has been reached. Please upgrade your plan to practice without limits.",
+    userFlashcardRestartLimitDesc: "Your daily restart limit has been reached. Please upgrade your plan to practice without limits.",
 
     // Contact & Support
     contactSupport: "Contact & Support",

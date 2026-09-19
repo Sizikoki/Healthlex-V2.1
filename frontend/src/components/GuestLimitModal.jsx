@@ -1,13 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Sparkles, UserPlus, LogIn, ArrowLeft } from 'lucide-react';
+import { Lock, Sparkles, UserPlus, LogIn, ArrowLeft, ArrowUpRight, Crown } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/context/LanguageContext';
+import { isLoggedIn } from '@/utils/storage';
 
 export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle, cardDesc }) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const userLoggedIn = isLoggedIn();
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -20,7 +22,7 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
             {title || t('guestLimitTitle', '3 Günlük Ücretsiz Deneme Süreniz Sona Erdi! 🎯')}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600 mt-2 leading-relaxed">
-            {description || t('guestLimitDesc', 'Tüm paket içeriklerini ve oyunları keşfetmeniz için sunulan 3 günlük ücretsiz deneme süreniz tamamlandı. Öğrenmeye devam etmek ve ilerlemenizi tüm cihazlarınızda kaydetmek için lütfen ücretsiz kayıt olun.')}
+            {description || t('guestLimitDesc', 'Tüm platform içeriklerini ve oyunları keşfetmeniz için sunulan deneme süreniz veya günlük oynama hakkınız tamamlandı. Sınırsız pratik yapmak için lütfen planınızı yükseltin.')}
           </DialogDescription>
         </DialogHeader>
 
@@ -28,35 +30,55 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
           <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold block text-amber-950">
-              {cardTitle || t('guestLimitCardTitle', 'Ücretsiz Üye Olun & Öğrenmeye Devam Edin!')}
+              {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planınızı Yükseltin') : t('guestLimitCardTitle', 'Planınızı Yükseltin veya Üye Olun'))}
             </strong>
-            {cardDesc || t('guestLimitCardDesc', 'Kayıt olarak tüm kelime kartlarına ve oyunlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
+            {cardDesc || (userLoggedIn
+              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
+              : t('guestLimitCardDesc', 'Üyelik oluşturup planınızı seçerek kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.'))}
           </div>
         </div>
 
         <div className="flex flex-col gap-2.5 mt-2">
-          <Button
-            onClick={() => {
-              onClose();
-              navigate('/register');
-            }}
-            className="w-full h-12 text-base font-semibold gradient-primary shadow-md hover:shadow-lg transition-all"
-          >
-            <UserPlus className="w-5 h-5 mr-2" />
-            {t('signUpUnlimited', 'Ücretsiz Üye Ol (Öğrenmeye Devam Et)')}
-          </Button>
+          {userLoggedIn ? (
+            // Halihazırda giriş yapmış kullanıcı için: Plan Yükseltme butonu
+            <Button
+              onClick={() => {
+                onClose();
+                navigate('/pricing');
+              }}
+              className="w-full h-12 text-base font-semibold gradient-primary shadow-md hover:shadow-lg transition-all"
+            >
+              <Crown className="w-5 h-5 mr-2" />
+              {t('upgradePlanBtn', 'Planınızı Yükseltin')}
+              <ArrowUpRight className="w-4 h-4 ml-1 opacity-80" />
+            </Button>
+          ) : (
+            // Giriş yapmamış misafir kullanıcı için
+            <>
+              <Button
+                onClick={() => {
+                  onClose();
+                  navigate('/register');
+                }}
+                className="w-full h-12 text-base font-semibold gradient-primary shadow-md hover:shadow-lg transition-all"
+              >
+                <UserPlus className="w-5 h-5 mr-2" />
+                {t('signUpFree', 'Ücretsiz Üye Ol')}
+              </Button>
 
-          <Button
-            variant="outline"
-            onClick={() => {
-              onClose();
-              navigate('/login');
-            }}
-            className="w-full h-11 text-sm font-semibold border-gray-300 hover:bg-gray-50"
-          >
-            <LogIn className="w-4 h-4 mr-2" />
-            {t('alreadyHaveAccountLogin', 'Zaten Hesabım Var, Giriş Yap')}
-          </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  onClose();
+                  navigate('/login');
+                }}
+                className="w-full h-11 text-sm font-semibold border-gray-300 hover:bg-gray-50"
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                {t('alreadyHaveAccountLogin', 'Zaten Hesabım Var, Giriş Yap')}
+              </Button>
+            </>
+          )}
 
           <Button
             variant="ghost"

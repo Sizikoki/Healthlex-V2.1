@@ -47,15 +47,59 @@ export const getPastDueState = (userData) => {
 export const checkIsBasic = (userData) => {
   if (!userData) return false;
   if (userData.isLifetime === true) return false;
+
   const planStr = (userData.plan || '').toLowerCase();
   const status = (userData.subscriptionStatus || '').toLowerCase();
-  return (
+
+  const isBasicFlag =
     userData.isBasic === true ||
     userData.planType === 'basic' ||
     planStr.includes('basic') ||
     planStr.includes('temel') ||
-    status === 'basic'
-  );
+    status === 'basic';
+
+  if (!isBasicFlag) return false;
+
+  // İptal edilmiş veya ücretsiz statüsüne düşmüşse Temel plan geçerli değildir
+  if (status === 'canceled' || status === 'free') return false;
+
+  // Karttan çekim başarısız / gecikmede (past_due) ise 5 günlük ek süre kuralı
+  if (status === 'past_due') {
+    const { isWithinGracePeriod } = getPastDueState(userData);
+    return isWithinGracePeriod;
+  }
+
+  // Deneme süresinde ise (trialing veya isTrial bayrağı): süresi bitmiş mi kontrol et
+  if (status === 'trialing' || userData.isTrial === true || userData.isTrialing === true || !!userData.trialEndDate) {
+    let endMs = null;
+    if (userData.trialEndDate) {
+      if (typeof userData.trialEndDate.toDate === 'function') {
+        endMs = userData.trialEndDate.toDate().getTime();
+      } else if (typeof userData.trialEndDate === 'number') {
+        endMs = userData.trialEndDate;
+      } else if (userData.trialEndDate.seconds) {
+        endMs = userData.trialEndDate.seconds * 1000;
+      } else {
+        const parsed = new Date(userData.trialEndDate).getTime();
+        if (!isNaN(parsed)) endMs = parsed;
+      }
+    } else if (userData.trialStartDate) {
+      const start = new Date(userData.trialStartDate).getTime();
+      if (!isNaN(start)) endMs = start + (3 * 24 * 60 * 60 * 1000);
+    }
+
+    // Deneme süresi dolmuşsa ve ücret alınamamışsa Temel plan sona ermiştir
+    if (endMs && Date.now() > endMs) {
+      return false;
+    }
+  }
+
+  // Aktif veya geçerli deneme durumunda Temel plan geçerlidir
+  if (status === 'active' || status === 'trialing' || status === 'basic') {
+    return true;
+  }
+
+  return userData.isBasic === true;
 };
 
 /**

@@ -7,8 +7,8 @@ import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
 import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, getFlashcardGuestDailyInfo, incrementFlashcardGuestPlay, getFlashcardGuestRestartInfo, incrementFlashcardGuestRestart, MAX_GUEST_DAILY_FLASHCARDS, MAX_GUEST_DAILY_RESTARTS, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
-import { db } from '@/firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '@/firebase/config';
+import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
@@ -23,18 +23,41 @@ export const Flashcards = () => {
   const categoryId = searchParams.get('category');
 
   const previewRole = getPreviewRole();
-  const localUser = getUser();
-  const isPro = previewRole === 'pro' || checkIsPro(localUser);
+  const [currentUserData, setCurrentUserData] = useState(() => getUser());
+  const isPro = previewRole === 'pro' || checkIsPro(currentUserData);
+  const hasPaidPlan = previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(currentUserData);
+  const isLimited = !hasPaidPlan;
+
+  useEffect(() => {
+    if (previewRole) return;
+    const uid = auth?.currentUser?.uid || getUser()?.uid;
+    if (!uid) {
+      setCurrentUserData(getUser());
+      return;
+    }
+    try {
+      const userDocRef = doc(db, 'users', uid);
+      const unsub = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          setCurrentUserData(docSnap.data());
+        } else {
+          setCurrentUserData(getUser());
+        }
+      }, (err) => {
+        console.warn('[Flashcards] Could not check live user plan status:', err);
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('[Flashcards] Error setting up user listener:', e);
+    }
+  }, [previewRole]);
 
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
-  // Sınırlı kullanıcı = anonim misafir VEYA kayıtlı ama hiç plan almamış kullanıcı
-  // Basic / Pro / Lifetime satın almış olan herkes sınırsız oynayabilir
-  const hasPaidPlan = checkHasPaidPlan(localUser);
-  const isLimited = !hasPaidPlan;
+
   const initialGuestInfo = isLimited ? getFlashcardGuestDailyInfo() : { canPlay: true };
   const [loading, setLoading] = useState(initialGuestInfo.canPlay);
   const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
@@ -216,6 +239,7 @@ export const Flashcards = () => {
 
   if (showGuestModal) {
     const isRestartLimit = guestModalType === 'restart';
+    const userLoggedIn = isLoggedIn();
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <GuestLimitModal
@@ -228,11 +252,23 @@ export const Flashcards = () => {
           }
           description={
             isRestartLimit
-              ? t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için ücretsiz üye olun.`)
-              : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.`)
+              ? (userLoggedIn
+                  ? t('userFlashcardRestartLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsiniz. Sınırsız pratik yapmak için lütfen planınızı yükseltin.`)
+                  : t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen planınızı yükseltin.`))
+              : (userLoggedIn
+                  ? t('userFlashcardDailyLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.`)
+                  : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen planınızı yükseltin.`))
           }
-          cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
-          cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
+          cardTitle={
+            userLoggedIn
+              ? t('upgradePlanCardTitle', 'Planınızı Yükseltin')
+              : t('guestLimitCardTitle', 'Ücretsiz Üye Olun')
+          }
+          cardDesc={
+            userLoggedIn
+              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
+              : t('guestLimitCardDesc', 'Kayıt olarak ilerlemenizi senkronize edebilir ve platform özelliklerinden faydalanabilirsiniz.')
+          }
         />
       </div>
     );
