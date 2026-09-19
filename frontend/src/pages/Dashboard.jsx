@@ -543,6 +543,565 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
 };
 
 // =============================================================================
+// TEMEL PLAN SABİTLERİ (9d Şablonu)
+// =============================================================================
+const BASIC_DASHBOARD_MORPHEMES = [
+  { name: 'oste/o-', slug: 'osteo', meaningTr: 'kemik', meaningEn: 'bone' },
+  { name: '-itis', slug: 'itis', meaningTr: 'iltihap', meaningEn: 'inflammation' },
+  { name: 'arthr/o-', slug: 'arthro', meaningTr: 'eklem', meaningEn: 'joint' },
+  { name: 'my/o-', slug: 'myo', meaningTr: 'kas', meaningEn: 'muscle' },
+  { name: 'neur/o-', slug: 'neuro', meaningTr: 'sinir', meaningEn: 'nerve' }
+];
+
+const BASIC_DASHBOARD_LOCKED_GAMES = [
+  {
+    id: 'quiz',
+    name: 'Quiz',
+    enName: 'Quiz Mode',
+    plan: 'Pro ve üzeri gerekir',
+    enPlan: 'Requires Pro & above'
+  },
+  {
+    id: 'morpheme',
+    name: 'Morfem Yapıcı',
+    enName: 'Morpheme Builder',
+    plan: 'Pro ve üzeri gerekir',
+    enPlan: 'Requires Pro & above'
+  },
+  {
+    id: 'level',
+    name: 'Seviye ve günlük tekrar',
+    enName: 'Level & daily repetition',
+    plan: 'Pro ve üzeri gerekir',
+    enPlan: 'Requires Pro & above'
+  }
+];
+
+// =============================================================================
+// TEMEL PLAN KULLANICISI İÇİN DİNAMİK PANEL (9d Şablonu)
+// =============================================================================
+const BasicUserDashboard = ({
+  userName,
+  streak,
+  termCount,
+  isTr,
+  todayFormatted,
+  trialState,
+  firestoreData,
+  pastDueState,
+  handleUpgrade,
+  checkoutLoading
+}) => {
+  const navigate = useNavigate();
+  const searchInputRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [recentTerms, setRecentTerms] = useState([]);
+
+  // Dinamik Son Bakılan Terimler (localStorage)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('healthlex_recent_terms');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setRecentTerms(parsed.slice(0, 4));
+        }
+      }
+    } catch (e) {}
+  }, []);
+
+  // ⌘K / Ctrl+K Kısayol Tuşu Dinleyicisi
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Dinamik Kategori Terim Sayıları
+  const catCounts = useMemo(() => {
+    const counts = {};
+    FREE_DASHBOARD_CATEGORIES.forEach((cat) => {
+      try {
+        const terms = getTermsByCategory(cat.id);
+        counts[cat.id] = terms && terms.length > 0 ? terms.length : cat.defaultCount;
+      } catch (e) {
+        counts[cat.id] = cat.defaultCount;
+      }
+    });
+    return counts;
+  }, []);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/study?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/study');
+    }
+  };
+
+  // Deneme Bitişi, İlk Tahsilat ve Plan Tutarı Hesaplama
+  const billingInfo = useMemo(() => {
+    let trialEndObj = null;
+    let billingObj = null;
+
+    if (trialState) {
+      if (trialState.endDate) trialEndObj = trialState.endDate;
+      if (trialState.nextBilledAt) billingObj = trialState.nextBilledAt;
+    }
+
+    if (!trialEndObj && firestoreData?.trialEndDate) {
+      trialEndObj = firestoreData.trialEndDate.toDate
+        ? firestoreData.trialEndDate.toDate()
+        : new Date(firestoreData.trialEndDate);
+    }
+    if (!billingObj && firestoreData?.nextBilledAt) {
+      billingObj = firestoreData.nextBilledAt.toDate
+        ? firestoreData.nextBilledAt.toDate()
+        : new Date(firestoreData.nextBilledAt);
+    }
+
+    if (!trialEndObj) {
+      if (firestoreData?.createdAt) {
+        const created = firestoreData.createdAt.toDate
+          ? firestoreData.createdAt.toDate()
+          : new Date(firestoreData.createdAt);
+        trialEndObj = new Date(created.getTime() + 3 * 24 * 60 * 60 * 1000);
+      } else {
+        const storedStart = localStorage.getItem('healthlex_user_trial_start');
+        const startMs = storedStart ? parseInt(storedStart, 10) : Date.now();
+        trialEndObj = new Date(startMs + 3 * 24 * 60 * 60 * 1000);
+      }
+    }
+
+    if (!billingObj) {
+      billingObj = trialEndObj;
+    }
+
+    const formatDate = (d) => {
+      try {
+        const date = new Date(d);
+        if (isNaN(date.getTime())) return '';
+        return date.toLocaleDateString(isTr ? 'tr-TR' : 'en-US', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+      } catch {
+        return '';
+      }
+    };
+
+    return {
+      trialEndDateFormatted: formatDate(trialEndObj),
+      firstBillingDateFormatted: formatDate(billingObj),
+      amount: isTr ? '₺790/yıl' : '₺790/yr'
+    };
+  }, [trialState, firestoreData, isTr]);
+
+  const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 0;
+  const termsVal = termCount ? String(termCount) : '446';
+  const learnedCount = getStats()?.learnedTerms || 0;
+
+  const statsList = [
+    { label: isTr ? 'ÖĞRENİLEN' : 'LEARNED', v: String(learnedCount), unit: isTr ? 'terim' : 'terms' },
+    { label: isTr ? 'SERİ' : 'STREAK', v: String(streakDays), unit: isTr ? 'gün' : 'days' },
+    { label: isTr ? 'KÜTÜPHANE' : 'LIBRARY', v: termsVal, unit: isTr ? 'terim' : 'terms' },
+    { label: isTr ? 'MORFEM' : 'MORPHEMES', v: '100', unit: isTr ? 'açık' : 'unlocked' }
+  ];
+
+  return (
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-11 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased">
+      <div className="w-full max-w-[1120px] flex flex-col gap-6 sm:gap-7">
+        {/* Üst Karşılama Başlığı ve Arama Kutusu */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-5 lg:gap-8">
+          <div className="flex flex-col gap-2 text-left">
+            <div className="flex items-center gap-2.5">
+              <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'PANELİM · TEMEL PLAN' : 'DASHBOARD · BASIC PLAN'}
+              </span>
+              <span className="bg-[#f5f7fb] dark:bg-muted border border-[#dfe4ee] dark:border-border text-[#6b7a90] dark:text-muted-foreground font-extrabold text-[11px] px-2 py-0.5 rounded-[6px]">
+                {isTr ? 'Temel' : 'Basic'}
+              </span>
+              {todayFormatted && (
+                <span className="text-[12px] text-[#6b7a90] dark:text-muted-foreground hidden sm:inline opacity-80">
+                  · {todayFormatted}
+                </span>
+              )}
+            </div>
+            <h1 className="m-0 font-semibold text-2xl sm:text-[34px] sm:leading-[1.15] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+              {isTr
+                ? `Merhaba ${userName || 'Öğrenci'}, kütüphane tamamen açık.`
+                : `Hello ${userName || 'Student'}, library is fully open.`}
+            </h1>
+          </div>
+
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex items-center gap-2.5 bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] px-4 w-full lg:w-[420px] h-[50px] shrink-0 shadow-xs focus-within:border-[#2563eb] transition-all"
+          >
+            <Search className="w-4 h-4 text-[#6b7a90] shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={
+                isTr
+                  ? 'Terim veya morfem ara… örn. “os frontale”'
+                  : 'Search terms or morphemes… e.g. "os frontale"'
+              }
+              className="bg-transparent border-none outline-hidden text-[14px] sm:text-[15px] font-normal text-[#0f1b33] dark:text-foreground placeholder:text-[#9aa6ba] w-full"
+            />
+            <span className="font-bold text-[11px] text-[#6b7a90] dark:text-muted-foreground border border-[#e5e9f2] dark:border-border rounded-[5px] px-1.5 py-0.5 select-none shrink-0">
+              ⌘K
+            </span>
+          </form>
+        </div>
+
+        {/* Ödeme Gecikmesi / Ek Süre Uyarısı */}
+        {pastDueState?.isPastDue && (
+          <div className={`rounded-xl p-4 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs ${
+            pastDueState.isWithinGracePeriod
+              ? 'bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-200'
+              : 'bg-destructive/10 border-destructive/40 text-destructive'
+          }`}>
+            <div className="flex items-start sm:items-center gap-3">
+              <span className="text-2xl shrink-0">{pastDueState.isWithinGracePeriod ? '⚠️' : '🚫'}</span>
+              <div>
+                <p className="font-bold text-sm">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
+                    : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
+                </p>
+                <p className="text-xs opacity-90 mt-0.5">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr
+                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
+                        : `Your subscription renewal failed. Please update your card within ${pastDueState.daysLeft} days to avoid service interruption.`)
+                    : (isTr
+                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin veya yeni bir plan seçin.'
+                        : 'Access is restricted because the 5-day grace period has expired. Please update your card.')}
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/pricing"
+              className="shrink-0 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
+            >
+              {isTr ? 'Kartı Güncelle' : 'Update Card'}
+            </Link>
+          </div>
+        )}
+
+        {/* Deneme Bitişi, İlk Tahsilat ve Plan Tutarı Şeridi (İstenen Özellik) */}
+        <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[14px_20px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6 shadow-xs text-left">
+          <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-[13px] sm:text-[14px] text-[#0f1b33] dark:text-foreground">
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
+              </span>
+              <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                {billingInfo.trialEndDateFormatted}
+              </span>
+            </div>
+            <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'İlk tahsilat:' : 'First billing:'}
+              </span>
+              <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                {billingInfo.firstBillingDateFormatted}
+              </span>
+            </div>
+            <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'Mevcut Plan:' : 'Current Plan:'}
+              </span>
+              <span className="font-extrabold text-[12px] px-2.5 py-1 rounded-[6px] bg-[#e8f0ff] dark:bg-blue-950/60 text-[#2563eb] dark:text-blue-400 border border-[#2563eb]/20">
+                {isTr ? `Temel Plan · ${billingInfo.amount}` : `Basic Plan · ${billingInfo.amount}`}
+              </span>
+            </div>
+          </div>
+          <Link
+            to="/pricing"
+            className="text-[13px] font-bold text-[#2563eb] hover:underline shrink-0 whitespace-nowrap self-end sm:self-auto"
+          >
+            {isTr ? 'Planı Yönet →' : 'Manage Plan →'}
+          </Link>
+        </div>
+
+        {/* 4'lü İstatistik Şeridi (9d Şablonu) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          {statsList.map((q, idx) => (
+            <div
+              key={idx}
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 sm:p-4 flex flex-col gap-1 text-left shadow-xs"
+            >
+              <span className="font-extrabold text-[10px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {q.label}
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-extrabold text-2xl sm:text-[24px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {q.v}
+                </span>
+                <span className="font-semibold text-[11px] text-[#6b7a90] dark:text-muted-foreground">
+                  {q.unit}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 3 Ana Sütun Bölümü (Kategoriler | Morfemler | Oyunlar) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr_1fr] gap-5 items-start">
+          {/* SÜTUN 1: KATEGORİLER (13) & SON BAKILAN TERİMLER */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'KATEGORİLER · 13' : 'CATEGORIES · 13'}
+              </span>
+              <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                {isTr ? 'Tümü →' : 'View all →'}
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {FREE_DASHBOARD_CATEGORIES.map((cat) => {
+                const count = catCounts[cat.id] || cat.defaultCount;
+                const displayName = isTr ? cat.name : cat.enName;
+                return (
+                  <Link
+                    key={cat.id}
+                    to={`/study?category=${cat.id}`}
+                    className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[10px] p-3 sm:px-3.5 sm:py-3 flex justify-between items-center gap-2.5 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all group"
+                  >
+                    <span className="font-bold text-[13px] leading-[1.3] truncate group-hover:text-[#2563eb] transition-colors">
+                      {displayName}
+                    </span>
+                    <span className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground shrink-0">
+                      {count} {isTr ? 'terim' : 'terms'}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Son Bakılan Terimler Bölümü */}
+            {recentTerms.length > 0 ? (
+              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-4 flex flex-col gap-3 shadow-xs">
+                <div className="flex justify-between items-center">
+                  <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                    {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+                  </span>
+                  <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                    {isTr ? 'Sözlük →' : 'Glossary →'}
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {recentTerms.map((rt, idx) => (
+                    <Link
+                      key={idx}
+                      to={`/study/${rt.slug || rt.term}`}
+                      className="bg-[#f9fafc] dark:bg-muted/30 border border-[#e5e9f2] dark:border-border/60 hover:border-[#2563eb]/40 rounded-[9px] p-2.5 flex justify-between items-center gap-2 transition-all group"
+                    >
+                      <span className="font-bold text-[13px] text-[#0f1b33] dark:text-foreground truncate group-hover:text-[#2563eb]">
+                        {rt.term}
+                      </span>
+                      {rt.turkish && (
+                        <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground truncate max-w-[110px]">
+                          {rt.turkish}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white dark:bg-card border border-dashed border-[#d5dbe7] dark:border-border/80 rounded-[12px] p-4 sm:p-[14px_16px] flex flex-col gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+                </span>
+                <span className="font-semibold text-[13px] leading-[1.5] text-[#3c4858] dark:text-foreground/80">
+                  {isTr
+                    ? 'Henüz bir terime bakmadın. Aramadan veya bir kategoriden başlayabilirsin.'
+                    : 'You have not viewed any terms yet. Search above or start from a category.'}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* SÜTUN 2: MORFEMLER · 100 TANESİ AÇIK */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'MORFEMLER · 100 TANESİ AÇIK' : 'MORPHEMES · 100 UNLOCKED'}
+              </span>
+              <Link to="/morphemes" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                {isTr ? 'Liste →' : 'List →'}
+              </Link>
+            </div>
+
+            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 flex flex-col gap-3 shadow-xs">
+              {/* Morfem İlerleme Çubuğu */}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
+                  <span>{isTr ? '100 / 571 açık' : '100 / 571 open'}</span>
+                  <span className="text-[#2563eb] dark:text-blue-400 font-extrabold">%18</span>
+                </div>
+                <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
+                  <div className="w-[17.5%] h-full bg-[#2563eb]" />
+                </div>
+              </div>
+
+              {/* 5 Örnek Morfem (9d Şablonu) */}
+              <div className="flex flex-col gap-1.5">
+                {BASIC_DASHBOARD_MORPHEMES.map((m, idx) => (
+                  <Link
+                    key={idx}
+                    to={`/morphemes?search=${encodeURIComponent(m.name.replace(/[^a-zA-Z]/g, ''))}`}
+                    className="flex justify-between items-center gap-2.5 px-3 py-2 rounded-[8px] bg-[#f9fafc] dark:bg-muted/30 hover:bg-[#e8f0ff] dark:hover:bg-primary/15 transition-colors group"
+                  >
+                    <span className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground font-mono group-hover:text-[#2563eb]">
+                      {m.name}
+                    </span>
+                    <span className="font-normal text-[12px] text-[#6b7a90] dark:text-muted-foreground">
+                      {isTr ? m.meaningTr : m.meaningEn}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
+              <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
+                {isTr
+                  ? 'Temel planda 100 morfem sınırsız açıktır. Kalan 471 morfem için Pro’ya geçebilirsiniz.'
+                  : '100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 471.'}
+              </span>
+            </div>
+          </div>
+
+          {/* SÜTUN 3: OYUNLAR · 2 AÇIK */}
+          <div className="flex flex-col gap-3.5 text-left">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'OYUNLAR · 2 AÇIK' : 'GAMES · 2 UNLOCKED'}
+              </span>
+              <Link to="/games" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                {isTr ? 'Tümü →' : 'All →'}
+              </Link>
+            </div>
+
+            {/* 2 Açık Oyun (Flashcard, Eşleştirme) */}
+            <div className="flex flex-col gap-2.5">
+              {/* Flashcard */}
+              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 flex flex-col gap-2 shadow-xs">
+                <div className="flex justify-between items-center">
+                  <span className="font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
+                    Flashcard
+                  </span>
+                  <span className="font-extrabold text-[10px] leading-none px-2 py-1 rounded-[6px] bg-[#e8f0ff] text-[#2563eb] dark:bg-blue-950/60 dark:text-blue-400 select-none">
+                    {isTr ? 'AÇIK' : 'OPEN'}
+                  </span>
+                </div>
+                <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
+                  {isTr ? 'Kartlarla terim tekrarı. Sınırsız oyna.' : 'Review terms with cards. Play unlimited.'}
+                </span>
+                <Link
+                  to="/flashcards"
+                  className="block text-center bg-[#0f1b33] hover:bg-[#1d4ed8] text-white font-bold text-[13px] py-2 px-3 rounded-[9px] transition-colors"
+                >
+                  {isTr ? 'Başlat' : 'Start'}
+                </Link>
+              </div>
+
+              {/* Eşleştirme */}
+              <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3.5 flex flex-col gap-2 shadow-xs">
+                <div className="flex justify-between items-center">
+                  <span className="font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground">
+                    {isTr ? 'Eşleştirme' : 'Matching Game'}
+                  </span>
+                  <span className="font-extrabold text-[10px] leading-none px-2 py-1 rounded-[6px] bg-[#e8f0ff] text-[#2563eb] dark:bg-blue-950/60 dark:text-blue-400 select-none">
+                    {isTr ? 'AÇIK' : 'OPEN'}
+                  </span>
+                </div>
+                <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
+                  {isTr ? 'Terimleri Türkçe karşılıklarıyla eşleştir.' : 'Match terms with their definitions.'}
+                </span>
+                <Link
+                  to="/match"
+                  className="block text-center bg-[#0f1b33] hover:bg-[#1d4ed8] text-white font-bold text-[13px] py-2 px-3 rounded-[9px] transition-colors"
+                >
+                  {isTr ? 'Başlat' : 'Start'}
+                </Link>
+              </div>
+            </div>
+
+            {/* 3 Kilitli Oyun (Quiz, Morfem Yapıcı, Seviye ve tekrar) */}
+            <div className="flex flex-col gap-2">
+              {BASIC_DASHBOARD_LOCKED_GAMES.map((g) => (
+                <Link
+                  key={g.id}
+                  to="/pricing"
+                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[10px] p-2.5 sm:px-3.5 sm:py-2.5 flex justify-between items-center gap-2.5 opacity-80 hover:opacity-100 hover:border-[#2563eb]/40 transition-all group"
+                >
+                  <div>
+                    <div className="font-extrabold text-[13px] text-[#0f1b33] dark:text-foreground group-hover:text-[#2563eb] transition-colors">
+                      {isTr ? g.name : g.enName}
+                    </div>
+                    <div className="font-normal text-[11px] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                      {isTr ? g.plan : g.enPlan}
+                    </div>
+                  </div>
+                  <span className="font-extrabold text-[10px] leading-none px-2 py-1 rounded-[6px] bg-[#f5f7fb] dark:bg-muted text-[#6b7a90] dark:text-muted-foreground shrink-0 select-none">
+                    🔒 {isTr ? 'KİLİTLİ' : 'LOCKED'}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Pro Yükseltme Kartı (9d Şablonu) */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[18px_24px] gap-4 sm:gap-6 shadow-xs text-left">
+          <div>
+            <div className="font-semibold text-base sm:text-[17px] font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
+              {isTr
+                ? 'Quiz, Morfem Yapıcı ve seviye sistemi Pro’da'
+                : 'Quiz, Morpheme Builder and level system in Pro'}
+            </div>
+            <div className="font-normal text-[12px] sm:text-[13px] text-[#6b7a90] dark:text-muted-foreground mt-1">
+              {isTr
+                ? 'Pro ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
+                : 'Pro ₺2,000/yr · Lifetime ₺5,990 one-time'}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleUpgrade}
+            disabled={checkoutLoading}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] px-6 py-3 rounded-[10px] shrink-0 whitespace-nowrap transition-all shadow-xs cursor-pointer disabled:opacity-60"
+          >
+            <span>
+              {checkoutLoading
+                ? (isTr ? 'Yükleniyor...' : 'Loading...')
+                : (isTr ? 'Pro’ya yükselt' : 'Upgrade to Pro')}
+            </span>
+            {!checkoutLoading && <span className="text-base leading-none">→</span>}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =============================================================================
 // ANA DASHBOARD BİLEŞENİ
 // =============================================================================
 export const Dashboard = () => {
@@ -557,7 +1116,14 @@ export const Dashboard = () => {
   );
   const [authReady, setAuthReady] = useState(!!previewRole);
   const [firestoreData, setFirestoreData] = useState(
-    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free', displayName: 'Dr. Ahmet Kaya' } : null
+    previewRole ? {
+      isPro: previewRole === 'pro' || previewRole === 'lifetime',
+      isBasic: previewRole === 'basic',
+      isLifetime: previewRole === 'lifetime',
+      plan: previewRole,
+      subscriptionStatus: previewRole === 'basic' ? 'basic' : (previewRole === 'pro' ? 'active' : (previewRole === 'lifetime' ? 'lifetime' : 'free')),
+      displayName: 'Dr. Ahmet Kaya'
+    } : null
   );
   const [subLoading, setSubLoading] = useState(!previewRole);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
@@ -731,7 +1297,27 @@ export const Dashboard = () => {
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // ÜCRETLİ ABONE (PRO / TEMEL / LIFETIME) İÇİN GELİŞMİŞ PANEL
+  // TEMEL PLAN KULLANICISI İÇİN DİNAMİK PANEL (9d ŞABLONU)
+  // ─────────────────────────────────────────────────────────────────────────────
+  if (currentPlan === 'basic') {
+    return (
+      <BasicUserDashboard
+        userName={userName}
+        streak={streak}
+        termCount={termCount}
+        isTr={isTr}
+        todayFormatted={todayFormatted}
+        trialState={trialState}
+        firestoreData={firestoreData}
+        pastDueState={pastDueState}
+        handleUpgrade={handleUpgrade}
+        checkoutLoading={checkoutLoading}
+      />
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // PRO / LIFETIME ABONE İÇİN GELİŞMİŞ PANEL
   // ─────────────────────────────────────────────────────────────────────────────
   const quickActions = [
     {

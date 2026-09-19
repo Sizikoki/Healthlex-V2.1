@@ -221,8 +221,9 @@ export const ProgressPage = () => {
   const effectiveData = firestoreData || user;
   const trialState = getUserTrialState(effectiveData || firebaseUser);
   const isTrialActive = trialState?.isActive === true;
-  const isBasic = checkIsBasic(effectiveData) || previewRole === 'basic';
-  const effectiveIsPro = isPro || checkIsPro(effectiveData) || resolveIsPro(effectiveData) || previewRole === 'pro';
+  // Deneme süresindeki kullanıcılar Pro gibi full yetkiye sahiptir; bu nedenle isTrialActive iken isBasic false kalır
+  const isBasic = !isTrialActive && (checkIsBasic(effectiveData) || previewRole === 'basic');
+  const effectiveIsPro = isTrialActive || isPro || checkIsPro(effectiveData) || resolveIsPro(effectiveData) || previewRole === 'pro';
   const hasAccess = effectiveIsPro || isBasic || isTrialActive;
 
   // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
