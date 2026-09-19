@@ -41,33 +41,45 @@ export const MatchGame = () => {
       setCheckingPlan(false);
       return;
     }
-    const uid = auth?.currentUser?.uid || getUser()?.uid;
-    if (!uid) {
-      setHasPlan(false);
-      setCheckingPlan(false);
-      return;
-    }
 
-    try {
-      const userDocRef = doc(db, 'users', uid);
-      const unsub = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setIsPro(checkIsPro(data));
-          setHasPlan(checkHasPaidPlan(data));
-        } else {
-          setIsPro(false);
-          setHasPlan(false);
-        }
+    const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      const targetUser = firebaseUser || getUser();
+      const uid = targetUser?.uid;
+
+      if (!uid) {
+        setHasPlan(false);
         setCheckingPlan(false);
-      }, (err) => {
-        console.warn('[MatchGame] Error checking plan:', err);
+        return;
+      }
+
+      // İlk yerel kullanıcı kontrolü
+      if (checkHasPaidPlan(targetUser)) {
+        setHasPlan(true);
+      }
+
+      try {
+        const userDocRef = doc(db, 'users', uid);
+        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setIsPro(checkIsPro(data));
+            setHasPlan(checkHasPaidPlan(data));
+          } else {
+            setIsPro(checkIsPro(targetUser));
+            setHasPlan(checkHasPaidPlan(targetUser));
+          }
+          setCheckingPlan(false);
+        }, (err) => {
+          console.warn('[MatchGame] Error checking plan:', err);
+          setCheckingPlan(false);
+        });
+        return () => unsubDoc();
+      } catch (e) {
         setCheckingPlan(false);
-      });
-      return () => unsub();
-    } catch (e) {
-      setCheckingPlan(false);
-    }
+      }
+    });
+
+    return () => unsubAuth();
   }, [previewRole]);
 
   useEffect(() => {

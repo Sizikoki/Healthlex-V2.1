@@ -126,7 +126,24 @@ export const Login = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     updateCanonicalUrl('https://www.healthlexmed.com/login');
-  }, []);
+
+    // Kullanıcı zaten giriş yapmışsa veya oturum açıldığı anda otomatik yönlendir
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser && !currentUser.isAnonymous) {
+        const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+          try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+        })();
+        if (chosenPlan) {
+          try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+          navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
+        } else {
+          navigate(redirectTo, { replace: true });
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate, redirectTo]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -139,7 +156,7 @@ export const Login = () => {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || email.split('@')[0], email, joinDate: user.metadata.creationTime || new Date().toISOString() });
-      await syncProgressFromFirestore();
+      syncProgressFromFirestore().catch(() => {});
       toast.success(t('loginSuccess', 'Giris basarili! Hos geldiniz.'));
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -164,7 +181,7 @@ export const Login = () => {
       const { user } = await signInWithPopup(auth, googleProvider);
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
-      await syncProgressFromFirestore();
+      syncProgressFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -263,7 +280,24 @@ export const Register = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     updateCanonicalUrl('https://www.healthlexmed.com/register');
-  }, []);
+
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser && !currentUser.isAnonymous) {
+        const plan = new URLSearchParams(window.location.search).get('plan') || (() => {
+          try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+        })();
+        if (plan) {
+          try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+          navigate(`/pricing?checkout=${plan}`, { replace: true });
+        } else {
+          const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
+          navigate(targetDestination, { replace: true });
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate, redirectTo]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -281,7 +315,7 @@ export const Register = () => {
       await updateProfile(user, { displayName: name });
       await ensureUserDoc({ ...user, displayName: name });
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
-      await syncProgressFromFirestore();
+      syncProgressFromFirestore().catch(() => {});
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -307,7 +341,7 @@ export const Register = () => {
       const { user } = await signInWithPopup(auth, googleProvider);
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
-      await syncProgressFromFirestore();
+      syncProgressFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }

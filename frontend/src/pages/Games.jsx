@@ -54,32 +54,43 @@ export const Games = () => {
 
   useEffect(() => {
     if (previewRole) return;
-    const uid = auth?.currentUser?.uid || getUser()?.uid;
-    if (!uid) {
-      const localUser = getUser();
-      setIsPro(checkIsPro(localUser));
-      setHasPlan(checkHasPaidPlan(localUser));
-      return;
-    }
 
-    try {
-      const userDocRef = doc(db, 'users', uid);
-      const unsub = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setIsPro(checkIsPro(data));
-          setHasPlan(checkHasPaidPlan(data));
-        } else {
-          setIsPro(false);
-          setHasPlan(false);
-        }
-      }, (err) => {
-        console.warn('[Games] Could not check pro/plan status:', err);
-      });
-      return () => unsub();
-    } catch (e) {
-      console.warn('[Games] Error checking pro/plan status:', e);
-    }
+    const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      const targetUser = firebaseUser || getUser();
+      const uid = targetUser?.uid;
+
+      if (!uid) {
+        const localUser = getUser();
+        setIsPro(checkIsPro(localUser));
+        setHasPlan(checkHasPaidPlan(localUser));
+        return;
+      }
+
+      if (checkHasPaidPlan(targetUser)) {
+        setHasPlan(true);
+      }
+
+      try {
+        const userDocRef = doc(db, 'users', uid);
+        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setIsPro(checkIsPro(data));
+            setHasPlan(checkHasPaidPlan(data));
+          } else {
+            setIsPro(checkIsPro(targetUser));
+            setHasPlan(checkHasPaidPlan(targetUser));
+          }
+        }, (err) => {
+          console.warn('[Games] Could not check pro/plan status:', err);
+        });
+        return () => unsubDoc();
+      } catch (e) {
+        console.warn('[Games] Error checking pro/plan status:', e);
+      }
+    });
+
+    return () => unsubAuth();
   }, [previewRole]);
 
   const [selectedCategory, setSelectedCategory] = useState(() => {
