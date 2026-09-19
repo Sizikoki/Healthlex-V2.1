@@ -383,56 +383,172 @@ export const Welcome = () => {
   }, [isPro, isBasic, effectiveUser, isTr]);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-6 sm:py-14 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased">
-      <div className="w-full max-w-[960px] flex flex-col gap-[22px] sm:gap-9">
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-12 lg:py-14 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 flex justify-center font-sans antialiased">
+      <div className="w-full max-w-[1536px] 2xl:max-w-[1620px] flex flex-col gap-7 sm:gap-9">
         {/* Header Section */}
-        <div className="flex flex-col gap-2.5 sm:gap-3 text-left">
-          <span className="font-extrabold text-[11px] sm:text-[12px] leading-none tracking-[0.12em] sm:tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-            {badgeText}
-          </span>
-          <h1 className="m-0 font-semibold text-[28px] leading-[1.15] sm:text-[44px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
-            {greetingTitle}
-          </h1>
-          <p className="m-0 font-normal text-[14px] leading-[1.5] sm:text-[17px] text-[#6b7a90] dark:text-muted-foreground max-w-[720px]">
-            {isTr && !hasPaidPlan ? (
-              <>
-                <span className="sm:hidden">
-                  Misafir olarak giriş yaptın. Kütüphaneyi ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır.
-                </span>
-                <span className="hidden sm:inline">
-                  Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.
-                </span>
-              </>
-            ) : (
-              greetingSubtitle
-            )}
-          </p>
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 text-left">
+          <div className="flex flex-col gap-2.5 sm:gap-3 max-w-3xl">
+            <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              {badgeText}
+            </span>
+            <h1 className="m-0 font-semibold text-3xl sm:text-4xl lg:text-[42px] sm:leading-[1.12] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+              {greetingTitle}
+            </h1>
+            <p className="m-0 font-normal text-[15px] sm:text-[17px] leading-[1.6] text-[#6b7a90] dark:text-muted-foreground">
+              {isTr && !hasPaidPlan ? (
+                <>
+                  <span className="sm:hidden">
+                    Misafir olarak giriş yaptın. Kütüphaneyi ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır.
+                  </span>
+                  <span className="hidden sm:inline">
+                    Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.
+                  </span>
+                </>
+              ) : (
+                greetingSubtitle
+              )}
+            </p>
+          </div>
+
+          {/* Hızlı Başla / Panele Git Butonları */}
+          <div className="flex items-center gap-3 shrink-0 self-stretch sm:self-auto">
+            <Link
+              to="/dashboard"
+              className="flex-1 sm:flex-initial text-center bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/50 text-[#0f1b33] dark:text-foreground font-bold text-[14px] sm:text-[15px] px-5 py-3 rounded-[12px] shadow-2xs transition-all"
+            >
+              {isTr ? 'Panelime Git' : 'Go to Dashboard'}
+            </Link>
+            <Link
+              to="/study"
+              className="flex-1 sm:flex-initial text-center bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] sm:text-[15px] px-5 py-3 rounded-[12px] shadow-xs transition-all whitespace-nowrap"
+            >
+              {isTr ? 'Kütüphaneyi Keşfet →' : 'Explore Library →'}
+            </Link>
+          </div>
         </div>
 
-        {/* 3 Quota Metric Cards */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        {/* 3 Quota Metric Cards (Geniş Ekrana Yayılmış) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-6">
           {quotas.map((q, idx) => (
             <div
               key={idx}
-              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] sm:rounded-[14px] p-[12px_10px] sm:p-[22px_24px] flex flex-col gap-1 sm:gap-2 shadow-xs transition-all hover:border-[#2563eb]/40 text-left"
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[16px] p-5 sm:p-6 lg:p-7 flex flex-col justify-between gap-3.5 shadow-xs transition-all hover:border-[#2563eb]/40 hover:shadow-md text-left"
             >
-              <span className="font-extrabold text-[10px] sm:text-[11px] leading-none tracking-[0.1em] sm:tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase truncate">
-                {q.label}
-              </span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2 mt-0.5">
-                <span className="font-extrabold text-[22px] sm:text-[34px] leading-none text-[#0f1b33] dark:text-foreground">
-                  {q.v}
+              <div className="flex flex-col gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {q.label}
                 </span>
-                <span className="font-semibold text-[11px] leading-[1.3] sm:text-sm text-[#6b7a90] dark:text-muted-foreground mt-0.5 sm:mt-0 truncate">
-                  <span className="sm:hidden">{q.mobileUnit || q.unit}</span>
-                  <span className="hidden sm:inline">{q.unit}</span>
-                </span>
+                <div className="flex items-baseline gap-2.5 mt-1">
+                  <span className="font-extrabold text-3xl sm:text-4xl lg:text-[40px] leading-none text-[#0f1b33] dark:text-foreground">
+                    {q.v}
+                  </span>
+                  <span className="font-semibold text-xs sm:text-sm text-[#6b7a90] dark:text-muted-foreground">
+                    <span className="sm:hidden">{q.mobileUnit || q.unit}</span>
+                    <span className="hidden sm:inline">{q.unit}</span>
+                  </span>
+                </div>
               </div>
-              <div className="hidden sm:block font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground">
+              <div className="font-normal text-[13px] sm:text-[14px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground pt-2.5 border-t border-[#f0f3f8] dark:border-border/50">
                 {q.note}
               </div>
             </div>
           ))}
+        </div>
+
+        {/* 4 HIZLI ÇALIŞMA ALANI (Geniş Ekranda Kenarları Dolduran Modül Kartları) */}
+        <div className="flex flex-col gap-3.5 text-left">
+          <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+            {isTr ? 'HEMEN BAŞLAYABİLECEĞİN MODÜLLER' : 'MODULES READY TO STUDY'}
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5">
+            <Link
+              to="/study"
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/50 hover:shadow-md rounded-[16px] p-5 sm:p-6 flex flex-col justify-between gap-3.5 text-[#0f1b33] dark:text-foreground transition-all group hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-[12px] bg-blue-500/10 text-blue-600 dark:text-blue-400 grid place-items-center font-bold text-xl shadow-2xs">
+                  📚
+                </div>
+                <span className="text-[12px] font-bold text-[#2563eb] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+                  {isTr ? 'İncele' : 'Browse'} →
+                </span>
+              </div>
+              <div>
+                <div className="font-extrabold text-[16px] group-hover:text-[#2563eb] transition-colors">
+                  {isTr ? 'Tıbbi Terimler Sözlüğü' : 'Medical Dictionary'}
+                </div>
+                <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? '13 kategori, 588+ detaylı tıbbi terim ve klinik köken.' : '13 categories, 588+ medical terms with origins.'}
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              to="/morphemes"
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/50 hover:shadow-md rounded-[16px] p-5 sm:p-6 flex flex-col justify-between gap-3.5 text-[#0f1b33] dark:text-foreground transition-all group hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-[12px] bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 grid place-items-center font-bold text-xl shadow-2xs">
+                  🔬
+                </div>
+                <span className="text-[12px] font-bold text-[#2563eb] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+                  {isTr ? 'Keşfet' : 'Explore'} →
+                </span>
+              </div>
+              <div>
+                <div className="font-extrabold text-[16px] group-hover:text-[#2563eb] transition-colors">
+                  {isTr ? 'Morfem Kütüphanesi' : 'Morpheme Library'}
+                </div>
+                <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? '571 ön ek, kök ve son ek analizi ve türetim mantığı.' : '571 prefixes, roots and suffixes with logic.'}
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              to="/flashcards"
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/50 hover:shadow-md rounded-[16px] p-5 sm:p-6 flex flex-col justify-between gap-3.5 text-[#0f1b33] dark:text-foreground transition-all group hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-[12px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 grid place-items-center font-bold text-xl shadow-2xs">
+                  🃏
+                </div>
+                <span className="text-[12px] font-bold text-[#2563eb] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+                  {isTr ? 'Başla' : 'Play'} →
+                </span>
+              </div>
+              <div>
+                <div className="font-extrabold text-[16px] group-hover:text-[#2563eb] transition-colors">
+                  {isTr ? 'Flashcard & Tekrar' : 'Flashcard & Review'}
+                </div>
+                <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? 'Aralıklı tekrar algoritması ile kalıcı hafıza çalışması.' : 'Spaced repetition for long-term memorization.'}
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              to="/games"
+              className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/50 hover:shadow-md rounded-[16px] p-5 sm:p-6 flex flex-col justify-between gap-3.5 text-[#0f1b33] dark:text-foreground transition-all group hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-[12px] bg-amber-500/10 text-amber-600 dark:text-amber-400 grid place-items-center font-bold text-xl shadow-2xs">
+                  🎮
+                </div>
+                <span className="text-[12px] font-bold text-[#2563eb] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+                  {isTr ? 'Oyna' : 'Play'} →
+                </span>
+              </div>
+              <div>
+                <div className="font-extrabold text-[16px] group-hover:text-[#2563eb] transition-colors">
+                  {isTr ? 'İnteraktif Oyun Modları' : 'Interactive Games'}
+                </div>
+                <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı ile pekiştir.' : 'Matching, Quiz and Morpheme Builder games.'}
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* MOBILE VIEW: Feature Breakdown as Compact Cards (sm:hidden) */}
@@ -451,10 +567,10 @@ export const Welcome = () => {
             return (
               <div
                 key={idx}
-                className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-[12px_14px] flex gap-2.5 items-start shadow-xs text-left"
+                className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-3.5 flex gap-3 items-start shadow-xs text-left"
               >
                 <span
-                  className={`shrink-0 w-[22px] h-[22px] rounded-[6px] grid place-items-center font-extrabold text-[12px] leading-none select-none ${s.badgeClass}`}
+                  className={`shrink-0 w-[24px] h-[24px] rounded-[7px] grid place-items-center font-extrabold text-[12px] leading-none select-none ${s.badgeClass}`}
                 >
                   {s.sym}
                 </span>
@@ -477,13 +593,13 @@ export const Welcome = () => {
           })}
         </div>
 
-        {/* DESKTOP VIEW: Feature Comparison Table (hidden sm:block) */}
-        <div className="hidden sm:block bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] overflow-hidden shadow-xs">
+        {/* DESKTOP VIEW: Feature Comparison Table (hidden sm:block, Genişletilmiş) */}
+        <div className="hidden sm:block bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[18px] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
-            <div className="min-w-[560px] sm:min-w-0">
+            <div className="min-w-[720px]">
               {/* Table Column Headers */}
-              <div className="grid grid-cols-[1.3fr_1.4fr_1fr] px-6 py-3.5 bg-[#f9fafc] dark:bg-muted/40 border-b border-[#e5e9f2] dark:border-border font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase text-left">
-                <span>{isTr ? 'ÖZELLİK' : 'FEATURE'}</span>
+              <div className="grid grid-cols-[1.3fr_1.4fr_1fr] px-8 py-4 bg-[#f9fafc] dark:bg-muted/40 border-b border-[#e5e9f2] dark:border-border font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase text-left">
+                <span>{isTr ? 'ÖZELLİK & AÇIKLAMA' : 'FEATURE & DESCRIPTION'}</span>
                 <span>
                   {isTr
                     ? hasPaidPlan
@@ -493,7 +609,7 @@ export const Welcome = () => {
                     ? 'YOUR PLAN'
                     : 'GUEST LIMIT'}
                 </span>
-                <span>PRO</span>
+                <span>PRO & ÖMÜR BOYU</span>
               </div>
 
               {/* Table Rows */}
@@ -503,37 +619,37 @@ export const Welcome = () => {
                   return (
                     <div
                       key={idx}
-                      className="grid grid-cols-[1.3fr_1.4fr_1fr] px-6 py-4 items-center gap-4 hover:bg-[#fafbfc] dark:hover:bg-muted/20 transition-colors"
+                      className="grid grid-cols-[1.3fr_1.4fr_1fr] px-8 py-4.5 items-center gap-6 hover:bg-[#fafbfc] dark:hover:bg-muted/20 transition-colors"
                     >
                       {/* Column 1: Name & Desc */}
                       <div>
                         <div className="font-extrabold text-[15px] text-[#0f1b33] dark:text-foreground leading-snug">
                           {r.name}
                         </div>
-                        <div className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                        <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
                           {r.desc}
                         </div>
                       </div>
 
                       {/* Column 2: Status / Limit with Badge Icon */}
-                      <div className="flex gap-2.5 items-start">
+                      <div className="flex gap-3 items-center">
                         <span
-                          className={`shrink-0 w-[22px] h-[22px] rounded-[6px] grid place-items-center font-extrabold text-[12px] leading-none select-none ${s.badgeClass}`}
+                          className={`shrink-0 w-[24px] h-[24px] rounded-[7px] grid place-items-center font-extrabold text-[13px] leading-none select-none shadow-2xs ${s.badgeClass}`}
                         >
                           {s.sym}
                         </span>
                         <div>
-                          <div className={`font-bold text-[14px] leading-[1.35] ${s.fgClass}`}>
+                          <div className={`font-bold text-[14.5px] leading-[1.35] ${s.fgClass}`}>
                             {r.limit}
                           </div>
-                          <div className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
+                          <div className="font-normal text-[12.5px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
                             {r.sub}
                           </div>
                         </div>
                       </div>
 
                       {/* Column 3: Pro Column */}
-                      <div className="font-semibold text-[14px] text-[#2563eb] dark:text-blue-400">
+                      <div className="font-bold text-[14.5px] text-[#2563eb] dark:text-blue-400">
                         {r.pro}
                       </div>
                     </div>
@@ -545,50 +661,50 @@ export const Welcome = () => {
         </div>
 
         {/* MOBILE VIEW: Bottom CTA Stacked Card (sm:hidden) */}
-        <div className="flex flex-col sm:hidden bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[14px] p-5 text-white gap-3 shadow-md text-left">
+        <div className="flex flex-col sm:hidden bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[16px] p-5 text-white gap-3.5 shadow-md text-left">
           <div>
-            <div className="font-semibold text-[18px] leading-snug font-['Lora',Georgia,serif]">
+            <div className="font-semibold text-[19px] leading-snug font-['Lora',Georgia,serif]">
               {bannerConfig.title}
             </div>
-            <div className="font-normal text-[13px] leading-[1.5] text-[#b8c4d9] mt-1">
+            <div className="font-normal text-[13px] leading-[1.5] text-[#b8c4d9] mt-1.5">
               {bannerConfig.mobileSubtitle || bannerConfig.subtitle}
             </div>
           </div>
           <Link
             to={bannerConfig.primaryLink}
-            className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] p-[13px] rounded-[10px] shadow-xs transition-all"
+            className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] p-[13px] rounded-[11px] shadow-xs transition-all"
           >
             {bannerConfig.primaryText}
           </Link>
           <Link
             to={bannerConfig.secondaryLink}
-            className="block text-center border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-bold text-[14px] p-3 rounded-[10px] transition-all"
+            className="block text-center border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-bold text-[14px] p-3 rounded-[11px] transition-all"
           >
             {bannerConfig.secondaryText}
           </Link>
         </div>
 
         {/* DESKTOP VIEW: Bottom CTA Horizontal Banner (hidden sm:flex) */}
-        <div className="hidden sm:flex justify-between items-center bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[14px] p-[24px_28px] text-white gap-6 shadow-md text-left">
-          <div>
-            <div className="font-semibold text-xl leading-snug font-['Lora',Georgia,serif]">
+        <div className="hidden sm:flex justify-between items-center bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[18px] p-7 lg:p-8 text-white gap-6 shadow-md text-left">
+          <div className="max-w-3xl">
+            <div className="font-semibold text-2xl leading-snug font-['Lora',Georgia,serif]">
               {bannerConfig.title}
             </div>
-            <div className="font-normal text-sm text-[#b8c4d9] mt-1">
+            <div className="font-normal text-[15px] text-[#b8c4d9] mt-1.5 leading-relaxed">
               {bannerConfig.subtitle}
             </div>
           </div>
 
-          <div className="flex gap-2.5 shrink-0">
+          <div className="flex gap-3 shrink-0">
             <Link
               to={bannerConfig.secondaryLink}
-              className="text-center bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-bold text-[15px] px-[18px] py-3 rounded-[10px] transition-all"
+              className="text-center bg-transparent border border-white/30 hover:border-white/60 hover:bg-white/10 text-white font-bold text-[15px] px-5 py-3.5 rounded-[11px] transition-all"
             >
               {bannerConfig.secondaryText}
             </Link>
             <Link
               to={bannerConfig.primaryLink}
-              className="text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] px-6 py-3 rounded-[10px] shadow-sm transition-all whitespace-nowrap"
+              className="text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] px-6 py-3.5 rounded-[11px] shadow-sm transition-all whitespace-nowrap"
             >
               {bannerConfig.primaryText}
             </Link>
