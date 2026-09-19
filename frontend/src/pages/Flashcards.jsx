@@ -31,12 +31,13 @@ export const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
+  // Misafir kontrolü: localStorage'daki kullanıcı verisi VEYA Firebase Auth currentUser (anonim olmayan)
   const isGuest = !isLoggedIn();
   const initialGuestInfo = isGuest ? getFlashcardGuestDailyInfo() : { canPlay: true };
   const [loading, setLoading] = useState(initialGuestInfo.canPlay);
   const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
 
-  const loadTerms = useCallback(async () => {
+  const loadTerms = useCallback(async (isRestart = false) => {
     if (!isLoggedIn()) {
       const guestDaily = getFlashcardGuestDailyInfo();
       if (!guestDaily.canPlay) {
@@ -44,7 +45,10 @@ export const Flashcards = () => {
         setLoading(false);
         return;
       }
-      incrementFlashcardGuestPlay();
+      // Restart durumunda ek oynama hakkı tüketme, sadece ilk yüklemede say
+      if (!isRestart) {
+        incrementFlashcardGuestPlay();
+      }
     }
 
     try {
@@ -171,7 +175,8 @@ export const Flashcards = () => {
     setIsFlipped(false);
     setLearnedCount(0);
     setSkippedCount(0);
-    loadTerms();
+    setShowGuestModal(false);
+    loadTerms(true); // isRestart=true: restart sayılmasın, ayrı oynama hakkı tüketmesin
   };
 
   if (loading) {

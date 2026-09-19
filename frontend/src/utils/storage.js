@@ -393,7 +393,11 @@ export const getUser = () => {
 };
 
 export const isLoggedIn = () => {
-  return getUser() !== null || (auth && auth.currentUser !== null);
+  // LocalStorage'da geçerli kullanıcı verisi varsa → giriş yapmış
+  if (getUser() !== null) return true;
+  // Firebase Auth'da gerçek (anonim olmayan) oturum varsa → giriş yapmış
+  if (auth && auth.currentUser && !auth.currentUser.isAnonymous) return true;
+  return false;
 };
 
 export const logout = () => {
