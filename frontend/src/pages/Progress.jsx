@@ -100,6 +100,45 @@ export const ProgressPage = () => {
     setInProp(true);
   }, []);
 
+  const effectiveData = firestoreData || user;
+  const trialState = getUserTrialState(effectiveData || firebaseUser);
+
+  // Temel plan tespiti (Preview veya Firestore verisi veya checkIsBasic)
+  const isBasicPlan =
+    previewRole === 'basic' ||
+    effectiveData?.isBasic === true ||
+    (effectiveData?.plan || '').toLowerCase().includes('basic') ||
+    (effectiveData?.plan || '').toLowerCase().includes('temel') ||
+    (effectiveData?.subscriptionStatus || '').toLowerCase() === 'basic' ||
+    checkIsBasic(effectiveData);
+
+  // Pro / Lifetime tespiti (Temel planda ise Pro olamaz)
+  const isLifetime =
+    previewRole === 'lifetime' ||
+    effectiveData?.isLifetime === true ||
+    (effectiveData?.plan || '').toLowerCase().includes('lifetime');
+
+  const effectiveIsPro =
+    !isBasicPlan &&
+    (isLifetime ||
+      previewRole === 'pro' ||
+      isPro ||
+      checkIsPro(effectiveData) ||
+      resolveIsPro(effectiveData));
+
+  const hasAccess =
+    effectiveIsPro ||
+    isBasicPlan ||
+    (trialState?.isActive && !trialState?.isExpired);
+
+  // Temel plan kullanıcısı için varsayılan sekmeyi Flashcard yap (Tüm erken return'lerin üstünde)
+  useEffect(() => {
+    if (!hasInitializedTab.current && isBasicPlan) {
+      setActiveTab('flashcard');
+      hasInitializedTab.current = true;
+    }
+  }, [isBasicPlan]);
+
   const formatName = (name) => {
     if (!name) return currentLanguage === 'en' ? 'User' : 'Kullanıcı';
     return name
@@ -228,45 +267,6 @@ export const ProgressPage = () => {
       </div>
     );
   }
-
-  const effectiveData = firestoreData || user;
-  const trialState = getUserTrialState(effectiveData || firebaseUser);
-
-  // Temel plan tespiti (Preview veya Firestore verisi veya checkIsBasic)
-  const isBasicPlan =
-    previewRole === 'basic' ||
-    effectiveData?.isBasic === true ||
-    (effectiveData?.plan || '').toLowerCase().includes('basic') ||
-    (effectiveData?.plan || '').toLowerCase().includes('temel') ||
-    (effectiveData?.subscriptionStatus || '').toLowerCase() === 'basic' ||
-    checkIsBasic(effectiveData);
-
-  // Pro / Lifetime tespiti (Temel planda ise Pro olamaz)
-  const isLifetime =
-    previewRole === 'lifetime' ||
-    effectiveData?.isLifetime === true ||
-    (effectiveData?.plan || '').toLowerCase().includes('lifetime');
-
-  const effectiveIsPro =
-    !isBasicPlan &&
-    (isLifetime ||
-      previewRole === 'pro' ||
-      isPro ||
-      checkIsPro(effectiveData) ||
-      resolveIsPro(effectiveData));
-
-  const hasAccess =
-    effectiveIsPro ||
-    isBasicPlan ||
-    (trialState?.isActive && !trialState?.isExpired);
-
-  // Temel plan kullanıcısı için varsayılan sekmeyi Flashcard yap
-  useEffect(() => {
-    if (!hasInitializedTab.current && isBasicPlan) {
-      setActiveTab('flashcard');
-      hasInitializedTab.current = true;
-    }
-  }, [isBasicPlan]);
 
   // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
   if (!hasAccess) {
