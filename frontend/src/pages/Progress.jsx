@@ -502,15 +502,18 @@ export const ProgressPage = () => {
             <div className={`transition-all duration-500 ${inProp ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
               {/* Tab Selection Row */}
               <div className="tabs flex gap-[4px] bg-[var(--paper-dim)] p-[4px] rounded-[11px] border border-[var(--line)] flex-wrap mb-[20px]">
-                <button 
+                <button
                   onClick={() => setActiveTab('quiz')}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
+                  disabled={isBasic && !effectiveIsPro}
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 ${
                     activeTab === 'quiz' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
-                  }`}
+                  } ${isBasic && !effectiveIsPro ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
+                  {isBasic && !effectiveIsPro && <span className="text-[10px]">🔒</span>}
                   {t('quizHistory')}
+                  {isBasic && !effectiveIsPro && <span className="text-[9px] font-semibold text-amber-600 bg-amber-100 px-1 py-0.5 rounded">Pro</span>}
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('match')}
                   className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
                     activeTab === 'match' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
@@ -518,15 +521,18 @@ export const ProgressPage = () => {
                 >
                   {t('matchHistory')}
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('morpheme')}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
+                  disabled={isBasic && !effectiveIsPro}
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 ${
                     activeTab === 'morpheme' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
-                  }`}
+                  } ${isBasic && !effectiveIsPro ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
+                  {isBasic && !effectiveIsPro && <span className="text-[10px]">🔒</span>}
                   {t('morphemeHistory')}
+                  {isBasic && !effectiveIsPro && <span className="text-[9px] font-semibold text-amber-600 bg-amber-100 px-1 py-0.5 rounded">Pro</span>}
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('flashcard')}
                   className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
                     activeTab === 'flashcard' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
@@ -538,32 +544,49 @@ export const ProgressPage = () => {
 
               {/* 1. QUIZ HISTORY PANEL */}
               <div className={`hist-panel bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] ${activeTab === 'quiz' ? 'active block' : 'hidden'}`}>
-                <div className="hist-head flex justify-between items-start gap-[20px] flex-wrap mb-[18px]">
-                  <div>
-                    <div className="hist-title font-bold text-[1rem] text-[var(--ink)] mb-[2px]">{t('recentQuizzes')}</div>
-                    <div className="hist-sub text-[0.84rem] text-[var(--muted)]">{t('last10QuizPerf')}</div>
+                {isBasic && !effectiveIsPro ? (
+                  <div className="empty-state text-center py-[40px] px-[10px]">
+                    <div className="text-3xl mb-3">🔒</div>
+                    <div className="hist-title font-bold text-[1rem] mb-2">
+                      {t('quizLockedForBasicTitle', 'Quiz — Pro Planına Özel')}
+                    </div>
+                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-xs mx-auto">
+                      {t('quizLockedForBasicDesc', 'Quiz modu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır.')}
+                    </p>
+                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">
+                      {t('upgradeToPro', "Pro'ya Yükselt")} →
+                    </Link>
                   </div>
-                </div>
-                {quizScores.length > 0 ? (
-                  quizScores.map((score, idx) => (
-                    <div className="hist-item flex justify-between items-center bg-[var(--paper)] rounded-[9px] p-[14px_18px] mb-[10px] last:mb-0" key={idx}>
+                ) : (
+                  <>
+                    <div className="hist-head flex justify-between items-start gap-[20px] flex-wrap mb-[18px]">
                       <div>
-                        <div className="l1 font-semibold text-[0.92rem]">{score.score} / {score.total}</div>
-                        <div className="l2 text-[0.78rem] text-[var(--muted)] mt-[2px]">{formatDate(score.date)}</div>
-                      </div>
-                      <div className={`score font-serif font-semibold text-[1.15rem] ${
-                        score.percentage >= 70 ? 'score-good text-[var(--teal-deep)]' : 'score-mid text-[var(--gold)]'
-                      }`}>
-                        %{score.percentage}
+                        <div className="hist-title font-bold text-[1rem] text-[var(--ink)] mb-[2px]">{t('recentQuizzes')}</div>
+                        <div className="hist-sub text-[0.84rem] text-[var(--muted)]">{t('last10QuizPerf')}</div>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <div className="empty-state text-center py-[30px] px-[10px]">
-                    <div className="hist-title font-bold text-[1rem]">{t('noQuizYet')}</div>
-                    <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noQuizSub')}</p>
-                    <Link to="/quiz" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('solveQuiz')} →</Link>
-                  </div>
+                    {quizScores.length > 0 ? (
+                      quizScores.map((score, idx) => (
+                        <div className="hist-item flex justify-between items-center bg-[var(--paper)] rounded-[9px] p-[14px_18px] mb-[10px] last:mb-0" key={idx}>
+                          <div>
+                            <div className="l1 font-semibold text-[0.92rem]">{score.score} / {score.total}</div>
+                            <div className="l2 text-[0.78rem] text-[var(--muted)] mt-[2px]">{formatDate(score.date)}</div>
+                          </div>
+                          <div className={`score font-serif font-semibold text-[1.15rem] ${
+                            score.percentage >= 70 ? 'score-good text-[var(--teal-deep)]' : 'score-mid text-[var(--gold)]'
+                          }`}>
+                            %{score.percentage}
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="empty-state text-center py-[30px] px-[10px]">
+                        <div className="hist-title font-bold text-[1rem]">{t('noQuizYet')}</div>
+                        <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noQuizSub')}</p>
+                        <Link to="/quiz" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('solveQuiz')} →</Link>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
 
@@ -598,30 +621,47 @@ export const ProgressPage = () => {
 
               {/* 3. MORPHEME HISTORY PANEL */}
               <div className={`hist-panel bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] ${activeTab === 'morpheme' ? 'active block' : 'hidden'}`}>
-                <div className="hist-head flex justify-between items-start gap-[20px] flex-wrap mb-[18px]">
-                  <div>
-                    <div className="hist-title font-bold text-[1rem] text-[var(--ink)] mb-[2px]">{t('recentMorphemes')}</div>
-                    <div className="hist-sub text-[0.84rem] text-[var(--muted)]">{t('last10MorphemePerf')}</div>
+                {isBasic && !effectiveIsPro ? (
+                  <div className="empty-state text-center py-[40px] px-[10px]">
+                    <div className="text-3xl mb-3">🔒</div>
+                    <div className="hist-title font-bold text-[1rem] mb-2">
+                      {t('morphemeLockedForBasicTitle', 'Morfem Yapıcı — Pro Planına Özel')}
+                    </div>
+                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-xs mx-auto">
+                      {t('morphemeLockedForBasicDesc', 'Morfem Yapıcı oyunu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır.')}
+                    </p>
+                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">
+                      {t('upgradeToPro', "Pro'ya Yükselt")} →
+                    </Link>
                   </div>
-                </div>
-                {morphemeScores.length > 0 ? (
-                  morphemeScores.map((score, idx) => (
-                    <div className="hist-item flex justify-between items-center bg-[var(--paper)] rounded-[9px] p-[14px_18px] mb-[10px] last:mb-0" key={idx}>
+                ) : (
+                  <>
+                    <div className="hist-head flex justify-between items-start gap-[20px] flex-wrap mb-[18px]">
                       <div>
-                        <div className="l1 font-semibold text-[0.92rem]">{score.score} / {score.total} pts</div>
-                        <div className="l2 text-[0.78rem] text-[var(--muted)] mt-[2px]">{formatDate(score.date)}</div>
-                      </div>
-                      <div className="score font-serif font-semibold text-[1.15rem] score-good text-[var(--teal-deep)]">
-                        %{score.percentage}
+                        <div className="hist-title font-bold text-[1rem] text-[var(--ink)] mb-[2px]">{t('recentMorphemes')}</div>
+                        <div className="hist-sub text-[0.84rem] text-[var(--muted)]">{t('last10MorphemePerf')}</div>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <div className="empty-state text-center py-[30px] px-[10px]">
-                    <div className="hist-title font-bold text-[1rem]">{t('noMorphemeYet')}</div>
-                    <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noMorphemeSub')}</p>
-                    <Link to="/games" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('playMorpheme')} →</Link>
-                  </div>
+                    {morphemeScores.length > 0 ? (
+                      morphemeScores.map((score, idx) => (
+                        <div className="hist-item flex justify-between items-center bg-[var(--paper)] rounded-[9px] p-[14px_18px] mb-[10px] last:mb-0" key={idx}>
+                          <div>
+                            <div className="l1 font-semibold text-[0.92rem]">{score.score} / {score.total} pts</div>
+                            <div className="l2 text-[0.78rem] text-[var(--muted)] mt-[2px]">{formatDate(score.date)}</div>
+                          </div>
+                          <div className="score font-serif font-semibold text-[1.15rem] score-good text-[var(--teal-deep)]">
+                            %{score.percentage}
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="empty-state text-center py-[30px] px-[10px]">
+                        <div className="hist-title font-bold text-[1rem]">{t('noMorphemeYet')}</div>
+                        <p className="text-[var(--muted)] text-[0.92rem] mt-2 mb-[18px]">{t('noMorphemeSub')}</p>
+                        <Link to="/games" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">{t('playMorpheme')} →</Link>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
 

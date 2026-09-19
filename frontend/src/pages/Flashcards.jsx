@@ -13,7 +13,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { useLanguage } from '@/context/LanguageContext';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Flashcards = () => {
@@ -31,22 +31,25 @@ export const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
-  // Misafir kontrolü: localStorage'daki kullanıcı verisi VEYA Firebase Auth currentUser (anonim olmayan)
-  const isGuest = !isLoggedIn();
-  const initialGuestInfo = isGuest ? getFlashcardGuestDailyInfo() : { canPlay: true };
+  // Sınırlı kullanıcı = anonim misafir VEYA kayıtlı ama hiç plan almamış kullanıcı
+  // Basic / Pro / Lifetime satın almış olan herkes sınırsız oynayabilir
+  const hasPaidPlan = checkHasPaidPlan(localUser);
+  const isLimited = !hasPaidPlan;
+  const initialGuestInfo = isLimited ? getFlashcardGuestDailyInfo() : { canPlay: true };
   const [loading, setLoading] = useState(initialGuestInfo.canPlay);
   const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
   const [guestModalType, setGuestModalType] = useState('play'); // 'play' | 'restart'
   // Misafir kalan hak sayıları (reaktif state)
   const [guestPlayInfo, setGuestPlayInfo] = useState(
-    isGuest ? getFlashcardGuestDailyInfo() : { remaining: MAX_GUEST_DAILY_FLASHCARDS, canPlay: true }
+    isLimited ? getFlashcardGuestDailyInfo() : { remaining: MAX_GUEST_DAILY_FLASHCARDS, canPlay: true }
   );
   const [guestRestartInfo, setGuestRestartInfo] = useState(
-    isGuest ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
+    isLimited ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
   );
 
   const loadTerms = useCallback(async (isRestart = false) => {
-    if (!isLoggedIn()) {
+    // Limit kontrolü: plan almamış herkes (anonim misafir veya kayıtlı ama plansız)
+    if (isLimited) {
       if (isRestart) {
         // Restart hakkını kontrol et ve tüket
         const restartInfo = getFlashcardGuestRestartInfo();
@@ -146,7 +149,7 @@ export const Flashcards = () => {
     } finally {
       setLoading(false);
     }
-  }, [categoryId, isPro, currentLanguage]);
+  }, [categoryId, isPro, isLimited, currentLanguage]);
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/flashcards');
@@ -270,8 +273,8 @@ export const Flashcards = () => {
               <p className="text-muted-foreground">{t('cardCount')} {currentIndex + 1} / {terms.length}</p>
             </div>
             <div className="flex items-center gap-2">
-              {/* Misafir restart hakkı göstergesi */}
-              {isGuest && (
+              {/* Sınırlı kullanıcı (misafir/basic) restart hakkı göstergesi */}
+              {isLimited && (
                 <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full border ${
                   guestRestartInfo.remaining <= 2
                     ? 'bg-orange-50 border-orange-200 text-orange-700'
@@ -285,8 +288,8 @@ export const Flashcards = () => {
                 variant="outline"
                 size="icon"
                 onClick={handleRestart}
-                disabled={isGuest && !guestRestartInfo.canRestart}
-                title={isGuest ? `${guestRestartInfo.remaining} restart hakkınız kaldı` : t('restart', 'Yeniden Başlat')}
+                disabled={isLimited && !guestRestartInfo.canRestart}
+                title={isLimited ? `${guestRestartInfo.remaining} restart hakkınız kaldı` : t('restart', 'Yeniden Başlat')}
               >
                 <RotateCw className="w-5 h-5" />
               </Button>
@@ -304,8 +307,8 @@ export const Flashcards = () => {
               <X className="w-4 h-4 text-muted-foreground" />
               <span>{t('skippedLabel')}: {skippedCount}</span>
             </div>
-            {/* Misafir günlük oynama hakkı göstergesi */}
-            {isGuest && (
+            {/* Sınırlı kullanıcı (misafir/basic) günlük oynama hakkı göstergesi */}
+            {isLimited && (
               <div className={`flex items-center gap-1.5 ml-auto text-xs font-medium px-2.5 py-1 rounded-full border ${
                 guestPlayInfo.remaining <= 1
                   ? 'bg-red-50 border-red-200 text-red-700'
