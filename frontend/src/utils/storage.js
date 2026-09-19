@@ -73,6 +73,56 @@ export const incrementFlashcardGuestPlay = () => {
   };
 };
 
+// ── Flashcard Guest Daily Restart Limit (Günde 10 Restart Sınırı) ─────────────
+export const MAX_GUEST_DAILY_RESTARTS = 10;
+
+export const getFlashcardGuestRestartInfo = () => {
+  const today = new Date().toISOString().split('T')[0];
+  try {
+    const raw = localStorage.getItem('medterm_flashcard_guest_restart_daily');
+    if (raw) {
+      const data = JSON.parse(raw);
+      if (data && data.date === today) {
+        const count = typeof data.count === 'number' ? data.count : 0;
+        return {
+          date: today,
+          count,
+          remaining: Math.max(0, MAX_GUEST_DAILY_RESTARTS - count),
+          canRestart: count < MAX_GUEST_DAILY_RESTARTS
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('[storage] getFlashcardGuestRestartInfo parse error:', e);
+  }
+  return {
+    date: today,
+    count: 0,
+    remaining: MAX_GUEST_DAILY_RESTARTS,
+    canRestart: true
+  };
+};
+
+export const incrementFlashcardGuestRestart = () => {
+  const today = new Date().toISOString().split('T')[0];
+  const info = getFlashcardGuestRestartInfo();
+  const nextCount = info.count + 1;
+  try {
+    localStorage.setItem('medterm_flashcard_guest_restart_daily', JSON.stringify({
+      date: today,
+      count: nextCount
+    }));
+  } catch (e) {
+    console.warn('[storage] incrementFlashcardGuestRestart write error:', e);
+  }
+  return {
+    date: today,
+    count: nextCount,
+    remaining: Math.max(0, MAX_GUEST_DAILY_RESTARTS - nextCount),
+    canRestart: nextCount < MAX_GUEST_DAILY_RESTARTS
+  };
+};
+
 // Guest 3-Day Trial Limit Utilities (Her iki paket için de 3 günlük misafir deneme süresi)
 export const GUEST_TRIAL_DAYS = 3;
 export const GUEST_TRIAL_MS = GUEST_TRIAL_DAYS * 24 * 60 * 60 * 1000;

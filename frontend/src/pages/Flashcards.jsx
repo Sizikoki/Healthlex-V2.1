@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, RotateCw, ChevronRight, Check, X, Sparkles } from 'lucide-react';
+import { ArrowLeft, RotateCw, ChevronRight, Check, X, Sparkles, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
-import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, getFlashcardGuestDailyInfo, incrementFlashcardGuestPlay, getUser } from '@/utils/storage';
+import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, getFlashcardGuestDailyInfo, incrementFlashcardGuestPlay, getFlashcardGuestRestartInfo, incrementFlashcardGuestRestart, MAX_GUEST_DAILY_FLASHCARDS, MAX_GUEST_DAILY_RESTARTS, getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
@@ -36,18 +36,38 @@ export const Flashcards = () => {
   const initialGuestInfo = isGuest ? getFlashcardGuestDailyInfo() : { canPlay: true };
   const [loading, setLoading] = useState(initialGuestInfo.canPlay);
   const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
+  const [guestModalType, setGuestModalType] = useState('play'); // 'play' | 'restart'
+  // Misafir kalan hak sayıları (reaktif state)
+  const [guestPlayInfo, setGuestPlayInfo] = useState(
+    isGuest ? getFlashcardGuestDailyInfo() : { remaining: MAX_GUEST_DAILY_FLASHCARDS, canPlay: true }
+  );
+  const [guestRestartInfo, setGuestRestartInfo] = useState(
+    isGuest ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
+  );
 
   const loadTerms = useCallback(async (isRestart = false) => {
     if (!isLoggedIn()) {
-      const guestDaily = getFlashcardGuestDailyInfo();
-      if (!guestDaily.canPlay) {
-        setShowGuestModal(true);
-        setLoading(false);
-        return;
-      }
-      // Restart durumunda ek oynama hakkı tüketme, sadece ilk yüklemede say
-      if (!isRestart) {
-        incrementFlashcardGuestPlay();
+      if (isRestart) {
+        // Restart hakkını kontrol et ve tüket
+        const restartInfo = getFlashcardGuestRestartInfo();
+        if (!restartInfo.canRestart) {
+          setGuestModalType('restart');
+          setShowGuestModal(true);
+          return;
+        }
+        const newRestartInfo = incrementFlashcardGuestRestart();
+        setGuestRestartInfo(newRestartInfo);
+      } else {
+        // Oynama hakkını kontrol et ve tüket
+        const guestDaily = getFlashcardGuestDailyInfo();
+        if (!guestDaily.canPlay) {
+          setGuestModalType('play');
+          setShowGuestModal(true);
+          setLoading(false);
+          return;
+        }
+        const newPlayInfo = incrementFlashcardGuestPlay();
+        setGuestPlayInfo(newPlayInfo);
       }
     }
 
@@ -192,13 +212,22 @@ export const Flashcards = () => {
   }
 
   if (showGuestModal) {
+    const isRestartLimit = guestModalType === 'restart';
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <GuestLimitModal
           isOpen={true}
-          onClose={() => navigate('/games')}
-          title={t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')}
-          description={t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.')}
+          onClose={() => isRestartLimit ? setShowGuestModal(false) : navigate('/games')}
+          title={
+            isRestartLimit
+              ? t('guestFlashcardRestartLimitTitle', 'Günlük Yeniden Başlatma Hakkınız Doldu! 🔄')
+              : t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')
+          }
+          description={
+            isRestartLimit
+              ? t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için ücretsiz üye olun.`)
+              : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.`)
+          }
           cardTitle={t('guestFlashcardCardTitle', 'Ücretsiz Üye Olun & Sınırsız Pratik Yapın')}
           cardDesc={t('guestFlashcardCardDesc', 'Ücretsiz üyelik oluşturarak tüm kartlara sınırsız erişebilir, ilerlemenizi senkronize edebilirsiniz.')}
         />
@@ -240,14 +269,33 @@ export const Flashcards = () => {
               <h1 className="text-2xl sm:text-3xl font-bold">{t('flashcards')}</h1>
               <p className="text-muted-foreground">{t('cardCount')} {currentIndex + 1} / {terms.length}</p>
             </div>
-            <Button variant="outline" size="icon" onClick={handleRestart}>
-              <RotateCw className="w-5 h-5" />
-            </Button>
+            <div className="flex items-center gap-2">
+              {/* Misafir restart hakkı göstergesi */}
+              {isGuest && (
+                <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full border ${
+                  guestRestartInfo.remaining <= 2
+                    ? 'bg-orange-50 border-orange-200 text-orange-700'
+                    : 'bg-muted border-border text-muted-foreground'
+                }`}>
+                  <RotateCw className="w-3 h-3" />
+                  <span>{guestRestartInfo.remaining}/{MAX_GUEST_DAILY_RESTARTS}</span>
+                </div>
+              )}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleRestart}
+                disabled={isGuest && !guestRestartInfo.canRestart}
+                title={isGuest ? `${guestRestartInfo.remaining} restart hakkınız kaldı` : t('restart', 'Yeniden Başlat')}
+              >
+                <RotateCw className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
 
           <Progress value={progress} className="h-2" />
 
-          <div className="flex items-center gap-4 mt-4 text-sm">
+          <div className="flex items-center gap-4 mt-4 text-sm flex-wrap">
             <div className="flex items-center gap-1">
               <Check className="w-4 h-4 text-success" />
               <span>{t('learnedLabel')}: {learnedCount}</span>
@@ -256,6 +304,23 @@ export const Flashcards = () => {
               <X className="w-4 h-4 text-muted-foreground" />
               <span>{t('skippedLabel')}: {skippedCount}</span>
             </div>
+            {/* Misafir günlük oynama hakkı göstergesi */}
+            {isGuest && (
+              <div className={`flex items-center gap-1.5 ml-auto text-xs font-medium px-2.5 py-1 rounded-full border ${
+                guestPlayInfo.remaining <= 1
+                  ? 'bg-red-50 border-red-200 text-red-700'
+                  : guestPlayInfo.remaining <= 2
+                  ? 'bg-orange-50 border-orange-200 text-orange-700'
+                  : 'bg-blue-50 border-blue-200 text-blue-700'
+              }`}>
+                <Shield className="w-3 h-3" />
+                <span>
+                  {currentLanguage === 'en'
+                    ? `${guestPlayInfo.remaining} of ${MAX_GUEST_DAILY_FLASHCARDS} daily plays left`
+                    : `Günlük ${guestPlayInfo.remaining}/${MAX_GUEST_DAILY_FLASHCARDS} oynama hakkı`}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
