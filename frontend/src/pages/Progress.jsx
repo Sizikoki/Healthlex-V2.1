@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getStats, getQuizScores, getMatchScores, getMorphemeScores, getFlashcardSessions, getUser, getStreak, getProgress, isLoggedIn, getUserTrialState } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
@@ -13,7 +13,10 @@ const resolveIsPro = (userData) => {
   if (!userData) return false;
   if (userData.isLifetime === true) return true;
   if (userData.isBasic === true) return false;
+  const planStr = (userData.plan || '').toLowerCase();
+  if (planStr.includes('basic') || planStr.includes('temel')) return false;
   const status = (userData.subscriptionStatus || '').toLowerCase();
+  if (status === 'basic') return false;
   if (status === 'trial' || status === 'trialing') {
     const trial = getUserTrialState(userData);
     return trial.isActive;
@@ -31,9 +34,16 @@ export const ProgressPage = () => {
     previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
   );
   const [firestoreData, setFirestoreData] = useState(
-    previewRole ? { isPro: previewRole === 'pro', subscriptionStatus: previewRole === 'pro' ? 'active' : 'free', displayName: 'Dr. Ahmet Kaya' } : null
+    previewRole ? {
+      isPro: previewRole === 'pro' || previewRole === 'lifetime',
+      isBasic: previewRole === 'basic',
+      isLifetime: previewRole === 'lifetime',
+      plan: previewRole,
+      subscriptionStatus: previewRole === 'basic' ? 'basic' : (previewRole === 'pro' ? 'active' : 'free'),
+      displayName: 'Dr. Ahmet Kaya'
+    } : null
   );
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
+  const [isPro, setIsPro] = useState(previewRole === 'pro' || previewRole === 'lifetime');
   const [subLoading, setSubLoading] = useState(!previewRole);
 
   useEffect(() => {
@@ -53,12 +63,12 @@ export const ProgressPage = () => {
           setIsPro(resolveIsPro(data));
         } else {
           const localUser = getUser();
-          setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+          setIsPro(resolveIsPro(localUser));
         }
       } catch (err) {
         console.warn('[Progress] Could not fetch subscription status:', err);
         const localUser = getUser();
-        setIsPro(localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
+        setIsPro(resolveIsPro(localUser));
       } finally {
         setSubLoading(false);
       }
@@ -82,7 +92,8 @@ export const ProgressPage = () => {
 
   const progressPercentage = Math.round((stats.learnedTerms / totalTerms) * 100);
 
-  const [activeTab, setActiveTab] = useState('quiz');
+  const [activeTab, setActiveTab] = useState(() => (previewRole === 'basic' ? 'flashcard' : 'quiz'));
+  const hasInitializedTab = useRef(false);
   const [inProp, setInProp] = useState(false);
 
   useEffect(() => {
@@ -220,11 +231,42 @@ export const ProgressPage = () => {
 
   const effectiveData = firestoreData || user;
   const trialState = getUserTrialState(effectiveData || firebaseUser);
-  const isTrialActive = trialState?.isActive === true;
-  // Deneme süresindeki kullanıcılar Pro gibi full yetkiye sahiptir; bu nedenle isTrialActive iken isBasic false kalır
-  const isBasic = !isTrialActive && (checkIsBasic(effectiveData) || previewRole === 'basic');
-  const effectiveIsPro = isTrialActive || isPro || checkIsPro(effectiveData) || resolveIsPro(effectiveData) || previewRole === 'pro';
-  const hasAccess = effectiveIsPro || isBasic || isTrialActive;
+
+  // Temel plan tespiti (Preview veya Firestore verisi veya checkIsBasic)
+  const isBasicPlan =
+    previewRole === 'basic' ||
+    effectiveData?.isBasic === true ||
+    (effectiveData?.plan || '').toLowerCase().includes('basic') ||
+    (effectiveData?.plan || '').toLowerCase().includes('temel') ||
+    (effectiveData?.subscriptionStatus || '').toLowerCase() === 'basic' ||
+    checkIsBasic(effectiveData);
+
+  // Pro / Lifetime tespiti (Temel planda ise Pro olamaz)
+  const isLifetime =
+    previewRole === 'lifetime' ||
+    effectiveData?.isLifetime === true ||
+    (effectiveData?.plan || '').toLowerCase().includes('lifetime');
+
+  const effectiveIsPro =
+    !isBasicPlan &&
+    (isLifetime ||
+      previewRole === 'pro' ||
+      isPro ||
+      checkIsPro(effectiveData) ||
+      resolveIsPro(effectiveData));
+
+  const hasAccess =
+    effectiveIsPro ||
+    isBasicPlan ||
+    (trialState?.isActive && !trialState?.isExpired);
+
+  // Temel plan kullanıcısı için varsayılan sekmeyi Flashcard yap
+  useEffect(() => {
+    if (!hasInitializedTab.current && isBasicPlan) {
+      setActiveTab('flashcard');
+      hasInitializedTab.current = true;
+    }
+  }, [isBasicPlan]);
 
   // TrialDashboardView SADECE hiçbir plana sahip olmayan ve deneme sürecinde de olmayan kullanıcıya gösterilsin
   if (!hasAccess) {
@@ -504,39 +546,49 @@ export const ProgressPage = () => {
               {/* Tab Selection Row */}
               <div className="tabs flex gap-[4px] bg-[var(--paper-dim)] p-[4px] rounded-[11px] border border-[var(--line)] flex-wrap mb-[20px]">
                 <button
+                  type="button"
                   onClick={() => setActiveTab('quiz')}
-                  disabled={isBasic && !effectiveIsPro}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 ${
-                    activeTab === 'quiz' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
-                  } ${isBasic && !effectiveIsPro ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 cursor-pointer ${
+                    activeTab === 'quiz' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink)]'
+                  } ${isBasicPlan ? 'opacity-90' : ''}`}
                 >
-                  {isBasic && !effectiveIsPro && <span className="text-[10px]">🔒</span>}
+                  {isBasicPlan && <span className="text-[11px]">🔒</span>}
                   {t('quizHistory')}
-                  {isBasic && !effectiveIsPro && <span className="text-[9px] font-semibold text-amber-600 bg-amber-100 px-1 py-0.5 rounded">Pro</span>}
+                  {isBasicPlan && (
+                    <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-300/40">
+                      Pro
+                    </span>
+                  )}
                 </button>
                 <button
+                  type="button"
                   onClick={() => setActiveTab('match')}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
-                    activeTab === 'match' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all cursor-pointer ${
+                    activeTab === 'match' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink)]'
                   }`}
                 >
                   {t('matchHistory')}
                 </button>
                 <button
+                  type="button"
                   onClick={() => setActiveTab('morpheme')}
-                  disabled={isBasic && !effectiveIsPro}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 ${
-                    activeTab === 'morpheme' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
-                  } ${isBasic && !effectiveIsPro ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all flex items-center gap-1.5 cursor-pointer ${
+                    activeTab === 'morpheme' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink)]'
+                  } ${isBasicPlan ? 'opacity-90' : ''}`}
                 >
-                  {isBasic && !effectiveIsPro && <span className="text-[10px]">🔒</span>}
+                  {isBasicPlan && <span className="text-[11px]">🔒</span>}
                   {t('morphemeHistory')}
-                  {isBasic && !effectiveIsPro && <span className="text-[9px] font-semibold text-amber-600 bg-amber-100 px-1 py-0.5 rounded">Pro</span>}
+                  {isBasicPlan && (
+                    <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-300/40">
+                      Pro
+                    </span>
+                  )}
                 </button>
                 <button
+                  type="button"
                   onClick={() => setActiveTab('flashcard')}
-                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all ${
-                    activeTab === 'flashcard' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)]'
+                  className={`tab-btn border-none bg-none p-[9px_16px] rounded-[8px] font-bold text-[0.86rem] transition-all cursor-pointer ${
+                    activeTab === 'flashcard' ? 'active bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--ink)]'
                   }`}
                 >
                   {t('flashcardHistory')}
@@ -545,17 +597,18 @@ export const ProgressPage = () => {
 
               {/* 1. QUIZ HISTORY PANEL */}
               <div className={`hist-panel bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] ${activeTab === 'quiz' ? 'active block' : 'hidden'}`}>
-                {isBasic && !effectiveIsPro ? (
+                {isBasicPlan ? (
                   <div className="empty-state text-center py-[40px] px-[10px]">
                     <div className="text-3xl mb-3">🔒</div>
-                    <div className="hist-title font-bold text-[1rem] mb-2">
+                    <div className="hist-title font-bold text-[1.05rem] text-[var(--ink)] mb-2">
                       {t('quizLockedForBasicTitle', 'Quiz — Pro Planına Özel')}
                     </div>
-                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-xs mx-auto">
-                      {t('quizLockedForBasicDesc', 'Quiz modu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır.')}
+                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-sm mx-auto leading-relaxed">
+                      {t('quizLockedForBasicDesc', 'Quiz modu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır. Temel planda Flashcard ve Eşleştirme geçmişi sınırsız olarak aktiftir.')}
                     </p>
-                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">
-                      {t('upgradeToPro', "Pro'ya Yükselt")} →
+                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] hover:bg-[var(--teal-deep)] text-white font-semibold text-[0.9rem] px-5 py-2.5 rounded-[9px] shadow-sm transition-all inline-flex items-center gap-1.5">
+                      <span>{t('upgradeToPro', "Pro'ya Yükselt")}</span>
+                      <span>→</span>
                     </Link>
                   </div>
                 ) : (
@@ -622,17 +675,18 @@ export const ProgressPage = () => {
 
               {/* 3. MORPHEME HISTORY PANEL */}
               <div className={`hist-panel bg-white border border-[var(--line)] rounded-[var(--radius)] p-[26px] ${activeTab === 'morpheme' ? 'active block' : 'hidden'}`}>
-                {isBasic && !effectiveIsPro ? (
+                {isBasicPlan ? (
                   <div className="empty-state text-center py-[40px] px-[10px]">
                     <div className="text-3xl mb-3">🔒</div>
-                    <div className="hist-title font-bold text-[1rem] mb-2">
+                    <div className="hist-title font-bold text-[1.05rem] text-[var(--ink)] mb-2">
                       {t('morphemeLockedForBasicTitle', 'Morfem Yapıcı — Pro Planına Özel')}
                     </div>
-                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-xs mx-auto">
-                      {t('morphemeLockedForBasicDesc', 'Morfem Yapıcı oyunu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır.')}
+                    <p className="text-[var(--muted)] text-[0.88rem] mt-1 mb-[18px] max-w-sm mx-auto leading-relaxed">
+                      {t('morphemeLockedForBasicDesc', 'Morfem Yapıcı oyunu ve ilerleme geçmişi yalnızca Pro ve Ömür Boyu üyelerine açıktır. Temel planda Flashcard ve Eşleştirme geçmişi sınırsız olarak aktiftir.')}
                     </p>
-                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] text-white font-semibold text-[0.9rem] p-[10px_18px] rounded-[9px]">
-                      {t('upgradeToPro', "Pro'ya Yükselt")} →
+                    <Link to="/pricing" className="btn btn-primary bg-[var(--teal)] hover:bg-[var(--teal-deep)] text-white font-semibold text-[0.9rem] px-5 py-2.5 rounded-[9px] shadow-sm transition-all inline-flex items-center gap-1.5">
+                      <span>{t('upgradeToPro', "Pro'ya Yükselt")}</span>
+                      <span>→</span>
                     </Link>
                   </div>
                 ) : (
