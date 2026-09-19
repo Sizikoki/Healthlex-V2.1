@@ -1102,6 +1102,494 @@ const BasicUserDashboard = ({
 };
 
 // =============================================================================
+// PRO / LIFETIME KULLANICISI İÇİN DİNAMİK PANEL (10a Şablonu)
+// =============================================================================
+const ProUserDashboard = ({
+  userName,
+  streak,
+  termCount,
+  isTr,
+  currentPlan,
+  pastDueState,
+  todayFormatted
+}) => {
+  const navigate = useNavigate();
+  const searchInputRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [recentTerms, setRecentTerms] = useState([]);
+  const [goal, setGoal] = useState(() => {
+    try {
+      const saved = localStorage.getItem('healthlex_daily_goal');
+      return saved ? parseInt(saved, 10) : 15;
+    } catch {
+      return 15;
+    }
+  });
+
+  const isLifetime = currentPlan === 'lifetime';
+
+  // Dinamik Son Bakılan Terimler (localStorage)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('healthlex_recent_terms');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setRecentTerms(parsed.slice(0, 3));
+        }
+      }
+    } catch (e) {}
+  }, []);
+
+  // ⌘K / Ctrl+K Kısayol Tuşu Dinleyicisi
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleGoalChange = (newGoal) => {
+    setGoal(newGoal);
+    try {
+      localStorage.setItem('healthlex_daily_goal', String(newGoal));
+    } catch (e) {}
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/study?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/study');
+    }
+  };
+
+  const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 0;
+  const stats = getStats() || {};
+  const learnedCount = stats.learnedTerms || 0;
+
+  // Oyun kartları listesi (10a SVG ikonları ve degradeleri ile)
+  const games = [
+    {
+      name: 'Flashcard',
+      desc: isTr ? 'Kartlarla hızlı tekrar' : 'Quick review with cards',
+      link: '/flashcards',
+      bg: 'linear-gradient(135deg,#3b82f6,#93c5fd)',
+      d: 'M2 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z'
+    },
+    {
+      name: isTr ? 'Eşleştirme' : 'Matching',
+      desc: isTr ? 'Terim ve Türkçe karşılığı' : 'Match term with definition',
+      link: '/match',
+      bg: 'linear-gradient(135deg,#22c55e,#facc15)',
+      d: 'M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5'
+    },
+    {
+      name: 'Quiz',
+      desc: isTr ? 'Kategoriye özel sorular' : 'Category-specific questions',
+      link: '/quiz',
+      bg: 'linear-gradient(135deg,#f97316,#fcd34d)',
+      d: 'M9.5 2a4 4 0 0 0-4 4v1.5a3.5 3.5 0 0 0 0 7V16a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4zM14.5 2a4 4 0 0 1 4 4v1.5a3.5 3.5 0 0 1 0 7V16a4 4 0 0 1-8 0'
+    },
+    {
+      name: isTr ? 'Morfem Yapıcı' : 'Morpheme Builder',
+      desc: isTr ? 'Terimi parçalarından kur' : 'Build term from morphemes',
+      link: '/games/morpheme-builder',
+      bg: 'linear-gradient(135deg,#7c3aed,#c084fc)',
+      d: 'M14 7a2 2 0 1 0-4 0H7v3a2 2 0 1 0 0 4v3h3a2 2 0 1 0 4 0h3v-3a2 2 0 1 0 0-4V7z'
+    }
+  ];
+
+  // 10a metin ve stil dinamikleri
+  const planLabel = isLifetime ? (isTr ? 'Ömür Boyu' : 'Lifetime') : (isTr ? 'Pro plan' : 'Pro plan');
+  const eyebrow = isLifetime
+    ? (isTr ? 'PANELİM · ÖMÜR BOYU' : 'DASHBOARD · LIFETIME')
+    : (isTr ? 'PANELİM · PRO PLAN' : 'DASHBOARD · PRO PLAN');
+  const badgeBg = isLifetime ? '#fff7e6' : '#e8f0ff';
+  const badgeBorder = isLifetime ? '#f5d9a0' : '#c9dcff';
+  const badgeDot = isLifetime ? '#d97706' : '#2563eb';
+  const badgeFg = isLifetime ? '#92400e' : '#1d4ed8';
+
+  const footTitle = isLifetime
+    ? (isTr ? 'Ömür boyu erişimin aktif' : 'Lifetime access is active')
+    : (isTr ? 'Planın aktif' : 'Your plan is active');
+  const footText = isLifetime
+    ? (isTr
+        ? 'Yenileme yok, ek ödeme yok. Gelecek modüller hesabına otomatik eklenir.'
+        : 'No renewals, no extra fees. Future modules will be automatically added to your account.')
+    : (isTr
+        ? 'Pro planın yenilenene kadar tüm modüller açık. Ömür Boyu’na geçersen yenileme tamamen kalkar.'
+        : 'All modules are unlocked until renewal. Switch to Lifetime to remove renewals permanently.');
+  const footCta = isLifetime
+    ? (isTr ? 'Gelecek modülleri gör →' : 'See upcoming modules →')
+    : (isTr ? 'Planımı yönet →' : 'Manage my plan →');
+
+  return (
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-11 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased text-[#1f2937] dark:text-foreground">
+      <div className="w-full max-w-[1120px] flex flex-col gap-7 sm:gap-8">
+        {/* Üst Karşılama Başlığı ve Arama Kutusu */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-5 lg:gap-8">
+          <div className="flex flex-col gap-2 text-left">
+            <div className="flex items-center gap-2.5">
+              <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {eyebrow}
+              </span>
+              <span className="bg-[#e8f0ff] dark:bg-blue-950/60 border border-[#c9dcff] dark:border-blue-900/60 text-[#1d4ed8] dark:text-blue-300 font-extrabold text-[11px] px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb]" />
+                {planLabel}
+              </span>
+              {todayFormatted && (
+                <span className="text-[12px] text-[#6b7a90] dark:text-muted-foreground hidden sm:inline opacity-80">
+                  · {todayFormatted}
+                </span>
+              )}
+            </div>
+            <h1 className="m-0 font-semibold text-2xl sm:text-[36px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+              {isTr
+                ? `Merhaba ${userName || 'Selin'}, her şey açık.`
+                : `Hello ${userName || 'there'}, everything is unlocked.`}
+            </h1>
+          </div>
+
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex items-center gap-2.5 bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] px-4 w-full lg:w-[420px] h-[50px] shrink-0 shadow-xs focus-within:border-[#2563eb] transition-all"
+          >
+            <Search className="w-4 h-4 text-[#6b7a90] shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={
+                isTr
+                  ? 'Terim veya morfem ara… örn. “os frontale”'
+                  : 'Search terms or morphemes… e.g. "os frontale"'
+              }
+              className="bg-transparent border-none outline-hidden text-[14px] sm:text-[15px] font-normal text-[#0f1b33] dark:text-foreground placeholder:text-[#9aa6ba] w-full"
+            />
+            <span className="font-bold text-[11px] text-[#6b7a90] dark:text-muted-foreground border border-[#e5e9f2] dark:border-border rounded-[5px] px-1.5 py-0.5 select-none shrink-0">
+              ⌘K
+            </span>
+          </form>
+        </div>
+
+        {/* Ödeme Gecikmesi / Ek Süre Uyarısı */}
+        {pastDueState?.isPastDue && (
+          <div className={`rounded-xl p-4 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs ${
+            pastDueState.isWithinGracePeriod
+              ? 'bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-200'
+              : 'bg-destructive/10 border-destructive/40 text-destructive'
+          }`}>
+            <div className="flex items-start sm:items-center gap-3">
+              <span className="text-2xl shrink-0">{pastDueState.isWithinGracePeriod ? '⚠️' : '🚫'}</span>
+              <div>
+                <p className="font-bold text-sm">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
+                    : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
+                </p>
+                <p className="text-xs opacity-90 mt-0.5">
+                  {pastDueState.isWithinGracePeriod
+                    ? (isTr
+                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
+                        : `Your subscription renewal failed. Please update your card within ${pastDueState.daysLeft} days to avoid service interruption.`)
+                    : (isTr
+                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin.'
+                        : 'Access is restricted because the 5-day grace period has expired. Please update your card.')}
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/pricing"
+              className="shrink-0 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
+            >
+              {isTr ? 'Kartı Güncelle' : 'Update Card'}
+            </Link>
+          </div>
+        )}
+
+        {/* 2'li Üst Bölüm: BUGÜNKÜ TEKRAR & SEVİYE VE SERİ */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-5 items-stretch">
+          {/* Sol Kart: BUGÜNKÜ TEKRAR */}
+          <div className="bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[16px] p-6 sm:p-[26px_28px] text-white flex flex-col justify-between gap-4 shadow-md text-left">
+            <div className="flex justify-between items-start gap-5">
+              <div>
+                <div className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#8fb3ff] uppercase">
+                  {isTr ? 'BUGÜNKÜ TEKRAR' : 'TODAY’S REVIEW'}
+                </div>
+                <div className="font-semibold text-2xl sm:text-[26px] leading-[1.2] font-['Lora',Georgia,serif] mt-2 text-white">
+                  {learnedCount > 0
+                    ? (isTr ? 'Bugünkü tekrarlarına devam et' : 'Continue today’s review')
+                    : (isTr ? 'İlk tekrarınla başla' : 'Start your first review')}
+                </div>
+                <div className="font-normal text-[14px] leading-[1.5] text-[#b8c4d9] mt-1.5 max-w-[420px]">
+                  {learnedCount > 0
+                    ? (isTr
+                        ? `${learnedCount} terim öğrendin. Hedefine ulaşmak için günlük tekrarını yap.`
+                        : `You have learned ${learnedCount} terms. Complete your daily review to reach your goal.`)
+                    : (isTr
+                        ? 'Henüz çalıştığın terim yok. Hedefini seç, sistem her gün sana o kadar terim getirsin.'
+                        : 'No studied terms yet. Pick your target and the system will present that many terms each day.')}
+                </div>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="font-extrabold text-3xl sm:text-[34px] leading-none text-white">
+                  {Math.min(learnedCount, goal)} / {goal}
+                </div>
+                <div className="font-semibold text-[12px] text-[#b8c4d9] mt-1">
+                  {isTr ? 'bugün' : 'today'}
+                </div>
+              </div>
+            </div>
+
+            {/* Günlük Hedef Seçici */}
+            <div className="flex flex-col gap-2">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#8fb3ff] uppercase">
+                {isTr ? 'GÜNLÜK HEDEF' : 'DAILY GOAL'}
+              </span>
+              <div className="flex gap-2">
+                {[10, 15, 20, 25].map((n) => {
+                  const on = goal === n;
+                  return (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => handleGoalChange(n)}
+                      className={`flex-1 text-center py-2.5 rounded-[9px] font-extrabold text-[14px] transition-all cursor-pointer ${
+                        on
+                          ? 'bg-white text-[#0f1b33] border border-white shadow-xs'
+                          : 'bg-white/6 hover:bg-white/10 text-[#dbe4f5] border border-white/18'
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Bugünkü Tekrarını Yap Butonu */}
+            <Link
+              to="/flashcards"
+              className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] py-3 px-4 rounded-[10px] shadow-xs transition-all"
+            >
+              {isTr ? 'Bugünkü tekrarını yap' : 'Start today’s review'}
+            </Link>
+          </div>
+
+          {/* Sağ Kart: SEVİYE VE SERİ */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[16px] p-6 sm:p-[26px_28px] flex flex-col justify-between gap-4 shadow-xs text-left">
+            <div className="flex flex-col gap-2.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'SEVİYE VE SERİ' : 'LEVEL & STREAK'}
+              </span>
+              <div
+                style={{
+                  backgroundColor: badgeBg,
+                  borderColor: badgeBorder,
+                  color: badgeFg
+                }}
+                className="inline-flex self-start items-center gap-2.5 border rounded-full py-2.5 px-4"
+              >
+                <span
+                  style={{ backgroundColor: badgeDot }}
+                  className="w-[26px] height-[26px] h-[26px] rounded-full text-white font-extrabold text-[13px] grid place-items-center"
+                >
+                  ★
+                </span>
+                <span className="font-extrabold text-[15px]">
+                  {streakDays > 0
+                    ? (isTr ? `${streakDays}. Gün · Yolculuk sürüyor` : `Day ${streakDays} · Journey continues`)
+                    : (isTr ? 'Yolculuğun başlıyor' : 'Your journey begins')}
+                </span>
+              </div>
+              <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+                {isTr
+                  ? 'İlk tekrarını tamamladığında seviyen ve serin görünmeye başlar.'
+                  : 'Your level and streak will start counting once you complete your daily review.'}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3.5 border border-[#eef1f6] dark:border-border/60">
+                <div className="font-extrabold text-2xl sm:text-[24px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {streakDays}
+                </div>
+                <div className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1.5">
+                  {isTr ? 'gün seri' : 'day streak'}
+                </div>
+              </div>
+              <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3.5 border border-[#eef1f6] dark:border-border/60">
+                <div className="font-extrabold text-2xl sm:text-[24px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {learnedCount}
+                </div>
+                <div className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1.5">
+                  {isTr ? 'öğrenilen terim' : 'learned terms'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* OYUN MODLARI · 4 AÇIK (10a Şablonu) */}
+        <div className="flex flex-col gap-3.5 text-left">
+          <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+            {isTr ? 'OYUN MODLARI · 4 AÇIK' : 'GAME MODES · 4 UNLOCKED'}
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {games.map((g, i) => (
+              <Link
+                key={i}
+                to={g.link}
+                className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/40 hover:shadow-xs rounded-[14px] p-4 sm:p-[18px] flex flex-col gap-3 text-[#0f1b33] dark:text-foreground transition-all group"
+              >
+                <div
+                  style={{ background: g.bg }}
+                  className="w-10 h-10 rounded-[11px] grid place-items-center shrink-0 shadow-xs"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d={g.d} />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-extrabold text-[15px] group-hover:text-[#2563eb] transition-colors">
+                    {g.name}
+                  </div>
+                  <div className="font-normal text-[13px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                    {g.desc}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* 3'lü Alt Izgara: ZAYIF TERİMLER · SON BAKILAN TERİMLER · MORFEM İLERLEMESİ */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start text-left">
+          {/* 1. ZAYIF TERİMLER */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-2.5 shadow-xs">
+            <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              {isTr ? 'ZAYIF TERİMLER' : 'WEAK TERMS'}
+            </span>
+            <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
+              {isTr ? 'Zorlandığın terimler burada birikir.' : 'Terms you struggle with accumulate here.'}
+            </span>
+            <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+              {isTr
+                ? 'İlk oyununu oynadıktan sonra yanlış bildiğin terimler otomatik olarak tekrar listesine eklenir.'
+                : 'After playing your first game, terms you answered incorrectly are automatically added to the review list.'}
+            </span>
+          </div>
+
+          {/* 2. SON BAKILAN TERİMLER */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-2.5 shadow-xs">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+              </span>
+              {recentTerms.length > 0 && (
+                <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                  {isTr ? 'Sözlük →' : 'Glossary →'}
+                </Link>
+              )}
+            </div>
+            {recentTerms.length > 0 ? (
+              <div className="flex flex-col gap-2 mt-1">
+                {recentTerms.map((rt, idx) => (
+                  <Link
+                    key={idx}
+                    to={`/study/${rt.slug || rt.term}`}
+                    className="bg-[#f9fafc] dark:bg-muted/30 border border-[#e5e9f2] dark:border-border/60 hover:border-[#2563eb]/40 rounded-[9px] p-2.5 flex justify-between items-center gap-2 transition-all group"
+                  >
+                    <span className="font-bold text-[13px] text-[#0f1b33] dark:text-foreground truncate group-hover:text-[#2563eb]">
+                      {rt.term}
+                    </span>
+                    {rt.turkish && (
+                      <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground truncate max-w-[120px]">
+                        {rt.turkish}
+                      </span>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <>
+                <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
+                  {isTr ? 'Henüz bir terime bakmadın.' : 'You have not viewed any terms yet.'}
+                </span>
+                <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+                  {isTr
+                    ? 'Yukarıdan arayabilir veya bir kategoriden başlayabilirsin.'
+                    : 'You can search above or begin from any category.'}
+                </span>
+              </>
+            )}
+          </div>
+
+          {/* 3. MORFEM İLERLEMESİ */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-3 shadow-xs">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'MORFEM İLERLEMESİ' : 'MORPHEME PROGRESS'}
+              </span>
+              <Link to="/morphemes" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                {isTr ? 'Liste →' : 'List →'}
+              </Link>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-extrabold text-[26px] leading-none text-[#0f1b33] dark:text-foreground">
+                0 / 571
+              </span>
+            </div>
+            <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
+              <div className="w-[1.5%] h-full bg-[#2563eb] rounded-full" />
+            </div>
+            <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+              {isTr
+                ? '571 morfemin tamamı açık. Morfem Yapıcı’da çalıştıkça ilerleme burada işlenir.'
+                : 'All 571 morphemes are unlocked. As you study in Morpheme Builder, your progress appears here.'}
+            </span>
+          </div>
+        </div>
+
+        {/* Alt Bilgi & Plan Yönetim Şeridi (10a Şablonu) */}
+        <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[20px_24px] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 shadow-xs text-left">
+          <div>
+            <div className="font-semibold text-lg font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
+              {footTitle}
+            </div>
+            <div className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground mt-1">
+              {footText}
+            </div>
+          </div>
+          <Link
+            to="/pricing"
+            className="bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] py-3 px-4.5 rounded-[10px] shrink-0 transition-colors self-stretch sm:self-auto text-center"
+          >
+            {footCta}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =============================================================================
 // ANA DASHBOARD BİLEŞENİ
 // =============================================================================
 export const Dashboard = () => {
@@ -1148,28 +1636,25 @@ export const Dashboard = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         navigate('/login', { replace: true });
-      } else {
-        setFirebaseUser(user);
-        setAuthReady(true);
+        return;
       }
+      setFirebaseUser(user);
+      setAuthReady(true);
     });
     return () => unsubscribe();
   }, [navigate, previewRole]);
 
-  // Firestore: Abonelik Durumu
+  // Firestore Kullanıcı ve Abonelik Verisi Çekme
   useEffect(() => {
-    if (previewRole || !authReady) return;
-    const uid = firebaseUser?.uid || getUser()?.uid;
-    if (!uid) {
-      setSubLoading(false);
-      return;
-    }
+    if (previewRole) return;
+    if (!authReady || !firebaseUser) return;
+
     const fetchSubscription = async () => {
       try {
-        const snap = await getDoc(doc(db, 'users', uid));
-        if (snap.exists()) {
-          const data = snap.data();
-          setFirestoreData(data);
+        const userDocRef = doc(db, 'users', firebaseUser.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setFirestoreData(userDocSnap.data());
         }
       } catch (err) {
         console.warn('[Dashboard] Could not fetch subscription status:', err);
@@ -1198,7 +1683,6 @@ export const Dashboard = () => {
     (isTr ? 'Kullanıcı' : 'User');
 
   const userName = formatTurkishName(rawName);
-  const stats = getStats();
   const streak = getStreak();
   const flashcardInfo = getFlashcardGuestDailyInfo();
 
@@ -1317,253 +1801,18 @@ export const Dashboard = () => {
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // PRO / LIFETIME ABONE İÇİN GELİŞMİŞ PANEL
+  // PRO / LIFETIME ABONE İÇİN GELİŞMİŞ PANEL (10a ŞABLONU)
   // ─────────────────────────────────────────────────────────────────────────────
-  const quickActions = [
-    {
-      icon: <BookOpen className="w-6 h-6" />,
-      label: isTr ? 'Terimler Kütüphanesi' : 'Term Library',
-      desc: isTr ? 'Tüm medikal terimleri keşfet' : 'Explore all medical terms',
-      path: '/study',
-      accent: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'
-    },
-    {
-      icon: <Gamepad2 className="w-6 h-6" />,
-      label: isTr ? 'Oyunlar' : 'Games',
-      desc: isTr ? 'Eğlenerek öğren' : 'Learn by playing',
-      path: '/games',
-      accent: 'bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20'
-    },
-    {
-      icon: <CreditCard className="w-6 h-6" />,
-      label: isTr ? "Flashcard'lar" : 'Flashcards',
-      desc: isTr ? 'Kartlarla tekrar yap' : 'Review with cards',
-      path: '/flashcards',
-      accent: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
-    },
-    {
-      icon: <Layers className="w-6 h-6" />,
-      label: isTr ? 'Morfem Gezgini' : 'Morpheme Explorer',
-      desc: isTr ? 'Kök, ön ve son ekleri keşfet' : 'Explore roots and affixes',
-      path: '/morphemes',
-      accent: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
-    },
-    {
-      icon: <BarChart3 className="w-6 h-6" />,
-      label: isTr ? 'İlerleme Takibi' : 'Progress',
-      desc: isTr ? 'Öğrenme istatistiklerini gör' : 'Track your learning',
-      path: '/progress',
-      accent: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        {/* Top Bar: Hoş Geldin + Profil / Çıkış */}
-        <div className="flex items-start justify-between gap-4 mb-8">
-          <div className="min-w-0">
-            <p className="text-sm text-muted-foreground font-medium mb-1">{todayFormatted}</p>
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-              {isTr ? `Hoş geldin, ${userName}! 👋` : `Welcome back, ${userName}! 👋`}
-            </h1>
-          </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Streak Badge */}
-            <div className="hidden sm:flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full text-sm font-semibold text-amber-700 dark:text-amber-400">
-              <Flame className="w-4 h-4" />
-              {streak.currentStreak} {isTr ? 'gün' : 'days'}
-            </div>
-            {/* Profil */}
-            <Link
-              to="/profile"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-muted transition-colors text-sm font-medium text-foreground"
-            >
-              <User className="w-4 h-4 text-muted-foreground" />
-              <span className="hidden sm:inline">{isTr ? 'Profil' : 'Profile'}</span>
-            </Link>
-            {/* Çıkış */}
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-destructive/10 hover:border-destructive/40 hover:text-destructive transition-colors text-sm font-medium text-muted-foreground"
-            >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">{isTr ? 'Çıkış' : 'Logout'}</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Ödeme Gecikmesi / 5 Günlük Ek Süre (Grace Period) Uyarısı */}
-        {!subLoading && pastDueState.isPastDue && (
-          <div className={`mb-6 rounded-xl p-4 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs ${
-            pastDueState.isWithinGracePeriod
-              ? 'bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-200'
-              : 'bg-destructive/10 border-destructive/40 text-destructive'
-          }`}>
-            <div className="flex items-start sm:items-center gap-3">
-              <span className="text-2xl flex-shrink-0">{pastDueState.isWithinGracePeriod ? '⚠️' : '🚫'}</span>
-              <div>
-                <p className="font-bold text-sm">
-                  {pastDueState.isWithinGracePeriod
-                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
-                    : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
-                </p>
-                <p className="text-xs opacity-90 mt-0.5">
-                  {pastDueState.isWithinGracePeriod
-                    ? (isTr
-                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
-                        : `Your subscription renewal failed. Please update your payment method within ${pastDueState.daysLeft} days to avoid service interruption.`)
-                    : (isTr
-                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin veya yeni bir plan seçin.'
-                        : 'Access is restricted because the 5-day grace period has expired. Please update your card or choose a plan.')}
-                </p>
-              </div>
-            </div>
-            <Link
-              to="/pricing"
-              className="flex-shrink-0 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
-            >
-              {isTr ? 'Kartı Güncelle' : 'Update Card'}
-            </Link>
-          </div>
-        )}
-
-        {/* Abonelik Durumu Kartı */}
-        {!subLoading && (
-          currentPlan === 'lifetime' ? (
-            <div className="mb-6 flex items-center justify-between gap-4 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-indigo-500/10 border border-emerald-500/30 rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-xs">
-                  <Sparkles className="w-5 h-5 fill-white" />
-                </div>
-                <div>
-                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? 'Ömür Boyu Pro Üye' : 'Lifetime Pro Member'}
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-                      {isTr ? 'ÖMÜR BOYU' : 'LIFETIME'}
-                    </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isTr
-                      ? 'Tüm 13 kategori, 571+ morfem ve 4 oyun moduna süresiz tam erişiminiz aktif.'
-                      : 'You have unlimited lifetime access to all 13 categories, 571+ morphemes, and 4 game modes.'}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : currentPlan === 'pro' ? (
-            <div className="mb-6 flex items-center justify-between gap-4 bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/30 rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-white shadow-xs">
-                  <Star className="w-5 h-5 fill-white" />
-                </div>
-                <div>
-                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? 'Yıllık Pro Üye' : 'Annual Pro Member'}
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/15 text-primary border border-primary/30">
-                      PRO
-                    </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isTr
-                      ? 'Tüm 13 kategori, 571+ morfem ve 4 oyun moduna sınırsız tam erişiminiz aktif.'
-                      : 'You have unlimited access to all 13 categories, 571+ morphemes, and 4 game modes.'}
-                  </p>
-                  {trialState.isActive && (
-                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                      <span>⏳</span>
-                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ) : currentPlan === 'basic' ? (
-            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-blue-500/30 rounded-xl px-5 py-4 shadow-xs">
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
-                  <Layers className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="font-bold text-foreground text-sm flex items-center gap-2">
-                    {isTr ? 'Temel Plan Üyesi' : 'Basic Plan Member'}
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">
-                      {isTr ? 'TEMEL' : 'BASIC'}
-                    </span>
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {isTr
-                      ? '13 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme aktif.'
-                      : '13 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.'}
-                  </p>
-                  {trialState.isActive && (
-                    <div className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md inline-flex items-center gap-1.5">
-                      <span>⏳</span>
-                      <span>{trialState.summaryText(isTr ? 'tr' : 'en')}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-              {IS_PAYMENT_ACTIVE && (
-                <button
-                  onClick={handleUpgrade}
-                  disabled={checkoutLoading}
-                  className="flex-shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-violet-600 text-white rounded-lg font-semibold text-sm hover:opacity-95 transition-opacity shadow-sm disabled:opacity-60 cursor-pointer"
-                >
-                  <Star className="w-4 h-4 fill-white" />
-                  {checkoutLoading
-                    ? (isTr ? 'Yükleniyor...' : 'Loading...')
-                    : (isTr ? "Pro'ya Yükselt" : 'Upgrade to Pro')}
-                  {!checkoutLoading && <ArrowRight className="w-4 h-4" />}
-                </button>
-              )}
-            </div>
-          ) : null
-        )}
-
-        {/* İstatistik Şeridi */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-          {[
-            { label: isTr ? 'Öğrenilen Terim' : 'Learned Terms', value: stats.learnedTerms, icon: '📚' },
-            { label: isTr ? 'Çalışma Serisi' : 'Study Streak', value: `${streak.currentStreak} ${isTr ? 'gün' : 'd'}`, icon: '🔥' },
-            { label: isTr ? 'Quiz Ort.' : 'Quiz Avg.', value: `${stats.averageQuizScore}%`, icon: '🎯' },
-            { label: isTr ? 'Toplam İnceleme' : 'Total Reviews', value: stats.totalReviews, icon: '🔄' }
-          ].map((stat) => (
-            <div key={stat.label} className="bg-card border border-border rounded-xl px-4 py-3.5 flex flex-col gap-1">
-              <span className="text-xl">{stat.icon}</span>
-              <span className="text-xl font-bold text-foreground">{stat.value}</span>
-              <span className="text-xs text-muted-foreground">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Hızlı Erişim Butonları */}
-        <div>
-          <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-            {isTr ? 'Çalışmaya Başla' : 'Start Learning'}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {quickActions.map((action) => (
-              <Link
-                key={action.path}
-                to={action.path}
-                className="group flex items-center gap-4 bg-card border border-border hover:border-primary/40 hover:shadow-md rounded-xl px-5 py-4 transition-all duration-200"
-              >
-                <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105 ${action.accent}`}>
-                  {action.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">{action.label}</p>
-                  <p className="text-xs text-muted-foreground truncate">{action.desc}</p>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-              </Link>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <ProUserDashboard
+      userName={userName}
+      streak={streak}
+      termCount={termCount}
+      isTr={isTr}
+      currentPlan={currentPlan}
+      pastDueState={pastDueState}
+      todayFormatted={todayFormatted}
+    />
   );
 };
 
