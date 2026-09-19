@@ -1205,8 +1205,8 @@ const ProUserDashboard = ({
     }
   ];
 
-  // 10d metin ve stil dinamikleri
-  const planLabel = isLifetime ? (isTr ? 'Ömür Boyu' : 'Lifetime') : (isTr ? 'Pro' : 'Pro');
+  // 11a metin ve stil dinamikleri
+  const planLabel = isLifetime ? (isTr ? 'Ömür Boyu' : 'Lifetime') : (isTr ? 'Pro plan' : 'Pro plan');
   const eyebrow = isLifetime
     ? (isTr ? 'PANELİM · ÖMÜR BOYU' : 'DASHBOARD · LIFETIME')
     : (isTr ? 'PANELİM · PRO PLAN' : 'DASHBOARD · PRO PLAN');
@@ -1223,8 +1223,8 @@ const ProUserDashboard = ({
         ? 'Yenileme yok, ek ödeme yok. Gelecek modüller hesabına otomatik eklenir.'
         : 'No renewals, no extra fees. Future modules will be automatically added to your account.')
     : (isTr
-        ? 'Pro planın yenilenene kadar tüm modüller açık.'
-        : 'All modules are unlocked until your Pro plan renews.');
+        ? 'Pro planın yenilenene kadar tüm modüller açık. Ömür Boyu’na geçersen yenileme tamamen kalkar.'
+        : 'All modules are unlocked until your Pro plan renews. Switch to Lifetime to remove renewals permanently.');
   const footCta = isLifetime
     ? (isTr ? 'Gelecek modülleri gör →' : 'See upcoming modules →')
     : (isTr ? 'Planımı yönet →' : 'Manage my plan →');
@@ -1244,13 +1244,13 @@ const ProUserDashboard = ({
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-6 sm:py-9 px-4 sm:px-6 lg:px-10 flex justify-center font-sans antialiased text-[#1f2937] dark:text-foreground">
-      <div className="w-full max-w-[1360px] flex flex-col gap-5 sm:gap-6">
-        {/* Üst Karşılama Başlığı ve Arama Kutusu (10d & 10a uyumlu) */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-4 lg:gap-8">
-          <div className="flex flex-col gap-1.5 text-left">
+    <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-11 px-4 sm:px-6 lg:px-8 flex justify-center font-sans antialiased text-[#1f2937] dark:text-foreground">
+      <div className="w-full max-w-[1280px] flex flex-col gap-7 sm:gap-8">
+        {/* Üst Karşılama Başlığı ve Arama Kutusu (11a Şablonu) */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-8">
+          <div className="flex flex-col gap-2 text-left">
             <div className="flex items-center gap-2.5">
-              <span className="font-extrabold text-[11px] sm:text-[12px] leading-none tracking-[0.12em] sm:tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              <span className="font-extrabold text-[12px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
                 {eyebrow}
               </span>
               <span
@@ -1259,9 +1259,9 @@ const ProUserDashboard = ({
                   borderColor: badgeBorder,
                   color: badgeFg
                 }}
-                className="border font-extrabold text-[11px] sm:text-[12px] px-2.5 py-1 rounded-[8px] inline-flex items-center gap-1.5"
+                className="border font-extrabold text-[12px] px-2.5 py-1 rounded-[8px] inline-flex items-center gap-1.5"
               >
-                <span style={{ backgroundColor: badgeDot }} className="w-1.5 h-1.5 rounded-full" />
+                <span style={{ backgroundColor: badgeDot }} className="w-2 h-2 rounded-full" />
                 {planLabel}
               </span>
               {todayFormatted && (
@@ -1270,7 +1270,7 @@ const ProUserDashboard = ({
                 </span>
               )}
             </div>
-            <h1 className="m-0 font-semibold text-2xl sm:text-[34px] sm:leading-[1.15] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
+            <h1 className="m-0 font-semibold text-2xl sm:text-[36px] sm:leading-[1.1] text-[#0f1b33] dark:text-foreground font-['Lora',Georgia,serif]">
               {isTr
                 ? `Merhaba ${userName || 'Selin'}, her şey açık.`
                 : `Hello ${userName || 'there'}, everything is unlocked.`}
@@ -1279,7 +1279,7 @@ const ProUserDashboard = ({
 
           <form
             onSubmit={handleSearchSubmit}
-            className="flex items-center gap-2.5 bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] px-3.5 w-full lg:w-[420px] h-[46px] sm:h-[50px] shrink-0 shadow-xs focus-within:border-[#2563eb] transition-all"
+            className="flex items-center gap-2.5 bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] px-4 w-full lg:w-[420px] h-[50px] shrink-0 shadow-xs focus-within:border-[#2563eb] transition-all"
           >
             <Search className="w-4 h-4 text-[#6b7a90] shrink-0" />
             <input
@@ -1289,10 +1289,10 @@ const ProUserDashboard = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={
                 isTr
-                  ? 'Terim veya morfem ara…'
-                  : 'Search terms or morphemes…'
+                  ? 'Terim veya morfem ara… örn. “os frontale”'
+                  : 'Search terms or morphemes… e.g. "os frontale"'
               }
-              className="bg-transparent border-none outline-hidden text-[14px] font-normal text-[#0f1b33] dark:text-foreground placeholder:text-[#9aa6ba] w-full"
+              className="bg-transparent border-none outline-hidden text-[14px] sm:text-[15px] font-normal text-[#0f1b33] dark:text-foreground placeholder:text-[#9aa6ba] w-full"
             />
             <span className="font-bold text-[11px] text-[#6b7a90] dark:text-muted-foreground border border-[#e5e9f2] dark:border-border rounded-[5px] px-1.5 py-0.5 select-none shrink-0">
               ⌘K
@@ -1335,177 +1335,79 @@ const ProUserDashboard = ({
           </div>
         )}
 
-        {/* 2 SÜTUNLU GENİŞ DASHBOARD GÖVDESİ (Sol: Ana Çalışma & Oyunlar & Kategoriler | Sağ: Yan Bilgi & İlerleme) */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] xl:grid-cols-[1fr_390px] gap-5 sm:gap-6 items-start">
-          {/* SOL ANA KOLON */}
-          <div className="flex flex-col gap-5 sm:gap-6 text-left">
-            {/* 1. BUGÜNKÜ TEKRAR KARTI (10d & 10a uyumlu) */}
-            <div className="bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[16px] p-5 sm:p-[24px_26px] text-white flex flex-col justify-between gap-4 shadow-md">
-              <div className="flex justify-between items-start gap-4">
-                <div>
-                  <div className="font-extrabold text-[11px] leading-none tracking-[0.12em] sm:tracking-[0.14em] text-[#8fb3ff] uppercase">
-                    {isTr ? 'BUGÜNKÜ TEKRAR' : 'TODAY’S REVIEW'}
-                  </div>
-                  <div className="font-semibold text-xl sm:text-[24px] leading-[1.2] font-['Lora',Georgia,serif] mt-2 text-white">
-                    {learnedCount > 0
-                      ? (isTr ? 'Bugünkü tekrarlarına devam et' : 'Continue today’s review')
-                      : (isTr ? 'İlk tekrarınla başla' : 'Start your first review')}
-                  </div>
-                  <div className="font-normal text-[13px] sm:text-[14px] leading-[1.5] text-[#b8c4d9] mt-1.5 max-w-[480px]">
-                    {learnedCount > 0
-                      ? (isTr
-                          ? `${learnedCount} terim öğrendin. Hedefine ulaşmak için günlük tekrarını yap.`
-                          : `You have learned ${learnedCount} terms. Complete your daily review to reach your goal.`)
-                      : (isTr
-                          ? 'Henüz çalıştığın terim yok. Hedefini seç, sistem her gün sana o kadar terim getirsin.'
-                          : 'No studied terms yet. Pick your target and the system will present that many terms each day.')}
-                  </div>
+        {/* 2'Lİ ÜST IZGARA: BUGÜNKÜ TEKRAR & SEVİYE VE SERİ (11a Şablonu 1.35fr : 1fr) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-5 items-stretch">
+          {/* Sol Kart: BUGÜNKÜ TEKRAR (11a) */}
+          <div className="bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[16px] p-6 sm:p-[26px_28px] text-white flex flex-col justify-between gap-4 shadow-md text-left">
+            <div className="flex justify-between items-start gap-4">
+              <div>
+                <div className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#8fb3ff] uppercase">
+                  {isTr ? 'BUGÜNKÜ TEKRAR' : 'TODAY’S REVIEW'}
                 </div>
-                <div className="text-right shrink-0">
-                  <div className="font-extrabold text-2xl sm:text-[32px] leading-none text-white">
-                    {Math.min(learnedCount, goal)} / {goal}
-                  </div>
-                  <div className="font-semibold text-[11px] sm:text-[12px] text-[#b8c4d9] mt-1">
-                    {isTr ? 'bugün' : 'today'}
-                  </div>
+                <div className="font-semibold text-2xl sm:text-[26px] leading-[1.2] font-['Lora',Georgia,serif] mt-2 text-white">
+                  {learnedCount > 0
+                    ? (isTr ? 'Bugünkü tekrarlarına devam et' : 'Continue today’s review')
+                    : (isTr ? 'İlk tekrarınla başla' : 'Start your first review')}
+                </div>
+                <div className="font-normal text-[14px] leading-[1.5] text-[#b8c4d9] mt-1.5 max-w-[420px]">
+                  {learnedCount > 0
+                    ? (isTr
+                        ? `${learnedCount} terim öğrendin. Hedefine ulaşmak için günlük tekrarını yap.`
+                        : `You have learned ${learnedCount} terms. Complete your daily review to reach your goal.`)
+                    : (isTr
+                        ? 'Henüz çalıştığın terim yok. Hedefini seç, sistem her gün sana o kadar terim getirsin.'
+                        : 'No studied terms yet. Pick your target and the system will present that many terms each day.')}
                 </div>
               </div>
-
-              {/* Günlük Hedef Seçici & Başlat Butonu Yan Yana */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-end justify-between gap-3.5 pt-1">
-                <div className="flex flex-col gap-1.5 flex-1 max-w-[340px]">
-                  <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#8fb3ff] uppercase">
-                    {isTr ? 'GÜNLÜK HEDEF' : 'DAILY GOAL'}
-                  </span>
-                  <div className="flex gap-2">
-                    {[10, 15, 20, 25].map((n) => {
-                      const on = goal === n;
-                      return (
-                        <button
-                          key={n}
-                          type="button"
-                          onClick={() => handleGoalChange(n)}
-                          className={`flex-1 text-center py-2 rounded-[9px] font-extrabold text-[13px] sm:text-[14px] transition-all cursor-pointer ${
-                            on
-                              ? 'bg-white text-[#0f1b33] border border-white shadow-xs'
-                              : 'bg-white/6 hover:bg-white/10 text-[#dbe4f5] border border-white/18'
-                          }`}
-                        >
-                          {n}
-                        </button>
-                      );
-                    })}
-                  </div>
+              <div className="text-right shrink-0">
+                <div className="font-extrabold text-3xl sm:text-[34px] leading-none text-white">
+                  {Math.min(learnedCount, goal)} / {goal}
                 </div>
-
-                <Link
-                  to="/flashcards"
-                  className="inline-flex items-center justify-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[14px] sm:text-[15px] py-2.5 sm:py-3 px-5 sm:px-6 rounded-[10px] shadow-xs transition-all shrink-0 text-center"
-                >
-                  {isTr ? 'Bugünkü tekrarını yap' : 'Start today’s review'}
-                </Link>
+                <div className="font-semibold text-[12px] text-[#b8c4d9] mt-1">
+                  {isTr ? 'bugün' : 'today'}
+                </div>
               </div>
             </div>
 
-            {/* 2. OYUN MODLARI · 4 AÇIK (Mobil/Tablet 2x2, Geniş ekran 4 sütun) */}
-            <div className="flex flex-col gap-3">
-              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] sm:tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'OYUN MODLARI · 4 AÇIK' : 'GAME MODES · 4 UNLOCKED'}
+            {/* Günlük Hedef Seçici */}
+            <div className="flex flex-col gap-2">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#8fb3ff] uppercase">
+                {isTr ? 'GÜNLÜK HEDEF' : 'DAILY GOAL'}
               </span>
-              <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
-                {games.map((g, i) => (
-                  <Link
-                    key={i}
-                    to={g.link}
-                    className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/40 hover:shadow-xs rounded-[14px] p-3.5 sm:p-4 flex flex-col gap-2.5 text-[#0f1b33] dark:text-foreground transition-all group"
-                  >
-                    <div
-                      style={{ background: g.bg }}
-                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-[10px] grid place-items-center shrink-0 shadow-xs"
-                    >
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d={g.d} />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-extrabold text-[14px] group-hover:text-[#2563eb] transition-colors">
-                        {g.name}
-                      </div>
-                      <div className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
-                        {g.desc}
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* 3. KATEGORİLER KÜTÜPHANESİ · 13 AÇIK */}
-            <div className="flex flex-col gap-3">
-              <div className="flex justify-between items-baseline">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                  {isTr ? 'KATEGORİLER KÜTÜPHANESİ · 13 AÇIK' : 'CATEGORY LIBRARY · 13 UNLOCKED'}
-                </span>
-                <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
-                  {isTr ? 'Tüm Kütüphaneyi Gör →' : 'View Full Library →'}
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">
-                {FREE_DASHBOARD_CATEGORIES.map((cat) => {
-                  const count = catCounts[cat.id] || cat.defaultCount;
-                  const displayName = isTr ? cat.name : cat.enName;
+              <div className="flex gap-2">
+                {[10, 15, 20, 25].map((n) => {
+                  const on = goal === n;
                   return (
-                    <Link
-                      key={cat.id}
-                      to={`/study?category=${cat.id}`}
-                      className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[10px] p-2.5 sm:p-3 px-3.5 flex justify-between items-center gap-2 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all group"
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => handleGoalChange(n)}
+                      className={`flex-1 text-center py-2.5 rounded-[9px] font-extrabold text-[14px] transition-all cursor-pointer ${
+                        on
+                          ? 'bg-white text-[#0f1b33] border border-white shadow-xs'
+                          : 'bg-white/6 hover:bg-white/10 text-[#dbe4f5] border border-white/18'
+                      }`}
                     >
-                      <span className="font-bold text-[13px] leading-[1.3] truncate group-hover:text-[#2563eb] transition-colors">
-                        {displayName}
-                      </span>
-                      <span className="font-semibold text-[11.5px] text-[#6b7a90] dark:text-muted-foreground shrink-0 bg-[#f5f7fb] dark:bg-muted px-2 py-0.5 rounded-[5px]">
-                        {count} {isTr ? 'terim' : 'terms'}
-                      </span>
-                    </Link>
+                      {n}
+                    </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* 4. ALT BİLGİ / PLAN YÖNETİM ÇUBUĞU (10d uyumlu) */}
-            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[18px_24px] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3.5 shadow-xs">
-              <div>
-                <div className="font-semibold text-base sm:text-[17px] font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
-                  {footTitle}
-                </div>
-                <div className="font-normal text-[12px] sm:text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground mt-0.5">
-                  {footText}
-                </div>
-              </div>
-              <Link
-                to="/pricing"
-                className="bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[13.5px] py-2.5 px-4 rounded-[9px] shrink-0 transition-colors whitespace-nowrap self-stretch sm:self-auto text-center"
-              >
-                {footCta}
-              </Link>
-            </div>
+            {/* Bugünkü Tekrarını Yap Butonu */}
+            <Link
+              to="/flashcards"
+              className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] py-3 px-4 rounded-[10px] shadow-xs transition-all"
+            >
+              {isTr ? 'Bugünkü tekrarını yap' : 'Start today’s review'}
+            </Link>
           </div>
 
-          {/* SAĞ YAN PANEL (WIDGET KOLONU) */}
-          <div className="flex flex-col gap-4 sm:gap-5 text-left">
-            {/* 1. SEVİYE VE SERİ KARTI (10d uyumlu) */}
-            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-5 flex flex-col gap-3.5 shadow-xs">
-              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+          {/* Sağ Kart: SEVİYE VE SERİ (11a) */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[16px] p-6 sm:p-[26px_28px] flex flex-col justify-between gap-4 shadow-xs text-left">
+            <div className="flex flex-col gap-2.5">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
                 {isTr ? 'SEVİYE VE SERİ' : 'LEVEL & STREAK'}
               </span>
               <div
@@ -1514,15 +1416,15 @@ const ProUserDashboard = ({
                   borderColor: badgeBorder,
                   color: badgeFg
                 }}
-                className="inline-flex self-start items-center gap-2.5 border rounded-full py-2 px-3.5"
+                className="inline-flex self-start items-center gap-2.5 border rounded-full py-2.5 px-4"
               >
                 <span
                   style={{ backgroundColor: badgeDot }}
-                  className="w-[22px] h-[22px] rounded-full text-white font-extrabold text-[12px] grid place-items-center"
+                  className="w-[26px] h-[26px] rounded-full text-white font-extrabold text-[13px] grid place-items-center"
                 >
                   ★
                 </span>
-                <span className="font-extrabold text-[14px]">
+                <span className="font-extrabold text-[15px]">
                   {streakDays > 0
                     ? (isTr ? `${streakDays}. Gün · Yolculuk sürüyor` : `Day ${streakDays} · In progress`)
                     : (isTr ? 'Yolculuğun başlıyor' : 'Your journey begins')}
@@ -1533,103 +1435,208 @@ const ProUserDashboard = ({
                   ? 'İlk tekrarını tamamladığında seviyen ve serin görünmeye başlar.'
                   : 'Your level and streak will start counting once you complete your daily review.'}
               </span>
-
-              <div className="grid grid-cols-2 gap-2.5">
-                <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3 border border-[#eef1f6] dark:border-border/60">
-                  <div className="font-extrabold text-[22px] leading-none text-[#0f1b33] dark:text-foreground">
-                    {streakDays}
-                  </div>
-                  <div className="font-semibold text-[11px] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                    {isTr ? 'gün seri' : 'day streak'}
-                  </div>
-                </div>
-                <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3 border border-[#eef1f6] dark:border-border/60">
-                  <div className="font-extrabold text-[22px] leading-none text-[#0f1b33] dark:text-foreground">
-                    {learnedCount}
-                  </div>
-                  <div className="font-semibold text-[11px] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                    {isTr ? 'öğrenilen terim' : 'learned terms'}
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* 2. ZAYIF TERİMLER (10d uyumlu) */}
-            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-4 flex flex-col gap-2 shadow-xs">
-              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'ZAYIF TERİMLER' : 'WEAK TERMS'}
-              </span>
-              <span className="font-semibold text-[13px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
-                {isTr ? 'Zorlandığın terimler burada birikir.' : 'Terms you struggle with accumulate here.'}
-              </span>
-              <span className="font-normal text-[12px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
-                {isTr
-                  ? 'İlk oyunundan sonra yanlış bildiğin terimler tekrar listesine eklenir.'
-                  : 'After your first game, terms you answered incorrectly will be added to review.'}
-              </span>
-            </div>
-
-            {/* 3. SON BAKILAN TERİMLER (10d: kesikli kenarlık border-dashed #d5dbe7) */}
-            <div className="bg-white dark:bg-card border border-dashed border-[#d5dbe7] dark:border-border/80 rounded-[12px] p-3.5 sm:p-[14px_16px] flex flex-col gap-1.5 shadow-xs">
-              <div className="flex justify-between items-baseline">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                  {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
-                </span>
-                {recentTerms.length > 0 && (
-                  <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
-                    {isTr ? 'Sözlük →' : 'Glossary →'}
-                  </Link>
-                )}
-              </div>
-              {recentTerms.length > 0 ? (
-                <div className="flex flex-col gap-1.5 mt-0.5">
-                  {recentTerms.map((rt, idx) => (
-                    <Link
-                      key={idx}
-                      to={`/study/${rt.slug || rt.term}`}
-                      className="bg-[#f9fafc] dark:bg-muted/30 border border-[#e5e9f2] dark:border-border/60 hover:border-[#2563eb]/40 rounded-[9px] p-2 flex justify-between items-center gap-2 transition-all group"
-                    >
-                      <span className="font-bold text-[13px] text-[#0f1b33] dark:text-foreground truncate group-hover:text-[#2563eb]">
-                        {rt.term}
-                      </span>
-                      {rt.turkish && (
-                        <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground truncate max-w-[110px]">
-                          {rt.turkish}
-                        </span>
-                      )}
-                    </Link>
-                  ))}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3.5 border border-[#eef1f6] dark:border-border/60">
+                <div className="font-extrabold text-2xl sm:text-[24px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {streakDays}
                 </div>
-              ) : (
-                <span className="font-semibold text-[13px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
-                  {isTr ? 'Henüz bir terime bakmadın. Aramadan başlayabilirsin.' : 'You have not viewed any terms yet. Start by searching above.'}
-                </span>
-              )}
-            </div>
-
-            {/* 4. MORFEM İLERLEMESİ (10d uyumlu) */}
-            <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-4 flex flex-col gap-2.5 shadow-xs">
-              <div className="flex justify-between items-baseline">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                  {isTr ? 'MORFEM İLERLEMESİ' : 'MORPHEME PROGRESS'}
-                </span>
-                <Link to="/morphemes" className="font-bold text-[12px] text-[#2563eb] hover:underline">
-                  {isTr ? 'Liste →' : 'List →'}
-                </Link>
+                <div className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? 'gün seri' : 'day streak'}
+                </div>
               </div>
-              <span className="font-extrabold text-[22px] leading-none text-[#0f1b33] dark:text-foreground">
-                0 / 571
-              </span>
-              <div className="h-[6px] bg-[#eef1f6] dark:bg-muted rounded-[3px] overflow-hidden">
-                <div className="w-[1.5%] h-full bg-[#2563eb] rounded-[3px]" />
+              <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3.5 border border-[#eef1f6] dark:border-border/60">
+                <div className="font-extrabold text-2xl sm:text-[24px] leading-none text-[#0f1b33] dark:text-foreground">
+                  {learnedCount}
+                </div>
+                <div className="font-semibold text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                  {isTr ? 'öğrenilen terim' : 'learned terms'}
+                </div>
               </div>
-              <span className="font-normal text-[12px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
-                {isTr
-                  ? '571 morfemin tamamı açık. Çalıştıkça ilerleme burada işlenir.'
-                  : 'All 571 morphemes are unlocked. As you study, progress is tracked here.'}
-              </span>
             </div>
           </div>
+        </div>
+
+        {/* OYUN MODLARI · 4 AÇIK (11a Şablonu 4 Sütun) */}
+        <div className="flex flex-col gap-3.5 text-left">
+          <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+            {isTr ? 'OYUN MODLARI · 4 AÇIK' : 'GAME MODES · 4 UNLOCKED'}
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {games.map((g, i) => (
+              <Link
+                key={i}
+                to={g.link}
+                className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border hover:border-[#2563eb]/40 hover:shadow-xs rounded-[14px] p-4 sm:p-[18px] flex flex-col gap-3 text-[#0f1b33] dark:text-foreground transition-all group"
+              >
+                <div
+                  style={{ background: g.bg }}
+                  className="w-10 h-10 rounded-[11px] grid place-items-center shrink-0 shadow-xs"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d={g.d} />
+                  </svg>
+                </div>
+                <div>
+                  <div className="font-extrabold text-[15px] group-hover:text-[#2563eb] transition-colors">
+                    {g.name}
+                  </div>
+                  <div className="font-normal text-[13px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground mt-1">
+                    {g.desc}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* 3'LÜ ALT IZGARA: ZAYIF TERİMLER · SON BAKILAN TERİMLER · MORFEM İLERLEMESİ (11a Şablonu) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start text-left">
+          {/* 1. ZAYIF TERİMLER (11a) */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-2.5 shadow-xs">
+            <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              {isTr ? 'ZAYIF TERİMLER' : 'WEAK TERMS'}
+            </span>
+            <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
+              {isTr ? 'Zorlandığın terimler burada birikir.' : 'Terms you struggle with accumulate here.'}
+            </span>
+            <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+              {isTr
+                ? 'İlk oyununu oynadıktan sonra yanlış bildiğin terimler otomatik olarak tekrar listesine eklenir.'
+                : 'After playing your first game, terms you answered incorrectly are automatically added to the review list.'}
+            </span>
+          </div>
+
+          {/* 2. SON BAKILAN TERİMLER (11a) */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-2.5 shadow-xs">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'SON BAKILAN TERİMLER' : 'RECENTLY VIEWED TERMS'}
+              </span>
+              {recentTerms.length > 0 && (
+                <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                  {isTr ? 'Sözlük →' : 'Glossary →'}
+                </Link>
+              )}
+            </div>
+            {recentTerms.length > 0 ? (
+              <div className="flex flex-col gap-2 mt-1">
+                {recentTerms.map((rt, idx) => (
+                  <Link
+                    key={idx}
+                    to={`/study/${rt.slug || rt.term}`}
+                    className="bg-[#f9fafc] dark:bg-muted/30 border border-[#e5e9f2] dark:border-border/60 hover:border-[#2563eb]/40 rounded-[9px] p-2.5 flex justify-between items-center gap-2 transition-all group"
+                  >
+                    <span className="font-bold text-[13px] text-[#0f1b33] dark:text-foreground truncate group-hover:text-[#2563eb]">
+                      {rt.term}
+                    </span>
+                    {rt.turkish && (
+                      <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground truncate max-w-[120px]">
+                        {rt.turkish}
+                      </span>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <>
+                <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
+                  {isTr ? 'Henüz bir terime bakmadın.' : 'You have not viewed any terms yet.'}
+                </span>
+                <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+                  {isTr
+                    ? 'Yukarıdan arayabilir veya bir kategoriden başlayabilirsin.'
+                    : 'You can search above or begin from any category.'}
+                </span>
+              </>
+            )}
+          </div>
+
+          {/* 3. MORFEM İLERLEMESİ (11a) */}
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 flex flex-col gap-3 shadow-xs">
+            <div className="flex justify-between items-baseline">
+              <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                {isTr ? 'MORFEM İLERLEMESİ' : 'MORPHEME PROGRESS'}
+              </span>
+              <Link to="/morphemes" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+                {isTr ? 'Liste →' : 'List →'}
+              </Link>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-extrabold text-[26px] leading-none text-[#0f1b33] dark:text-foreground">
+                0 / 571
+              </span>
+            </div>
+            <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
+              <div className="w-[1.5%] h-full bg-[#2563eb] rounded-full" />
+            </div>
+            <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
+              {isTr
+                ? '571 morfemin tamamı açık. Morfem Yapıcı’da çalıştıkça ilerleme burada işlenir.'
+                : 'All 571 morphemes are unlocked. As you study in Morpheme Builder, your progress appears here.'}
+            </span>
+          </div>
+        </div>
+
+        {/* KATEGORİLER KÜTÜPHANESİ · 13 AÇIK (Ekranı zenginleştiren tam genişlik kütüphane) */}
+        <div className="flex flex-col gap-3.5 text-left">
+          <div className="flex justify-between items-baseline">
+            <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+              {isTr ? 'KATEGORİLER KÜTÜPHANESİ · 13 AÇIK' : 'CATEGORY LIBRARY · 13 UNLOCKED'}
+            </span>
+            <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
+              {isTr ? 'Tüm Kütüphaneyi Gör →' : 'View Full Library →'}
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+            {FREE_DASHBOARD_CATEGORIES.map((cat) => {
+              const count = catCounts[cat.id] || cat.defaultCount;
+              const displayName = isTr ? cat.name : cat.enName;
+              return (
+                <Link
+                  key={cat.id}
+                  to={`/study?category=${cat.id}`}
+                  className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[10px] p-3 px-3.5 flex justify-between items-center gap-2 text-[#0f1b33] dark:text-foreground hover:border-[#2563eb]/40 hover:shadow-xs transition-all group"
+                >
+                  <span className="font-bold text-[13px] leading-[1.3] truncate group-hover:text-[#2563eb] transition-colors">
+                    {displayName}
+                  </span>
+                  <span className="font-semibold text-[11.5px] text-[#6b7a90] dark:text-muted-foreground shrink-0 bg-[#f5f7fb] dark:bg-muted px-2 py-0.5 rounded-[5px]">
+                    {count} {isTr ? 'terim' : 'terms'}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ALT BİLGİ & PLAN YÖNETİM ŞERİDİ (11a Şablonu) */}
+        <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-5 sm:p-[20px_24px] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 shadow-xs text-left">
+          <div>
+            <div className="font-semibold text-lg font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
+              {footTitle}
+            </div>
+            <div className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground mt-1">
+              {footText}
+            </div>
+          </div>
+          <Link
+            to="/pricing"
+            className="bg-[#0f1b33] dark:bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[14px] py-3 px-4.5 rounded-[10px] shrink-0 transition-colors self-stretch sm:self-auto text-center"
+          >
+            {footCta}
+          </Link>
         </div>
       </div>
     </div>
