@@ -52,6 +52,19 @@ export const Flashcards = () => {
     }
   }, [previewRole]);
 
+  useEffect(() => {
+    if (hasPaidPlan) {
+      setShowGuestModal(false);
+      setLoading(false);
+    } else {
+      const guestInfo = getFlashcardGuestDailyInfo();
+      setGuestPlayInfo(guestInfo);
+      if (!guestInfo.canPlay) {
+        setShowGuestModal(true);
+      }
+    }
+  }, [hasPaidPlan]);
+
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);

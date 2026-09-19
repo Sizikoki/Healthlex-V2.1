@@ -404,7 +404,7 @@ export const Games = () => {
                         {locked && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                             <Lock className="w-3 h-3" />
-                            {isMatch ? (isTr ? 'Temel' : 'Basic') : 'Pro'}
+                            {isMatch ? (isTr ? 'Temel' : 'Basic') : (isTr ? 'Pro / Ömür Boyu' : 'Pro / Lifetime')}
                           </span>
                         )}
                       </div>
@@ -425,7 +425,7 @@ export const Games = () => {
                             <Lock className="mr-2 w-4 h-4 text-amber-500" />
                             {isMatch
                               ? (isTr ? 'Temel ve Üzeri ile Aç' : 'Unlock with Basic & Above')
-                              : (isTr ? 'Pro ile Aç' : 'Unlock with Pro')}
+                              : (isTr ? 'Pro ve Üzeri' : 'Pro & Above')}
                           </>
                         ) : (
                           <>
