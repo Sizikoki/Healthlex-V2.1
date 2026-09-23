@@ -209,9 +209,9 @@ export const Login = () => {
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary rounded-xl shadow-lg">
-              <Activity className="w-8 h-8 text-primary-foreground" />
-            </div>
+            <Link to="/" className="p-2.5 bg-card border border-border/80 rounded-2xl shadow-sm hover:scale-105 transition-transform flex items-center justify-center">
+              <img src="/logo-mark.png" alt="HealthLexMed Logo" className="w-10 h-10 object-contain" />
+            </Link>
           </div>
           <CardTitle className="text-2xl font-bold">{t('loginTitle', "HealthLexMed'e Giris Yap")}</CardTitle>
           <CardDescription>{t('loginSubtitle', 'Hesabiniza erisin ve ogrenmeye devam edin')}</CardDescription>
@@ -370,9 +370,9 @@ export const Register = () => {
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary rounded-xl shadow-lg">
-              <Activity className="w-8 h-8 text-primary-foreground" />
-            </div>
+            <Link to="/" className="p-2.5 bg-card border border-border/80 rounded-2xl shadow-sm hover:scale-105 transition-transform flex items-center justify-center">
+              <img src="/logo-mark.png" alt="HealthLexMed Logo" className="w-10 h-10 object-contain" />
+            </Link>
           </div>
           <CardTitle className="text-2xl font-bold">{t('registerTitle', "HealthLexMed'e Kayit Ol")}</CardTitle>
           <CardDescription>{t('registerSubtitle', 'Ucretsiz hesap olustur ve ogrenmeye basla')}</CardDescription>

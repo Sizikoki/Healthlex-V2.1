@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Search, BookOpen, Menu, X, Sparkles } from 'lucide-react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Search, BookOpen, Menu, X, Sparkles, Layers } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -17,9 +17,11 @@ import { getTermMorphemes } from '@/utils/morphemeAdapter';
 import { getTermSlug } from '@/utils/termHelper';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
+import { scoreAndRankTerms, normalizeSearchText } from '@/utils/searchHelper';
 
-// Sabit kategori listesi
+// Sabit kategori listesi (Tüm Terimler en başta)
 const CATEGORIES = [
+  { id: 'all', key: 'allCategories', name: 'Tüm Terimler', nameEn: 'All Terms' },
   { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
   { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
   { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
@@ -238,8 +240,14 @@ export const Study = () => {
     }
   }, [previewRole]);
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState(CATEGORIES[0].id);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedCategoryId, setSelectedCategoryId] = useState(() => {
+    const cat = searchParams.get('category');
+    if (cat && CATEGORIES.some(c => c.id === cat)) return cat;
+    return 'skull_bones';
+  });
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
+  const [searchScope, setSearchScope] = useState('all'); // 'all' | 'category'
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [allTerms, setAllTerms] = useState(() => getAllTerms());
@@ -248,11 +256,18 @@ export const Study = () => {
   const [expandedCardIds, setExpandedCardIds] = useState(() => new Set());
   const [morphemesCache, setMorphemesCache] = useState({});
 
+  useEffect(() => {
+    const q = searchParams.get('search');
+    if (q !== null && q !== undefined && q !== searchQuery) {
+      setSearchQuery(q);
+    }
+  }, [searchParams, searchQuery]);
+
   // Kategori veya arama değiştiğinde gösterilen sayıyı ilk 24'e ve açık kartları sıfırla
   useEffect(() => {
     setVisibleCount(24);
     setExpandedCardIds(new Set());
-  }, [selectedCategoryId, searchQuery]);
+  }, [selectedCategoryId, searchQuery, searchScope]);
 
   useEffect(() => {
     let isMounted = true;
@@ -319,41 +334,58 @@ export const Study = () => {
     };
   }, [selectedCategoryId]);
 
-  const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[0];
+  const selectedCategory = CATEGORIES.find(c => c.id === selectedCategoryId) || CATEGORIES[1];
 
   const categoryCounts = useMemo(() => {
     const counts = {};
     CATEGORIES.forEach((cat) => {
-      counts[cat.id] = allTerms.filter((t) => {
-        if (cat.category) return t.category === cat.category;
-        if (cat.subcategory) return t.subcategory === cat.subcategory;
-        return true;
-      }).length;
+      if (cat.id === 'all') {
+        counts['all'] = allTerms.length;
+      } else {
+        counts[cat.id] = allTerms.filter((t) => {
+          if (cat.category) return t.category === cat.category;
+          if (cat.subcategory) return t.subcategory === cat.subcategory;
+          return true;
+        }).length;
+      }
     });
     return counts;
   }, [allTerms]);
 
-  const filteredTerms = allTerms.filter(t => {
-    if (selectedCategory.category) {
-      return t.category === selectedCategory.category;
-    }
-    if (selectedCategory.subcategory) {
-      return t.subcategory === selectedCategory.subcategory;
-    }
-    return true;
-  });
+  const categoryTerms = useMemo(() => {
+    if (selectedCategoryId === 'all') return allTerms;
+    return allTerms.filter(t => {
+      if (selectedCategory.category) {
+        return t.category === selectedCategory.category;
+      }
+      if (selectedCategory.subcategory) {
+        return t.subcategory === selectedCategory.subcategory;
+      }
+      return true;
+    });
+  }, [allTerms, selectedCategoryId, selectedCategory]);
 
-  const terms = searchQuery
-    ? filteredTerms.filter(
-        (t) =>
-          t.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (t.turkish && t.turkish.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (t.english && t.english.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (t.definition && t.definition.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (t.turkishDefinition && t.turkishDefinition.toLowerCase().includes(searchQuery.toLowerCase())) ||
-          (t.englishDefinition && t.englishDefinition.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
-    : filteredTerms;
+  // Akıllı Arama & Alaka Sıralaması
+  const allRankedTerms = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    return scoreAndRankTerms(allTerms, searchQuery, selectedCategoryId);
+  }, [allTerms, searchQuery, selectedCategoryId]);
+
+  const categoryRankedTerms = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    if (selectedCategoryId === 'all') return allRankedTerms;
+    return scoreAndRankTerms(categoryTerms, searchQuery, selectedCategoryId);
+  }, [categoryTerms, searchQuery, selectedCategoryId, allRankedTerms]);
+
+  const terms = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return categoryTerms;
+    }
+    if (searchScope === 'category' && selectedCategoryId !== 'all') {
+      return categoryRankedTerms;
+    }
+    return allRankedTerms;
+  }, [searchQuery, searchScope, selectedCategoryId, categoryTerms, categoryRankedTerms, allRankedTerms]);
 
   const handleMarkAsLearned = (termId) => {
     try {
@@ -408,6 +440,22 @@ export const Study = () => {
     });
   }, []);
 
+  const getCategoryBadge = useCallback((term) => {
+    if (!term) return '';
+    const subcat = term.subcategory === 'motus' ? 'movement_terms' : term.subcategory;
+    const cat = CATEGORIES.find(c =>
+      c.id !== 'all' && (
+        (c.subcategory && c.subcategory === subcat) ||
+        (c.category && c.category === term.category) ||
+        (c.id === subcat)
+      )
+    );
+    if (cat) {
+      return t(cat.key, cat.name);
+    }
+    return t(selectedCategory.key, selectedCategory.name);
+  }, [t, selectedCategory]);
+
   const renderTermCard = (term) => (
     <TermCard
       key={term.id}
@@ -416,7 +464,7 @@ export const Study = () => {
       isExpanded={expandedCardIds.has(term.id)}
       morphemes={morphemesCache[term.id]}
       onToggleMorphemes={handleToggleMorphemes}
-      categoryBadgeText={t(selectedCategory.key, selectedCategory.name)}
+      categoryBadgeText={getCategoryBadge(term)}
       isTr={isTr}
       currentLanguage={currentLanguage}
       t={t}
@@ -529,26 +577,91 @@ export const Study = () => {
               <span className="hidden sm:inline">{t('categories', 'Kategoriler')}</span>
             </button>
             <div>
-              <h1 className="text-xl font-bold font-serif text-foreground">{t(selectedCategory.key, selectedCategory.name)}</h1>
+              <h1 className="text-xl font-bold font-serif text-foreground">
+                {searchQuery
+                  ? (isTr ? `Arama: "${searchQuery}"` : `Search: "${searchQuery}"`)
+                  : t(selectedCategory.key, selectedCategory.name)}
+              </h1>
               <p className="text-xs text-muted-foreground">{terms.length} {t('termsCount', isTr ? 'terim' : 'terms')}</p>
             </div>
           </div>
 
           {/* Search bar */}
-          <div className="relative w-48 sm:w-72">
+          <div className="relative w-52 sm:w-80">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="text"
-              placeholder={t('searchPlaceholder')}
+              placeholder={isTr ? "Terim veya tanım ara (örn: Humerus, Atlas)..." : t('searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 text-sm rounded-xl"
+              className="pl-9 pr-8 text-sm rounded-xl"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 text-xs rounded-md"
+                aria-label={isTr ? "Aramayı Temizle" : "Clear search"}
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
 
         {/* Content Area */}
         <div className="p-4 sm:p-6 lg:p-8 flex-1">
+          {/* Arama Durum ve Kapsam Çubuğu */}
+          {searchQuery && (
+            <div className="mb-6 p-3 sm:p-4 rounded-2xl bg-card border border-border flex flex-wrap items-center justify-between gap-3 text-xs shadow-xs">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-semibold text-foreground">
+                  {isTr ? `"${searchQuery}" için sonuçlar:` : `Results for "${searchQuery}":`}
+                </span>
+                {selectedCategoryId !== 'all' && (
+                  <div className="inline-flex items-center rounded-lg border border-border p-0.5 bg-muted/60">
+                    <button
+                      type="button"
+                      onClick={() => setSearchScope('all')}
+                      className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
+                        searchScope === 'all'
+                          ? 'bg-background text-foreground shadow-xs font-bold'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {isTr ? `Tüm Terimler (${allRankedTerms.length})` : `All Terms (${allRankedTerms.length})`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSearchScope('category')}
+                      className={`px-2.5 py-1 rounded-md font-medium transition-all cursor-pointer ${
+                        searchScope === 'category'
+                          ? 'bg-background text-foreground shadow-xs font-bold'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {t(selectedCategory.key, selectedCategory.name)} ({categoryRankedTerms.length})
+                    </button>
+                  </div>
+                )}
+                {searchScope === 'category' && categoryRankedTerms.length === 0 && allRankedTerms.length > 0 && (
+                  <span className="text-amber-600 dark:text-amber-400 font-medium">
+                    {isTr
+                      ? `("${t(selectedCategory.key, selectedCategory.name)}" kategorisinde eşleşme yok, tüm kategorilerdeki ${allRankedTerms.length} sonuç listeleniyor)`
+                      : `(No matches in this category, showing all ${allRankedTerms.length} terms across all categories)`}
+                  </span>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="text-primary hover:underline font-semibold cursor-pointer"
+              >
+                {isTr ? 'Aramayı Temizle' : 'Clear Search'}
+              </button>
+            </div>
+          )}
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>

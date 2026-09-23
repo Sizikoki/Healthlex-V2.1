@@ -28,6 +28,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { getUser } from '@/utils/storage';
 import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
+import { scoreAndRankMorphemes, normalizeSearchText } from '@/utils/searchHelper';
 import { toast } from 'sonner';
 
 // Kategori & Sistem İsim Eşleştirmeleri (TR & EN)
@@ -59,21 +60,6 @@ const CATEGORY_NAMES = {
   noun: { tr: 'İsim, Küçültme & Özel', en: 'Noun & Specialty' },
 };
 
-// Türkçe ve İngilizce karakterleri arama için normalize etme
-function normalizeSearchText(text) {
-  if (!text) return '';
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/ğ/g, 'g')
-    .replace(/ü/g, 'u')
-    .replace(/ş/g, 's')
-    .replace(/ı/g, 'i')
-    .replace(/ö/g, 'o')
-    .replace(/ç/g, 'c')
-    .replace(/[-/]/g, '')
-    .trim();
-}
 
 export const MorphemeExplorer = () => {
   const navigate = useNavigate();
@@ -141,15 +127,18 @@ export const MorphemeExplorer = () => {
   }, [searchParams]);
 
   // Tüm morfemleri tek bir listeye dönüştürme ve standartlaştırma
+  // Tüm morfemleri tek bir listeye dönüştürme ve standartlaştırma
   const allMorphemes = useMemo(() => {
     const list = [];
 
     PREFIXES.forEach((p, idx) => {
+      const raw = p.prefix || '';
       list.push({
         id: `p_${idx}`,
         globalIndex: list.length,
         type: 'prefix',
         displayTerm: p.prefix,
+        variants: p.variants || raw.split(/[/;]/).map(v => v.trim()),
         meaningTr: p.meaningTr,
         meaningEn: p.meaningEn,
         category: p.category,
@@ -160,11 +149,14 @@ export const MorphemeExplorer = () => {
     });
 
     ROOTS.forEach((r, idx) => {
+      const raw = r.root || '';
       list.push({
         id: `r_${idx}`,
         globalIndex: list.length,
         type: 'root',
         displayTerm: r.root,
+        cleanRoot: r.cleanRoot,
+        variants: [r.cleanRoot, raw.replace('/', '')].filter(Boolean),
         meaningTr: r.meaningTr,
         meaningEn: r.meaningEn,
         category: r.system,
@@ -175,11 +167,13 @@ export const MorphemeExplorer = () => {
     });
 
     SUFFIXES.forEach((s, idx) => {
+      const raw = s.suffix || '';
       list.push({
         id: `s_${idx}`,
         globalIndex: list.length,
         type: 'suffix',
         displayTerm: s.suffix,
+        variants: s.variants || raw.split(/[/;]/).map(v => v.trim()),
         meaningTr: s.meaningTr,
         meaningEn: s.meaningEn,
         category: s.type,
@@ -224,11 +218,35 @@ export const MorphemeExplorer = () => {
     return Array.from(categoriesSet);
   }, [allMorphemes, activeTab]);
 
-  // Arama & Filtreleme Mantığı
-  const filteredMorphemes = useMemo(() => {
-    const normalizedQuery = normalizeSearchText(searchQuery);
+  // Akıllı Arama & Alaka Sıralaması Mantığı
+  const searchedMorphemes = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return allMorphemes;
+    }
+    return scoreAndRankMorphemes(allMorphemes, searchQuery);
+  }, [allMorphemes, searchQuery]);
 
-    return allMorphemes.filter((item) => {
+  // Sekmelerdeki eşleşme sayıları (Arama yapıldığında anlık güncellenir)
+  const tabCounts = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return {
+        all: allMorphemes.length,
+        prefix: PREFIXES.length,
+        root: ROOTS.length,
+        suffix: SUFFIXES.length,
+      };
+    }
+    return {
+      all: searchedMorphemes.length,
+      prefix: searchedMorphemes.filter((m) => m.type === 'prefix').length,
+      root: searchedMorphemes.filter((m) => m.type === 'root').length,
+      suffix: searchedMorphemes.filter((m) => m.type === 'suffix').length,
+    };
+  }, [allMorphemes, searchedMorphemes, searchQuery]);
+
+  // Tip ve Kategori Filtreleme
+  const filteredMorphemes = useMemo(() => {
+    return searchedMorphemes.filter((item) => {
       // 1. Tip filtresi
       if (activeTab !== 'all' && item.type !== activeTab) {
         return false;
@@ -239,26 +257,9 @@ export const MorphemeExplorer = () => {
         return false;
       }
 
-      // 3. Arama sorgusu
-      if (!normalizedQuery) return true;
-
-      const normTerm = normalizeSearchText(item.displayTerm);
-      const normTr = normalizeSearchText(item.meaningTr);
-      const normEn = normalizeSearchText(item.meaningEn);
-      const normEx = normalizeSearchText(item.example);
-      const normBr = normalizeSearchText(item.breakdown);
-      const normDesc = normalizeSearchText(item.description);
-
-      return (
-        normTerm.includes(normalizedQuery) ||
-        normTr.includes(normalizedQuery) ||
-        normEn.includes(normalizedQuery) ||
-        normEx.includes(normalizedQuery) ||
-        normBr.includes(normalizedQuery) ||
-        normDesc.includes(normalizedQuery)
-      );
+      return true;
     });
-  }, [allMorphemes, activeTab, selectedCategory, searchQuery]);
+  }, [searchedMorphemes, activeTab, selectedCategory]);
 
   // Sayfalama (Pagination)
   const totalPages = Math.ceil(filteredMorphemes.length / itemsPerPage) || 1;
@@ -368,43 +369,43 @@ export const MorphemeExplorer = () => {
           <div className="flex flex-wrap justify-center items-center gap-2 pt-2">
             <button
               onClick={() => handleTabChange('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                 activeTab === 'all'
                   ? 'bg-primary text-primary-foreground border-primary shadow-sm'
                   : 'bg-card border-border text-foreground hover:bg-muted'
               }`}
             >
-              {isTr ? 'Tüm Havuz' : 'All Morphemes'} ({allMorphemes.length})
+              {isTr ? 'Tüm Havuz' : 'All Morphemes'} ({tabCounts.all})
             </button>
             <button
               onClick={() => handleTabChange('prefix')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                 activeTab === 'prefix'
                   ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
                   : 'bg-blue-500/10 border-blue-500/20 text-blue-700 dark:text-blue-400 hover:bg-blue-500/20'
               }`}
             >
-              {isTr ? 'Ön Ekler' : 'Prefixes'} ({PREFIXES.length})
+              {isTr ? 'Ön Ekler' : 'Prefixes'} ({tabCounts.prefix})
             </button>
             <button
               onClick={() => handleTabChange('root')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                 activeTab === 'root'
                   ? 'bg-violet-600 text-white border-violet-600 shadow-sm'
                   : 'bg-violet-500/10 border-violet-500/20 text-violet-700 dark:text-violet-300 hover:bg-violet-500/20'
               }`}
             >
-              {isTr ? 'Kökler' : 'Roots'} ({ROOTS.length})
+              {isTr ? 'Kökler' : 'Roots'} ({tabCounts.root})
             </button>
             <button
               onClick={() => handleTabChange('suffix')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                 activeTab === 'suffix'
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
                   : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-500/20'
               }`}
             >
-              {isTr ? 'Son Ekler' : 'Suffixes'} ({SUFFIXES.length})
+              {isTr ? 'Son Ekler' : 'Suffixes'} ({tabCounts.suffix})
             </button>
           </div>
 
@@ -675,16 +676,37 @@ export const MorphemeExplorer = () => {
               <h3 className="text-lg font-semibold text-foreground">
                 {isTr ? 'Aramanızla eşleşen morfem bulunamadı' : 'No matching morphemes found'}
               </h3>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                {isTr
-                  ? 'Farklı bir kök, ön ek veya Türkçe/İngilizce tıbbi kelime aramayı deneyebilirsiniz.'
-                  : 'Try searching with a different affix, root, or keyword.'}
-              </p>
+              {searchedMorphemes.length > 0 ? (
+                <p className="text-sm text-primary font-medium max-w-md mx-auto">
+                  {isTr
+                    ? `Seçili filtrede sonuç yok ancak diğer sekmelerde toplam ${searchedMorphemes.length} morfem bulundu!`
+                    : `No matches in this filter, but ${searchedMorphemes.length} matches found in other tabs!`}
+                </p>
+              ) : (
+                <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                  {isTr
+                    ? 'Farklı bir kök, ön ek veya Türkçe/İngilizce tıbbi kelime aramayı deneyebilirsiniz.'
+                    : 'Try searching with a different affix, root, or keyword.'}
+                </p>
+              )}
             </div>
-            <Button onClick={resetFilters} variant="outline" className="rounded-xl">
-              <RotateCcw className="w-4 h-4 mr-2" />
-              {isTr ? 'Aramayı Temizle' : 'Clear Search'}
-            </Button>
+            {searchedMorphemes.length > 0 && (activeTab !== 'all' || selectedCategory !== 'all') ? (
+              <Button
+                onClick={() => {
+                  setActiveTab('all');
+                  setSelectedCategory('all');
+                  setCurrentPage(1);
+                }}
+                className="rounded-xl font-bold cursor-pointer"
+              >
+                {isTr ? `Tüm Sekmelerdeki ${searchedMorphemes.length} Sonucu Gör` : `View All ${searchedMorphemes.length} Results`}
+              </Button>
+            ) : (
+              <Button onClick={resetFilters} variant="outline" className="rounded-xl cursor-pointer">
+                <RotateCcw className="w-4 h-4 mr-2" />
+                {isTr ? 'Aramayı Temizle' : 'Clear Search'}
+              </Button>
+            )}
           </div>
         )}
 

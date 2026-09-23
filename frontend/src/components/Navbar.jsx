@@ -184,12 +184,12 @@ export const Navbar = () => {
       <div className="w-full max-w-[1720px] 2xl:max-w-[1840px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo — giriş yapmış kullanıcıda /dashboard'a götürür */}
-          <Link to={loggedIn ? '/dashboard' : '/'} className="flex items-center gap-2 flex-shrink-0">
-            <div className="bg-primary p-2 rounded-md">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 12h4l2 7 4-14 2 7h6" />
-              </svg>
-            </div>
+          <Link to={loggedIn ? '/dashboard' : '/'} className="flex items-center gap-2.5 flex-shrink-0 group">
+            <img
+              src="/logo-mark.png"
+              alt="HealthLexMed Logo"
+              className="w-9 h-9 object-contain transition-transform group-hover:scale-105"
+            />
             <span className="text-xl font-bold tracking-tight text-foreground">
               Health<span className="text-primary font-semibold font-serif italic">Lex</span>Med
             </span>
