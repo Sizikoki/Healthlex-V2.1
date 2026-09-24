@@ -10,6 +10,7 @@ import {
   ChevronRight,
   RotateCcw,
   Lock,
+  Check,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,7 +26,13 @@ import { useLanguage } from '@/context/LanguageContext';
 import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { getUser } from '@/utils/storage';
+import {
+  getUser,
+  saveMorphemeProgress,
+  getMorphemeProgress,
+  syncMorphemeProgressFromFirestore,
+  isLoggedIn
+} from '@/utils/storage';
 import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { scoreAndRankMorphemes, normalizeSearchText } from '@/utils/searchHelper';
@@ -117,6 +124,44 @@ export const MorphemeExplorer = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 24;
+
+  const [morphemeProgress, setMorphemeProgress] = useState(() => getMorphemeProgress());
+
+  useEffect(() => {
+    syncMorphemeProgressFromFirestore().then(() => {
+      setMorphemeProgress(getMorphemeProgress());
+    }).catch(() => {});
+  }, []);
+
+  const handleToggleMorphemeLearned = (morphemeKey, morphemeDisplay) => {
+    try {
+      const isLearned = !morphemeProgress[morphemeKey]?.learned;
+      saveMorphemeProgress(morphemeKey, isLearned);
+      setMorphemeProgress(prev => ({
+        ...prev,
+        [morphemeKey]: {
+          learned: isLearned,
+          lastReviewed: new Date().toISOString()
+        }
+      }));
+
+      if (!isLoggedIn()) {
+        toast.info(
+          isLearned
+            ? (isTr ? `"${morphemeDisplay}" öğrenildi! (Misafir: İlerlemeniz bu cihazda saklanır)` : `"${morphemeDisplay}" marked as learned!`)
+            : (isTr ? `"${morphemeDisplay}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
+        );
+      } else {
+        toast.success(
+          isLearned
+            ? (isTr ? `"${morphemeDisplay}" öğrenildi olarak kaydedildi!` : `"${morphemeDisplay}" marked as learned!`)
+            : (isTr ? `"${morphemeDisplay}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
+        );
+      }
+    } catch (err) {
+      console.error('[MorphemeExplorer] Error toggling morpheme learned:', err);
+    }
+  };
 
   useEffect(() => {
     const q = searchParams.get('search');
@@ -506,6 +551,7 @@ export const MorphemeExplorer = () => {
             {paginatedMorphemes.map((item) => {
               const slug = (item.displayTerm || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
               const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro, isBasic);
+              const isLearned = !!morphemeProgress[slug]?.learned;
 
               const handleCardClick = (e) => {
                 if (locked) {
@@ -643,21 +689,56 @@ export const MorphemeExplorer = () => {
                           )}
                         </div>
 
-                        {/* Kart Alt Barı: Detay & Terimler Linki */}
-                        <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs mt-2">
+                        {/* Kart Alt Barı: Detay & Terimler Linki - ÖĞRENDİM BUTONU - Tür Rozeti */}
+                        <div className="pt-3 border-t border-border/40 flex items-center justify-between gap-2 text-xs mt-2">
                           {locked ? (
-                            <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 group-hover:underline">
+                            <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 group-hover:underline shrink-0">
                               <Lock className="w-3.5 h-3.5" />
                               {isTr ? "Pro'ya Geçin" : 'Upgrade to Pro'}
                               <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                           ) : (
-                            <span className="font-semibold text-primary group-hover:underline inline-flex items-center gap-1">
-                              {isTr ? 'Kök Detayı & Terimler' : 'Root Details & Terms'}
+                            <span className="font-semibold text-primary group-hover:underline inline-flex items-center gap-1 shrink-0">
+                              {item.type === 'prefix'
+                                ? (isTr ? 'Ön Ek Detayı' : 'Prefix Details')
+                                : item.type === 'suffix'
+                                ? (isTr ? 'Son Ek Detayı' : 'Suffix Details')
+                                : (isTr ? 'Kök Detayı' : 'Root Details')}
                               <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                           )}
-                          <span className="text-[11px] text-muted-foreground font-mono">#{item.type}</span>
+
+                          {/* Kök Detayı ile Tür arasındaki alana eklenen ÖĞRENDİM BUTONU */}
+                          {!locked && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleToggleMorphemeLearned(slug, item.displayTerm);
+                              }}
+                              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer shadow-2xs select-none ${
+                                isLearned
+                                  ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/25'
+                                  : 'bg-muted/70 hover:bg-primary/10 text-muted-foreground hover:text-primary border border-border hover:border-primary/30'
+                              }`}
+                              title={isLearned ? (isTr ? 'Öğrenildi olarak işaretli (kaldırmak için tıklayın)' : 'Marked as learned (click to unmark)') : (isTr ? 'Öğrendim olarak işaretle' : 'Mark as learned')}
+                            >
+                              {isLearned ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 stroke-[2.5] text-emerald-600 dark:text-emerald-400" />
+                                  <span>{isTr ? 'Öğrenildi' : 'Learned'}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
+                                  <span>{isTr ? 'Öğrendim' : 'Mark Learned'}</span>
+                                </>
+                              )}
+                            </button>
+                          )}
+
+                          <span className="text-[11px] text-muted-foreground font-mono shrink-0">#{item.type}</span>
                         </div>
                       </CardContent>
                     </Card>

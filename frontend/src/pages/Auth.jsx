@@ -5,7 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { saveUser, syncProgressFromFirestore } from '@/utils/storage';
+import {
+  saveUser,
+  syncProgressFromFirestore,
+  syncMorphemeProgressFromFirestore,
+  syncStreakFromFirestore
+} from '@/utils/storage';
 import { toast } from 'sonner';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signInWithPopup } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
@@ -157,6 +162,8 @@ export const Login = () => {
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || email.split('@')[0], email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
+      syncMorphemeProgressFromFirestore().catch(() => {});
+      syncStreakFromFirestore().catch(() => {});
       toast.success(t('loginSuccess', 'Giris basarili! Hos geldiniz.'));
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -182,6 +189,8 @@ export const Login = () => {
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
+      syncMorphemeProgressFromFirestore().catch(() => {});
+      syncStreakFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -316,6 +325,8 @@ export const Register = () => {
       await ensureUserDoc({ ...user, displayName: name });
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
+      syncMorphemeProgressFromFirestore().catch(() => {});
+      syncStreakFromFirestore().catch(() => {});
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
@@ -342,6 +353,8 @@ export const Register = () => {
       await ensureUserDoc(user);
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
+      syncMorphemeProgressFromFirestore().catch(() => {});
+      syncStreakFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
       const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
         try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   BookOpen,
@@ -11,6 +11,7 @@ import {
   ChevronRight,
   ShieldCheck,
   CheckCircle2,
+  Check,
   Tag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,13 @@ import {
   CATEGORY_NAMES
 } from '@/utils/morphemeHelper';
 import { getTermSlug } from '@/utils/termHelper';
+import {
+  saveMorphemeProgress,
+  getMorphemeProgress,
+  syncMorphemeProgressFromFirestore,
+  isLoggedIn
+} from '@/utils/storage';
+import { toast } from 'sonner';
 
 export const MorphemeDetail = () => {
   const { slug } = useParams();
@@ -38,6 +46,52 @@ export const MorphemeDetail = () => {
   const categoryName = morpheme?.category
     ? (CATEGORY_NAMES[morpheme.category]?.[currentLanguage] || morpheme.category)
     : '';
+
+  const cleanSlug = useMemo(() => {
+    if (morpheme?.slug) return morpheme.slug;
+    return (morpheme?.displayTerm || slug || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
+  }, [morpheme, slug]);
+
+  const [morphemeProgress, setMorphemeProgress] = useState(() => getMorphemeProgress());
+
+  useEffect(() => {
+    syncMorphemeProgressFromFirestore().then(() => {
+      setMorphemeProgress(getMorphemeProgress());
+    }).catch(() => {});
+  }, []);
+
+  const isLearned = !!morphemeProgress[cleanSlug]?.learned;
+
+  const handleToggleLearned = () => {
+    try {
+      const nextLearned = !isLearned;
+      saveMorphemeProgress(cleanSlug, nextLearned);
+      setMorphemeProgress(prev => ({
+        ...prev,
+        [cleanSlug]: {
+          learned: nextLearned,
+          lastReviewed: new Date().toISOString()
+        }
+      }));
+
+      const termName = morpheme?.displayTerm || cleanSlug;
+      if (!isLoggedIn()) {
+        toast.info(
+          nextLearned
+            ? (isTr ? `"${termName}" öğrenildi! (Misafir: İlerlemeniz bu cihazda saklanır)` : `"${termName}" marked as learned!`)
+            : (isTr ? `"${termName}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
+        );
+      } else {
+        toast.success(
+          nextLearned
+            ? (isTr ? `"${termName}" öğrenildi olarak kaydedildi!` : `"${termName}" marked as learned!`)
+            : (isTr ? `"${termName}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
+        );
+      }
+    } catch (err) {
+      console.error('[MorphemeDetail] Error toggling learned:', err);
+    }
+  };
 
   // SEO & Head Title, Meta Description and Canonical URL update dynamically
   useEffect(() => {
@@ -162,11 +216,33 @@ export const MorphemeDetail = () => {
               </h1>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Button
+                size="sm"
+                variant={isLearned ? 'secondary' : 'outline'}
+                onClick={handleToggleLearned}
+                className={`transition-all font-semibold cursor-pointer ${
+                  isLearned
+                    ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/40 hover:bg-emerald-500/25'
+                    : 'border-border hover:bg-muted text-foreground'
+                }`}
+              >
+                {isLearned ? (
+                  <>
+                    <Check className="w-4 h-4 mr-1.5 stroke-[2.5] text-emerald-600 dark:text-emerald-400" />
+                    {isTr ? 'Öğrenildi' : 'Learned'}
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="w-4 h-4 mr-1.5 text-muted-foreground" />
+                    {isTr ? 'Öğrendim' : 'Mark Learned'}
+                  </>
+                )}
+              </Button>
               <Button
                 size="sm"
                 onClick={() => navigate('/morpheme')}
-                className="gradient-primary shadow-sm hover:shadow"
+                className="gradient-primary shadow-sm hover:shadow cursor-pointer"
               >
                 <Gamepad2 className="w-4 h-4 mr-1.5" />
                 {isTr ? 'Oyunda Oyna' : 'Play in Game'}

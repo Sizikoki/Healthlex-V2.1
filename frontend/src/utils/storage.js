@@ -1,11 +1,12 @@
 // Browser localStorage utilities for user progress tracking
 // All user-specific data is namespaced by user email to ensure data isolation
 import { auth, db } from '@/firebase/config';
-import { doc, setDoc, deleteDoc, collection, query, where, getDocs, writeBatch } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc, collection, query, where, getDocs, writeBatch } from 'firebase/firestore';
 
 const STORAGE_KEYS = {
   USER: 'medterm_user',
   PROGRESS: 'medterm_progress',
+  MORPHEME_PROGRESS: 'medterm_morpheme_progress',
   FLASHCARD_PROGRESS: 'medterm_flashcard',
   QUIZ_SCORES: 'medterm_quiz_scores',
   MATCH_SCORES: 'medterm_match_scores',
@@ -712,36 +713,193 @@ export const getMorphemeScores = () => {
   return data ? JSON.parse(data) : [];
 };
 
-// Study streak
-export const updateStreak = () => {
+// ── Morpheme Progress Tracking ──────────────────────────────────────────────
+export const saveMorphemeProgress = async (morphemeId, isLearned) => {
+  try {
+    const key = getUserStorageKey(STORAGE_KEYS.MORPHEME_PROGRESS);
+    if (!key) return;
+
+    // 1. Update local storage cache immediately for fast UI feedback
+    const progress = getMorphemeProgress();
+    progress[morphemeId] = {
+      learned: isLearned,
+      lastReviewed: new Date().toISOString()
+    };
+    localStorage.setItem(key, JSON.stringify(progress));
+
+    // 2. Synchronize to Firestore in the background
+    const currentUid = auth?.currentUser?.uid;
+    if (currentUid) {
+      try {
+        const docId = `${currentUid}_${morphemeId}`;
+        const morphemeDocRef = doc(db, 'user_morpheme_progress', docId);
+
+        if (isLearned) {
+          await setDoc(morphemeDocRef, {
+            userId: currentUid,
+            morphemeId: morphemeId,
+            status: 'learned',
+            lastReviewed: new Date().toISOString()
+          });
+        } else {
+          await deleteDoc(morphemeDocRef);
+        }
+      } catch (error) {
+        console.error('[storage] Error syncing morpheme progress to Firestore:', morphemeId, error);
+      }
+    }
+  } catch (err) {
+    console.error('[storage] Critical error in saveMorphemeProgress:', morphemeId, err);
+  }
+};
+
+export const getMorphemeProgress = () => {
+  const key = getUserStorageKey(STORAGE_KEYS.MORPHEME_PROGRESS);
+  if (!key) return {};
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : {};
+};
+
+export const getMorphemeStatus = (morphemeId) => {
+  const progress = getMorphemeProgress();
+  return progress[morphemeId] || { learned: false };
+};
+
+export const getLearnedMorphemesCount = () => {
+  const progress = getMorphemeProgress();
+  return Object.values(progress).filter((p) => p.learned).length;
+};
+
+export const syncMorphemeProgressFromFirestore = async () => {
+  const user = getUser();
+  const userIdentifier = auth?.currentUser?.uid || user?.uid;
+  if (!userIdentifier) return;
+
+  try {
+    const progressRef = collection(db, 'user_morpheme_progress');
+    const q = query(progressRef, where('userId', '==', userIdentifier));
+    const querySnapshot = await getDocs(q);
+
+    const progress = {};
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.status === 'learned') {
+        progress[data.morphemeId] = {
+          learned: true,
+          lastReviewed: data.lastReviewed || new Date().toISOString()
+        };
+      }
+    });
+
+    const key = getUserStorageKey(STORAGE_KEYS.MORPHEME_PROGRESS);
+    if (key) {
+      localStorage.setItem(key, JSON.stringify(progress));
+    }
+    console.log('[storage] Morpheme progress synchronized from Firestore.');
+  } catch (error) {
+    console.error('[storage] Error syncing morpheme progress from Firestore:', error);
+  }
+};
+
+// ── Giriş / Ziyaret Bazlı Günlük Seri (Calendar-based Study Streak) ────────────
+export const updateStreak = async () => {
   const key = getUserStorageKey(STORAGE_KEYS.STUDY_STREAK);
-  if (!key) return getStreak(); // No user logged in, return default
-
   const streak = getStreak();
-  const today = new Date().toDateString();
-  const lastStudy = streak.lastStudyDate ? new Date(streak.lastStudyDate).toDateString() : null;
 
-  if (lastStudy === today) {
-    // Already studied today
+  // Local calendar date in YYYY-MM-DD
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const todayStr = `${year}-${month}-${day}`;
+
+  const lastDateStr = streak.lastStudyDate ? streak.lastStudyDate.slice(0, 10) : null;
+
+  if (lastDateStr === todayStr) {
+    // Already counted today
     return streak;
   }
 
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-
-  if (lastStudy === yesterday) {
-    // Continuing streak
-    streak.currentStreak += 1;
-    streak.longestStreak = Math.max(streak.longestStreak, streak.currentStreak);
-  } else {
-    // Streak broken, start new
+  if (!lastDateStr) {
+    // First active day
     streak.currentStreak = 1;
+    streak.longestStreak = Math.max(streak.longestStreak || 0, 1);
+    streak.totalDays = (streak.totalDays || 0) + 1;
+  } else {
+    // Calculate calendar day difference in UTC to avoid hour/DST drift
+    const lastDate = new Date(`${lastDateStr}T00:00:00Z`);
+    const currentDate = new Date(`${todayStr}T00:00:00Z`);
+    const diffDays = Math.round((currentDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) {
+      // Consecutive calendar day! Streak increases
+      streak.currentStreak = (streak.currentStreak || 0) + 1;
+      streak.longestStreak = Math.max(streak.longestStreak || 0, streak.currentStreak);
+      streak.totalDays = (streak.totalDays || 0) + 1;
+    } else if (diffDays > 1) {
+      // Streak broken, reset to 1
+      streak.currentStreak = 1;
+      streak.totalDays = (streak.totalDays || 0) + 1;
+    } else {
+      // Same day or clock skew, keep
+      return streak;
+    }
   }
 
   streak.lastStudyDate = new Date().toISOString();
-  streak.totalDays += 1;
 
-  localStorage.setItem(key, JSON.stringify(streak));
+  if (key) {
+    localStorage.setItem(key, JSON.stringify(streak));
+  }
+
+  // Synchronize to Firestore users/{uid}
+  const currentUid = auth?.currentUser?.uid;
+  if (currentUid) {
+    try {
+      const userRef = doc(db, 'users', currentUid);
+      await setDoc(userRef, {
+        streak: {
+          currentStreak: streak.currentStreak,
+          longestStreak: streak.longestStreak,
+          lastStudyDate: streak.lastStudyDate,
+          totalDays: streak.totalDays
+        }
+      }, { merge: true });
+    } catch (err) {
+      console.warn('[storage] Error syncing streak to Firestore:', err);
+    }
+  }
+
   return streak;
+};
+
+export const syncStreakFromFirestore = async () => {
+  const currentUid = auth?.currentUser?.uid || getUser()?.uid;
+  if (!currentUid) return;
+
+  try {
+    const userRef = doc(db, 'users', currentUid);
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data.streak) {
+        const localStreak = getStreak();
+        const mergedStreak = {
+          currentStreak: Math.max(localStreak.currentStreak || 0, data.streak.currentStreak || 0),
+          longestStreak: Math.max(localStreak.longestStreak || 0, data.streak.longestStreak || 0),
+          totalDays: Math.max(localStreak.totalDays || 0, data.streak.totalDays || 0),
+          lastStudyDate: data.streak.lastStudyDate || localStreak.lastStudyDate
+        };
+        const key = getUserStorageKey(STORAGE_KEYS.STUDY_STREAK);
+        if (key) {
+          localStorage.setItem(key, JSON.stringify(mergedStreak));
+        }
+        return mergedStreak;
+      }
+    }
+  } catch (err) {
+    console.warn('[storage] Error syncing streak from Firestore:', err);
+  }
 };
 
 export const getStreak = () => {
@@ -757,23 +915,39 @@ export const getStreak = () => {
   };
 };
 
+// ── Seviye Hesaplama (Level Logic) ──────────────────────────────────────────
+export const getUserLevel = (learnedTerms = 0, learnedMorphemes = 0) => {
+  const total = (Number(learnedTerms) || 0) + (Number(learnedMorphemes) || 0);
+  if (total >= 400) return { level: 6, titleTr: 'Başhekim', titleEn: 'Chief Physician', nextThreshold: null, currentTotal: total };
+  if (total >= 250) return { level: 5, titleTr: 'Uzman', titleEn: 'Specialist', nextThreshold: 400, currentTotal: total };
+  if (total >= 120) return { level: 4, titleTr: 'Asistan', titleEn: 'Resident', nextThreshold: 250, currentTotal: total };
+  if (total >= 50)  return { level: 3, titleTr: 'Pratisyen', titleEn: 'Practitioner', nextThreshold: 120, currentTotal: total };
+  if (total >= 15)  return { level: 2, titleTr: 'Çırak', titleEn: 'Apprentice', nextThreshold: 50, currentTotal: total };
+  return { level: 1, titleTr: 'Başlangıç', titleEn: 'Beginner', nextThreshold: 15, currentTotal: total };
+};
+
 // Stats summary
 export const getStats = () => {
   const progress = getProgress();
   const learnedCount = Object.values(progress).filter(p => p.learned).length;
+  const learnedMorphemes = getLearnedMorphemesCount();
   const totalReviews = Object.values(progress).reduce((acc, p) => acc + p.reviewCount, 0);
   const streak = getStreak();
   const quizAvg = getAverageQuizScore();
   const quizCount = getQuizScores().length;
   const matchCount = getMatchScores().length;
+  const userLevel = getUserLevel(learnedCount, learnedMorphemes);
 
   return {
     learnedTerms: learnedCount,
+    learnedMorphemes,
     totalReviews,
     currentStreak: streak.currentStreak,
     longestStreak: streak.longestStreak,
+    totalDays: streak.totalDays,
     averageQuizScore: quizAvg,
     quizzesTaken: quizCount,
-    matchGamesPlayed: matchCount
+    matchGamesPlayed: matchCount,
+    userLevel
   };
 };

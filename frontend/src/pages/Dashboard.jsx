@@ -22,6 +22,11 @@ import {
   getStats,
   getUser,
   getStreak,
+  updateStreak,
+  syncStreakFromFirestore,
+  syncMorphemeProgressFromFirestore,
+  getLearnedMorphemesCount,
+  getUserLevel,
   logout,
   formatTurkishName,
   getUserTrialState,
@@ -1169,9 +1174,12 @@ const ProUserDashboard = ({
     }
   };
 
-  const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 0;
+  const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 1;
   const stats = getStats() || {};
   const learnedCount = stats.learnedTerms || 0;
+  const learnedMorphemes = stats.learnedMorphemes !== undefined ? stats.learnedMorphemes : getLearnedMorphemesCount();
+  const userLevel = stats.userLevel || getUserLevel(learnedCount, learnedMorphemes);
+  const morphemePct = Math.round((learnedMorphemes / 571) * 100);
 
   // Oyun kartları listesi (10a SVG ikonları ve degradeleri ile)
   const games = [
@@ -1450,15 +1458,15 @@ const ProUserDashboard = ({
                   ★
                 </span>
                 <span className="font-extrabold text-[14px]">
-                  {streakDays > 0
-                    ? (isTr ? `${streakDays}. Gün · Yolculuk sürüyor` : `Day ${streakDays} · In progress`)
-                    : (isTr ? 'Yolculuğun başlıyor' : 'Your journey begins')}
+                  {isTr
+                    ? `${userLevel.titleTr} (Seviye ${userLevel.level}) · ${streakDays}. Gün Serisi`
+                    : `${userLevel.titleEn} (Level ${userLevel.level}) · Day ${streakDays} Streak`}
                 </span>
               </div>
               <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? 'İlk tekrarını tamamladığında seviyen ve serin düzenli olarak kaydedilir.'
-                  : 'Your level and streak will start counting once you complete your daily review.'}
+                  ? 'Giriş yaptıkça günlük seriniz korunur. Terim ve morfem öğrendikçe seviyeniz yükselir.'
+                  : 'Daily visits keep your streak alive. Master terms and morphemes to level up.'}
               </span>
             </div>
 
@@ -1477,15 +1485,15 @@ const ProUserDashboard = ({
                   {learnedCount}
                 </div>
                 <div className="font-semibold text-[11px] sm:text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? 'öğrenilen' : 'learned'}
+                  {isTr ? 'öğrenilen terim' : 'learned terms'}
                 </div>
               </div>
               <div className="bg-[#f9fafc] dark:bg-muted/40 rounded-[12px] p-3 sm:p-3.5 border border-[#eef1f6] dark:border-border/60">
                 <div className="font-extrabold text-xl sm:text-2xl leading-none text-[#0f1b33] dark:text-foreground">
-                  588+
+                  {learnedMorphemes}
                 </div>
                 <div className="font-semibold text-[11px] sm:text-[12px] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? 'açık terim' : 'unlocked'}
+                  {isTr ? 'öğrenilen morfem' : 'learned morphemes'}
                 </div>
               </div>
             </div>
@@ -1635,19 +1643,26 @@ const ProUserDashboard = ({
               </div>
               <div className="flex items-baseline justify-between">
                 <span className="font-extrabold text-[28px] leading-none text-[#0f1b33] dark:text-foreground">
-                  0 / 571
+                  {learnedMorphemes} / 571
                 </span>
                 <span className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/40">
-                  {isTr ? 'Tümü Açık' : 'All Unlocked'}
+                  {learnedMorphemes > 0 ? `%${morphemePct} ${isTr ? 'Öğrenildi' : 'Learned'}` : (isTr ? 'Tümü Açık' : 'All Unlocked')}
                 </span>
               </div>
               <div className="h-2 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
-                <div className="w-[2%] h-full bg-[#2563eb] rounded-full" />
+                <div
+                  style={{ width: `${Math.max(learnedMorphemes > 0 ? 3 : 0, morphemePct)}%` }}
+                  className="h-full bg-[#2563eb] rounded-full transition-all duration-500"
+                />
               </div>
               <span className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground">
-                {isTr
-                  ? '571 morfemin tamamı hesabına tanımlı. Parçaları birleştirdikçe ilerleme artar.'
-                  : 'All 571 morphemes are available in your account. Build words to increase progress.'}
+                {learnedMorphemes > 0
+                  ? (isTr
+                      ? `571 morfemden ${learnedMorphemes} tanesini öğrendiniz (%${morphemePct}). Morfem Atlası’ndan yenilerini keşfedebilirsiniz.`
+                      : `You have learned ${learnedMorphemes} out of 571 morphemes (${morphemePct}%). Keep exploring in the atlas.`)
+                  : (isTr
+                      ? '571 morfemin tamamı hesabına tanımlı. Morfem Atlası’nda "Öğrendim" butonuna basarak ilerlemeni kaydedebilirsin.'
+                      : 'All 571 morphemes are unlocked. Visit Morpheme Atlas and click "Mark Learned" to track progress.')}
               </span>
             </div>
 
@@ -1852,7 +1867,30 @@ export const Dashboard = () => {
     (isTr ? 'Kullanıcı' : 'User');
 
   const userName = formatTurkishName(rawName);
-  const streak = getStreak();
+  const [streakState, setStreakState] = useState(() => getStreak());
+
+  // Günlük giriş serisi güncelleme ve Firestore senkronizasyonu
+  useEffect(() => {
+    let isMounted = true;
+    const initStreakAndMorphemes = async () => {
+      try {
+        if (firebaseUser?.uid) {
+          await syncStreakFromFirestore().catch(() => {});
+          await syncMorphemeProgressFromFirestore().catch(() => {});
+        }
+        const updated = await updateStreak();
+        if (isMounted && updated) {
+          setStreakState(updated);
+        }
+      } catch (err) {
+        console.warn('[Dashboard] Error initializing streak on visit:', err);
+      }
+    };
+    initStreakAndMorphemes();
+    return () => { isMounted = false; };
+  }, [firebaseUser]);
+
+  const streak = streakState;
   const flashcardInfo = getFlashcardGuestDailyInfo();
 
   const todayFormatted = new Date().toLocaleDateString(isTr ? 'tr-TR' : 'en-US', {
