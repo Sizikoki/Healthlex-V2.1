@@ -1,0 +1,780 @@
+[
+  {
+    "id": 7,
+    "term": "Os Nasale",
+    "english": "Nasal Bone",
+    "proposedGroup": "Os Nasale"
+  },
+  {
+    "id": 8,
+    "term": "Os Lacrimale",
+    "english": "Lacrimal Bone",
+    "proposedGroup": "Os Lacrimale"
+  },
+  {
+    "id": 9,
+    "term": "Os Zygomaticum",
+    "english": "Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 10,
+    "term": "Maxilla",
+    "english": "Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 11,
+    "term": "Os Palatinum",
+    "english": "Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 12,
+    "term": "Processus Maxillaris Conchae Nasalis Inferioris",
+    "english": "Maxillary Process of Inferior Nasal Concha",
+    "proposedGroup": "Concha Nasalis Inferior"
+  },
+  {
+    "id": 13,
+    "term": "Vomer",
+    "english": "Vomer",
+    "proposedGroup": "Vomer"
+  },
+  {
+    "id": 14,
+    "term": "Mandibula",
+    "english": "Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 662,
+    "term": "Concha Nasalis Inferior",
+    "english": "Inferior Nasal Concha",
+    "proposedGroup": "Concha Nasalis Inferior"
+  },
+  {
+    "id": 663,
+    "term": "Processus Lacrimalis Conchae Nasalis Inferioris",
+    "english": "Lacrimal Process of Inferior Nasal Concha",
+    "proposedGroup": "Concha Nasalis Inferior"
+  },
+  {
+    "id": 664,
+    "term": "Processus Ethmoidalis Conchae Nasalis Inferioris",
+    "english": "Ethmoidal Process of Inferior Nasal Concha",
+    "proposedGroup": "Concha Nasalis Inferior"
+  },
+  {
+    "id": 665,
+    "term": "Crista Lacrimalis Posterior",
+    "english": "Posterior Lacrimal Crest",
+    "proposedGroup": "Os Lacrimale"
+  },
+  {
+    "id": 666,
+    "term": "Sulcus Lacrimalis Ossis Lacrimalis",
+    "english": "Lacrimal Groove of Lacrimal Bone",
+    "proposedGroup": "Os Lacrimale"
+  },
+  {
+    "id": 667,
+    "term": "Hamulus Lacrimalis",
+    "english": "Lacrimal Hamulus",
+    "proposedGroup": "Os Lacrimale"
+  },
+  {
+    "id": 668,
+    "term": "Sulcus Ethmoidalis Ossis Nasalis",
+    "english": "Ethmoidal Groove of Nasal Bone",
+    "proposedGroup": "Os Nasale"
+  },
+  {
+    "id": 669,
+    "term": "Foramina Nasalia",
+    "english": "Nasal Foramina",
+    "proposedGroup": "Os Nasale"
+  },
+  {
+    "id": 670,
+    "term": "Ala Vomeris",
+    "english": "Ala of Vomer",
+    "proposedGroup": "Vomer"
+  },
+  {
+    "id": 671,
+    "term": "Sulcus Vomeris",
+    "english": "Groove of Vomer",
+    "proposedGroup": "Vomer"
+  },
+  {
+    "id": 672,
+    "term": "Crista Choanalis Vomeris",
+    "english": "Choanal Crest of Vomer",
+    "proposedGroup": "Vomer"
+  },
+  {
+    "id": 673,
+    "term": "Pars Cuneiformis Vomeris",
+    "english": "Cuneiform Part of Vomer",
+    "proposedGroup": "Vomer"
+  },
+  {
+    "id": 674,
+    "term": "Facies Lateralis Ossis Zygomatici",
+    "english": "Lateral Surface of Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 675,
+    "term": "Facies Temporalis Ossis Zygomatici",
+    "english": "Temporal Surface of Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 676,
+    "term": "Facies Orbitalis Ossis Zygomatici",
+    "english": "Orbital Surface of Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 677,
+    "term": "Processus Temporalis Ossis Zygomatici",
+    "english": "Temporal Process of Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 678,
+    "term": "Processus Frontalis Ossis Zygomatici",
+    "english": "Frontal Process of Zygomatic Bone",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 679,
+    "term": "Tuberculum Orbitale",
+    "english": "Orbital Tubercle",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 680,
+    "term": "Tuberculum Marginale",
+    "english": "Marginal Tubercle",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 681,
+    "term": "Foramen Zygomaticoorbitale",
+    "english": "Zygomaticoorbital Foramen",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 682,
+    "term": "Foramen Zygomaticofaciale",
+    "english": "Zygomaticofacial Foramen",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 683,
+    "term": "Foramen Zygomaticotemporale",
+    "english": "Zygomaticotemporal Foramen",
+    "proposedGroup": "Os Zygomaticum"
+  },
+  {
+    "id": 684,
+    "term": "Corpus Mandibulae",
+    "english": "Body of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 685,
+    "term": "Basis Mandibulae",
+    "english": "Base of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 686,
+    "term": "Symphysis Mandibulae",
+    "english": "Mandibular Symphysis",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 687,
+    "term": "Protuberantia Mentalis",
+    "english": "Mental Protuberance",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 688,
+    "term": "Tuberculum Mentale",
+    "english": "Mental Tubercle",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 689,
+    "term": "Foramen Mentale",
+    "english": "Mental Foramen",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 690,
+    "term": "Linea Obliqua Mandibulae",
+    "english": "Oblique Line of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 691,
+    "term": "Fossa Digastrica",
+    "english": "Digastric Fossa",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 692,
+    "term": "Spina Mentalis Superior",
+    "english": "Superior Mental Spine",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 693,
+    "term": "Spina Mentalis Inferior",
+    "english": "Inferior Mental Spine",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 694,
+    "term": "Linea Mylohyoidea",
+    "english": "Mylohyoid Line",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 695,
+    "term": "Torus Mandibularis",
+    "english": "Mandibular Torus",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 696,
+    "term": "Fovea Sublingualis",
+    "english": "Sublingual Fossa",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 697,
+    "term": "Fovea Submandibularis",
+    "english": "Submandibular Fossa",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 698,
+    "term": "Pars Alveolaris Mandibulae",
+    "english": "Alveolar Part of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 699,
+    "term": "Arcus Alveolaris Mandibulae",
+    "english": "Alveolar Arch of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 700,
+    "term": "Alveoli Dentales Mandibulae",
+    "english": "Dental Alveoli of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 701,
+    "term": "Septa Interalveolaria Mandibulae",
+    "english": "Interalveolar Septa of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 702,
+    "term": "Septa Interradicularia Mandibulae",
+    "english": "Interradicular Septa of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 703,
+    "term": "Juga Alveolaria Mandibulae",
+    "english": "Alveolar Yokes of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 704,
+    "term": "Trigonum Retromolare",
+    "english": "Retromolar Triangle",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 705,
+    "term": "Fossa Retromolaris",
+    "english": "Retromolar Fossa",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 706,
+    "term": "Ramus Mandibulae",
+    "english": "Ramus of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 707,
+    "term": "Angulus Mandibulae",
+    "english": "Angle of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 708,
+    "term": "Tuberositas Masseterica",
+    "english": "Masseteric Tuberosity",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 709,
+    "term": "Tuberositas Pterygoidea",
+    "english": "Pterygoid Tuberosity",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 710,
+    "term": "Foramen Mandibulae",
+    "english": "Mandibular Foramen",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 711,
+    "term": "Lingula Mandibulae",
+    "english": "Lingula of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 712,
+    "term": "Canalis Mandibulae",
+    "english": "Mandibular Canal",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 713,
+    "term": "Sulcus Mylohyoideus",
+    "english": "Mylohyoid Groove",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 714,
+    "term": "Processus Coronoideus Mandibulae",
+    "english": "Coronoid Process of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 715,
+    "term": "Crista Temporalis Mandibulae",
+    "english": "Temporal Crest of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 716,
+    "term": "Incisura Mandibulae",
+    "english": "Mandibular Notch",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 717,
+    "term": "Processus Condylaris",
+    "english": "Condylar Process",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 718,
+    "term": "Collum Mandibulae",
+    "english": "Neck of Mandible",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 719,
+    "term": "Fovea Pterygoidea",
+    "english": "Pterygoid Fovea",
+    "proposedGroup": "Mandibula"
+  },
+  {
+    "id": 720,
+    "term": "Os Hyoideum",
+    "english": "Hyoid Bone",
+    "proposedGroup": "Os Hyoideum"
+  },
+  {
+    "id": 721,
+    "term": "Corpus Ossis Hyoidei",
+    "english": "Body of Hyoid Bone",
+    "proposedGroup": "Os Hyoideum"
+  },
+  {
+    "id": 722,
+    "term": "Cornu Minus",
+    "english": "Lesser Horn",
+    "proposedGroup": "Os Hyoideum"
+  },
+  {
+    "id": 723,
+    "term": "Cornu Majus",
+    "english": "Greater Horn",
+    "proposedGroup": "Os Hyoideum"
+  },
+  {
+    "id": 724,
+    "term": "Corpus Maxillae",
+    "english": "Body of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 725,
+    "term": "Facies Orbitalis Maxillae",
+    "english": "Orbital Surface of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 726,
+    "term": "Canalis Infraorbitalis",
+    "english": "Infraorbital Canal",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 727,
+    "term": "Sulcus Infraorbitalis",
+    "english": "Infraorbital Groove",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 728,
+    "term": "Margo Infraorbitalis Maxillae",
+    "english": "Infraorbital Margin of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 729,
+    "term": "Facies Anterior Maxillae",
+    "english": "Anterior Surface of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 730,
+    "term": "Foramen Infraorbitale",
+    "english": "Infraorbital Foramen",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 731,
+    "term": "Fossa Canina",
+    "english": "Canine Fossa",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 732,
+    "term": "Incisura Nasalis Maxillae",
+    "english": "Nasal Notch of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 733,
+    "term": "Spina Nasalis Anterior",
+    "english": "Anterior Nasal Spine",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 734,
+    "term": "Sutura Zygomaticomaxillaris",
+    "english": "Zygomaticomaxillary Suture",
+    "proposedGroup": "Maxilla",
+    "isUncertain": true,
+    "uncertainReason": "Sutura Zygomaticomaxillaris: Zigomatik kemik ile maksilla arasındaki eklemdir. Maxilla grubuna atanabilir ancak eklem/dikiş yapısı olduğu için head_and_neck_joints kategorisine taşınması güçlü bir adaydır."
+  },
+  {
+    "id": 735,
+    "term": "Facies Infratemporalis Maxillae",
+    "english": "Infratemporal Surface of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 736,
+    "term": "Foramina Alveolaria",
+    "english": "Alveolar Foramina",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 737,
+    "term": "Canales Alveolares",
+    "english": "Alveolar Canals",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 738,
+    "term": "Tuber Maxillae",
+    "english": "Maxillary Tuberosity",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 739,
+    "term": "Facies Nasalis Maxillae",
+    "english": "Nasal Surface of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 740,
+    "term": "Sulcus Lacrimalis Maxillae",
+    "english": "Lacrimal Groove of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 741,
+    "term": "Crista Conchalis Maxillae",
+    "english": "Conchal Crest of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 742,
+    "term": "Margo Lacrimalis Maxillae",
+    "english": "Lacrimal Margin of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 743,
+    "term": "Hiatus Maxillaris",
+    "english": "Maxillary Hiatus",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 744,
+    "term": "Sulcus Palatinus Major Maxillae",
+    "english": "Greater Palatine Groove of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 745,
+    "term": "Sinus Maxillaris",
+    "english": "Maxillary Sinus",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 746,
+    "term": "Processus Frontalis Maxillae",
+    "english": "Frontal Process of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 747,
+    "term": "Crista Lacrimalis Anterior",
+    "english": "Anterior Lacrimal Crest",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 748,
+    "term": "Incisura Lacrimalis Maxillae",
+    "english": "Lacrimal Notch of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 749,
+    "term": "Crista Ethmoidalis Maxillae",
+    "english": "Ethmoidal Crest of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 750,
+    "term": "Processus Zygomaticus Maxillae",
+    "english": "Zygomatic Process of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 751,
+    "term": "Processus Palatinus",
+    "english": "Palatine Process",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 752,
+    "term": "Crista Nasalis Maxillae",
+    "english": "Nasal Crest of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 753,
+    "term": "Os Incisivum",
+    "english": "Incisive Bone",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 754,
+    "term": "Canales Incisivi",
+    "english": "Incisive Canals",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 755,
+    "term": "Sutura Incisiva",
+    "english": "Incisive Suture",
+    "proposedGroup": "Maxilla",
+    "isUncertain": true,
+    "uncertainReason": "Sutura Incisiva: Os incisivum ile maksilla arasındaki gelişimsel dikiş çizgisidir. Maxilla içinde kalabilir veya head_and_neck_joints dikişleri arasına taşınabilir."
+  },
+  {
+    "id": 756,
+    "term": "Spinae Palatinae",
+    "english": "Palatine Spines",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 757,
+    "term": "Sulci Palatini",
+    "english": "Palatine Grooves",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 758,
+    "term": "Processus Alveolaris Maxillae",
+    "english": "Alveolar Process of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 759,
+    "term": "Arcus Alveolaris Maxillae",
+    "english": "Alveolar Arch of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 760,
+    "term": "Alveoli Dentales Maxillae",
+    "english": "Dental Alveoli of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 761,
+    "term": "Septa Interalveolaria Maxillae",
+    "english": "Interalveolar Septa of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 762,
+    "term": "Septa Interradicularia Maxillae",
+    "english": "Interradicular Septa of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 763,
+    "term": "Juga Alveolaria Maxillae",
+    "english": "Alveolar Yokes of Maxilla",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 764,
+    "term": "Foramina Incisiva",
+    "english": "Incisive Foramina",
+    "proposedGroup": "Maxilla"
+  },
+  {
+    "id": 765,
+    "term": "Lamina Perpendicularis Ossis Palatini",
+    "english": "Perpendicular Plate of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 766,
+    "term": "Facies Nasalis Ossis Palatini",
+    "english": "Nasal Surface of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 767,
+    "term": "Facies Maxillaris Ossis Palatini",
+    "english": "Maxillary Surface of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 768,
+    "term": "Incisura Sphenopalatina",
+    "english": "Sphenopalatine Notch",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 769,
+    "term": "Sulcus Palatinus Major Ossis Palatini",
+    "english": "Greater Palatine Groove of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 770,
+    "term": "Processus Pyramidalis",
+    "english": "Pyramidal Process",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 771,
+    "term": "Canales Palatini Minores",
+    "english": "Lesser Palatine Canals",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 772,
+    "term": "Crista Conchalis Ossis Palatini",
+    "english": "Conchal Crest of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 773,
+    "term": "Crista Ethmoidalis Ossis Palatini",
+    "english": "Ethmoidal Crest of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 774,
+    "term": "Processus Orbitalis",
+    "english": "Orbital Process",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 775,
+    "term": "Processus Sphenoidalis Ossis Palatini",
+    "english": "Sphenoidal Process of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 776,
+    "term": "Lamina Horizontalis",
+    "english": "Horizontal Plate",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 777,
+    "term": "Facies Nasalis Laminae Horizontalis",
+    "english": "Nasal Surface of Horizontal Plate",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 778,
+    "term": "Facies Palatina",
+    "english": "Palatine Surface",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 779,
+    "term": "Foramina Palatina Minora Ossis Palatini",
+    "english": "Lesser Palatine Foramina of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 780,
+    "term": "Spina Nasalis Posterior",
+    "english": "Posterior Nasal Spine",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 781,
+    "term": "Crista Nasalis Ossis Palatini",
+    "english": "Nasal Crest of Palatine Bone",
+    "proposedGroup": "Os Palatinum"
+  },
+  {
+    "id": 782,
+    "term": "Crista Palatina",
+    "english": "Palatine Crest",
+    "proposedGroup": "Os Palatinum"
+  }
+]

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Search, BookOpen, Menu, X, Sparkles, Layers } from 'lucide-react';
+import { Search, BookOpen, Menu, X, Sparkles, Layers, ChevronDown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -249,6 +249,35 @@ export const Study = () => {
   const [visibleCount, setVisibleCount] = useState(24);
   const [expandedCardIds, setExpandedCardIds] = useState(() => new Set());
   const [morphemesCache, setMorphemesCache] = useState({});
+  const [openGroups, setOpenGroups] = useState(() => {
+    try {
+      const cat = searchParams.get('category') || 'skull_bones';
+      const saved = sessionStorage.getItem(`study_open_groups_${cat}`);
+      if (saved !== null) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.warn('Failed to parse saved open groups from sessionStorage:', e);
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(`study_open_groups_${selectedCategoryId}`);
+      if (saved !== null) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setOpenGroups(parsed);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse saved open groups from sessionStorage:', e);
+    }
+    setOpenGroups(null);
+  }, [selectedCategoryId]);
 
   useEffect(() => {
     const q = searchParams.get('search');
@@ -423,6 +452,44 @@ export const Study = () => {
 
     return sortedGroups;
   }, [terms, searchQuery, isTr]);
+
+  const activeOpenGroups = useMemo(() => {
+    if (openGroups !== null) {
+      return new Set(openGroups);
+    }
+    if (termGroups && termGroups.length > 0) {
+      return new Set([termGroups[0].name]);
+    }
+    return new Set();
+  }, [openGroups, termGroups]);
+
+  const toggleGroup = useCallback((groupName) => {
+    setOpenGroups((prev) => {
+      let currentList;
+      if (prev !== null) {
+        currentList = prev;
+      } else if (termGroups && termGroups.length > 0) {
+        currentList = [termGroups[0].name];
+      } else {
+        currentList = [];
+      }
+
+      let next;
+      if (currentList.includes(groupName)) {
+        next = currentList.filter((g) => g !== groupName);
+      } else {
+        next = [...currentList, groupName];
+      }
+
+      try {
+        sessionStorage.setItem(`study_open_groups_${selectedCategoryId}`, JSON.stringify(next));
+      } catch (e) {
+        console.warn('Failed to save open groups to sessionStorage:', e);
+      }
+
+      return next;
+    });
+  }, [termGroups, selectedCategoryId]);
 
   const handleMarkAsLearned = (termId) => {
     try {
@@ -710,22 +777,42 @@ export const Study = () => {
               <p className="text-sm text-muted-foreground mt-1">{t('tryAnotherSearch')}</p>
             </div>
           ) : termGroups ? (
-            /* Dinamik Gruplu Görünüm */
-            <div className="space-y-10">
+            /* Dinamik Gruplu Görünüm (Akordeon) */
+            <div className="space-y-4">
               {termGroups.map((group) => {
                 if (group.terms.length === 0) return null;
+                const isOpen = activeOpenGroups.has(group.name);
 
                 return (
                   <div key={group.name} className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-lg font-bold tracking-tight">{group.name}</h2>
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {group.terms.length}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-                      {group.terms.map(renderTermCard)}
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => toggleGroup(group.name)}
+                      aria-expanded={isOpen}
+                      className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-card hover:bg-muted/50 border border-border transition-all cursor-pointer text-left group/acc focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-xs"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <h2 className="text-lg font-bold font-serif tracking-tight text-foreground truncate">
+                          {group.name}
+                        </h2>
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 shrink-0">
+                          {group.terms.length}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-muted/60 text-muted-foreground group-hover/acc:text-foreground group-hover/acc:bg-muted transition-colors shrink-0 ml-2">
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ease-out ${
+                            isOpen ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </div>
+                    </button>
+
+                    {isOpen && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start pt-1">
+                        {group.terms.map(renderTermCard)}
+                      </div>
+                    )}
                   </div>
                 );
               })}
