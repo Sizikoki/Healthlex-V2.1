@@ -699,22 +699,6 @@ export const medicalTermsData = {
             "group": "Os Frontale"
         },
         {
-            "id": 456,
-            "term": "Sutura Frontalis Persistens",
-            "english": "Persistent Frontal Suture; Metopic Suture",
-            "turkishDefinition": "Kalıcı alın dikişi (eş anlamlısı: Sutura Metopica); normalde çocuklukta kapanan, bazı bireylerde erişkinlikte de devam eden alın kemiği ortadaki dikiş.",
-            "roots": "sutura (dikiş) + frontalis (alına ait) + persistens (devam eden)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "skull_bones",
-            "turkishShort": "Kalıcı alın dikişi",
-            "englishDefinition": "The midline suture of the frontal bone that normally closes in childhood but occasionally persists into adulthood.",
-            "createdAt": {
-                "_seconds": 1789116370,
-                "_nanoseconds": 219000000
-            }
-        },
-        {
             "id": 457,
             "term": "Margo Supraorbitalis",
             "english": "Supraorbital Margin",
@@ -4198,70 +4182,6 @@ export const medicalTermsData = {
                 "_nanoseconds": 800000000
             },
             "group": "Os Ethmoidale"
-        },
-        {
-            "id": 720,
-            "term": "Os Hyoideum",
-            "english": "Hyoid Bone",
-            "turkishDefinition": "Dil kemiği; boyunda, çeneyle omurga arasında serbestçe asılı duran, hiçbir kemikle doğrudan eklemleşmeyen U şeklinde kemik.",
-            "turkishShort": "Dil kemiği",
-            "roots": "os (kemik) + hyoides (Y harfi şeklinde)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "skull_bones",
-            "englishDefinition": "A U-shaped bone in the neck, suspended freely between the mandible and the spine, articulating with no other bone.",
-            "createdAt": {
-                "_seconds": 1789201616,
-                "_nanoseconds": 546000000
-            }
-        },
-        {
-            "id": 721,
-            "term": "Corpus Ossis Hyoidei",
-            "english": "Body of Hyoid Bone",
-            "turkishDefinition": "Dil kemiği gövdesi; dil kemiğinin ortadaki yatay, kalınca kısmı.",
-            "turkishShort": "Dil kemiği gövdesi",
-            "roots": "corpus (gövde) + os hyoideum (dil kemiği)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "skull_bones",
-            "englishDefinition": "The horizontal, thickened central portion of the hyoid bone.",
-            "createdAt": {
-                "_seconds": 1789201616,
-                "_nanoseconds": 546000000
-            }
-        },
-        {
-            "id": 722,
-            "term": "Cornu Minus",
-            "english": "Lesser Horn",
-            "turkishDefinition": "Küçük boynuz; dil kemiği gövdesinden yukarı ve arkaya uzanan küçük çift çıkıntı.",
-            "turkishShort": "Küçük boynuz",
-            "roots": "cornu (boynuz) + minus (küçük)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "skull_bones",
-            "englishDefinition": "A small paired projection extending upward and backward from the body of the hyoid bone.",
-            "createdAt": {
-                "_seconds": 1789201616,
-                "_nanoseconds": 546000000
-            }
-        },
-        {
-            "id": 723,
-            "term": "Cornu Majus",
-            "english": "Greater Horn",
-            "turkishDefinition": "Büyük boynuz; dil kemiği gövdesinden arkaya ve yukarı uzanan, dil kökü kaslarının tutunduğu daha uzun çift çıkıntı.",
-            "turkishShort": "Büyük boynuz",
-            "roots": "cornu (boynuz) + majus (büyük)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "skull_bones",
-            "englishDefinition": "A longer paired projection extending backward and upward from the body of the hyoid bone, providing attachment for muscles of the tongue base.",
-            "createdAt": {
-                "_seconds": 1789201616,
-                "_nanoseconds": 546000000
-            }
         }
     ],
     "face_bones": [
@@ -5288,8 +5208,71 @@ export const medicalTermsData = {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
             }
-        }
-    ,
+        },
+        {
+            "id": 720,
+            "term": "Os Hyoideum",
+            "english": "Hyoid Bone",
+            "turkishDefinition": "Dil kemiği; boyunda, çeneyle omurga arasında serbestçe asılı duran, hiçbir kemikle doğrudan eklemleşmeyen U şeklinde kemik.",
+            "turkishShort": "Dil kemiği",
+            "roots": "os (kemik) + hyoides (Y harfi şeklinde)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "face_bones",
+            "englishDefinition": "A U-shaped bone in the neck, suspended freely between the mandible and the spine, articulating with no other bone.",
+            "createdAt": {
+                "_seconds": 1789201616,
+                "_nanoseconds": 546000000
+            }
+        },
+        {
+            "id": 721,
+            "term": "Corpus Ossis Hyoidei",
+            "english": "Body of Hyoid Bone",
+            "turkishDefinition": "Dil kemiği gövdesi; dil kemiğinin ortadaki yatay, kalınca kısmı.",
+            "turkishShort": "Dil kemiği gövdesi",
+            "roots": "corpus (gövde) + os hyoideum (dil kemiği)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "face_bones",
+            "englishDefinition": "The horizontal, thickened central portion of the hyoid bone.",
+            "createdAt": {
+                "_seconds": 1789201616,
+                "_nanoseconds": 546000000
+            }
+        },
+        {
+            "id": 722,
+            "term": "Cornu Minus",
+            "english": "Lesser Horn",
+            "turkishDefinition": "Küçük boynuz; dil kemiği gövdesinden yukarı ve arkaya uzanan küçük çift çıkıntı.",
+            "turkishShort": "Küçük boynuz",
+            "roots": "cornu (boynuz) + minus (küçük)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "face_bones",
+            "englishDefinition": "A small paired projection extending upward and backward from the body of the hyoid bone.",
+            "createdAt": {
+                "_seconds": 1789201616,
+                "_nanoseconds": 546000000
+            }
+        },
+        {
+            "id": 723,
+            "term": "Cornu Majus",
+            "english": "Greater Horn",
+            "turkishDefinition": "Büyük boynuz; dil kemiği gövdesinden arkaya ve yukarı uzanan, dil kökü kaslarının tutunduğu daha uzun çift çıkıntı.",
+            "turkishShort": "Büyük boynuz",
+            "roots": "cornu (boynuz) + majus (büyük)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "face_bones",
+            "englishDefinition": "A longer paired projection extending backward and upward from the body of the hyoid bone, providing attachment for muscles of the tongue base.",
+            "createdAt": {
+                "_seconds": 1789201616,
+                "_nanoseconds": 546000000
+            }
+        },
         {
             "id": 724,
             "term": "Corpus Maxillae",
@@ -8538,8 +8521,23 @@ export const medicalTermsData = {
                 "_seconds": 1789114584,
                 "_nanoseconds": 451000000
             }
-        }
-    ,
+        },
+        {
+            "id": 456,
+            "term": "Sutura Frontalis Persistens",
+            "english": "Persistent Frontal Suture; Metopic Suture",
+            "turkishDefinition": "Kalıcı alın dikişi (eş anlamlısı: Sutura Metopica); normalde çocuklukta kapanan, bazı bireylerde erişkinlikte de devam eden alın kemiği ortadaki dikiş.",
+            "roots": "sutura (dikiş) + frontalis (alına ait) + persistens (devam eden)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "head_and_neck_joints",
+            "turkishShort": "Kalıcı alın dikişi",
+            "englishDefinition": "The midline suture of the frontal bone that normally closes in childhood but occasionally persists into adulthood.",
+            "createdAt": {
+                "_seconds": 1789116370,
+                "_nanoseconds": 219000000
+            }
+        },
         {
             "id": 783,
             "term": "Sutura Frontonasalis",

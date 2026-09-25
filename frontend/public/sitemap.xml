@@ -3577,12 +3577,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.healthlexmed.com/study/sutura-frontalis-persistens</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.healthlexmed.com/study/margo-supraorbitalis</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -4813,30 +4807,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.healthlexmed.com/study/os-hyoideum</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.healthlexmed.com/study/corpus-ossis-hyoidei</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.healthlexmed.com/study/cornu-minus</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.healthlexmed.com/study/cornu-majus</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.healthlexmed.com/study/os-nasale</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -5228,6 +5198,30 @@
   </url>
   <url>
     <loc>https://www.healthlexmed.com/study/fovea-pterygoidea</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/os-hyoideum</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/corpus-ossis-hyoidei</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/cornu-minus</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/cornu-majus</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -6578,6 +6572,12 @@
   </url>
   <url>
     <loc>https://www.healthlexmed.com/study/articulationes-sternocostales</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/sutura-frontalis-persistens</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
