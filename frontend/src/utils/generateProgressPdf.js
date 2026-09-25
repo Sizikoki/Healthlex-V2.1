@@ -14,7 +14,7 @@ export const generateProgressPdf = async ({
   planName = 'Temel',
   isTr = true
 }) => {
-  // 15 Kategori Listesi
+  // 16 Kategori Listesi
   const catList = [
     { id: 'skull_bones', name: isTr ? 'Kafatası Kemikleri' : 'Skull Bones' },
     { id: 'trunk_bones', name: isTr ? 'Gövde Kemikleri' : 'Trunk Bones' },
@@ -154,7 +154,7 @@ export const generateProgressPdf = async ({
       <div style="margin-bottom: 22px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <h2 style="font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
-            ${isTr ? '15 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 15 Anatomical Categories'}
+            ${isTr ? '16 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 16 Anatomical Categories'}
           </h2>
           <span style="font-size: 11px; color: #64748b;">${totalTermsCount} ${isTr ? 'toplam medikal terim' : 'total terms'}</span>
         </div>

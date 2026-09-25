@@ -52,7 +52,7 @@ export const FAQ = () => {
             category: 'content',
             icon: BookOpen,
             q: 'Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?',
-            a: '15 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 100 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsiniz.'
+            a: '16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 100 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsiniz.'
           },
           {
             id: 'register',
@@ -124,7 +124,7 @@ export const FAQ = () => {
             category: 'content',
             icon: BookOpen,
             q: 'Which features are free, and what is included in Basic and Pro plans?',
-            a: 'All 15 anatomical categories and the complete medical glossary are openly accessible to everyone, including guests. Guests can explore the first 24 morphemes and play up to 5 Flashcard sessions daily. The Basic plan unlocks the top 100 morphemes, unlimited Flashcard and Matching games, and personal progress tracking. The Pro plan provides unrestricted access to all 571+ morphemes, Quiz and Morpheme Builder game modes, smart review spaced repetition, and in-depth analytics. Additionally, the 3-day free trial grants complete, unrestricted access to all Pro features.'
+            a: 'All 16 anatomical categories and the complete medical glossary are openly accessible to everyone, including guests. Guests can explore the first 24 morphemes and play up to 5 Flashcard sessions daily. The Basic plan unlocks the top 100 morphemes, unlimited Flashcard and Matching games, and personal progress tracking. The Pro plan provides unrestricted access to all 571+ morphemes, Quiz and Morpheme Builder game modes, smart review spaced repetition, and in-depth analytics. Additionally, the 3-day free trial grants complete, unrestricted access to all Pro features.'
           },
           {
             id: 'register',

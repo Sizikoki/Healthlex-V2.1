@@ -22,7 +22,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
   const items = isTr ? [
     '571+ MORFEM',
     `${count}+ TERİM`,
-    '15 KATEGORİ',
+    '16 KATEGORİ',
     '4 OYUN MODU',
     'TR ⇄ EN',
     'SINIRLI SÜRE: PRO %55 İNDİRİM',
@@ -31,7 +31,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
   ] : [
     '571+ MORPHEMES',
     `${count}+ TERMS`,
-    '15 CATEGORIES',
+    '16 CATEGORIES',
     '4 GAME MODES',
     'TR ⇄ EN',
     'LIMITED TIME: PRO 55% OFF',
