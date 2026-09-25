@@ -175,7 +175,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Beyni çevreleyen ve koruyan, kafatasının üst kısmını oluşturan kemiktir",
-            "englishDefinition": "Forms the forehead and anterior cranial roof, articulating posteriorly with the parietal bones at the coronal suture."
+            "englishDefinition": "Forms the forehead and anterior cranial roof, articulating posteriorly with the parietal bones at the coronal suture.",
+            "group": "Os Frontale"
         },
         {
             "id": 2,
@@ -187,7 +188,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Kafatasının üst dış duvarını ve tavanını oluşturan büyük, kavisli bir kemiktir",
-            "englishDefinition": "A paired bone forming the lateral walls and roof of the cranium, joined to its mate at the sagittal suture."
+            "englishDefinition": "A paired bone forming the lateral walls and roof of the cranium, joined to its mate at the sagittal suture.",
+            "group": "Os Parietale"
         },
         {
             "id": 3,
@@ -199,7 +201,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Kafatasının alt yan duvarlarına katkıda bulunur",
-            "englishDefinition": "Forms part of the lateral skull base and houses the structures of hearing and balance within the ear."
+            "englishDefinition": "Forms part of the lateral skull base and houses the structures of hearing and balance within the ear.",
+            "group": "Os Temporale"
         },
         {
             "id": 4,
@@ -211,7 +214,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Kafatasının arka duvarının ve tabanının büyük bir bölümünü oluşturan kemiktir",
-            "englishDefinition": "Forms the posterior skull and base, containing the foramen magnum through which the spinal cord passes."
+            "englishDefinition": "Forms the posterior skull and base, containing the foramen magnum through which the spinal cord passes.",
+            "group": "Os Occipitale"
         },
         {
             "id": 5,
@@ -223,7 +227,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Beyni çevreleyen ve koruyan kafatasının üst kısmını oluşturan kemiklerden biridir",
-            "englishDefinition": "A wedge-shaped bone forming the central skull base, articulating with nearly all other cranial bones."
+            "englishDefinition": "A wedge-shaped bone forming the central skull base, articulating with nearly all other cranial bones.",
+            "group": "Os Sphenoidale"
         },
         {
             "id": 6,
@@ -235,7 +240,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "skull_bones",
             "turkishShort": "Kafatasının üst kısmında yer alır ve beyni çevreleyip korur",
-            "englishDefinition": "A light, sieve-like bone forming part of the anterior skull base and nasal cavity roof, with perforations for olfactory nerves."
+            "englishDefinition": "A light, sieve-like bone forming part of the anterior skull base and nasal cavity roof, with perforations for olfactory nerves.",
+            "group": "Os Ethmoidale"
         },
         {
             "id": 433,
@@ -255,7 +261,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 434,
@@ -275,7 +282,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 435,
@@ -295,7 +303,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 436,
@@ -315,7 +324,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 437,
@@ -335,7 +345,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 438,
@@ -355,7 +366,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 439,
@@ -375,7 +387,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 440,
@@ -395,7 +408,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 441,
@@ -411,7 +425,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789115924,
                 "_nanoseconds": 701000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 442,
@@ -431,7 +446,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 443,
@@ -451,7 +467,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 444,
@@ -471,7 +488,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 445,
@@ -491,7 +509,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 446,
@@ -511,7 +530,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 447,
@@ -531,7 +551,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 448,
@@ -551,7 +572,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 449,
@@ -571,7 +593,8 @@ export const medicalTermsData = {
             "updatedAt": {
                 "_seconds": 1789116630,
                 "_nanoseconds": 917000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 450,
@@ -587,7 +610,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789115924,
                 "_nanoseconds": 701000000
-            }
+            },
+            "group": "Os Parietale"
         },
         {
             "id": 451,
@@ -603,7 +627,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 452,
@@ -619,7 +644,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 453,
@@ -635,7 +661,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 454,
@@ -651,7 +678,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 455,
@@ -667,7 +695,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 456,
@@ -699,7 +728,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 458,
@@ -715,7 +745,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 459,
@@ -731,7 +762,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 460,
@@ -747,7 +779,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 461,
@@ -763,7 +796,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 462,
@@ -779,7 +813,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 463,
@@ -795,7 +830,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 464,
@@ -811,7 +847,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 465,
@@ -827,7 +864,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 466,
@@ -843,7 +881,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 467,
@@ -859,7 +898,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 468,
@@ -875,7 +915,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 469,
@@ -891,7 +932,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 470,
@@ -907,7 +949,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 471,
@@ -923,7 +966,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 472,
@@ -939,7 +983,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 473,
@@ -955,7 +1000,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 474,
@@ -971,7 +1017,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 475,
@@ -987,7 +1034,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 476,
@@ -1003,7 +1051,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 477,
@@ -1019,7 +1068,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 478,
@@ -1035,7 +1085,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 479,
@@ -1051,7 +1102,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 480,
@@ -1067,7 +1119,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
-            }
+            },
+            "group": "Os Frontale"
         },
         {
             "id": 481,
@@ -1083,7 +1136,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 482,
@@ -1099,7 +1153,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 483,
@@ -1115,7 +1170,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 484,
@@ -1131,7 +1187,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 485,
@@ -1147,7 +1204,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 486,
@@ -1163,7 +1221,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 487,
@@ -1179,7 +1238,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 488,
@@ -1195,7 +1255,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 489,
@@ -1211,7 +1272,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 490,
@@ -1227,7 +1289,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 491,
@@ -1243,7 +1306,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 492,
@@ -1259,7 +1323,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 493,
@@ -1275,7 +1340,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 494,
@@ -1291,7 +1357,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 495,
@@ -1307,7 +1374,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 496,
@@ -1323,7 +1391,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 497,
@@ -1339,7 +1408,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 498,
@@ -1355,7 +1425,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 499,
@@ -1371,7 +1442,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 500,
@@ -1387,7 +1459,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 501,
@@ -1403,7 +1476,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 502,
@@ -1419,7 +1493,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 503,
@@ -1435,7 +1510,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 504,
@@ -1451,7 +1527,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 505,
@@ -1467,7 +1544,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 506,
@@ -1483,7 +1561,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 507,
@@ -1499,7 +1578,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 508,
@@ -1515,7 +1595,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 509,
@@ -1531,7 +1612,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 510,
@@ -1547,7 +1629,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 511,
@@ -1563,7 +1646,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 512,
@@ -1579,7 +1663,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 513,
@@ -1595,7 +1680,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 514,
@@ -1611,7 +1697,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 515,
@@ -1627,7 +1714,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 516,
@@ -1643,7 +1731,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117059,
                 "_nanoseconds": 402000000
-            }
+            },
+            "group": "Os Occipitale"
         },
         {
             "id": 517,
@@ -1659,7 +1748,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 518,
@@ -1675,7 +1765,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 519,
@@ -1691,7 +1782,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 520,
@@ -1707,7 +1799,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 521,
@@ -1723,7 +1816,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 522,
@@ -1739,7 +1833,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 523,
@@ -1755,7 +1850,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 524,
@@ -1771,7 +1867,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 525,
@@ -1787,7 +1884,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 526,
@@ -1803,7 +1901,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 527,
@@ -1819,7 +1918,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 528,
@@ -1835,7 +1935,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 529,
@@ -1851,7 +1952,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 530,
@@ -1867,7 +1969,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 531,
@@ -1883,7 +1986,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 532,
@@ -1899,7 +2003,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 533,
@@ -1915,7 +2020,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 534,
@@ -1931,7 +2037,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 535,
@@ -1947,7 +2054,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 536,
@@ -1963,7 +2071,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 537,
@@ -1979,7 +2088,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 538,
@@ -1995,7 +2105,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 539,
@@ -2011,7 +2122,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 540,
@@ -2027,7 +2139,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 541,
@@ -2043,7 +2156,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 542,
@@ -2059,7 +2173,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 543,
@@ -2075,7 +2190,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 544,
@@ -2091,7 +2207,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 545,
@@ -2107,7 +2224,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 546,
@@ -2123,7 +2241,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 547,
@@ -2139,7 +2258,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 548,
@@ -2155,7 +2275,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 549,
@@ -2171,7 +2292,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 550,
@@ -2187,7 +2309,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 551,
@@ -2203,7 +2326,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 552,
@@ -2219,7 +2343,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 553,
@@ -2235,7 +2360,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 554,
@@ -2251,7 +2377,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 555,
@@ -2267,7 +2394,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 556,
@@ -2283,7 +2411,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 557,
@@ -2299,7 +2428,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 558,
@@ -2315,7 +2445,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 559,
@@ -2331,7 +2462,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 560,
@@ -2347,7 +2479,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 561,
@@ -2363,7 +2496,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 562,
@@ -2379,7 +2513,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 563,
@@ -2395,7 +2530,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 564,
@@ -2411,7 +2547,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 565,
@@ -2427,7 +2564,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 566,
@@ -2443,7 +2581,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 567,
@@ -2459,7 +2598,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 568,
@@ -2475,7 +2615,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 569,
@@ -2491,7 +2632,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789117932,
                 "_nanoseconds": 470000000
-            }
+            },
+            "group": "Os Sphenoidale"
         },
         {
             "id": 570,
@@ -2507,7 +2649,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 571,
@@ -2523,7 +2666,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 572,
@@ -2539,7 +2683,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 573,
@@ -2555,7 +2700,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 574,
@@ -2571,7 +2717,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 575,
@@ -2587,7 +2734,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 576,
@@ -2603,7 +2751,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 577,
@@ -2619,7 +2768,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 578,
@@ -2635,7 +2785,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 579,
@@ -2651,7 +2802,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 580,
@@ -2667,7 +2819,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 581,
@@ -2683,7 +2836,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 582,
@@ -2699,7 +2853,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 583,
@@ -2715,7 +2870,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 584,
@@ -2731,7 +2887,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 585,
@@ -2747,7 +2904,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 586,
@@ -2763,7 +2921,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 587,
@@ -2779,7 +2938,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 588,
@@ -2795,7 +2955,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 589,
@@ -2811,7 +2972,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 590,
@@ -2827,7 +2989,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 591,
@@ -2843,7 +3006,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 592,
@@ -2859,7 +3023,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 593,
@@ -2875,7 +3040,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 594,
@@ -2891,7 +3057,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 595,
@@ -2907,7 +3074,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 596,
@@ -2923,7 +3091,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 597,
@@ -2939,7 +3108,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 598,
@@ -2955,7 +3125,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 599,
@@ -2971,7 +3142,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 600,
@@ -2987,7 +3159,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 601,
@@ -3003,7 +3176,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 602,
@@ -3019,7 +3193,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 603,
@@ -3035,7 +3210,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 604,
@@ -3051,7 +3227,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 605,
@@ -3067,7 +3244,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 606,
@@ -3083,7 +3261,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 607,
@@ -3099,7 +3278,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 608,
@@ -3115,7 +3295,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 609,
@@ -3131,7 +3312,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 610,
@@ -3147,7 +3329,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 611,
@@ -3163,7 +3346,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 612,
@@ -3179,7 +3363,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 613,
@@ -3195,7 +3380,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 614,
@@ -3211,7 +3397,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 615,
@@ -3227,7 +3414,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 616,
@@ -3243,7 +3431,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 617,
@@ -3259,7 +3448,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 618,
@@ -3275,7 +3465,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 619,
@@ -3291,7 +3482,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 620,
@@ -3307,7 +3499,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 621,
@@ -3323,7 +3516,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 622,
@@ -3339,7 +3533,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 623,
@@ -3355,7 +3550,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 624,
@@ -3371,7 +3567,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 625,
@@ -3387,7 +3584,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 626,
@@ -3403,7 +3601,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 627,
@@ -3419,7 +3618,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 628,
@@ -3435,7 +3635,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 629,
@@ -3451,7 +3652,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 630,
@@ -3467,7 +3669,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 631,
@@ -3483,7 +3686,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 632,
@@ -3499,7 +3703,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 633,
@@ -3515,7 +3720,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 634,
@@ -3531,7 +3737,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 635,
@@ -3547,7 +3754,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 636,
@@ -3563,7 +3771,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 637,
@@ -3579,7 +3788,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 638,
@@ -3595,7 +3805,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 639,
@@ -3611,7 +3822,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 640,
@@ -3627,7 +3839,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 641,
@@ -3643,7 +3856,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 642,
@@ -3659,7 +3873,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 643,
@@ -3675,7 +3890,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 644,
@@ -3691,7 +3907,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789118933,
                 "_nanoseconds": 513000000
-            }
+            },
+            "group": "Os Temporale"
         },
         {
             "id": 645,
@@ -3707,7 +3924,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 646,
@@ -3723,7 +3941,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 647,
@@ -3739,7 +3958,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 648,
@@ -3755,7 +3975,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 649,
@@ -3771,7 +3992,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 650,
@@ -3787,7 +4009,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 651,
@@ -3803,7 +4026,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 652,
@@ -3819,7 +4043,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 653,
@@ -3835,7 +4060,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 654,
@@ -3851,7 +4077,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 655,
@@ -3867,7 +4094,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 656,
@@ -3883,7 +4111,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 657,
@@ -3899,7 +4128,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 658,
@@ -3915,7 +4145,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 659,
@@ -3931,7 +4162,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 660,
@@ -3947,7 +4179,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 661,
@@ -3963,7 +4196,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Ethmoidale"
         },
         {
             "id": 720,

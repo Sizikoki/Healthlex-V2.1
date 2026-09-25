@@ -1,0 +1,4105 @@
+[
+  {
+    "_docId": "001",
+    "id": 1,
+    "term": "Os Frontale",
+    "english": "Frontal Bone",
+    "roots": "os (kemik) + frons (alın)",
+    "turkishDefinition": "Beyni çevreleyen ve koruyan, kafatasının üst kısmını oluşturan kemiktir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Beyni çevreleyen ve koruyan, kafatasının üst kısmını oluşturan kemiktir",
+    "englishDefinition": "Forms the forehead and anterior cranial roof, articulating posteriorly with the parietal bones at the coronal suture."
+  },
+  {
+    "_docId": "002",
+    "id": 2,
+    "term": "Os Parietale",
+    "english": "Parietal Bone",
+    "roots": "os (kemik) + paries (duvar)",
+    "turkishDefinition": "Kafatasının üst dış duvarını ve tavanını oluşturan büyük, kavisli bir kemiktir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kafatasının üst dış duvarını ve tavanını oluşturan büyük, kavisli bir kemiktir",
+    "englishDefinition": "A paired bone forming the lateral walls and roof of the cranium, joined to its mate at the sagittal suture."
+  },
+  {
+    "_docId": "003",
+    "id": 3,
+    "term": "Os Temporale",
+    "english": "Temporal Bone",
+    "roots": "os (kemik) + tempus (şakak)",
+    "turkishDefinition": "Kafatasının alt yan duvarlarına katkıda bulunur.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kafatasının alt yan duvarlarına katkıda bulunur",
+    "englishDefinition": "Forms part of the lateral skull base and houses the structures of hearing and balance within the ear."
+  },
+  {
+    "_docId": "004",
+    "id": 4,
+    "term": "Os Occipitale",
+    "english": "Occipital Bone",
+    "roots": "os (kemik) + occiput (ense)",
+    "turkishDefinition": "Kafatasının arka duvarının ve tabanının büyük bir bölümünü oluşturan kemiktir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kafatasının arka duvarının ve tabanının büyük bir bölümünü oluşturan kemiktir",
+    "englishDefinition": "Forms the posterior skull and base, containing the foramen magnum through which the spinal cord passes."
+  },
+  {
+    "_docId": "005",
+    "id": 5,
+    "term": "Os Sphenoideum",
+    "english": "Sphenoid Bone",
+    "roots": "os (kemik) + sphen (kama)",
+    "turkishDefinition": "Beyni çevreleyen ve koruyan kafatasının üst kısmını oluşturan kemiklerden biridir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Beyni çevreleyen ve koruyan kafatasının üst kısmını oluşturan kemiklerden biridir",
+    "englishDefinition": "A wedge-shaped bone forming the central skull base, articulating with nearly all other cranial bones."
+  },
+  {
+    "_docId": "006",
+    "id": 6,
+    "term": "Os Ethmoideum",
+    "english": "Ethmoid Bone",
+    "roots": "os (kemik) + ethmos (elek)",
+    "turkishDefinition": "Kafatasının üst kısmında yer alır ve beyni çevreleyip korur.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kafatasının üst kısmında yer alır ve beyni çevreleyip korur",
+    "englishDefinition": "A light, sieve-like bone forming part of the anterior skull base and nasal cavity roof, with perforations for olfactory nerves."
+  },
+  {
+    "_docId": "433",
+    "id": 433,
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The inner surface of the parietal bone, facing the brain.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Internal Surface of Parietal Bone",
+    "term": "Facies Interna Ossis Parietalis",
+    "roots": "facies (yüz) + interna (iç) + os parietale (duvar kemiği)",
+    "turkishDefinition": "Duvar kemiği iç yüzü; duvar kemiğinin beyne bakan iç yüzeyi.",
+    "turkishShort": "Duvar kemiği iç yüzü",
+    "updatedAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "434",
+    "id": 434,
+    "turkishDefinition": "Sigmoid sinüs oluğu; duvar kemiğinin iç yüzünde sigmoid venöz sinüsün yerleştiği oluk.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the internal surface of the parietal bone that accommodates the sigmoid venous sinus.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Groove for Sigmoid Sinus of Parietal Bone",
+    "term": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sigmoideus (S şeklinde) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği sigmoid sinüs oluğu",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "435",
+    "id": 435,
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the midline of the internal surface of the parietal bone that houses the superior sagittal sinus.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Groove for Superior Sagittal Sinus of Parietal Bone",
+    "term": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sagittalis (ok yönünde) + superior (üst) + os parietale (duvar kemiği)",
+    "turkishDefinition": "Duvar kemiği üst sagittal sinüs oluğu; duvar kemiğinin iç yüzünün orta hattı boyunca uzanan, üst sagittal venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Duvar kemiği üst sagittal sinüs oluğu",
+    "updatedAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "436",
+    "id": 436,
+    "turkishDefinition": "Meninks orta arter oluğu; duvar kemiğinin iç yüzünde orta meninks arterinin seyrettiği oluk.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the internal surface of the parietal bone that carries the middle meningeal artery.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Groove for Middle Meningeal Artery of Parietal Bone",
+    "term": "Sulcus Arteriae Meningeae Mediae Ossis Parietalis",
+    "roots": "sulcus (oluk) + arteria (atardamar) + meningeus (meninkslere ait) + medius (orta) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği meninks orta arter oluğu",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "437",
+    "id": 437,
+    "turkishDefinition": "Arter olukları; duvar kemiğinin iç yüzünde çeşitli meninks arterlerinin seyrettiği küçük oluklar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Small grooves on the internal surface of the parietal bone that accommodate branches of the meningeal arteries.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Grooves for Arteries of Parietal Bone",
+    "term": "Sulci Arteriosi Ossis Parietalis",
+    "roots": "sulcus (oluk) + arteriosus (atardamara ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği arter olukları",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "438",
+    "id": 438,
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The outer, convex surface of the parietal bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "External Surface of Parietal Bone",
+    "term": "Facies Externa Ossis Parietalis",
+    "roots": "facies (yüz) + externa (dış) + os parietale (duvar kemiği)",
+    "turkishDefinition": "Duvar kemiği dış yüzü; duvar kemiğinin deri altına bakan dış yüzeyi.",
+    "turkishShort": "Duvar kemiği dış yüzü",
+    "updatedAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "439",
+    "id": 439,
+    "turkishDefinition": "Üst şakak çizgisi; duvar kemiğinin dış yüzünde temporal fasyanın tutunduğu üst çizgi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The upper of two curved lines on the external surface of the parietal bone, marking the attachment of the temporal fascia.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Superior Temporal Line of Parietal Bone",
+    "term": "Linea Temporalis Superior Ossis Parietalis",
+    "roots": "linea (çizgi) + temporalis (şakağa ait) + superior (üst) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği üst şakak çizgisi",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "440",
+    "id": 440,
+    "turkishDefinition": "Alt şakak çizgisi; duvar kemiğinin dış yüzünde temporal kasın tutunduğu alt çizgi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The lower of two curved lines on the external surface of the parietal bone, marking the attachment of the temporalis muscle.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Inferior Temporal Line of Parietal Bone",
+    "term": "Linea Temporalis Inferior Ossis Parietalis",
+    "roots": "linea (çizgi) + temporalis (şakağa ait) + inferior (alt) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alt şakak çizgisi",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "441",
+    "id": 441,
+    "term": "Tuber Parietale",
+    "english": "Parietal Tuber",
+    "turkishDefinition": "Duvar kemik çıkıntısı (eş anlamlısı: Eminentia Parietalis); duvar kemiğinin dış yüzünde en dışbükey kısmındaki kabartı.",
+    "roots": "tuber (tümsek) + parietalis (duvar kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Duvar kemik çıkıntısı",
+    "englishDefinition": "The most convex and prominent point on the external surface of the parietal bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    }
+  },
+  {
+    "_docId": "442",
+    "id": 442,
+    "turkishDefinition": "Ardkafa kemiği kenarı; duvar kemiğinin oksipital kemikle birleştiği kenar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The posterior border of the parietal bone that articulates with the occipital bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Occipital Border of Parietal Bone",
+    "term": "Margo Occipitalis Ossis Parietalis",
+    "roots": "margo (kenar) + occipitalis (ardkafaya ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği ardkafa kenarı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "443",
+    "id": 443,
+    "turkishDefinition": "Pullu kenar; duvar kemiğinin şakak kemiğinin pulsu kısmıyla birleştiği kenar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the parietal bone that articulates with the squamous part of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Squamosal Border of Parietal Bone",
+    "term": "Margo Squamosus Ossis Parietalis",
+    "roots": "margo (kenar) + squamosus (pullu) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği pullu kenarı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "444",
+    "id": 444,
+    "turkishDefinition": "Sagittal kenar; iki duvar kemiğinin orta hatta birleştiği üst kenar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The superior border of the parietal bone that meets its counterpart at the midline to form the sagittal suture.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Sagittal Border of Parietal Bone",
+    "term": "Margo Sagittalis Ossis Parietalis",
+    "roots": "margo (kenar) + sagittalis (ok yönünde) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği sagittal kenarı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "445",
+    "id": 445,
+    "turkishDefinition": "Alın kemiği kenarı; duvar kemiğinin alın kemiğiyle birleştiği ön kenar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The anterior border of the parietal bone that articulates with the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Frontal Border of Parietal Bone",
+    "term": "Margo Frontalis Ossis Parietalis",
+    "roots": "margo (kenar) + frontalis (alına ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alın kenarı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "446",
+    "id": 446,
+    "turkishDefinition": "Alın açısı; duvar kemiğinin alın ve sagittal kenarlarının kesiştiği ön-üst köşesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The anterosuperior corner of the parietal bone, where the frontal and sagittal borders meet.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Frontal Angle of Parietal Bone",
+    "term": "Angulus Frontalis Ossis Parietalis",
+    "roots": "angulus (açı, köşe) + frontalis (alına ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği alın açısı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "447",
+    "id": 447,
+    "turkishDefinition": "Ardkafa açısı; duvar kemiğinin sagittal ve oksipital kenarlarının kesiştiği arka-üst köşesi.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The posterosuperior corner of the parietal bone, where the sagittal and occipital borders meet.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Occipital Angle of Parietal Bone",
+    "term": "Angulus Occipitalis Ossis Parietalis",
+    "roots": "angulus (açı, köşe) + occipitalis (ardkafaya ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği ardkafa açısı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "448",
+    "id": 448,
+    "turkishDefinition": "Kama kemik açısı; duvar kemiğinin ön-alt köşesi, sfenoid kemiğe komşudur.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The anteroinferior corner of the parietal bone, adjacent to the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Sphenoidal Angle of Parietal Bone",
+    "term": "Angulus Sphenoidalis Ossis Parietalis",
+    "roots": "angulus (açı, köşe) + sphenoidalis (kama kemiğine ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği kama kemik açısı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "449",
+    "id": 449,
+    "turkishDefinition": "Mastoid açısı; duvar kemiğinin arka-alt köşesi, mastoid bölgeye komşudur.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The posteroinferior corner of the parietal bone, adjacent to the mastoid region of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    },
+    "english": "Mastoid Angle of Parietal Bone",
+    "term": "Angulus Mastoideus Ossis Parietalis",
+    "roots": "angulus (açı, köşe) + mastoideus (meme şeklinde, mastoid bölgeye ait) + os parietale (duvar kemiği)",
+    "turkishShort": "Duvar kemiği mastoid açısı",
+    "updatedAt": {
+      "_seconds": 1789116630,
+      "_nanoseconds": 917000000
+    }
+  },
+  {
+    "_docId": "450",
+    "id": 450,
+    "term": "Foramen Parietale",
+    "english": "Parietal Foramen",
+    "turkishDefinition": "Parietal delik; duvar kemiğinin arka kısmında bulunan, emisser ven geçişine izin veren küçük delik.",
+    "roots": "foramen (delik) + parietalis (duvar kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Parietal delik",
+    "englishDefinition": "A small opening near the posterior part of the parietal bone that transmits an emissary vein.",
+    "createdAt": {
+      "_seconds": 1789115924,
+      "_nanoseconds": 701000000
+    }
+  },
+  {
+    "_docId": "451",
+    "id": 451,
+    "term": "Squama Frontalis",
+    "english": "Frontal Squama",
+    "turkishDefinition": "Alın pulu; alın kemiğinin geniş, dikey plaka şeklindeki ana gövdesi.",
+    "roots": "squama (pul) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın pulu",
+    "englishDefinition": "The broad, vertical plate-like main body of the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "452",
+    "id": 452,
+    "term": "Facies Externa Ossis Frontalis",
+    "english": "External Surface of Frontal Bone",
+    "turkishDefinition": "Alın kemiği dış yüzü; alın kemiğinin kaş kemeri ve glabellayı içeren dış yüzeyi.",
+    "roots": "facies (yüz) + externa (dış) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği dış yüzü",
+    "englishDefinition": "The outer surface of the frontal bone, which includes the superciliary arches and glabella.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "453",
+    "id": 453,
+    "term": "Tuber Frontale",
+    "english": "Frontal Tuber",
+    "turkishDefinition": "Alın tümseği (eş anlamlısı: Eminentia Frontalis); alın kemiğinin dış yüzünde her iki yanda yer alan hafif kabarıklık.",
+    "roots": "tuber (tümsek) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın tümseği",
+    "englishDefinition": "A slight prominence on either side of the external surface of the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "454",
+    "id": 454,
+    "term": "Arcus Superciliaris",
+    "english": "Superciliary Arch",
+    "turkishDefinition": "Kaş kemeri; alın kemiğinin dış yüzünde kaşların üzerinde yer alan kavisli kabartı.",
+    "roots": "arcus (kemer) + superciliaris (kaşa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kaş kemeri",
+    "englishDefinition": "A curved ridge on the external surface of the frontal bone above the eyebrows.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "455",
+    "id": 455,
+    "term": "Glabella",
+    "english": "Glabella",
+    "turkishDefinition": "Kaşlar arası düzlük; iki kaş kemeri arasındaki düz, kıl bulunmayan alan.",
+    "roots": "glaber (kılsız, düz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kaşlar arası düzlük",
+    "englishDefinition": "The smooth area between the eyebrows, located between the two superciliary arches.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "456",
+    "id": 456,
+    "term": "Sutura Frontalis Persistens",
+    "english": "Persistent Frontal Suture; Metopic Suture",
+    "turkishDefinition": "Kalıcı alın dikişi (eş anlamlısı: Sutura Metopica); normalde çocuklukta kapanan, bazı bireylerde erişkinlikte de devam eden alın kemiği ortadaki dikiş.",
+    "roots": "sutura (dikiş) + frontalis (alına ait) + persistens (devam eden)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kalıcı alın dikişi",
+    "englishDefinition": "The midline suture of the frontal bone that normally closes in childhood but occasionally persists into adulthood.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "457",
+    "id": 457,
+    "term": "Margo Supraorbitalis",
+    "english": "Supraorbital Margin",
+    "turkishDefinition": "Göz çukuru üst kenarı; alın kemiğinin göz çukurunun üst sınırını oluşturan kenarı.",
+    "roots": "margo (kenar) + supra (üstünde) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Göz çukuru üst kenarı",
+    "englishDefinition": "The upper rim of the orbit, formed by the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "458",
+    "id": 458,
+    "term": "Incisura Supraorbitalis",
+    "english": "Supraorbital Notch; Foramen",
+    "turkishDefinition": "Göz üstü çentiği / deliği (eş anlamlısı: Foramen Supraorbitale); supraorbital sinir ve damarların geçtiği çentik veya delik.",
+    "roots": "incisura (çentik) + supra (üstünde) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Göz üstü çentiği",
+    "englishDefinition": "A notch or foramen in the supraorbital margin through which the supraorbital nerve and vessels pass.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "459",
+    "id": 459,
+    "term": "Incisura Frontalis",
+    "english": "Frontal Notch; Foramen",
+    "turkishDefinition": "Frontal çentik / delik (eş anlamlısı: Foramen Frontale); supraorbital çentiğin iç tarafında yer alan, frontal sinir dalının geçtiği küçük çentik.",
+    "roots": "incisura (çentik) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Frontal çentik",
+    "englishDefinition": "A small notch or foramen medial to the supraorbital notch, transmitting a branch of the frontal nerve.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "460",
+    "id": 460,
+    "term": "Facies Temporalis Ossis Frontalis",
+    "english": "Temporal Surface of Frontal Bone",
+    "turkishDefinition": "Alın kemiği şakak yüzü; alın kemiğinin şakak çukuruna bakan yan yüzeyi.",
+    "roots": "facies (yüz) + temporalis (şakağa ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği şakak yüzü",
+    "englishDefinition": "The lateral surface of the frontal bone that faces the temporal fossa.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "461",
+    "id": 461,
+    "term": "Margo Parietalis Ossis Frontalis",
+    "english": "Parietal Margin of Frontal Bone",
+    "turkishDefinition": "Alın kemiği parietal kenarı; alın kemiğinin duvar kemikleriyle birleştiği kenar.",
+    "roots": "margo (kenar) + parietalis (duvar kemiğine ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği parietal kenarı",
+    "englishDefinition": "The border of the frontal bone that articulates with the parietal bones.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "462",
+    "id": 462,
+    "term": "Linea Temporalis Ossis Frontalis",
+    "english": "Temporal Line of Frontal Bone",
+    "turkishDefinition": "Alın kemiği temporal çizgisi; alın kemiğinin dış yüzünde temporal fasyanın başlangıcını işaretleyen çizgi.",
+    "roots": "linea (çizgi) + temporalis (şakağa ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği temporal çizgisi",
+    "englishDefinition": "A curved line on the external surface of the frontal bone marking the origin of the temporal fascia.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "463",
+    "id": 463,
+    "term": "Processus Zygomaticus Ossis Frontalis",
+    "english": "Zygomatic Process of Frontal Bone",
+    "turkishDefinition": "Alın kemiği elmacık çıkıntısı; alın kemiğinin yan tarafında elmacık kemiğiyle birleşen çıkıntı.",
+    "roots": "processus (çıkıntı) + zygomaticus (elmacığa ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği elmacık çıkıntısı",
+    "englishDefinition": "A lateral projection of the frontal bone that articulates with the zygomatic bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "464",
+    "id": 464,
+    "term": "Facies Interna Ossis Frontalis",
+    "english": "Internal Surface of Frontal Bone",
+    "turkishDefinition": "Alın kemiği iç yüzü; alın kemiğinin beyne bakan, frontal krista ve sagittal sinüs oluğunu içeren iç yüzeyi.",
+    "roots": "facies (yüz) + interna (iç) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği iç yüzü",
+    "englishDefinition": "The inner surface of the frontal bone, facing the brain and containing the frontal crest and sagittal sinus groove.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "465",
+    "id": 465,
+    "term": "Crista Frontalis",
+    "english": "Frontal Crest",
+    "turkishDefinition": "Alın ibiği; alın kemiğinin iç yüzünün orta hattında yer alan, dura mater'in tutunduğu dikey kemik çıkıntısı.",
+    "roots": "crista (ibik) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın ibiği",
+    "englishDefinition": "A vertical ridge on the midline of the internal surface of the frontal bone, providing attachment for the falx cerebri.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "466",
+    "id": 466,
+    "term": "Sulcus Sinus Sagittalis Superioris Ossis Frontalis",
+    "english": "Groove for Superior Sagittal Sinus of Frontal Bone",
+    "turkishDefinition": "Alın kemiği üst sagittal sinüs oluğu; alın kemiğinin iç yüzünün orta hattında, üst sagittal venöz sinüsün başlangıç kısmının yerleştiği oluk.",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sagittalis (ok yönünde) + superior (üst) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği üst sagittal sinüs oluğu",
+    "englishDefinition": "A groove along the midline of the internal surface of the frontal bone that continues into the superior sagittal sinus.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "467",
+    "id": 467,
+    "term": "Foramen Caecum",
+    "english": "Foramen Caecum",
+    "turkishDefinition": "Kör delik; alın kemiği ile kalbur kemiği arasında yer alan, embriyonik dönemde önemli olan küçük delik.",
+    "roots": "foramen (delik) + caecus (kör, kapalı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kör delik",
+    "englishDefinition": "A small opening between the frontal and ethmoid bones, of embryological significance.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "468",
+    "id": 468,
+    "term": "Pars Nasalis Ossis Frontalis",
+    "english": "Nasal Part of Frontal Bone",
+    "turkishDefinition": "Alın kemiği burun bölgesi; alın kemiğinin burun kökü ve kalbur kemiğine komşu alt-ön kısmı.",
+    "roots": "pars (bölüm) + nasalis (buruna ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği burun bölgesi",
+    "englishDefinition": "The anteroinferior part of the frontal bone adjacent to the nasal bones and ethmoid.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "469",
+    "id": 469,
+    "term": "Spina Nasalis Ossis Frontalis",
+    "english": "Nasal Spine of Frontal Bone",
+    "turkishDefinition": "Alın kemiği burun dikeni; alın kemiğinin burun bölgesinin orta hattından aşağı uzanan sivri çıkıntı.",
+    "roots": "spina (diken) + nasalis (buruna ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği burun dikeni",
+    "englishDefinition": "A pointed projection extending downward from the midline of the nasal part of the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "470",
+    "id": 470,
+    "term": "Margo Nasalis Ossis Frontalis",
+    "english": "Nasal Margin of Frontal Bone",
+    "turkishDefinition": "Alın kemiği burun kenarı; alın kemiğinin burun kemikleriyle birleştiği pürtüklü kenar.",
+    "roots": "margo (kenar) + nasalis (buruna ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği burun kenarı",
+    "englishDefinition": "The serrated border of the frontal bone that articulates with the nasal bones.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "471",
+    "id": 471,
+    "term": "Pars Orbitalis Ossis Frontalis",
+    "english": "Orbital Part of Frontal Bone",
+    "turkishDefinition": "Alın kemiği göz çukuru bölgesi; alın kemiğinin göz çukurunun tavanını oluşturan yatay plaka şeklindeki kısmı.",
+    "roots": "pars (bölüm) + orbitalis (göz çukuruna ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği göz çukuru bölgesi",
+    "englishDefinition": "The horizontal plate-like part of the frontal bone forming the roof of the orbit.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "472",
+    "id": 472,
+    "term": "Facies Orbitalis Ossis Frontalis",
+    "english": "Orbital Surface of Frontal Bone",
+    "turkishDefinition": "Alın kemiği göz çukuru yüzü; alın kemiğinin göz çukurunun tavanını oluşturan alt yüzeyi.",
+    "roots": "facies (yüz) + orbitalis (göz çukuruna ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği göz çukuru yüzü",
+    "englishDefinition": "The smooth inferior surface of the orbital part of the frontal bone, forming the roof of the orbit.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "473",
+    "id": 473,
+    "term": "Spina Trochlearis",
+    "english": "Trochlear Spine",
+    "turkishDefinition": "Makara dikeni; göz çukuru tavanında üst eğik göz kası makarasının tutunduğu küçük çıkıntı.",
+    "roots": "spina (diken) + trochlearis (makaraya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Makara dikeni",
+    "englishDefinition": "A small projection in the orbit to which the trochlea of the superior oblique muscle attaches.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "474",
+    "id": 474,
+    "term": "Fovea Trochlearis",
+    "english": "Trochlear Fovea",
+    "turkishDefinition": "Makara çukurcuğu; göz çukuru tavanında spina trochlearis yerine bazı bireylerde bulunan sığ çukurcuk.",
+    "roots": "fovea (çukurcuk) + trochlearis (makaraya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Makara çukurcuğu",
+    "englishDefinition": "A small depression in the orbit, present in some individuals instead of the trochlear spine, for attachment of the trochlea.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "475",
+    "id": 475,
+    "term": "Fossa Glandulae Lacrimalis",
+    "english": "Fossa for Lacrimal Gland",
+    "turkishDefinition": "Gözyaşı bezi çukuru; göz çukurunun dış-üst köşesinde gözyaşı bezini barındıran sığ çukur.",
+    "roots": "fossa (çukur) + glandula (bez) + lacrimalis (gözyaşına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Gözyaşı bezi çukuru",
+    "englishDefinition": "A shallow depression in the superolateral part of the orbit that houses the lacrimal gland.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "476",
+    "id": 476,
+    "term": "Margo Sphenoidalis Ossis Frontalis",
+    "english": "Sphenoidal Margin of Frontal Bone",
+    "turkishDefinition": "Alın kemiği kama kemik kenarı; alın kemiğinin sfenoid kemiğin büyük kanadıyla birleştiği kenar.",
+    "roots": "margo (kenar) + sphenoidalis (kama kemiğine ait) + os frontale (alın kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın kemiği kama kemik kenarı",
+    "englishDefinition": "The border of the frontal bone that articulates with the greater wing of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "477",
+    "id": 477,
+    "term": "Incisura Ethmoidalis",
+    "english": "Ethmoidal Notch",
+    "turkishDefinition": "Kalbur kemik çentiği; alın kemiğinin göz çukuru bölümleri arasında kalbur kemiğini kabul eden geniş çentik.",
+    "roots": "incisura (çentik) + ethmoidalis (kalbur kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Kalbur kemik çentiği",
+    "englishDefinition": "A wide notch between the orbital parts of the frontal bone that accommodates the ethmoid bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "478",
+    "id": 478,
+    "term": "Sinus Frontalis",
+    "english": "Frontal Sinus",
+    "turkishDefinition": "Alın sinüsü; alın kemiğinin içinde bulunan, hava dolu paranazal sinüs.",
+    "roots": "sinus (boşluk, oyuk) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın sinüsü",
+    "englishDefinition": "An air-filled paranasal sinus located within the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "479",
+    "id": 479,
+    "term": "Apertura Sinus Frontalis",
+    "english": "Opening of Frontal Sinus",
+    "turkishDefinition": "Alın sinüsü açıklığı; alın sinüsünün orta burun geçidine açıldığı delik.",
+    "roots": "apertura (açıklık) + sinus (boşluk) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın sinüsü açıklığı",
+    "englishDefinition": "The opening through which the frontal sinus drains into the middle nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "480",
+    "id": 480,
+    "term": "Septum Sinuum Frontalium",
+    "english": "Septum of Frontal Sinuses",
+    "turkishDefinition": "Alın sinüsleri bölmesi; sağ ve sol alın sinüslerini birbirinden ayıran ince kemik bölme.",
+    "roots": "septum (bölme) + sinus (boşluk) + frontalis (alına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "turkishShort": "Alın sinüsleri bölmesi",
+    "englishDefinition": "The thin bony partition separating the right and left frontal sinuses.",
+    "createdAt": {
+      "_seconds": 1789116370,
+      "_nanoseconds": 219000000
+    }
+  },
+  {
+    "_docId": "481",
+    "id": 481,
+    "term": "Foramen Magnum",
+    "english": "Foramen Magnum",
+    "turkishDefinition": "En büyük kafa deliği; ardkafa kemiğinin ortasında yer alan, medulla oblongata'nın omurilikle devam ettiği büyük açıklık.",
+    "turkishShort": "En büyük kafa deliği",
+    "roots": "foramen (delik) + magnus (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The large opening in the occipital bone through which the medulla oblongata continues as the spinal cord.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "482",
+    "id": 482,
+    "term": "Basion",
+    "english": "Basion",
+    "turkishDefinition": "Basiyon; foramen magnum'un ön orta noktası, kraniyometrik ölçümlerde referans noktası.",
+    "turkishShort": "Basiyon",
+    "roots": "basis (taban - Yunanca)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The midpoint of the anterior margin of the foramen magnum, used as a craniometric landmark.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "483",
+    "id": 483,
+    "term": "Opisthion",
+    "english": "Opisthion",
+    "turkishDefinition": "Opistiyon; foramen magnum'un arka orta noktası, kraniyometrik ölçümlerde referans noktası.",
+    "turkishShort": "Opistiyon",
+    "roots": "opisthen (arkada - Yunanca)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The midpoint of the posterior margin of the foramen magnum, used as a craniometric landmark.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "484",
+    "id": 484,
+    "term": "Pars Basilaris Ossis Occipitalis",
+    "english": "Basilar Part of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği taban parçası; foramen magnum'un önünde yer alan, sfenoid kemikle birleşerek klivusu oluşturan kısım.",
+    "turkishShort": "Ardkafa kemiği taban parçası",
+    "roots": "pars (bölüm) + basilaris (tabana ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The part of the occipital bone anterior to the foramen magnum that joins the sphenoid bone to form the clivus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "485",
+    "id": 485,
+    "term": "Clivus",
+    "english": "Clivus",
+    "turkishDefinition": "Yokuş / Klivus; sfenoid kemiğin gövdesi ile ardkafa kemiğinin taban parçasının birleşmesiyle oluşan eğimli yüzey.",
+    "turkishShort": "Yokuş / Klivus",
+    "roots": "clivus (yokuş, eğim)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The sloped surface formed by the union of the body of the sphenoid bone and the basilar part of the occipital bone.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "486",
+    "id": 486,
+    "term": "Tuberculum Pharyngeum",
+    "english": "Pharyngeal Tubercle",
+    "turkishDefinition": "Yutak tümsekciği; ardkafa kemiğinin taban parçasının alt yüzünde, yutak duvarının tutunduğu küçük tümsek.",
+    "turkishShort": "Yutak tümsekciği",
+    "roots": "tuberculum (küçük tümsek) + pharyngeus (yutağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small tubercle on the inferior surface of the basilar part of the occipital bone, providing attachment for the pharyngeal wall.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "487",
+    "id": 487,
+    "term": "Sulcus Sinus Petrosi Inferioris Ossis Occipitalis",
+    "english": "Groove for Inferior Petrosal Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği alt petroz sinüs oluğu; ardkafa kemiğinin taban parçasının yan kenarında yer alan, alt petroz venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Ardkafa kemiği alt petroz sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + petrosus (taşsı) + inferior (alt) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the lateral edge of the basilar part of the occipital bone that houses the inferior petrosal sinus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "488",
+    "id": 488,
+    "term": "Pars Lateralis Ossis Occipitalis",
+    "english": "Lateral Part of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği yan parçası; foramen magnum'un yanlarında yer alan, oksipital kondilleri taşıyan kısım.",
+    "turkishShort": "Ardkafa kemiği yan parçası",
+    "roots": "pars (bölüm) + lateralis (yan) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The part of the occipital bone lateral to the foramen magnum that bears the occipital condyles.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "489",
+    "id": 489,
+    "term": "Squama Occipitalis",
+    "english": "Occipital Squama",
+    "turkishDefinition": "Ardkafa pulu; ardkafa kemiğinin foramen magnum'un arkasında kalan geniş, kavisli plaka şeklindeki kısmı.",
+    "turkishShort": "Ardkafa pulu",
+    "roots": "squama (pul) + occipitalis (ardkafaya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The broad, curved plate-like portion of the occipital bone posterior to the foramen magnum.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "490",
+    "id": 490,
+    "term": "Margo Mastoideus Ossis Occipitalis",
+    "english": "Mastoid Border of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği mastoid kenarı; ardkafa kemiğinin şakak kemiğinin mastoid parçasıyla birleştiği kenar.",
+    "turkishShort": "Ardkafa kemiği mastoid kenarı",
+    "roots": "margo (kenar) + mastoideus (mastoid bölgeye ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the occipital bone that articulates with the mastoid part of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "491",
+    "id": 491,
+    "term": "Margo Lambdoideus Ossis Occipitalis",
+    "english": "Lambdoid Border of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği lambdoid kenarı; ardkafa kemiğinin duvar kemikleriyle birleşerek lambdoid dikişi oluşturan kenarı.",
+    "turkishShort": "Ardkafa kemiği lambdoid kenarı",
+    "roots": "margo (kenar) + lambdoideus (lambda harfi şeklinde) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the occipital bone that articulates with the parietal bones to form the lambdoid suture.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "492",
+    "id": 492,
+    "term": "Os Interparietale",
+    "english": "Interparietal Bone",
+    "turkishDefinition": "İnterparietal kemik; bazı bireylerde ardkafa pulunun üst kısmında ayrı bir kemik olarak kalabilen, embriyonik kaynaklı yapı.",
+    "turkishShort": "İnterparietal kemik",
+    "roots": "os (kemik) + inter (arasında) + parietalis (duvar kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A variant ossicle that may persist as a separate bone in the upper part of the occipital squama in some individuals.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "493",
+    "id": 493,
+    "term": "Condylus Occipitalis",
+    "english": "Occipital Condyle",
+    "turkishDefinition": "Ardkafa lokması / kondili; ardkafa kemiğinin yan parçasında yer alan, atlas ile eklemleşen oval kemik çıkıntısı.",
+    "turkishShort": "Ardkafa lokması",
+    "roots": "condylus (lokma, eklem çıkıntısı) + occipitalis (ardkafaya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An oval bony prominence on the lateral part of the occipital bone that articulates with the atlas.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "494",
+    "id": 494,
+    "term": "Canalis Condylaris",
+    "english": "Condylar Canal",
+    "turkishDefinition": "Kondiler kanal; oksipital kondilin arkasında bazı bireylerde bulunan, emisser ven geçişine izin veren kanal.",
+    "turkishShort": "Kondiler kanal",
+    "roots": "canalis (kanal) + condylaris (kondile ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal posterior to the occipital condyle, present in some individuals, transmitting an emissary vein.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "495",
+    "id": 495,
+    "term": "Canalis Nervi Hypoglossi",
+    "english": "Hypoglossal Canal",
+    "turkishDefinition": "Dilaltı sinir kanalı; oksipital kondilin üzerinde yer alan, 12. kafa çifti olan hipoglossal sinirin geçtiği kanal.",
+    "turkishShort": "Dilaltı sinir kanalı",
+    "roots": "canalis (kanal) + nervus (sinir) + hypoglossus (dil altına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal above the occipital condyle through which the hypoglossal nerve (cranial nerve XII) passes.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "496",
+    "id": 496,
+    "term": "Fossa Condylaris",
+    "english": "Condylar Fossa",
+    "turkishDefinition": "Kondil çukuru; oksipital kondilin arkasında yer alan, kondiler kanal bulunmadığında görülebilen çukur.",
+    "turkishShort": "Kondil çukuru",
+    "roots": "fossa (çukur) + condylaris (kondile ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A depression posterior to the occipital condyle, sometimes containing the opening of the condylar canal.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "497",
+    "id": 497,
+    "term": "Tuberculum Jugulare",
+    "english": "Jugular Tubercle",
+    "turkishDefinition": "Juguler tümsekcik; ardkafa kemiğinin taban parçası ile yan parçası arasında yer alan, hipoglossal kanalın üzerindeki kabartı.",
+    "turkishShort": "Juguler tümsekcik",
+    "roots": "tuberculum (küçük tümsek) + jugularis (boyun toplardamarına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small elevation above the hypoglossal canal, located between the basilar and lateral parts of the occipital bone.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "498",
+    "id": 498,
+    "term": "Incisura Jugularis Ossis Occipitalis",
+    "english": "Jugular Notch of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği juguler çentiği; ardkafa kemiğinin yan parçasında yer alan, şakak kemiğiyle birlikte foramen jugulare'yi oluşturan çentik.",
+    "turkishShort": "Ardkafa kemiği juguler çentiği",
+    "roots": "incisura (çentik) + jugularis (boyun toplardamarına ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A notch on the lateral part of the occipital bone that, together with the temporal bone, forms the jugular foramen.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "499",
+    "id": 499,
+    "term": "Processus Jugularis",
+    "english": "Jugular Process",
+    "turkishDefinition": "Boyun toplardamarı çıkıntısı; ardkafa kemiğinin yan parçasının dışa doğru uzanan çıkıntısı.",
+    "turkishShort": "Boyun toplardamarı çıkıntısı",
+    "roots": "processus (çıkıntı) + jugularis (boyun toplardamarına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A lateral projection of the occipital bone's lateral part, situated above the jugular notch.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "500",
+    "id": 500,
+    "term": "Processus Intrajugulans Ossis Occipitalis",
+    "english": "Intrajugular Process of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği intrajuguler çıkıntısı; foramen jugulare'yi kısmen ikiye bölen küçük kemik çıkıntısı.",
+    "turkishShort": "Ardkafa kemiği intrajuguler çıkıntısı",
+    "roots": "processus (çıkıntı) + intra (içinde) + jugularis (boyun toplardamarına ait) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small bony projection that partially divides the jugular foramen, arising from the occipital bone.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "501",
+    "id": 501,
+    "term": "Protuberantia Occipitalis Externa",
+    "english": "External Occipital Protuberance",
+    "turkishDefinition": "Dış ardkafa tümseği; ardkafa pulunun dış yüzünün orta hattında, ense bağının tutunduğu belirgin kabartı.",
+    "turkishShort": "Dış ardkafa tümseği",
+    "roots": "protuberantia (kabartı) + occipitalis (ardkafaya ait) + externa (dış)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A prominent midline bump on the external surface of the occipital squama, providing attachment for the nuchal ligament.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "502",
+    "id": 502,
+    "term": "Crista Occipitalis Externa",
+    "english": "External Occipital Crest",
+    "turkishDefinition": "Dış ardkafa ibiği; dış ardkafa tümseğinden foramen magnum'a uzanan orta hat ibiği.",
+    "turkishShort": "Dış ardkafa ibiği",
+    "roots": "crista (ibik) + occipitalis (ardkafaya ait) + externa (dış)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A midline ridge extending from the external occipital protuberance to the foramen magnum.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "503",
+    "id": 503,
+    "term": "Linea Nuchalis Suprema",
+    "english": "Highest Nuchal Line",
+    "turkishDefinition": "En üst ense çizgisi; dış ardkafa tümseğinin üzerinde yer alan, epikranial aponörozun tutunduğu ince çizgi.",
+    "turkishShort": "En üst ense çizgisi",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + suprema (en üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The uppermost of the curved lines on the external occipital surface, providing attachment for the epicranial aponeurosis.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "504",
+    "id": 504,
+    "term": "Linea Nuchalis Superior",
+    "english": "Superior Nuchal Line",
+    "turkishDefinition": "Üst ense çizgisi; trapezius ve sternokleidomastoid kaslarının tutunduğu, dış ardkafa tümseğinden yanlara uzanan çizgi.",
+    "turkishShort": "Üst ense çizgisi",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + superior (üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A curved line extending laterally from the external occipital protuberance, providing attachment for the trapezius and sternocleidomastoid muscles.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "505",
+    "id": 505,
+    "term": "Linea Nuchalis Inferior",
+    "english": "Inferior Nuchal Line",
+    "turkishDefinition": "Alt ense çizgisi; üst ense çizgisinin altında yer alan, boyun kaslarının bir kısmının tutunduğu çizgi.",
+    "turkishShort": "Alt ense çizgisi",
+    "roots": "linea (çizgi) + nuchalis (enseye ait) + inferior (alt)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A curved line below the superior nuchal line, providing attachment for some of the neck muscles.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "506",
+    "id": 506,
+    "term": "Planum Occipitale",
+    "english": "Occipital Plane",
+    "turkishDefinition": "Ardkafa düzlüğü; dış ardkafa tümseğinin üzerinde kalan, ardkafa pulunun üst-dış kısmı.",
+    "turkishShort": "Ardkafa düzlüğü",
+    "roots": "planum (düzlük) + occipitalis (ardkafaya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The upper-outer part of the occipital squama above the external occipital protuberance.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "507",
+    "id": 507,
+    "term": "Eminentia Cruciformis",
+    "english": "Cruciform Eminence",
+    "turkishDefinition": "Haçsı kabartı; ardkafa pulunun iç yüzünde, dört çukuru (iki serebral, iki serebellar) birbirinden ayıran haç şeklindeki kabartı.",
+    "turkishShort": "Haçsı kabartı",
+    "roots": "eminentia (kabartı) + cruciformis (haç şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A cross-shaped ridge on the internal surface of the occipital squama that separates the cerebral and cerebellar fossae.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "508",
+    "id": 508,
+    "term": "Protuberantia Occipitalis Interna",
+    "english": "Internal Occipital Protuberance",
+    "turkishDefinition": "İç ardkafa tümseği; haçsı kabartının merkezinde yer alan, dural venöz sinüslerin birleştiği nokta.",
+    "turkishShort": "İç ardkafa tümseği",
+    "roots": "protuberantia (kabartı) + occipitalis (ardkafaya ait) + interna (iç)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The point at the center of the cruciform eminence where the dural venous sinuses converge.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "509",
+    "id": 509,
+    "term": "Crista Occipitalis Interna",
+    "english": "Internal Occipital Crest",
+    "turkishDefinition": "İç ardkafa ibiği; iç ardkafa tümseğinden foramen magnum'a uzanan, falx cerebelli'nin tutunduğu orta hat ibiği.",
+    "turkishShort": "İç ardkafa ibiği",
+    "roots": "crista (ibik) + occipitalis (ardkafaya ait) + interna (iç)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A midline ridge extending from the internal occipital protuberance to the foramen magnum, providing attachment for the falx cerebelli.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "510",
+    "id": 510,
+    "term": "Sulcus Sinus Transversi Ossis Occipitalis",
+    "english": "Groove for Transverse Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği enine sinüs oluğu; haçsı kabartının yanlara uzanan kollarında yer alan, enine venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Ardkafa kemiği enine sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + transversus (enine) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the lateral arms of the cruciform eminence that houses the transverse venous sinus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "511",
+    "id": 511,
+    "term": "Sulcus Sinus Sigmoidei Ossis Occipitalis",
+    "english": "Groove for Sigmoid Sinus of Occipital Bone",
+    "turkishDefinition": "Ardkafa kemiği sigmoid sinüs oluğu; ardkafa kemiğinin yan parçasında yer alan, sigmoid venöz sinüsün devam ettiği oluk.",
+    "turkishShort": "Ardkafa kemiği sigmoid sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sigmoideus (S şeklinde) + os occipitale (ardkafa kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the lateral part of the occipital bone that continues the course of the sigmoid venous sinus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "512",
+    "id": 512,
+    "term": "Sulcus Sinus Occipitalis",
+    "english": "Groove for Occipital Sinus",
+    "turkishDefinition": "Ardkafa sinüs oluğu; iç ardkafa ibiğinin yanında yer alan, küçük oksipital venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Ardkafa sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + occipitalis (ardkafaya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small groove beside the internal occipital crest that houses the occipital venous sinus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "513",
+    "id": 513,
+    "term": "Sulcus Sinus Marginalis",
+    "english": "Groove for Marginal Sinus",
+    "turkishDefinition": "Kenar sinüs oluğu; foramen magnum'un kenarı boyunca uzanan, marjinal venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Kenar sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + marginalis (kenara ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the margin of the foramen magnum that houses the marginal venous sinus.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "514",
+    "id": 514,
+    "term": "Processus Paramastoideus",
+    "english": "Paramastoid Process",
+    "turkishDefinition": "Paramastoid çıkıntı; ardkafa kemiğinin yan parçasında bazı bireylerde bulunan, atlasın enine çıkıntısına doğru uzanan ek çıkıntı.",
+    "turkishShort": "Paramastoid çıkıntı",
+    "roots": "processus (çıkıntı) + para (yanında) + mastoideus (mastoid bölgeye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An accessory projection on the lateral part of the occipital bone, present in some individuals, extending toward the transverse process of the atlas.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "515",
+    "id": 515,
+    "term": "Fossa Cerebralis",
+    "english": "Cerebral Fossa",
+    "turkishDefinition": "Beyin çukuru; haçsı kabartının üstünde yer alan, beyin loblarını barındıran çukur.",
+    "turkishShort": "Beyin çukuru",
+    "roots": "fossa (çukur) + cerebralis (beyne ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A depression above the cruciform eminence on the internal surface of the occipital squama that accommodates the cerebral lobes.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "516",
+    "id": 516,
+    "term": "Fossa Cerebellaris",
+    "english": "Cerebellar Fossa",
+    "turkishDefinition": "Beyincik çukuru; haçsı kabartının altında yer alan, beyincik loblarını barındıran çukur.",
+    "turkishShort": "Beyincik çukuru",
+    "roots": "fossa (çukur) + cerebellaris (beyinciğe ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A depression below the cruciform eminence on the internal surface of the occipital squama that accommodates the cerebellar lobes.",
+    "createdAt": {
+      "_seconds": 1789117059,
+      "_nanoseconds": 402000000
+    }
+  },
+  {
+    "_docId": "517",
+    "id": 517,
+    "term": "Corpus Ossis Sphenoidalis",
+    "english": "Body of Sphenoid Bone",
+    "turkishDefinition": "Kama kemik gövdesi; sfenoid kemiğin merkezi, küp şeklindeki ana gövde kısmı, içinde sfenoid sinüsü barındırır.",
+    "turkishShort": "Kama kemik gövdesi",
+    "roots": "corpus (gövde) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The central, cuboidal main body of the sphenoid bone, containing the sphenoidal sinus.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "518",
+    "id": 518,
+    "term": "Jugum Sphenoidale",
+    "english": "Sphenoidal Yoke",
+    "turkishDefinition": "Kama kemik boyunduruğu; sfenoid gövdesinin üst yüzünde, iki küçük kanadı birbirine bağlayan düz alan.",
+    "turkishShort": "Kama kemik boyunduruğu",
+    "roots": "jugum (boyunduruk, bağlantı) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A flat area on the superior surface of the sphenoid body connecting the two lesser wings.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "519",
+    "id": 519,
+    "term": "Limbus Sphenoidalis",
+    "english": "Limbus of Sphenoid",
+    "turkishDefinition": "Kama kemik kenarı; jugum sphenoidale'nin arka sınırını oluşturan keskin kenar, kiyazma önü oluğun önünde yer alır.",
+    "turkishShort": "Kama kemik kenarı",
+    "roots": "limbus (kenar, sınır) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A sharp ridge forming the posterior border of the jugum sphenoidale, anterior to the prechiasmatic sulcus.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "520",
+    "id": 520,
+    "term": "Sulcus Prechiasmaticus",
+    "english": "Prechiasmatic Sulcus",
+    "turkishDefinition": "Kiyazma önü oluğu; görme siniri çaprazının (kiyazma) önünde yer alan, iki optik kanalı birleştiren enine oluk.",
+    "turkishShort": "Kiyazma önü oluğu",
+    "roots": "sulcus (oluk) + prae (önünde) + chiasma (çapraz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A transverse groove connecting the two optic canals, located anterior to the optic chiasm.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "521",
+    "id": 521,
+    "term": "Sella Turcica",
+    "english": "Sella Turcica (Turkish Saddle)",
+    "turkishDefinition": "Türk eğeri; sfenoid kemiğinin gövdesinin üst yüzünde, hipofiz bezini barındıran eyer şeklindeki çukur.",
+    "turkishShort": "Türk eğeri",
+    "roots": "sella (eyer) + turcicus (Türk'e ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A saddle-shaped depression on the superior surface of the sphenoid body that houses the pituitary gland.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "522",
+    "id": 522,
+    "term": "Tuberculum Sellae",
+    "english": "Tuberculum of Sella",
+    "turkishDefinition": "Eğer tümsekciği; sella turcica'nın ön sınırını oluşturan küçük kemik kabartı.",
+    "turkishShort": "Eğer tümsekciği",
+    "roots": "tuberculum (küçük tümsek) + sella (eyer)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small bony prominence forming the anterior border of the sella turcica.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "523",
+    "id": 523,
+    "term": "Processus Clinoideus Medius",
+    "english": "Middle Clinoid Process",
+    "turkishDefinition": "Orta klinoid çıkıntı; sella turcica'nın ön-yan kısmında bazı bireylerde bulunan küçük kemik çıkıntı.",
+    "turkishShort": "Orta klinoid çıkıntı",
+    "roots": "processus (çıkıntı) + clinoideus (yatak şeklinde) + medius (orta)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small bony projection on the anterolateral part of the sella turcica, present in some individuals.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "524",
+    "id": 524,
+    "term": "Fossa Hypophysialis",
+    "english": "Hypophysial Fossa",
+    "turkishDefinition": "Hipofiz çukuru; sella turcica'nın tabanında hipofiz bezinin yerleştiği çukur.",
+    "turkishShort": "Hipofiz çukuru",
+    "roots": "fossa (çukur) + hypophysis (hipofiz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The depression at the floor of the sella turcica that houses the pituitary gland.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "525",
+    "id": 525,
+    "term": "Dorsum Sellae",
+    "english": "Dorsum Sellae",
+    "turkishDefinition": "Eğer arkası düzlük; sella turcica'nın arka sınırını oluşturan dikey kemik plaka.",
+    "turkishShort": "Eğer arkası düzlük",
+    "roots": "dorsum (arka, sırt) + sella (eyer)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A vertical bony plate forming the posterior boundary of the sella turcica.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "526",
+    "id": 526,
+    "term": "Processus Clinoideus Posterior",
+    "english": "Posterior Clinoid Process",
+    "turkishDefinition": "Arka klinoid çıkıntı; dorsum sellae'nin üst köşelerinde yer alan çift kemik çıkıntı.",
+    "turkishShort": "Arka klinoid çıkıntı",
+    "roots": "processus (çıkıntı) + clinoideus (yatak şeklinde) + posterior (arka)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A paired bony projection at the upper corners of the dorsum sellae.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "527",
+    "id": 527,
+    "term": "Sulcus Caroticus",
+    "english": "Carotid Sulcus",
+    "turkishDefinition": "Karotis arter oluğu; sfenoid gövdesinin yan yüzünde iç karotis arterin seyrettiği S şeklinde oluk.",
+    "turkishShort": "Karotis arter oluğu",
+    "roots": "sulcus (oluk) + caroticus (şah damarına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An S-shaped groove on the lateral surface of the sphenoid body that accommodates the internal carotid artery.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "528",
+    "id": 528,
+    "term": "Lingula Sphenoidalis",
+    "english": "Sphenoidal Lingula",
+    "turkishDefinition": "Kama kemik dilciği; sulcus caroticus'un yanında yer alan küçük, dil şeklinde kemik çıkıntı.",
+    "turkishShort": "Kama kemik dilciği",
+    "roots": "lingula (küçük dil) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small, tongue-shaped bony projection adjacent to the carotid sulcus.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "529",
+    "id": 529,
+    "term": "Crista Sphenoidalis",
+    "english": "Sphenoidal Crest",
+    "turkishDefinition": "Kama kemik ibiği; sfenoid gövdesinin ön yüzünde orta hatta uzanan dikey ibik, etmoid kemiğin perpendiküler tabakasıyla eklemleşir.",
+    "turkishShort": "Kama kemik ibiği",
+    "roots": "crista (ibik) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A vertical midline ridge on the anterior surface of the sphenoid body that articulates with the perpendicular plate of the ethmoid bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "530",
+    "id": 530,
+    "term": "Rostrum Sphenoidale",
+    "english": "Sphenoidal Rostrum",
+    "turkishDefinition": "Kama kemik gagası; sfenoid gövdesinin alt-ön kısmında, vomer kemiğinin kanatları arasına yerleşen sivri çıkıntı.",
+    "turkishShort": "Kama kemik gagası",
+    "roots": "rostrum (gaga) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A pointed projection on the anteroinferior part of the sphenoid body that fits between the alae of the vomer.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "531",
+    "id": 531,
+    "term": "Sinus Sphenoidalis",
+    "english": "Sphenoidal Sinus",
+    "turkishDefinition": "Kama kemik sinüsü; sfenoid gövdesinin içinde bulunan, hava dolu paranazal sinüs.",
+    "turkishShort": "Kama kemik sinüsü",
+    "roots": "sinus (boşluk) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An air-filled paranasal sinus located within the body of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "532",
+    "id": 532,
+    "term": "Septum Sinuum Sphenoidalium",
+    "english": "Septum of Sphenoidal Sinuses",
+    "turkishDefinition": "Kama kemik sinüs bölmesi; sağ ve sol sfenoid sinüslerini birbirinden ayıran ince kemik bölme.",
+    "turkishShort": "Kama kemik sinüs bölmesi",
+    "roots": "septum (bölme) + sinus (boşluk) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The thin bony partition separating the right and left sphenoidal sinuses.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "533",
+    "id": 533,
+    "term": "Apertura Sinus Sphenoidalis",
+    "english": "Opening of Sphenoidal Sinus",
+    "turkishDefinition": "Kama kemik sinüs açıklığı; sfenoid sinüsünün sfenoetmoidal çıkmaza açıldığı delik.",
+    "turkishShort": "Kama kemik sinüs açıklığı",
+    "roots": "apertura (açıklık) + sinus (boşluk) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The opening through which the sphenoidal sinus drains into the sphenoethmoidal recess.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "534",
+    "id": 534,
+    "term": "Concha Sphenoidalis",
+    "english": "Sphenoidal Concha",
+    "turkishDefinition": "Kama kemik boynuzu; sfenoid gövdesinin ön-alt kısmında, sfenoid sinüsün ön duvarını oluşturan ince kemik kabuk.",
+    "turkishShort": "Kama kemik boynuzu",
+    "roots": "concha (kabuk, boynuz) + sphenoidalis (kama kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin bony shell forming the anterior wall of the sphenoidal sinus, located anteroinferiorly on the sphenoid body.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "535",
+    "id": 535,
+    "term": "Ala Minor Ossis Sphenoidalis",
+    "english": "Lesser Wing of Sphenoid Bone",
+    "turkishDefinition": "Küçük kanat; sfenoid gövdesinden yanlara uzanan, ön kraniyal çukurun bir kısmını oluşturan ince kemik kanat.",
+    "turkishShort": "Küçük kanat",
+    "roots": "ala (kanat) + minor (küçük) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin bony wing extending laterally from the sphenoid body, forming part of the anterior cranial fossa.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "536",
+    "id": 536,
+    "term": "Canalis Opticus",
+    "english": "Optic Canal",
+    "turkishDefinition": "Görme siniri kanalı; küçük kanadın tabanında yer alan, optik sinir ve oftalmik arterin geçtiği kanal.",
+    "turkishShort": "Görme siniri kanalı",
+    "roots": "canalis (kanal) + opticus (görmeye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal at the base of the lesser wing through which the optic nerve and ophthalmic artery pass.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "537",
+    "id": 537,
+    "term": "Processus Clinoideus Anterior",
+    "english": "Anterior Clinoid Process",
+    "turkishDefinition": "Ön klinoid çıkıntı; küçük kanadın kök kısmında yer alan, dura mater'in tutunduğu kemik çıkıntı.",
+    "turkishShort": "Ön klinoid çıkıntı",
+    "roots": "processus (çıkıntı) + clinoideus (yatak şeklinde) + anterior (ön)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A bony projection at the root of the lesser wing, providing attachment for the dura mater.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "538",
+    "id": 538,
+    "term": "Fissura Orbitalis Superior",
+    "english": "Superior Orbital Fissure",
+    "turkishDefinition": "Göz çukuru üst yarığı; büyük ve küçük kanatlar arasında yer alan, göz kaslarını hareket ettiren sinirlerin geçtiği yarık.",
+    "turkishShort": "Göz çukuru üst yarığı",
+    "roots": "fissura (yarık) + orbitalis (göz çukuruna ait) + superior (üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A gap between the greater and lesser wings through which the nerves controlling eye movement pass.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "539",
+    "id": 539,
+    "term": "Ala Major Ossis Sphenoidalis",
+    "english": "Greater Wing of Sphenoid Bone",
+    "turkishDefinition": "Büyük kanat; sfenoid gövdesinden yanlara ve yukarı uzanan, kafatası tabanının önemli bir kısmını oluşturan geniş kemik kanat.",
+    "turkishShort": "Büyük kanat",
+    "roots": "ala (kanat) + major (büyük) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A broad bony wing extending laterally and superiorly from the sphenoid body, forming a major part of the cranial base.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "540",
+    "id": 540,
+    "term": "Facies Cerebralis Ossis Sphenoidalis",
+    "english": "Cerebral Surface of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği beyin yüzü; büyük kanadın kafatası boşluğuna bakan iç yüzeyi.",
+    "turkishShort": "Kama kemiği beyin yüzü",
+    "roots": "facies (yüz) + cerebralis (beyne ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The internal surface of the greater wing facing the cranial cavity.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "541",
+    "id": 541,
+    "term": "Facies Temporalis Ossis Sphenoidalis",
+    "english": "Temporal Surface of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği şakak yüzü; büyük kanadın şakak çukuruna bakan dış yüzeyi.",
+    "turkishShort": "Kama kemiği şakak yüzü",
+    "roots": "facies (yüz) + temporalis (şakağa ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The external surface of the greater wing that faces the temporal fossa.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "542",
+    "id": 542,
+    "term": "Facies Infratemporalis Ossis Sphenoidalis",
+    "english": "Infratemporal Surface of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği şakak altı yüzü; büyük kanadın şakak altı çukuruna bakan alt yüzeyi.",
+    "turkishShort": "Kama kemiği şakak altı yüzü",
+    "roots": "facies (yüz) + infratemporalis (şakak altına ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The inferior surface of the greater wing that faces the infratemporal fossa.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "543",
+    "id": 543,
+    "term": "Crista Infratemporalis Ossis Sphenoidalis",
+    "english": "Infratemporal Crest of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği şakak altı ibiği; büyük kanadın şakak yüzü ile şakak altı yüzünü birbirinden ayıran ibik.",
+    "turkishShort": "Kama kemiği şakak altı ibiği",
+    "roots": "crista (ibik) + infratemporalis (şakak altına ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A ridge on the greater wing separating the temporal surface from the infratemporal surface.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "544",
+    "id": 544,
+    "term": "Facies Maxillaris Ossis Sphenoidalis",
+    "english": "Maxillary Surface of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği üst çene yüzü; büyük kanadın üst çene kemiğine bakan küçük ön-alt yüzeyi.",
+    "turkishShort": "Kama kemiği üst çene yüzü",
+    "roots": "facies (yüz) + maxillaris (üst çeneye ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small anteroinferior surface of the greater wing that faces the maxilla.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "545",
+    "id": 545,
+    "term": "Facies Orbitalis Ossis Sphenoidalis",
+    "english": "Orbital Surface of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği göz çukuru yüzü; büyük kanadın göz çukurunun yan duvarını oluşturan düz yüzeyi.",
+    "turkishShort": "Kama kemiği göz çukuru yüzü",
+    "roots": "facies (yüz) + orbitalis (göz çukuruna ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The smooth surface of the greater wing that forms the lateral wall of the orbit.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "546",
+    "id": 546,
+    "term": "Margo Zygomaticus Ossis Sphenoidalis",
+    "english": "Zygomatic Margin of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği elmacık kenarı; büyük kanadın elmacık kemiğiyle birleştiği kenar.",
+    "turkishShort": "Kama kemiği elmacık kenarı",
+    "roots": "margo (kenar) + zygomaticus (elmacığa ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the greater wing that articulates with the zygomatic bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "547",
+    "id": 547,
+    "term": "Margo Frontalis Ossis Sphenoidalis",
+    "english": "Frontal Margin of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği alın kenarı; büyük kanadın alın kemiğiyle birleştiği kenar.",
+    "turkishShort": "Kama kemiği alın kenarı",
+    "roots": "margo (kenar) + frontalis (alına ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the greater wing that articulates with the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "548",
+    "id": 548,
+    "term": "Margo Parietalis Ossis Sphenoidalis",
+    "english": "Parietal Margin of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği duvar kemik kenarı; büyük kanadın duvar kemiğiyle birleştiği kenar.",
+    "turkishShort": "Kama kemiği duvar kemik kenarı",
+    "roots": "margo (kenar) + parietalis (duvar kemiğine ait) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the greater wing that articulates with the parietal bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "549",
+    "id": 549,
+    "term": "Margo Squamosus Ossis Sphenoidalis",
+    "english": "Squamosal Margin of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği pullu kenarı; büyük kanadın şakak kemiğinin pulsu parçasıyla birleştiği kenar.",
+    "turkishShort": "Kama kemiği pullu kenarı",
+    "roots": "margo (kenar) + squamosus (pullu) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the greater wing that articulates with the squamous part of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "550",
+    "id": 550,
+    "term": "Foramen Rotundum",
+    "english": "Foramen Rotundum",
+    "turkishDefinition": "Yuvarlak delik; büyük kanatta yer alan, trigeminal sinirin maksiller dalının geçtiği yuvarlak delik.",
+    "turkishShort": "Yuvarlak delik",
+    "roots": "foramen (delik) + rotundus (yuvarlak)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A round opening in the greater wing through which the maxillary branch of the trigeminal nerve passes.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "551",
+    "id": 551,
+    "term": "Foramen Ovale",
+    "english": "Foramen Ovale",
+    "turkishDefinition": "Oval delik; büyük kanatta yer alan, trigeminal sinirin mandibular dalının geçtiği oval delik.",
+    "turkishShort": "Oval delik",
+    "roots": "foramen (delik) + ovalis (oval)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An oval opening in the greater wing through which the mandibular branch of the trigeminal nerve passes.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "552",
+    "id": 552,
+    "term": "Foramen Venosum",
+    "english": "Sphenoidal Emissary Foramen",
+    "turkishDefinition": "Venöz delik; büyük kanatta bazı bireylerde bulunan, emisser ven geçişine izin veren küçük delik.",
+    "turkishShort": "Venöz delik",
+    "roots": "foramen (delik) + venosus (toplardamara ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small opening in the greater wing, present in some individuals, transmitting an emissary vein.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "553",
+    "id": 553,
+    "term": "Foramen Spinosum",
+    "english": "Foramen Spinosum",
+    "turkishDefinition": "Dikenli delik; büyük kanatta yer alan, orta meninks arterinin geçtiği delik.",
+    "turkishShort": "Dikenli delik",
+    "roots": "foramen (delik) + spinosus (dikenli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An opening in the greater wing through which the middle meningeal artery passes.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "554",
+    "id": 554,
+    "term": "Foramen Petrosum",
+    "english": "Foramen Petrosum",
+    "turkishDefinition": "Petroz delik; bazı bireylerde foramen ovale yakınında bulunan, küçük petroz sinirin geçtiği ek delik.",
+    "turkishShort": "Petroz delik",
+    "roots": "foramen (delik) + petrosus (taşsı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An accessory opening near the foramen ovale, present in some individuals, transmitting the lesser petrosal nerve.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "555",
+    "id": 555,
+    "term": "Spina Ossis Sphenoidalis",
+    "english": "Spine of Sphenoid Bone",
+    "turkishDefinition": "Kama kemik dikeni; büyük kanadın arka-alt köşesinde yer alan, sfenomandibular bağın tutunduğu sivri çıkıntı.",
+    "turkishShort": "Kama kemik dikeni",
+    "roots": "spina (diken) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A pointed projection at the posteroinferior angle of the greater wing, providing attachment for the sphenomandibular ligament.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "556",
+    "id": 556,
+    "term": "Sulcus Tubae Auditivae",
+    "english": "Sulcus of Auditory Tube",
+    "turkishDefinition": "İşitme borusu oluğu (eş anlamlısı: Sulcus Tubae Auditoriae); sfenoid kemiği ile şakak kemiği arasında Östaki borusunun kıkırdak kısmının yerleştiği oluk.",
+    "turkishShort": "İşitme borusu oluğu",
+    "roots": "sulcus (oluk) + tuba (boru) + auditivus (işitmeye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove between the sphenoid and temporal bones that accommodates the cartilaginous part of the auditory (Eustachian) tube.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "557",
+    "id": 557,
+    "term": "Processus Pterygoideus",
+    "english": "Pterygoid Process",
+    "turkishDefinition": "Kanatsı çıkıntı; sfenoid kemiğinin gövde ve büyük kanat birleşim yerinden aşağı uzanan çift çıkıntı.",
+    "turkishShort": "Kanatsı çıkıntı",
+    "roots": "processus (çıkıntı) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A paired projection extending downward from the junction of the body and greater wing of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "558",
+    "id": 558,
+    "term": "Lamina Lateralis Processus Pterygoidei",
+    "english": "Lateral Plate of Pterygoid Process",
+    "turkishDefinition": "Kanatsı çıkıntının dış yaprağı; pterigoid çıkıntının daha ince ve dışa yerleşen yaprağı, çiğneme kaslarının tutunduğu yer.",
+    "turkishShort": "Kanatsı çıkıntının dış yaprağı",
+    "roots": "lamina (yaprak, tabaka) + lateralis (dış) + processus pterygoideus (kanatsı çıkıntı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The thinner, laterally positioned plate of the pterygoid process, providing attachment for the muscles of mastication.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "559",
+    "id": 559,
+    "term": "Lamina Medialis Processus Pterygoidei",
+    "english": "Medial Plate of Pterygoid Process",
+    "turkishDefinition": "Kanatsı çıkıntının iç yaprağı; pterigoid çıkıntının daha ince ve içe yerleşen, alt ucunda hamulus bulunan yaprağı.",
+    "turkishShort": "Kanatsı çıkıntının iç yaprağı",
+    "roots": "lamina (yaprak, tabaka) + medialis (iç) + processus pterygoideus (kanatsı çıkıntı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The thinner, medially positioned plate of the pterygoid process, ending inferiorly in the pterygoid hamulus.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "560",
+    "id": 560,
+    "term": "Incisura Pterygoidea",
+    "english": "Pterygoid Notch",
+    "turkishDefinition": "Kanatsı çentik; pterigoid çıkıntının iki yaprağı arasındaki alt çentik.",
+    "turkishShort": "Kanatsı çentik",
+    "roots": "incisura (çentik) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The notch between the two plates of the pterygoid process at their inferior aspect.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "561",
+    "id": 561,
+    "term": "Fossa Pterygoidea",
+    "english": "Pterygoid Fossa",
+    "turkishDefinition": "Kanatsı çukur; pterigoid çıkıntının iki yaprağı arasında kalan, iç kanatsı kasın başladığı çukur.",
+    "turkishShort": "Kanatsı çukur",
+    "roots": "fossa (çukur) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A depression between the two plates of the pterygoid process, giving origin to the medial pterygoid muscle.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "562",
+    "id": 562,
+    "term": "Fossa Scaphoidea Ossis Sphenoidalis",
+    "english": "Scaphoid Fossa of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği kayığımsı çukuru; pterigoid çıkıntının kökünde yer alan, kulak zarı gerici kasının başladığı küçük çukur.",
+    "turkishShort": "Kama kemiği kayığımsı çukuru",
+    "roots": "fossa (çukur) + scaphoideus (kayık şeklinde) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small depression at the root of the pterygoid process that gives origin to the tensor tympani muscle.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "563",
+    "id": 563,
+    "term": "Processus Vaginalis Ossis Sphenoidalis",
+    "english": "Vaginal Process of Sphenoid Bone",
+    "turkishDefinition": "Kama kemiği kılıf benzeri çıkıntısı; pterigoid çıkıntının kökünden vomer kemiğine doğru uzanan ince çıkıntı.",
+    "turkishShort": "Kama kemiği kılıf benzeri çıkıntısı",
+    "roots": "processus (çıkıntı) + vaginalis (kılıf şeklinde) + os sphenoidale (kama kemik)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin projection from the root of the pterygoid process extending toward the vomer.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "564",
+    "id": 564,
+    "term": "Sulcus Palatovaginalis",
+    "english": "Palatovaginal Groove",
+    "turkishDefinition": "Damak-kılıf oluğu; kılıf benzeri çıkıntının alt yüzünde yer alan, damak sinirinin geçtiği oluk.",
+    "turkishShort": "Damak-kılıf oluğu",
+    "roots": "sulcus (oluk) + palatinus (damağa ait) + vaginalis (kılıf şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the inferior surface of the vaginal process that transmits a palatine nerve branch.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "565",
+    "id": 565,
+    "term": "Sulcus Vomerovaginalis",
+    "english": "Vomerovaginal Groove",
+    "turkishDefinition": "Sapan kemik-kılıf oluğu; kılıf benzeri çıkıntının alt yüzünde vomer kemiğinin kanadının yerleştiği oluk.",
+    "turkishShort": "Sapan kemik-kılıf oluğu",
+    "roots": "sulcus (oluk) + vomer (sapan kemiği) + vaginalis (kılıf şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the inferior surface of the vaginal process that accommodates the ala of the vomer.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "566",
+    "id": 566,
+    "term": "Hamulus Pterygoideus",
+    "english": "Pterygoid Hamulus",
+    "turkishDefinition": "Kanatsı çengel; iç pterigoid yaprağın alt ucunda yer alan, kulak zarı gerici kası tendonunun döndüğü kanca şeklindeki çıkıntı.",
+    "turkishShort": "Kanatsı çengel",
+    "roots": "hamulus (küçük çengel) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A hook-shaped projection at the inferior end of the medial pterygoid plate around which the tendon of the tensor tympani muscle turns.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "567",
+    "id": 567,
+    "term": "Sulcus Hamuli Pterygoidei",
+    "english": "Groove of Pterygoid Hamulus",
+    "turkishDefinition": "Kanatsı çengel oluğu; kanatsı çengelin yanında yer alan, kulak zarı gerici kası tendonunun geçtiği küçük oluk.",
+    "turkishShort": "Kanatsı çengel oluğu",
+    "roots": "sulcus (oluk) + hamulus (küçük çengel) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small groove beside the pterygoid hamulus through which the tendon of the tensor tympani muscle passes.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "568",
+    "id": 568,
+    "term": "Canalis Pterygoideus",
+    "english": "Pterygoid Canal",
+    "turkishDefinition": "Pterigoid kanal; pterigoid çıkıntının kökünden geçen, Vidian sinir ve damarlarını taşıyan kanal.",
+    "turkishShort": "Pterigoid kanal",
+    "roots": "canalis (kanal) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal through the root of the pterygoid process that transmits the nerve and vessels of the pterygoid canal (Vidian nerve).",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "569",
+    "id": 569,
+    "term": "Processus Pterygospinosus",
+    "english": "Pterygospinous Process",
+    "turkishDefinition": "Pterigospinal çıkıntı; bazı bireylerde pterigoid çıkıntı ile sfenoid dikeni arasında bulunan ek kemik köprüsü.",
+    "turkishShort": "Pterigospinal çıkıntı",
+    "roots": "processus (çıkıntı) + pterygoideus (kanat şeklinde) + spinosus (dikenli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An accessory bony bridge, present in some individuals, connecting the pterygoid process to the spine of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789117932,
+      "_nanoseconds": 470000000
+    }
+  },
+  {
+    "_docId": "570",
+    "id": 570,
+    "term": "Pars Petrosa Ossis Temporalis",
+    "english": "Petrous Part of Temporal Bone",
+    "turkishDefinition": "Taşsı parça; şakak kemiğinin en sert kısmı, iç kulak yapılarını barındıran piramit şeklindeki bölüm.",
+    "turkishShort": "Taşsı parça",
+    "roots": "pars (bölüm) + petrosus (taşsı) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The densest, pyramid-shaped part of the temporal bone that houses the structures of the inner ear.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "571",
+    "id": 571,
+    "term": "Margo Occipitalis Ossis Temporalis",
+    "english": "Occipital Border of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği ardkafa kenarı; şakak kemiğinin ardkafa kemiğiyle birleştiği kenar.",
+    "turkishShort": "Şakak kemiği ardkafa kenarı",
+    "roots": "margo (kenar) + occipitalis (ardkafaya ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border of the temporal bone that articulates with the occipital bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "572",
+    "id": 572,
+    "term": "Processus Mastoideus",
+    "english": "Mastoid Process",
+    "turkishDefinition": "Meme çıkıntısı; şakak kemiğinin kulak arkasında yer alan, sternokleidomastoid kasının tutunduğu koni şeklindeki çıkıntı.",
+    "turkishShort": "Meme çıkıntısı",
+    "roots": "processus (çıkıntı) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A cone-shaped projection of the temporal bone behind the ear, providing attachment for the sternocleidomastoid muscle.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "573",
+    "id": 573,
+    "term": "Incisura Mastoidea",
+    "english": "Mastoid Notch",
+    "turkishDefinition": "Mastoid çentik; mastoid çıkıntının iç tarafında yer alan, digastrik kasın arka karnının başladığı çentik.",
+    "turkishShort": "Mastoid çentik",
+    "roots": "incisura (çentik) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove medial to the mastoid process, giving origin to the posterior belly of the digastric muscle.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "574",
+    "id": 574,
+    "term": "Sulcus Sinus Sigmoidei Ossis Temporalis",
+    "english": "Groove for Sigmoid Sinus of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği sigmoid sinüs oluğu; mastoid çıkıntının iç yüzünde sigmoid venöz sinüsün devam ettiği oluk.",
+    "turkishShort": "Şakak kemiği sigmoid sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + sigmoideus (S şeklinde) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the internal surface of the mastoid process that continues the course of the sigmoid venous sinus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "575",
+    "id": 575,
+    "term": "Sulcus Arteriae Occipitalis",
+    "english": "Occipital Groove",
+    "turkishDefinition": "Oksipital arter oluğu; mastoid çentiğin yanında yer alan, oksipital arterin seyrettiği oluk.",
+    "turkishShort": "Oksipital arter oluğu",
+    "roots": "sulcus (oluk) + arteria (atardamar) + occipitalis (ardkafaya ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove beside the mastoid notch that accommodates the occipital artery.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "576",
+    "id": 576,
+    "term": "Foramen Mastoideum",
+    "english": "Mastoid Foramen",
+    "turkishDefinition": "Mastoid delik; mastoid çıkıntının yakınında yer alan, emisser ven geçişine izin veren küçük delik.",
+    "turkishShort": "Mastoid delik",
+    "roots": "foramen (delik) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small opening near the mastoid process transmitting an emissary vein.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "577",
+    "id": 577,
+    "term": "Canalis Nervi Facialis",
+    "english": "Facial Canal",
+    "turkishDefinition": "Yüz siniri kanalı; şakak kemiğinin petroz parçası içinde yüz sinirinin (7. kafa çifti) seyrettiği kıvrımlı kanal.",
+    "turkishShort": "Yüz siniri kanalı",
+    "roots": "canalis (kanal) + nervus (sinir) + facialis (yüze ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A winding canal within the petrous part of the temporal bone through which the facial nerve (cranial nerve VII) travels.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "578",
+    "id": 578,
+    "term": "Geniculum Canalis Nervi Facialis",
+    "english": "Geniculum of Facial Canal",
+    "turkishDefinition": "Yüz siniri kanalı dizi; yüz siniri kanalının keskin açıyla döndüğü, genikulat gangliyonun yerleştiği kısım.",
+    "turkishShort": "Yüz siniri kanalı dizi",
+    "roots": "geniculum (küçük diz, dönemeç) + canalis (kanal) + nervus (sinir) + facialis (yüze ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The sharp bend in the facial canal where the geniculate ganglion is located.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "579",
+    "id": 579,
+    "term": "Canaliculus Chordae Tympani",
+    "english": "Canaliculus for Chorda Tympani",
+    "turkishDefinition": "Korda timpani sinir kanalcığı; yüz siniri kanalından ayrılan korda timpani dalının orta kulağa geçtiği ince kanalcık.",
+    "turkishShort": "Korda timpani sinir kanalcığı",
+    "roots": "canaliculus (küçük kanal) + chorda (tel, ip) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small canal through which the chorda tympani branch of the facial nerve enters the middle ear.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "580",
+    "id": 580,
+    "term": "Apex Partis Petrosae",
+    "english": "Apex of Petrous Part",
+    "turkishDefinition": "Petroz parçanın tepesi; petroz parçanın en iç ucu, karotis kanalının iç açıklığına komşudur.",
+    "turkishShort": "Petroz parçanın tepesi",
+    "roots": "apex (tepe, uç) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The medial tip of the petrous part, adjacent to the internal opening of the carotid canal.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "581",
+    "id": 581,
+    "term": "Canalis Caroticus",
+    "english": "Carotid Canal",
+    "turkishDefinition": "Şah damarı kanalı; petroz parçadan geçen, iç karotis arterin kafatasına girdiği kanal.",
+    "turkishShort": "Şah damarı kanalı",
+    "roots": "canalis (kanal) + caroticus (şah damarına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal through the petrous part through which the internal carotid artery enters the skull.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "582",
+    "id": 582,
+    "term": "Apertura Externa Canalis Carotici",
+    "english": "External Opening of Carotid Canal",
+    "turkishDefinition": "Şah damarı kanalı dış deliği; karotis kanalının kafatası tabanındaki dış açıklığı.",
+    "turkishShort": "Şah damarı kanalı dış deliği",
+    "roots": "apertura (açıklık) + externa (dış) + canalis caroticus (şah damarı kanalı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The external opening of the carotid canal on the base of the skull.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "583",
+    "id": 583,
+    "term": "Apertura Interna Canalis Carotici",
+    "english": "Internal Opening of Carotid Canal",
+    "turkishDefinition": "Şah damarı kanalı iç deliği; karotis kanalının petroz parça tepesindeki iç açıklığı.",
+    "turkishShort": "Şah damarı kanalı iç deliği",
+    "roots": "apertura (açıklık) + interna (iç) + canalis caroticus (şah damarı kanalı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The internal opening of the carotid canal at the apex of the petrous part.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "584",
+    "id": 584,
+    "term": "Canaliculi Caroticotympanici",
+    "english": "Caroticotympanic Canaliculi",
+    "turkishDefinition": "Karotikotimpanik kanalcıklar; karotis kanalından orta kulağa açılan, sinir dallarını taşıyan küçük kanalcıklar.",
+    "turkishShort": "Karotikotimpanik kanalcıklar",
+    "roots": "canaliculus (küçük kanal) + caroticus (şah damarına ait) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Small canals connecting the carotid canal to the middle ear, transmitting nerve branches.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "585",
+    "id": 585,
+    "term": "Canalis Musculotubarius",
+    "english": "Musculotubal Canal",
+    "turkishDefinition": "Kas-boru kanalı; petroz parçanın tepesinde yer alan, Östaki borusu ve kulak zarı gerici kasını barındıran kanal.",
+    "turkishShort": "Kas-boru kanalı",
+    "roots": "canalis (kanal) + musculus (kas) + tuba (boru)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A canal at the apex of the petrous part that houses the auditory tube and the tensor tympani muscle.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "586",
+    "id": 586,
+    "term": "Semicanalis Musculi Tensoris Tympani",
+    "english": "Canal for Tensor Tympani",
+    "turkishDefinition": "Kulak zarı gerici kas yarım kanalı; kas-boru kanalının üst, daha küçük bölümü, kulak zarı gerici kasını barındırır.",
+    "turkishShort": "Kulak zarı gerici kas yarım kanalı",
+    "roots": "semicanalis (yarım kanal) + musculus (kas) + tensor (gerici) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The upper, smaller compartment of the musculotubal canal, housing the tensor tympani muscle.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "587",
+    "id": 587,
+    "term": "Semicanalis Tubae Auditivae",
+    "english": "Canal for Auditory Tube",
+    "turkishDefinition": "Östaki borusu yarım kanalı; kas-boru kanalının alt, daha büyük bölümü, Östaki borusunun kemik kısmını barındırır.",
+    "turkishShort": "Östaki borusu yarım kanalı",
+    "roots": "semicanalis (yarım kanal) + tuba (boru) + auditivus (işitmeye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The lower, larger compartment of the musculotubal canal, housing the bony part of the auditory tube.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "588",
+    "id": 588,
+    "term": "Septum Canalis Musculotubarii",
+    "english": "Septum of Musculotubal Canal",
+    "turkishDefinition": "Kas-boru kanalı bölmesi; kas-boru kanalının iki yarım kanalını birbirinden ayıran ince kemik bölme.",
+    "turkishShort": "Kas-boru kanalı bölmesi",
+    "roots": "septum (bölme) + canalis (kanal) + musculus (kas) + tuba (boru)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The thin bony partition separating the two compartments of the musculotubal canal.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "589",
+    "id": 589,
+    "term": "Facies Anterior Partis Petrosae",
+    "english": "Anterior Surface of Petrous Part",
+    "turkishDefinition": "Petroz parçanın ön yüzü; petroz parçanın orta kraniyal çukura bakan yüzü, kas-boru kanalı ve tegmen timpani'yi içerir.",
+    "turkishShort": "Petroz parçanın ön yüzü",
+    "roots": "facies (yüz) + anterior (ön) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The surface of the petrous part facing the middle cranial fossa, containing the musculotubal canal and tegmen tympani.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "590",
+    "id": 590,
+    "term": "Tegmen Tympani",
+    "english": "Tegmen Tympani",
+    "turkishDefinition": "Kulak zarı çatısı; petroz parçanın ön yüzünde, orta kulak boşluğunu üstten örten ince kemik plaka.",
+    "turkishShort": "Kulak zarı çatısı",
+    "roots": "tegmen (çatı, örtü) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin bony plate on the anterior surface of the petrous part that roofs the tympanic cavity.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "591",
+    "id": 591,
+    "term": "Eminentia Arcuata",
+    "english": "Arcuate Eminence",
+    "turkishDefinition": "Kavisli kabartı; petroz parçanın ön yüzünde, üst yarım daire kanalının konumunu işaretleyen kabartı.",
+    "turkishShort": "Kavisli kabartı",
+    "roots": "eminentia (kabartı) + arcuatus (kavisli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A bony bulge on the anterior surface of the petrous part, marking the position of the superior semicircular canal.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "592",
+    "id": 592,
+    "term": "Hiatus Canalis Nervi Petrosi Majoris",
+    "english": "Hiatus for Greater Petrosal Nerve",
+    "turkishDefinition": "Büyük petroz sinir geçidi; petroz parçanın ön yüzünde büyük petroz sinirin çıktığı küçük açıklık.",
+    "turkishShort": "Büyük petroz sinir geçidi",
+    "roots": "hiatus (geçit, açıklık) + canalis (kanal) + nervus (sinir) + petrosus (taşsı) + major (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small opening on the anterior surface of the petrous part through which the greater petrosal nerve emerges.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "593",
+    "id": 593,
+    "term": "Sulcus Nervi Petrosi Majoris",
+    "english": "Groove for Greater Petrosal Nerve",
+    "turkishDefinition": "Büyük petroz sinir oluğu; büyük petroz sinir geçidinden devam eden, sinirin seyrettiği oluk.",
+    "turkishShort": "Büyük petroz sinir oluğu",
+    "roots": "sulcus (oluk) + nervus (sinir) + petrosus (taşsı) + major (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove continuing from the hiatus for the greater petrosal nerve, along which the nerve travels.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "594",
+    "id": 594,
+    "term": "Hiatus Canalis Nervi Petrosi",
+    "english": "Hiatus for Lesser Petrosal Nerve",
+    "turkishDefinition": "Küçük petroz sinir geçidi; büyük petroz sinir geçidinin yanında yer alan, küçük petroz sinirin çıktığı açıklık.",
+    "turkishShort": "Küçük petroz sinir geçidi",
+    "roots": "hiatus (geçit, açıklık) + canalis (kanal) + nervus (sinir) + petrosus (taşsı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An opening beside the hiatus for the greater petrosal nerve through which the lesser petrosal nerve emerges.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "595",
+    "id": 595,
+    "term": "Sulcus Nervi Petrosi Minoris",
+    "english": "Groove for Lesser Petrosal Nerve",
+    "turkishDefinition": "Küçük petroz sinir oluğu; küçük petroz sinirin seyrettiği, hiatus'tan devam eden oluk.",
+    "turkishShort": "Küçük petroz sinir oluğu",
+    "roots": "sulcus (oluk) + nervus (sinir) + petrosus (taşsı) + minor (küçük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove continuing from the hiatus for the lesser petrosal nerve, along which the nerve travels.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "596",
+    "id": 596,
+    "term": "Impressio Trigeminalis",
+    "english": "Trigeminal Impression",
+    "turkishDefinition": "Trigeminal sinir izi; petroz parçanın tepesi yakınında, trigeminal gangliyonun bıraktığı hafif çukurluk.",
+    "turkishShort": "Trigeminal sinir izi",
+    "roots": "impressio (iz, baskı) + trigeminus (üçüz sinir)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A shallow depression near the apex of the petrous part left by the trigeminal ganglion.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "597",
+    "id": 597,
+    "term": "Margo Superior Partis Petrosae",
+    "english": "Superior Border of Petrous Part",
+    "turkishDefinition": "Petroz parçanın üst kenarı; petroz parçanın orta ve arka kraniyal çukurları ayıran üst kenarı.",
+    "turkishShort": "Petroz parçanın üst kenarı",
+    "roots": "margo (kenar) + superior (üst) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The upper border of the petrous part, separating the middle and posterior cranial fossae.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "598",
+    "id": 598,
+    "term": "Sulcus Sinus Petrosi Superioris",
+    "english": "Groove for Superior Petrosal Sinus",
+    "turkishDefinition": "Üst petroz sinüs oluğu; petroz parçanın üst kenarı boyunca uzanan, üst petroz venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Üst petroz sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + petrosus (taşsı) + superior (üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the superior border of the petrous part that houses the superior petrosal sinus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "599",
+    "id": 599,
+    "term": "Facies Posterior Partis Petrosae",
+    "english": "Posterior Surface of Petrous Part",
+    "turkishDefinition": "Petroz parçanın arka yüzü; petroz parçanın arka kraniyal çukura bakan yüzü, iç işitme deliğini içerir.",
+    "turkishShort": "Petroz parçanın arka yüzü",
+    "roots": "facies (yüz) + posterior (arka) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The surface of the petrous part facing the posterior cranial fossa, containing the internal acoustic opening.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "600",
+    "id": 600,
+    "term": "Porus Acusticus Internus",
+    "english": "Internal Acoustic Opening",
+    "turkishDefinition": "İç işitme deliği; petroz parçanın arka yüzünde, işitme ve yüz sinirlerinin girdiği delik.",
+    "turkishShort": "İç işitme deliği",
+    "roots": "porus (delik) + acusticus (işitmeye ait) + internus (iç)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An opening on the posterior surface of the petrous part through which the vestibulocochlear and facial nerves enter.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "601",
+    "id": 601,
+    "term": "Meatus Acusticus Internus",
+    "english": "Internal Acoustic Meatus",
+    "turkishDefinition": "İç işitme yolu; porus acusticus internus'tan başlayan, işitme ve yüz sinirlerini taşıyan kısa kanal.",
+    "turkishShort": "İç işitme yolu",
+    "roots": "meatus (yol, geçit) + acusticus (işitmeye ait) + internus (iç)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A short canal beginning at the internal acoustic opening that transmits the vestibulocochlear and facial nerves.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "602",
+    "id": 602,
+    "term": "Fossa Subarcuata",
+    "english": "Subarcuate Fossa",
+    "turkishDefinition": "Kavis altı çukuru; petroz parçanın arka yüzünde, iç işitme deliğinin üstünde yer alan küçük çukur.",
+    "turkishShort": "Kavis altı çukuru",
+    "roots": "fossa (çukur) + sub (altında) + arcuatus (kavisli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small depression on the posterior surface of the petrous part, above the internal acoustic opening.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "603",
+    "id": 603,
+    "term": "Canaliculus Vestibuli",
+    "english": "Vestibular Canaliculus",
+    "turkishDefinition": "Vestibüler kanalcık; petroz parçanın arka yüzünde, endolenfatik kesenin yerleştiği ince kanalcık.",
+    "turkishShort": "Vestibüler kanalcık",
+    "roots": "canaliculus (küçük kanal) + vestibulum (giriş boşluğu)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small canal on the posterior surface of the petrous part that houses the endolymphatic sac.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "604",
+    "id": 604,
+    "term": "Apertura Canaliculi Vestibuli",
+    "english": "Opening of Vestibular Canaliculus",
+    "turkishDefinition": "Vestibüler kanalcık açıklığı; vestibüler kanalcığın petroz parça yüzeyindeki açıklığı.",
+    "turkishShort": "Vestibüler kanalcık açıklığı",
+    "roots": "apertura (açıklık) + canaliculus (küçük kanal) + vestibulum (giriş boşluğu)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The opening of the vestibular canaliculus on the surface of the petrous part.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "605",
+    "id": 605,
+    "term": "Margo Posterior Partis Petrosae",
+    "english": "Posterior Border of Petrous Part",
+    "turkishDefinition": "Petroz parçanın arka kenarı; petroz parçanın arka ve alt yüzlerini ayıran kenar, alt petroz sinüs oluğunu içerir.",
+    "turkishShort": "Petroz parçanın arka kenarı",
+    "roots": "margo (kenar) + posterior (arka) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The border separating the posterior and inferior surfaces of the petrous part, containing the groove for the inferior petrosal sinus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "606",
+    "id": 606,
+    "term": "Sulcus Sinus Petrosi Inferioris Ossis Temporalis",
+    "english": "Groove for Inferior Petrosal Sinus of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği alt petroz sinüs oluğu; petroz parçanın arka kenarında yer alan, alt petroz venöz sinüsün yerleştiği oluk.",
+    "turkishShort": "Şakak kemiği alt petroz sinüs oluğu",
+    "roots": "sulcus (oluk) + sinus (sinüs) + petrosus (taşsı) + inferior (alt) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove along the posterior border of the petrous part that houses the inferior petrosal sinus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "607",
+    "id": 607,
+    "term": "Incisura Jugularis Ossis Temporalis",
+    "english": "Jugular Notch of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği juguler çentiği; petroz parçanın alt yüzünde yer alan, ardkafa kemiğiyle birlikte foramen jugulare'yi oluşturan çentik.",
+    "turkishShort": "Şakak kemiği juguler çentiği",
+    "roots": "incisura (çentik) + jugularis (boyun toplardamarına ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A notch on the inferior surface of the petrous part that, together with the occipital bone, forms the jugular foramen.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "608",
+    "id": 608,
+    "term": "Facies Inferior Partis Petrosae",
+    "english": "Inferior Surface of Petrous Part",
+    "turkishDefinition": "Petroz parçanın alt yüzü; kafatası tabanının dışına bakan, juguler çukur ve karotis kanalını içeren düzensiz yüzey.",
+    "turkishShort": "Petroz parçanın alt yüzü",
+    "roots": "facies (yüz) + inferior (alt) + pars petrosa (taşsı parça)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The irregular external surface of the petrous part at the base of the skull, containing the jugular fossa and carotid canal.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "609",
+    "id": 609,
+    "term": "Fossa Jugularis",
+    "english": "Jugular Fossa",
+    "turkishDefinition": "Boyun toplardamarı çukuru; petroz parçanın alt yüzünde iç juguler venin genişleyerek başladığı derin çukur.",
+    "turkishShort": "Boyun toplardamarı çukuru",
+    "roots": "fossa (çukur) + jugularis (boyun toplardamarına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A deep depression on the inferior surface of the petrous part where the internal jugular vein begins.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "610",
+    "id": 610,
+    "term": "Canaliculus Cochleae",
+    "english": "Cochlear Canaliculus",
+    "turkishDefinition": "Salyangoz kanalcığı; juguler çukurun yanında yer alan, perilenfatik kanalın açıldığı ince kanalcık.",
+    "turkishShort": "Salyangoz kanalcığı",
+    "roots": "canaliculus (küçük kanal) + cochlea (salyangoz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small canal beside the jugular fossa through which the perilymphatic duct opens.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "611",
+    "id": 611,
+    "term": "Apertura Canaliculi Cochleae",
+    "english": "Opening of Cochlear Canaliculus",
+    "turkishDefinition": "Salyangoz kanalcığı açıklığı; kohlear kanalcığın petroz parça yüzeyindeki açıklığı.",
+    "turkishShort": "Salyangoz kanalcığı açıklığı",
+    "roots": "apertura (açıklık) + canaliculus (küçük kanal) + cochlea (salyangoz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The opening of the cochlear canaliculus on the surface of the petrous part.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "612",
+    "id": 612,
+    "term": "Canaliculus Mastoideus",
+    "english": "Mastoid Canaliculus",
+    "turkishDefinition": "Mastoid kanalcığı; juguler çukurun içinde başlayan, vagus sinirinin bir dalını taşıyan ince kanalcık.",
+    "turkishShort": "Mastoid kanalcığı",
+    "roots": "canaliculus (küçük kanal) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small canal beginning within the jugular fossa that transmits a branch of the vagus nerve.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "613",
+    "id": 613,
+    "term": "Processus Intrajugularis Ossis Temporalis",
+    "english": "Intrajugular Process of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği intrajuguler çıkıntısı; juguler çukurun kenarından uzanan, foramen jugulare'yi kısmen bölen çıkıntı.",
+    "turkishShort": "Şakak kemiği intrajuguler çıkıntısı",
+    "roots": "processus (çıkıntı) + intra (içinde) + jugularis (boyun toplardamarına ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A projection from the edge of the jugular fossa that partially divides the jugular foramen, arising from the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "614",
+    "id": 614,
+    "term": "Processus Styloideus Ossis Temporalis",
+    "english": "Styloid Process of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği bızsı çıkıntısı; petroz parçanın alt yüzünden aşağı uzanan, ince ve uzun kemik çıkıntı, dil ve boyun kaslarının tutunduğu yer.",
+    "turkishShort": "Şakak kemiği bızsı çıkıntısı",
+    "roots": "processus (çıkıntı) + styloideus (kalem şeklinde) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin, elongated bony projection extending downward from the inferior surface of the petrous part, providing attachment for muscles of the tongue and neck.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "615",
+    "id": 615,
+    "term": "Foramen Stylomastoideum",
+    "english": "Stylomastoid Foramen",
+    "turkishDefinition": "Stilomastoid delik; bızsı çıkıntı ile mastoid çıkıntı arasında yer alan, yüz sinirinin kafatasından çıktığı delik.",
+    "turkishShort": "Stilomastoid delik",
+    "roots": "foramen (delik) + styloideus (kalem şeklinde) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An opening between the styloid and mastoid processes through which the facial nerve exits the skull.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "616",
+    "id": 616,
+    "term": "Canaliculus Tympanicus",
+    "english": "Tympanic Canaliculus",
+    "turkishDefinition": "Timpanik kanalcık; petroz parçanın alt yüzünde başlayan, glossofaringeal sinirin bir dalını taşıyan ince kanalcık.",
+    "turkishShort": "Timpanik kanalcık",
+    "roots": "canaliculus (küçük kanal) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small canal beginning on the inferior surface of the petrous part that transmits a branch of the glossopharyngeal nerve.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "617",
+    "id": 617,
+    "term": "Fossula Petrosa",
+    "english": "Petrosal Fossula",
+    "turkishDefinition": "Petroz çukurcuk; juguler çukurun dış kenarında yer alan, timpanik kanalcığın başladığı küçük çukurcuk.",
+    "turkishShort": "Petroz çukurcuk",
+    "roots": "fossula (küçük çukur) + petrosus (taşsı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small depression at the outer edge of the jugular fossa where the tympanic canaliculus begins.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "618",
+    "id": 618,
+    "term": "Cavitas Tympani",
+    "english": "Tympanic Cavity",
+    "turkishDefinition": "Kulak zarı boşluğu; orta kulağı oluşturan, kulak zarının iç tarafında yer alan hava dolu boşluk.",
+    "turkishShort": "Kulak zarı boşluğu",
+    "roots": "cavitas (boşluk) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The air-filled space of the middle ear, located medial to the eardrum.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "619",
+    "id": 619,
+    "term": "Pars Tympanica Ossis Temporalis",
+    "english": "Tympanic Part of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği timpanik parçası; dış işitme yolunun ön, alt ve arka duvarlarını oluşturan halka şeklindeki kemik parça.",
+    "turkishShort": "Şakak kemiği timpanik parçası",
+    "roots": "pars (bölüm) + tympanum (kulak zarı) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A ring-shaped part of the temporal bone forming the anterior, inferior, and posterior walls of the external acoustic meatus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "620",
+    "id": 620,
+    "term": "Anulus Tympanicus",
+    "english": "Tympanic Ring",
+    "turkishDefinition": "Timpanik halka; yenidoğanda timpanik parçanın henüz tam kapanmamış halka şeklindeki erken hali.",
+    "turkishShort": "Timpanik halka",
+    "roots": "anulus (halka) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The incomplete, ring-shaped precursor of the tympanic part, seen in newborns.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "621",
+    "id": 621,
+    "term": "Porus Acusticus Externus",
+    "english": "External Acoustic Opening",
+    "turkishDefinition": "Dış işitme deliği; timpanik parçanın oluşturduğu, dış işitme yolunun kafatası yüzeyindeki açıklığı.",
+    "turkishShort": "Dış işitme deliği",
+    "roots": "porus (delik) + acusticus (işitmeye ait) + externus (dış)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The opening of the external acoustic meatus on the surface of the skull, formed by the tympanic part.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "622",
+    "id": 622,
+    "term": "Meatus Acusticus Externus",
+    "english": "External Acoustic Meatus",
+    "turkishDefinition": "Dış işitme yolu; dış kulaktan kulak zarına uzanan, kısmen kemik kısmen kıkırdak yapıdaki kanal.",
+    "turkishShort": "Dış işitme yolu",
+    "roots": "meatus (yol, geçit) + acusticus (işitmeye ait) + externus (dış)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The canal, partly bony and partly cartilaginous, extending from the outer ear to the eardrum.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "623",
+    "id": 623,
+    "term": "Spina Tympanica Major",
+    "english": "Greater Tympanic Spine",
+    "turkishDefinition": "Büyük timpanik diken; timpanik parçanın üst ucunda yer alan büyük kemik çıkıntı.",
+    "turkishShort": "Büyük timpanik diken",
+    "roots": "spina (diken) + tympanum (kulak zarı) + major (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A larger bony projection at the upper end of the tympanic part.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "624",
+    "id": 624,
+    "term": "Spina Tympanica Minor",
+    "english": "Lesser Tympanic Spine",
+    "turkishDefinition": "Küçük timpanik diken; timpanik parçanın üst ucunda büyük timpanik dikenin yanında yer alan küçük kemik çıkıntı.",
+    "turkishShort": "Küçük timpanik diken",
+    "roots": "spina (diken) + tympanum (kulak zarı) + minor (küçük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A smaller bony projection at the upper end of the tympanic part, beside the greater tympanic spine.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "625",
+    "id": 625,
+    "term": "Sulcus Tympanicus",
+    "english": "Tympanic Sulcus",
+    "turkishDefinition": "Timpanik oluk; timpanik parçanın iç yüzünde kulak zarının kenarının oturduğu oluk.",
+    "turkishShort": "Timpanik oluk",
+    "roots": "sulcus (oluk) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the inner surface of the tympanic part in which the margin of the eardrum is seated.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "626",
+    "id": 626,
+    "term": "Incisura Tympanica",
+    "english": "Tympanic Notch",
+    "turkishDefinition": "Timpanik çentik; timpanik oluğun üst kısmında, kulak zarının gevşek kısmına karşılık gelen çentik.",
+    "turkishShort": "Timpanik çentik",
+    "roots": "incisura (çentik) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A gap in the upper part of the tympanic sulcus, corresponding to the flaccid part of the eardrum.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "627",
+    "id": 627,
+    "term": "Vagina Processus Styloidei",
+    "english": "Sheath of Styloid Process",
+    "turkishDefinition": "Bızsı çıkıntı kılıfı; timpanik parçanın bızsı çıkıntının kökünü çevreleyen kısmı.",
+    "turkishShort": "Bızsı çıkıntı kılıfı",
+    "roots": "vagina (kılıf) + processus styloideus (bızsı çıkıntı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The part of the tympanic part that ensheathes the base of the styloid process.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "628",
+    "id": 628,
+    "term": "Pars Squamosa Ossis Temporalis",
+    "english": "Squamous Part of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği pulsu parçası; şakak kemiğinin ince, düz plaka şeklindeki üst-ön kısmı.",
+    "turkishShort": "Şakak kemiği pulsu parçası",
+    "roots": "pars (bölüm) + squamosus (pullu) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The thin, flat, plate-like anterosuperior part of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "629",
+    "id": 629,
+    "term": "Margo Parietalis Ossis Temporalis",
+    "english": "Parietal Border of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği duvar kemik kenarı; pulsu parçanın duvar kemiğiyle birleştiği kavisli üst kenar.",
+    "turkishShort": "Şakak kemiği duvar kemik kenarı",
+    "roots": "margo (kenar) + parietalis (duvar kemiğine ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The curved upper border of the squamous part that articulates with the parietal bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "630",
+    "id": 630,
+    "term": "Incisura Parietalis Ossis Temporalis",
+    "english": "Parietal Notch of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği duvar kemik çentiği; pulsu parçanın mastoid parçayla birleştiği yerdeki küçük çentik.",
+    "turkishShort": "Şakak kemiği duvar kemik çentiği",
+    "roots": "incisura (çentik) + parietalis (duvar kemiğine ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small notch where the squamous part meets the mastoid part of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "631",
+    "id": 631,
+    "term": "Margo Sphenoidalis Ossis Temporalis",
+    "english": "Sphenoidal Margin of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği kama kemik kenarı; pulsu parçanın sfenoid kemiğin büyük kanadıyla birleştiği ön kenar.",
+    "turkishShort": "Şakak kemiği kama kemik kenarı",
+    "roots": "margo (kenar) + sphenoidalis (kama kemiğine ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The anterior border of the squamous part that articulates with the greater wing of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "632",
+    "id": 632,
+    "term": "Facies Temporalis Ossis Temporalis",
+    "english": "Temporal Surface of Temporal Bone",
+    "turkishDefinition": "Şakak kemiğinin şakak yüzü; pulsu parçanın şakak çukuruna katılan dış yüzeyi.",
+    "turkishShort": "Şakak kemiğinin şakak yüzü",
+    "roots": "facies (yüz) + temporalis (şakağa ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The external surface of the squamous part that contributes to the temporal fossa.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "633",
+    "id": 633,
+    "term": "Sulcus Arteriae Temporalis Mediae",
+    "english": "Groove for Middle Temporal Artery",
+    "turkishDefinition": "Orta temporal arter oluğu; pulsu parçanın dış yüzünde orta temporal arterin seyrettiği oluk.",
+    "turkishShort": "Orta temporal arter oluğu",
+    "roots": "sulcus (oluk) + arteria (atardamar) + temporalis (şakağa ait) + medius (orta)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A groove on the external surface of the squamous part that accommodates the middle temporal artery.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "634",
+    "id": 634,
+    "term": "Processus Zygomaticus Ossis Temporalis",
+    "english": "Zygomatic Process of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği elmacık çıkıntısı; pulsu parçadan öne doğru uzanan, elmacık kemiğiyle birleşen çıkıntı.",
+    "turkishShort": "Şakak kemiği elmacık çıkıntısı",
+    "roots": "processus (çıkıntı) + zygomaticus (elmacığa ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A projection extending anteriorly from the squamous part that articulates with the zygomatic bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "635",
+    "id": 635,
+    "term": "Crista Supramastoidea",
+    "english": "Supramastoid Crest",
+    "turkishDefinition": "Supramastoid ibik; elmacık çıkıntısının kökünden mastoid çıkıntıya doğru uzanan, temporal fasyanın tutunduğu ibik.",
+    "turkishShort": "Supramastoid ibik",
+    "roots": "crista (ibik) + supra (üstünde) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A ridge extending from the root of the zygomatic process toward the mastoid process, providing attachment for the temporal fascia.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "636",
+    "id": 636,
+    "term": "Foveola Suprameatica",
+    "english": "Suprameatal Triangle",
+    "turkishDefinition": "Suprameatal üçgen / çukurcuk (eş anlamlısı: Foveola Suprameatalis); dış işitme yolunun üstünde yer alan küçük üçgen çukurcuk.",
+    "turkishShort": "Suprameatal üçgen",
+    "roots": "foveola (küçük çukur) + supra (üstünde) + meatus (yol, geçit)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small triangular depression above the external acoustic meatus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "637",
+    "id": 637,
+    "term": "Spina Suprameatica",
+    "english": "Suprameatal Spine",
+    "turkishDefinition": "Suprameatal diken (eş anlamlısı: Spina Suprameatalis); dış işitme yolunun arka-üst kenarında yer alan küçük kemik çıkıntı.",
+    "turkishShort": "Suprameatal diken",
+    "roots": "spina (diken) + supra (üstünde) + meatus (yol, geçit)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small bony projection at the posterosuperior margin of the external acoustic meatus.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "638",
+    "id": 638,
+    "term": "Facies Articularis Ossis Temporalis",
+    "english": "Articular Surface of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği eklem yüzü; mandibular çukurun ön kısmında yer alan, çene eklemi (TME) hareketine katılan eklem yüzü.",
+    "turkishShort": "Şakak kemiği eklem yüzü",
+    "roots": "facies (yüz) + articularis (ekleme ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The articular surface at the anterior part of the mandibular fossa, participating in temporomandibular joint movement.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "639",
+    "id": 639,
+    "term": "Tuberculum Articulare",
+    "english": "Articular Tubercle",
+    "turkishDefinition": "Eklem tümseği; mandibular çukurun önünde yer alan, çene eklemi hareketinde kondilin öne kaydığı kemik tümsek.",
+    "turkishShort": "Eklem tümseği",
+    "roots": "tuberculum (küçük tümsek) + articularis (ekleme ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A bony prominence anterior to the mandibular fossa over which the mandibular condyle glides during jaw movement.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "640",
+    "id": 640,
+    "term": "Fissura Petrotympanica",
+    "english": "Petrotympanic Fissure",
+    "turkishDefinition": "Petrotimpanik yarık; petroz parça ile timpanik parça arasında yer alan, korda timpani sinirinin çıktığı ince yarık.",
+    "turkishShort": "Petrotimpanik yarık",
+    "roots": "fissura (yarık) + petrosus (taşsı) + tympanum (kulak zarı)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin fissure between the petrous and tympanic parts through which the chorda tympani nerve exits.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "641",
+    "id": 641,
+    "term": "Fissura Petrosquamosa",
+    "english": "Petrosquamous Fissure",
+    "turkishDefinition": "Petroskuamöz yarık; petroz parça ile pulsu parça arasında yenidoğanda görülen, erişkinde genellikle kapanan yarık.",
+    "turkishShort": "Petroskuamöz yarık",
+    "roots": "fissura (yarık) + petrosus (taşsı) + squamosus (pullu)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A fissure between the petrous and squamous parts, present in infants and usually closed in adults.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "642",
+    "id": 642,
+    "term": "Fissura Tympanosquamosa",
+    "english": "Tympanosquamous Fissure",
+    "turkishDefinition": "Timpanoskuamöz yarık; timpanik parça ile pulsu parça arasında yer alan yarık.",
+    "turkishShort": "Timpanoskuamöz yarık",
+    "roots": "fissura (yarık) + tympanum (kulak zarı) + squamosus (pullu)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A fissure between the tympanic and squamous parts of the temporal bone.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "643",
+    "id": 643,
+    "term": "Fissura Tympanomastoidea",
+    "english": "Tympanomastoid Fissure",
+    "turkishDefinition": "Timpanomastoid yarık; timpanik parça ile mastoid parça arasında yer alan, vagus sinirinin kulak dalının çıktığı yarık.",
+    "turkishShort": "Timpanomastoid yarık",
+    "roots": "fissura (yarık) + tympanum (kulak zarı) + mastoideus (meme şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A fissure between the tympanic and mastoid parts through which the auricular branch of the vagus nerve exits.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "644",
+    "id": 644,
+    "term": "Facies Cerebralis Ossis Temporalis",
+    "english": "Cerebral Surface of Temporal Bone",
+    "turkishDefinition": "Şakak kemiği beyin yüzü; petroz parçanın orta kraniyal çukura bakan iç yüzeyi.",
+    "turkishShort": "Şakak kemiği beyin yüzü",
+    "roots": "facies (yüz) + cerebralis (beyne ait) + os temporale (şakak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The internal surface of the petrous part facing the middle cranial fossa.",
+    "createdAt": {
+      "_seconds": 1789118933,
+      "_nanoseconds": 513000000
+    }
+  },
+  {
+    "_docId": "645",
+    "id": 645,
+    "term": "Lamina Cribrosa",
+    "english": "Cribriform Plate",
+    "turkishDefinition": "Kalburumsu tabaka; kalbur kemiğinin üst yüzeyinde koku sinir liflerinin geçtiği çok sayıda küçük delik içeren yatay plaka.",
+    "turkishShort": "Kalburumsu tabaka",
+    "roots": "lamina (tabaka, plaka) + cribrosus (kalburumsu, delikli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A horizontal plate at the top of the ethmoid bone containing numerous small openings through which olfactory nerve fibers pass.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "646",
+    "id": 646,
+    "term": "Foramina Cribrosa",
+    "english": "Cribriform Foramina",
+    "turkishDefinition": "Kalburumsu delikler; kalburumsu tabakada bulunan, koku sinir liflerinin geçtiği çok sayıda küçük delik.",
+    "turkishShort": "Kalburumsu delikler",
+    "roots": "foramen (delik) + cribrosus (kalburumsu, delikli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Numerous small openings in the cribriform plate through which the olfactory nerve fibers pass.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "647",
+    "id": 647,
+    "term": "Crista Galli",
+    "english": "Crista Galli",
+    "turkishDefinition": "Horoz ibiği; kalburumsu tabakanın orta hattından yukarı uzanan, falx cerebri'nin tutunduğu üçgen kemik çıkıntı.",
+    "turkishShort": "Horoz ibiği",
+    "roots": "crista (ibik) + gallus (horoz)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A triangular bony projection rising from the midline of the cribriform plate, providing attachment for the falx cerebri.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "648",
+    "id": 648,
+    "term": "Ala Cristae Galli",
+    "english": "Ala of Crista Galli",
+    "turkishDefinition": "Horoz ibiği kanadı; horoz ibiğinin tabanında yer alan, küçük kanat şeklindeki çift çıkıntı.",
+    "turkishShort": "Horoz ibiği kanadı",
+    "roots": "ala (kanat) + crista galli (horoz ibiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A pair of small wing-shaped projections at the base of the crista galli.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "649",
+    "id": 649,
+    "term": "Lamina Perpendicularis Ossis Ethmoidalis",
+    "english": "Perpendicular Plate of Ethmoid Bone",
+    "turkishDefinition": "Dik tabaka; kalbur kemiğinin burun bölmesinin üst kısmını oluşturan dikey kemik plaka.",
+    "turkishShort": "Dik tabaka",
+    "roots": "lamina (tabaka, plaka) + perpendicularis (dik) + os ethmoidale (kalbur kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The vertical bony plate of the ethmoid bone that forms the upper part of the nasal septum.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "650",
+    "id": 650,
+    "term": "Labyrinthus Ethmoidalis",
+    "english": "Ethmoidal Labyrinth",
+    "turkishDefinition": "Kalbur kemiği labirenti; kalbur kemiğinin iki yanında yer alan, hava hücrelerini barındıran süngerimsi kemik kütlesi.",
+    "turkishShort": "Kalbur kemiği labirenti",
+    "roots": "labyrinthus (labirent) + ethmoidalis (kalbur kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A spongy mass of bone on either side of the ethmoid bone containing the ethmoidal air cells.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "651",
+    "id": 651,
+    "term": "Cellulae Ethmoidales Anteriores",
+    "english": "Anterior Ethmoidal Cells",
+    "turkishDefinition": "Ön kalbur hücreleri; kalbur labirentinin ön kısmında yer alan, orta burun geçidine açılan hava hücreleri.",
+    "turkishShort": "Ön kalbur hücreleri",
+    "roots": "cellula (küçük hücre) + ethmoidalis (kalbur kemiğine ait) + anterior (ön)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Air cells in the anterior part of the ethmoidal labyrinth that drain into the middle nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "652",
+    "id": 652,
+    "term": "Cellulae Ethmoidales Mediae",
+    "english": "Middle Ethmoidal Cells",
+    "turkishDefinition": "Orta kalbur hücreleri; kalbur labirentinin orta kısmında yer alan, bulla ethmoidalis üzerine açılan hava hücreleri.",
+    "turkishShort": "Orta kalbur hücreleri",
+    "roots": "cellula (küçük hücre) + ethmoidalis (kalbur kemiğine ait) + medius (orta)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Air cells in the middle part of the ethmoidal labyrinth that open onto the ethmoidal bulla.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "653",
+    "id": 653,
+    "term": "Cellulae Ethmoidales Posteriores",
+    "english": "Posterior Ethmoidal Cells",
+    "turkishDefinition": "Arka kalbur hücreleri; kalbur labirentinin arka kısmında yer alan, üst burun geçidine açılan hava hücreleri.",
+    "turkishShort": "Arka kalbur hücreleri",
+    "roots": "cellula (küçük hücre) + ethmoidalis (kalbur kemiğine ait) + posterior (arka)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "Air cells in the posterior part of the ethmoidal labyrinth that drain into the superior nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "654",
+    "id": 654,
+    "term": "Lamina Orbitalis Ossis Ethmoidalis",
+    "english": "Orbital Plate of Ethmoid Bone",
+    "turkishDefinition": "Göz çukuru tabakası; kalbur labirentinin göz çukurunun iç duvarını oluşturan ince kemik plaka.",
+    "turkishShort": "Göz çukuru tabakası",
+    "roots": "lamina (tabaka, plaka) + orbitalis (göz çukuruna ait) + os ethmoidale (kalbur kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin bony plate of the ethmoidal labyrinth forming the medial wall of the orbit.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "655",
+    "id": 655,
+    "term": "Concha Nasalis Suprema",
+    "english": "Supreme Nasal Concha",
+    "turkishDefinition": "En üst burun konkası; bazı bireylerde üst burun konkasının üzerinde bulunan ek küçük kemik kıvrım.",
+    "turkishShort": "En üst burun konkası",
+    "roots": "concha (kabuk, konka) + nasalis (buruna ait) + suprema (en üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "An additional small bony curl sometimes present above the superior nasal concha.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "656",
+    "id": 656,
+    "term": "Concha Nasalis Superior",
+    "english": "Superior Nasal Concha",
+    "turkishDefinition": "Üst burun konkası; kalbur labirentinin iç yüzünde yer alan, üst burun geçidini oluşturan kemik kıvrım.",
+    "turkishShort": "Üst burun konkası",
+    "roots": "concha (kabuk, konka) + nasalis (buruna ait) + superior (üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A bony curl on the medial surface of the ethmoidal labyrinth that forms the superior nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "657",
+    "id": 657,
+    "term": "Concha Nasalis Media",
+    "english": "Middle Nasal Concha",
+    "turkishDefinition": "Orta burun konkası; kalbur labirentinin iç yüzünde yer alan, orta burun geçidini oluşturan kemik kıvrım.",
+    "turkishShort": "Orta burun konkası",
+    "roots": "concha (kabuk, konka) + nasalis (buruna ait) + medius (orta)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A bony curl on the medial surface of the ethmoidal labyrinth that forms the middle nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "658",
+    "id": 658,
+    "term": "Bulla Ethmoidalis",
+    "english": "Ethmoidal Bulla",
+    "turkishDefinition": "Kalbur kabarcığı; orta burun geçidinde yer alan, orta kalbur hücrelerinin oluşturduğu yuvarlak kabarıklık.",
+    "turkishShort": "Kalbur kabarcığı",
+    "roots": "bulla (kabarcık) + ethmoidalis (kalbur kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A rounded bulge in the middle nasal meatus formed by the middle ethmoidal cells.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "659",
+    "id": 659,
+    "term": "Processus Uncinatus",
+    "english": "Uncinate Process",
+    "turkishDefinition": "Çengelsi çıkıntı; kalbur labirentinden aşağı ve arkaya uzanan, ince çengel şeklindeki kemik çıkıntı.",
+    "turkishShort": "Çengelsi çıkıntı",
+    "roots": "processus (çıkıntı) + uncinatus (çengelli)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A thin, hook-shaped bony projection extending downward and backward from the ethmoidal labyrinth.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "660",
+    "id": 660,
+    "term": "Infundibulum Ethmoidale",
+    "english": "Ethmoidal Infundibulum",
+    "turkishDefinition": "Kalbur hunisi; çengelsi çıkıntı ile bulla arasında yer alan, alın sinüsünün genellikle boşaldığı huni şeklindeki geçit.",
+    "turkishShort": "Kalbur hunisi",
+    "roots": "infundibulum (huni) + ethmoidalis (kalbur kemiğine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A funnel-shaped passage between the uncinate process and the bulla into which the frontal sinus typically drains.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "661",
+    "id": 661,
+    "term": "Hiatus Semilunaris",
+    "english": "Semilunar Hiatus",
+    "turkishDefinition": "Yarım ay şeklindeki geçit; çengelsi çıkıntı ile bulla ethmoidalis arasında yer alan, orta burun geçidine açılan yarık şeklindeki geçit.",
+    "turkishShort": "Yarım ay şeklindeki geçit",
+    "roots": "hiatus (geçit, açıklık) + semilunaris (yarım ay şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A crescent-shaped passage between the uncinate process and the ethmoidal bulla, opening into the middle nasal meatus.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "_docId": "720",
+    "id": 720,
+    "term": "Os Hyoideum",
+    "english": "Hyoid Bone",
+    "turkishDefinition": "Dil kemiği; boyunda, çeneyle omurga arasında serbestçe asılı duran, hiçbir kemikle doğrudan eklemleşmeyen U şeklinde kemik.",
+    "turkishShort": "Dil kemiği",
+    "roots": "os (kemik) + hyoides (Y harfi şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A U-shaped bone in the neck, suspended freely between the mandible and the spine, articulating with no other bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "_docId": "721",
+    "id": 721,
+    "term": "Corpus Ossis Hyoidei",
+    "english": "Body of Hyoid Bone",
+    "turkishDefinition": "Dil kemiği gövdesi; dil kemiğinin ortadaki yatay, kalınca kısmı.",
+    "turkishShort": "Dil kemiği gövdesi",
+    "roots": "corpus (gövde) + os hyoideum (dil kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "The horizontal, thickened central portion of the hyoid bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "_docId": "722",
+    "id": 722,
+    "term": "Cornu Minus",
+    "english": "Lesser Horn",
+    "turkishDefinition": "Küçük boynuz; dil kemiği gövdesinden yukarı ve arkaya uzanan küçük çift çıkıntı.",
+    "turkishShort": "Küçük boynuz",
+    "roots": "cornu (boynuz) + minus (küçük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A small paired projection extending upward and backward from the body of the hyoid bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "_docId": "723",
+    "id": 723,
+    "term": "Cornu Majus",
+    "english": "Greater Horn",
+    "turkishDefinition": "Büyük boynuz; dil kemiği gövdesinden arkaya ve yukarı uzanan, dil kökü kaslarının tutunduğu daha uzun çift çıkıntı.",
+    "turkishShort": "Büyük boynuz",
+    "roots": "cornu (boynuz) + majus (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "skull_bones",
+    "englishDefinition": "A longer paired projection extending backward and upward from the body of the hyoid bone, providing attachment for muscles of the tongue base.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  }
+]

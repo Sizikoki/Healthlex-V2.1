@@ -1,0 +1,1464 @@
+[
+  {
+    "id": 1,
+    "term": "Os Frontale",
+    "english": "Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 2,
+    "term": "Os Parietale",
+    "english": "Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 3,
+    "term": "Os Temporale",
+    "english": "Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 4,
+    "term": "Os Occipitale",
+    "english": "Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 5,
+    "term": "Os Sphenoideum",
+    "english": "Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 6,
+    "term": "Os Ethmoideum",
+    "english": "Ethmoid Bone",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 433,
+    "term": "Facies Interna Ossis Parietalis",
+    "english": "Internal Surface of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 434,
+    "term": "Sulcus Sinus Sigmoidei Ossis Parietalis",
+    "english": "Groove for Sigmoid Sinus of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 435,
+    "term": "Sulcus Sinus Sagittalis Superioris Ossis Parietalis",
+    "english": "Groove for Superior Sagittal Sinus of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 436,
+    "term": "Sulcus Arteriae Meningeae Mediae Ossis Parietalis",
+    "english": "Groove for Middle Meningeal Artery of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 437,
+    "term": "Sulci Arteriosi Ossis Parietalis",
+    "english": "Grooves for Arteries of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 438,
+    "term": "Facies Externa Ossis Parietalis",
+    "english": "External Surface of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 439,
+    "term": "Linea Temporalis Superior Ossis Parietalis",
+    "english": "Superior Temporal Line of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 440,
+    "term": "Linea Temporalis Inferior Ossis Parietalis",
+    "english": "Inferior Temporal Line of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 441,
+    "term": "Tuber Parietale",
+    "english": "Parietal Tuber",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 442,
+    "term": "Margo Occipitalis Ossis Parietalis",
+    "english": "Occipital Border of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 443,
+    "term": "Margo Squamosus Ossis Parietalis",
+    "english": "Squamosal Border of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 444,
+    "term": "Margo Sagittalis Ossis Parietalis",
+    "english": "Sagittal Border of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 445,
+    "term": "Margo Frontalis Ossis Parietalis",
+    "english": "Frontal Border of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 446,
+    "term": "Angulus Frontalis Ossis Parietalis",
+    "english": "Frontal Angle of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 447,
+    "term": "Angulus Occipitalis Ossis Parietalis",
+    "english": "Occipital Angle of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 448,
+    "term": "Angulus Sphenoidalis Ossis Parietalis",
+    "english": "Sphenoidal Angle of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 449,
+    "term": "Angulus Mastoideus Ossis Parietalis",
+    "english": "Mastoid Angle of Parietal Bone",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 450,
+    "term": "Foramen Parietale",
+    "english": "Parietal Foramen",
+    "proposedGroup": "Os Parietale"
+  },
+  {
+    "id": 451,
+    "term": "Squama Frontalis",
+    "english": "Frontal Squama",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 452,
+    "term": "Facies Externa Ossis Frontalis",
+    "english": "External Surface of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 453,
+    "term": "Tuber Frontale",
+    "english": "Frontal Tuber",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 454,
+    "term": "Arcus Superciliaris",
+    "english": "Superciliary Arch",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 455,
+    "term": "Glabella",
+    "english": "Glabella",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 456,
+    "term": "Sutura Frontalis Persistens",
+    "english": "Persistent Frontal Suture; Metopic Suture",
+    "proposedGroup": "Cranium (Genel)",
+    "isUncertain": true,
+    "uncertainReason": "Alın dikişi (Sutura Metopica); kemikler arası bir eklem/dikiş hattı olduğu için Cranium (Genel) önerilmiştir (Alternatif: Os Frontale varyantı)."
+  },
+  {
+    "id": 457,
+    "term": "Margo Supraorbitalis",
+    "english": "Supraorbital Margin",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 458,
+    "term": "Incisura Supraorbitalis",
+    "english": "Supraorbital Notch; Foramen",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 459,
+    "term": "Incisura Frontalis",
+    "english": "Frontal Notch; Foramen",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 460,
+    "term": "Facies Temporalis Ossis Frontalis",
+    "english": "Temporal Surface of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 461,
+    "term": "Margo Parietalis Ossis Frontalis",
+    "english": "Parietal Margin of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 462,
+    "term": "Linea Temporalis Ossis Frontalis",
+    "english": "Temporal Line of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 463,
+    "term": "Processus Zygomaticus Ossis Frontalis",
+    "english": "Zygomatic Process of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 464,
+    "term": "Facies Interna Ossis Frontalis",
+    "english": "Internal Surface of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 465,
+    "term": "Crista Frontalis",
+    "english": "Frontal Crest",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 466,
+    "term": "Sulcus Sinus Sagittalis Superioris Ossis Frontalis",
+    "english": "Groove for Superior Sagittal Sinus of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 467,
+    "term": "Foramen Caecum",
+    "english": "Foramen Caecum",
+    "proposedGroup": "Os Frontale",
+    "isUncertain": true,
+    "uncertainReason": "Foramen Caecum: Frontal kemik iç yüzünde crista frontalis dibinde yer alır ancak etmoid kemiğin crista galli'si ile sınır komşusudur. Çoğunlukla frontal kemik yapısı kabul edilir (Alternatif: Cranium Genel)."
+  },
+  {
+    "id": 468,
+    "term": "Pars Nasalis Ossis Frontalis",
+    "english": "Nasal Part of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 469,
+    "term": "Spina Nasalis Ossis Frontalis",
+    "english": "Nasal Spine of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 470,
+    "term": "Margo Nasalis Ossis Frontalis",
+    "english": "Nasal Margin of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 471,
+    "term": "Pars Orbitalis Ossis Frontalis",
+    "english": "Orbital Part of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 472,
+    "term": "Facies Orbitalis Ossis Frontalis",
+    "english": "Orbital Surface of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 473,
+    "term": "Spina Trochlearis",
+    "english": "Trochlear Spine",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 474,
+    "term": "Fovea Trochlearis",
+    "english": "Trochlear Fovea",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 475,
+    "term": "Fossa Glandulae Lacrimalis",
+    "english": "Fossa for Lacrimal Gland",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 476,
+    "term": "Margo Sphenoidalis Ossis Frontalis",
+    "english": "Sphenoidal Margin of Frontal Bone",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 477,
+    "term": "Incisura Ethmoidalis",
+    "english": "Ethmoidal Notch",
+    "proposedGroup": "Os Frontale",
+    "isUncertain": true,
+    "uncertainReason": "Incisura Ethmoidalis: Frontal kemiğin etmoid kemiğin lamina cribrosa'sını kabul eden U şeklindeki çentiğidir; frontal kemik üzerindedir ancak iki kemik sınırındadır."
+  },
+  {
+    "id": 478,
+    "term": "Sinus Frontalis",
+    "english": "Frontal Sinus",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 479,
+    "term": "Apertura Sinus Frontalis",
+    "english": "Opening of Frontal Sinus",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 480,
+    "term": "Septum Sinuum Frontalium",
+    "english": "Septum of Frontal Sinuses",
+    "proposedGroup": "Os Frontale"
+  },
+  {
+    "id": 481,
+    "term": "Foramen Magnum",
+    "english": "Foramen Magnum",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 482,
+    "term": "Basion",
+    "english": "Basion",
+    "proposedGroup": "Cranium (Genel)",
+    "isUncertain": true,
+    "uncertainReason": "Foramen magnum ön kenarı orta noktasıdır; kraniyometrik/antropolojik kafatası ölçüm noktası olduğu için Cranium (Genel) önerilmiştir (Alternatif: Os Occipitale)."
+  },
+  {
+    "id": 483,
+    "term": "Opisthion",
+    "english": "Opisthion",
+    "proposedGroup": "Cranium (Genel)",
+    "isUncertain": true,
+    "uncertainReason": "Foramen magnum arka kenarı orta noktasıdır; kraniyometrik kafatası referans noktası olduğu için Cranium (Genel) önerilmiştir (Alternatif: Os Occipitale)."
+  },
+  {
+    "id": 484,
+    "term": "Pars Basilaris Ossis Occipitalis",
+    "english": "Basilar Part of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 485,
+    "term": "Clivus",
+    "english": "Clivus",
+    "proposedGroup": "Cranium (Genel)",
+    "isUncertain": true,
+    "uncertainReason": "Oksipital kemiğin pars basilaris'i ile sfenoid kemiğin dorsum sellae'sinin birleşmesiyle (synchondrosis sphenooccipitalis) oluşur. İki kemiğin ortak yapısı olduğundan tek bir kemiğe zorlanmayıp Cranium (Genel) grubuna atanmıştır (Alternatif: Os Occipitale)."
+  },
+  {
+    "id": 486,
+    "term": "Tuberculum Pharyngeum",
+    "english": "Pharyngeal Tubercle",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 487,
+    "term": "Sulcus Sinus Petrosi Inferioris Ossis Occipitalis",
+    "english": "Groove for Inferior Petrosal Sinus of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 488,
+    "term": "Pars Lateralis Ossis Occipitalis",
+    "english": "Lateral Part of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 489,
+    "term": "Squama Occipitalis",
+    "english": "Occipital Squama",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 490,
+    "term": "Margo Mastoideus Ossis Occipitalis",
+    "english": "Mastoid Border of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 491,
+    "term": "Margo Lambdoideus Ossis Occipitalis",
+    "english": "Lambdoid Border of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 492,
+    "term": "Os Interparietale",
+    "english": "Interparietal Bone",
+    "proposedGroup": "Cranium (Genel)",
+    "isUncertain": true,
+    "uncertainReason": "Parietal ve oksipital kemikler arasında lambdoid dikişte bulunan aksesuar sutural kemiktir; birden fazla kemik sınırında bağımsız kemikleşme gösterdiğinden Cranium (Genel) önerilmiştir (Alternatif: Os Occipitale gelişimsel varyantı)."
+  },
+  {
+    "id": 493,
+    "term": "Condylus Occipitalis",
+    "english": "Occipital Condyle",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 494,
+    "term": "Canalis Condylaris",
+    "english": "Condylar Canal",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 495,
+    "term": "Canalis Nervi Hypoglossi",
+    "english": "Hypoglossal Canal",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 496,
+    "term": "Fossa Condylaris",
+    "english": "Condylar Fossa",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 497,
+    "term": "Tuberculum Jugulare",
+    "english": "Jugular Tubercle",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 498,
+    "term": "Incisura Jugularis Ossis Occipitalis",
+    "english": "Jugular Notch of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 499,
+    "term": "Processus Jugularis",
+    "english": "Jugular Process",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 500,
+    "term": "Processus Intrajugulans Ossis Occipitalis",
+    "english": "Intrajugular Process of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 501,
+    "term": "Protuberantia Occipitalis Externa",
+    "english": "External Occipital Protuberance",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 502,
+    "term": "Crista Occipitalis Externa",
+    "english": "External Occipital Crest",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 503,
+    "term": "Linea Nuchalis Suprema",
+    "english": "Highest Nuchal Line",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 504,
+    "term": "Linea Nuchalis Superior",
+    "english": "Superior Nuchal Line",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 505,
+    "term": "Linea Nuchalis Inferior",
+    "english": "Inferior Nuchal Line",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 506,
+    "term": "Planum Occipitale",
+    "english": "Occipital Plane",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 507,
+    "term": "Eminentia Cruciformis",
+    "english": "Cruciform Eminence",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 508,
+    "term": "Protuberantia Occipitalis Interna",
+    "english": "Internal Occipital Protuberance",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 509,
+    "term": "Crista Occipitalis Interna",
+    "english": "Internal Occipital Crest",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 510,
+    "term": "Sulcus Sinus Transversi Ossis Occipitalis",
+    "english": "Groove for Transverse Sinus of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 511,
+    "term": "Sulcus Sinus Sigmoidei Ossis Occipitalis",
+    "english": "Groove for Sigmoid Sinus of Occipital Bone",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 512,
+    "term": "Sulcus Sinus Occipitalis",
+    "english": "Groove for Occipital Sinus",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 513,
+    "term": "Sulcus Sinus Marginalis",
+    "english": "Groove for Marginal Sinus",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 514,
+    "term": "Processus Paramastoideus",
+    "english": "Paramastoid Process",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 515,
+    "term": "Fossa Cerebralis",
+    "english": "Cerebral Fossa",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 516,
+    "term": "Fossa Cerebellaris",
+    "english": "Cerebellar Fossa",
+    "proposedGroup": "Os Occipitale"
+  },
+  {
+    "id": 517,
+    "term": "Corpus Ossis Sphenoidalis",
+    "english": "Body of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 518,
+    "term": "Jugum Sphenoidale",
+    "english": "Sphenoidal Yoke",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 519,
+    "term": "Limbus Sphenoidalis",
+    "english": "Limbus of Sphenoid",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 520,
+    "term": "Sulcus Prechiasmaticus",
+    "english": "Prechiasmatic Sulcus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 521,
+    "term": "Sella Turcica",
+    "english": "Sella Turcica (Turkish Saddle)",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 522,
+    "term": "Tuberculum Sellae",
+    "english": "Tuberculum of Sella",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 523,
+    "term": "Processus Clinoideus Medius",
+    "english": "Middle Clinoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 524,
+    "term": "Fossa Hypophysialis",
+    "english": "Hypophysial Fossa",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 525,
+    "term": "Dorsum Sellae",
+    "english": "Dorsum Sellae",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 526,
+    "term": "Processus Clinoideus Posterior",
+    "english": "Posterior Clinoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 527,
+    "term": "Sulcus Caroticus",
+    "english": "Carotid Sulcus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 528,
+    "term": "Lingula Sphenoidalis",
+    "english": "Sphenoidal Lingula",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 529,
+    "term": "Crista Sphenoidalis",
+    "english": "Sphenoidal Crest",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 530,
+    "term": "Rostrum Sphenoidale",
+    "english": "Sphenoidal Rostrum",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 531,
+    "term": "Sinus Sphenoidalis",
+    "english": "Sphenoidal Sinus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 532,
+    "term": "Septum Sinuum Sphenoidalium",
+    "english": "Septum of Sphenoidal Sinuses",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 533,
+    "term": "Apertura Sinus Sphenoidalis",
+    "english": "Opening of Sphenoidal Sinus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 534,
+    "term": "Concha Sphenoidalis",
+    "english": "Sphenoidal Concha",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 535,
+    "term": "Ala Minor Ossis Sphenoidalis",
+    "english": "Lesser Wing of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 536,
+    "term": "Canalis Opticus",
+    "english": "Optic Canal",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 537,
+    "term": "Processus Clinoideus Anterior",
+    "english": "Anterior Clinoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 538,
+    "term": "Fissura Orbitalis Superior",
+    "english": "Superior Orbital Fissure",
+    "proposedGroup": "Os Sphenoidale",
+    "isUncertain": true,
+    "uncertainReason": "Fissura Orbitalis Superior: Sfenoid kemiğin büyük ve küçük kanatları arasında yer alır; sfenoid kanatları sınırlar ancak orbita ile orta kafa çukuru arasındaki ana geçit olduğundan Cranium (Genel) olarak da düşünülebilir."
+  },
+  {
+    "id": 539,
+    "term": "Ala Major Ossis Sphenoidalis",
+    "english": "Greater Wing of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 540,
+    "term": "Facies Cerebralis Ossis Sphenoidalis",
+    "english": "Cerebral Surface of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 541,
+    "term": "Facies Temporalis Ossis Sphenoidalis",
+    "english": "Temporal Surface of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 542,
+    "term": "Facies Infratemporalis Ossis Sphenoidalis",
+    "english": "Infratemporal Surface of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 543,
+    "term": "Crista Infratemporalis Ossis Sphenoidalis",
+    "english": "Infratemporal Crest of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 544,
+    "term": "Facies Maxillaris Ossis Sphenoidalis",
+    "english": "Maxillary Surface of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 545,
+    "term": "Facies Orbitalis Ossis Sphenoidalis",
+    "english": "Orbital Surface of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 546,
+    "term": "Margo Zygomaticus Ossis Sphenoidalis",
+    "english": "Zygomatic Margin of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 547,
+    "term": "Margo Frontalis Ossis Sphenoidalis",
+    "english": "Frontal Margin of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 548,
+    "term": "Margo Parietalis Ossis Sphenoidalis",
+    "english": "Parietal Margin of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 549,
+    "term": "Margo Squamosus Ossis Sphenoidalis",
+    "english": "Squamosal Margin of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 550,
+    "term": "Foramen Rotundum",
+    "english": "Foramen Rotundum",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 551,
+    "term": "Foramen Ovale",
+    "english": "Foramen Ovale",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 552,
+    "term": "Foramen Venosum",
+    "english": "Sphenoidal Emissary Foramen",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 553,
+    "term": "Foramen Spinosum",
+    "english": "Foramen Spinosum",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 554,
+    "term": "Foramen Petrosum",
+    "english": "Foramen Petrosum",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 555,
+    "term": "Spina Ossis Sphenoidalis",
+    "english": "Spine of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 556,
+    "term": "Sulcus Tubae Auditivae",
+    "english": "Sulcus of Auditory Tube",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 557,
+    "term": "Processus Pterygoideus",
+    "english": "Pterygoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 558,
+    "term": "Lamina Lateralis Processus Pterygoidei",
+    "english": "Lateral Plate of Pterygoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 559,
+    "term": "Lamina Medialis Processus Pterygoidei",
+    "english": "Medial Plate of Pterygoid Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 560,
+    "term": "Incisura Pterygoidea",
+    "english": "Pterygoid Notch",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 561,
+    "term": "Fossa Pterygoidea",
+    "english": "Pterygoid Fossa",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 562,
+    "term": "Fossa Scaphoidea Ossis Sphenoidalis",
+    "english": "Scaphoid Fossa of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 563,
+    "term": "Processus Vaginalis Ossis Sphenoidalis",
+    "english": "Vaginal Process of Sphenoid Bone",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 564,
+    "term": "Sulcus Palatovaginalis",
+    "english": "Palatovaginal Groove",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 565,
+    "term": "Sulcus Vomerovaginalis",
+    "english": "Vomerovaginal Groove",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 566,
+    "term": "Hamulus Pterygoideus",
+    "english": "Pterygoid Hamulus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 567,
+    "term": "Sulcus Hamuli Pterygoidei",
+    "english": "Groove of Pterygoid Hamulus",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 568,
+    "term": "Canalis Pterygoideus",
+    "english": "Pterygoid Canal",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 569,
+    "term": "Processus Pterygospinosus",
+    "english": "Pterygospinous Process",
+    "proposedGroup": "Os Sphenoidale"
+  },
+  {
+    "id": 570,
+    "term": "Pars Petrosa Ossis Temporalis",
+    "english": "Petrous Part of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 571,
+    "term": "Margo Occipitalis Ossis Temporalis",
+    "english": "Occipital Border of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 572,
+    "term": "Processus Mastoideus",
+    "english": "Mastoid Process",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 573,
+    "term": "Incisura Mastoidea",
+    "english": "Mastoid Notch",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 574,
+    "term": "Sulcus Sinus Sigmoidei Ossis Temporalis",
+    "english": "Groove for Sigmoid Sinus of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 575,
+    "term": "Sulcus Arteriae Occipitalis",
+    "english": "Occipital Groove",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 576,
+    "term": "Foramen Mastoideum",
+    "english": "Mastoid Foramen",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 577,
+    "term": "Canalis Nervi Facialis",
+    "english": "Facial Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 578,
+    "term": "Geniculum Canalis Nervi Facialis",
+    "english": "Geniculum of Facial Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 579,
+    "term": "Canaliculus Chordae Tympani",
+    "english": "Canaliculus for Chorda Tympani",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 580,
+    "term": "Apex Partis Petrosae",
+    "english": "Apex of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 581,
+    "term": "Canalis Caroticus",
+    "english": "Carotid Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 582,
+    "term": "Apertura Externa Canalis Carotici",
+    "english": "External Opening of Carotid Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 583,
+    "term": "Apertura Interna Canalis Carotici",
+    "english": "Internal Opening of Carotid Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 584,
+    "term": "Canaliculi Caroticotympanici",
+    "english": "Caroticotympanic Canaliculi",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 585,
+    "term": "Canalis Musculotubarius",
+    "english": "Musculotubal Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 586,
+    "term": "Semicanalis Musculi Tensoris Tympani",
+    "english": "Canal for Tensor Tympani",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 587,
+    "term": "Semicanalis Tubae Auditivae",
+    "english": "Canal for Auditory Tube",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 588,
+    "term": "Septum Canalis Musculotubarii",
+    "english": "Septum of Musculotubal Canal",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 589,
+    "term": "Facies Anterior Partis Petrosae",
+    "english": "Anterior Surface of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 590,
+    "term": "Tegmen Tympani",
+    "english": "Tegmen Tympani",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 591,
+    "term": "Eminentia Arcuata",
+    "english": "Arcuate Eminence",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 592,
+    "term": "Hiatus Canalis Nervi Petrosi Majoris",
+    "english": "Hiatus for Greater Petrosal Nerve",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 593,
+    "term": "Sulcus Nervi Petrosi Majoris",
+    "english": "Groove for Greater Petrosal Nerve",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 594,
+    "term": "Hiatus Canalis Nervi Petrosi",
+    "english": "Hiatus for Lesser Petrosal Nerve",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 595,
+    "term": "Sulcus Nervi Petrosi Minoris",
+    "english": "Groove for Lesser Petrosal Nerve",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 596,
+    "term": "Impressio Trigeminalis",
+    "english": "Trigeminal Impression",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 597,
+    "term": "Margo Superior Partis Petrosae",
+    "english": "Superior Border of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 598,
+    "term": "Sulcus Sinus Petrosi Superioris",
+    "english": "Groove for Superior Petrosal Sinus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 599,
+    "term": "Facies Posterior Partis Petrosae",
+    "english": "Posterior Surface of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 600,
+    "term": "Porus Acusticus Internus",
+    "english": "Internal Acoustic Opening",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 601,
+    "term": "Meatus Acusticus Internus",
+    "english": "Internal Acoustic Meatus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 602,
+    "term": "Fossa Subarcuata",
+    "english": "Subarcuate Fossa",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 603,
+    "term": "Canaliculus Vestibuli",
+    "english": "Vestibular Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 604,
+    "term": "Apertura Canaliculi Vestibuli",
+    "english": "Opening of Vestibular Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 605,
+    "term": "Margo Posterior Partis Petrosae",
+    "english": "Posterior Border of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 606,
+    "term": "Sulcus Sinus Petrosi Inferioris Ossis Temporalis",
+    "english": "Groove for Inferior Petrosal Sinus of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 607,
+    "term": "Incisura Jugularis Ossis Temporalis",
+    "english": "Jugular Notch of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 608,
+    "term": "Facies Inferior Partis Petrosae",
+    "english": "Inferior Surface of Petrous Part",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 609,
+    "term": "Fossa Jugularis",
+    "english": "Jugular Fossa",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 610,
+    "term": "Canaliculus Cochleae",
+    "english": "Cochlear Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 611,
+    "term": "Apertura Canaliculi Cochleae",
+    "english": "Opening of Cochlear Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 612,
+    "term": "Canaliculus Mastoideus",
+    "english": "Mastoid Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 613,
+    "term": "Processus Intrajugularis Ossis Temporalis",
+    "english": "Intrajugular Process of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 614,
+    "term": "Processus Styloideus Ossis Temporalis",
+    "english": "Styloid Process of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 615,
+    "term": "Foramen Stylomastoideum",
+    "english": "Stylomastoid Foramen",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 616,
+    "term": "Canaliculus Tympanicus",
+    "english": "Tympanic Canaliculus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 617,
+    "term": "Fossula Petrosa",
+    "english": "Petrosal Fossula",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 618,
+    "term": "Cavitas Tympani",
+    "english": "Tympanic Cavity",
+    "proposedGroup": "Os Temporale",
+    "isUncertain": true,
+    "uncertainReason": "Cavitas Tympani (Orta Kulak Boşluğu): Temporal kemik içinde yer alır, ancak kulak boşluğu olduğu için organ/boşluk anatomisi niteliğindedir."
+  },
+  {
+    "id": 619,
+    "term": "Pars Tympanica Ossis Temporalis",
+    "english": "Tympanic Part of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 620,
+    "term": "Anulus Tympanicus",
+    "english": "Tympanic Ring",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 621,
+    "term": "Porus Acusticus Externus",
+    "english": "External Acoustic Opening",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 622,
+    "term": "Meatus Acusticus Externus",
+    "english": "External Acoustic Meatus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 623,
+    "term": "Spina Tympanica Major",
+    "english": "Greater Tympanic Spine",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 624,
+    "term": "Spina Tympanica Minor",
+    "english": "Lesser Tympanic Spine",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 625,
+    "term": "Sulcus Tympanicus",
+    "english": "Tympanic Sulcus",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 626,
+    "term": "Incisura Tympanica",
+    "english": "Tympanic Notch",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 627,
+    "term": "Vagina Processus Styloidei",
+    "english": "Sheath of Styloid Process",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 628,
+    "term": "Pars Squamosa Ossis Temporalis",
+    "english": "Squamous Part of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 629,
+    "term": "Margo Parietalis Ossis Temporalis",
+    "english": "Parietal Border of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 630,
+    "term": "Incisura Parietalis Ossis Temporalis",
+    "english": "Parietal Notch of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 631,
+    "term": "Margo Sphenoidalis Ossis Temporalis",
+    "english": "Sphenoidal Margin of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 632,
+    "term": "Facies Temporalis Ossis Temporalis",
+    "english": "Temporal Surface of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 633,
+    "term": "Sulcus Arteriae Temporalis Mediae",
+    "english": "Groove for Middle Temporal Artery",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 634,
+    "term": "Processus Zygomaticus Ossis Temporalis",
+    "english": "Zygomatic Process of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 635,
+    "term": "Crista Supramastoidea",
+    "english": "Supramastoid Crest",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 636,
+    "term": "Foveola Suprameatica",
+    "english": "Suprameatal Triangle",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 637,
+    "term": "Spina Suprameatica",
+    "english": "Suprameatal Spine",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 638,
+    "term": "Facies Articularis Ossis Temporalis",
+    "english": "Articular Surface of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 639,
+    "term": "Tuberculum Articulare",
+    "english": "Articular Tubercle",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 640,
+    "term": "Fissura Petrotympanica",
+    "english": "Petrotympanic Fissure",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 641,
+    "term": "Fissura Petrosquamosa",
+    "english": "Petrosquamous Fissure",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 642,
+    "term": "Fissura Tympanosquamosa",
+    "english": "Tympanosquamous Fissure",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 643,
+    "term": "Fissura Tympanomastoidea",
+    "english": "Tympanomastoid Fissure",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 644,
+    "term": "Facies Cerebralis Ossis Temporalis",
+    "english": "Cerebral Surface of Temporal Bone",
+    "proposedGroup": "Os Temporale"
+  },
+  {
+    "id": 645,
+    "term": "Lamina Cribrosa",
+    "english": "Cribriform Plate",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 646,
+    "term": "Foramina Cribrosa",
+    "english": "Cribriform Foramina",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 647,
+    "term": "Crista Galli",
+    "english": "Crista Galli",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 648,
+    "term": "Ala Cristae Galli",
+    "english": "Ala of Crista Galli",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 649,
+    "term": "Lamina Perpendicularis Ossis Ethmoidalis",
+    "english": "Perpendicular Plate of Ethmoid Bone",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 650,
+    "term": "Labyrinthus Ethmoidalis",
+    "english": "Ethmoidal Labyrinth",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 651,
+    "term": "Cellulae Ethmoidales Anteriores",
+    "english": "Anterior Ethmoidal Cells",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 652,
+    "term": "Cellulae Ethmoidales Mediae",
+    "english": "Middle Ethmoidal Cells",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 653,
+    "term": "Cellulae Ethmoidales Posteriores",
+    "english": "Posterior Ethmoidal Cells",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 654,
+    "term": "Lamina Orbitalis Ossis Ethmoidalis",
+    "english": "Orbital Plate of Ethmoid Bone",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 655,
+    "term": "Concha Nasalis Suprema",
+    "english": "Supreme Nasal Concha",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 656,
+    "term": "Concha Nasalis Superior",
+    "english": "Superior Nasal Concha",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 657,
+    "term": "Concha Nasalis Media",
+    "english": "Middle Nasal Concha",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 658,
+    "term": "Bulla Ethmoidalis",
+    "english": "Ethmoidal Bulla",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 659,
+    "term": "Processus Uncinatus",
+    "english": "Uncinate Process",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 660,
+    "term": "Infundibulum Ethmoidale",
+    "english": "Ethmoidal Infundibulum",
+    "proposedGroup": "Os Ethmoidale"
+  },
+  {
+    "id": 661,
+    "term": "Hiatus Semilunaris",
+    "english": "Semilunar Hiatus",
+    "proposedGroup": "Os Ethmoidale",
+    "isUncertain": true,
+    "uncertainReason": "Hiatus Semilunaris: Bulla ethmoidalis ile processus uncinatus arasındaki yarıktır; etmoid kemik oluşumudur ancak burun meatusu/drenaj geçidi olarak da değerlendirilir."
+  },
+  {
+    "id": 720,
+    "term": "Os Hyoideum",
+    "english": "Hyoid Bone",
+    "proposedGroup": "Os Hyoideum",
+    "categorySuspicion": "face_bones (Yüz Kemikleri / Viscerocranium veya Boyun İskeleti)",
+    "suspicionReason": "Hyoid (dil) kemiği kafatası (neurocranium) kemiği değildir; viscerocranium/boyun iskeletine aittir. face_bones kategorisine taşınması önerilir."
+  },
+  {
+    "id": 721,
+    "term": "Corpus Ossis Hyoidei",
+    "english": "Body of Hyoid Bone",
+    "proposedGroup": "Os Hyoideum",
+    "categorySuspicion": "face_bones (Yüz Kemikleri / Viscerocranium veya Boyun İskeleti)",
+    "suspicionReason": "Hyoid (dil) kemiği kafatası (neurocranium) kemiği değildir; viscerocranium/boyun iskeletine aittir. face_bones kategorisine taşınması önerilir."
+  },
+  {
+    "id": 722,
+    "term": "Cornu Minus",
+    "english": "Lesser Horn",
+    "proposedGroup": "Os Hyoideum",
+    "categorySuspicion": "face_bones (Yüz Kemikleri / Viscerocranium veya Boyun İskeleti)",
+    "suspicionReason": "Hyoid (dil) kemiği kafatası (neurocranium) kemiği değildir; viscerocranium/boyun iskeletine aittir. face_bones kategorisine taşınması önerilir."
+  },
+  {
+    "id": 723,
+    "term": "Cornu Majus",
+    "english": "Greater Horn",
+    "proposedGroup": "Os Hyoideum",
+    "categorySuspicion": "face_bones (Yüz Kemikleri / Viscerocranium veya Boyun İskeleti)",
+    "suspicionReason": "Hyoid (dil) kemiği kafatası (neurocranium) kemiği değildir; viscerocranium/boyun iskeletine aittir. face_bones kategorisine taşınması önerilir."
+  }
+]
