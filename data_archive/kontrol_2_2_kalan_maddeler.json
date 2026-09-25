@@ -1,0 +1,192 @@
+{
+  "toplamAday": 22,
+  "gercekCakismaCount": 4,
+  "kesinYeniCount": 18,
+  "gercekCakisma": [
+    {
+      "candidateNumber": 13,
+      "candidateTerm": "Articulatio temporomandibularis",
+      "firestoreDocId": "170",
+      "firestoreId": 170,
+      "existingTerm": "Articulatio Temporomandibularis",
+      "existingEnglish": "Temporomandibular Joint (TMJ)",
+      "existingSubcategory": "head_and_neck_joints",
+      "reason": "Birebir terim eşleşmesi: \"articulatio temporomandibularis\" -> Firestore term: \"Articulatio Temporomandibularis\""
+    },
+    {
+      "candidateNumber": 14,
+      "candidateTerm": "Discus articularis (TMJ)",
+      "firestoreDocId": "117",
+      "firestoreId": 117,
+      "existingTerm": "Discus Articularis",
+      "existingEnglish": "Articular Disc",
+      "existingSubcategory": "upper_extremity_joints",
+      "reason": "Birebir terim eşleşmesi: \"discus articularis\" -> Firestore term: \"Discus Articularis\""
+    },
+    {
+      "candidateNumber": 15,
+      "candidateTerm": "Lig. laterale (TMJ)",
+      "firestoreDocId": "174",
+      "firestoreId": 174,
+      "existingTerm": "Ligamentum Temporomandibulare",
+      "existingEnglish": "Temporomandibular Ligament (Lateral Ligament)",
+      "existingSubcategory": "head_and_neck_joints",
+      "reason": "Birebir terim eşleşmesi: \"ligamentum temporomandibulare\" -> Firestore term: \"Ligamentum Temporomandibulare\""
+    },
+    {
+      "candidateNumber": 19,
+      "candidateTerm": "Articulatio atlantooccipitalis",
+      "firestoreDocId": "161",
+      "firestoreId": 161,
+      "existingTerm": "Articulatio Atlantooccipitalis",
+      "existingEnglish": "Atlanto-occipital Joint",
+      "existingSubcategory": "spine_joints",
+      "reason": "Birebir terim eşleşmesi: \"articulatio atlantooccipitalis\" -> Firestore term: \"Articulatio Atlantooccipitalis\""
+    }
+  ],
+  "kesinYeni": [
+    {
+      "no": 1,
+      "term": "Lig. pterygospinale",
+      "variants": [
+        "ligamentum pterygospinale",
+        "lig pterygospinale"
+      ]
+    },
+    {
+      "no": 2,
+      "term": "Lig. stylohyoideum",
+      "variants": [
+        "ligamentum stylohyoideum",
+        "lig stylohyoideum"
+      ]
+    },
+    {
+      "no": 3,
+      "term": "Syndesmosis dentoalveolaris",
+      "variants": [
+        "syndesmosis dentoalveolaris",
+        "gomphosis"
+      ]
+    },
+    {
+      "no": 4,
+      "term": "Periodontium",
+      "variants": [
+        "periodontium"
+      ]
+    },
+    {
+      "no": 5,
+      "term": "Periodontium protectionis",
+      "variants": [
+        "periodontium protectionis",
+        "gingiva"
+      ]
+    },
+    {
+      "no": 6,
+      "term": "Periodontium insertionis",
+      "variants": [
+        "periodontium insertionis"
+      ]
+    },
+    {
+      "no": 7,
+      "term": "Desmodontium",
+      "variants": [
+        "desmodontium",
+        "periodontal ligament",
+        "ligamentum periodontale"
+      ]
+    },
+    {
+      "no": 8,
+      "term": "Cementum",
+      "variants": [
+        "cementum"
+      ]
+    },
+    {
+      "no": 9,
+      "term": "Synchondrosis sphenooccipitalis",
+      "variants": [
+        "synchondrosis sphenooccipitalis",
+        "synchondrosis spheno-occipitalis"
+      ]
+    },
+    {
+      "no": 10,
+      "term": "Synchondrosis sphenopetrosa",
+      "variants": [
+        "synchondrosis sphenopetrosa",
+        "synchondrosis spheno-petrosa"
+      ]
+    },
+    {
+      "no": 11,
+      "term": "Synchondrosis petrooccipitalis",
+      "variants": [
+        "synchondrosis petrooccipitalis",
+        "synchondrosis petro-occipitalis"
+      ]
+    },
+    {
+      "no": 12,
+      "term": "Synchondrosis sphenoethmoidalis",
+      "variants": [
+        "synchondrosis sphenoethmoidalis",
+        "synchondrosis spheno-ethmoidalis"
+      ]
+    },
+    {
+      "no": 16,
+      "term": "Lig. mediale (TMJ)",
+      "variants": [
+        "ligamentum mediale",
+        "lig mediale"
+      ]
+    },
+    {
+      "no": 17,
+      "term": "Lig. sphenomandibulare",
+      "variants": [
+        "ligamentum sphenomandibulare",
+        "lig sphenomandibulare"
+      ]
+    },
+    {
+      "no": 18,
+      "term": "Lig. stylomandibulare",
+      "variants": [
+        "ligamentum stylomandibulare",
+        "lig stylomandibulare"
+      ]
+    },
+    {
+      "no": 20,
+      "term": "Membrana atlantooccipitalis anterior",
+      "variants": [
+        "membrana atlantooccipitalis anterior",
+        "membrana atlanto-occipitalis anterior"
+      ]
+    },
+    {
+      "no": 21,
+      "term": "Membrana atlantooccipitalis posterior",
+      "variants": [
+        "membrana atlantooccipitalis posterior",
+        "membrana atlanto-occipitalis posterior"
+      ]
+    },
+    {
+      "no": 22,
+      "term": "Lig. atlantooccipitale laterale",
+      "variants": [
+        "ligamentum atlantooccipitale laterale",
+        "ligamentum atlanto-occipitale laterale",
+        "lig atlantooccipitale laterale"
+      ]
+    }
+  ]
+}

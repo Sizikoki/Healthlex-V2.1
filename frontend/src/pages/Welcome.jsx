@@ -122,7 +122,7 @@ export const Welcome = () => {
 
   // 3 Quotas Cards
   const quotas = useMemo(() => {
-    const termsVal = termCount ? `${termCount}` : '590';
+    const termsVal = String(termCount || getInitialTermCount());
     if (isPro || effectiveUser?.isLifetime) {
       return [
         {
@@ -221,7 +221,7 @@ export const Welcome = () => {
 
   // Feature Comparison Table Rows
   const rows = useMemo(() => {
-    const termsCountStr = termCount ? `${termCount}` : '590';
+    const termsCountStr = String(termCount || getInitialTermCount());
 
     if (isTr) {
       if (isPro || effectiveUser?.isLifetime) {

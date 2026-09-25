@@ -25,3 +25,10 @@ Whenever seeding new JSON datasets into Firestore (via `upload.js` seed script) 
 - Must be a short string, usually derived from the part before the semicolon `;` in the full definition.
 - Must remain completely untouched once set/derived.
 
+## Term Count Synchronization
+
+Whenever seeding new JSON datasets into Firestore or modifying the terms collection, ensure `frontend/src/data/termCount.json` is updated with the latest Firestore document count:
+- The central `termCountService.js` loads `termCount.json` as its baseline synchronous value for `getInitialTermCount()` and queries Firestore live count in the background via `getTermCount()`.
+- Seed scripts must automatically update `frontend/src/data/termCount.json` upon completion so the frontend baseline never goes stale.
+
+

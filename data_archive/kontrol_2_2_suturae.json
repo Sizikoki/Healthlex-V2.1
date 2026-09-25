@@ -1,0 +1,177 @@
+{
+  "toplamAday": 34,
+  "gercekCakismaCount": 6,
+  "kesinYeniCount": 28,
+  "gercekCakisma": [
+    {
+      "itemNumber": 18,
+      "inputTerm": "Sutura coronalis",
+      "firestoreDocId": "175",
+      "firestoreId": 175,
+      "existingTerm": "Sutura Coronalis",
+      "existingEnglish": "Coronal Suture",
+      "existingSubcategory": "head_and_neck_joints"
+    },
+    {
+      "itemNumber": 19,
+      "inputTerm": "Sutura sagittalis",
+      "firestoreDocId": "176",
+      "firestoreId": 176,
+      "existingTerm": "Sutura Sagittalis",
+      "existingEnglish": "Sagittal Suture",
+      "existingSubcategory": "head_and_neck_joints"
+    },
+    {
+      "itemNumber": 20,
+      "inputTerm": "Sutura lambdoidea",
+      "firestoreDocId": "177",
+      "firestoreId": 177,
+      "existingTerm": "Sutura Lambdoidea",
+      "existingEnglish": "Lambdoid Suture",
+      "existingSubcategory": "head_and_neck_joints"
+    },
+    {
+      "itemNumber": 22,
+      "inputTerm": "Sutura squamosa",
+      "firestoreDocId": "178",
+      "firestoreId": 178,
+      "existingTerm": "Sutura Squamosa",
+      "existingEnglish": "Squamous Suture",
+      "existingSubcategory": "head_and_neck_joints"
+    },
+    {
+      "itemNumber": 23,
+      "inputTerm": "Sutura frontalis persistens",
+      "firestoreDocId": "456",
+      "firestoreId": 456,
+      "existingTerm": "Sutura Frontalis Persistens",
+      "existingEnglish": "Persistent Frontal Suture; Metopic Suture",
+      "existingSubcategory": "skull_bones"
+    },
+    {
+      "itemNumber": 27,
+      "inputTerm": "Sutura zygomaticomaxillaris",
+      "firestoreDocId": "734",
+      "firestoreId": 734,
+      "existingTerm": "Sutura Zygomaticomaxillaris",
+      "existingEnglish": "Zygomaticomaxillary Suture",
+      "existingSubcategory": "face_bones"
+    }
+  ],
+  "kesinYeni": [
+    {
+      "itemNumber": 1,
+      "term": "Sutura frontonasalis"
+    },
+    {
+      "itemNumber": 2,
+      "term": "Sutura frontomaxillaris"
+    },
+    {
+      "itemNumber": 3,
+      "term": "Sutura frontolacrimalis"
+    },
+    {
+      "itemNumber": 4,
+      "term": "Sutura frontoethmoidalis"
+    },
+    {
+      "itemNumber": 5,
+      "term": "Sutura sphenofrontalis"
+    },
+    {
+      "itemNumber": 6,
+      "term": "Sutura sphenoparietalis",
+      "not": "Kaynakta sphenparietalis varyantı var"
+    },
+    {
+      "itemNumber": 7,
+      "term": "Sutura sphenosquamosa"
+    },
+    {
+      "itemNumber": 8,
+      "term": "Sutura sphenoethmoidalis"
+    },
+    {
+      "itemNumber": 9,
+      "term": "Sutura temporozygomatica"
+    },
+    {
+      "itemNumber": 10,
+      "term": "Sutura internasalis",
+      "not": "Kaynakta internasilis/internatalis varyantları var"
+    },
+    {
+      "itemNumber": 11,
+      "term": "Sutura nasomaxillaris"
+    },
+    {
+      "itemNumber": 12,
+      "term": "Sutura lacrimomaxillaris"
+    },
+    {
+      "itemNumber": 13,
+      "term": "Sutura lacrimoconchalis"
+    },
+    {
+      "itemNumber": 14,
+      "term": "Sutura intermaxillaris"
+    },
+    {
+      "itemNumber": 15,
+      "term": "Sutura palatomaxillaris"
+    },
+    {
+      "itemNumber": 16,
+      "term": "Sutura palatoethmoidalis"
+    },
+    {
+      "itemNumber": 17,
+      "term": "Sutura interpalatina"
+    },
+    {
+      "itemNumber": 21,
+      "term": "Sutura occipitomastoidea"
+    },
+    {
+      "itemNumber": 24,
+      "term": "Sutura parietomastoidea"
+    },
+    {
+      "itemNumber": 25,
+      "term": "Sutura squamomastoidea"
+    },
+    {
+      "itemNumber": 26,
+      "term": "Sutura frontozygomatica"
+    },
+    {
+      "itemNumber": 28,
+      "term": "Sutura ethmoidomaxillaris"
+    },
+    {
+      "itemNumber": 29,
+      "term": "Sutura ethmoidolacrimalis"
+    },
+    {
+      "itemNumber": 30,
+      "term": "Sutura sphenovomeralis"
+    },
+    {
+      "itemNumber": 31,
+      "term": "Sutura sphenozygomatica"
+    },
+    {
+      "itemNumber": 32,
+      "term": "Sutura sphenomaxillaris"
+    },
+    {
+      "itemNumber": 33,
+      "term": "Sutura palatina mediana"
+    },
+    {
+      "itemNumber": 34,
+      "term": "Sutura palatina transversa"
+    }
+  ]
+}

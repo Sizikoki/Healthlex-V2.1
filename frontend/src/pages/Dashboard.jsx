@@ -204,7 +204,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
   const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 1;
   const remainingPlays = flashcardInfo?.playsRemaining ?? 5;
   const totalPlays = flashcardInfo?.maxPlays ?? 5;
-  const termsVal = termCount ? String(termCount) : '590';
+  const termsVal = String(termCount || getInitialTermCount());
 
   const quotas = [
     {

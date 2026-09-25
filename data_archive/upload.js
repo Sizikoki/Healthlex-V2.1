@@ -249,8 +249,23 @@ async function uploadTerms() {
   console.log(`   Okunan toplam terim  : ${totalLoaded}`);
   console.log(`   Başarıyla yüklenen   : ${totalUploaded}`);
   console.log(`   Atlanan (zaten var)  : ${totalSkipped}`);
-  console.log(`   Geçersiz (şema hatası): ${totalInvalid}`);
   console.log("─".repeat(45));
+
+  // Update frontend termCount.json configuration automatically
+  try {
+    const totalSnapshot = await db.collection(COLLECTION_NAME).count().get();
+    const finalTotal = totalSnapshot.data().count;
+    const configPath = path.resolve(__dirname, "../frontend/src/data/termCount.json");
+    if (fs.existsSync(path.dirname(configPath))) {
+      fs.writeFileSync(configPath, JSON.stringify({
+        totalTerms: finalTotal,
+        lastUpdated: new Date().toISOString()
+      }, null, 2) + "\n", "utf8");
+      console.log(`   ⚡ termCount.json otomatik güncellendi: ${finalTotal}`);
+    }
+  } catch (err) {
+    console.warn("   ⚠️ termCount.json güncellenemedi:", err.message);
+  }
 }
 
 uploadTerms()

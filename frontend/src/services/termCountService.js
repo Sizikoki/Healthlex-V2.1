@@ -1,15 +1,16 @@
 import { db } from '@/firebase/config';
 import { collection, getCountFromServer } from 'firebase/firestore';
-import { getAllTerms } from '@/data/medicalTerms';
+import termCountConfig from '@/data/termCount.json';
 
-let cachedCount = null;
+const BASELINE_COUNT = typeof termCountConfig?.totalTerms === 'number' ? termCountConfig.totalTerms : 695;
+let cachedCount = BASELINE_COUNT;
 let lastFetchTime = 0;
 const CACHE_TTL_MS = 60 * 1000; // 1 dakika önbellek
 
 /**
  * Terim sayısını tek bir merkezi kaynaktan döner.
  * Firestore getCountFromServer() API'si ile ucuz ve hızlı sorgu yapar.
- * Hata veya zaman aşımında yerel getAllTerms().length değerine döner.
+ * Hata veya zaman aşımında termCount.json yapılandırmasındaki güncel tabana döner.
  */
 export async function getTermCount() {
   const now = Date.now();
@@ -35,19 +36,15 @@ export async function getTermCount() {
       return count;
     }
   } catch (err) {
-    console.warn('[termCountService] Could not fetch live count from Firestore, using local fallback:', err?.message);
+    console.warn('[termCountService] Could not fetch live count from Firestore, using config fallback:', err?.message);
   }
 
-  const fallbackCount = getAllTerms().length;
-  cachedCount = fallbackCount;
-  lastFetchTime = now;
-  return fallbackCount;
+  return cachedCount;
 }
 
 /**
- * Senkron olarak mevcut veya yerel terim sayısını anında döner (ilk render için).
+ * Senkron olarak mevcut veya yapılandırma dosyasındaki terim sayısını anında döner (ilk render için).
  */
 export function getInitialTermCount() {
-  if (cachedCount !== null) return cachedCount;
-  return getAllTerms().length;
+  return cachedCount;
 }
