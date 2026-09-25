@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const SERVICE_ACCOUNT_PATH = path.join(__dirname, "../data_archive/serviceAccountKey.json");
-const DATA_FILE_PATH = path.join(__dirname, "../data_archive/maxilla_palatinum.json");
+const DATA_FILE_PATH = path.join(__dirname, "../data_archive/bas_boyun_kaslari.json");
 const COLLECTION_NAME = "terms";
 
 if (!fs.existsSync(SERVICE_ACCOUNT_PATH)) {
@@ -18,9 +18,11 @@ if (!fs.existsSync(DATA_FILE_PATH)) {
 
 const serviceAccount = require(SERVICE_ACCOUNT_PATH);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
 const db = admin.firestore();
 
@@ -56,35 +58,41 @@ function formatEnglishTerm(str) {
       suffix = ')';
       cleanWord = cleanWord.slice(0, -1);
     }
+    
     if (cleanWord === cleanWord.toUpperCase() && cleanWord.length >= 2) {
       return prefix + cleanWord + suffix;
     }
+    
     if (lowercaseWords.has(cleanWord.toLowerCase()) && index > 0) {
       return prefix + cleanWord.toLowerCase() + suffix;
     }
+    
     const capitalized = cleanWord.charAt(0).toLocaleUpperCase('tr-TR') + cleanWord.slice(1).toLocaleLowerCase('tr-TR');
     return prefix + capitalized + suffix;
   }).join(' ');
 }
 
 async function run() {
-  const raw = fs.readFileSync(DATA_FILE_PATH, "utf8");
-  const items = JSON.parse(raw);
+  const rawData = fs.readFileSync(DATA_FILE_PATH, 'utf8');
+  const items = JSON.parse(rawData);
+
   console.log(`Loaded ${items.length} items from ${DATA_FILE_PATH}`);
 
-  // Validation
-  for (let i = 0; i < items.length; i++) {
-    const expectedId = 724 + i;
-    const item = items[i];
-    if (item.id !== expectedId) {
-      throw new Error(`ID mismatch at index ${i}: expected ${expectedId}, found ${item.id}`);
-    }
-    if (item.subcategory !== 'face_bones') {
-      item.subcategory = 'face_bones';
-    }
+  // Safety checks
+  if (items.length !== 77) {
+    throw new Error(`Expected 77 items, but found ${items.length}!`);
   }
 
-  // Pre-check Firestore count & max ID
+  const ids = items.map(i => i.id);
+  const minId = Math.min(...ids);
+  const maxId = Math.max(...ids);
+  console.log(`Item ID range: ${minId} - ${maxId}`);
+
+  if (minId !== 829 || maxId !== 905) {
+    throw new Error(`Safety abort: IDs are expected to be 829-905, found ${minId}-${maxId}`);
+  }
+
+  // Pre-check Firestore
   const initialSnapshot = await db.collection(COLLECTION_NAME).get();
   console.log(`Initial total Firestore documents: ${initialSnapshot.size}`);
 
@@ -95,8 +103,8 @@ async function run() {
   });
   console.log(`Initial max ID: ${initialMaxId}`);
 
-  if (initialMaxId !== 723) {
-    throw new Error(`Safety abort: initial max ID is ${initialMaxId}, expected 723!`);
+  if (initialMaxId !== 828) {
+    throw new Error(`Safety abort: initial max ID is ${initialMaxId}, expected 828!`);
   }
 
   // Batch insert
@@ -116,7 +124,7 @@ async function run() {
       roots: item.roots ? item.roots.trim() : "",
       category: item.category ? item.category.trim() : "anatomy",
       system: item.system ? item.system.trim() : "movement",
-      subcategory: "face_bones",
+      subcategory: "head_and_neck_muscles",
       englishDefinition: item.englishDefinition ? item.englishDefinition.trim() : "",
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     };
@@ -127,7 +135,7 @@ async function run() {
 
   console.log(`Committing batch with ${count} items...`);
   await batch.commit();
-  console.log(`Successfully committed ${count} items!`);
+  console.log(`Successfully committed ${count} items to Firestore!`);
 
   // Verification
   const finalSnapshot = await db.collection(COLLECTION_NAME).get();
@@ -140,8 +148,8 @@ async function run() {
   });
   console.log(`Final max ID: ${finalMaxId}`);
 
-  // Fetch requested documents: 724, 753, 782
-  const checkDocIds = ['724', '753', '782'];
+  // Fetch requested documents: 829, 867, 905
+  const checkDocIds = ['829', '867', '905'];
   const fetchedDocs = {};
   for (const dId of checkDocIds) {
     const d = await db.collection(COLLECTION_NAME).doc(dId).get();

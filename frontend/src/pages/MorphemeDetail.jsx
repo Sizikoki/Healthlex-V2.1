@@ -404,8 +404,8 @@ export const MorphemeDetail = () => {
           </h3>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {isTr
-              ? '570+ morfem ve 13 kategori ile anatomiyi 4 interaktif oyun modunda test edin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
-              : 'Master Latin medical terminology through 570+ morphemes and 4 game modes. Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
+              ? '570+ morfem ve 14 kategori ile anatomiyi 4 interaktif oyun modunda test edin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
+              : 'Master Latin medical terminology through 570+ morphemes, 14 categories and 4 game modes. Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Button

@@ -47,14 +47,14 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Temel',
-        tag: '13 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
+        tag: '14 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
         noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
         cta: '3 Gün Ücretsiz Dene',
         feats: [
-          ['✓', '13 anatomik kategori · 100 morfem'],
+          ['✓', '14 anatomik kategori · 100 morfem'],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
@@ -72,7 +72,7 @@ const TRANSLATIONS = {
         noteMo: 'Sadece yıllık · ₺167/ay',
         cta: '3 Gün Ücretsiz Dene',
         feats: [
-          ['✓', '13 kategori · 571+ morfem'],
+          ['✓', '14 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -88,7 +88,7 @@ const TRANSLATIONS = {
         note: 'Tek ödeme · Deneme süresi yoktur (Doğrudan satın alma)',
         cta: 'Ömür Boyu Satın Al',
         feats: [
-          ['✓', '13 kategori · 571+ morfem'],
+          ['✓', '14 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -97,7 +97,7 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Çalışma / Sözlük terimleri', '13 Kategori (Tümü açık)', '13 Kategori (Tümü açık)', '13 Kategori (Tümü açık)'],
+      ['Çalışma / Sözlük terimleri', '14 Kategori (Tümü açık)', '14 Kategori (Tümü açık)', '14 Kategori (Tümü açık)'],
       ['Morfem kütüphanesi', '100 morfem', '571+ (Tümü)', '571+ (Tümü)'],
       ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız', 'Sınırsız'],
       ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
@@ -142,14 +142,14 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Basic',
-        tag: '13 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
+        tag: '14 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
         noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
         cta: 'Start 3-Day Free Trial',
         feats: [
-          ['✓', '13 anatomical categories · 100 morphemes'],
+          ['✓', '14 anatomical categories · 100 morphemes'],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Pro & above)'],
@@ -167,7 +167,7 @@ const TRANSLATIONS = {
         noteMo: 'Yearly only · ₺167/mo',
         cta: 'Start 3-Day Free Trial',
         feats: [
-          ['✓', '13 categories · 571+ morphemes'],
+          ['✓', '14 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -183,7 +183,7 @@ const TRANSLATIONS = {
         note: 'One payment · No trial period (Direct purchase)',
         cta: 'Buy Lifetime Plan',
         feats: [
-          ['✓', '13 categories · 571+ morphemes'],
+          ['✓', '14 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -192,7 +192,7 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Study / Glossary terms', 'All 13 Categories Unlocked', 'All 13 Categories Unlocked', 'All 13 Categories Unlocked'],
+      ['Study / Glossary terms', 'All 14 Categories Unlocked', 'All 14 Categories Unlocked', 'All 14 Categories Unlocked'],
       ['Morpheme library', '100 morphemes', '571+ (All)', '571+ (All)'],
       ['Flashcard · Matching', 'Unlimited', 'Unlimited', 'Unlimited'],
       ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],

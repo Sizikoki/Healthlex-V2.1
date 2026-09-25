@@ -25,10 +25,18 @@ Whenever seeding new JSON datasets into Firestore (via `upload.js` seed script) 
 - Must be a short string, usually derived from the part before the semicolon `;` in the full definition.
 - Must remain completely untouched once set/derived.
 
-## Term Count Synchronization
+## Dual Synchronization (Frontend Bundle & Term Count)
 
-Whenever seeding new JSON datasets into Firestore or modifying the terms collection, ensure `frontend/src/data/termCount.json` is updated with the latest Firestore document count:
-- The central `termCountService.js` loads `termCount.json` as its baseline synchronous value for `getInitialTermCount()` and queries Firestore live count in the background via `getTermCount()`.
-- Seed scripts must automatically update `frontend/src/data/termCount.json` upon completion so the frontend baseline never goes stale.
+Whenever seeding new JSON datasets into Firestore or modifying the terms collection:
+1. **Frontend Bundle Synchronization (`medicalTerms.js`)**:
+   - Seed and upload scripts (`upload.js`, `scripts/upload_*.js`) must automatically merge newly uploaded terms into `frontend/src/data/medicalTerms.js` using `scripts/syncTermBundle.js`.
+   - The merge must place terms into their respective `subcategory` array, prevent duplicate insertions by `id`, and preserve 8-space indentation and valid JS formatting.
+   - This ensures offline/static bundle features (sitemap generation, offline flashcards, static search fallbacks) remain immediately synchronized with Firestore.
+
+2. **Term Count Synchronization (`termCount.json`)**:
+   - Seed scripts must automatically update `frontend/src/data/termCount.json` with the latest Firestore document count upon completion.
+   - The central `termCountService.js` loads `termCount.json` as its baseline synchronous value for `getInitialTermCount()` and queries Firestore live count in the background via `getTermCount()`.
+   - Never hardcode term counts in UI components (`Dashboard.jsx`, `Welcome.jsx`, etc.); always query `termCountService.js`.
+
 
 

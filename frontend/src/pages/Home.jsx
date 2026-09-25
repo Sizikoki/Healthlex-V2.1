@@ -206,7 +206,7 @@ export const Home = () => {
                 <div className="l">{content.features.morphemes}</div>
               </div>
               <div className="stat">
-                <div className="n">10</div>
+                <div className="n">14</div>
                 <div className="l">{content.features.categories}</div>
               </div>
               <div className="stat">

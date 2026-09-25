@@ -150,6 +150,14 @@ async function run() {
 
   console.log("\n=== FETCHED DOCUMENTS ===");
   console.log(JSON.stringify(fetchedDocs, null, 2));
+
+  // Auto-sync frontend bundle and termCount.json
+  try {
+    const { syncTermsToBundle } = require("./syncTermBundle");
+    syncTermsToBundle(DATA_FILE_PATH, finalSnapshot.size);
+  } catch (err) {
+    console.warn("⚠️ Bundle sync error:", err.message);
+  }
 }
 
 run().catch(err => {

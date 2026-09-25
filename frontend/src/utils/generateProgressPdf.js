@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { getInitialTermCount } from '@/services/termCountService';
 
 export const generateProgressPdf = async ({
   user,
@@ -13,7 +14,7 @@ export const generateProgressPdf = async ({
   planName = 'Temel',
   isTr = true
 }) => {
-  // 13 Kategori Listesi
+  // 14 Kategori Listesi
   const catList = [
     { id: 'skull_bones', name: isTr ? 'Kafatası Kemikleri' : 'Skull Bones' },
     { id: 'trunk_bones', name: isTr ? 'Gövde Kemikleri' : 'Trunk Bones' },
@@ -24,13 +25,14 @@ export const generateProgressPdf = async ({
     { id: 'lower_extremity_joints', name: isTr ? 'Alt Ekstremite Eklemleri' : 'Lower Extremity Joints' },
     { id: 'spine_joints', name: isTr ? 'Omurga Eklemleri' : 'Spine Joints' },
     { id: 'head_and_neck_joints', name: isTr ? 'Kafa ve Boyun Eklemleri' : 'Head & Neck Joints' },
+    { id: 'head_and_neck_muscles', name: isTr ? 'Baş ve Boyun Kasları' : 'Head & Neck Muscles' },
     { id: 'muscle_structures', name: isTr ? 'Kas ve Kasla İlişkili Yapılar' : 'Muscle Structures' },
     { id: 'bone_structures', name: isTr ? 'Kemik / İskelet Yapıları' : 'Bone Structures' },
     { id: 'movement_terms', name: isTr ? 'Hareket Terimleri' : 'Movement Terms' },
     { id: 'anatomic_direction', name: isTr ? 'Anatomik Yön Terimleri' : 'Anatomical Directions' }
   ];
 
-  const totalTermsCount = terms.length || 588;
+  const totalTermsCount = terms.length || getInitialTermCount();
   const learnedCount = Object.values(progress).filter(p => p?.learned).length || stats.learnedTerms || 0;
   const generalPct = totalTermsCount > 0 ? Math.round((learnedCount / totalTermsCount) * 100) : 0;
 
@@ -150,7 +152,7 @@ export const generateProgressPdf = async ({
       <div style="margin-bottom: 22px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <h2 style="font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
-            ${isTr ? '13 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 13 Anatomical Categories'}
+            ${isTr ? '14 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 14 Anatomical Categories'}
           </h2>
           <span style="font-size: 11px; color: #64748b;">${totalTermsCount} ${isTr ? 'toplam medikal terim' : 'total terms'}</span>
         </div>

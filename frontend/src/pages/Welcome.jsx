@@ -226,7 +226,7 @@ export const Welcome = () => {
     if (isTr) {
       if (isPro || effectiveUser?.isLifetime) {
         return [
-          { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: '13 kategori, sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },
+          { name: 'Kategoriler', desc: '14 tıp kategorisi', type: 'open', limit: '14 kategori, sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
           { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '571+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '571+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Kişisel tekrar algoritması aktif', pro: 'Sınırsız' },
@@ -239,7 +239,7 @@ export const Welcome = () => {
 
       if (isBasic) {
         return [
-          { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: '13 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
+          { name: 'Kategoriler', desc: '14 tıp kategorisi', type: 'open', limit: '14 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
           { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '571+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Limitsiz kart çalışması', pro: 'Sınırsız' },
@@ -252,7 +252,7 @@ export const Welcome = () => {
 
       // Guest / Free default
       return [
-        { name: 'Kategoriler', desc: '13 tıp kategorisi', type: 'open', limit: '13 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
+        { name: 'Kategoriler', desc: '14 tıp kategorisi', type: 'open', limit: '14 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
         { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
         { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '571+ morfem' },
         { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'part', limit: 'Günde 5 oyun', sub: 'Her gece yenilenir', pro: 'Sınırsız' },
@@ -266,7 +266,7 @@ export const Welcome = () => {
     // English Rows
     if (isPro || effectiveUser?.isLifetime) {
       return [
-        { name: 'Categories', desc: '13 medical categories', type: 'open', limit: '13 categories, unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' },
+        { name: 'Categories', desc: '14 medical categories', type: 'open', limit: '14 categories, unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
         { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '571+ morphemes open', sub: 'Full library unlocked', pro: '571+ morphemes' },
         { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Adaptive algorithm active', pro: 'Unlimited' },
@@ -279,7 +279,7 @@ export const Welcome = () => {
 
     if (isBasic) {
       return [
-        { name: 'Categories', desc: '13 medical categories', type: 'open', limit: '13 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
+        { name: 'Categories', desc: '14 medical categories', type: 'open', limit: '14 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
         { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '571+ morphemes' },
         { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
@@ -291,7 +291,7 @@ export const Welcome = () => {
     }
 
     return [
-      { name: 'Categories', desc: '13 medical categories', type: 'open', limit: '13 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
+      { name: 'Categories', desc: '14 medical categories', type: 'open', limit: '14 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
       { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '571+ morphemes' },
       { name: 'Flashcards', desc: 'Spaced repetition with cards', type: 'part', limit: '5 games per day', sub: 'Refreshes every midnight', pro: 'Unlimited' },
@@ -339,11 +339,11 @@ export const Welcome = () => {
       return {
         title: isTr ? 'Tüm içerikler hesabında aktif!' : 'All content is active on your account!',
         subtitle: isTr
-          ? '13 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
-          : 'Enjoy unlimited access to all categories, 571+ morphemes, and 4 game modes.',
+          ? '14 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
+          : 'Enjoy unlimited access to all 14 categories, 571+ morphemes, and 4 game modes.',
         mobileSubtitle: isTr
-          ? '13 kategori, 571+ morfem ve 4 oyun modu sınırsız kullanımına hazır.'
-          : 'All 13 categories, 571+ morphemes, and 4 game modes are active.',
+          ? '14 kategori, 571+ morfem ve 4 oyun modu sınırsız kullanımına hazır.'
+          : 'All 14 categories, 571+ morphemes, and 4 game modes are active.',
         secondaryText: isTr ? 'Panelime Git' : 'Go to Dashboard',
         secondaryLink: '/dashboard',
         primaryText: isTr ? 'Çalışmaya Başla →' : 'Start Studying →',
@@ -478,7 +478,7 @@ export const Welcome = () => {
                   {isTr ? 'Tıbbi Terimler Sözlüğü' : 'Medical Dictionary'}
                 </div>
                 <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? '13 kategori, 588+ detaylı tıbbi terim ve klinik köken.' : '13 categories, 588+ medical terms with origins.'}
+                  {isTr ? '14 kategori, 770+ detaylı tıbbi terim ve klinik köken.' : '14 categories, 770+ medical terms with origins.'}
                 </div>
               </div>
             </Link>

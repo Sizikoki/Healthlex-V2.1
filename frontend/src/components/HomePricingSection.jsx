@@ -25,7 +25,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Temel',
-        tag: '13 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
+        tag: '14 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
@@ -33,7 +33,7 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: false,
         feats: [
-          ['✓', '13 anatomik kategori · 100 morfem'],
+          ['✓', '14 anatomik kategori · 100 morfem'],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
@@ -53,7 +53,7 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: true,
         feats: [
-          ['✓', '13 kategori · 571+ morfem'],
+          ['✓', '14 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -72,7 +72,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '13 kategori · 571+ morfem'],
+          ['✓', '14 kategori · 571+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -98,7 +98,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Basic',
-        tag: '13 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
+        tag: '14 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
@@ -106,7 +106,7 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: false,
         feats: [
-          ['✓', '13 anatomical categories · 100 morphemes'],
+          ['✓', '14 anatomical categories · 100 morphemes'],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Pro & above)'],
@@ -126,7 +126,7 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: true,
         feats: [
-          ['✓', '13 categories · 571+ morphemes'],
+          ['✓', '14 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -145,7 +145,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '13 categories · 571+ morphemes'],
+          ['✓', '14 categories · 571+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],

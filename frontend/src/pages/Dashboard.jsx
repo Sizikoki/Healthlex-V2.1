@@ -101,6 +101,7 @@ const FREE_DASHBOARD_CATEGORIES = [
   { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', enName: 'Lower Extremity Joints', defaultCount: 29 },
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', enName: 'Spine Joints', defaultCount: 22 },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', enName: 'Head and Neck Joints', defaultCount: 18 },
+  { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları', enName: 'Head and Neck Muscles', defaultCount: 77 },
   { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', enName: 'Muscles & Related Structures', defaultCount: 64 },
   { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', enName: 'Bone & Skeletal Structures', defaultCount: 35 },
   { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', enName: 'Movement Terms', defaultCount: 26 },
@@ -230,7 +231,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
     },
     {
       label: isTr ? 'KATEGORİ' : 'CATEGORIES',
-      v: '13',
+      v: `${FREE_DASHBOARD_CATEGORIES.length}`,
       unit: isTr ? 'açık' : 'open',
       note: isTr ? 'Sınırsız gezinme, kilit yok' : 'Unlimited browsing, zero locks',
       borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
@@ -314,7 +315,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
           <div className="flex flex-col gap-3.5 text-left">
             <div className="flex justify-between items-baseline">
               <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'KATEGORİLER · 13' : 'CATEGORIES · 13'}
+                {isTr ? `KATEGORİLER · ${FREE_DASHBOARD_CATEGORIES.length}` : `CATEGORIES · ${FREE_DASHBOARD_CATEGORIES.length}`}
               </span>
               <Link to="/study" className="font-bold text-[13px] text-[#2563eb] hover:underline">
                 {isTr ? 'Tümünü gör →' : 'View all →'}
@@ -866,11 +867,11 @@ const BasicUserDashboard = ({
 
         {/* 3 Ana Sütun Bölümü (Kategoriler | Morfemler | Oyunlar) */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr_1fr] gap-5 items-start">
-          {/* SÜTUN 1: KATEGORİLER (13) & SON BAKILAN TERİMLER */}
+          {/* SÜTUN 1: KATEGORİLER (14) & SON BAKILAN TERİMLER */}
           <div className="flex flex-col gap-3.5 text-left">
             <div className="flex justify-between items-baseline">
               <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'KATEGORİLER · 13' : 'CATEGORIES · 13'}
+                {isTr ? `KATEGORİLER · ${FREE_DASHBOARD_CATEGORIES.length}` : `CATEGORIES · ${FREE_DASHBOARD_CATEGORIES.length}`}
               </span>
               <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
                 {isTr ? 'Tümü →' : 'View all →'}
@@ -1684,11 +1685,11 @@ const ProUserDashboard = ({
           </div>
         </div>
 
-        {/* KATEGORİLER KÜTÜPHANESİ · 13 AÇIK + GENEL BAKIŞ (Ekranı zenginleştiren tam genişlik kütüphane) */}
+        {/* KATEGORİLER KÜTÜPHANESİ · 14 AÇIK + GENEL BAKIŞ (Ekranı zenginleştiren tam genişlik kütüphane) */}
         <div className="flex flex-col gap-3.5 text-left">
           <div className="flex justify-between items-baseline">
             <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-              {isTr ? 'KATEGORİLER KÜTÜPHANESİ · 13 AÇIK' : 'CATEGORY LIBRARY · 13 UNLOCKED'}
+              {isTr ? `KATEGORİLER KÜTÜPHANESİ · ${FREE_DASHBOARD_CATEGORIES.length} AÇIK` : `CATEGORY LIBRARY · ${FREE_DASHBOARD_CATEGORIES.length} UNLOCKED`}
             </span>
             <Link to="/study" className="font-bold text-[12px] text-[#2563eb] hover:underline">
               {isTr ? 'Tüm Kütüphaneyi Gör →' : 'View Full Library →'}

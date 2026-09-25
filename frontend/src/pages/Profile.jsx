@@ -611,19 +611,19 @@ export const Profile = () => {
                       : isTrialActive
                       ? (isBasic
                           ? (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 13 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
-                              : 'You are on a 3-day free trial. Full access to all 13 categories, 571+ morphemes, and 4 game modes.')
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 14 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 14 categories, 571+ morphemes, and 4 game modes.')
                           : (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. 13 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
-                              : 'You are on a 3-day free trial. Full access to all 13 categories, 571+ morphemes, and 4 game modes.'))
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. 14 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 14 categories, 571+ morphemes, and 4 game modes.'))
                       : isProPlan
                       ? (isTr
                           ? 'Tüm tıbbi terminoloji morfemlerine, oyun modlarına ve detaylı analizlere sınırsız erişim.'
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
                       : isBasic
                       ? (isTr
-                          ? 'Temel plandasınız: 13 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 571+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
-                          : 'You are on the Basic plan: 13 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 571+ morphemes and Quiz.')
+                          ? 'Temel plandasınız: 14 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 571+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
+                          : 'You are on the Basic plan: 14 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 571+ morphemes and Quiz.')
                       : (isTr
                           ? 'Temel erişimdesiniz. 571 morfem kütüphanesi, 4 oyun modu ve seviye sisteminin tamamına sınırsız erişmek için Pro\'ya geçin.'
                           : 'You have trial access. Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.')}
@@ -819,8 +819,8 @@ export const Profile = () => {
                   </div>
                   <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5 max-w-[420px]">
                     {isTr 
-                      ? '13 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerinizi içeren resmi PDF raporu.' 
-                      : 'Official PDF report containing 13 categories, learned terms, badges, and study stats.'}
+                      ? '14 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerinizi içeren resmi PDF raporu.' 
+                      : 'Official PDF report containing 14 categories, learned terms, badges, and study stats.'}
                   </div>
                   <button
                     type="button"
