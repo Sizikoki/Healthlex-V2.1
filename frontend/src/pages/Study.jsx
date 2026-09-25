@@ -40,15 +40,6 @@ const CATEGORIES = [
   { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri', system: 'movement', subcategory: 'anatomic_direction' },
 ];
 
-const UPPER_EXTREMITY_GROUPS = [
-  { name: 'Scapula', ids: [19, 59, 60, 91, 92, 93, 94, 95, 96, 97, 98] },
-  { name: 'Clavicula', ids: [20, 83, 84, 85, 86, 87, 88, 89, 90] },
-  { name: 'Humerus', ids: [21, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82] },
-  { name: 'Radius', ids: [22, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40] },
-  { name: 'Ulna', ids: [23, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53] },
-  { name: 'Ossa Manus', ids: [24, 25, 26, 54, 55, 56, 57, 58] }
-];
-
 const TermCard = React.memo(({
   term,
   isLearned,
@@ -312,6 +303,7 @@ export const Study = () => {
             category: termItem.category || '',
             system: termItem.system || '',
             subcategory: termItem.subcategory === 'motus' ? 'movement_terms' : (termItem.subcategory || ''),
+            group: termItem.group || '',
           }));
 
           setAllTerms((prev) => {
@@ -389,6 +381,48 @@ export const Study = () => {
     }
     return allRankedTerms;
   }, [searchQuery, searchScope, selectedCategoryId, categoryTerms, categoryRankedTerms, allRankedTerms]);
+
+  const termGroups = useMemo(() => {
+    if (searchQuery.trim()) return null;
+
+    const hasAnyGroup = terms.some((t) => Boolean(t.group && t.group.trim()));
+    if (!hasAnyGroup) return null;
+
+    const groupsMap = new Map();
+    const ungrouped = [];
+
+    terms.forEach((term) => {
+      const gName = term.group ? term.group.trim() : '';
+      if (gName) {
+        if (!groupsMap.has(gName)) {
+          groupsMap.set(gName, {
+            name: gName,
+            minId: Number(term.id) || Infinity,
+            terms: [],
+          });
+        }
+        const g = groupsMap.get(gName);
+        g.terms.push(term);
+        if (Number(term.id) < g.minId) {
+          g.minId = Number(term.id);
+        }
+      } else {
+        ungrouped.push(term);
+      }
+    });
+
+    const sortedGroups = Array.from(groupsMap.values()).sort((a, b) => a.minId - b.minId);
+
+    if (ungrouped.length > 0) {
+      sortedGroups.push({
+        name: isTr ? 'Diğer Yapılar' : 'Other Structures',
+        minId: Infinity,
+        terms: ungrouped,
+      });
+    }
+
+    return sortedGroups;
+  }, [terms, searchQuery, isTr]);
 
   const handleMarkAsLearned = (termId) => {
     try {
@@ -675,23 +709,22 @@ export const Study = () => {
               <h3 className="text-base font-semibold">{t('noTermsFound')}</h3>
               <p className="text-sm text-muted-foreground mt-1">{t('tryAnotherSearch')}</p>
             </div>
-          ) : selectedCategoryId === 'upper_extremity_bones' && !searchQuery ? (
-            /* Üst Extremite Kemikleri - Gruplu Görünüm */
+          ) : termGroups ? (
+            /* Dinamik Gruplu Görünüm */
             <div className="space-y-10">
-              {UPPER_EXTREMITY_GROUPS.map((group) => {
-                const groupTerms = terms.filter(t => group.ids.includes(t.id));
-                if (groupTerms.length === 0) return null;
+              {termGroups.map((group) => {
+                if (group.terms.length === 0) return null;
 
                 return (
                   <div key={group.name} className="space-y-4">
                     <div className="flex items-center gap-3">
                       <h2 className="text-lg font-bold tracking-tight">{group.name}</h2>
                       <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {groupTerms.length}
+                        {group.terms.length}
                       </span>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-                      {groupTerms.map(renderTermCard)}
+                      {group.terms.map(renderTermCard)}
                     </div>
                   </div>
                 );

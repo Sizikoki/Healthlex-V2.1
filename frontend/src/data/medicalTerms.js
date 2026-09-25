@@ -6170,7 +6170,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kabaca üçgen şeklinde bir göğüs kemeri kemiğidir",
-            "englishDefinition": "A flat, triangular bone forming the posterior part of the shoulder girdle, connecting the upper limb to the trunk."
+            "englishDefinition": "A flat, triangular bone forming the posterior part of the shoulder girdle, connecting the upper limb to the trunk.",
+            "group": "Scapula"
         },
         {
             "id": 20,
@@ -6182,7 +6183,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Göğüs kemerinin aksial iskelete bağlayan tek kemiktir",
-            "englishDefinition": "An S-shaped long bone forming the anterior part of the shoulder girdle, linking the sternum to the scapula."
+            "englishDefinition": "An S-shaped long bone forming the anterior part of the shoulder girdle, linking the sternum to the scapula.",
+            "group": "Clavicula"
         },
         {
             "id": 21,
@@ -6194,7 +6196,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Üst kol bölgesinde yer alan uzun bir kemiktir",
-            "englishDefinition": "The single long bone of the arm, extending from the shoulder to the elbow, and the largest bone of the upper limb."
+            "englishDefinition": "The single long bone of the arm, extending from the shoulder to the elbow, and the largest bone of the upper limb.",
+            "group": "Humerus"
         },
         {
             "id": 22,
@@ -6206,7 +6209,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ön kolda bulunan ve başparmak tarafındaki kemiktir",
-            "englishDefinition": "The lateral (thumb-side) forearm bone, articulating with the humerus, ulna, and carpal bones."
+            "englishDefinition": "The lateral (thumb-side) forearm bone, articulating with the humerus, ulna, and carpal bones.",
+            "group": "Radius"
         },
         {
             "id": 23,
@@ -6218,7 +6222,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ön kolda bulunan ve serçe parmak tarafında bulunan kemiktir",
-            "englishDefinition": "The medial (little-finger-side) forearm bone, longer than the radius and forming the main hinge of the elbow."
+            "englishDefinition": "The medial (little-finger-side) forearm bone, longer than the radius and forming the main hinge of the elbow.",
+            "group": "Ulna"
         },
         {
             "id": 24,
@@ -6230,7 +6235,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğini oluşturan 8 kısa kemikten meydana gelir ve ön kol ile el arasındaki eklemleşmeyi sağlar",
-            "englishDefinition": "Eight short bones arranged in two rows forming the wrist, connecting the forearm to the hand."
+            "englishDefinition": "Eight short bones arranged in two rows forming the wrist, connecting the forearm to the hand.",
+            "group": "Ossa Manus"
         },
         {
             "id": 25,
@@ -6242,7 +6248,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El iskeletinde Ossa Carpi ile Phalanges Proximales arasında yer alan 5 uzun kemiktir",
-            "englishDefinition": "Five miniature long bones forming the palm, connecting the carpal bones to the phalanges."
+            "englishDefinition": "Five miniature long bones forming the palm, connecting the carpal bones to the phalanges.",
+            "group": "Ossa Manus"
         },
         {
             "id": 26,
@@ -6254,7 +6261,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Phalanges Digitorum Manus, parmakların kemikleridir",
             "englishDefinition": "The bones of the fingers; two in the thumb and three in each other digit, totaling 14.",
-            "term": "Phalanges Manus"
+            "term": "Phalanges Manus",
+            "group": "Ossa Manus"
         },
         {
             "id": 27,
@@ -6266,7 +6274,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius başının eklem çukuru",
-            "englishDefinition": "A shallow depression on top of the radial head that articulates with the capitulum of the humerus."
+            "englishDefinition": "A shallow depression on top of the radial head that articulates with the capitulum of the humerus.",
+            "group": "Radius"
         },
         {
             "id": 28,
@@ -6278,7 +6287,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius başı",
-            "englishDefinition": "The disc-shaped proximal end of the radius, articulating with the humerus and the radial notch of the ulna."
+            "englishDefinition": "The disc-shaped proximal end of the radius, articulating with the humerus and the radial notch of the ulna.",
+            "group": "Radius"
         },
         {
             "id": 29,
@@ -6290,7 +6300,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius boynu",
-            "englishDefinition": "The narrowed segment of the radius located just below its head."
+            "englishDefinition": "The narrowed segment of the radius located just below its head.",
+            "group": "Radius"
         },
         {
             "id": 30,
@@ -6302,7 +6313,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius pürtüğü",
-            "englishDefinition": "A bony prominence below the radial neck serving as the insertion site for the biceps brachii tendon."
+            "englishDefinition": "A bony prominence below the radial neck serving as the insertion site for the biceps brachii tendon.",
+            "group": "Radius"
         },
         {
             "id": 31,
@@ -6314,7 +6326,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un ön kenarı",
-            "englishDefinition": "The rounded anterior edge running along the shaft of the radius."
+            "englishDefinition": "The rounded anterior edge running along the shaft of the radius.",
+            "group": "Radius"
         },
         {
             "id": 32,
@@ -6326,7 +6339,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un ön yüzü",
-            "englishDefinition": "The forward-facing surface of the radial shaft, giving attachment to forearm flexor muscles."
+            "englishDefinition": "The forward-facing surface of the radial shaft, giving attachment to forearm flexor muscles.",
+            "group": "Radius"
         },
         {
             "id": 33,
@@ -6338,7 +6352,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un kemikler arası kenarı",
-            "englishDefinition": "The sharp medial edge of the radius facing the ulna, anchoring the interosseous membrane."
+            "englishDefinition": "The sharp medial edge of the radius facing the ulna, anchoring the interosseous membrane.",
+            "group": "Radius"
         },
         {
             "id": 34,
@@ -6350,7 +6365,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un arka kenarı",
-            "englishDefinition": "The posterior edge running along the shaft of the radius."
+            "englishDefinition": "The posterior edge running along the shaft of the radius.",
+            "group": "Radius"
         },
         {
             "id": 35,
@@ -6362,7 +6378,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un arka yüzü",
-            "englishDefinition": "The backward-facing surface of the radial shaft, giving attachment to forearm extensor muscles."
+            "englishDefinition": "The backward-facing surface of the radial shaft, giving attachment to forearm extensor muscles.",
+            "group": "Radius"
         },
         {
             "id": 36,
@@ -6374,7 +6391,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un dış yan yüzü",
-            "englishDefinition": "The outward-facing surface of the radial shaft, between the anterior and posterior borders."
+            "englishDefinition": "The outward-facing surface of the radial shaft, between the anterior and posterior borders.",
+            "group": "Radius"
         },
         {
             "id": 37,
@@ -6386,7 +6404,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un alt ucunda el bileği kemikleriyle eklemleşen yüzeyi",
             "englishDefinition": "The distal surface of the radius that articulates with the proximal row of carpal bones at the wrist.",
-            "term": "Facies Articularis Carpalis"
+            "term": "Facies Articularis Carpalis",
+            "group": "Radius"
         },
         {
             "id": 38,
@@ -6398,7 +6417,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un alt ucundaki dirsek kemiği çentiği",
-            "englishDefinition": "A concavity on the medial side of the distal radius that articulates with the head of the ulna."
+            "englishDefinition": "A concavity on the medial side of the distal radius that articulates with the head of the ulna.",
+            "group": "Radius"
         },
         {
             "id": 39,
@@ -6410,7 +6430,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius'un arka yüzündeki dorsal tümsekçik",
-            "englishDefinition": "A bony prominence (Lister's tubercle) on the posterior distal radius, acting as a pulley for the extensor pollicis longus tendon."
+            "englishDefinition": "A bony prominence (Lister's tubercle) on the posterior distal radius, acting as a pulley for the extensor pollicis longus tendon.",
+            "group": "Radius"
         },
         {
             "id": 40,
@@ -6422,7 +6443,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Radius alt ucunun dış yan tarafındaki kalem benzeri çıkıntı",
-            "englishDefinition": "A pointed projection on the lateral side of the distal radius, palpable at the wrist."
+            "englishDefinition": "A pointed projection on the lateral side of the distal radius, palpable at the wrist.",
+            "group": "Radius"
         },
         {
             "id": 41,
@@ -6434,7 +6456,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın üst ucunda bulunan dirsek çıkıntısı",
-            "englishDefinition": "The large proximal-posterior projection of the ulna that forms the point of the elbow."
+            "englishDefinition": "The large proximal-posterior projection of the ulna that forms the point of the elbow.",
+            "group": "Ulna"
         },
         {
             "id": 42,
@@ -6446,7 +6469,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın üst ucunda humerus trochleası (makara) ile eklemleşen çentik",
-            "englishDefinition": "A crescent-shaped notch on the ulna that grips the trochlea of the humerus at the elbow joint."
+            "englishDefinition": "A crescent-shaped notch on the ulna that grips the trochlea of the humerus at the elbow joint.",
+            "group": "Ulna"
         },
         {
             "id": 43,
@@ -6458,7 +6482,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın üst ucunda, ön taraftaki gaga benzeri çıkıntı",
-            "englishDefinition": "An anterior projection of the ulna forming the lower boundary of the trochlear notch."
+            "englishDefinition": "An anterior projection of the ulna forming the lower boundary of the trochlear notch.",
+            "group": "Ulna"
         },
         {
             "id": 44,
@@ -6470,7 +6495,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın üst ucunda radius başının eklemleştiği çentik",
-            "englishDefinition": "A lateral concavity on the ulna that articulates with the head of the radius."
+            "englishDefinition": "A lateral concavity on the ulna that articulates with the head of the radius.",
+            "group": "Ulna"
         },
         {
             "id": 45,
@@ -6482,7 +6508,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnadaki supinator kasın yapıştığı keskin kenar/ibik",
-            "englishDefinition": "A bony ridge below the radial notch of the ulna, giving origin to part of the supinator muscle."
+            "englishDefinition": "A bony ridge below the radial notch of the ulna, giving origin to part of the supinator muscle.",
+            "group": "Ulna"
         },
         {
             "id": 46,
@@ -6494,7 +6521,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnadaki pürtüklü tümsekçik",
-            "englishDefinition": "A roughened area below the coronoid process serving as the insertion site for the brachialis muscle."
+            "englishDefinition": "A roughened area below the coronoid process serving as the insertion site for the brachialis muscle.",
+            "group": "Ulna"
         },
         {
             "id": 47,
@@ -6506,7 +6534,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın ön yüzü",
-            "englishDefinition": "The forward-facing surface of the ulnar shaft, giving attachment to forearm flexor muscles."
+            "englishDefinition": "The forward-facing surface of the ulnar shaft, giving attachment to forearm flexor muscles.",
+            "group": "Ulna"
         },
         {
             "id": 48,
@@ -6518,7 +6547,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın kemikler arası kenarı",
-            "englishDefinition": "The sharp lateral edge of the ulna facing the radius, anchoring the interosseous membrane."
+            "englishDefinition": "The sharp lateral edge of the ulna facing the radius, anchoring the interosseous membrane.",
+            "group": "Ulna"
         },
         {
             "id": 49,
@@ -6530,7 +6560,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın ön kenarı",
-            "englishDefinition": "The rounded anterior edge running along the shaft of the ulna."
+            "englishDefinition": "The rounded anterior edge running along the shaft of the ulna.",
+            "group": "Ulna"
         },
         {
             "id": 50,
@@ -6542,7 +6573,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın arka kenarı",
-            "englishDefinition": "The subcutaneous posterior edge of the ulna, palpable along the back of the forearm."
+            "englishDefinition": "The subcutaneous posterior edge of the ulna, palpable along the back of the forearm.",
+            "group": "Ulna"
         },
         {
             "id": 51,
@@ -6554,7 +6586,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Dirsek kemiğinin alt ucundaki kafa kısmı (ulna başı)",
-            "englishDefinition": "The rounded distal end of the ulna, located near the wrist."
+            "englishDefinition": "The rounded distal end of the ulna, located near the wrist.",
+            "group": "Ulna"
         },
         {
             "id": 52,
@@ -6566,7 +6599,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulna başındaki çevre eklem yüzeyi",
-            "englishDefinition": "The circular articular surface around the ulnar head that articulates with the ulnar notch of the radius."
+            "englishDefinition": "The circular articular surface around the ulnar head that articulates with the ulnar notch of the radius.",
+            "group": "Ulna"
         },
         {
             "id": 53,
@@ -6578,7 +6612,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Ulnanın alt ucundaki kalem benzeri çıkıntı",
-            "englishDefinition": "A small pointed projection on the medial side of the distal ulna, near the wrist."
+            "englishDefinition": "A small pointed projection on the medial side of the distal ulna, near the wrist.",
+            "group": "Ulna"
         },
         {
             "id": 54,
@@ -6590,7 +6625,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğinin kayık kemiği (proksimal sıranın en dıştaki kemiği)",
-            "englishDefinition": "A boat-shaped carpal bone at the lateral end of the proximal row, the most commonly fractured carpal bone."
+            "englishDefinition": "A boat-shaped carpal bone at the lateral end of the proximal row, the most commonly fractured carpal bone.",
+            "group": "Ossa Manus"
         },
         {
             "id": 55,
@@ -6602,7 +6638,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğinin ay kemiği",
-            "englishDefinition": "A crescent-shaped carpal bone in the middle of the proximal row, articulating directly with the radius."
+            "englishDefinition": "A crescent-shaped carpal bone in the middle of the proximal row, articulating directly with the radius.",
+            "group": "Ossa Manus"
         },
         {
             "id": 56,
@@ -6614,7 +6651,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğinin üç köşe kemiği",
             "english": "Triquetral Bone",
-            "englishDefinition": "A pyramid-shaped carpal bone at the medial end of the proximal row, articulating with the pisiform."
+            "englishDefinition": "A pyramid-shaped carpal bone at the medial end of the proximal row, articulating with the pisiform.",
+            "group": "Ossa Manus"
         },
         {
             "id": 57,
@@ -6626,7 +6664,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğinin bezelye kemiği",
-            "englishDefinition": "A small, pea-shaped sesamoid bone sitting on the triquetrum, serving as an attachment for the flexor carpi ulnaris."
+            "englishDefinition": "A small, pea-shaped sesamoid bone sitting on the triquetrum, serving as an attachment for the flexor carpi ulnaris.",
+            "group": "Ossa Manus"
         },
         {
             "id": 58,
@@ -6638,7 +6677,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "El bileğinin çengelli kemiği",
-            "englishDefinition": "A carpal bone of the distal row bearing a hook-like process on its palmar surface, anchoring wrist flexor structures."
+            "englishDefinition": "A carpal bone of the distal row bearing a hook-like process on its palmar surface, anchoring wrist flexor structures.",
+            "group": "Ossa Manus"
         },
         {
             "id": 59,
@@ -6650,7 +6690,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin arkasında, dikenin altındaki geniş çukur",
-            "englishDefinition": "A broad depression below the spine of the scapula that gives origin to the infraspinatus muscle."
+            "englishDefinition": "A broad depression below the spine of the scapula that gives origin to the infraspinatus muscle.",
+            "group": "Scapula"
         },
         {
             "id": 60,
@@ -6662,7 +6703,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin arka yüzü",
-            "englishDefinition": "The dorsal surface of the scapula, divided by the scapular spine into the supraspinous and infraspinous fossae."
+            "englishDefinition": "The dorsal surface of the scapula, divided by the scapular spine into the supraspinous and infraspinous fossae.",
+            "group": "Scapula"
         },
         {
             "id": 61,
@@ -6674,7 +6716,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus başı",
-            "englishDefinition": "The rounded proximal end of the humerus that articulates with the glenoid cavity of the scapula to form the shoulder joint."
+            "englishDefinition": "The rounded proximal end of the humerus that articulates with the glenoid cavity of the scapula to form the shoulder joint.",
+            "group": "Humerus"
         },
         {
             "id": 62,
@@ -6686,7 +6729,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus'un anatomik boynu",
-            "englishDefinition": "A shallow groove encircling the humeral head, marking the former growth-plate line and site of joint capsule attachment."
+            "englishDefinition": "A shallow groove encircling the humeral head, marking the former growth-plate line and site of joint capsule attachment.",
+            "group": "Humerus"
         },
         {
             "id": 63,
@@ -6698,7 +6742,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus'un cerrahi boynu",
-            "englishDefinition": "A narrowed region just below the tubercles of the humerus, clinically important as a common fracture site."
+            "englishDefinition": "A narrowed region just below the tubercles of the humerus, clinically important as a common fracture site.",
+            "group": "Humerus"
         },
         {
             "id": 64,
@@ -6710,7 +6755,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus üst ucunda, ön tarafta bulunan küçük tümsekçik",
             "english": "Lesser Tubercle",
-            "englishDefinition": "A small anterior prominence on the proximal humerus serving as the insertion site for the subscapularis muscle."
+            "englishDefinition": "A small anterior prominence on the proximal humerus serving as the insertion site for the subscapularis muscle.",
+            "group": "Humerus"
         },
         {
             "id": 65,
@@ -6722,7 +6768,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus üst ucunda, dış tarafta bulunan büyük tümsekçik",
             "english": "Greater Tubercle",
-            "englishDefinition": "A large lateral prominence on the proximal humerus providing attachment for several rotator cuff muscles."
+            "englishDefinition": "A large lateral prominence on the proximal humerus providing attachment for several rotator cuff muscles.",
+            "group": "Humerus"
         },
         {
             "id": 66,
@@ -6734,7 +6781,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus ön alt ucunda, capitulum'un hemen üzerindeki küçük çukurluk",
-            "englishDefinition": "A small depression above the capitulum that accommodates the head of the radius during forearm flexion."
+            "englishDefinition": "A small depression above the capitulum that accommodates the head of the radius during forearm flexion.",
+            "group": "Humerus"
         },
         {
             "id": 67,
@@ -6746,7 +6794,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunda, radius başı ile eklemleşen küçük baş şeklindeki çıkıntı",
-            "englishDefinition": "A rounded lateral articular surface at the distal humerus that articulates with the head of the radius."
+            "englishDefinition": "A rounded lateral articular surface at the distal humerus that articulates with the head of the radius.",
+            "group": "Humerus"
         },
         {
             "id": 68,
@@ -6758,7 +6807,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunda, ulna ile eklemleşen makara şeklindeki eklem yüzü",
-            "englishDefinition": "A pulley-shaped medial articular surface at the distal humerus that engages the trochlear notch of the ulna."
+            "englishDefinition": "A pulley-shaped medial articular surface at the distal humerus that engages the trochlear notch of the ulna.",
+            "group": "Humerus"
         },
         {
             "id": 69,
@@ -6770,7 +6820,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus'un arka yüzü",
-            "englishDefinition": "The posterior aspect of the humeral shaft, crossed obliquely by the radial groove."
+            "englishDefinition": "The posterior aspect of the humeral shaft, crossed obliquely by the radial groove.",
+            "group": "Humerus"
         },
         {
             "id": 70,
@@ -6782,7 +6833,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus arka alt ucunda dirsek eklemi açıldığında olecranon'un girdiği derin çukur",
-            "englishDefinition": "A deep posterior depression on the distal humerus that receives the olecranon during elbow extension."
+            "englishDefinition": "A deep posterior depression on the distal humerus that receives the olecranon during elbow extension.",
+            "group": "Humerus"
         },
         {
             "id": 71,
@@ -6794,7 +6846,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Tuberculum majus ile minus arasında uzanan oluk (biceps oluğu)",
             "english": "Intertubercular Sulcus",
-            "englishDefinition": "A groove between the greater and lesser tubercles that houses the tendon of the long head of biceps brachii."
+            "englishDefinition": "A groove between the greater and lesser tubercles that houses the tendon of the long head of biceps brachii.",
+            "group": "Humerus"
         },
         {
             "id": 72,
@@ -6806,7 +6859,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Tuberculum majus'un aşağı doğru uzanan keskin kenarı",
-            "englishDefinition": "A bony ridge extending down from the greater tubercle, giving insertion to the pectoralis major muscle."
+            "englishDefinition": "A bony ridge extending down from the greater tubercle, giving insertion to the pectoralis major muscle.",
+            "group": "Humerus"
         },
         {
             "id": 73,
@@ -6818,7 +6872,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Tuberculum minus'un aşağı doğru uzanan keskin kenarı",
-            "englishDefinition": "A bony ridge extending down from the lesser tubercle, giving insertion to teres major and latissimus dorsi."
+            "englishDefinition": "A bony ridge extending down from the lesser tubercle, giving insertion to teres major and latissimus dorsi.",
+            "group": "Humerus"
         },
         {
             "id": 74,
@@ -6830,7 +6885,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus gövdesinin arkasında spiral olarak uzanan radial sinir oluğu",
-            "englishDefinition": "A spiral groove on the posterior humeral shaft transmitting the radial nerve and deep brachial artery."
+            "englishDefinition": "A spiral groove on the posterior humeral shaft transmitting the radial nerve and deep brachial artery.",
+            "group": "Humerus"
         },
         {
             "id": 75,
@@ -6842,7 +6898,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus gövdesinin dış tarafında, deltoid kasının yapıştığı V şeklindeki pürtüklü alan",
-            "englishDefinition": "A V-shaped roughened area on the lateral humeral shaft serving as the insertion site for the deltoid muscle."
+            "englishDefinition": "A V-shaped roughened area on the lateral humeral shaft serving as the insertion site for the deltoid muscle.",
+            "group": "Humerus"
         },
         {
             "id": 76,
@@ -6854,7 +6911,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus'un ön-dış yan yüzü",
-            "englishDefinition": "The anterolateral aspect of the humeral shaft, situated between the anterior and lateral borders."
+            "englishDefinition": "The anterolateral aspect of the humeral shaft, situated between the anterior and lateral borders.",
+            "group": "Humerus"
         },
         {
             "id": 77,
@@ -6866,7 +6924,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus'un ön-iç yan yüzü",
-            "englishDefinition": "The anteromedial aspect of the humeral shaft, situated between the anterior and medial borders."
+            "englishDefinition": "The anteromedial aspect of the humeral shaft, situated between the anterior and medial borders.",
+            "group": "Humerus"
         },
         {
             "id": 78,
@@ -6878,7 +6937,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunda, epicondylus medialis'in yukarısına uzanan iç yan kenar",
             "english": "Medial Supracondylar Crest",
-            "englishDefinition": "A bony ridge along the medial edge of the distal humerus, leading down to the medial epicondyle."
+            "englishDefinition": "A bony ridge along the medial edge of the distal humerus, leading down to the medial epicondyle.",
+            "group": "Humerus"
         },
         {
             "id": 79,
@@ -6890,7 +6950,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunda, epicondylus lateralis'in yukarısına uzanan dış yan kenar",
             "english": "Lateral Supracondylar Crest",
-            "englishDefinition": "A prominent bony ridge along the lateral edge of the distal humerus, giving origin to the brachioradialis muscle."
+            "englishDefinition": "A prominent bony ridge along the lateral edge of the distal humerus, giving origin to the brachioradialis muscle.",
+            "group": "Humerus"
         },
         {
             "id": 80,
@@ -6902,7 +6963,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunun dış yan tarafındaki çıkıntı",
-            "englishDefinition": "A lateral bony projection at the distal humerus, providing the common origin of the forearm extensor muscles."
+            "englishDefinition": "A lateral bony projection at the distal humerus, providing the common origin of the forearm extensor muscles.",
+            "group": "Humerus"
         },
         {
             "id": 81,
@@ -6914,7 +6976,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus alt ucunun iç yan tarafındaki belirgin çıkıntı",
-            "englishDefinition": "A prominent medial bony projection at the distal humerus, providing the common origin of the forearm flexor muscles."
+            "englishDefinition": "A prominent medial bony projection at the distal humerus, providing the common origin of the forearm flexor muscles.",
+            "group": "Humerus"
         },
         {
             "id": 82,
@@ -6926,7 +6989,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Humerus ön alt ucunda, dirsek büküldüğünde ulnanın processus coronoideus'unun girdiği çukur",
-            "englishDefinition": "An anterior depression above the trochlea that receives the coronoid process of the ulna during elbow flexion."
+            "englishDefinition": "An anterior depression above the trochlea that receives the coronoid process of the ulna during elbow flexion.",
+            "group": "Humerus"
         },
         {
             "id": 83,
@@ -6938,7 +7002,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Köprücük kemiğinin kürek kemiği omuz çıkıntısı (akromiyon) ile eklemleşen yassı dış ucu",
-            "englishDefinition": "The flattened lateral end of the clavicle that articulates with the acromion of the scapula."
+            "englishDefinition": "The flattened lateral end of the clavicle that articulates with the acromion of the scapula.",
+            "group": "Clavicula"
         },
         {
             "id": 84,
@@ -6950,7 +7015,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın akromiyal ucunda bulunan eklem yüzü",
             "english": "Acromial Articular Facet",
-            "englishDefinition": "A small oval facet on the lateral clavicle forming the acromioclavicular joint with the scapula."
+            "englishDefinition": "A small oval facet on the lateral clavicle forming the acromioclavicular joint with the scapula.",
+            "group": "Clavicula"
         },
         {
             "id": 85,
@@ -6962,7 +7028,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın alt yüzünde trapezoid bağın yapıştığı eğik çizgi",
-            "englishDefinition": "A roughened line on the inferior lateral clavicle anchoring the trapezoid ligament."
+            "englishDefinition": "A roughened line on the inferior lateral clavicle anchoring the trapezoid ligament.",
+            "group": "Clavicula"
         },
         {
             "id": 86,
@@ -6974,7 +7041,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın alt yüzünde konoid bağın yapıştığı küçük konik tümsekçik",
-            "englishDefinition": "A cone-shaped prominence on the inferior lateral clavicle anchoring the conoid ligament."
+            "englishDefinition": "A cone-shaped prominence on the inferior lateral clavicle anchoring the conoid ligament.",
+            "group": "Clavicula"
         },
         {
             "id": 87,
@@ -6986,7 +7054,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın alt yüzünde subclavius kasının uzandığı oluk",
             "english": "Subclavian Groove",
-            "englishDefinition": "A shallow groove running along the inferior surface of the clavicular shaft, giving attachment to the subclavius muscle."
+            "englishDefinition": "A shallow groove running along the inferior surface of the clavicular shaft, giving attachment to the subclavius muscle.",
+            "group": "Clavicula"
         },
         {
             "id": 88,
@@ -6998,7 +7067,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın alt yüzünde, sternal uca yakın kostoklavikular bağın tutunduğu pürtüklü iz",
-            "englishDefinition": "A roughened impression on the inferior medial clavicle marking attachment of the costoclavicular ligament to the first rib."
+            "englishDefinition": "A roughened impression on the inferior medial clavicle marking attachment of the costoclavicular ligament to the first rib.",
+            "group": "Clavicula"
         },
         {
             "id": 89,
@@ -7010,7 +7080,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Köprücük kemiğinin sternum (göğüs kemiği) ile eklemleşen kalınlaşmış iç ucu",
-            "englishDefinition": "The thickened, triangular medial end of the clavicle that articulates with the manubrium of the sternum."
+            "englishDefinition": "The thickened, triangular medial end of the clavicle that articulates with the manubrium of the sternum.",
+            "group": "Clavicula"
         },
         {
             "id": 90,
@@ -7022,7 +7093,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Clavicula'nın sternal ucunda bulunan eklem yüzü",
             "english": "Sternal Articular Facet",
-            "englishDefinition": "The articular surface at the medial clavicular end forming the sternoclavicular joint with the manubrium and first costal cartilage."
+            "englishDefinition": "The articular surface at the medial clavicular end forming the sternoclavicular joint with the manubrium and first costal cartilage.",
+            "group": "Clavicula"
         },
         {
             "id": 91,
@@ -7034,7 +7106,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğindeki glenoid çukurun üst kenarında bulunan, biceps kasının uzun tendonunun tutunduğu tümsekçik",
-            "englishDefinition": "A small prominence just above the glenoid cavity giving origin to the long head of biceps brachii."
+            "englishDefinition": "A small prominence just above the glenoid cavity giving origin to the long head of biceps brachii.",
+            "group": "Scapula"
         },
         {
             "id": 93,
@@ -7046,7 +7119,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Scapula başı (glenoid bölge) ile kürek kemiğinin gövdesi arasındaki daralmış boyun kısmı",
-            "englishDefinition": "A slightly constricted region separating the glenoid cavity from the body of the scapula."
+            "englishDefinition": "A slightly constricted region separating the glenoid cavity from the body of the scapula.",
+            "group": "Scapula"
         },
         {
             "id": 94,
@@ -7058,7 +7132,8 @@ export const medicalTermsData = {
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğindeki glenoid çukurun alt kenarında bulunan, triceps kasının uzun başının tutunduğu tümsekçik",
             "englishDefinition": "A roughened prominence just below the glenoid cavity giving origin to the long head of triceps brachii.",
-            "term": "Tuberculum Infraglenoidale"
+            "term": "Tuberculum Infraglenoidale",
+            "group": "Scapula"
         },
         {
             "id": 95,
@@ -7070,7 +7145,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin dış yan kenarı",
-            "englishDefinition": "The thick, sturdy edge of the scapula facing the axilla."
+            "englishDefinition": "The thick, sturdy edge of the scapula facing the axilla.",
+            "group": "Scapula"
         },
         {
             "id": 96,
@@ -7082,7 +7158,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin kaburgalara bakan ön yüzeyindeki geniş ve sığ çukurluk",
-            "englishDefinition": "A broad, shallow concavity on the costal surface of the scapula that gives origin to the subscapularis muscle."
+            "englishDefinition": "A broad, shallow concavity on the costal surface of the scapula that gives origin to the subscapularis muscle.",
+            "group": "Scapula"
         },
         {
             "id": 97,
@@ -7094,7 +7171,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin omurgaya bakan iç yan kenarı",
-            "englishDefinition": "The thin, elongated edge of the scapula facing the vertebral column."
+            "englishDefinition": "The thin, elongated edge of the scapula facing the vertebral column.",
+            "group": "Scapula"
         },
         {
             "id": 98,
@@ -7106,7 +7184,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "upper_extremity_bones",
             "turkishShort": "Kürek kemiğinin iç yan ve dış yan kenarlarının birleşmesiyle oluşan en alt köşesi",
-            "englishDefinition": "The lowest point of the scapula, formed where the medial and lateral borders converge."
+            "englishDefinition": "The lowest point of the scapula, formed where the medial and lateral borders converge.",
+            "group": "Scapula"
         }
     ],
     "upper_extremity_joints": [
