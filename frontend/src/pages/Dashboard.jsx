@@ -102,7 +102,9 @@ const FREE_DASHBOARD_CATEGORIES = [
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', enName: 'Spine Joints', defaultCount: 22 },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', enName: 'Head and Neck Joints', defaultCount: 18 },
   { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları', enName: 'Head and Neck Muscles', defaultCount: 77 },
-  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', enName: 'Muscles & Related Structures', defaultCount: 64 },
+  { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları', enName: 'Trunk Muscles', defaultCount: 64 },
+  { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları', enName: 'Upper Extremity Muscles', defaultCount: 19 },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', enName: 'Muscles & Related Structures', defaultCount: 50 },
   { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', enName: 'Bone & Skeletal Structures', defaultCount: 35 },
   { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', enName: 'Movement Terms', defaultCount: 26 },
   { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri', enName: 'Anatomical Direction', defaultCount: 24 }

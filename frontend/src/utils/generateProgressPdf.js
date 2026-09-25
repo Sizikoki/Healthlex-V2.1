@@ -14,7 +14,7 @@ export const generateProgressPdf = async ({
   planName = 'Temel',
   isTr = true
 }) => {
-  // 14 Kategori Listesi
+  // 15 Kategori Listesi
   const catList = [
     { id: 'skull_bones', name: isTr ? 'Kafatası Kemikleri' : 'Skull Bones' },
     { id: 'trunk_bones', name: isTr ? 'Gövde Kemikleri' : 'Trunk Bones' },
@@ -26,6 +26,8 @@ export const generateProgressPdf = async ({
     { id: 'spine_joints', name: isTr ? 'Omurga Eklemleri' : 'Spine Joints' },
     { id: 'head_and_neck_joints', name: isTr ? 'Kafa ve Boyun Eklemleri' : 'Head & Neck Joints' },
     { id: 'head_and_neck_muscles', name: isTr ? 'Baş ve Boyun Kasları' : 'Head & Neck Muscles' },
+    { id: 'trunk_muscles', name: isTr ? 'Gövde Kasları' : 'Trunk Muscles' },
+    { id: 'upper_extremity_muscles', name: isTr ? 'Üst Ekstremite Kasları' : 'Upper Extremity Muscles' },
     { id: 'muscle_structures', name: isTr ? 'Kas ve Kasla İlişkili Yapılar' : 'Muscle Structures' },
     { id: 'bone_structures', name: isTr ? 'Kemik / İskelet Yapıları' : 'Bone Structures' },
     { id: 'movement_terms', name: isTr ? 'Hareket Terimleri' : 'Movement Terms' },
@@ -152,7 +154,7 @@ export const generateProgressPdf = async ({
       <div style="margin-bottom: 22px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <h2 style="font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">
-            ${isTr ? '14 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 14 Anatomical Categories'}
+            ${isTr ? '15 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 15 Anatomical Categories'}
           </h2>
           <span style="font-size: 11px; color: #64748b;">${totalTermsCount} ${isTr ? 'toplam medikal terim' : 'total terms'}</span>
         </div>

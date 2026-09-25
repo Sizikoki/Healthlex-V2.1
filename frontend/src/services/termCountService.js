@@ -2,7 +2,7 @@ import { db } from '@/firebase/config';
 import { collection, getCountFromServer } from 'firebase/firestore';
 import termCountConfig from '@/data/termCount.json';
 
-const BASELINE_COUNT = typeof termCountConfig?.totalTerms === 'number' ? termCountConfig.totalTerms : 772;
+const BASELINE_COUNT = typeof termCountConfig?.totalTerms === 'number' ? termCountConfig.totalTerms : 886;
 let cachedCount = BASELINE_COUNT;
 let lastFetchTime = 0;
 const CACHE_TTL_MS = 60 * 1000; // 1 dakika önbellek

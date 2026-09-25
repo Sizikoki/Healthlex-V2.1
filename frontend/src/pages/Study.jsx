@@ -32,6 +32,8 @@ const CATEGORIES = [
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
   { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları', system: 'movement', subcategory: 'head_and_neck_muscles' },
+  { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları', system: 'movement', subcategory: 'trunk_muscles' },
+  { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları', system: 'movement', subcategory: 'upper_extremity_muscles' },
   { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', system: 'movement', subcategory: 'muscle_structures' },
   { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', system: 'movement', subcategory: 'bone_structures' },
   { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', category: 'movement_terms' },

@@ -194,6 +194,8 @@ export const ProgressPage = () => {
     { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
     { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
     { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları' },
+    { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları' },
+    { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları' },
     { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar' },
     { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları' },
     { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri' },
