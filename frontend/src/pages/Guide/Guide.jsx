@@ -5,6 +5,10 @@ import { Section1Intro } from './sections/Section1Intro';
 import { Section2Structure } from './sections/Section2Structure';
 import { Section3Steps } from './sections/Section3Steps';
 import { Section4Pronunciation } from './sections/Section4Pronunciation';
+import { Section5Plurals } from './sections/Section5Plurals';
+import { Section6Synonyms } from './sections/Section6Synonyms';
+import { Section7CommonMistakes } from './sections/Section7CommonMistakes';
+import { Section8HowToStudy } from './sections/Section8HowToStudy';
 
 export const Guide = () => {
   // Temporary security: set <meta name="robots" content="noindex">
@@ -46,12 +50,16 @@ export const Guide = () => {
           {/* Sol Sabit İçindekiler */}
           <TableOfContents />
 
-          {/* Sağ Makale Bölümleri 1 - 4 */}
+          {/* Sağ Makale Bölümleri 1 - 8 */}
           <article className="flex flex-col gap-[88px] pb-[96px] w-[720px]">
             <Section1Intro />
             <Section2Structure />
             <Section3Steps />
             <Section4Pronunciation />
+            <Section5Plurals />
+            <Section6Synonyms />
+            <Section7CommonMistakes />
+            <Section8HowToStudy />
           </article>
         </div>
       </main>
