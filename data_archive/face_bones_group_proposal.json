@@ -480,14 +480,6 @@
     "proposedGroup": "Maxilla"
   },
   {
-    "id": 734,
-    "term": "Sutura Zygomaticomaxillaris",
-    "english": "Zygomaticomaxillary Suture",
-    "proposedGroup": "Maxilla",
-    "isUncertain": true,
-    "uncertainReason": "Sutura Zygomaticomaxillaris: Zigomatik kemik ile maksilla arasındaki eklemdir. Maxilla grubuna atanabilir ancak eklem/dikiş yapısı olduğu için head_and_neck_joints kategorisine taşınması güçlü bir adaydır."
-  },
-  {
     "id": 735,
     "term": "Facies Infratemporalis Maxillae",
     "english": "Infratemporal Surface of Maxilla",

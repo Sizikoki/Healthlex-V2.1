@@ -5394,18 +5394,6 @@ export const medicalTermsData = {
             "englishDefinition": "A pointed projection at the junction of the two maxillae, below the nasal notch."
         },
         {
-            "id": 734,
-            "term": "Sutura Zygomaticomaxillaris",
-            "english": "Zygomaticomaxillary Suture",
-            "turkishDefinition": "Zygomatik-maksiller dikiş; üst çene kemiği ile elmacık kemiği arasındaki sabit dikiş.",
-            "roots": "sutura (dikiş) + zygomaticus (elmacığa ait) + maxilla (üst çene kemiği)",
-            "category": "anatomy",
-            "system": "movement",
-            "subcategory": "face_bones",
-            "turkishShort": "Zygomatik-maksiller dikiş",
-            "englishDefinition": "The fixed suture between the maxilla and the zygomatic bone."
-        },
-        {
             "id": 735,
             "term": "Facies Infratemporalis Maxillae",
             "english": "Infratemporal Surface of Maxilla",
@@ -8537,6 +8525,18 @@ export const medicalTermsData = {
                 "_seconds": 1789116370,
                 "_nanoseconds": 219000000
             }
+        },
+        {
+            "id": 734,
+            "term": "Sutura Zygomaticomaxillaris",
+            "english": "Zygomaticomaxillary Suture",
+            "turkishDefinition": "Zygomatik-maksiller dikiş; üst çene kemiği ile elmacık kemiği arasındaki sabit dikiş.",
+            "roots": "sutura (dikiş) + zygomaticus (elmacığa ait) + maxilla (üst çene kemiği)",
+            "category": "anatomy",
+            "system": "movement",
+            "subcategory": "head_and_neck_joints",
+            "turkishShort": "Zygomatik-maksiller dikiş",
+            "englishDefinition": "The fixed suture between the maxilla and the zygomatic bone."
         },
         {
             "id": 783,

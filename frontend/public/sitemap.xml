@@ -5287,12 +5287,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.healthlexmed.com/study/sutura-zygomaticomaxillaris</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.healthlexmed.com/study/facies-infratemporalis-maxillae</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -6578,6 +6572,12 @@
   </url>
   <url>
     <loc>https://www.healthlexmed.com/study/sutura-frontalis-persistens</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthlexmed.com/study/sutura-zygomaticomaxillaris</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

@@ -1,0 +1,16 @@
+{
+  "id": 734,
+  "term": "Sutura Zygomaticomaxillaris",
+  "english": "Zygomaticomaxillary Suture",
+  "turkishDefinition": "Zygomatik-maksiller dikiş; üst çene kemiği ile elmacık kemiği arasındaki sabit dikiş.",
+  "turkishShort": "Zygomatik-maksiller dikiş",
+  "roots": "sutura (dikiş) + zygomaticus (elmacığa ait) + maxilla (üst çene kemiği)",
+  "category": "anatomy",
+  "system": "movement",
+  "subcategory": "face_bones",
+  "englishDefinition": "The fixed suture between the maxilla and the zygomatic bone.",
+  "createdAt": {
+    "_seconds": 1790283682,
+    "_nanoseconds": 771000000
+  }
+}
