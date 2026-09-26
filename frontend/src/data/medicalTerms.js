@@ -4195,7 +4195,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst yüzün ortasında, Maxilla ön çıkıntıları arasında yan yana yer alan küçük dikdörtgen şekilli kemikler olup birlikte burun sırtını oluştururlar",
-            "englishDefinition": "A pair of small rectangular bones between the frontal processes of the maxilla, forming the bridge of the nose."
+            "englishDefinition": "A pair of small rectangular bones between the frontal processes of the maxilla, forming the bridge of the nose.",
+            "group": "Os Nasale"
         },
         {
             "id": 8,
@@ -4207,7 +4208,8 @@ export const medicalTermsData = {
             "subcategory": "face_bones",
             "turkishShort": "Medial Orbital duvarların ön kısmını oluşturan çiftli kraniofasiyal kemiklerdir",
             "englishDefinition": "The smallest facial bone, forming the anterior part of the medial orbital wall and housing the lacrimal groove.",
-            "term": "Os Lacrimale"
+            "term": "Os Lacrimale",
+            "group": "Os Lacrimale"
         },
         {
             "id": 9,
@@ -4219,7 +4221,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Yanağın çıkıntısını oluşturan önemli bir yüz kemiğidir",
-            "englishDefinition": "A diamond-shaped bone forming the prominence of the cheek, contributing to the lateral orbital wall and zygomatic arch."
+            "englishDefinition": "A diamond-shaped bone forming the prominence of the cheek, contributing to the lateral orbital wall and zygomatic arch.",
+            "group": "Os Zygomaticum"
         },
         {
             "id": 10,
@@ -4231,7 +4234,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Yüzün orta üçte birini oluşturan, orta hatta birleşen bir çift simetrik kemiktir",
-            "englishDefinition": "A paired bone forming the upper jaw and central middle third of the face, housing the upper teeth and contributing to the orbit, nasal cavity, and hard palate."
+            "englishDefinition": "A paired bone forming the upper jaw and central middle third of the face, housing the upper teeth and contributing to the orbit, nasal cavity, and hard palate.",
+            "group": "Maxilla"
         },
         {
             "id": 11,
@@ -4243,7 +4247,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Orta hatta birleşen çift L şeklinde kemiklerdir",
-            "englishDefinition": "An L-shaped bone lying posterior to the maxilla, forming part of the hard palate, nasal cavity, and orbital floor."
+            "englishDefinition": "An L-shaped bone lying posterior to the maxilla, forming part of the hard palate, nasal cavity, and orbital floor.",
+            "group": "Os Palatinum"
         },
         {
             "id": 12,
@@ -4255,7 +4260,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Inferior Nasal Concha'nın lateral yüzünden çıkan, Maxilla ile eklemleşen kemik çıkıntısıdır",
-            "englishDefinition": "A bony projection from the inferior nasal concha that articulates with the maxilla, helping form the lateral nasal wall."
+            "englishDefinition": "A bony projection from the inferior nasal concha that articulates with the maxilla, helping form the lateral nasal wall.",
+            "group": "Concha Nasalis Inferior"
         },
         {
             "id": 13,
@@ -4267,7 +4273,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Eşlenmemiş yüz kemiklerinden biridir ve kemik nasal septumun posteroinferior bölümünü oluşturur",
-            "englishDefinition": "An unpaired, plough-shaped bone forming the posteroinferior part of the bony nasal septum."
+            "englishDefinition": "An unpaired, plough-shaped bone forming the posteroinferior part of the bony nasal septum.",
+            "group": "Vomer"
         },
         {
             "id": 14,
@@ -4279,7 +4286,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Alt çenenin tek orta hat kemiğidir",
-            "englishDefinition": "The single midline bone of the lower jaw, articulating with the temporal bone at the temporomandibular joint."
+            "englishDefinition": "The single midline bone of the lower jaw, articulating with the temporal bone at the temporomandibular joint.",
+            "group": "Mandibula"
         },
         {
             "id": 662,
@@ -4295,7 +4303,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Concha Nasalis Inferior"
         },
         {
             "id": 663,
@@ -4311,7 +4320,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Concha Nasalis Inferior"
         },
         {
             "id": 664,
@@ -4327,7 +4337,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Concha Nasalis Inferior"
         },
         {
             "id": 665,
@@ -4343,7 +4354,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Lacrimale"
         },
         {
             "id": 666,
@@ -4359,7 +4371,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Lacrimale"
         },
         {
             "id": 667,
@@ -4375,7 +4388,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Lacrimale"
         },
         {
             "id": 668,
@@ -4391,7 +4405,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Nasale"
         },
         {
             "id": 669,
@@ -4407,7 +4422,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Os Nasale"
         },
         {
             "id": 670,
@@ -4423,7 +4439,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Vomer"
         },
         {
             "id": 671,
@@ -4439,7 +4456,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Vomer"
         },
         {
             "id": 672,
@@ -4455,7 +4473,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Vomer"
         },
         {
             "id": 673,
@@ -4471,7 +4490,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789200447,
                 "_nanoseconds": 800000000
-            }
+            },
+            "group": "Vomer"
         },
         {
             "id": 674,
@@ -4487,7 +4507,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 675,
@@ -4503,7 +4524,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 676,
@@ -4519,7 +4541,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 677,
@@ -4535,7 +4558,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 678,
@@ -4551,7 +4575,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 679,
@@ -4567,7 +4592,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 680,
@@ -4583,7 +4609,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 681,
@@ -4599,7 +4626,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 682,
@@ -4615,7 +4643,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 683,
@@ -4631,7 +4660,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789202007,
                 "_nanoseconds": 795000000
-            }
+            },
+            "group": "Os Zygomaticum"
         },
         {
             "id": 684,
@@ -4647,7 +4677,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 685,
@@ -4663,7 +4694,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 686,
@@ -4679,7 +4711,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 687,
@@ -4695,7 +4728,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 688,
@@ -4711,7 +4745,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 689,
@@ -4727,7 +4762,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 690,
@@ -4743,7 +4779,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 691,
@@ -4759,7 +4796,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 692,
@@ -4775,7 +4813,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 693,
@@ -4791,7 +4830,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 694,
@@ -4807,7 +4847,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 695,
@@ -4823,7 +4864,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 696,
@@ -4839,7 +4881,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 697,
@@ -4855,7 +4898,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 698,
@@ -4871,7 +4915,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 699,
@@ -4887,7 +4932,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 700,
@@ -4903,7 +4949,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 701,
@@ -4919,7 +4966,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 702,
@@ -4935,7 +4983,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 703,
@@ -4951,7 +5000,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 704,
@@ -4967,7 +5017,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 705,
@@ -4983,7 +5034,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 706,
@@ -4999,7 +5051,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 707,
@@ -5015,7 +5068,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 708,
@@ -5031,7 +5085,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 709,
@@ -5047,7 +5102,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 710,
@@ -5063,7 +5119,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 711,
@@ -5079,7 +5136,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 712,
@@ -5095,7 +5153,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 713,
@@ -5111,7 +5170,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 714,
@@ -5127,7 +5187,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 715,
@@ -5143,7 +5204,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 716,
@@ -5159,7 +5221,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 717,
@@ -5175,7 +5238,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 718,
@@ -5191,7 +5255,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 719,
@@ -5207,7 +5272,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Mandibula"
         },
         {
             "id": 720,
@@ -5223,7 +5289,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Os Hyoideum"
         },
         {
             "id": 721,
@@ -5239,7 +5306,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Os Hyoideum"
         },
         {
             "id": 722,
@@ -5255,7 +5323,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Os Hyoideum"
         },
         {
             "id": 723,
@@ -5271,7 +5340,8 @@ export const medicalTermsData = {
             "createdAt": {
                 "_seconds": 1789201616,
                 "_nanoseconds": 546000000
-            }
+            },
+            "group": "Os Hyoideum"
         },
         {
             "id": 724,
@@ -5283,7 +5353,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene gövdesi",
-            "englishDefinition": "The main, central part of the maxilla, containing the maxillary sinus."
+            "englishDefinition": "The main, central part of the maxilla, containing the maxillary sinus.",
+            "group": "Maxilla"
         },
         {
             "id": 725,
@@ -5295,7 +5366,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene göz çukuru yüzü",
-            "englishDefinition": "The triangular surface of the maxillary body forming the floor of the orbit."
+            "englishDefinition": "The triangular surface of the maxillary body forming the floor of the orbit.",
+            "group": "Maxilla"
         },
         {
             "id": 726,
@@ -5307,7 +5379,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Göz çukuru altı kanalı",
-            "englishDefinition": "A canal in the floor of the orbit that transmits the infraorbital nerve and vessels."
+            "englishDefinition": "A canal in the floor of the orbit that transmits the infraorbital nerve and vessels.",
+            "group": "Maxilla"
         },
         {
             "id": 727,
@@ -5319,7 +5392,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Göz çukuru altı oluğu",
-            "englishDefinition": "A groove in the posterior part of the orbital floor that becomes the infraorbital canal anteriorly."
+            "englishDefinition": "A groove in the posterior part of the orbital floor that becomes the infraorbital canal anteriorly.",
+            "group": "Maxilla"
         },
         {
             "id": 728,
@@ -5331,7 +5405,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene göz çukuru alt kenarı",
-            "englishDefinition": "The border of the maxilla forming the lower margin of the orbit."
+            "englishDefinition": "The border of the maxilla forming the lower margin of the orbit.",
+            "group": "Maxilla"
         },
         {
             "id": 729,
@@ -5343,7 +5418,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene ön yüzü",
-            "englishDefinition": "The anterior surface of the maxillary body, lying beneath the facial skin."
+            "englishDefinition": "The anterior surface of the maxillary body, lying beneath the facial skin.",
+            "group": "Maxilla"
         },
         {
             "id": 730,
@@ -5355,7 +5431,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Göz çukuru altı deliği",
-            "englishDefinition": "An opening through which the infraorbital nerve and vessels emerge onto the face."
+            "englishDefinition": "An opening through which the infraorbital nerve and vessels emerge onto the face.",
+            "group": "Maxilla"
         },
         {
             "id": 731,
@@ -5367,7 +5444,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Köpek dişi çukuru",
-            "englishDefinition": "A depression on the anterior surface of the maxilla above the root of the canine tooth."
+            "englishDefinition": "A depression on the anterior surface of the maxilla above the root of the canine tooth.",
+            "group": "Maxilla"
         },
         {
             "id": 732,
@@ -5379,7 +5457,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene burun çentiği",
-            "englishDefinition": "The curved notch of the maxilla forming the lateral boundary of the nasal cavity opening."
+            "englishDefinition": "The curved notch of the maxilla forming the lateral boundary of the nasal cavity opening.",
+            "group": "Maxilla"
         },
         {
             "id": 733,
@@ -5391,7 +5470,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Ön burun dikeni",
-            "englishDefinition": "A pointed projection at the junction of the two maxillae, below the nasal notch."
+            "englishDefinition": "A pointed projection at the junction of the two maxillae, below the nasal notch.",
+            "group": "Maxilla"
         },
         {
             "id": 735,
@@ -5403,7 +5483,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene şakak altı yüzü",
-            "englishDefinition": "The posterior surface of the maxillary body facing the infratemporal fossa."
+            "englishDefinition": "The posterior surface of the maxillary body facing the infratemporal fossa.",
+            "group": "Maxilla"
         },
         {
             "id": 736,
@@ -5415,7 +5496,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Diş yuvası delikleri",
-            "englishDefinition": "Openings on the infratemporal surface of the maxilla through which the posterior superior alveolar nerves pass."
+            "englishDefinition": "Openings on the infratemporal surface of the maxilla through which the posterior superior alveolar nerves pass.",
+            "group": "Maxilla"
         },
         {
             "id": 737,
@@ -5427,7 +5509,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Diş yuvası kanalları",
-            "englishDefinition": "Canals continuing from the alveolar foramina that transmit the posterior superior alveolar nerves and vessels."
+            "englishDefinition": "Canals continuing from the alveolar foramina that transmit the posterior superior alveolar nerves and vessels.",
+            "group": "Maxilla"
         },
         {
             "id": 738,
@@ -5439,7 +5522,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene tümseği",
-            "englishDefinition": "A rounded prominence at the posteroinferior corner of the infratemporal surface of the maxilla."
+            "englishDefinition": "A rounded prominence at the posteroinferior corner of the infratemporal surface of the maxilla.",
+            "group": "Maxilla"
         },
         {
             "id": 739,
@@ -5451,7 +5535,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene burun yüzü",
-            "englishDefinition": "The medial surface of the maxillary body facing the nasal cavity."
+            "englishDefinition": "The medial surface of the maxillary body facing the nasal cavity.",
+            "group": "Maxilla"
         },
         {
             "id": 740,
@@ -5463,7 +5548,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene gözyaşı oluğu",
-            "englishDefinition": "A groove on the nasal surface of the maxilla forming part of the nasolacrimal canal."
+            "englishDefinition": "A groove on the nasal surface of the maxilla forming part of the nasolacrimal canal.",
+            "group": "Maxilla"
         },
         {
             "id": 741,
@@ -5475,7 +5561,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene konka ibiği",
-            "englishDefinition": "A horizontal ridge on the nasal surface of the maxilla providing attachment for the inferior nasal concha."
+            "englishDefinition": "A horizontal ridge on the nasal surface of the maxilla providing attachment for the inferior nasal concha.",
+            "group": "Maxilla"
         },
         {
             "id": 742,
@@ -5487,7 +5574,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene gözyaşı kenarı",
-            "englishDefinition": "The posterior border of the maxilla that articulates with the lacrimal bone."
+            "englishDefinition": "The posterior border of the maxilla that articulates with the lacrimal bone.",
+            "group": "Maxilla"
         },
         {
             "id": 743,
@@ -5499,7 +5587,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene sinüs ağzı",
-            "englishDefinition": "A large opening on the nasal surface of the maxilla through which the maxillary sinus communicates with the nasal cavity."
+            "englishDefinition": "A large opening on the nasal surface of the maxilla through which the maxillary sinus communicates with the nasal cavity.",
+            "group": "Maxilla"
         },
         {
             "id": 744,
@@ -5511,7 +5600,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene büyük damak oluğu",
-            "englishDefinition": "A groove on the palatine process of the maxilla that accommodates the greater palatine nerve and vessels."
+            "englishDefinition": "A groove on the palatine process of the maxilla that accommodates the greater palatine nerve and vessels.",
+            "group": "Maxilla"
         },
         {
             "id": 745,
@@ -5523,7 +5613,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Maksiller sinüs",
-            "englishDefinition": "The largest paranasal sinus, located within the body of the maxilla."
+            "englishDefinition": "The largest paranasal sinus, located within the body of the maxilla.",
+            "group": "Maxilla"
         },
         {
             "id": 746,
@@ -5535,7 +5626,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene alın çıkıntısı",
-            "englishDefinition": "A projection of the maxilla extending upward to articulate with the frontal bone."
+            "englishDefinition": "A projection of the maxilla extending upward to articulate with the frontal bone.",
+            "group": "Maxilla"
         },
         {
             "id": 747,
@@ -5547,7 +5639,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Ön gözyaşı ibiği",
-            "englishDefinition": "A ridge on the frontal process of the maxilla forming the anterior boundary of the lacrimal sac fossa."
+            "englishDefinition": "A ridge on the frontal process of the maxilla forming the anterior boundary of the lacrimal sac fossa.",
+            "group": "Maxilla"
         },
         {
             "id": 748,
@@ -5559,7 +5652,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene gözyaşı çentiği",
-            "englishDefinition": "A notch on the frontal process of the maxilla that receives the lacrimal bone."
+            "englishDefinition": "A notch on the frontal process of the maxilla that receives the lacrimal bone.",
+            "group": "Maxilla"
         },
         {
             "id": 749,
@@ -5571,7 +5665,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene kalbur ibiği",
-            "englishDefinition": "A ridge on the nasal surface of the maxilla providing attachment for the middle nasal concha."
+            "englishDefinition": "A ridge on the nasal surface of the maxilla providing attachment for the middle nasal concha.",
+            "group": "Maxilla"
         },
         {
             "id": 750,
@@ -5583,7 +5678,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene elmacık çıkıntısı",
-            "englishDefinition": "A projection of the maxilla extending laterally to articulate with the zygomatic bone."
+            "englishDefinition": "A projection of the maxilla extending laterally to articulate with the zygomatic bone.",
+            "group": "Maxilla"
         },
         {
             "id": 751,
@@ -5595,7 +5691,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak çıkıntısı",
-            "englishDefinition": "A horizontal plate projecting medially from the maxilla, forming most of the hard palate."
+            "englishDefinition": "A horizontal plate projecting medially from the maxilla, forming most of the hard palate.",
+            "group": "Maxilla"
         },
         {
             "id": 752,
@@ -5607,7 +5704,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene burun ibiği",
-            "englishDefinition": "A midline ridge on the superior surface of the palatine process, providing attachment for the nasal septum."
+            "englishDefinition": "A midline ridge on the superior surface of the palatine process, providing attachment for the nasal septum.",
+            "group": "Maxilla"
         },
         {
             "id": 753,
@@ -5619,7 +5717,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Kesici kemik",
-            "englishDefinition": "The anterior part of the maxilla bearing the incisor teeth, separate from the rest of the maxilla in the embryonic stage."
+            "englishDefinition": "The anterior part of the maxilla bearing the incisor teeth, separate from the rest of the maxilla in the embryonic stage.",
+            "group": "Maxilla"
         },
         {
             "id": 754,
@@ -5631,7 +5730,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Kesici diş kanalları",
-            "englishDefinition": "Paired canals extending from the incisive foramen to the hard palate, transmitting the nasopalatine nerves."
+            "englishDefinition": "Paired canals extending from the incisive foramen to the hard palate, transmitting the nasopalatine nerves.",
+            "group": "Maxilla"
         },
         {
             "id": 755,
@@ -5643,7 +5743,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Kesici diş dikişi",
-            "englishDefinition": "The suture line between the incisive bone and the rest of the maxilla, occasionally visible in some individuals."
+            "englishDefinition": "The suture line between the incisive bone and the rest of the maxilla, occasionally visible in some individuals.",
+            "group": "Maxilla"
         },
         {
             "id": 756,
@@ -5655,7 +5756,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak dikenleri",
-            "englishDefinition": "Small bony projections on the inferior surface of the palatine process."
+            "englishDefinition": "Small bony projections on the inferior surface of the palatine process.",
+            "group": "Maxilla"
         },
         {
             "id": 757,
@@ -5667,7 +5769,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak olukları",
-            "englishDefinition": "Grooves on the inferior surface of the palatine process that accommodate palatine nerves and vessels."
+            "englishDefinition": "Grooves on the inferior surface of the palatine process that accommodate palatine nerves and vessels.",
+            "group": "Maxilla"
         },
         {
             "id": 758,
@@ -5679,7 +5782,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene diş yuvası çıkıntısı",
-            "englishDefinition": "The thickened inferior part of the maxillary body that houses the roots of the teeth."
+            "englishDefinition": "The thickened inferior part of the maxillary body that houses the roots of the teeth.",
+            "group": "Maxilla"
         },
         {
             "id": 759,
@@ -5691,7 +5795,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene diş yuvası kemeri",
-            "englishDefinition": "The curved arch formed by the dental alveoli of the maxilla."
+            "englishDefinition": "The curved arch formed by the dental alveoli of the maxilla.",
+            "group": "Maxilla"
         },
         {
             "id": 760,
@@ -5703,7 +5808,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene diş yuvaları",
-            "englishDefinition": "The sockets in the maxilla that hold the roots of the teeth."
+            "englishDefinition": "The sockets in the maxilla that hold the roots of the teeth.",
+            "group": "Maxilla"
         },
         {
             "id": 761,
@@ -5715,7 +5821,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene diş yuvaları arası bölmeler",
-            "englishDefinition": "Thin bony partitions separating adjacent dental alveoli in the maxilla."
+            "englishDefinition": "Thin bony partitions separating adjacent dental alveoli in the maxilla.",
+            "group": "Maxilla"
         },
         {
             "id": 762,
@@ -5727,7 +5834,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene kökler arası bölmeler",
-            "englishDefinition": "Bony partitions between the roots of multi-rooted teeth in the maxilla."
+            "englishDefinition": "Bony partitions between the roots of multi-rooted teeth in the maxilla.",
+            "group": "Maxilla"
         },
         {
             "id": 763,
@@ -5739,7 +5847,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Üst çene diş yuvası kabartıları",
-            "englishDefinition": "Slight bony ridges on the surface of the maxilla overlying the roots of the teeth."
+            "englishDefinition": "Slight bony ridges on the surface of the maxilla overlying the roots of the teeth.",
+            "group": "Maxilla"
         },
         {
             "id": 764,
@@ -5751,7 +5860,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Kesici delikler",
-            "englishDefinition": "Openings at the anterior part of the hard palate through which the incisive canals open."
+            "englishDefinition": "Openings at the anterior part of the hard palate through which the incisive canals open.",
+            "group": "Maxilla"
         },
         {
             "id": 765,
@@ -5763,7 +5873,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği dikey tabakası",
-            "englishDefinition": "The vertical plate of the palatine bone contributing to the lateral wall of the nasal cavity."
+            "englishDefinition": "The vertical plate of the palatine bone contributing to the lateral wall of the nasal cavity.",
+            "group": "Os Palatinum"
         },
         {
             "id": 766,
@@ -5775,7 +5886,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği burun yüzü",
-            "englishDefinition": "The surface of the perpendicular plate of the palatine bone facing the nasal cavity."
+            "englishDefinition": "The surface of the perpendicular plate of the palatine bone facing the nasal cavity.",
+            "group": "Os Palatinum"
         },
         {
             "id": 767,
@@ -5787,7 +5899,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği üst çene yüzü",
-            "englishDefinition": "The lateral surface of the perpendicular plate of the palatine bone facing the maxilla."
+            "englishDefinition": "The lateral surface of the perpendicular plate of the palatine bone facing the maxilla.",
+            "group": "Os Palatinum"
         },
         {
             "id": 768,
@@ -5799,7 +5912,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Kama-damak çentiği",
-            "englishDefinition": "A notch on the superior border of the perpendicular plate of the palatine bone that forms the sphenopalatine foramen."
+            "englishDefinition": "A notch on the superior border of the perpendicular plate of the palatine bone that forms the sphenopalatine foramen.",
+            "group": "Os Palatinum"
         },
         {
             "id": 769,
@@ -5811,7 +5925,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği büyük damak oluğu",
-            "englishDefinition": "A groove on the perpendicular plate of the palatine bone that accommodates the greater palatine nerve and vessels."
+            "englishDefinition": "A groove on the perpendicular plate of the palatine bone that accommodates the greater palatine nerve and vessels.",
+            "group": "Os Palatinum"
         },
         {
             "id": 770,
@@ -5823,7 +5938,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Piramidal çıkıntı",
-            "englishDefinition": "A projection of the palatine bone extending backward from the junction of the perpendicular and horizontal plates."
+            "englishDefinition": "A projection of the palatine bone extending backward from the junction of the perpendicular and horizontal plates.",
+            "group": "Os Palatinum"
         },
         {
             "id": 771,
@@ -5835,7 +5951,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Küçük damak kanalları",
-            "englishDefinition": "Canals within the pyramidal process that transmit the lesser palatine nerves."
+            "englishDefinition": "Canals within the pyramidal process that transmit the lesser palatine nerves.",
+            "group": "Os Palatinum"
         },
         {
             "id": 772,
@@ -5847,7 +5964,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği konka ibiği",
-            "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the inferior nasal concha."
+            "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the inferior nasal concha.",
+            "group": "Os Palatinum"
         },
         {
             "id": 773,
@@ -5859,7 +5977,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği kalbur ibiği",
-            "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the middle nasal concha."
+            "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the middle nasal concha.",
+            "group": "Os Palatinum"
         },
         {
             "id": 774,
@@ -5871,7 +5990,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Göz çukuru çıkıntısı",
-            "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone contributing to the floor of the orbit."
+            "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone contributing to the floor of the orbit.",
+            "group": "Os Palatinum"
         },
         {
             "id": 775,
@@ -5883,7 +6003,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği kama kemik çıkıntısı",
-            "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone, adjacent to the sphenoid bone."
+            "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone, adjacent to the sphenoid bone.",
+            "group": "Os Palatinum"
         },
         {
             "id": 776,
@@ -5895,7 +6016,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Yatay tabaka",
-            "englishDefinition": "The horizontal portion of the palatine bone extending medially from the perpendicular plate, forming the posterior part of the hard palate."
+            "englishDefinition": "The horizontal portion of the palatine bone extending medially from the perpendicular plate, forming the posterior part of the hard palate.",
+            "group": "Os Palatinum"
         },
         {
             "id": 777,
@@ -5907,7 +6029,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Yatay tabakanın burun yüzü",
-            "englishDefinition": "The superior surface of the horizontal plate of the palatine bone, facing the nasal cavity."
+            "englishDefinition": "The superior surface of the horizontal plate of the palatine bone, facing the nasal cavity.",
+            "group": "Os Palatinum"
         },
         {
             "id": 778,
@@ -5919,7 +6042,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak yüzü",
-            "englishDefinition": "The inferior surface of the horizontal plate of the palatine bone, facing the oral cavity."
+            "englishDefinition": "The inferior surface of the horizontal plate of the palatine bone, facing the oral cavity.",
+            "group": "Os Palatinum"
         },
         {
             "id": 779,
@@ -5931,7 +6055,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği küçük damak delikleri",
-            "englishDefinition": "Openings in the pyramidal process through which the lesser palatine nerves emerge into the oral cavity."
+            "englishDefinition": "Openings in the pyramidal process through which the lesser palatine nerves emerge into the oral cavity.",
+            "group": "Os Palatinum"
         },
         {
             "id": 780,
@@ -5943,7 +6068,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Arka burun dikeni",
-            "englishDefinition": "A pointed projection at the junction of the horizontal plates of the two palatine bones, extending posteriorly."
+            "englishDefinition": "A pointed projection at the junction of the horizontal plates of the two palatine bones, extending posteriorly.",
+            "group": "Os Palatinum"
         },
         {
             "id": 781,
@@ -5955,7 +6081,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak kemiği burun ibiği",
-            "englishDefinition": "A midline ridge on the superior surface of the horizontal plate, providing attachment for the nasal septum."
+            "englishDefinition": "A midline ridge on the superior surface of the horizontal plate, providing attachment for the nasal septum.",
+            "group": "Os Palatinum"
         },
         {
             "id": 782,
@@ -5967,7 +6094,8 @@ export const medicalTermsData = {
             "system": "movement",
             "subcategory": "face_bones",
             "turkishShort": "Damak ibiği",
-            "englishDefinition": "A transverse ridge on the inferior surface of the horizontal plate that reinforces the palatine suture."
+            "englishDefinition": "A transverse ridge on the inferior surface of the horizontal plate that reinforces the palatine suture.",
+            "group": "Os Palatinum"
         }
     ],
     "spine_joints": [

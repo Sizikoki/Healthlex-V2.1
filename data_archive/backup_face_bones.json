@@ -1,0 +1,1786 @@
+[
+  {
+    "id": 7,
+    "term": "Os Nasale",
+    "english": "Nasal Bone",
+    "roots": "os (kemik) + nasus (burun)",
+    "turkishDefinition": "Üst yüzün ortasında, Maxilla ön çıkıntıları arasında yan yana yer alan küçük dikdörtgen şekilli kemikler olup birlikte burun sırtını oluştururlar.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst yüzün ortasında, Maxilla ön çıkıntıları arasında yan yana yer alan küçük dikdörtgen şekilli kemikler olup birlikte burun sırtını oluştururlar",
+    "englishDefinition": "A pair of small rectangular bones between the frontal processes of the maxilla, forming the bridge of the nose."
+  },
+  {
+    "id": 8,
+    "english": "Lacrimal Bone",
+    "roots": "os (kemik) + lacrima (gözyaşı)",
+    "turkishDefinition": "Medial Orbital duvarların ön kısmını oluşturan çiftli kraniofasiyal kemiklerdir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Medial Orbital duvarların ön kısmını oluşturan çiftli kraniofasiyal kemiklerdir",
+    "englishDefinition": "The smallest facial bone, forming the anterior part of the medial orbital wall and housing the lacrimal groove.",
+    "term": "Os Lacrimale"
+  },
+  {
+    "id": 9,
+    "term": "Os Zygomaticum",
+    "english": "Zygomatic Bone",
+    "roots": "os (kemik) + zygoma (yanak)",
+    "turkishDefinition": "Yanağın çıkıntısını oluşturan önemli bir yüz kemiğidir. Şekli kabaca dikdörtgen şeklindedir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Yanağın çıkıntısını oluşturan önemli bir yüz kemiğidir",
+    "englishDefinition": "A diamond-shaped bone forming the prominence of the cheek, contributing to the lateral orbital wall and zygomatic arch."
+  },
+  {
+    "id": 10,
+    "term": "Maxilla",
+    "english": "Maxilla",
+    "roots": "maxilla (üst çene)",
+    "turkishDefinition": "Yüzün orta üçte birini oluşturan, orta hatta birleşen bir çift simetrik kemiktir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Yüzün orta üçte birini oluşturan, orta hatta birleşen bir çift simetrik kemiktir",
+    "englishDefinition": "A paired bone forming the upper jaw and central middle third of the face, housing the upper teeth and contributing to the orbit, nasal cavity, and hard palate."
+  },
+  {
+    "id": 11,
+    "term": "Os Palatinum",
+    "english": "Palatine Bone",
+    "roots": "os (kemik) + palatum (damak)",
+    "turkishDefinition": "Orta hatta birleşen çift L şeklinde kemiklerdir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Orta hatta birleşen çift L şeklinde kemiklerdir",
+    "englishDefinition": "An L-shaped bone lying posterior to the maxilla, forming part of the hard palate, nasal cavity, and orbital floor."
+  },
+  {
+    "id": 12,
+    "term": "Processus Maxillaris Conchae Nasalis Inferioris",
+    "english": "Maxillary Process of Inferior Nasal Concha",
+    "roots": "processus (çıkıntı) + maxilla + concha (kabuk)",
+    "turkishDefinition": "Inferior Nasal Concha'nın lateral yüzünden çıkan, Maxilla ile eklemleşen kemik çıkıntısıdır.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Inferior Nasal Concha'nın lateral yüzünden çıkan, Maxilla ile eklemleşen kemik çıkıntısıdır",
+    "englishDefinition": "A bony projection from the inferior nasal concha that articulates with the maxilla, helping form the lateral nasal wall."
+  },
+  {
+    "id": 13,
+    "term": "Vomer",
+    "english": "Vomer",
+    "roots": "vomer (saban demiri)",
+    "turkishDefinition": "Eşlenmemiş yüz kemiklerinden biridir ve kemik nasal septumun posteroinferior bölümünü oluşturur.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Eşlenmemiş yüz kemiklerinden biridir ve kemik nasal septumun posteroinferior bölümünü oluşturur",
+    "englishDefinition": "An unpaired, plough-shaped bone forming the posteroinferior part of the bony nasal septum."
+  },
+  {
+    "id": 14,
+    "term": "Mandibula",
+    "english": "Mandible",
+    "roots": "mandibula (alt çene)",
+    "turkishDefinition": "Alt çenenin tek orta hat kemiğidir.",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Alt çenenin tek orta hat kemiğidir",
+    "englishDefinition": "The single midline bone of the lower jaw, articulating with the temporal bone at the temporomandibular joint."
+  },
+  {
+    "id": 662,
+    "term": "Concha Nasalis Inferior",
+    "english": "Inferior Nasal Concha",
+    "turkishDefinition": "Alt burun konkası; burun boşluğunun yan duvarında yer alan, kendi başına bağımsız bir yüz kemiği olan kavisli kemik kıvrım.",
+    "turkishShort": "Alt burun konkası",
+    "roots": "concha (kabuk, konka) + nasalis (buruna ait) + inferior (alt)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An independent facial bone forming a curved bony structure on the lateral wall of the nasal cavity.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 663,
+    "term": "Processus Lacrimalis Conchae Nasalis Inferioris",
+    "english": "Lacrimal Process of Inferior Nasal Concha",
+    "turkishDefinition": "Alt burun konkası gözyaşı çıkıntısı; alt burun konkasının gözyaşı kemiğiyle birleşen küçük çıkıntısı.",
+    "turkishShort": "Alt burun konkası gözyaşı çıkıntısı",
+    "roots": "processus (çıkıntı) + lacrimalis (gözyaşına ait) + concha nasalis inferior (alt burun konkası)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small projection of the inferior nasal concha that articulates with the lacrimal bone.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 664,
+    "term": "Processus Ethmoidalis Conchae Nasalis Inferioris",
+    "english": "Ethmoidal Process of Inferior Nasal Concha",
+    "turkishDefinition": "Alt burun konkası kalbur çıkıntısı; alt burun konkasının kalbur kemiğinin süngerimsi kemiğiyle birleşen çıkıntısı.",
+    "turkishShort": "Alt burun konkası kalbur çıkıntısı",
+    "roots": "processus (çıkıntı) + ethmoidalis (kalbur kemiğine ait) + concha nasalis inferior (alt burun konkası)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A projection of the inferior nasal concha that articulates with the uncinate process of the ethmoid bone.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 665,
+    "term": "Crista Lacrimalis Posterior",
+    "english": "Posterior Lacrimal Crest",
+    "turkishDefinition": "Arka gözyaşı ibiği; gözyaşı kemiğinin dış yüzünde yer alan, gözyaşı oluğunun arka sınırını oluşturan dikey ibik.",
+    "turkishShort": "Arka gözyaşı ibiği",
+    "roots": "crista (ibik) + lacrimalis (gözyaşına ait) + posterior (arka)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A vertical ridge on the lateral surface of the lacrimal bone forming the posterior boundary of the lacrimal groove.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 666,
+    "term": "Sulcus Lacrimalis Ossis Lacrimalis",
+    "english": "Lacrimal Groove of Lacrimal Bone",
+    "turkishDefinition": "Gözyaşı kemiği gözyaşı oluğu; gözyaşı kemiğinin dış yüzünde yer alan, gözyaşı kesesinin bir kısmını barındıran oluk.",
+    "turkishShort": "Gözyaşı kemiği gözyaşı oluğu",
+    "roots": "sulcus (oluk) + lacrimalis (gözyaşına ait) + os lacrimale (gözyaşı kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A groove on the lateral surface of the lacrimal bone that houses part of the lacrimal sac.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 667,
+    "term": "Hamulus Lacrimalis",
+    "english": "Lacrimal Hamulus",
+    "turkishDefinition": "Gözyaşı çengeli; gözyaşı kemiğinin alt ucunda yer alan, alt burun konkasıyla birleşen küçük çengel şeklinde çıkıntı.",
+    "turkishShort": "Gözyaşı çengeli",
+    "roots": "hamulus (küçük çengel) + lacrimalis (gözyaşına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small hook-shaped projection at the lower end of the lacrimal bone that articulates with the inferior nasal concha.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 668,
+    "term": "Sulcus Ethmoidalis Ossis Nasalis",
+    "english": "Ethmoidal Groove of Nasal Bone",
+    "turkishDefinition": "Burun kemiği kalbur oluğu; burun kemiğinin iç yüzünde ön kalbur sinirinin dalının seyrettiği oluk.",
+    "turkishShort": "Burun kemiği kalbur oluğu",
+    "roots": "sulcus (oluk) + ethmoidalis (kalbur kemiğine ait) + os nasale (burun kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A groove on the internal surface of the nasal bone that accommodates a branch of the anterior ethmoidal nerve.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 669,
+    "term": "Foramina Nasalia",
+    "english": "Nasal Foramina",
+    "turkishDefinition": "Burun delikleri; burun kemiğinde bulunan, küçük damarların geçtiği çok sayıda küçük delik.",
+    "turkishShort": "Burun delikleri",
+    "roots": "foramen (delik) + nasalis (buruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "Numerous small openings in the nasal bone that transmit small blood vessels.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 670,
+    "term": "Ala Vomeris",
+    "english": "Ala of Vomer",
+    "turkishDefinition": "Sapan kemiği kanadı; vomer kemiğinin üst kenarında yer alan, sfenoid kemiğin rostrumuyla eklemleşen ince kanat şeklindeki çıkıntı.",
+    "turkishShort": "Sapan kemiği kanadı",
+    "roots": "ala (kanat) + vomer (sapan kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A thin, wing-shaped projection on the upper border of the vomer that articulates with the rostrum of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 671,
+    "term": "Sulcus Vomeris",
+    "english": "Groove of Vomer",
+    "turkishDefinition": "Sapan kemiği oluğu; vomer kemiğinin üst kenarında nazopalatin sinir ve damarının seyrettiği oluk.",
+    "turkishShort": "Sapan kemiği oluğu",
+    "roots": "sulcus (oluk) + vomer (sapan kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A groove on the upper border of the vomer that accommodates the nasopalatine nerve and vessels.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 672,
+    "term": "Crista Choanalis Vomeris",
+    "english": "Choanal Crest of Vomer",
+    "turkishDefinition": "Sapan kemiği koan ibiği; vomer kemiğinin alt-arka kenarında yer alan, koananın oluşumuna katılan ibik.",
+    "turkishShort": "Sapan kemiği koan ibiği",
+    "roots": "crista (ibik) + choana (koana, arka burun deliği) + vomer (sapan kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A ridge on the posteroinferior border of the vomer that contributes to the formation of the choana.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 673,
+    "term": "Pars Cuneiformis Vomeris",
+    "english": "Cuneiform Part of Vomer",
+    "turkishDefinition": "Sapan kemiği kama şeklindeki parçası; vomer kemiğinin sfenoid kemiğin rostrumuna komşu kama şeklindeki arka-üst kısmı.",
+    "turkishShort": "Sapan kemiği kama şeklindeki parçası",
+    "roots": "pars (bölüm) + cuneiformis (kama şeklinde) + vomer (sapan kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The wedge-shaped posterosuperior part of the vomer adjacent to the rostrum of the sphenoid bone.",
+    "createdAt": {
+      "_seconds": 1789200447,
+      "_nanoseconds": 800000000
+    }
+  },
+  {
+    "id": 674,
+    "term": "Facies Lateralis Ossis Zygomatici",
+    "english": "Lateral Surface of Zygomatic Bone",
+    "turkishDefinition": "Elmacık kemiği dış yüzü; elmacık kemiğinin yüz derisinin altında kalan dışbükey dış yüzeyi.",
+    "turkishShort": "Elmacık kemiği dış yüzü",
+    "roots": "facies (yüz) + lateralis (yan) + os zygomaticum (elmacık kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The convex outer surface of the zygomatic bone, lying beneath the facial skin.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 675,
+    "term": "Facies Temporalis Ossis Zygomatici",
+    "english": "Temporal Surface of Zygomatic Bone",
+    "turkishDefinition": "Elmacık kemiği şakak yüzü; elmacık kemiğinin şakak altı çukuruna bakan iç yüzeyi.",
+    "turkishShort": "Elmacık kemiği şakak yüzü",
+    "roots": "facies (yüz) + temporalis (şakağa ait) + os zygomaticum (elmacık kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The internal surface of the zygomatic bone that faces the infratemporal fossa.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 676,
+    "term": "Facies Orbitalis Ossis Zygomatici",
+    "english": "Orbital Surface of Zygomatic Bone",
+    "turkishDefinition": "Elmacık kemiği göz çukuru yüzü; elmacık kemiğinin göz çukurunun yan duvarını oluşturan düz yüzeyi.",
+    "turkishShort": "Elmacık kemiği göz çukuru yüzü",
+    "roots": "facies (yüz) + orbitalis (göz çukuruna ait) + os zygomaticum (elmacık kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The smooth surface of the zygomatic bone that forms the lateral wall of the orbit.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 677,
+    "term": "Processus Temporalis Ossis Zygomatici",
+    "english": "Temporal Process of Zygomatic Bone",
+    "turkishDefinition": "Elmacık kemiği şakak çıkıntısı; elmacık kemiğinin şakak kemiğinin elmacık çıkıntısıyla birleşerek elmacık kemerini oluşturan çıkıntısı.",
+    "turkishShort": "Elmacık kemiği şakak çıkıntısı",
+    "roots": "processus (çıkıntı) + temporalis (şakağa ait) + os zygomaticum (elmacık kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A projection of the zygomatic bone that joins the zygomatic process of the temporal bone to form the zygomatic arch.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 678,
+    "term": "Processus Frontalis Ossis Zygomatici",
+    "english": "Frontal Process of Zygomatic Bone",
+    "turkishDefinition": "Elmacık kemiği alın çıkıntısı; elmacık kemiğinin yukarı uzanarak alın kemiğiyle birleşen çıkıntısı.",
+    "turkishShort": "Elmacık kemiği alın çıkıntısı",
+    "roots": "processus (çıkıntı) + frontalis (alına ait) + os zygomaticum (elmacık kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A projection of the zygomatic bone extending upward to articulate with the frontal bone.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 679,
+    "term": "Tuberculum Orbitale",
+    "english": "Orbital Tubercle",
+    "turkishDefinition": "Göz çukuru tümsekciği (Whitnall tümsekciği); elmacık kemiğinin göz çukuru yüzünde yer alan, göz kapağı bağlarının tutunduğu küçük kemik çıkıntı.",
+    "turkishShort": "Göz çukuru tümsekciği",
+    "roots": "tuberculum (küçük tümsek) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small bony projection on the orbital surface of the zygomatic bone, also known as Whitnall's tubercle, providing attachment for eyelid ligaments.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 680,
+    "term": "Tuberculum Marginale",
+    "english": "Marginal Tubercle",
+    "turkishDefinition": "Kenar tümsekciği; elmacık kemiğinin göz çukuru kenarında yer alan, temporal fasyanın tutunduğu küçük çıkıntı.",
+    "turkishShort": "Kenar tümsekciği",
+    "roots": "tuberculum (küçük tümsek) + marginalis (kenara ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small projection on the orbital margin of the zygomatic bone, providing attachment for the temporal fascia.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 681,
+    "term": "Foramen Zygomaticoorbitale",
+    "english": "Zygomaticoorbital Foramen",
+    "turkishDefinition": "Elmacık-göz çukuru deliği; elmacık kemiğinin göz çukuru yüzünde yer alan, elmacık sinirinin girdiği delik.",
+    "turkishShort": "Elmacık-göz çukuru deliği",
+    "roots": "foramen (delik) + zygomaticus (elmacığa ait) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An opening on the orbital surface of the zygomatic bone through which the zygomatic nerve enters.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 682,
+    "term": "Foramen Zygomaticofaciale",
+    "english": "Zygomaticofacial Foramen",
+    "turkishDefinition": "Elmacık-yüz deliği; elmacık kemiğinin dış yüzünde yer alan, elmacık sinirinin yüze çıktığı delik.",
+    "turkishShort": "Elmacık-yüz deliği",
+    "roots": "foramen (delik) + zygomaticus (elmacığa ait) + facialis (yüze ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An opening on the lateral surface of the zygomatic bone through which a branch of the zygomatic nerve emerges onto the face.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 683,
+    "term": "Foramen Zygomaticotemporale",
+    "english": "Zygomaticotemporal Foramen",
+    "turkishDefinition": "Elmacık-şakak deliği; elmacık kemiğinin şakak yüzünde yer alan, elmacık sinirinin şakak bölgesine çıktığı delik.",
+    "turkishShort": "Elmacık-şakak deliği",
+    "roots": "foramen (delik) + zygomaticus (elmacığa ait) + temporalis (şakağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An opening on the temporal surface of the zygomatic bone through which a branch of the zygomatic nerve emerges into the temporal region.",
+    "createdAt": {
+      "_seconds": 1789202007,
+      "_nanoseconds": 795000000
+    }
+  },
+  {
+    "id": 684,
+    "term": "Corpus Mandibulae",
+    "english": "Body of Mandible",
+    "turkishDefinition": "Alt çene gövdesi; alt çene kemiğinin at nalı şeklindeki yatay, ana gövde kısmı.",
+    "turkishShort": "Alt çene gövdesi",
+    "roots": "corpus (gövde) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The horizontal, horseshoe-shaped main body of the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 685,
+    "term": "Basis Mandibulae",
+    "english": "Base of Mandible",
+    "turkishDefinition": "Alt çene tabanı; alt çene gövdesinin alt kalın kenarı.",
+    "turkishShort": "Alt çene tabanı",
+    "roots": "basis (taban) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The thick lower border of the body of the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 686,
+    "term": "Symphysis Mandibulae",
+    "english": "Mandibular Symphysis",
+    "turkishDefinition": "Alt çene birleşim çizgisi; alt çenenin iki yarısının doğumda kaynaştığı orta hat izi.",
+    "turkishShort": "Alt çene birleşim çizgisi",
+    "roots": "symphysis (birleşme, kaynaşma) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The midline fusion line where the two halves of the mandible unite during infancy.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 687,
+    "term": "Protuberantia Mentalis",
+    "english": "Mental Protuberance",
+    "turkishDefinition": "Çene tümseği; alt çenenin ön orta hattında yer alan, çene ucunu oluşturan üçgen kemik kabartı.",
+    "turkishShort": "Çene tümseği",
+    "roots": "protuberantia (kabartı) + mentum (çene)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A triangular bony prominence at the midline of the anterior mandible forming the chin.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 688,
+    "term": "Tuberculum Mentale",
+    "english": "Mental Tubercle",
+    "turkishDefinition": "Çene tümsekciği; çene tümseğinin her iki yanında yer alan küçük kabartı.",
+    "turkishShort": "Çene tümsekciği",
+    "roots": "tuberculum (küçük tümsek) + mentum (çene)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small prominence on either side of the mental protuberance.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 689,
+    "term": "Foramen Mentale",
+    "english": "Mental Foramen",
+    "turkishDefinition": "Çene deliği; alt çenenin gövdesinde yer alan, çene sinir ve damarlarının çıktığı delik.",
+    "turkishShort": "Çene deliği",
+    "roots": "foramen (delik) + mentum (çene)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An opening on the body of the mandible through which the mental nerve and vessels exit.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 690,
+    "term": "Linea Obliqua Mandibulae",
+    "english": "Oblique Line of Mandible",
+    "turkishDefinition": "Alt çene eğik çizgisi; alt çene gövdesinin dış yüzünde çene açısından öne doğru uzanan çizgi.",
+    "turkishShort": "Alt çene eğik çizgisi",
+    "roots": "linea (çizgi) + obliquus (eğik) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A line on the external surface of the mandibular body running forward from the angle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 691,
+    "term": "Fossa Digastrica",
+    "english": "Digastric Fossa",
+    "turkishDefinition": "Digastrik kas çukuru; alt çenenin iç-alt yüzünde digastrik kasın ön karnının başladığı küçük çukur.",
+    "turkishShort": "Digastrik kas çukuru",
+    "roots": "fossa (çukur) + digastricus (iki karınlı kas)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small depression on the inner-lower surface of the mandible giving origin to the anterior belly of the digastric muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 692,
+    "term": "Spina Mentalis Superior",
+    "english": "Superior Mental Spine",
+    "turkishDefinition": "Üst çene dikeni; alt çenenin iç yüzünde orta hatta yer alan, genioglossus kasının tutunduğu üst çift diken.",
+    "turkishShort": "Üst çene dikeni",
+    "roots": "spina (diken) + mentum (çene) + superior (üst)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The upper pair of small spines on the internal surface of the mandibular midline, providing attachment for the genioglossus muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 693,
+    "term": "Spina Mentalis Inferior",
+    "english": "Inferior Mental Spine",
+    "turkishDefinition": "Alt çene dikeni; alt çenenin iç yüzünde orta hatta yer alan, geniohyoid kasının tutunduğu alt çift diken.",
+    "turkishShort": "Alt çene dikeni",
+    "roots": "spina (diken) + mentum (çene) + inferior (alt)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The lower pair of small spines on the internal surface of the mandibular midline, providing attachment for the geniohyoid muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 694,
+    "term": "Linea Mylohyoidea",
+    "english": "Mylohyoid Line",
+    "turkishDefinition": "Milohiyoid çizgi; alt çenenin iç yüzünde milohiyoid kasının tutunduğu eğik çizgi.",
+    "turkishShort": "Milohiyoid çizgi",
+    "roots": "linea (çizgi) + mylohyoideus (öğütücü diş-dilkemiği kasına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An oblique line on the internal surface of the mandible providing attachment for the mylohyoid muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 695,
+    "term": "Torus Mandibularis",
+    "english": "Mandibular Torus",
+    "turkishDefinition": "Alt çene kemik çıkıntısı; alt çenenin iç yüzünde premolar diş bölgesinde bazı bireylerde görülen kemik kabartı.",
+    "turkishShort": "Alt çene kemik çıkıntısı",
+    "roots": "torus (kabartı, şişkinlik) + mandibularis (alt çeneye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A bony growth on the internal surface of the mandible near the premolar region, present in some individuals.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 696,
+    "term": "Fovea Sublingualis",
+    "english": "Sublingual Fossa",
+    "turkishDefinition": "Dil altı bezi çukuru; alt çenenin iç yüzünde dil altı tükürük bezini barındıran çukur.",
+    "turkishShort": "Dil altı bezi çukuru",
+    "roots": "fovea (çukurcuk) + sublingualis (dil altına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A depression on the internal surface of the mandible that houses the sublingual salivary gland.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 697,
+    "term": "Fovea Submandibularis",
+    "english": "Submandibular Fossa",
+    "turkishDefinition": "Çene altı bezi çukuru; alt çenenin iç yüzünde milohiyoid çizginin altında çene altı tükürük bezini barındıran çukur.",
+    "turkishShort": "Çene altı bezi çukuru",
+    "roots": "fovea (çukurcuk) + submandibularis (çene altına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A depression on the internal surface of the mandible, below the mylohyoid line, that houses the submandibular salivary gland.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 698,
+    "term": "Pars Alveolaris Mandibulae",
+    "english": "Alveolar Part of Mandible",
+    "turkishDefinition": "Alt çene diş yuvası parçası; alt çene gövdesinin diş köklerini barındıran üst kısmı.",
+    "turkishShort": "Alt çene diş yuvası parçası",
+    "roots": "pars (bölüm) + alveolaris (diş yuvasına ait) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The upper part of the mandibular body that houses the roots of the teeth.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 699,
+    "term": "Arcus Alveolaris Mandibulae",
+    "english": "Alveolar Arch of Mandible",
+    "turkishDefinition": "Alt çene diş yuvası kemeri; alt çenenin diş yuvalarının oluşturduğu kavisli kemer.",
+    "turkishShort": "Alt çene diş yuvası kemeri",
+    "roots": "arcus (kemer) + alveolaris (diş yuvasına ait) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The curved arch formed by the dental alveoli of the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 700,
+    "term": "Alveoli Dentales Mandibulae",
+    "english": "Dental Alveoli of Mandible",
+    "turkishDefinition": "Alt çene diş yuvaları; alt çenede diş köklerinin yerleştiği çukurlar.",
+    "turkishShort": "Alt çene diş yuvaları",
+    "roots": "alveolus (küçük çukur, yuva) + dens (diş) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The sockets in the mandible that hold the roots of the teeth.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 701,
+    "term": "Septa Interalveolaria Mandibulae",
+    "english": "Interalveolar Septa of Mandible",
+    "turkishDefinition": "Alt çene diş yuvaları arası bölmeler; komşu diş yuvalarını birbirinden ayıran ince kemik bölmeler.",
+    "turkishShort": "Alt çene diş yuvaları arası bölmeler",
+    "roots": "septum (bölme) + inter (arasında) + alveolus (küçük çukur, yuva) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "Thin bony partitions separating adjacent dental alveoli in the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 702,
+    "term": "Septa Interradicularia Mandibulae",
+    "english": "Interradicular Septa of Mandible",
+    "turkishDefinition": "Alt çene kökler arası bölmeler; çok köklü dişlerin kökleri arasındaki kemik bölmeler.",
+    "turkishShort": "Alt çene kökler arası bölmeler",
+    "roots": "septum (bölme) + inter (arasında) + radix (kök) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "Bony partitions between the roots of multi-rooted teeth in the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 703,
+    "term": "Juga Alveolaria Mandibulae",
+    "english": "Alveolar Yokes of Mandible",
+    "turkishDefinition": "Alt çene diş yuvası kabartıları; diş köklerinin üzerindeki kemik yüzeyde oluşturduğu hafif kabartılar.",
+    "turkishShort": "Alt çene diş yuvası kabartıları",
+    "roots": "jugum (kabartı, sırt) + alveolaris (diş yuvasına ait) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "Slight bony ridges on the surface of the mandible overlying the roots of the teeth.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 704,
+    "term": "Trigonum Retromolare",
+    "english": "Retromolar Triangle",
+    "turkishDefinition": "Diş arkası üçgen; alt çenede son azı dişinin arkasında yer alan üçgen kemik alan.",
+    "turkishShort": "Diş arkası üçgen",
+    "roots": "trigonum (üçgen) + retro (arkasında) + molaris (azı dişine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A triangular bony area on the mandible behind the last molar tooth.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 705,
+    "term": "Fossa Retromolaris",
+    "english": "Retromolar Fossa",
+    "turkishDefinition": "Diş arkası çukur; diş arkası üçgenin yanında yer alan sığ çukur.",
+    "turkishShort": "Diş arkası çukur",
+    "roots": "fossa (çukur) + retro (arkasında) + molaris (azı dişine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A shallow depression adjacent to the retromolar triangle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 706,
+    "term": "Ramus Mandibulae",
+    "english": "Ramus of Mandible",
+    "turkishDefinition": "Alt çene kolu; alt çene gövdesinin arka ucundan yukarı doğru uzanan dikey kemik kısmı.",
+    "turkishShort": "Alt çene kolu",
+    "roots": "ramus (dal, kol) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The vertical portion of the mandible extending upward from the posterior end of the body.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 707,
+    "term": "Angulus Mandibulae",
+    "english": "Angle of Mandible",
+    "turkishDefinition": "Alt çene açısı; alt çene gövdesi ile kolunun birleştiği köşe.",
+    "turkishShort": "Alt çene açısı",
+    "roots": "angulus (açı, köşe) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The corner where the body and ramus of the mandible meet.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 708,
+    "term": "Tuberositas Masseterica",
+    "english": "Masseteric Tuberosity",
+    "turkishDefinition": "Çiğneme kası pürtüğü; alt çene açısının dış yüzünde çiğneme kasının tutunduğu pürtüklü alan.",
+    "turkishShort": "Çiğneme kası pürtüğü",
+    "roots": "tuberositas (pürtük, kabarıklık) + masseter (çiğneme kası)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A rough area on the external surface of the mandibular angle providing attachment for the masseter muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 709,
+    "term": "Tuberositas Pterygoidea",
+    "english": "Pterygoid Tuberosity",
+    "turkishDefinition": "Pterigoid kas pürtüğü; alt çene açısının iç yüzünde iç kanatsı kasın tutunduğu pürtüklü alan.",
+    "turkishShort": "Pterigoid kas pürtüğü",
+    "roots": "tuberositas (pürtük, kabarıklık) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A rough area on the internal surface of the mandibular angle providing attachment for the medial pterygoid muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 710,
+    "term": "Foramen Mandibulae",
+    "english": "Mandibular Foramen",
+    "turkishDefinition": "Alt çene deliği; alt çene kolunun iç yüzünde alt alveoler sinir ve damarların girdiği delik.",
+    "turkishShort": "Alt çene deliği",
+    "roots": "foramen (delik) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "An opening on the internal surface of the ramus through which the inferior alveolar nerve and vessels enter.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 711,
+    "term": "Lingula Mandibulae",
+    "english": "Lingula of Mandible",
+    "turkishDefinition": "Alt çene dilciği; alt çene deliğinin önünde yer alan, sfenomandibular bağın tutunduğu küçük dil şeklinde çıkıntı.",
+    "turkishShort": "Alt çene dilciği",
+    "roots": "lingula (küçük dil) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small tongue-shaped projection anterior to the mandibular foramen, providing attachment for the sphenomandibular ligament.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 712,
+    "term": "Canalis Mandibulae",
+    "english": "Mandibular Canal",
+    "turkishDefinition": "Alt çene kanalı; alt çene deliğinden başlayıp çene deliğine kadar uzanan, alt alveoler sinir ve damarları taşıyan kanal.",
+    "turkishShort": "Alt çene kanalı",
+    "roots": "canalis (kanal) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A canal running from the mandibular foramen to the mental foramen, transmitting the inferior alveolar nerve and vessels.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 713,
+    "term": "Sulcus Mylohyoideus",
+    "english": "Mylohyoid Groove",
+    "turkishDefinition": "Milohiyoid oluk; alt çene dilciğinin altında milohiyoid sinir ve damarının seyrettiği oluk.",
+    "turkishShort": "Milohiyoid oluk",
+    "roots": "sulcus (oluk) + mylohyoideus (öğütücü diş-dilkemiği kasına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A groove below the lingula of the mandible that accommodates the mylohyoid nerve and vessels.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 714,
+    "term": "Processus Coronoideus Mandibulae",
+    "english": "Coronoid Process of Mandible",
+    "turkishDefinition": "Alt çene taçsı çıkıntısı; alt çene kolunun ön-üst ucunda yer alan, temporal kasın tutunduğu üçgen çıkıntı.",
+    "turkishShort": "Alt çene taçsı çıkıntısı",
+    "roots": "processus (çıkıntı) + coronoideus (taç şeklinde) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A triangular projection at the anterosuperior end of the mandibular ramus, providing attachment for the temporalis muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 715,
+    "term": "Crista Temporalis Mandibulae",
+    "english": "Temporal Crest of Mandible",
+    "turkishDefinition": "Alt çene temporal ibiği; taçsı çıkıntının iç yüzünden aşağı uzanan, temporal kas tendonunun bir kısmının tutunduğu ibik.",
+    "turkishShort": "Alt çene temporal ibiği",
+    "roots": "crista (ibik) + temporalis (şakağa ait) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A ridge descending from the internal surface of the coronoid process, providing partial attachment for the temporalis tendon.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 716,
+    "term": "Incisura Mandibulae",
+    "english": "Mandibular Notch",
+    "turkishDefinition": "Alt çene çentiği; taçsı çıkıntı ile lokma çıkıntısı arasındaki yarım ay şeklinde çentik.",
+    "turkishShort": "Alt çene çentiği",
+    "roots": "incisura (çentik) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A crescent-shaped notch between the coronoid process and the condylar process.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 717,
+    "term": "Processus Condylaris",
+    "english": "Condylar Process",
+    "turkishDefinition": "Lokma çıkıntısı; alt çene kolunun arka-üst ucunda yer alan, çene eklemini oluşturan çıkıntı.",
+    "turkishShort": "Lokma çıkıntısı",
+    "roots": "processus (çıkıntı) + condylaris (kondile ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A projection at the posterosuperior end of the mandibular ramus that forms part of the temporomandibular joint.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 718,
+    "term": "Collum Mandibulae",
+    "english": "Neck of Mandible",
+    "turkishDefinition": "Alt çene boynu; lokma çıkıntısının alt çene başını taşıyan, hafifçe daralmış kısmı.",
+    "turkishShort": "Alt çene boynu",
+    "roots": "collum (boyun) + mandibula (alt çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The slightly narrowed part of the condylar process supporting the head of the mandible.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 719,
+    "term": "Fovea Pterygoidea",
+    "english": "Pterygoid Fovea",
+    "turkishDefinition": "Pterigoid çukurcuk; alt çene boynunun ön yüzünde dış kanatsı kasın tutunduğu küçük çukurcuk.",
+    "turkishShort": "Pterigoid çukurcuk",
+    "roots": "fovea (çukurcuk) + pterygoideus (kanat şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small depression on the anterior surface of the neck of the mandible, providing attachment for the lateral pterygoid muscle.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 720,
+    "term": "Os Hyoideum",
+    "english": "Hyoid Bone",
+    "turkishDefinition": "Dil kemiği; boyunda, çeneyle omurga arasında serbestçe asılı duran, hiçbir kemikle doğrudan eklemleşmeyen U şeklinde kemik.",
+    "turkishShort": "Dil kemiği",
+    "roots": "os (kemik) + hyoides (Y harfi şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A U-shaped bone in the neck, suspended freely between the mandible and the spine, articulating with no other bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 721,
+    "term": "Corpus Ossis Hyoidei",
+    "english": "Body of Hyoid Bone",
+    "turkishDefinition": "Dil kemiği gövdesi; dil kemiğinin ortadaki yatay, kalınca kısmı.",
+    "turkishShort": "Dil kemiği gövdesi",
+    "roots": "corpus (gövde) + os hyoideum (dil kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "The horizontal, thickened central portion of the hyoid bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 722,
+    "term": "Cornu Minus",
+    "english": "Lesser Horn",
+    "turkishDefinition": "Küçük boynuz; dil kemiği gövdesinden yukarı ve arkaya uzanan küçük çift çıkıntı.",
+    "turkishShort": "Küçük boynuz",
+    "roots": "cornu (boynuz) + minus (küçük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A small paired projection extending upward and backward from the body of the hyoid bone.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 723,
+    "term": "Cornu Majus",
+    "english": "Greater Horn",
+    "turkishDefinition": "Büyük boynuz; dil kemiği gövdesinden arkaya ve yukarı uzanan, dil kökü kaslarının tutunduğu daha uzun çift çıkıntı.",
+    "turkishShort": "Büyük boynuz",
+    "roots": "cornu (boynuz) + majus (büyük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "englishDefinition": "A longer paired projection extending backward and upward from the body of the hyoid bone, providing attachment for muscles of the tongue base.",
+    "createdAt": {
+      "_seconds": 1789201616,
+      "_nanoseconds": 546000000
+    }
+  },
+  {
+    "id": 724,
+    "term": "Corpus Maxillae",
+    "english": "Body of Maxilla",
+    "turkishDefinition": "Üst çene gövdesi; üst çene kemiğinin ana, merkezi kısmı, içinde maksiller sinüsü barındırır.",
+    "roots": "corpus (gövde) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene gövdesi",
+    "englishDefinition": "The main, central part of the maxilla, containing the maxillary sinus."
+  },
+  {
+    "id": 725,
+    "term": "Facies Orbitalis Maxillae",
+    "english": "Orbital Surface of Maxilla",
+    "turkishDefinition": "Üst çene göz çukuru yüzü; üst çene gövdesinin göz çukurunun tabanını oluşturan üçgen yüzeyi.",
+    "roots": "facies (yüz) + orbitalis (göz çukuruna ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene göz çukuru yüzü",
+    "englishDefinition": "The triangular surface of the maxillary body forming the floor of the orbit."
+  },
+  {
+    "id": 726,
+    "term": "Canalis Infraorbitalis",
+    "english": "Infraorbital Canal",
+    "turkishDefinition": "Göz çukuru altı kanalı; göz çukuru tabanında infraorbital sinir ve damarları taşıyan kanal.",
+    "roots": "canalis (kanal) + infra (altında) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Göz çukuru altı kanalı",
+    "englishDefinition": "A canal in the floor of the orbit that transmits the infraorbital nerve and vessels."
+  },
+  {
+    "id": 727,
+    "term": "Sulcus Infraorbitalis",
+    "english": "Infraorbital Groove",
+    "turkishDefinition": "Göz çukuru altı oluğu; kanalis infraorbitalis'in arka kısmında yer alan, öne doğru kanala dönüşen oluk.",
+    "roots": "sulcus (oluk) + infra (altında) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Göz çukuru altı oluğu",
+    "englishDefinition": "A groove in the posterior part of the orbital floor that becomes the infraorbital canal anteriorly."
+  },
+  {
+    "id": 728,
+    "term": "Margo Infraorbitalis Maxillae",
+    "english": "Infraorbital Margin of Maxilla",
+    "turkishDefinition": "Üst çene göz çukuru alt kenarı; üst çenenin göz çukurunun alt sınırını oluşturan kenar.",
+    "roots": "margo (kenar) + infra (altında) + orbitalis (göz çukuruna ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene göz çukuru alt kenarı",
+    "englishDefinition": "The border of the maxilla forming the lower margin of the orbit."
+  },
+  {
+    "id": 729,
+    "term": "Facies Anterior Maxillae",
+    "english": "Anterior Surface of Maxilla",
+    "turkishDefinition": "Üst çene ön yüzü; üst çene gövdesinin yüz derisinin altında kalan ön yüzeyi.",
+    "roots": "facies (yüz) + anterior (ön) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene ön yüzü",
+    "englishDefinition": "The anterior surface of the maxillary body, lying beneath the facial skin."
+  },
+  {
+    "id": 730,
+    "term": "Foramen Infraorbitale",
+    "english": "Infraorbital Foramen",
+    "turkishDefinition": "Göz çukuru altı deliği; infraorbital sinir ve damarların yüze çıktığı delik.",
+    "roots": "foramen (delik) + infra (altında) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Göz çukuru altı deliği",
+    "englishDefinition": "An opening through which the infraorbital nerve and vessels emerge onto the face."
+  },
+  {
+    "id": 731,
+    "term": "Fossa Canina",
+    "english": "Canine Fossa",
+    "turkishDefinition": "Köpek dişi çukuru; üst çene ön yüzünde köpek dişi kökünün üzerinde yer alan çukur.",
+    "roots": "fossa (çukur) + caninus (köpek dişine ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Köpek dişi çukuru",
+    "englishDefinition": "A depression on the anterior surface of the maxilla above the root of the canine tooth."
+  },
+  {
+    "id": 732,
+    "term": "Incisura Nasalis Maxillae",
+    "english": "Nasal Notch of Maxilla",
+    "turkishDefinition": "Üst çene burun çentiği; üst çenenin burun boşluğunun yan sınırını oluşturan kavisli çentik.",
+    "roots": "incisura (çentik) + nasalis (buruna ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene burun çentiği",
+    "englishDefinition": "The curved notch of the maxilla forming the lateral boundary of the nasal cavity opening."
+  },
+  {
+    "id": 733,
+    "term": "Spina Nasalis Anterior",
+    "english": "Anterior Nasal Spine",
+    "turkishDefinition": "Ön burun dikeni; iki üst çenenin birleşim yerinde burun çentiğinin altında öne uzanan sivri çıkıntı.",
+    "roots": "spina (diken) + nasalis (buruna ait) + anterior (ön)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Ön burun dikeni",
+    "englishDefinition": "A pointed projection at the junction of the two maxillae, below the nasal notch."
+  },
+  {
+    "id": 735,
+    "term": "Facies Infratemporalis Maxillae",
+    "english": "Infratemporal Surface of Maxilla",
+    "turkishDefinition": "Üst çene şakak altı yüzü; üst çene gövdesinin şakak altı çukuruna bakan arka yüzeyi.",
+    "roots": "facies (yüz) + infra (altında) + temporalis (şakağa ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene şakak altı yüzü",
+    "englishDefinition": "The posterior surface of the maxillary body facing the infratemporal fossa."
+  },
+  {
+    "id": 736,
+    "term": "Foramina Alveolaria",
+    "english": "Alveolar Foramina",
+    "turkishDefinition": "Diş yuvası delikleri; üst çenenin şakak altı yüzünde arka üst diş sinirlerinin geçtiği delikler.",
+    "roots": "foramen (delik) + alveolaris (diş yuvasına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Diş yuvası delikleri",
+    "englishDefinition": "Openings on the infratemporal surface of the maxilla through which the posterior superior alveolar nerves pass."
+  },
+  {
+    "id": 737,
+    "term": "Canales Alveolares",
+    "english": "Alveolar Canals",
+    "turkishDefinition": "Diş yuvası kanalları; diş yuvası deliklerinden devam eden, arka üst diş sinir ve damarlarını taşıyan kanallar.",
+    "roots": "canalis (kanal) + alveolaris (diş yuvasına ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Diş yuvası kanalları",
+    "englishDefinition": "Canals continuing from the alveolar foramina that transmit the posterior superior alveolar nerves and vessels."
+  },
+  {
+    "id": 738,
+    "term": "Tuber Maxillae",
+    "english": "Maxillary Tuberosity",
+    "turkishDefinition": "Üst çene tümseği (eş anlamlısı: Eminentia Maxillae); üst çenenin şakak altı yüzünün arka-alt köşesindeki kabartı.",
+    "roots": "tuber (tümsek) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene tümseği",
+    "englishDefinition": "A rounded prominence at the posteroinferior corner of the infratemporal surface of the maxilla."
+  },
+  {
+    "id": 739,
+    "term": "Facies Nasalis Maxillae",
+    "english": "Nasal Surface of Maxilla",
+    "turkishDefinition": "Üst çene burun yüzü; üst çene gövdesinin burun boşluğuna bakan iç yüzeyi.",
+    "roots": "facies (yüz) + nasalis (buruna ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene burun yüzü",
+    "englishDefinition": "The medial surface of the maxillary body facing the nasal cavity."
+  },
+  {
+    "id": 740,
+    "term": "Sulcus Lacrimalis Maxillae",
+    "english": "Lacrimal Groove of Maxilla",
+    "turkishDefinition": "Üst çene gözyaşı oluğu; üst çenenin burun yüzünde nazolakrimal kanalın bir kısmını oluşturan oluk.",
+    "roots": "sulcus (oluk) + lacrimalis (gözyaşına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene gözyaşı oluğu",
+    "englishDefinition": "A groove on the nasal surface of the maxilla forming part of the nasolacrimal canal."
+  },
+  {
+    "id": 741,
+    "term": "Crista Conchalis Maxillae",
+    "english": "Conchal Crest of Maxilla",
+    "turkishDefinition": "Üst çene konka ibiği; üst çenenin burun yüzünde alt burun konkasının tutunduğu yatay ibik.",
+    "roots": "crista (ibik) + concha (kabuk, konka) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene konka ibiği",
+    "englishDefinition": "A horizontal ridge on the nasal surface of the maxilla providing attachment for the inferior nasal concha."
+  },
+  {
+    "id": 742,
+    "term": "Margo Lacrimalis Maxillae",
+    "english": "Lacrimal Margin of Maxilla",
+    "turkishDefinition": "Üst çene gözyaşı kenarı; üst çenenin gözyaşı kemiğiyle birleştiği arka kenar.",
+    "roots": "margo (kenar) + lacrimalis (gözyaşına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene gözyaşı kenarı",
+    "englishDefinition": "The posterior border of the maxilla that articulates with the lacrimal bone."
+  },
+  {
+    "id": 743,
+    "term": "Hiatus Maxillaris",
+    "english": "Maxillary Hiatus",
+    "turkishDefinition": "Üst çene sinüs ağzı; üst çenenin burun yüzünde maksiller sinüsün burun boşluğuna açıldığı geniş açıklık.",
+    "roots": "hiatus (geçit, açıklık) + maxillaris (üst çeneye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene sinüs ağzı",
+    "englishDefinition": "A large opening on the nasal surface of the maxilla through which the maxillary sinus communicates with the nasal cavity."
+  },
+  {
+    "id": 744,
+    "term": "Sulcus Palatinus Major Maxillae",
+    "english": "Greater Palatine Groove of Maxilla",
+    "turkishDefinition": "Üst çene büyük damak oluğu; üst çenenin damak çıkıntısında büyük damak sinir ve damarının seyrettiği oluk.",
+    "roots": "sulcus (oluk) + palatinus (damağa ait) + major (büyük) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene büyük damak oluğu",
+    "englishDefinition": "A groove on the palatine process of the maxilla that accommodates the greater palatine nerve and vessels."
+  },
+  {
+    "id": 745,
+    "term": "Sinus Maxillaris",
+    "english": "Maxillary Sinus",
+    "turkishDefinition": "Maksiller sinüs (Highmore boşluğu); üst çene gövdesinin içinde bulunan en büyük paranazal sinüs.",
+    "roots": "sinus (boşluk) + maxillaris (üst çeneye ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Maksiller sinüs",
+    "englishDefinition": "The largest paranasal sinus, located within the body of the maxilla."
+  },
+  {
+    "id": 746,
+    "term": "Processus Frontalis Maxillae",
+    "english": "Frontal Process of Maxilla",
+    "turkishDefinition": "Üst çene alın çıkıntısı; üst çene gövdesinden yukarı uzanarak alın kemiğiyle birleşen çıkıntı.",
+    "roots": "processus (çıkıntı) + frontalis (alına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene alın çıkıntısı",
+    "englishDefinition": "A projection of the maxilla extending upward to articulate with the frontal bone."
+  },
+  {
+    "id": 747,
+    "term": "Crista Lacrimalis Anterior",
+    "english": "Anterior Lacrimal Crest",
+    "turkishDefinition": "Ön gözyaşı ibiği; üst çenenin alın çıkıntısının iç yüzünde yer alan, gözyaşı kesesi çukurunun ön sınırını oluşturan ibik.",
+    "roots": "crista (ibik) + lacrimalis (gözyaşına ait) + anterior (ön)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Ön gözyaşı ibiği",
+    "englishDefinition": "A ridge on the frontal process of the maxilla forming the anterior boundary of the lacrimal sac fossa."
+  },
+  {
+    "id": 748,
+    "term": "Incisura Lacrimalis Maxillae",
+    "english": "Lacrimal Notch of Maxilla",
+    "turkishDefinition": "Üst çene gözyaşı çentiği; üst çenenin alın çıkıntısında gözyaşı kemiğini kabul eden çentik.",
+    "roots": "incisura (çentik) + lacrimalis (gözyaşına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene gözyaşı çentiği",
+    "englishDefinition": "A notch on the frontal process of the maxilla that receives the lacrimal bone."
+  },
+  {
+    "id": 749,
+    "term": "Crista Ethmoidalis Maxillae",
+    "english": "Ethmoidal Crest of Maxilla",
+    "turkishDefinition": "Üst çene kalbur ibiği; üst çenenin burun yüzünde orta burun konkasının tutunduğu ibik.",
+    "roots": "crista (ibik) + ethmoidalis (kalbur kemiğine ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene kalbur ibiği",
+    "englishDefinition": "A ridge on the nasal surface of the maxilla providing attachment for the middle nasal concha."
+  },
+  {
+    "id": 750,
+    "term": "Processus Zygomaticus Maxillae",
+    "english": "Zygomatic Process of Maxilla",
+    "turkishDefinition": "Üst çene elmacık çıkıntısı; üst çene gövdesinden yana uzanarak elmacık kemiğiyle birleşen çıkıntı.",
+    "roots": "processus (çıkıntı) + zygomaticus (elmacığa ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene elmacık çıkıntısı",
+    "englishDefinition": "A projection of the maxilla extending laterally to articulate with the zygomatic bone."
+  },
+  {
+    "id": 751,
+    "term": "Processus Palatinus",
+    "english": "Palatine Process",
+    "turkishDefinition": "Damak çıkıntısı; üst çene gövdesinden içe doğru uzanan, sert damağın büyük kısmını oluşturan yatay plaka.",
+    "roots": "processus (çıkıntı) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak çıkıntısı",
+    "englishDefinition": "A horizontal plate projecting medially from the maxilla, forming most of the hard palate."
+  },
+  {
+    "id": 752,
+    "term": "Crista Nasalis Maxillae",
+    "english": "Nasal Crest of Maxilla",
+    "turkishDefinition": "Üst çene burun ibiği; damak çıkıntısının üst yüzünde orta hatta uzanan, burun bölmesinin tutunduğu ibik.",
+    "roots": "crista (ibik) + nasalis (buruna ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene burun ibiği",
+    "englishDefinition": "A midline ridge on the superior surface of the palatine process, providing attachment for the nasal septum."
+  },
+  {
+    "id": 753,
+    "term": "Os Incisivum",
+    "english": "Incisive Bone",
+    "turkishDefinition": "Kesici kemik (eş anlamlısı: Premaxilla); üst çenenin kesici dişleri taşıyan, embriyonik dönemde ayrı olan ön kısmı.",
+    "roots": "os (kemik) + incisivus (kesici)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Kesici kemik",
+    "englishDefinition": "The anterior part of the maxilla bearing the incisor teeth, separate from the rest of the maxilla in the embryonic stage."
+  },
+  {
+    "id": 754,
+    "term": "Canales Incisivi",
+    "english": "Incisive Canals",
+    "turkishDefinition": "Kesici diş kanalları; kesici delikten sert damağa uzanan, nazopalatin sinirlerini taşıyan çift kanal.",
+    "roots": "canalis (kanal) + incisivus (kesici)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Kesici diş kanalları",
+    "englishDefinition": "Paired canals extending from the incisive foramen to the hard palate, transmitting the nasopalatine nerves."
+  },
+  {
+    "id": 755,
+    "term": "Sutura Incisiva",
+    "english": "Incisive Suture",
+    "turkishDefinition": "Kesici diş dikişi; kesici kemik ile üst çenenin geri kalanı arasındaki, bazı bireylerde görülebilen dikiş izi.",
+    "roots": "sutura (dikiş) + incisivus (kesici)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Kesici diş dikişi",
+    "englishDefinition": "The suture line between the incisive bone and the rest of the maxilla, occasionally visible in some individuals."
+  },
+  {
+    "id": 756,
+    "term": "Spinae Palatinae",
+    "english": "Palatine Spines",
+    "turkishDefinition": "Damak dikenleri; damak çıkıntısının alt yüzünde yer alan küçük kemik çıkıntılar.",
+    "roots": "spina (diken) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak dikenleri",
+    "englishDefinition": "Small bony projections on the inferior surface of the palatine process."
+  },
+  {
+    "id": 757,
+    "term": "Sulci Palatini",
+    "english": "Palatine Grooves",
+    "turkishDefinition": "Damak olukları; damak çıkıntısının alt yüzünde damak sinir ve damarlarının seyrettiği oluklar.",
+    "roots": "sulcus (oluk) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak olukları",
+    "englishDefinition": "Grooves on the inferior surface of the palatine process that accommodate palatine nerves and vessels."
+  },
+  {
+    "id": 758,
+    "term": "Processus Alveolaris Maxillae",
+    "english": "Alveolar Process of Maxilla",
+    "turkishDefinition": "Üst çene diş yuvası çıkıntısı; üst çene gövdesinin diş köklerini barındıran aşağı doğru kalınlaşmış kısmı.",
+    "roots": "processus (çıkıntı) + alveolaris (diş yuvasına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene diş yuvası çıkıntısı",
+    "englishDefinition": "The thickened inferior part of the maxillary body that houses the roots of the teeth."
+  },
+  {
+    "id": 759,
+    "term": "Arcus Alveolaris Maxillae",
+    "english": "Alveolar Arch of Maxilla",
+    "turkishDefinition": "Üst çene diş yuvası kemeri; üst çenenin diş yuvalarının oluşturduğu kavisli kemer.",
+    "roots": "arcus (kemer) + alveolaris (diş yuvasına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene diş yuvası kemeri",
+    "englishDefinition": "The curved arch formed by the dental alveoli of the maxilla."
+  },
+  {
+    "id": 760,
+    "term": "Alveoli Dentales Maxillae",
+    "english": "Dental Alveoli of Maxilla",
+    "turkishDefinition": "Üst çene diş yuvaları; üst çenede diş köklerinin yerleştiği çukurlar.",
+    "roots": "alveolus (küçük çukur, yuva) + dens (diş) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene diş yuvaları",
+    "englishDefinition": "The sockets in the maxilla that hold the roots of the teeth."
+  },
+  {
+    "id": 761,
+    "term": "Septa Interalveolaria Maxillae",
+    "english": "Interalveolar Septa of Maxilla",
+    "turkishDefinition": "Üst çene diş yuvaları arası bölmeler; komşu diş yuvalarını birbirinden ayıran ince kemik bölmeler.",
+    "roots": "septum (bölme) + inter (arasında) + alveolus (küçük çukur, yuva) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene diş yuvaları arası bölmeler",
+    "englishDefinition": "Thin bony partitions separating adjacent dental alveoli in the maxilla."
+  },
+  {
+    "id": 762,
+    "term": "Septa Interradicularia Maxillae",
+    "english": "Interradicular Septa of Maxilla",
+    "turkishDefinition": "Üst çene kökler arası bölmeler; çok köklü dişlerin kökleri arasındaki kemik bölmeler.",
+    "roots": "septum (bölme) + inter (arasında) + radix (kök) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene kökler arası bölmeler",
+    "englishDefinition": "Bony partitions between the roots of multi-rooted teeth in the maxilla."
+  },
+  {
+    "id": 763,
+    "term": "Juga Alveolaria Maxillae",
+    "english": "Alveolar Yokes of Maxilla",
+    "turkishDefinition": "Üst çene diş yuvası kabartıları; diş köklerinin üzerindeki kemik yüzeyde oluşturduğu hafif kabartılar.",
+    "roots": "jugum (kabartı, sırt) + alveolaris (diş yuvasına ait) + maxilla (üst çene kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Üst çene diş yuvası kabartıları",
+    "englishDefinition": "Slight bony ridges on the surface of the maxilla overlying the roots of the teeth."
+  },
+  {
+    "id": 764,
+    "term": "Foramina Incisiva",
+    "english": "Incisive Foramina",
+    "turkishDefinition": "Kesici delikler; sert damağın ön kısmında kesici kanalın açıldığı delikler.",
+    "roots": "foramen (delik) + incisivus (kesici)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Kesici delikler",
+    "englishDefinition": "Openings at the anterior part of the hard palate through which the incisive canals open."
+  },
+  {
+    "id": 765,
+    "term": "Lamina Perpendicularis Ossis Palatini",
+    "english": "Perpendicular Plate of Palatine Bone",
+    "turkishDefinition": "Damak kemiği dikey tabakası; damak kemiğinin burun boşluğunun yan duvarına katkıda bulunan dikey plaka.",
+    "roots": "lamina (tabaka, plaka) + perpendicularis (dik) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği dikey tabakası",
+    "englishDefinition": "The vertical plate of the palatine bone contributing to the lateral wall of the nasal cavity."
+  },
+  {
+    "id": 766,
+    "term": "Facies Nasalis Ossis Palatini",
+    "english": "Nasal Surface of Palatine Bone",
+    "turkishDefinition": "Damak kemiği burun yüzü; damak kemiğinin dikey tabakasının burun boşluğuna bakan yüzü.",
+    "roots": "facies (yüz) + nasalis (buruna ait) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği burun yüzü",
+    "englishDefinition": "The surface of the perpendicular plate of the palatine bone facing the nasal cavity."
+  },
+  {
+    "id": 767,
+    "term": "Facies Maxillaris Ossis Palatini",
+    "english": "Maxillary Surface of Palatine Bone",
+    "turkishDefinition": "Damak kemiği üst çene yüzü; damak kemiğinin dikey tabakasının üst çeneye bakan dış yüzü.",
+    "roots": "facies (yüz) + maxillaris (üst çeneye ait) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği üst çene yüzü",
+    "englishDefinition": "The lateral surface of the perpendicular plate of the palatine bone facing the maxilla."
+  },
+  {
+    "id": 768,
+    "term": "Incisura Sphenopalatina",
+    "english": "Sphenopalatine Notch",
+    "turkishDefinition": "Kama-damak çentiği; damak kemiğinin dikey tabakasının üst kenarında yer alan, sfenopalatin foramen'i oluşturan çentik.",
+    "roots": "incisura (çentik) + sphenoidalis (kama kemiğine ait) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Kama-damak çentiği",
+    "englishDefinition": "A notch on the superior border of the perpendicular plate of the palatine bone that forms the sphenopalatine foramen."
+  },
+  {
+    "id": 769,
+    "term": "Sulcus Palatinus Major Ossis Palatini",
+    "english": "Greater Palatine Groove of Palatine Bone",
+    "turkishDefinition": "Damak kemiği büyük damak oluğu; damak kemiğinin dikey tabakasında büyük damak sinir ve damarının seyrettiği oluk.",
+    "roots": "sulcus (oluk) + palatinus (damağa ait) + major (büyük) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği büyük damak oluğu",
+    "englishDefinition": "A groove on the perpendicular plate of the palatine bone that accommodates the greater palatine nerve and vessels."
+  },
+  {
+    "id": 770,
+    "term": "Processus Pyramidalis",
+    "english": "Pyramidal Process",
+    "turkishDefinition": "Piramidal çıkıntı; damak kemiğinin dikey ve yatay tabakalarının birleşim yerinden arkaya uzanan çıkıntı.",
+    "roots": "processus (çıkıntı) + pyramidalis (piramit şeklinde)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Piramidal çıkıntı",
+    "englishDefinition": "A projection of the palatine bone extending backward from the junction of the perpendicular and horizontal plates."
+  },
+  {
+    "id": 771,
+    "term": "Canales Palatini Minores",
+    "english": "Lesser Palatine Canals",
+    "turkishDefinition": "Küçük damak kanalları; piramidal çıkıntı içinde küçük damak sinirlerini taşıyan kanallar.",
+    "roots": "canalis (kanal) + palatinus (damağa ait) + minor (küçük)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Küçük damak kanalları",
+    "englishDefinition": "Canals within the pyramidal process that transmit the lesser palatine nerves."
+  },
+  {
+    "id": 772,
+    "term": "Crista Conchalis Ossis Palatini",
+    "english": "Conchal Crest of Palatine Bone",
+    "turkishDefinition": "Damak kemiği konka ibiği; damak kemiğinin dikey tabakasında alt burun konkasının tutunduğu ibik.",
+    "roots": "crista (ibik) + concha (kabuk, konka) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği konka ibiği",
+    "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the inferior nasal concha."
+  },
+  {
+    "id": 773,
+    "term": "Crista Ethmoidalis Ossis Palatini",
+    "english": "Ethmoidal Crest of Palatine Bone",
+    "turkishDefinition": "Damak kemiği kalbur ibiği; damak kemiğinin dikey tabakasında orta burun konkasının tutunduğu ibik.",
+    "roots": "crista (ibik) + ethmoidalis (kalbur kemiğine ait) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği kalbur ibiği",
+    "englishDefinition": "A ridge on the perpendicular plate of the palatine bone providing attachment for the middle nasal concha."
+  },
+  {
+    "id": 774,
+    "term": "Processus Orbitalis",
+    "english": "Orbital Process",
+    "turkishDefinition": "Göz çukuru çıkıntısı; damak kemiğinin dikey tabakasının üst ucundan öne-yana uzanan, göz çukurunun tabanına katkıda bulunan çıkıntı.",
+    "roots": "processus (çıkıntı) + orbitalis (göz çukuruna ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Göz çukuru çıkıntısı",
+    "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone contributing to the floor of the orbit."
+  },
+  {
+    "id": 775,
+    "term": "Processus Sphenoidalis Ossis Palatini",
+    "english": "Sphenoidal Process of Palatine Bone",
+    "turkishDefinition": "Damak kemiği kama kemik çıkıntısı; damak kemiğinin dikey tabakasının üst ucundan arkaya-içe uzanan, sfenoid kemiğe komşu çıkıntı.",
+    "roots": "processus (çıkıntı) + sphenoidalis (kama kemiğine ait) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği kama kemik çıkıntısı",
+    "englishDefinition": "A projection from the superior end of the perpendicular plate of the palatine bone, adjacent to the sphenoid bone."
+  },
+  {
+    "id": 776,
+    "term": "Lamina Horizontalis",
+    "english": "Horizontal Plate",
+    "turkishDefinition": "Yatay tabaka; damak kemiğinin dikey tabakadan içe uzanan, sert damağın arka kısmını oluşturan yatay parçası.",
+    "roots": "lamina (tabaka, plaka) + horizontalis (yatay)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Yatay tabaka",
+    "englishDefinition": "The horizontal portion of the palatine bone extending medially from the perpendicular plate, forming the posterior part of the hard palate."
+  },
+  {
+    "id": 777,
+    "term": "Facies Nasalis Laminae Horizontalis",
+    "english": "Nasal Surface of Horizontal Plate",
+    "turkishDefinition": "Yatay tabakanın burun yüzü; damak kemiğinin yatay tabakasının burun boşluğuna bakan üst yüzü.",
+    "roots": "facies (yüz) + nasalis (buruna ait) + lamina horizontalis (yatay tabaka)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Yatay tabakanın burun yüzü",
+    "englishDefinition": "The superior surface of the horizontal plate of the palatine bone, facing the nasal cavity."
+  },
+  {
+    "id": 778,
+    "term": "Facies Palatina",
+    "english": "Palatine Surface",
+    "turkishDefinition": "Damak yüzü; damak kemiğinin yatay tabakasının ağız boşluğuna bakan alt yüzü.",
+    "roots": "facies (yüz) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak yüzü",
+    "englishDefinition": "The inferior surface of the horizontal plate of the palatine bone, facing the oral cavity."
+  },
+  {
+    "id": 779,
+    "term": "Foramina Palatina Minora Ossis Palatini",
+    "english": "Lesser Palatine Foramina of Palatine Bone",
+    "turkishDefinition": "Damak kemiği küçük damak delikleri; piramidal çıkıntıda küçük damak sinirlerinin ağza çıktığı delikler.",
+    "roots": "foramen (delik) + palatinus (damağa ait) + minor (küçük) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği küçük damak delikleri",
+    "englishDefinition": "Openings in the pyramidal process through which the lesser palatine nerves emerge into the oral cavity."
+  },
+  {
+    "id": 780,
+    "term": "Spina Nasalis Posterior",
+    "english": "Posterior Nasal Spine",
+    "turkishDefinition": "Arka burun dikeni; iki damak kemiğinin yatay tabakalarının birleşim yerinde arkaya uzanan sivri çıkıntı.",
+    "roots": "spina (diken) + nasalis (buruna ait) + posterior (arka)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Arka burun dikeni",
+    "englishDefinition": "A pointed projection at the junction of the horizontal plates of the two palatine bones, extending posteriorly."
+  },
+  {
+    "id": 781,
+    "term": "Crista Nasalis Ossis Palatini",
+    "english": "Nasal Crest of Palatine Bone",
+    "turkishDefinition": "Damak kemiği burun ibiği; yatay tabakanın üst yüzünde orta hatta uzanan, burun bölmesinin tutunduğu ibik.",
+    "roots": "crista (ibik) + nasalis (buruna ait) + os palatinum (damak kemiği)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak kemiği burun ibiği",
+    "englishDefinition": "A midline ridge on the superior surface of the horizontal plate, providing attachment for the nasal septum."
+  },
+  {
+    "id": 782,
+    "term": "Crista Palatina",
+    "english": "Palatine Crest",
+    "turkishDefinition": "Damak ibiği; yatay tabakanın alt yüzünde yer alan, damak dikişinin güçlendirilmesine katkıda bulunan enine ibik.",
+    "roots": "crista (ibik) + palatinus (damağa ait)",
+    "category": "anatomy",
+    "system": "movement",
+    "subcategory": "face_bones",
+    "turkishShort": "Damak ibiği",
+    "englishDefinition": "A transverse ridge on the inferior surface of the horizontal plate that reinforces the palatine suture."
+  }
+]
