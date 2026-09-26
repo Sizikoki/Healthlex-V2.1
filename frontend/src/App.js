@@ -16,6 +16,7 @@ import { MorphemeExplorer } from '@/pages/MorphemeExplorer';
 import { MorphemeDetail } from '@/pages/MorphemeDetail';
 import { TermDetail } from '@/pages/TermDetail';
 import { ProgressPage } from '@/pages/Progress';
+import { Guide } from '@/pages/Guide';
 import { Profile } from '@/pages/Profile';
 import { Contact } from '@/pages/Contact';
 import { FAQ } from '@/pages/FAQ';
@@ -161,6 +162,7 @@ function App() {
             <Route path="/morphemes" element={<MorphemeExplorer />} />
             <Route path="/morphemes/:slug" element={<MorphemeDetail />} />
             <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
+            <Route path="/rehber" element={<Guide />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
             <Route path="/hakkinda" element={<Navigate to="/contact" replace />} />

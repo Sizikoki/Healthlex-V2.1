@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Tıbbi Terminoloji Rehberi</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&amp;family=Lora:ital,wght@0,600;0,700;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f5f7fb;-webkit-font-smoothing:antialiased}
+a{color:#1d4ed8;text-decoration:none}a:hover{color:#1e40af}
+.p{margin:0;font:400 17px/1.75 Nunito,system-ui,sans-serif;color:#334155}
+.h3{margin:0;font:800 19px/1.35 Nunito,system-ui,sans-serif;color:#0f1b33}
+.t{font-family:Lora,Georgia,serif;font-style:italic;font-weight:600;color:#0f1b33}
+.m{display:inline-block;padding:1px 9px;border-radius:7px;font:700 14px/1.6 ui-monospace,'SF Mono',Menlo,Consolas,monospace;border:1px solid transparent;white-space:nowrap}
+.mp{background:#e7f6ec;color:#166534;border-color:#bfe5cb}
+.mr{background:#e8efff;color:#1e40af;border-color:#c7d6fb}
+.ms{background:#fdf1e3;color:#9a3f07;border-color:#f3d3ad}
+.card{background:#ffffff;border:1px solid #e3e8f1;border-radius:16px}
+.th{padding:14px 18px;text-align:left;font:800 12px/1.2 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#475569;background:#f8fafc;border-bottom:1px solid #e3e8f1}
+.td{padding:14px 18px;vertical-align:top;font:400 15px/1.55 Nunito,sans-serif;color:#334155;border-bottom:1px solid #eef1f6}
+.tl{font:800 16px/1.4 ui-monospace,'SF Mono',Menlo,Consolas,monospace;color:#0f1b33}
+.say{font:700 15px/1.55 Nunito,sans-serif;color:#0f1b33}
+.num{font:700 15px/1 Lora,Georgia,serif;color:#1d4ed8}
+.toc{display:flex;gap:12px;align-items:baseline;padding:9px 12px;border-radius:10px;font:600 15px/1.35 Nunito,sans-serif;color:#475569}
+.lbl{font:800 12px/1 Nunito,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</helmet>
+
+<div style="width: 1280px; height: 6800px; box-sizing: border-box; background: #f5f7fb; font-family: Nunito, system-ui, sans-serif; color: #0f1b33; display: flex; flex-direction: column">
+
+<header style="height: 72px; flex-shrink: 0; background: #ffffff; border-bottom: 1px solid #e3e8f1; display: flex; align-items: center; padding: 0 40px; gap: 36px">
+<a href="#" style="display: flex; align-items: center; gap: 10px">
+<span style="width: 32px; height: 32px; border-radius: 9px; background: #2563eb; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg></span>
+<span style="font: 800 19px Nunito; color: #0f1b33">Health<span style="font: italic 700 19px Lora; color: #2563eb">Lex</span>Med</span>
+</a>
+<nav style="display: flex; gap: 26px; font: 600 15px Nunito; flex-grow: 1">
+<a href="#" style="color: #5b6b82">Panelim</a>
+<a href="#" style="color: #5b6b82">Çalışma / Sözlük</a>
+<a href="#" style="color: #5b6b82">Morfemler</a>
+<a href="#" style="color: #5b6b82">Oyunlar</a>
+<a href="#" style="color: #0f1b33; font-weight: 800">Rehber</a>
+<a href="#" style="color: #5b6b82">Tarifeler</a>
+</nav>
+<a href="#" style="background: #2563eb; color: #ffffff; font: 800 14px Nunito; padding: 11px 18px; border-radius: 10px">Ücretsiz başla</a>
+</header>
+
+<section style="background: #ffffff; border-bottom: 1px solid #e3e8f1; padding: 64px 40px 56px; display: flex; justify-content: center">
+<div style="width: 1024px; display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; gap: 10px; align-items: center; font: 600 14px Nunito; color: #5b6b82">
+<a href="#" style="color: #5b6b82">Ana Sayfa</a><span>/</span><span style="color: #0f1b33">Rehber</span>
+</div>
+<span class="lbl" style="color: #1d4ed8">Başlangıç rehberi · 8 bölüm</span>
+<h1 style="margin: 0; font: 700 54px/1.08 Lora, Georgia, serif; color: #0f1b33; letter-spacing: -0.01em">Tıbbi Terminoloji Rehberi</h1>
+<p class="p" style="font-size: 19px; color: #475569; max-width: 560px">Tıbbi terimleri tek tek ezberlemek yerine parçalayarak çözmeyi öğren. Bu rehber terim çözümleme mantığını, Latince ve Yunanca köken ilişkilerini, okunuş ve yazım kurallarını ve verimli çalışma yöntemlerini bir arada anlatıyor.</p>
+<div style="display: flex; gap: 12px; margin-top: 4px">
+<a href="#s1" style="background: #0f1b33; color: #ffffff; font: 800 15px Nunito; padding: 14px 22px; border-radius: 11px">Okumaya başla</a>
+<a href="#s4" style="background: #ffffff; color: #0f1b33; font: 800 15px Nunito; padding: 13px 21px; border-radius: 11px; border: 1px solid #d5dce8">Okunuş tablosuna git</a>
+</div>
+</div>
+<div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 1px 2px rgba(15,27,51,.05), 0 12px 32px rgba(15,27,51,.07)">
+<span class="lbl" style="color: #5b6b82">Bir terimi parçala</span>
+<div style="font: italic 700 30px/1.2 Lora, Georgia, serif; color: #0f1b33">gastroenteritis</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start"><span class="m mr">gastr/o</span><span style="font: 600 14px/1.3 Nunito; color: #475569">mide</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start"><span class="m mr">enter/o</span><span style="font: 600 14px/1.3 Nunito; color: #475569">ince bağırsak</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start"><span class="m ms">-itis</span><span style="font: 600 14px/1.3 Nunito; color: #475569">iltihap</span></div>
+</div>
+<div style="height: 1px; background: #eef1f6"></div>
+<p class="p" style="font-size: 16px; color: #0f1b33"><b>Mide ve ince bağırsağın iltihabı.</b> Türkçede gastroenterit.</p>
+</div>
+</div>
+</section>
+
+<main style="padding: 56px 40px 0; display: flex; justify-content: center">
+<div style="width: 1024px; display: grid; grid-template-columns: 240px 720px; gap: 64px; align-items: start">
+
+<aside style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 28px">
+<nav aria-label="İçindekiler" style="display: flex; flex-direction: column; gap: 2px">
+<span class="lbl" style="color: #5b6b82; padding: 0 12px 10px">İçindekiler</span>
+<a href="#s1" class="toc" style="background: #e8efff; color: #0f1b33; font-weight: 800"><span class="num">1</span>Tıbbi terminoloji nedir?</a>
+<a href="#s2" class="toc"><span class="num">2</span>Bir terimin yapısı</a>
+<a href="#s3" class="toc"><span class="num">3</span>Adım adım çözümleme</a>
+<a href="#s4" class="toc"><span class="num">4</span>Harflerin okunuşu</a>
+<a href="#s5" class="toc"><span class="num">5</span>Tekil ve çoğul</a>
+<a href="#s6" class="toc"><span class="num">6</span>Eş anlamlı kökler</a>
+<a href="#s7" class="toc"><span class="num">7</span>Sık yapılan hatalar</a>
+<a href="#s8" class="toc"><span class="num">8</span>Nasıl çalışılır?</a>
+</nav>
+<div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<span class="lbl" style="color: #5b6b82">Renk kodu</span>
+<div style="display: flex; align-items: center; gap: 10px"><span class="m mp">epi-</span><span style="font: 600 14px Nunito; color: #475569">Ön ek</span></div>
+<div style="display: flex; align-items: center; gap: 10px"><span class="m mr">cardi/o</span><span style="font: 600 14px Nunito; color: #475569">Kök</span></div>
+<div style="display: flex; align-items: center; gap: 10px"><span class="m ms">-itis</span><span style="font: 600 14px Nunito; color: #475569">Son ek</span></div>
+<p style="margin: 4px 0 0; font: 400 13px/1.5 Nunito; color: #5b6b82">Renkli parçalara tıklayınca o morfemin sayfası açılır.</p>
+</div>
+</aside>
+
+<article style="display: flex; flex-direction: column; gap: 88px; padding-bottom: 96px">
+
+<section id="s1" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl" style="color: #1d4ed8">Bölüm 1</span>
+<h2 style="margin: 0; font: 700 36px/1.15 Lora, Georgia, serif; color: #0f1b33">Tıbbi terminoloji nedir, neden Latince ve Yunanca?</h2>
+</div>
+<p class="p">Tıbbi terminoloji; tıp, hemşirelik, fizyoterapi ve sağlık meslek yüksekokullarında öğrenim gördüğün süreçte ve meslek hayatın boyunca sağlık profesyonelleriyle eksiksiz, net ve nesnel bir şekilde iletişim kurmanı sağlayan özel bir bilimsel dildir.</p>
+<p class="p">Günlük dilde kullandığın kelimeler bağlama göre farklı anlamlar kazanabilirken, tıbbi bir terim kişiden kişiye veya kurumdan kuruma değişmeyen tek ve kesin bir anlama sahiptir.</p>
+<p class="p">Sağlık bilimleri eğitimine yeni başladığında bu dil sana ilk bakışta karmaşık görünebilir. Ama tıbbi terimler sonu gelmez bir ezber listesi değil, belirli kurallarla birleştirilmiş birer yapbozdur. Terimleri yapı taşlarına ayırıp çözümlediğinde, daha önce hiç karşılaşmadığın bir hastalığın veya tanı yönteminin anlamını tek bakışta çıkarabilirsin.</p>
+<h3 class="h3" style="margin-top: 10px">Neden Latince ve Yunanca?</h3>
+<p class="p">Günümüz tıp dilinin temelleri Antik Yunan ve Roma uygarlıklarına, Hipokrat ve Galen gibi hekimlerin tıp literatürüne kazandırdığı kavramlara dayanır. Bu dilin günümüze kadar korunmasının üç temel sebebi var:</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font: 800 16px/1.3 Nunito; color: #0f1b33">Değişmeyen bir dil</span>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Latince hiçbir ülkenin günlük dili olmadığından anlam kaymasına uğramaz, bölgesel farklılıklardan etkilenmez.</span>
+</div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font: 800 16px/1.3 Nunito; color: #0f1b33">Uluslararası standart</span>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Anatomi terimleri <b>Terminologia Anatomica</b> adlı resmi standartla belirlenir. Dünyanın her yerinde aynı yapıyı ifade eder.</span>
+</div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<span style="font: 800 16px/1.3 Nunito; color: #0f1b33">Görev paylaşımı</span>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Anatomik yapılarda ağırlıklı olarak Latince, hastalık ve cerrahi terimlerinde Grekçe kökler kullanılır.</span>
+</div>
+</div>
+</section>
+
+<section id="s2" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl" style="color: #1d4ed8">Bölüm 2</span>
+<h2 style="margin: 0; font: 700 36px/1.15 Lora, Georgia, serif; color: #0f1b33">Bir terimin yapısı</h2>
+</div>
+<p class="p">Bir tıbbi terim, anlamı meydana getiren farklı işlevlerdeki parçaların birleşmesiyle oluşur. Terim çözümlemeyi öğrenmek için önce bu dört yapı taşını tanımalısın.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font: 800 17px Nunito; color: #0f1b33">Kök</span><span class="lbl" style="color: #1e40af">Word root</span></div>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Terimin ana gövdesi ve anlam merkezi. Genellikle bir organı, dokuyu veya sistemi temsil eder.</span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><a href="#" class="m mr">cardi/o</a><span style="font: 600 14px/1.9 Nunito; color: #475569">kalp</span><a href="#" class="m mr">gastr/o</a><span style="font: 600 14px/1.9 Nunito; color: #475569">mide</span></div>
+</div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font: 800 17px Nunito; color: #0f1b33">Ön ek</span><span class="lbl" style="color: #166534">Prefix</span></div>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Kökün önüne gelir; yer, yön, sayı, zaman, boyut veya olumsuzluk katar.</span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><a href="#" class="m mp">epi-</a><span style="font: 600 14px Nunito; color: #475569">+</span><a href="#" class="m mr">derm/o</a><span style="font: 600 14px Nunito; color: #475569">→</span><span class="t" style="font-size: 16px">epidermis</span></div>
+</div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font: 800 17px Nunito; color: #0f1b33">Son ek</span><span class="lbl" style="color: #9a3f07">Suffix</span></div>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Kökün sonuna gelir; bir hastalığı, işlemi ya da terimin türünü belirler.</span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><a href="#" class="m mr">arthr/o</a><span style="font: 600 14px Nunito; color: #475569">+</span><a href="#" class="m ms">-itis</a><span style="font: 600 14px Nunito; color: #475569">→</span><span class="t" style="font-size: 16px">arthritis</span><span style="font: 600 13px Nunito; color: #5b6b82">(artrit)</span></div>
+</div>
+<div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font: 800 17px Nunito; color: #0f1b33">Bağlayıcı ünlü</span><span class="lbl" style="color: #475569">Combining vowel</span></div>
+<span style="font: 400 15px/1.6 Nunito; color: #475569">Parçaları birleştirirken telaffuzu kolaylaştırır. Neredeyse her zaman <b>o</b> harfidir.</span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span style="font: 700 15px Lora; color: #0f1b33">gastr<span style="background: #fff3c4; padding: 0 3px; border-radius: 4px">o</span>enter<span style="background: #fff3c4; padding: 0 3px; border-radius: 4px">o</span>logy</span></div>
+</div>
+</div>
+<h3 class="h3" style="margin-top: 10px">Bağlayıcı ünlünün istisnaları</h3>
+<p class="p">Kural olarak bağlayıcı ünlü "o" olsa da bazı köklerde farklı bir harf karşına çıkar: safra anlamına gelen <a href="#" class="m mr">chol/e</a> kökünde <b>e</b>, pelvis anlamına gelen <a href="#" class="m mr">pelv/i</a> kökünde ise <b>i</b> kullanılır.</p>
+<h3 class="h3" style="margin-top: 10px">Farklı kombinasyonlar</h3>
+<p class="p">Her terimde dört parçanın birden bulunması gerekmez.</p>
+<div class="card" style="overflow: hidden">
+<div style="display: grid; grid-template-columns: 170px 1fr 1fr; padding: 16px 20px; gap: 16px; align-items: center; border-bottom: 1px solid #eef1f6"><span style="font: 700 14px Nunito; color: #5b6b82">Kök + son ek</span><div style="display: flex; gap: 6px"><a href="#" class="m mr">neur/o</a><a href="#" class="m ms">-logy</a></div><span><span class="t">neurology</span> <span style="font: 600 14px Nunito; color: #5b6b82">· nöroloji</span></span></div>
+<div style="display: grid; grid-template-columns: 170px 1fr 1fr; padding: 16px 20px; gap: 16px; align-items: center; border-bottom: 1px solid #eef1f6"><span style="font: 700 14px Nunito; color: #5b6b82">Ön ek + son ek</span><div style="display: flex; gap: 6px"><a href="#" class="m mp">endo-</a><a href="#" class="m ms">-scope</a></div><span><span class="t">endoscope</span> <span style="font: 600 14px Nunito; color: #5b6b82">· endoskop</span></span></div>
+<div style="display: grid; grid-template-columns: 170px 1fr 1fr; padding: 16px 20px; gap: 16px; align-items: center"><span style="font: 700 14px Nunito; color: #5b6b82">Birden fazla kök</span><div style="display: flex; gap: 6px"><a href="#" class="m mr">cardi/o</a><a href="#" class="m mr">my/o</a><a href="#" class="m ms">-pathy</a></div><span><span class="t">cardiomyopathy</span> <span style="font: 600 14px Nunito; color: #5b6b82">· kardiyomiyopati</span></span></div>
+</div>
+</section>
+
+<section id="s3" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl" style="color: #1d4ed8">Bölüm 3</span>
+<h2 style="margin: 0; font: 700 36px/1.15 Lora, Georgia, serif; color: #0f1b33">Bir terim adım adım nasıl çözülür?</h2>
+</div>
+<p class="p">Uzun bir terimi soldan sağa okumak seni yanıltabilir. Altın kural: kelimeyi <b>sondan başa doğru</b> çözümle.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 10px"><span style="width: 36px; height: 36px; border-radius: 10px; background: #fdf1e3; color: #9a3f07; font: 700 18px Lora; display: flex; align-items: center; justify-content: center">1</span><span style="font: 800 16px Nunito; color: #0f1b33">Son ekten başla</span><span style="font: 400 15px/1.6 Nunito; color: #475569">Son ek, terimin hastalık mı, işlem mi, bilim dalı mı olduğunu söyler.</span></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 10px"><span style="width: 36px; height: 36px; border-radius: 10px; background: #e7f6ec; color: #166534; font: 700 18px Lora; display: flex; align-items: center; justify-content: center">2</span><span style="font: 800 16px Nunito; color: #0f1b33">Başa dön</span><span style="font: 400 15px/1.6 Nunito; color: #475569">Ön eki veya ilk kökü incele: yer, yön, sayı ya da etkilenen yapı.</span></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 10px"><span style="width: 36px; height: 36px; border-radius: 10px; background: #e8efff; color: #1e40af; font: 700 18px Lora; display: flex; align-items: center; justify-content: center">3</span><span style="font: 800 16px Nunito; color: #0f1b33">Ortayı birleştir</span><span style="font: 400 15px/1.6 Nunito; color: #475569">Ortada kalan kökleri sırayla okuyarak anlamı tamamla.</span></div>
+</div>
+<h3 class="h3" style="margin-top: 10px">Uygulamalı örnekler</h3>
+
+<div class="card" style="padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; gap: 12px"><span class="t" style="font-size: 26px">gastroenteritis</span><span style="font: 600 15px Nunito; color: #5b6b82">Türkçede gastroenterit</span></div>
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+<a href="#" class="m ms">-itis</a><span style="font: 600 15px Nunito; color: #475569">iltihap</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">gastr/o</a><span style="font: 600 15px Nunito; color: #475569">mide</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">enter/o</a><span style="font: 600 15px Nunito; color: #475569">ince bağırsak</span>
+</div>
+<p class="p" style="font-size: 16px; color: #0f1b33"><b>Mide ve ince bağırsağın iltihabı.</b></p>
+</div>
+
+<div class="card" style="padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; gap: 12px"><span class="t" style="font-size: 26px">osteoarthritis</span><span style="font: 600 15px Nunito; color: #5b6b82">Türkçede osteoartrit</span></div>
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+<a href="#" class="m ms">-itis</a><span style="font: 600 15px Nunito; color: #475569">iltihap</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">oste/o</a><span style="font: 600 15px Nunito; color: #475569">kemik</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">arthr/o</a><span style="font: 600 15px Nunito; color: #475569">eklem</span>
+</div>
+<p class="p" style="font-size: 16px; color: #0f1b33"><b>Kelime anlamıyla:</b> kemik ve eklemin iltihabı.</p>
+<div style="background: #fff8ec; border: 1px solid #f3d3ad; border-radius: 12px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9a3f07" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font: 800 14px Nunito; color: #9a3f07">Klinik not</span><span style="font: 400 15px/1.6 Nunito; color: #5b3a12">Terim "-itis" taşısa da osteoartrit esas olarak eklem kıkırdağının yıpranmasına bağlı dejeneratif bir hastalıktır. Terimin kelime anlamı ile klinik anlamı her zaman örtüşmez. Parçalama yöntemi güçlü bir araçtır ama klinik bilginin yerini tutmaz.</span></div>
+</div>
+</div>
+
+<div class="card" style="padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; gap: 12px"><span class="t" style="font-size: 26px">electrocardiogram</span><span style="font: 600 15px Nunito; color: #5b6b82">Türkçede elektrokardiyogram</span></div>
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+<a href="#" class="m ms">-gram</a><span style="font: 600 15px Nunito; color: #475569">kayıt</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">electr/o</a><span style="font: 600 15px Nunito; color: #475569">elektrik</span><span style="color: #c2cad8">·</span>
+<a href="#" class="m mr">cardi/o</a><span style="font: 600 15px Nunito; color: #475569">kalp</span>
+</div>
+<p class="p" style="font-size: 16px; color: #0f1b33"><b>Kalbin elektriksel aktivitesinin kaydı.</b></p>
+</div>
+</section>
+
+<section id="s4" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="lbl" style="color: #1d4ed8">Bölüm 4</span>
+<h2 style="margin: 0; font: 700 36px/1.15 Lora, Georgia, serif; color: #0f1b33">Harflerin ve harf gruplarının okunuşu</h2>
+</div>
+<p class="p">Bir Latince terimi <b>okumak</b> ile Türkçeye yerleşmiş haliyle <b>yazmak</b> iki ayrı şeydir. Derste terimi uluslararası yazımıyla (<span class="t">oesophagus</span>) görürsün; Türkçe bir metin yazarken ise Türk tıp dilindeki yazımını (özofagus) kullanırsın.</p>
+<div style="background: #eef3fb; border: 1px solid #d3def0; border-radius: 12px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font: 800 14px Nunito; color: #1e40af">İngilizce kaynaklar için not</span><span style="font: 400 15px/1.6 Nunito; color: #334155">Amerikan kaynaklarında sadeleştirilmiş yazımlarla karşılaşırsın: <i>oesophagus</i> yerine <i>esophagus</i>, <i>anaemia</i> yerine <i>anemia</i>, <i>haematology</i> yerine <i>hematology</i>. Bu bir çelişki değil, Amerikan İngilizcesinin yazım tercihidir.</span></div>
+</div>
+<div class="card" style="overflow: hidden">
+<table style="width: 100%; border-collapse: collapse">
+<thead><tr><th class="th" style="width: 90px">Harf</th><th class="th">Nasıl okunur</th><th class="th" style="width: 170px">Örnek</th><th class="th" style="width: 130px">Okunuşu</th></tr></thead>
+<tbody>
+<tr><td class="td tl">c</td><td class="td">a, o, u, au ve sessiz harflerden önce <b>k</b>; e, i, y, ae, oe önünde <b>s</b></td><td class="td"><span class="t">scapula</span><br><span class="t">crista</span><br><span class="t">cerebrum</span></td><td class="td say">skapula<br>krista<br>serebrum</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">g</td><td class="td">a, o, u önünde <b>g</b>. e, i, y önünde Türkçeleşmiş kelimelerde <b>j</b>; Latince anatomi terimlerinde sert <b>g</b> okunuşu da yaygındır. İkisini de duyabilirsin.</td><td class="td"><span class="t">gaster</span><br><span class="t">gynaecologia</span><br><span class="t">digitus</span></td><td class="td say">gaster<br>jinekoloji<br>dijitus / digitus</td></tr>
+<tr><td class="td tl">y</td><td class="td">Her zaman <b>i</b>. Ünlüden önce Türkçede doğal olarak y sesi eklenir.</td><td class="td"><span class="t">thymus</span><br><span class="t">myocardium</span></td><td class="td say">timus<br>miyokardiyum</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">x</td><td class="td">Her yerde <b>ks</b></td><td class="td"><span class="t">thorax</span><br><span class="t">xiphoid</span></td><td class="td say">toraks<br>ksifoid</td></tr>
+<tr><td class="td tl">ch</td><td class="td"><b>k</b></td><td class="td"><span class="t">cholera</span></td><td class="td say">kolera</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">ph</td><td class="td"><b>f</b></td><td class="td"><span class="t">pharynx</span></td><td class="td say">farinks</td></tr>
+<tr><td class="td tl">th</td><td class="td"><b>t</b></td><td class="td"><span class="t">thorax</span></td><td class="td say">toraks</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">rh, rrh</td><td class="td"><b>r</b></td><td class="td"><span class="t">rhinitis</span><br><span class="t">myorrhexis</span></td><td class="td say">rinit<br>miyoreksis</td></tr>
+<tr><td class="td tl">sch</td><td class="td"><b>ş</b></td><td class="td"><span class="t">schizophrenia</span></td><td class="td say">şizofreni</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">t</td><td class="td">ia, io, iu önünde <b>s</b></td><td class="td"><span class="t">articulatio</span></td><td class="td say">artikulasyo</td></tr>
+<tr><td class="td tl">j</td><td class="td">Ünlüden önce <b>y</b></td><td class="td"><span class="t">junctura</span></td><td class="td say">yunktura</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">ae</td><td class="td"><b>e</b></td><td class="td"><span class="t">caecum</span><br><span class="t">anaemia</span></td><td class="td say">sekum<br>anemi</td></tr>
+<tr><td class="td tl">oe</td><td class="td"><b>ö</b></td><td class="td"><span class="t">oedema</span><br><span class="t">oesophagus</span></td><td class="td say">ödem<br>ösofagus</td></tr>
+<tr style="background: #fbfcfe"><td class="td tl">eu</td><td class="td"><b>ö</b></td><td class="td"><span class="t">neuron</span></td><td class="td say">nöron</td></tr>
+<tr><td class="td tl" style="border-bottom: 0">au</td><td class="td" style="border-bottom: 0">Latince terimde <b>av</b>; Türkçeye yerleşmiş kelimelerde <b>o</b></td><td class="td" style="border-bottom: 0"><span class="t">auris</span><br><span class="t">autopsia</span></td><td class="td say" style="border-bottom: 0">avris<br>otopsi</td></tr>
+</tbody>
+</table>
+</div>
+<p class="p" style="font-size: 15px; color: #475569"><b style="color: #0f1b33">Okumak ile yazmak farkına bir örnek:</b> <span class="t">articulatio</span> Latince "artikulasyo" okunur, çünkü u harfi ü okunmaz. Türkçeye Fransızca üzerinden geçen "artikülasyon" kelimesindeki ü sesi ise yazım geleneğinden gelir.</p>
+</section>
+
+</article>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":6800}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
