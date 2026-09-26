@@ -8,18 +8,18 @@ export const Section2Structure = () => {
         <span className="font-extrabold text-[12px] leading-none uppercase tracking-[0.14em] text-[#1d4ed8]">
           Bölüm 2
         </span>
-        <h2 className="m-0 font-['Lora',serif] font-bold text-[36px] leading-[1.15] text-[#0f1b33]">
+        <h2 className="m-0 font-['Lora',serif] font-bold text-[26px] sm:text-[32px] desktop:text-[36px] leading-[1.18] desktop:leading-[1.15] text-[#0f1b33]">
           Bir terimin yapısı
         </h2>
       </div>
 
-      <p className="m-0 font-normal text-[17px] leading-[1.75] text-[#334155]">
+      <p className="m-0 font-normal text-[16px] sm:text-[17px] leading-[1.7] sm:leading-[1.75] text-[#334155]">
         Bir tıbbi terim, anlamı meydana getiren farklı işlevlerdeki parçaların birleşmesiyle oluşur. Terim çözümlemeyi öğrenmek için önce bu dört yapı taşını tanımalısın.
       </p>
 
-      <div className="grid grid-cols-2 gap-[14px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
         {/* Kök */}
-        <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[22px] flex flex-col gap-[10px]">
+        <div className="bg-white border border-[#e3e8f1] rounded-[14px] sm:rounded-[16px] p-[18px] sm:p-[22px] flex flex-col gap-[10px]">
           <div className="flex justify-between items-center">
             <span className="font-extrabold text-[17px] text-[#0f1b33]">Kök</span>
             <span className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#1e40af]">

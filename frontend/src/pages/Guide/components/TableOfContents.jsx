@@ -53,7 +53,7 @@ export const TableOfContents = () => {
   };
 
   return (
-    <aside className="sticky top-[104px] flex flex-col gap-[28px] w-[240px] shrink-0">
+    <aside className="hidden desktop:flex sticky top-[104px] flex-col gap-[28px] w-[240px] shrink-0">
       <nav aria-label="İçindekiler" className="flex flex-col gap-[2px]">
         <span className="font-extrabold text-[12px] leading-none uppercase tracking-[0.14em] text-[#5b6b82] px-[12px] pb-[10px]">
           İçindekiler

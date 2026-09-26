@@ -10,6 +10,7 @@ import { Section6Synonyms } from './sections/Section6Synonyms';
 import { Section7CommonMistakes } from './sections/Section7CommonMistakes';
 import { Section8HowToStudy } from './sections/Section8HowToStudy';
 import { RightSidebar } from './components/RightSidebar';
+import { MobileTableOfContents } from './components/MobileTableOfContents';
 
 export const Guide = () => {
   // Temporary security: set <meta name="robots" content="noindex">
@@ -45,14 +46,17 @@ export const Guide = () => {
       {/* Başlık Bölümü */}
       <GuideHeader />
 
+      {/* Mobil ve Tablet Yapışkan İçindekiler Çubuğu (< 1120px) */}
+      <MobileTableOfContents />
+
       {/* Ana İçerik: Sol İçindekiler + Orta Bölümler + Sağ Yardımcı Sütun */}
-      <main className="px-[40px] wide:px-0 pt-[56px] pb-0 flex justify-center">
-        <div className="w-[1024px] wide:w-[1352px] grid grid-cols-[240px_720px] wide:grid-cols-[240px_760px_240px] gap-[64px] wide:gap-[56px] items-start">
-          {/* Sol Sabit İçindekiler */}
+      <main className="px-[16px] sm:px-[24px] desktop:px-[40px] wide:px-0 pt-[32px] desktop:pt-[56px] pb-0 flex justify-center">
+        <div className="w-full max-w-[720px] desktop:max-w-none desktop:w-[1024px] wide:w-[1352px] flex flex-col desktop:grid desktop:grid-cols-[240px_720px] wide:grid-cols-[240px_760px_240px] desktop:gap-[64px] wide:gap-[56px] items-start">
+          {/* Sol Sabit İçindekiler (>= 1120px) */}
           <TableOfContents />
 
           {/* Orta Makale Bölümleri 1 - 8 */}
-          <article className="flex flex-col gap-[88px] pb-[96px] w-[720px] wide:w-[760px]">
+          <article className="flex flex-col gap-[56px] desktop:gap-[88px] pb-[96px] w-full desktop:w-[720px] wide:w-[760px]">
             <Section1Intro />
             <Section2Structure />
             <Section3Steps />

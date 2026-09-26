@@ -155,72 +155,111 @@ const PRONUNCIATION_RULES = [
 
 export const PronunciationTable = () => {
   return (
-    <div className="bg-white border border-[#e3e8f1] rounded-[16px] overflow-hidden">
-      <table className="w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[90px]">
-              Harf
-            </th>
-            <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1]">
-              Nasıl okunur
-            </th>
-            <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[170px]">
-              Örnek
-            </th>
-            <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[130px]">
-              Okunuşu
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {PRONUNCIATION_RULES.map((item, idx) => {
-            const isEven = idx % 2 === 1;
-            const isLast = idx === PRONUNCIATION_RULES.length - 1;
-            const borderClass = isLast ? 'border-b-0' : 'border-b border-[#eef1f6]';
+    <>
+      {/* Masaüstü ve Tablet Tablosu (>= 640px) */}
+      <div className="hidden sm:block bg-white border border-[#e3e8f1] rounded-[16px] overflow-hidden">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr>
+              <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[90px]">
+                Harf
+              </th>
+              <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1]">
+                Nasıl okunur
+              </th>
+              <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[170px]">
+                Örnek
+              </th>
+              <th className="p-[14px_18px] text-left font-extrabold text-[12px] leading-[1.2] uppercase tracking-[0.08em] text-[#475569] bg-[#f8fafc] border-b border-[#e3e8f1] w-[130px]">
+                Okunuşu
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {PRONUNCIATION_RULES.map((item, idx) => {
+              const isEven = idx % 2 === 1;
+              const isLast = idx === PRONUNCIATION_RULES.length - 1;
+              const borderClass = isLast ? 'border-b-0' : 'border-b border-[#eef1f6]';
 
-            return (
-              <tr
-                key={item.letter}
-                className={isEven ? 'bg-[#fbfcfe]' : 'bg-white'}
-              >
-                <td
-                  className={`p-[14px_18px] align-top font-mono font-extrabold text-[16px] leading-[1.4] text-[#0f1b33] ${borderClass}`}
+              return (
+                <tr
+                  key={item.letter}
+                  className={isEven ? 'bg-[#fbfcfe]' : 'bg-white'}
                 >
-                  {item.letter}
-                </td>
-                <td
-                  className={`p-[14px_18px] align-top font-normal text-[15px] leading-[1.55] text-[#334155] ${borderClass}`}
-                >
+                  <td
+                    className={`p-[14px_18px] align-top font-mono font-extrabold text-[16px] leading-[1.4] text-[#0f1b33] ${borderClass}`}
+                  >
+                    {item.letter}
+                  </td>
+                  <td
+                    className={`p-[14px_18px] align-top font-normal text-[15px] leading-[1.55] text-[#334155] ${borderClass}`}
+                  >
+                    {item.rule}
+                  </td>
+                  <td
+                    className={`p-[14px_18px] align-top font-normal text-[15px] leading-[1.55] text-[#334155] ${borderClass}`}
+                  >
+                    {item.examples.map((ex, i) => (
+                      <React.Fragment key={ex}>
+                        <span className="font-['Lora',serif] italic font-semibold text-[#0f1b33]">
+                          {ex}
+                        </span>
+                        {i < item.examples.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </td>
+                  <td
+                    className={`p-[14px_18px] align-top font-bold text-[15px] leading-[1.55] text-[#0f1b33] ${borderClass}`}
+                  >
+                    {item.pronunciations.map((pr, i) => (
+                      <React.Fragment key={i}>
+                        {pr}
+                        {i < item.pronunciations.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobil Kart Satırları (< 640px) */}
+      <div className="block sm:hidden bg-white border border-[#e3e8f1] rounded-[16px] overflow-hidden">
+        {PRONUNCIATION_RULES.map((item, idx) => {
+          const isLast = idx === PRONUNCIATION_RULES.length - 1;
+          const borderClass = isLast ? '' : 'border-b border-[#eef1f6]';
+
+          return (
+            <div
+              key={item.letter}
+              className={`grid grid-cols-[56px_1fr] gap-[14px] p-[16px] ${borderClass}`}
+            >
+              <span className="font-mono font-extrabold text-[20px] leading-[1.2] text-[#0f1b33]">
+                {item.letter}
+              </span>
+              <div className="flex flex-col gap-[8px]">
+                <span className="font-normal text-[15px] leading-[1.5] text-[#334155]">
                   {item.rule}
-                </td>
-                <td
-                  className={`p-[14px_18px] align-top font-normal text-[15px] leading-[1.55] text-[#334155] ${borderClass}`}
-                >
-                  {item.examples.map((ex, i) => (
-                    <React.Fragment key={ex}>
-                      <span className="font-['Lora',serif] italic font-semibold text-[#0f1b33]">
-                        {ex}
-                      </span>
-                      {i < item.examples.length - 1 && <br />}
-                    </React.Fragment>
-                  ))}
-                </td>
-                <td
-                  className={`p-[14px_18px] align-top font-bold text-[15px] leading-[1.55] text-[#0f1b33] ${borderClass}`}
-                >
-                  {item.pronunciations.map((pr, i) => (
-                    <React.Fragment key={i}>
-                      {pr}
-                      {i < item.pronunciations.length - 1 && <br />}
-                    </React.Fragment>
-                  ))}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+                </span>
+                {item.examples.map((ex, i) => (
+                  <div
+                    key={ex}
+                    className="flex gap-[8px] items-baseline flex-wrap font-bold text-[15px] text-[#0f1b33]"
+                  >
+                    <span className="font-['Lora',serif] italic font-semibold text-[#0f1b33]">
+                      {ex}
+                    </span>
+                    <span className="text-[#94a3b8] font-normal">→</span>
+                    <span>{item.pronunciations[i]}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };

@@ -9,24 +9,24 @@ export const Section7CommonMistakes = () => {
         <span className="font-extrabold text-[12px] leading-none uppercase tracking-[0.14em] text-[#1d4ed8]">
           Bölüm 7
         </span>
-        <h2 className="m-0 font-['Lora',serif] font-bold text-[36px] leading-[1.15] text-[#0f1b33]">
+        <h2 className="m-0 font-['Lora',serif] font-bold text-[26px] sm:text-[32px] desktop:text-[36px] leading-[1.18] desktop:leading-[1.15] text-[#0f1b33]">
           Sık yapılan hatalar
         </h2>
       </div>
 
-      <p className="m-0 font-normal text-[17px] leading-[1.75] text-[#334155]">
+      <p className="m-0 font-normal text-[16px] sm:text-[17px] leading-[1.7] sm:leading-[1.75] text-[#334155]">
         Tıp dilinde küçük bir harf değişikliği bile farklı bir yapıyı işaret edebilir. Hatalar genellikle üç alanda toplanır.
       </p>
 
       {/* 1. Yazım ve okunuş */}
-      <h3 className="m-0 font-extrabold text-[19px] leading-[1.35] text-[#0f1b33]">
+      <h3 className="m-0 font-extrabold text-[18px] sm:text-[19px] leading-[1.35] text-[#0f1b33]">
         Yazım ve okunuş
       </h3>
 
       <div className="bg-white border border-[#e3e8f1] rounded-[16px] overflow-hidden">
         {/* Satır 1: longutidinal / longitudinal */}
-        <div className="grid grid-cols-2 border-b border-[#eef1f6]">
-          <div className="p-[16px_20px] flex gap-[10px] items-center border-r border-[#eef1f6]">
+        <div className="flex flex-col sm:grid sm:grid-cols-2 border-b border-[#eef1f6]">
+          <div className="p-[14px_16px] sm:p-[16px_20px] flex gap-[10px] items-center border-b sm:border-b-0 sm:border-r border-[#eef1f6]">
             <svg
               width="18"
               height="18"
@@ -46,7 +46,7 @@ export const Section7CommonMistakes = () => {
             </span>
           </div>
 
-          <div className="p-[16px_20px] flex gap-[10px] items-center">
+          <div className="p-[14px_16px] sm:p-[16px_20px] flex gap-[10px] items-center">
             <svg
               width="18"
               height="18"
@@ -68,8 +68,8 @@ export const Section7CommonMistakes = () => {
         </div>
 
         {/* Satır 2: obstriksiyon / obstrüksiyon */}
-        <div className="grid grid-cols-2">
-          <div className="p-[16px_20px] flex gap-[10px] items-center border-r border-[#eef1f6]">
+        <div className="flex flex-col sm:grid sm:grid-cols-2">
+          <div className="p-[14px_16px] sm:p-[16px_20px] flex gap-[10px] items-center border-b sm:border-b-0 sm:border-r border-[#eef1f6]">
             <svg
               width="18"
               height="18"
@@ -89,7 +89,7 @@ export const Section7CommonMistakes = () => {
             </span>
           </div>
 
-          <div className="p-[16px_20px] flex gap-[10px] items-center">
+          <div className="p-[14px_16px] sm:p-[16px_20px] flex gap-[10px] items-center">
             <svg
               width="18"
               height="18"

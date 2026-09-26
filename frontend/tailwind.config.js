@@ -8,6 +8,7 @@ module.exports = {
   theme: {
   	extend: {
   		screens: {
+  			'desktop': '1120px',
   			'wide': '1440px',
   		},
   		borderRadius: {
