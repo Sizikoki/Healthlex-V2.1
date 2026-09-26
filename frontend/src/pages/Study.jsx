@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { auth, db } from '@/firebase/config';
 import { collection, getDocs, query, where, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms } from '@/data/medicalTerms';
+import { buildTermGroups } from '@/data/groupOrder';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermMorphemes } from '@/utils/morphemeAdapter';
@@ -413,45 +414,12 @@ export const Study = () => {
 
   const termGroups = useMemo(() => {
     if (searchQuery.trim()) return null;
-
-    const hasAnyGroup = terms.some((t) => Boolean(t.group && t.group.trim()));
-    if (!hasAnyGroup) return null;
-
-    const groupsMap = new Map();
-    const ungrouped = [];
-
-    terms.forEach((term) => {
-      const gName = term.group ? term.group.trim() : '';
-      if (gName) {
-        if (!groupsMap.has(gName)) {
-          groupsMap.set(gName, {
-            name: gName,
-            minId: Number(term.id) || Infinity,
-            terms: [],
-          });
-        }
-        const g = groupsMap.get(gName);
-        g.terms.push(term);
-        if (Number(term.id) < g.minId) {
-          g.minId = Number(term.id);
-        }
-      } else {
-        ungrouped.push(term);
-      }
-    });
-
-    const sortedGroups = Array.from(groupsMap.values()).sort((a, b) => a.minId - b.minId);
-
-    if (ungrouped.length > 0) {
-      sortedGroups.push({
-        name: isTr ? 'Diğer Yapılar' : 'Other Structures',
-        minId: Infinity,
-        terms: ungrouped,
-      });
-    }
-
-    return sortedGroups;
-  }, [terms, searchQuery, isTr]);
+    return buildTermGroups(
+      terms,
+      selectedCategoryId,
+      isTr ? 'Diğer Yapılar' : 'Other Structures'
+    );
+  }, [terms, searchQuery, selectedCategoryId, isTr]);
 
   const activeOpenGroups = useMemo(() => {
     if (openGroups !== null) {
