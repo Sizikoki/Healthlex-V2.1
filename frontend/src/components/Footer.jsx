@@ -7,6 +7,7 @@ const FOOTER_TRANSLATIONS = {
     tagline: 'Tıbbi terimleri parçala, anla, birleştir. Ezber değil, sistem.',
     col1Title: 'KURUMSAL',
     about: 'Hakkında',
+    guide: 'Terminoloji Rehberi',
     faq: 'Sık Sorulan Sorular',
     contact: 'İletişim',
     col2Title: 'YASAL',
@@ -24,6 +25,7 @@ const FOOTER_TRANSLATIONS = {
     tagline: 'Split, understand, rebuild medical terms. A system, not rote memorization.',
     col1Title: 'COMPANY',
     about: 'About',
+    guide: 'Terminology Guide',
     faq: 'Frequently Asked Questions',
     contact: 'Contact',
     col2Title: 'LEGAL',
@@ -83,6 +85,12 @@ export const Footer = () => {
                 className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
               >
                 {t.about}
+              </Link>
+              <Link
+                to="/rehber"
+                className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
+              >
+                {t.guide}
               </Link>
               <Link
                 to="/faq"
@@ -203,6 +211,12 @@ export const Footer = () => {
               className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
             >
               {t.about}
+            </Link>
+            <Link
+              to="/rehber"
+              className="text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors"
+            >
+              {t.guide}
             </Link>
             <Link
               to="/faq"

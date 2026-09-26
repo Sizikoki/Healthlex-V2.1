@@ -22,7 +22,7 @@ const MORPHEME_SLUG_MAP = {
   'electr/o': 'electr',
   'ren/o': 'ren',
   'nephr/o': 'nephr',
-  'cutane/o': 'cutan',
+  'cutane/o': 'cutane',
   'dermat/o': 'dermat',
   'or/o': 'or',
   'stomat/o': 'stomat',

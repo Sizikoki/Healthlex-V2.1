@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Info } from 'lucide-react';
 import { GuideHeader } from './components/GuideHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { Section1Intro } from './sections/Section1Intro';
@@ -13,6 +15,9 @@ import { RightSidebar } from './components/RightSidebar';
 import { MobileTableOfContents } from './components/MobileTableOfContents';
 
 export const Guide = () => {
+  const { currentLanguage } = useLanguage();
+  const isEn = currentLanguage === 'en';
+
   // Temporary security: set <meta name="robots" content="noindex">
   useEffect(() => {
     document.title = 'Tıbbi Terminoloji Rehberi | HealthLexMed';
@@ -43,6 +48,14 @@ export const Guide = () => {
 
   return (
     <div className="bg-[#f5f7fb] text-[#0f1b33] font-['Nunito',sans-serif] min-h-screen">
+      {/* İngilizce Bilgilendirme Bandı */}
+      {isEn && (
+        <div className="bg-[#eff6ff] border-b border-[#bfdbfe] text-[#1e40af] px-4 py-2.5 text-center text-[14px] font-medium flex items-center justify-center gap-2">
+          <Info className="w-4 h-4 shrink-0 text-[#2563eb]" />
+          <span>This guide is currently available in Turkish only.</span>
+        </div>
+      )}
+
       {/* Başlık Bölümü */}
       <GuideHeader />
 

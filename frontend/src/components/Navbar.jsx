@@ -140,6 +140,7 @@ export const Navbar = () => {
         { path: '/study', label: t('study') },
         { path: '/morphemes', label: t('morphemes', 'Morfemler') },
         { path: '/games', label: t('games') },
+        { path: '/rehber', label: isTr ? 'Rehber' : 'Guide' },
         { path: '/pricing', label: t('pricing', 'Tarifeler') },
         { path: '/progress', label: t('progress') },
       ]
@@ -148,6 +149,7 @@ export const Navbar = () => {
         { path: '/study', label: t('study') },
         { path: '/morphemes', label: t('morphemes', 'Morfemler') },
         { path: '/games', label: t('games') },
+        { path: '/rehber', label: isTr ? 'Rehber' : 'Guide' },
         { path: '/pricing', label: t('pricing', 'Tarifeler') },
         { path: '/progress', label: t('progress') },
       ];
