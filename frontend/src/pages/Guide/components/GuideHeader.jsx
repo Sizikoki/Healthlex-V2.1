@@ -18,9 +18,12 @@ export const GuideHeader = () => {
   };
 
   return (
-    <section className="bg-white border-b border-[#e3e8f1] px-[40px] pt-[64px] pb-[56px] flex justify-center">
-      <div className="w-[1024px] grid grid-cols-[1fr_400px] gap-[64px] items-center">
-        {/* Sol Kolon: Metin ve Butonlar */}
+    <section className="bg-white border-b border-[#e3e8f1] px-[40px] wide:px-0 pt-[64px] pb-[56px] flex justify-center">
+      <div className="w-[1024px] wide:w-[1352px] grid grid-cols-[1fr_400px] wide:grid-cols-[240px_1fr_440px] gap-[64px] wide:gap-[56px] items-center">
+        {/* Geniş ekranda ilk sütun boş (sol içindekiler hizası: 240px) */}
+        <div className="hidden wide:block" />
+
+        {/* Metin ve Butonlar (Orta sütun hizası) */}
         <div className="flex flex-col gap-[20px]">
           <div className="flex gap-[10px] items-center font-semibold text-[14px] text-[#5b6b82]">
             <Link to="/" className="text-[#5b6b82] hover:text-[#0f1b33] transition-colors">
@@ -61,7 +64,7 @@ export const GuideHeader = () => {
         </div>
 
         {/* Sağ Kolon: Bir Terimi Parçala Kartı */}
-        <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[28px] flex flex-col gap-[18px] shadow-[0_1px_2px_rgba(15,27,51,0.05),0_12px_32px_rgba(15,27,51,0.07)]">
+        <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[28px] flex flex-col gap-[18px] shadow-[0_1px_2px_rgba(15,27,51,0.05),0_12px_32px_rgba(15,27,51,0.07)] w-full wide:w-[440px]">
           <span className="font-extrabold text-[12px] leading-none uppercase tracking-[0.14em] text-[#5b6b82]">
             Bir terimi parçala
           </span>

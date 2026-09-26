@@ -9,6 +9,7 @@ import { Section5Plurals } from './sections/Section5Plurals';
 import { Section6Synonyms } from './sections/Section6Synonyms';
 import { Section7CommonMistakes } from './sections/Section7CommonMistakes';
 import { Section8HowToStudy } from './sections/Section8HowToStudy';
+import { RightSidebar } from './components/RightSidebar';
 
 export const Guide = () => {
   // Temporary security: set <meta name="robots" content="noindex">
@@ -44,14 +45,14 @@ export const Guide = () => {
       {/* Başlık Bölümü */}
       <GuideHeader />
 
-      {/* Ana İçerik: Sol İçindekiler + Sağ Bölümler */}
-      <main className="px-[40px] pt-[56px] pb-0 flex justify-center">
-        <div className="w-[1024px] grid grid-cols-[240px_720px] gap-[64px] items-start">
+      {/* Ana İçerik: Sol İçindekiler + Orta Bölümler + Sağ Yardımcı Sütun */}
+      <main className="px-[40px] wide:px-0 pt-[56px] pb-0 flex justify-center">
+        <div className="w-[1024px] wide:w-[1352px] grid grid-cols-[240px_720px] wide:grid-cols-[240px_760px_240px] gap-[64px] wide:gap-[56px] items-start">
           {/* Sol Sabit İçindekiler */}
           <TableOfContents />
 
-          {/* Sağ Makale Bölümleri 1 - 8 */}
-          <article className="flex flex-col gap-[88px] pb-[96px] w-[720px]">
+          {/* Orta Makale Bölümleri 1 - 8 */}
+          <article className="flex flex-col gap-[88px] pb-[96px] w-[720px] wide:w-[760px]">
             <Section1Intro />
             <Section2Structure />
             <Section3Steps />
@@ -61,6 +62,9 @@ export const Guide = () => {
             <Section7CommonMistakes />
             <Section8HowToStudy />
           </article>
+
+          {/* Sağ Yardımcı Sütun (1440px ve üzerinde görünür) */}
+          <RightSidebar />
         </div>
       </main>
     </div>

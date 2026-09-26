@@ -160,6 +160,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/morpheme" element={<MorphemeGame />} />
             <Route path="/morphemes" element={<MorphemeExplorer />} />
+            <Route path="/morfemler" element={<Navigate to="/morphemes" replace />} />
             <Route path="/morphemes/:slug" element={<MorphemeDetail />} />
             <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
             <Route path="/rehber" element={<Guide />} />
