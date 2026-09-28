@@ -802,22 +802,99 @@ export const syncMorphemeProgressFromFirestore = async () => {
 };
 
 // ── Giriş / Ziyaret Bazlı Günlük Seri (Calendar-based Study Streak) ────────────
-export const updateStreak = async () => {
-  const key = getUserStorageKey(STORAGE_KEYS.STUDY_STREAK);
-  const streak = getStreak();
 
-  // Local calendar date in YYYY-MM-DD
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const todayStr = `${year}-${month}-${day}`;
+/**
+ * Normalizes any Date instance, ISO string, or local YYYY-MM-DD string
+ * into a pure local calendar date string "YYYY-MM-DD" using user's local timezone.
+ */
+export const normalizeLocalDateStr = (val) => {
+  if (!val) return null;
+  if (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(val)) {
+    return val;
+  }
+  const d = val instanceof Date ? val : new Date(val);
+  if (isNaN(d.getTime())) return null;
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
-  const lastDateStr = streak.lastStudyDate ? streak.lastStudyDate.slice(0, 10) : null;
+/**
+ * Returns exact difference in calendar days between two dates.
+ * Both dates are converted to UTC midnight from their local year/month/day components.
+ */
+export const getDiffCalendarDays = (prevDateVal, nextDateVal) => {
+  const prevStr = normalizeLocalDateStr(prevDateVal);
+  const nextStr = normalizeLocalDateStr(nextDateVal);
+  if (!prevStr || !nextStr) return null;
+
+  const [py, pm, pd] = prevStr.split('-').map(Number);
+  const [ny, nm, nd] = nextStr.split('-').map(Number);
+  const prevUtc = Date.UTC(py, pm - 1, pd);
+  const nextUtc = Date.UTC(ny, nm - 1, nd);
+  return Math.round((nextUtc - prevUtc) / (1000 * 60 * 60 * 24));
+};
+
+/**
+ * Merges local and remote streak records.
+ * Rules:
+ * 1. Takes the record whose lastStudyDate is newer AS A WHOLE (currentStreak, totalDays, lastStudyDate).
+ * 2. Exception: longestStreak always takes the maximum of both records (records never drop).
+ */
+export const mergeStreakRecords = (localStreak = {}, remoteStreak = {}) => {
+  const localDateStr = normalizeLocalDateStr(localStreak.lastStudyDate);
+  const remoteDateStr = normalizeLocalDateStr(remoteStreak.lastStudyDate);
+
+  let chosen;
+  if (localDateStr && remoteDateStr) {
+    if (localDateStr > remoteDateStr) {
+      chosen = { ...localStreak, lastStudyDate: localDateStr };
+    } else if (remoteDateStr > localDateStr) {
+      chosen = { ...remoteStreak, lastStudyDate: remoteDateStr };
+    } else {
+      // Same calendar day: take the one with greater or equal currentStreak
+      chosen = (localStreak.currentStreak || 0) >= (remoteStreak.currentStreak || 0)
+        ? { ...localStreak, lastStudyDate: localDateStr }
+        : { ...remoteStreak, lastStudyDate: remoteDateStr };
+    }
+  } else if (localDateStr) {
+    chosen = { ...localStreak, lastStudyDate: localDateStr };
+  } else if (remoteDateStr) {
+    chosen = { ...remoteStreak, lastStudyDate: remoteDateStr };
+  } else {
+    chosen = { ...localStreak };
+  }
+
+  return {
+    currentStreak: chosen.currentStreak || 0,
+    longestStreak: Math.max(
+      localStreak.longestStreak || 0,
+      remoteStreak.longestStreak || 0,
+      chosen.currentStreak || 0
+    ),
+    totalDays: Math.max(localStreak.totalDays || 0, remoteStreak.totalDays || 0, chosen.totalDays || 0),
+    lastStudyDate: chosen.lastStudyDate ? normalizeLocalDateStr(chosen.lastStudyDate) : null
+  };
+};
+
+/**
+ * Calculates next streak state given current state and target date.
+ */
+export const calculateNextStreak = (currentStreakState = {}, targetDate = new Date()) => {
+  const streak = {
+    currentStreak: Number(currentStreakState.currentStreak) || 0,
+    longestStreak: Number(currentStreakState.longestStreak) || 0,
+    totalDays: Number(currentStreakState.totalDays) || 0,
+    lastStudyDate: currentStreakState.lastStudyDate || null
+  };
+
+  const todayStr = normalizeLocalDateStr(targetDate);
+  const lastDateStr = normalizeLocalDateStr(streak.lastStudyDate);
 
   if (lastDateStr === todayStr) {
     // Already counted today
-    return streak;
+    return { streak, updated: false };
   }
 
   if (!lastDateStr) {
@@ -826,10 +903,7 @@ export const updateStreak = async () => {
     streak.longestStreak = Math.max(streak.longestStreak || 0, 1);
     streak.totalDays = (streak.totalDays || 0) + 1;
   } else {
-    // Calculate calendar day difference in UTC to avoid hour/DST drift
-    const lastDate = new Date(`${lastDateStr}T00:00:00Z`);
-    const currentDate = new Date(`${todayStr}T00:00:00Z`);
-    const diffDays = Math.round((currentDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+    const diffDays = getDiffCalendarDays(lastDateStr, todayStr);
 
     if (diffDays === 1) {
       // Consecutive calendar day! Streak increases
@@ -841,12 +915,23 @@ export const updateStreak = async () => {
       streak.currentStreak = 1;
       streak.totalDays = (streak.totalDays || 0) + 1;
     } else {
-      // Same day or clock skew, keep
-      return streak;
+      // Clock skew or earlier date, keep existing
+      return { streak, updated: false };
     }
   }
 
-  streak.lastStudyDate = new Date().toISOString();
+  streak.lastStudyDate = todayStr;
+  return { streak, updated: true };
+};
+
+export const updateStreak = async (customDate = new Date()) => {
+  const key = getUserStorageKey(STORAGE_KEYS.STUDY_STREAK);
+  const currentStreak = getStreak();
+  const { streak, updated } = calculateNextStreak(currentStreak, customDate);
+
+  if (!updated) {
+    return streak;
+  }
 
   if (key) {
     localStorage.setItem(key, JSON.stringify(streak));
@@ -884,12 +969,7 @@ export const syncStreakFromFirestore = async () => {
       const data = snap.data();
       if (data.streak) {
         const localStreak = getStreak();
-        const mergedStreak = {
-          currentStreak: Math.max(localStreak.currentStreak || 0, data.streak.currentStreak || 0),
-          longestStreak: Math.max(localStreak.longestStreak || 0, data.streak.longestStreak || 0),
-          totalDays: Math.max(localStreak.totalDays || 0, data.streak.totalDays || 0),
-          lastStudyDate: data.streak.lastStudyDate || localStreak.lastStudyDate
-        };
+        const mergedStreak = mergeStreakRecords(localStreak, data.streak);
         const key = getUserStorageKey(STORAGE_KEYS.STUDY_STREAK);
         if (key) {
           localStorage.setItem(key, JSON.stringify(mergedStreak));
@@ -907,12 +987,31 @@ export const getStreak = () => {
   if (!key) return { currentStreak: 0, longestStreak: 0, totalDays: 0, lastStudyDate: null };
 
   const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : {
-    currentStreak: 0,
-    longestStreak: 0,
-    totalDays: 0,
-    lastStudyDate: null
-  };
+  if (!data) {
+    return {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalDays: 0,
+      lastStudyDate: null
+    };
+  }
+
+  try {
+    const parsed = JSON.parse(data);
+    return {
+      currentStreak: Number(parsed.currentStreak) || 0,
+      longestStreak: Number(parsed.longestStreak) || 0,
+      totalDays: Number(parsed.totalDays) || 0,
+      lastStudyDate: parsed.lastStudyDate ? normalizeLocalDateStr(parsed.lastStudyDate) : null
+    };
+  } catch (e) {
+    return {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalDays: 0,
+      lastStudyDate: null
+    };
+  }
 };
 
 // ── Seviye Hesaplama (Level Logic) ──────────────────────────────────────────
