@@ -23,7 +23,8 @@ import {
   findTermBySlug,
   getTermSlug,
   getRelatedTerms,
-  parseRootsToMorphemes
+  parseRootsToMorphemes,
+  buildTermMetaDescription
 } from '@/utils/termHelper';
 
 export const TermDetail = () => {
@@ -93,15 +94,24 @@ export const TermDetail = () => {
         : `${term.term} (${enName}) Medical Definition & Anatomy Breakdown - HealthLexMed`;
       document.title = titleStr;
 
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute(
-          'content',
-          isTr
-            ? `${term.term} (${enName}) nedir? Morfem ve etimoloji kökeni: ${term.roots || ''}. Tıbbi ve anatomik açıklaması, komşulukları ve fonksiyonları.`
-            : `What is ${term.term} (${enName})? Morpheme breakdown: ${term.roots || ''}. Medical definition, anatomical relationships, and flashcard learning.`
-        );
-      }
+      // Meta descriptions (Standard, OpenGraph, Twitter)
+      const metaDescriptionText = buildTermMetaDescription(term, isTr, 160);
+
+      const updateMetaTag = (selector, attrKey, attrVal, contentVal) => {
+        let el = document.querySelector(selector);
+        if (el) {
+          el.setAttribute('content', contentVal);
+        } else {
+          el = document.createElement('meta');
+          el.setAttribute(attrKey, attrVal);
+          el.setAttribute('content', contentVal);
+          document.head.appendChild(el);
+        }
+      };
+
+      updateMetaTag('meta[name="description"]', 'name', 'description', metaDescriptionText);
+      updateMetaTag('meta[property="og:description"]', 'property', 'og:description', metaDescriptionText);
+      updateMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', metaDescriptionText);
 
       // Update Canonical Link and OpenGraph URL
       const termSlug = getTermSlug(term.term) || slug;
@@ -363,7 +373,7 @@ export const TermDetail = () => {
 
         {/* Aynı Sistem ve Bölgedeki İlgili Terimler */}
         {relatedTerms.length > 0 && (
-          <div className="space-y-4">
+          <div data-nosnippet className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-foreground">
@@ -427,14 +437,14 @@ export const TermDetail = () => {
         )}
 
         {/* Conversion & Call to Action (CTA) Banner */}
-        <div className="p-5 sm:p-8 rounded-2xl gradient-hero border border-primary/20 shadow-md text-center space-y-4">
+        <div data-nosnippet className="p-5 sm:p-8 rounded-2xl gradient-hero border border-primary/20 shadow-md text-center space-y-4">
           <Badge className="gradient-primary text-xs px-3 py-1 font-semibold uppercase tracking-wider">
             {isTr ? '3 Günlük Ücretsiz Deneme' : '3-Day Free Access'}
           </Badge>
           <h3 className="text-2xl font-bold text-foreground max-w-lg mx-auto">
             {isTr
-              ? `${term.term} ve Tüm Anatomi Terimlerini Ezberlemeden Öğrenin`
-              : `Master ${term.term} and Medical Anatomy with Interactive Games`}
+              ? 'Tüm Anatomi Terimlerini Ezberlemeden Öğrenin'
+              : 'Master All Medical Anatomy Terms with Interactive Games'}
           </h3>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {isTr

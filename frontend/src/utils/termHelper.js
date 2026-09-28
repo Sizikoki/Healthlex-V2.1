@@ -103,3 +103,77 @@ export function getRelatedTerms(currentTerm, limit = 6) {
 
   return related.slice(0, limit);
 }
+
+/**
+ * Truncates text at word boundary, ensuring the result + suffix <= maxLen.
+ */
+export function truncateWordBoundary(text, maxLen) {
+  if (!text || text.length <= maxLen) return text || '';
+  const sub = text.slice(0, maxLen).trimEnd();
+  const lastSpace = sub.lastIndexOf(' ');
+  if (lastSpace > 0) {
+    return sub.slice(0, lastSpace).trimEnd().replace(/[,:;.-]+$/, '');
+  }
+  return sub.replace(/[,:;.-]+$/, '');
+}
+
+/**
+ * Builds SEO meta description according to specifications:
+ * TR: "{term} nedir? {turkishDefinition} Kökeni: {roots}."
+ * EN: "What is {term}? {englishDefinition} Origin: {roots}."
+ * Max 160 characters. Prioritizes definition; roots part is truncated or dropped if needed.
+ */
+export function buildTermMetaDescription(term, isTr = true, maxLength = 160) {
+  if (!term) return '';
+  const termName = (term.term || '').trim();
+
+  let rawDef = '';
+  if (isTr) {
+    rawDef = term.turkishDefinition || term.turkishShort || term.definition || '';
+  } else {
+    rawDef = term.englishDefinition || term.turkishDefinition || term.turkishShort || term.definition || '';
+  }
+
+  const cleanDef = rawDef.trim().replace(/\s+/g, ' ').replace(/\.+$/, '');
+  const cleanRoots = (term.roots || '').trim().replace(/\s+/g, ' ').replace(/\.+$/, '');
+
+  const question = isTr ? `${termName} nedir? ` : `What is ${termName}? `;
+  const originPrefix = isTr ? ' Kökeni: ' : ' Origin: ';
+
+  if (!cleanDef) {
+    const fallback = cleanRoots ? `${question}${originPrefix.trim()} ${cleanRoots}.` : question.trim();
+    return fallback.length <= maxLength ? fallback : truncateWordBoundary(fallback, maxLength - 1) + '…';
+  }
+
+  // 1. Full with complete definition and roots:
+  if (cleanRoots) {
+    const full = `${question}${cleanDef}.${originPrefix}${cleanRoots}.`;
+    if (full.length <= maxLength) {
+      return full;
+    }
+  }
+
+  // 2. Prioritize definition: try definition + partial roots or definition alone
+  const baseDef = `${question}${cleanDef}.`;
+  if (baseDef.length <= maxLength) {
+    if (cleanRoots) {
+      const availableForRoots = maxLength - baseDef.length - originPrefix.length - 1; // 1 for '…'
+      if (availableForRoots >= 8) {
+        const truncatedRoots = truncateWordBoundary(cleanRoots, availableForRoots);
+        if (truncatedRoots) {
+          const candidate = `${question}${cleanDef}.${originPrefix}${truncatedRoots}…`;
+          if (candidate.length <= maxLength) {
+            return candidate;
+          }
+        }
+      }
+    }
+    return baseDef;
+  }
+
+  // 3. Even definition alone exceeds maxLength: cut definition at word boundary
+  const allowedDefLength = maxLength - question.length - 1;
+  const truncatedDef = truncateWordBoundary(cleanDef, allowedDefLength);
+  return `${question}${truncatedDef}…`;
+}
+
