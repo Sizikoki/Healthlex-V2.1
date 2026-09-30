@@ -198,7 +198,7 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex space-x-1 items-center">
+          <div className="hidden desktop:flex space-x-1 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -216,7 +216,7 @@ export const Navbar = () => {
           </div>
 
           {/* User Menu / Auth Actions + Language Switcher */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden desktop:flex items-center gap-4">
             <LanguageSwitcher />
 
             {loggedIn ? (
@@ -282,7 +282,7 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile menu button & Language switcher */}
-          <div className="lg:hidden flex items-center gap-3">
+          <div className="desktop:hidden flex items-center gap-3">
             <LanguageSwitcher />
             <Button
               variant="ghost"
@@ -297,7 +297,7 @@ export const Navbar = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-2 border-t border-border">
+          <div className="desktop:hidden py-4 space-y-2 border-t border-border">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
