@@ -40,7 +40,7 @@
   "scripts": {
     "start": "craco start",
     "prebuild": "node scripts/sync-api.mjs",
-    "build": "node scripts/generate-sitemap.mjs && craco build && node scripts/prerender-faq.mjs",
+    "build": "node scripts/generate-sitemap.mjs && craco build && node scripts/prerender-faq.mjs && node scripts/prerender-rehber.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "test": "craco test"
   },

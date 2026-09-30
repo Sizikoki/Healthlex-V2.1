@@ -21,6 +21,7 @@ async function generateSitemap() {
     { loc: `${baseUrl}/`, priority: '1.0', changefreq: 'daily' },
     { loc: `${baseUrl}/study`, priority: '0.9', changefreq: 'daily' },
     { loc: `${baseUrl}/morphemes`, priority: '0.9', changefreq: 'daily' },
+    { loc: `${baseUrl}/rehber`, priority: '0.9', changefreq: 'weekly' },
     { loc: `${baseUrl}/games`, priority: '0.8', changefreq: 'weekly' },
     { loc: `${baseUrl}/flashcards`, priority: '0.8', changefreq: 'weekly' },
     { loc: `${baseUrl}/match`, priority: '0.8', changefreq: 'weekly' },

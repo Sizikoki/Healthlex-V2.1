@@ -14,34 +14,110 @@ import { Section8HowToStudy } from './sections/Section8HowToStudy';
 import { RightSidebar } from './components/RightSidebar';
 import { MobileTableOfContents } from './components/MobileTableOfContents';
 
+import { updateCanonicalUrl } from '@/utils/seo';
+
 export const Guide = () => {
   const { currentLanguage } = useLanguage();
   const isEn = currentLanguage === 'en';
 
-  // Temporary security: set <meta name="robots" content="noindex">
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = 'Tıbbi Terminoloji Rehberi | HealthLexMed';
 
-    let meta = document.querySelector('meta[name="robots"]');
-    let created = false;
-    let originalContent = '';
+    const desc = 'Tıbbi terimleri ezberlemeden, parçalayarak öğren: ön ek, kök ve son ek çözümlemesi, Latince okunuş kuralları, çoğul kuralları ve çalışma yöntemleri.';
+    const canonicalUrl = 'https://www.healthlexmed.com/rehber';
 
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'robots';
-      document.head.appendChild(meta);
-      created = true;
-    } else {
-      originalContent = meta.getAttribute('content') || '';
+    const setMeta = (selector, attrKey, attrVal, content) => {
+      let el = document.querySelector(selector);
+      if (el) {
+        el.setAttribute('content', content);
+      } else {
+        el = document.createElement('meta');
+        el.setAttribute(attrKey, attrVal);
+        el.setAttribute('content', content);
+        document.head.appendChild(el);
+      }
+    };
+
+    setMeta('meta[name="description"]', 'name', 'description', desc);
+    setMeta('meta[property="og:title"]', 'property', 'og:title', 'Tıbbi Terminoloji Rehberi | HealthLexMed');
+    setMeta('meta[property="og:description"]', 'property', 'og:description', desc);
+    setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', 'Tıbbi Terminoloji Rehberi | HealthLexMed');
+    setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', desc);
+    setMeta('meta[name="twitter:url"]', 'name', 'twitter:url', canonicalUrl);
+
+    // Robots meta: ensure normal indexing
+    const robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robotsMeta) {
+      robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     }
 
-    meta.setAttribute('content', 'noindex, nofollow');
+    // Canonical link
+    updateCanonicalUrl(canonicalUrl);
+
+    // Structured Data (JSON-LD: Article & BreadcrumbList)
+    const jsonLdData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://www.healthlexmed.com/rehber#article",
+          "isPartOf": {
+            "@type": "WebSite",
+            "@id": "https://www.healthlexmed.com/#website",
+            "name": "HealthLexMed",
+            "url": "https://www.healthlexmed.com/"
+          },
+          "headline": "Tıbbi Terminoloji Rehberi",
+          "description": desc,
+          "inLanguage": "tr",
+          "mainEntityOfPage": canonicalUrl,
+          "url": canonicalUrl,
+          "publisher": {
+            "@type": "Organization",
+            "name": "HealthLexMed",
+            "url": "https://www.healthlexmed.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.healthlexmed.com/logo-mark.png"
+            }
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.healthlexmed.com/rehber#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Ana Sayfa",
+              "item": "https://www.healthlexmed.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Rehber",
+              "item": canonicalUrl
+            }
+          ]
+        }
+      ]
+    };
+
+    let script = document.getElementById('guide-jsonld');
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'guide-jsonld';
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(jsonLdData);
 
     return () => {
-      if (created && meta.parentNode) {
-        meta.parentNode.removeChild(meta);
-      } else if (meta) {
-        meta.setAttribute('content', originalContent || 'index, follow');
+      const el = document.getElementById('guide-jsonld');
+      if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
       }
     };
   }, []);
