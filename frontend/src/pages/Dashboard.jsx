@@ -44,7 +44,7 @@ import { getTermsByCategory } from '@/data/medicalTerms';
 import { toast } from 'sonner';
 
 // --- Kullanıcı Plan Çözümleme ---
-// Plan Seviyeleri: 'lifetime' | 'pro' | 'basic' | 'trial' | 'expired'
+// Plan Seviyeleri: 'lifetime' | 'pro' | 'pro_trial' | 'basic' | 'trial' | 'expired'
 const resolveUserPlan = (userData, trialState, previewRole) => {
   if (previewRole === 'lifetime') return 'lifetime';
   if (previewRole === 'pro') return 'pro';
@@ -66,7 +66,8 @@ const resolveUserPlan = (userData, trialState, previewRole) => {
 
     if (status === 'trialing' || userData.isTrial === true) {
       if (trialState && !trialState.isExpired && trialState.isActive) {
-        return 'trial';
+        // Pro denemesi (Temel denemesi yukarıda 'basic' olarak döner): Pro paneli + deneme şeridi
+        return 'pro_trial';
       }
       return 'expired';
     }
@@ -1119,7 +1120,8 @@ const ProUserDashboard = ({
   isTr,
   currentPlan,
   pastDueState,
-  todayFormatted
+  todayFormatted,
+  trialState
 }) => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
@@ -1135,6 +1137,7 @@ const ProUserDashboard = ({
   });
 
   const isLifetime = currentPlan === 'lifetime';
+  const isProTrial = currentPlan === 'pro_trial' && trialState?.hasTrial && trialState?.isActive;
 
   // Dinamik Son Bakılan Terimler (localStorage)
   useEffect(() => {
@@ -1367,6 +1370,59 @@ const ProUserDashboard = ({
               className="shrink-0 px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
             >
               {isTr ? 'Kartı Güncelle' : 'Update Card'}
+            </Link>
+          </div>
+        )}
+
+        {/* Pro Deneme Şeridi: kalan gün, deneme bitişi, ilk tahsilat (Temel panelindeki şeridin Pro karşılığı) */}
+        {isProTrial && (
+          <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[14px_20px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6 shadow-xs text-left">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-[13px] sm:text-[14px] text-[#0f1b33] dark:text-foreground">
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'Deneme:' : 'Trial:'}
+                </span>
+                <span className="font-extrabold text-[12px] px-2.5 py-1 rounded-[6px] bg-[#0f766e]/10 text-[#0f766e] dark:text-[#5eead4] border border-[#0f766e]/30">
+                  {trialState.daysLeft < 1
+                    ? (isTr ? 'Son gün' : 'Last day')
+                    : (isTr
+                        ? `${trialState.daysLeft} gün kaldı`
+                        : `${trialState.daysLeft} ${trialState.daysLeft === 1 ? 'day' : 'days'} left`)}
+                </span>
+              </div>
+              <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
+                </span>
+                <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                  {trialState.formattedEndDate(isTr ? 'tr' : 'en')}
+                </span>
+              </div>
+              <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'İlk tahsilat:' : 'First billing:'}
+                </span>
+                <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                  {trialState.formattedBillingDate(isTr ? 'tr' : 'en')}
+                </span>
+              </div>
+              <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                  {isTr ? 'Mevcut Plan:' : 'Current Plan:'}
+                </span>
+                <span className="font-extrabold text-[12px] px-2.5 py-1 rounded-[6px] bg-[#e8f0ff] dark:bg-blue-950/60 text-[#2563eb] dark:text-blue-400 border border-[#2563eb]/20">
+                  {`Pro Plan · ${trialState.amountText(isTr)}`}
+                </span>
+              </div>
+            </div>
+            <Link
+              to="/pricing"
+              className="text-[13px] font-bold text-[#2563eb] hover:underline shrink-0 whitespace-nowrap self-end sm:self-auto"
+            >
+              {isTr ? 'Planı Yönet →' : 'Manage Plan →'}
             </Link>
           </div>
         )}
@@ -1858,7 +1914,7 @@ export const Dashboard = () => {
   const trialState = getUserTrialState(effectiveUserData);
   const currentPlan = resolveUserPlan(firestoreData, trialState, previewRole);
   const pastDueState = getPastDueState(firestoreData);
-  const hasPaidPlan = currentPlan === 'pro' || currentPlan === 'lifetime' || currentPlan === 'basic';
+  const hasPaidPlan = currentPlan === 'pro' || currentPlan === 'pro_trial' || currentPlan === 'lifetime' || currentPlan === 'basic';
 
   const rawName =
     firestoreData?.displayName ||
@@ -2022,6 +2078,7 @@ export const Dashboard = () => {
       currentPlan={currentPlan}
       pastDueState={pastDueState}
       todayFormatted={todayFormatted}
+      trialState={trialState}
     />
   );
 };
