@@ -254,17 +254,29 @@ export default async function handler(req, res) {
           }
         }
 
-        await updateUserSubscription(uid, email, {
-          isPro: !isBasic,
-          isBasic,
-          isLifetime,
-          planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
-          subscriptionStatus: 'active',
-          plan,
-          paddleTransactionId: tx?.id || null,
-          paddleCustomerId: tx?.customerId || null,
-          ...(isLifetime ? { paddleSubscriptionId: null } : {})
-        });
+        if (isLifetime) {
+          // Ömür Boyu: Tek seferlik satın alma (Paddle abonelik olayı üretmez).
+          // Mevcut davranış ve durum alanı ('active') birebir korunur.
+          await updateUserSubscription(uid, email, {
+            isPro: true,
+            isBasic: false,
+            isLifetime: true,
+            planType: 'lifetime',
+            subscriptionStatus: 'active',
+            plan,
+            paddleTransactionId: tx?.id || null,
+            paddleCustomerId: tx?.customerId || null,
+            paddleSubscriptionId: null
+          });
+        } else {
+          // Abonelik işlemi (tx.subscriptionId dolu): subscriptionStatus, isPro,
+          // isBasic, planType, plan alanları YAZILMAZ.
+          // Bu alanları yalnızca subscription.* olayları yönetir (deneme durumunun active ile ezilmesi önlenir).
+          await updateUserSubscription(uid, email, {
+            paddleTransactionId: tx?.id || null,
+            paddleCustomerId: tx?.customerId || null
+          });
+        }
         break;
       }
 
