@@ -70,7 +70,8 @@ export const checkIsBasic = (userData) => {
   }
 
   // Deneme süresinde ise (trialing veya isTrial bayrağı): süresi bitmiş mi kontrol et
-  if (status === 'trialing' || userData.isTrial === true || userData.isTrialing === true || !!userData.trialEndDate) {
+  // status 'active' olan ücretli aboneler deneme kontrolüne sokulmaz
+  if (status !== 'active' && (status === 'trialing' || userData.isTrial === true || userData.isTrialing === true || !!userData.trialEndDate)) {
     let endMs = null;
     if (userData.trialEndDate) {
       if (typeof userData.trialEndDate.toDate === 'function') {

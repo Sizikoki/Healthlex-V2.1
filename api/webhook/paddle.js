@@ -289,16 +289,20 @@ export default async function handler(req, res) {
         const pid = (sub?.customData?.planId || '').toLowerCase();
         const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
         const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
-        const status = sub?.status || 'active';
-        console.log('[Paddle] subscription.created customer:', sub?.customerId, 'status:', status);
+        const isTrialing = status === 'trialing';
+        console.log('[Paddle] subscription.created/activated customer:', sub?.customerId, 'status:', status, 'isTrialing:', isTrialing);
         await updateUserSubscription(uid, email, {
           isPro: !isBasic, isBasic, isLifetime,
           planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
           subscriptionStatus: status, plan,
           paddleSubscriptionId: sub?.id || null,
           paddleCustomerId: sub?.customerId || null,
-          trialStartDate: sub?.currentBillingPeriod?.startsAt || new Date().toISOString(),
-          trialEndDate: sub?.nextBilledAt || null,
+          ...(isTrialing ? {
+            trialStartDate: sub?.currentBillingPeriod?.startsAt || new Date().toISOString(),
+            trialEndDate: sub?.currentBillingPeriod?.endsAt || sub?.nextBilledAt || null
+          } : {
+            trialEndDate: null
+          }),
           pastDueSince: null
         });
         break;

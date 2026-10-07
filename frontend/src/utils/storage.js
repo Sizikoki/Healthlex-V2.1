@@ -278,11 +278,12 @@ export const getUserTrialState = (currentUser) => {
   // - Geliştirici/test önizlemesi (previewRole === 'trial')
   const status = (user.subscriptionStatus || '').toLowerCase();
   const hasTrial =
-    status === 'trialing' ||
-    user.isTrial === true ||
-    user.isTrialing === true ||
-    !!user.trialEndDate ||
-    user.previewRole === 'trial';
+    status !== 'active' &&
+    (status === 'trialing' ||
+      user.isTrial === true ||
+      user.isTrialing === true ||
+      !!user.trialEndDate ||
+      user.previewRole === 'trial');
 
   if (!hasTrial) {
     return {
