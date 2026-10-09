@@ -25,7 +25,12 @@ import { getFirebaseAdmin } from '../_lib/firebaseAdmin.js';
  * Lookup: UID first, then email fallback.
  * Uses merge:true so unrelated fields are never overwritten.
  */
-async function updateUserSubscription(userId, customerEmail, updateFields) {
+async function updateUserSubscription(
+  userId,
+  customerEmail,
+  updateFields,
+  subscriptionGuard = null // { subId: string, requireMatch: boolean }
+) {
   try {
     const adminApp = getFirebaseAdmin();
     if (!adminApp) { console.error('[Paddle Webhook] Firebase Admin init failed'); return false; }
@@ -44,6 +49,28 @@ async function updateUserSubscription(userId, customerEmail, updateFields) {
       if (!q.empty) ref = q.docs[0].ref;
     }
     if (ref) {
+      // subscription.* olayları için güvenlik kalkanı:
+      if (subscriptionGuard && subscriptionGuard.subId) {
+        const currentSnap = await ref.get();
+        const currentData = currentSnap.exists ? currentSnap.data() : {};
+
+        // 1. Kullanıcı Ömür Boyu (isLifetime) ise abonelik durum alanları EZİLEMEZ.
+        if (currentData.isLifetime === true) {
+          console.log(`[Paddle Webhook] Ignored subscription event (${subscriptionGuard.subId}) for Lifetime user ${ref.id}`);
+          return true;
+        }
+
+        // 2. updated, canceled, past_due olaylarında: gelen abonelik kimliği belgedeki
+        //    aktif abonelikle eşleşmiyorsa eski olay yoksayılır.
+        if (subscriptionGuard.requireMatch) {
+          const existingSubId = currentData.paddleSubscriptionId;
+          if (existingSubId && existingSubId !== subscriptionGuard.subId) {
+            console.log(`[Paddle Webhook] Ignored mismatched subscription event (${subscriptionGuard.subId}) because user ${ref.id} has active subscription ${existingSubId}`);
+            return true;
+          }
+        }
+      }
+
       await ref.set(
         { ...updateFields, updatedAt: admin.firestore.FieldValue.serverTimestamp() },
         { merge: true }
@@ -291,20 +318,25 @@ export default async function handler(req, res) {
         const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
         const isTrialing = status === 'trialing';
         console.log('[Paddle] subscription.created/activated customer:', sub?.customerId, 'status:', status, 'isTrialing:', isTrialing);
-        await updateUserSubscription(uid, email, {
-          isPro: !isBasic, isBasic, isLifetime,
-          planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
-          subscriptionStatus: status, plan,
-          paddleSubscriptionId: sub?.id || null,
-          paddleCustomerId: sub?.customerId || null,
-          ...(isTrialing ? {
-            trialStartDate: sub?.currentBillingPeriod?.startsAt || new Date().toISOString(),
-            trialEndDate: sub?.currentBillingPeriod?.endsAt || sub?.nextBilledAt || null
-          } : {
-            trialEndDate: null
-          }),
-          pastDueSince: null
-        });
+        await updateUserSubscription(
+          uid,
+          email,
+          {
+            isPro: !isBasic, isBasic, isLifetime,
+            planType: isLifetime ? 'lifetime' : isBasic ? 'basic' : 'pro',
+            subscriptionStatus: status, plan,
+            paddleSubscriptionId: sub?.id || null,
+            paddleCustomerId: sub?.customerId || null,
+            ...(isTrialing ? {
+              trialStartDate: sub?.currentBillingPeriod?.startsAt || new Date().toISOString(),
+              trialEndDate: sub?.currentBillingPeriod?.endsAt || sub?.nextBilledAt || null
+            } : {
+              trialEndDate: null
+            }),
+            pastDueSince: null
+          },
+          { subId: sub?.id, requireMatch: false }
+        );
         break;
       }
 
@@ -312,6 +344,22 @@ export default async function handler(req, res) {
         const sub = eventData.data;
         const status = sub?.status;
         console.log('[Paddle] subscription.updated status:', status);
+
+        if (status === 'canceled') {
+          await updateUserSubscription(
+            sub?.customData?.userId,
+            sub?.customData?.email || sub?.customer?.email,
+            {
+              isPro: false,
+              isBasic: false,
+              subscriptionStatus: 'canceled',
+              paddleSubscriptionId: null
+            },
+            { subId: sub?.id, requireMatch: true }
+          );
+          break;
+        }
+
         const item = sub?.items?.[0];
         const priceId = (item?.price?.id || '').toLowerCase();
         const customPlanId = (sub?.customData?.planId || '').toLowerCase();
@@ -330,7 +378,8 @@ export default async function handler(req, res) {
             subscriptionStatus: status || 'updated',
             paddleSubscriptionId: sub?.id || null,
             ...(status === 'active' || status === 'trialing' ? { pastDueSince: null } : {})
-          }
+          },
+          { subId: sub?.id, requireMatch: true }
         );
         break;
       }
@@ -341,7 +390,8 @@ export default async function handler(req, res) {
         await updateUserSubscription(
           sub?.customData?.userId,
           sub?.customData?.email || sub?.customer?.email,
-          { isPro: false, subscriptionStatus: 'canceled', paddleSubscriptionId: sub?.id || null }
+          { isPro: false, isBasic: false, subscriptionStatus: 'canceled', paddleSubscriptionId: null },
+          { subId: sub?.id, requireMatch: true }
         );
         break;
       }
@@ -355,7 +405,8 @@ export default async function handler(req, res) {
           {
             subscriptionStatus: 'past_due',
             pastDueSince: new Date().toISOString()
-          }
+          },
+          { subId: sub?.id, requireMatch: true }
         );
         break;
       }
