@@ -820,32 +820,34 @@ const BasicUserDashboard = ({
         {/* Plan ve Faturalandırma / Deneme Şeridi */}
         <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[14px_20px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6 shadow-xs text-left">
           <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-[13px] sm:text-[14px] text-[#0f1b33] dark:text-foreground">
-            {billingInfo.trialEndDateFormatted && (
+            {((firestoreData?.subscriptionStatus || '').toLowerCase() === 'trialing') && (
               <>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                    {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
-                  </span>
-                  <span className="font-bold text-[#0f1b33] dark:text-foreground">
-                    {billingInfo.trialEndDateFormatted}
-                  </span>
-                </div>
-                <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
-              </>
-            )}
-            {billingInfo.firstBillingDateFormatted && (
-              <>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                    {billingInfo.trialEndDateFormatted
-                      ? (isTr ? 'İlk tahsilat:' : 'First billing:')
-                      : (isTr ? 'Sonraki yenileme:' : 'Next renewal:')}
-                  </span>
-                  <span className="font-bold text-[#0f1b33] dark:text-foreground">
-                    {billingInfo.firstBillingDateFormatted}
-                  </span>
-                </div>
-                <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+                {billingInfo.trialEndDateFormatted && (
+                  <>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                        {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
+                      </span>
+                      <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                        {billingInfo.trialEndDateFormatted}
+                      </span>
+                    </div>
+                    <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+                  </>
+                )}
+                {billingInfo.firstBillingDateFormatted && (
+                  <>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
+                        {isTr ? 'İlk tahsilat:' : 'First billing:'}
+                      </span>
+                      <span className="font-bold text-[#0f1b33] dark:text-foreground">
+                        {billingInfo.firstBillingDateFormatted}
+                      </span>
+                    </div>
+                    <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
+                  </>
+                )}
               </>
             )}
             <div className="flex items-center gap-1.5">
