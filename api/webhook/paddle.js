@@ -316,6 +316,7 @@ export default async function handler(req, res) {
         const pid = (sub?.customData?.planId || '').toLowerCase();
         const isBasic = pid === 'basic' || plan.toLowerCase().includes('basic');
         const isLifetime = pid === 'lifetime' || plan.toLowerCase().includes('lifetime');
+        const status = sub?.status || 'active';
         const isTrialing = status === 'trialing';
         console.log('[Paddle] subscription.created/activated customer:', sub?.customerId, 'status:', status, 'isTrialing:', isTrialing);
         await updateUserSubscription(
