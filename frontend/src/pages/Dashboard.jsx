@@ -35,7 +35,7 @@ import {
 import { getPastDueState, getPreviewRole } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
@@ -1913,20 +1913,22 @@ export const Dashboard = () => {
     if (previewRole) return;
     if (!authReady || !firebaseUser) return;
 
-    const fetchSubscription = async () => {
-      try {
-        const userDocRef = doc(db, 'users', firebaseUser.uid);
-        const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          setFirestoreData(userDocSnap.data());
+    const userDocRef = doc(db, 'users', firebaseUser.uid);
+    const unsub = onSnapshot(
+      userDocRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          setFirestoreData(docSnap.data());
         }
-      } catch (err) {
+        setSubLoading(false);
+      },
+      (err) => {
         console.warn('[Dashboard] Could not fetch subscription status:', err);
-      } finally {
         setSubLoading(false);
       }
-    };
-    fetchSubscription();
+    );
+
+    return () => unsub();
   }, [authReady, firebaseUser, previewRole]);
 
   // Kullanıcı bilgileri ve plan durumu

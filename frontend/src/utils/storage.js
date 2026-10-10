@@ -453,6 +453,9 @@ export const isLoggedIn = () => {
 };
 
 export const logout = () => {
+  const user = getUser();
+  const uid = user?.uid || auth?.currentUser?.uid;
+
   // Clear local progress cache for the logged out user
   const progressKey = getUserStorageKey(STORAGE_KEYS.PROGRESS);
   if (progressKey) {
@@ -460,6 +463,10 @@ export const logout = () => {
   }
   
   localStorage.removeItem(STORAGE_KEYS.USER);
+  localStorage.removeItem('healthlex_user_trial_start');
+  if (uid) {
+    localStorage.removeItem(`healthlex_trial_start_${uid}`);
+  }
 };
 
 // Permanently delete all user progress and scores from Firestore and LocalStorage

@@ -4,7 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { getUser } from '@/utils/storage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
 import { checkIsPro, checkIsBasic, checkHasPaidPlan } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
@@ -39,21 +39,36 @@ export const Welcome = () => {
 
   // Listen to auth state and fetch user doc from Firestore
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    let unsubDoc = null;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      const uid = user?.uid || getUser()?.uid;
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+      const uid = user?.uid;
       if (uid) {
         try {
-          const snap = await getDoc(doc(db, 'users', uid));
-          if (snap.exists()) {
-            setFirestoreData(snap.data());
-          }
+          unsubDoc = onSnapshot(
+            doc(db, 'users', uid),
+            (snap) => {
+              if (snap.exists()) {
+                setFirestoreData(snap.data());
+              }
+            },
+            (e) => {
+              console.warn('[Welcome] Could not fetch user data:', e);
+            }
+          );
         } catch (e) {
-          console.warn('[Welcome] Could not fetch user data:', e);
+          console.warn('[Welcome] Could not setup snapshot listener:', e);
         }
       }
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      if (unsubDoc) unsubDoc();
+    };
   }, []);
 
   // User object and membership status
