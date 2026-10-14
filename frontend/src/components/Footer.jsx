@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/context/LanguageContext';
+import { openCookiePreferences } from '@/services/analytics';
 
 const FOOTER_TRANSLATIONS = {
   tr: {
@@ -15,6 +16,7 @@ const FOOTER_TRANSLATIONS = {
     terms: 'Kullanım Koşulları',
     refund: 'İptal ve İade',
     cookies: 'Çerez Politikası',
+    cookiePreferences: 'Çerez tercihleri',
     col3Title: 'DESTEK',
     supportSla: '24 - 48 saat içerisinde yanıtlıyoruz.',
     disclaimer: 'HealthLexMed bir eğitim aracıdır; tıbbi tavsiye, tanı veya tedavi yerine geçmez.',
@@ -33,6 +35,7 @@ const FOOTER_TRANSLATIONS = {
     terms: 'Terms of Service',
     refund: 'Refund Policy',
     cookies: 'Cookie Policy',
+    cookiePreferences: 'Cookie preferences',
     col3Title: 'SUPPORT',
     supportSla: 'We reply within 24 - 48 hours.',
     disclaimer: 'HealthLexMed is an educational tool; it does not replace medical advice, diagnosis, or treatment.',
@@ -140,6 +143,13 @@ export const Footer = () => {
               >
                 {t.cookies}
               </Link>
+              <button
+                type="button"
+                onClick={openCookiePreferences}
+                className="text-left text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors cursor-pointer"
+              >
+                {t.cookiePreferences}
+              </button>
             </div>
           </details>
         </div>
@@ -261,6 +271,13 @@ export const Footer = () => {
             >
               {t.cookies}
             </Link>
+            <button
+              type="button"
+              onClick={openCookiePreferences}
+              className="text-left text-[#dbe4f5] hover:text-white font-semibold text-[15px] transition-colors cursor-pointer"
+            >
+              {t.cookiePreferences}
+            </button>
           </div>
 
           {/* Kolon 4: Destek */}

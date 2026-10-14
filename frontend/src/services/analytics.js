@@ -4,16 +4,89 @@
  */
 
 export const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID || 'G-F8RSPV39KQ';
-export const COOKIE_CONSENT_KEY = 'hlx_cookie_consent'; // 'accepted' | 'declined'
+export const COOKIE_CONSENT_KEY_V1 = 'hlx_cookie_consent';
+export const COOKIE_CONSENT_KEY = 'hlx_cookie_consent_v2';
+export const CONSENT_EVENT_NAME = 'hlx_consent_changed';
 
 /**
- * Returns the current cookie consent status ('accepted', 'declined', or null if not yet chosen).
+ * Returns the current cookie consent object ({ version, necessary, analytics, marketing, updatedAt }),
+ * or null if the user has not yet made a choice in v2.
+ * Migrates old 'declined' users silently without showing the banner.
+ * Old 'accepted' users return null so they are shown the v2 banner to consent to marketing.
  */
 export const getCookieConsent = () => {
   try {
-    return localStorage.getItem(COOKIE_CONSENT_KEY);
+    const v2Raw = localStorage.getItem(COOKIE_CONSENT_KEY);
+    if (v2Raw) {
+      const parsed = JSON.parse(v2Raw);
+      if (parsed && parsed.version === 2) {
+        return parsed;
+      }
+    }
+
+    // Check migration from v1 ('hlx_cookie_consent')
+    const v1 = localStorage.getItem(COOKIE_CONSENT_KEY_V1);
+    if (v1 === 'declined') {
+      const migrated = {
+        version: 2,
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        updatedAt: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(migrated));
+        localStorage.removeItem(COOKIE_CONSENT_KEY_V1);
+      } catch {
+        // Ignore storage write errors
+      }
+      return migrated;
+    }
+
+    // For old 'accepted' or unset: return null so banner will be displayed to user
+    return null;
   } catch {
     return null;
+  }
+};
+
+/**
+ * Single function to check consent for a specific category: 'necessary' | 'analytics' | 'marketing'.
+ * @param {'necessary' | 'analytics' | 'marketing'} category
+ * @returns {boolean}
+ */
+export const hasConsent = (category) => {
+  if (category === 'necessary') return true;
+  const consent = getCookieConsent();
+  if (!consent) return false;
+  return Boolean(consent[category]);
+};
+
+/**
+ * Subscribes a listener for consent changes. Useful for deferred marketing/pixel initialization.
+ * @param {'necessary' | 'analytics' | 'marketing'} category
+ * @param {(granted: boolean, preferences: object) => void} callback
+ * @returns {() => void} unsubscribe function
+ */
+export const onConsentChange = (category, callback) => {
+  if (typeof window === 'undefined' || typeof callback !== 'function') return () => {};
+  const handler = (event) => {
+    const preferences = event.detail;
+    if (preferences) {
+      const granted = category === 'necessary' ? true : Boolean(preferences[category]);
+      callback(granted, preferences);
+    }
+  };
+  window.addEventListener(CONSENT_EVENT_NAME, handler);
+  return () => window.removeEventListener(CONSENT_EVENT_NAME, handler);
+};
+
+/**
+ * Dispatches an event to open the cookie preferences banner from anywhere (e.g. footer link).
+ */
+export const openCookiePreferences = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('hlx_open_cookie_preferences'));
   }
 };
 
@@ -99,7 +172,7 @@ export const POSTHOG_HOST = process.env.REACT_APP_POSTHOG_HOST || 'https://us.i.
  */
 export const initPostHog = () => {
   if (typeof window === 'undefined') return;
-  if (getCookieConsent() !== 'accepted') return;
+  if (!hasConsent('analytics')) return;
 
   try {
     if (window.__hlxPostHogInitialized && window.posthog) {
@@ -194,31 +267,61 @@ export const disablePostHog = () => {
 };
 
 /**
- * Sets user cookie consent and triggers the appropriate analytics behavior.
- * @param {'accepted' | 'declined'} consent
+ * Sets user cookie consent (categorized or preset) and triggers the appropriate analytics behavior.
+ * Emits reactive 'hlx_consent_changed' CustomEvent for runtime listeners (e.g., Meta Pixel).
+ * @param {'accepted' | 'declined' | { analytics?: boolean, marketing?: boolean }} consent
  */
 export const setCookieConsent = (consent) => {
+  let analytics = false;
+  let marketing = false;
+
+  if (consent === 'accepted') {
+    analytics = true;
+    marketing = true;
+  } else if (consent === 'declined') {
+    analytics = false;
+    marketing = false;
+  } else if (consent && typeof consent === 'object') {
+    analytics = Boolean(consent.analytics);
+    marketing = Boolean(consent.marketing);
+  }
+
+  const payload = {
+    version: 2,
+    necessary: true,
+    analytics,
+    marketing,
+    updatedAt: new Date().toISOString()
+  };
+
   try {
-    localStorage.setItem(COOKIE_CONSENT_KEY, consent);
+    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(payload));
+    localStorage.removeItem(COOKIE_CONSENT_KEY_V1);
   } catch (e) {
     console.warn('[Analytics] Could not write cookie consent to localStorage', e);
   }
 
-  if (consent === 'accepted') {
+  // Notify active listeners (e.g. Meta Pixel, PostHog, or reactive UI components)
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT_NAME, { detail: payload }));
+  }
+
+  if (payload.analytics) {
     initGoogleAnalytics();
     initPostHog();
   } else {
     disableGoogleAnalytics();
     disablePostHog();
   }
+
+  return payload;
 };
 
 /**
- * Checks consent on app start and boots analytics only if consent was previously given.
+ * Checks consent on app start and boots analytics only if analytics category was accepted.
  */
 export const initAnalyticsOnLoad = () => {
-  const consent = getCookieConsent();
-  if (consent === 'accepted') {
+  if (hasConsent('analytics')) {
     initGoogleAnalytics();
     initPostHog();
   } else {
