@@ -30,6 +30,8 @@ import { getPaddle } from '@/services/paddle';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { CookieBanner } from '@/components/CookieBanner';
 import { initAnalyticsOnLoad } from '@/services/analytics';
+import { initMetaPixelOnLoad } from '@/services/metaPixel';
+import { MetaPixelRouteTracker } from '@/components/MetaPixelRouteTracker';
 import { getPreviewRole } from '@/utils/planAccess';
 import './App.css';
 
@@ -124,6 +126,7 @@ function App() {
   useEffect(() => {
     getPaddle(); // Pre-warm & initialize Paddle.js with live client-side token
     initAnalyticsOnLoad(); // Check cookie consent and boot Google Analytics if accepted
+    initMetaPixelOnLoad(); // Boot Meta Pixel only with marketing consent (and listen for later changes)
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -139,6 +142,7 @@ function App() {
     <LanguageProvider>
       <BrowserRouter>
         <ScrollToTop />
+        <MetaPixelRouteTracker />
         <div className="App min-h-screen bg-background flex flex-col justify-between">
           <Navbar />
           <Routes>
