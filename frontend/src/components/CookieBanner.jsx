@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Cookie, ShieldCheck, X, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -25,7 +26,7 @@ export const CookieBanner = () => {
   useEffect(() => {
     const handleOpenPreferences = () => {
       const current = getCookieConsent();
-      setAnalyticsConsent(current ? Boolean(current.analytics) : true);
+      setAnalyticsConsent(current ? Boolean(current.analytics) : false);
       setMarketingConsent(current ? Boolean(current.marketing) : false);
       setShowPreferences(true);
       setIsVisible(true);
@@ -58,7 +59,7 @@ export const CookieBanner = () => {
 
   const handleOpenManage = () => {
     const current = getCookieConsent();
-    setAnalyticsConsent(current ? Boolean(current.analytics) : true);
+    setAnalyticsConsent(current ? Boolean(current.analytics) : false);
     setMarketingConsent(current ? Boolean(current.marketing) : false);
     setShowPreferences(true);
   };
@@ -92,7 +93,7 @@ export const CookieBanner = () => {
           <div className="flex-1">
             <div className="flex items-center justify-between gap-2 mb-1.5">
               <h4 className="font-bold text-sm text-foreground flex items-center gap-1.5">
-                {t('cookieBannerTitle', 'Çerez Tercihleriniz')}
+                {t('cookieBannerTitle', 'Çerez tercihleri')}
               </h4>
               <button
                 type="button"
@@ -111,6 +112,13 @@ export const CookieBanner = () => {
                     'cookieBannerDesc',
                     'Sitenin çalışması için gerekli çerezleri her zaman kullanıyoruz. İzin verirsen, siteyi geliştirmek için analitik çerezleri ve reklamlarımızın sonuçlarını ölçmek için pazarlama çerezlerini de kullanırız. Tercihini istediğin zaman footer\'daki "Çerez tercihleri" bağlantısından değiştirebilirsin.'
                   )}
+                  {t('cookieDetails', ' Ayrıntılar: ')}
+                  <Link
+                    to="/privacy"
+                    className="text-primary font-semibold hover:underline inline"
+                  >
+                    {t('cookiePolicyLinkText', 'Çerez Politikası')}
+                  </Link>
                 </p>
 
                 <div className="flex flex-col gap-2.5 pt-1">
