@@ -95,8 +95,8 @@ export const LEGAL_CONTENT = {
       title: 'GİZLİLİK POLİTİKASI VE KVKK AYDINLATMA METNİ',
       shortTitle: 'Gizlilik ve Çerez Politikası',
       subtitle: '(Privacy Policy & KVKK)',
-      effectiveDate: '03.09.2026',
-      controller: 'HealthLexMed (Bağcılar / İstanbul, Türkiye)',
+      effectiveDate: '16.10.2026',
+      controller: 'Sıddık Çiçek (HealthLexMed), Bağcılar / İstanbul, Türkiye',
       email: 'help@healthlexmed.com',
       website: 'https://www.healthlexmed.com',
       sections: [
@@ -104,10 +104,12 @@ export const LEGAL_CONTENT = {
           id: 'collected_data',
           title: '1. TOPLANAN KİŞİSEL VERİLER',
           bullets: [
-            'Kimlik ve İletişim Bilgileri: Ad, soyad, e-posta adresi (Google Firebase Authentication aracılığıyla).',
-            'Kullanım ve Performans Verileri: Çözülen test sonuçları, morfem hafıza kartı skorları, seviye ve çalışma süreleri.',
-            'Finansal İşlem Bilgisi: Sipariş numarası, paket türü, abonelik başlangıç/yenilenme tarihleri. (Kredi kartı numarası, CVV gibi kritik ödeme bilgileri tarafımızca işlenmez ve saklanmaz; doğrudan yetkili satıcımız Paddle altyapısında tutulur).',
-            'Teknik ve Trafik Logları: IP adresi, cihaz ve tarayıcı türü, oturum süreleri (Google Analytics GA4 ve Vercel altyapısı üzerinden).'
+            'Kimlik ve iletişim bilgileri: Ad, soyad, e-posta adresi (Google Firebase Authentication aracılığıyla).',
+            'Öğrenme verileri: Öğrendiğin terimler ve morfemler, oyun ve test sonuçların, seviye, seri ve çalışma tarihlerin.',
+            'Abonelik ve işlem bilgileri: İşlem numarası, plan türü, deneme ve abonelik tarihleri, abonelik durumu. Kart numarası, CVV gibi ödeme bilgileri tarafımızca işlenmez ve saklanmaz; doğrudan yetkili satıcımız Paddle tarafından işlenir.',
+            'Teknik veriler: IP adresi, cihaz ve tarayıcı türü, ziyaret edilen sayfalar ve zaman bilgisi.',
+            'Analitik veriler (yalnızca onay verirsen): Sitedeki sayfa ve özellik kullanımına ilişkin istatistikler.',
+            'Pazarlama verileri (yalnızca onay verirsen): Reklamlarımızdan siteye gelişin ve kayıt, deneme başlatma, satın alma gibi işlemlerin reklam ölçümü amacıyla kaydı; bu kapsamda e-posta adresinin geri döndürülemez biçimde şifrelenmiş (hash) hali.'
           ]
         },
         {
@@ -116,63 +118,93 @@ export const LEGAL_CONTENT = {
           isAlert: true,
           alertType: 'success',
           content: [
-            'HealthLexMed yalnızca eğitim ve referans yazılımıdır. Sitemizde hiçbir kullanıcıya, hastaya veya sağlık kuruluşuna ait kişisel sağlık verisi, rapor, reçete veya anamnez kaydı kesinlikle toplanmaz, talep edilmez ve işlenmez.'
+            'HealthLexMed yalnızca bir eğitim ve referans aracıdır. Sana, bir hastaya veya bir sağlık kuruluşuna ait sağlık verisi, rapor, reçete veya anamnez kaydı toplanmaz, istenmez ve işlenmez.'
+          ]
+        },
+        {
+          id: 'legal_bases',
+          title: '3. İŞLEME AMAÇLARI VE HUKUKİ SEBEPLER',
+          bullets: [
+            'Hesabını oluşturmak, girişini sağlamak ve öğrenme ilerlemeni saklamak: sözleşmenin kurulması ve ifası (KVKK md. 5/2-c).',
+            'Abonelik, ödeme, fatura ve vergi işlemleri: sözleşmenin ifası ve hukuki yükümlülüklerin yerine getirilmesi (md. 5/2-c, 5/2-ç).',
+            'Sitenin güvenliği, hataların tespiti ve çerezsiz temel trafik ölçümü (Vercel): meşru menfaat (md. 5/2-f).',
+            'Analitik çerezler (Google Analytics, PostHog): açık rıza (md. 5/1).',
+            'Pazarlama çerezleri ve reklam ölçümü (Meta Pikseli ve Meta Dönüşümler API\'si): açık rıza (md. 5/1).'
+          ],
+          content: [
+            'Açık rızanı istediğin zaman sitenin alt kısmındaki "Çerez tercihleri" bağlantısından geri alabilirsin. Geri alma, o ana kadar yapılmış işlemleri etkilemez.'
           ]
         },
         {
           id: 'third_parties',
-          title: '3. VERİLERİN PAYLAŞILDIĞI ALTYAPI SAĞLAYICILARI (YURT DIŞI AKTARIMI)',
-          content: [
-            'Hizmetin teknik güvenliği ve sürdürülebilirliği adına verileriniz sınırlı olarak şu sağlayıcılarla paylaşılır:'
-          ],
+          title: '4. VERİLERİN AKTARILDIĞI HİZMET SAĞLAYICILAR VE YURT DIŞI AKTARIM',
           table: {
             headers: ['Sağlayıcı', 'Ülke', 'Amaç', 'Veri Kapsamı'],
             rows: [
-              ['Paddle.com Market Ltd.', 'İrlanda / İngiltere', 'Satış, faturalandırma, abonelik yönetimi ve vergi (MoR)', 'Ad, Soyad, E-posta, Tutar, Sipariş ID'],
-              ['Google Firebase', 'ABD / AB', 'Güvenli kullanıcı kimlik doğrulama (Auth) ve veritabanı', 'Ad, E-posta, Parola karması, İlerleme verileri'],
-              ['Google Analytics (GA4)', 'ABD', 'Ziyaretçi davranış analizi ve site optimizasyonu', 'Anonim IP, cihaz bilgisi, tıklama istatistikleri'],
-              ['Vercel Inc.', 'ABD / Küresel CDN', 'Web sitesi barındırma, DNS ve sunucu erişim güvenliği', 'İstek logları, IP adresi, erişim zamanı']
+              ['Paddle.com Market Ltd.', 'İngiltere / İrlanda', 'Satış, faturalandırma, abonelik yönetimi ve vergi (yetkili satıcı)', 'Ad, soyad, e-posta, tutar, işlem numarası'],
+              ['Google (Firebase)', 'ABD / AB', 'Kimlik doğrulama ve veritabanı', 'Ad, e-posta, parola karması, öğrenme ilerlemesi'],
+              ['Vercel Inc.', 'ABD / küresel', 'Barındırma, güvenlik ve çerezsiz trafik ölçümü', 'İstek kayıtları, IP adresi, erişim zamanı'],
+              ['Google (Google Analytics 4), yalnızca onayla', 'ABD', 'Ziyaret ve kullanım istatistikleri', 'Cihaz bilgisi, sayfa ve tıklama istatistikleri, çerez kimliği'],
+              ['PostHog Inc., yalnızca onayla', 'ABD', 'Özellik kullanımı analizi', 'Cihaz bilgisi, sayfa ve etkileşim istatistikleri, çerez kimliği'],
+              ['Meta Platforms Ireland Ltd., yalnızca onayla', 'İrlanda / ABD', 'Reklam ölçümü ve reklamların ilgilenebilecek kişilere gösterilmesi', 'Çerez ve reklam tıklama kimliği, cihaz bilgisi, kayıt / deneme / satın alma olayları, şifrelenmiş e-posta']
             ]
-          }
+          },
+          content: [
+            'Bu sağlayıcıların sunucuları yurt dışında bulunduğundan verilerin yurt dışına aktarılır. Aktarımlar KVKK md. 9\'daki şartlara uygun olarak yapılır. Analitik ve pazarlama verileri yalnızca onay verirsen toplanır.'
+          ]
+        },
+        {
+          id: 'retention_periods',
+          title: '5. SAKLAMA SÜRELERİ',
+          bullets: [
+            'Hesap ve öğrenme verileri: Hesabın açık olduğu sürece saklanır, hesabını kapatman halinde silinir.',
+            'Abonelik, fatura ve işlem kayıtları: İlgili mevzuatın öngördüğü süre boyunca saklanır.',
+            'Çerezlerin saklama süreleri Çerez Politikası\'nda yer alır.'
+          ]
         },
         {
           id: 'user_rights',
-          title: '4. KULLANICI HAKLARI (KVKK MD. 11 VE GDPR)',
+          title: '6. HAKLARIN (KVKK MD. 11)',
           content: [
-            'Kullanıcılar; verilerinin silinmesini (hesabın tamamen kapatılması), düzeltilmesini veya kullanım durumunu talep edebilirler.',
-            'Taleplerinizi kayıtlı e-postanızdan help@healthlexmed.com adresine iletebilirsiniz. Başvurular en geç 30 gün içinde yanıtlanır.'
+            'Kişisel verilerinin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini, şartları oluştuğunda silinmesini veya yok edilmesini isteme, bu işlemlerin aktarıldığı üçüncü kişilere bildirilmesini isteme, otomatik sistemlerle analiz sonucu aleyhine bir sonuç çıkmasına itiraz etme ve kanuna aykırı işleme nedeniyle zarara uğraman halinde zararın giderilmesini talep etme haklarına sahipsin.',
+            'Verilerinin bir kopyasını Profil sayfasındaki [Verilerimi İndir](/profile) ile alabilirsin. Diğer taleplerini kayıtlı e-posta adresinden help@healthlexmed.com adresine iletebilirsin. Başvurular en geç 30 gün içinde yanıtlanır.'
           ]
         },
         {
           id: 'cookie_policy',
-          title: 'BELGE 4: ÇEREZ POLİTİKASI (COOKIE POLICY)',
+          title: 'ÇEREZ POLİTİKASI',
           isHeader: true,
-          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Yürürlük Tarihi: 03.09.2026',
+          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Yürürlük Tarihi: 16.10.2026',
           subsections: [
             {
-              title: '1. ÇEREZ NEDİR VE NASIL KULLANILIR?',
+              title: '1. ÇEREZ NEDİR?',
               content: [
-                'Çerezler (Cookies), platformumuzu ziyaret ettiğinizde tarayıcınıza yüklenen küçük metin dosyalarıdır. HealthLexMed; oturum güvenliğinizi sağlamak, dil tercihinizi (TR/EN) hatırlamak ve platform performansını optimize etmek amacıyla çerezlerden yararlanır.'
+                'Çerezler ve benzeri teknolojiler (tarayıcının yerel depolama alanı dahil), ziyaret ettiğin sitenin tarayıcına kaydettiği küçük bilgilerdir. Bir kısmı sitenin çalışması için gereklidir; diğerleri yalnızca onay verirsen kullanılır.'
               ]
             },
             {
               title: '2. ÇEREZ TÜRLERİ VE SAKLAMA SÜRELERİ',
               table: {
-                headers: ['Çerez Türü', 'Sağlayıcı', 'Amaç', 'Saklama Süresi'],
+                headers: ['Tür', 'Sağlayıcı', 'Amaç', 'Onay', 'Süre'],
                 rows: [
-                  ['Zorunlu (Teknik) Çerezler', 'HealthLexMed / Vercel / Firebase', 'Kullanıcı oturumunun korunması, güvenli geçişler ve hızlı CDN yüklemesi. Kapatılamaz.', 'Oturum Süresince (Session)'],
-                  ['Performans / Analitik Çerezler', 'Google Analytics (GA4)', 'Sayfa ziyaret sayılarını, kalış sürelerini ve buton tıklamalarını anonim olarak sayar.', '14 Ay (Kalıcı)'],
-                  ['İşlevsellik Çerezleri', 'HealthLexMed', 'Türkçe/İngilizce dil tercihlerini ve arayüz seçimlerini hatırlar.', '1 Yıla Kadar'],
-                  ['Pazarlama / Hedefleme Çerezleri', '-', 'Sitemizde üçüncü taraf hedefli reklam veya remarketing çerezleri kullanılmaz.', '-']
+                  ['Zorunlu', 'HealthLexMed, Firebase, Vercel', 'Giriş oturumu, güvenlik, dil tercihi ve çerez tercihinin saklanması', 'Gerekmez, kapatılamaz', 'Oturum süresince ya da tercih değiştirilene kadar'],
+                  ['Analitik', 'Google Analytics 4 (_ga, _ga_*), PostHog (ph_*)', 'Sayfa ve özellik kullanımı istatistikleri', 'Gerekir', 'Google Analytics: 2 yıla kadar; PostHog: 1 yıla kadar'],
+                  ['Pazarlama', 'Meta Pikseli (_fbp, _fbc)', 'Reklam sonuçlarını ölçmek ve reklamları ilgilenebilecek kişilere göstermek', 'Gerekir', '90 gün']
                 ]
-              }
+              },
+              content: [
+                'Vercel\'in trafik ölçümü çerez veya cihaz kimliği kullanmaz; yalnızca anonim toplam ziyaret sayılarını ölçer ve onaya bağlı değildir.'
+              ]
             },
             {
               title: '3. ÇEREZ TERCİHLERİNİN YÖNETİMİ',
               bullets: [
-                'Tarayıcı (Chrome, Safari, Edge, Firefox) ayarlarınızdan çerezlerin tamamını silebilir veya engelleyebilirsiniz.',
-                'Google Analytics izlemesini devre dışı bırakmak için resmi Google Analytics Opt-out Browser Add-on eklentisini kurabilirsiniz.',
-                'Sitemize ilk girişte analitik çerezler için rıza banner\'ı üzerinden "Kabul Et / Reddet" seçeneği sunulmaktadır.'
+                'İlk ziyaretinde çıkan bildirimde "Tümünü kabul et", "Yalnızca zorunlu" veya "Tercihleri yönet" seçeneklerinden birini seçebilirsin. Bildirimi kapatman "Yalnızca zorunlu" ile aynı sonucu doğurur.',
+                'Tercihini istediğin zaman sitenin alt kısmındaki "Çerez tercihleri" bağlantısından değiştirebilirsin.',
+                'Tarayıcı ayarlarından çerezleri silebilir veya engelleyebilirsin. Zorunlu çerezleri engellemen halinde giriş gibi bazı özellikler çalışmayabilir.'
+              ],
+              content: [
+                'Sorun veya itirazın için: help@healthlexmed.com'
               ]
             }
           ]
@@ -329,8 +361,8 @@ export const LEGAL_CONTENT = {
       title: 'PRIVACY POLICY & KVKK / GDPR DISCLOSURE',
       shortTitle: 'Privacy & Cookie Policy',
       subtitle: '(Privacy Policy & GDPR/KVKK)',
-      effectiveDate: 'September 3, 2026',
-      controller: 'HealthLexMed (Bagcilar / Istanbul, Turkey)',
+      effectiveDate: '16.10.2026',
+      controller: 'Sıddık Çiçek (HealthLexMed), Bağcılar / Istanbul, Turkey',
       email: 'help@healthlexmed.com',
       website: 'https://www.healthlexmed.com',
       sections: [
@@ -338,10 +370,12 @@ export const LEGAL_CONTENT = {
           id: 'collected_data',
           title: '1. COLLECTED PERSONAL DATA',
           bullets: [
-            'Identity & Contact Information: Full name and email address (collected via Google Firebase Authentication).',
-            'Usage & Performance Analytics: Quiz scores, morpheme flashcard completion data, user level, and study duration.',
-            'Financial & Transaction Records: Order ID, plan type, subscription start and renewal dates. (Sensitive payment card details like PAN and CVV are never processed or retained by HealthLexMed; they are managed entirely by our Merchant of Record, Paddle).',
-            'Technical & Traffic Logs: IP address, device & browser parameters, session lengths (managed via Google Analytics GA4 and Vercel infrastructure).'
+            'Identity and contact information: Full name, email address (via Google Firebase Authentication).',
+            'Learning data: Terms and morphemes learned, game and quiz results, level, streak, and study timestamps.',
+            'Subscription and transaction data: Transaction ID, plan type, trial and subscription dates, subscription status. Payment card details like card number and CVV are never processed or stored by us; they are handled directly by our Merchant of Record, Paddle.',
+            'Technical data: IP address, device and browser type, visited pages, and access timestamps.',
+            'Analytics data (only with your consent): Statistics on page and feature usage across the platform.',
+            'Marketing data (only with your consent): Records of arriving at our site via advertisements and key events such as registration, trial activation, and purchase for ad performance measurement; including your email address in irreversibly hashed form.'
           ]
         },
         {
@@ -350,63 +384,93 @@ export const LEGAL_CONTENT = {
           isAlert: true,
           alertType: 'success',
           content: [
-            'HealthLexMed is solely an educational and reference platform. We strictly do not collect, request, store, or process any patient records, clinical health data, prescriptions, or medical histories.'
+            'HealthLexMed is solely an educational and reference tool. No health data, reports, prescriptions, or medical records belonging to you, a patient, or a healthcare institution are collected, requested, or processed.'
+          ]
+        },
+        {
+          id: 'legal_bases',
+          title: '3. PROCESSING PURPOSES AND LEGAL BASES',
+          bullets: [
+            'Creating your account, enabling sign-in, and storing learning progress: Performance of contract (KVKK Art. 5/2-c / GDPR Art. 6/1-b).',
+            'Subscription, billing, invoicing, and tax compliance: Performance of contract and statutory legal obligations (KVKK Art. 5/2-c, 5/2-ç / GDPR Art. 6/1-c).',
+            'Platform security, error diagnostics, and cookieless essential traffic metrics (Vercel): Legitimate interests (KVKK Art. 5/2-f / GDPR Art. 6/1-f).',
+            'Analytics cookies (Google Analytics 4, PostHog): Explicit consent (KVKK Art. 5/1 / GDPR Art. 6/1-a).',
+            'Marketing cookies and ad attribution (Meta Pixel and Conversions API): Explicit consent (KVKK Art. 5/1 / GDPR Art. 6/1-a).'
+          ],
+          content: [
+            'You can withdraw your consent at any time via the "Cookie preferences" link in the website footer. Revocation does not affect the lawfulness of processing carried out prior to withdrawal.'
           ]
         },
         {
           id: 'third_parties',
-          title: '3. INFRASTRUCTURE PARTNERS (INTERNATIONAL TRANSFERS)',
-          content: [
-            'To maintain technical security and uninterrupted service, personal data is processed in collaboration with the following providers:'
-          ],
+          title: '4. SERVICE PROVIDERS AND CROSS-BORDER DATA TRANSFERS',
           table: {
             headers: ['Provider', 'Country', 'Purpose', 'Data Scope'],
             rows: [
-              ['Paddle.com Market Ltd.', 'Ireland / UK', 'Checkout, invoicing, subscription lifecycle, and tax management (MoR)', 'Name, Email, Amount, Order ID'],
-              ['Google Firebase', 'US / EU', 'Secure user authentication and encrypted database hosting', 'Name, Email, Password hash, Progress metrics'],
-              ['Google Analytics (GA4)', 'US', 'Aggregated behavioral analytics and interface optimization', 'Anonymized IP, device info, click statistics'],
-              ['Vercel Inc.', 'US / Global CDN', 'Web application hosting, edge DNS, and server request security', 'HTTP request logs, IP, timestamp']
+              ['Paddle.com Market Ltd.', 'UK / Ireland', 'Checkout, invoicing, subscription lifecycle, and tax management (Merchant of Record)', 'Name, email, amount, transaction ID'],
+              ['Google (Firebase)', 'US / EU', 'Authentication and cloud database', 'Name, email, password hash, learning progress'],
+              ['Vercel Inc.', 'US / Global', 'Hosting, platform security, and cookieless traffic metrics', 'HTTP request logs, IP address, timestamp'],
+              ['Google (Google Analytics 4), consent only', 'US', 'Visit and feature usage statistics', 'Device parameters, page views, click metrics, cookie ID'],
+              ['PostHog Inc., consent only', 'US', 'Feature engagement analytics', 'Device parameters, page interactions, cookie ID'],
+              ['Meta Platforms Ireland Ltd., consent only', 'Ireland / US', 'Ad performance measurement and reaching interested audiences', 'Cookie & ad click ID, device info, register/trial/purchase events, hashed email']
             ]
-          }
+          },
+          content: [
+            'Because these providers operate servers located abroad, your data is transferred internationally in compliance with statutory transfer regulations (KVKK Art. 9 / GDPR Chapter V). Analytics and marketing data are collected only with your explicit consent.'
+          ]
+        },
+        {
+          id: 'retention_periods',
+          title: '5. RETENTION PERIODS',
+          bullets: [
+            'Account and learning records: Retained as long as your account remains active; deleted upon account closure.',
+            'Subscription, billing, and transactional records: Retained for the statutory periods required by applicable fiscal and commercial laws.',
+            'Cookie retention periods are specified in the Cookie Policy.'
+          ]
         },
         {
           id: 'user_rights',
-          title: '4. USER DATA RIGHTS (GDPR & KVKK)',
+          title: '6. YOUR RIGHTS (KVKK ART. 11 / GDPR)',
           content: [
-            'Users retain the right to request deletion (complete account removal), rectification, or access to their stored personal records.',
-            'Inquiries may be addressed to help@healthlexmed.com from your registered email account. Applications are processed within 30 days.'
+            'You have the right to learn whether your personal data is being processed, request information if processed, learn the purpose of processing and whether it is used in line with that purpose, know the third parties to whom data is transferred, request rectification of incomplete or inaccurate data, request erasure or destruction under statutory conditions, object to adverse results from automated analysis, and claim compensation for damages incurred due to unlawful processing.',
+            'You can download a copy of your personal data using [Download My Data](/profile) on your Profile page. You may submit any other inquiries or requests from your registered email address to help@healthlexmed.com. Applications are answered within 30 days.'
           ]
         },
         {
           id: 'cookie_policy',
-          title: 'DOCUMENT 4: COOKIE POLICY',
+          title: 'COOKIE POLICY',
           isHeader: true,
-          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Effective Date: September 3, 2026',
+          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Effective Date: 16.10.2026',
           subsections: [
             {
-              title: '1. WHAT IS A COOKIE AND HOW IS IT USED?',
+              title: '1. WHAT IS A COOKIE?',
               content: [
-                'Cookies are compact text files placed onto your browser during your platform visit. HealthLexMed utilizes cookies to maintain session authorization, recall your bilingual language preference (TR/EN), and ensure optimized CDN performance.'
+                'Cookies and similar technologies (including browser local storage) are small pieces of data stored on your browser by visited sites. Some are strictly essential for platform operation; others are activated only with your explicit consent.'
               ]
             },
             {
-              title: '2. COOKIE CATEGORIES AND RETENTION PERIODS',
+              title: '2. COOKIE TYPES AND RETENTION PERIODS',
               table: {
-                headers: ['Category', 'Provider', 'Purpose', 'Duration'],
+                headers: ['Type', 'Provider', 'Purpose', 'Consent', 'Duration'],
                 rows: [
-                  ['Strictly Necessary (Technical)', 'HealthLexMed / Vercel / Firebase', 'Maintains user session security and rapid page routing. Cannot be toggled off.', 'Session duration'],
-                  ['Performance & Analytics', 'Google Analytics (GA4)', 'Measures page hits, duration, and feature engagement in an anonymous format.', '14 Months (Persistent)'],
-                  ['Functionality Cookies', 'HealthLexMed', 'Stores selected Turkish/English language preferences and UI configurations.', 'Up to 1 Year'],
-                  ['Marketing / Tracking', '-', 'No third-party behavioral targeting, profiling, or remarketing cookies are deployed.', '-']
+                  ['Essential', 'HealthLexMed, Firebase, Vercel', 'Session authentication, security, language preference, and cookie consent storage', 'Not required, cannot be turned off', 'Session duration or until preferences are changed'],
+                  ['Analytics', 'Google Analytics 4 (_ga, _ga_*), PostHog (ph_*)', 'Page and feature engagement statistics', 'Required', 'Google Analytics: up to 2 years; PostHog: up to 1 year'],
+                  ['Marketing', 'Meta Pixel (_fbp, _fbc)', 'Measuring ad performance and reaching interested audiences', 'Required', '90 days']
                 ]
-              }
+              },
+              content: [
+                'Vercel\'s traffic measurement does not use cookies or persistent device identifiers; it records only aggregated, anonymous visit metrics without requiring consent.'
+              ]
             },
             {
               title: '3. MANAGING COOKIE PREFERENCES',
               bullets: [
-                'You may delete or reject cookies at any time via your browser settings (Chrome, Safari, Edge, Firefox).',
-                'To disable Google Analytics tracking, install the official Google Analytics Opt-out Browser Add-on.',
-                'Our platform offers an analytical consent banner to allow or reject optional tracking on first entry.'
+                'On your first visit, you can select "Accept all", "Essential only", or "Manage preferences" via the consent banner. Closing the banner is treated as "Essential only".',
+                'You can update your choices anytime via the "Cookie preferences" link in the website footer.',
+                'You can also clear or block cookies via browser settings. Note that disabling essential cookies may prevent sign-in and other core features from functioning.'
+              ],
+              content: [
+                'For questions or feedback: help@healthlexmed.com'
               ]
             }
           ]
