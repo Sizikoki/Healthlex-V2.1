@@ -358,119 +358,119 @@ export const LEGAL_CONTENT = {
     },
     privacy: {
       id: 'privacy',
-      title: 'PRIVACY POLICY & KVKK / GDPR DISCLOSURE',
+      title: 'PRIVACY POLICY & KVKK / GDPR NOTICE',
       shortTitle: 'Privacy & Cookie Policy',
       subtitle: '(Privacy Policy & GDPR/KVKK)',
-      effectiveDate: '16.10.2026',
-      controller: 'Sıddık Çiçek (HealthLexMed), Bağcılar / Istanbul, Turkey',
+      effectiveDate: 'October 16, 2026',
+      controller: 'Sıddık Çiçek (HealthLexMed), Bağcılar / Istanbul, Türkiye',
       email: 'help@healthlexmed.com',
       website: 'https://www.healthlexmed.com',
       sections: [
         {
           id: 'collected_data',
-          title: '1. COLLECTED PERSONAL DATA',
+          title: '1. PERSONAL DATA WE COLLECT',
           bullets: [
-            'Identity and contact information: Full name, email address (via Google Firebase Authentication).',
-            'Learning data: Terms and morphemes learned, game and quiz results, level, streak, and study timestamps.',
-            'Subscription and transaction data: Transaction ID, plan type, trial and subscription dates, subscription status. Payment card details like card number and CVV are never processed or stored by us; they are handled directly by our Merchant of Record, Paddle.',
-            'Technical data: IP address, device and browser type, visited pages, and access timestamps.',
-            'Analytics data (only with your consent): Statistics on page and feature usage across the platform.',
-            'Marketing data (only with your consent): Records of arriving at our site via advertisements and key events such as registration, trial activation, and purchase for ad performance measurement; including your email address in irreversibly hashed form.'
+            'Identity and contact details: Name and email address (via Google Firebase Authentication).',
+            'Learning data: Terms and morphemes you have learned, your game and quiz results, level, streak and study dates.',
+            'Subscription and transaction details: Transaction ID, plan type, trial and subscription dates, subscription status. Payment card details such as card number and CVV are never processed or stored by us; they are handled directly by our Merchant of Record, Paddle.',
+            'Technical data: IP address, device and browser type, pages visited and timestamps.',
+            'Analytics data (only with your consent): Statistics on how pages and features are used.',
+            'Marketing data (only with your consent): Records of your arrival from our ads and of actions such as sign-up, trial start and purchase, for ad measurement; this includes an irreversibly encrypted (hashed) version of your email address.'
           ]
         },
         {
           id: 'health_data_pledge',
-          title: '2. NO HEALTH DATA PROCESSING PLEDGE',
+          title: '2. NO HEALTH DATA',
           isAlert: true,
           alertType: 'success',
           content: [
-            'HealthLexMed is solely an educational and reference tool. No health data, reports, prescriptions, or medical records belonging to you, a patient, or a healthcare institution are collected, requested, or processed.'
+            'HealthLexMed is solely an educational and reference tool. We do not collect, request or process health data, reports, prescriptions or medical histories about you, any patient or any healthcare institution.'
           ]
         },
         {
           id: 'legal_bases',
-          title: '3. PROCESSING PURPOSES AND LEGAL BASES',
+          title: '3. PURPOSES AND LEGAL BASES',
           bullets: [
-            'Creating your account, enabling sign-in, and storing learning progress: Performance of contract (KVKK Art. 5/2-c / GDPR Art. 6/1-b).',
-            'Subscription, billing, invoicing, and tax compliance: Performance of contract and statutory legal obligations (KVKK Art. 5/2-c, 5/2-ç / GDPR Art. 6/1-c).',
-            'Platform security, error diagnostics, and cookieless essential traffic metrics (Vercel): Legitimate interests (KVKK Art. 5/2-f / GDPR Art. 6/1-f).',
-            'Analytics cookies (Google Analytics 4, PostHog): Explicit consent (KVKK Art. 5/1 / GDPR Art. 6/1-a).',
-            'Marketing cookies and ad attribution (Meta Pixel and Conversions API): Explicit consent (KVKK Art. 5/1 / GDPR Art. 6/1-a).'
+            'Creating your account, signing you in and saving your learning progress: performance of a contract (KVKK Art. 5/2-c; GDPR Art. 6(1)(b)).',
+            'Subscriptions, payments, invoicing and tax: performance of a contract and legal obligations (KVKK Art. 5/2-c, 5/2-ç; GDPR Art. 6(1)(b), 6(1)(c)).',
+            'Site security, error detection and cookieless basic traffic measurement (Vercel): legitimate interests (KVKK Art. 5/2-f; GDPR Art. 6(1)(f)).',
+            'Analytics cookies (Google Analytics, PostHog): consent (KVKK Art. 5/1; GDPR Art. 6(1)(a)).',
+            'Marketing cookies and ad measurement (Meta Pixel and Meta Conversions API): consent (KVKK Art. 5/1; GDPR Art. 6(1)(a)).'
           ],
           content: [
-            'You can withdraw your consent at any time via the "Cookie preferences" link in the website footer. Revocation does not affect the lawfulness of processing carried out prior to withdrawal.'
+            'You can withdraw your consent at any time via the "Cookie preferences" link at the bottom of the site. Withdrawal does not affect processing carried out before it.'
           ]
         },
         {
           id: 'third_parties',
-          title: '4. SERVICE PROVIDERS AND CROSS-BORDER DATA TRANSFERS',
+          title: '4. SERVICE PROVIDERS AND INTERNATIONAL TRANSFERS',
           table: {
-            headers: ['Provider', 'Country', 'Purpose', 'Data Scope'],
+            headers: ['Provider', 'Country', 'Purpose', 'Data'],
             rows: [
-              ['Paddle.com Market Ltd.', 'UK / Ireland', 'Checkout, invoicing, subscription lifecycle, and tax management (Merchant of Record)', 'Name, email, amount, transaction ID'],
-              ['Google (Firebase)', 'US / EU', 'Authentication and cloud database', 'Name, email, password hash, learning progress'],
-              ['Vercel Inc.', 'US / Global', 'Hosting, platform security, and cookieless traffic metrics', 'HTTP request logs, IP address, timestamp'],
-              ['Google (Google Analytics 4), consent only', 'US', 'Visit and feature usage statistics', 'Device parameters, page views, click metrics, cookie ID'],
-              ['PostHog Inc., consent only', 'US', 'Feature engagement analytics', 'Device parameters, page interactions, cookie ID'],
-              ['Meta Platforms Ireland Ltd., consent only', 'Ireland / US', 'Ad performance measurement and reaching interested audiences', 'Cookie & ad click ID, device info, register/trial/purchase events, hashed email']
+              ['Paddle.com Market Ltd.', 'UK / Ireland', 'Checkout, invoicing, subscription management and tax (Merchant of Record)', 'Name, email, amount, transaction ID'],
+              ['Google (Firebase)', 'US / EU', 'Authentication and database', 'Name, email, password hash, learning progress'],
+              ['Vercel Inc.', 'US / global', 'Hosting, security and cookieless traffic measurement', 'Request logs, IP address, timestamps'],
+              ['Google (Google Analytics 4), consent only', 'US', 'Visit and usage statistics', 'Device info, page and click statistics, cookie ID'],
+              ['PostHog Inc., consent only', 'US', 'Feature usage analytics', 'Device info, page and interaction statistics, cookie ID'],
+              ['Meta Platforms Ireland Ltd., consent only', 'Ireland / US', 'Ad measurement and showing ads to people who may be interested', 'Cookie and ad click IDs, device info, sign-up / trial / purchase events, hashed email']
             ]
           },
           content: [
-            'Because these providers operate servers located abroad, your data is transferred internationally in compliance with statutory transfer regulations (KVKK Art. 9 / GDPR Chapter V). Analytics and marketing data are collected only with your explicit consent.'
+            'Because these providers\' servers are located abroad, your data is transferred internationally. Transfers are made in accordance with Article 9 of the KVKK and, where applicable, Chapter V of the GDPR. Analytics and marketing data are collected only with your consent.'
           ]
         },
         {
           id: 'retention_periods',
-          title: '5. RETENTION PERIODS',
+          title: '5. RETENTION',
           bullets: [
-            'Account and learning records: Retained as long as your account remains active; deleted upon account closure.',
-            'Subscription, billing, and transactional records: Retained for the statutory periods required by applicable fiscal and commercial laws.',
-            'Cookie retention periods are specified in the Cookie Policy.'
+            'Account and learning data: Kept while your account is open and deleted when you close your account.',
+            'Subscription, invoice and transaction records: Kept for the period required by applicable law.',
+            'Cookie retention periods are listed in the Cookie Policy.'
           ]
         },
         {
           id: 'user_rights',
-          title: '6. YOUR RIGHTS (KVKK ART. 11 / GDPR)',
+          title: '6. YOUR RIGHTS (KVKK ART. 11 AND GDPR)',
           content: [
-            'You have the right to learn whether your personal data is being processed, request information if processed, learn the purpose of processing and whether it is used in line with that purpose, know the third parties to whom data is transferred, request rectification of incomplete or inaccurate data, request erasure or destruction under statutory conditions, object to adverse results from automated analysis, and claim compensation for damages incurred due to unlawful processing.',
-            'You can download a copy of your personal data using [Download My Data](/profile) on your Profile page. You may submit any other inquiries or requests from your registered email address to help@healthlexmed.com. Applications are answered within 30 days.'
+            'You have the right to learn whether your personal data is processed, to request information about it, to learn the purpose of processing and whether it is used accordingly, to know the third parties it is transferred to, to request correction of incomplete or inaccurate data, to request deletion or destruction where the conditions are met, to request that these actions be notified to third parties, to object to an adverse outcome resulting solely from automated analysis, and to claim compensation for damage caused by unlawful processing. Under the GDPR you also have the rights to restriction, data portability and objection, and the right to lodge a complaint with your local data protection authority.',
+            'You can get a copy of your data via "Download My Data" on your Profile page. Send any other request from your registered email address to help@healthlexmed.com. Requests are answered within 30 days.'
           ]
         },
         {
           id: 'cookie_policy',
           title: 'COOKIE POLICY',
           isHeader: true,
-          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Effective Date: 16.10.2026',
+          subtitle: 'Platform: HealthLexMed (https://www.healthlexmed.com) · Effective Date: October 16, 2026',
           subsections: [
             {
-              title: '1. WHAT IS A COOKIE?',
+              title: '1. WHAT ARE COOKIES?',
               content: [
-                'Cookies and similar technologies (including browser local storage) are small pieces of data stored on your browser by visited sites. Some are strictly essential for platform operation; others are activated only with your explicit consent.'
+                'Cookies and similar technologies (including your browser\'s local storage) are small pieces of information that a website saves in your browser. Some are needed for the site to work; others are used only with your consent.'
               ]
             },
             {
-              title: '2. COOKIE TYPES AND RETENTION PERIODS',
+              title: '2. COOKIE CATEGORIES AND RETENTION',
               table: {
-                headers: ['Type', 'Provider', 'Purpose', 'Consent', 'Duration'],
+                headers: ['Category', 'Provider', 'Purpose', 'Consent', 'Duration'],
                 rows: [
-                  ['Essential', 'HealthLexMed, Firebase, Vercel', 'Session authentication, security, language preference, and cookie consent storage', 'Not required, cannot be turned off', 'Session duration or until preferences are changed'],
-                  ['Analytics', 'Google Analytics 4 (_ga, _ga_*), PostHog (ph_*)', 'Page and feature engagement statistics', 'Required', 'Google Analytics: up to 2 years; PostHog: up to 1 year'],
-                  ['Marketing', 'Meta Pixel (_fbp, _fbc)', 'Measuring ad performance and reaching interested audiences', 'Required', '90 days']
+                  ['Essential', 'HealthLexMed, Firebase, Vercel', 'Sign-in session, security, language preference and storing your cookie choice', 'Not required, cannot be turned off', 'Session or until you change your choice'],
+                  ['Analytics', 'Google Analytics 4 (_ga, _ga_*), PostHog (ph_*)', 'Page and feature usage statistics', 'Required', 'Google Analytics: up to 2 years; PostHog: up to 1 year'],
+                  ['Marketing', 'Meta Pixel (_fbp, _fbc)', 'Measuring ad results and showing ads to people who may be interested', 'Required', '90 days']
                 ]
               },
               content: [
-                'Vercel\'s traffic measurement does not use cookies or persistent device identifiers; it records only aggregated, anonymous visit metrics without requiring consent.'
+                'Vercel\'s traffic measurement does not use cookies or device identifiers; it only counts anonymous aggregate visits and does not depend on consent.'
               ]
             },
             {
-              title: '3. MANAGING COOKIE PREFERENCES',
+              title: '3. MANAGING YOUR COOKIE PREFERENCES',
               bullets: [
-                'On your first visit, you can select "Accept all", "Essential only", or "Manage preferences" via the consent banner. Closing the banner is treated as "Essential only".',
-                'You can update your choices anytime via the "Cookie preferences" link in the website footer.',
-                'You can also clear or block cookies via browser settings. Note that disabling essential cookies may prevent sign-in and other core features from functioning.'
+                'On your first visit you can choose "Accept all", "Essential only" or "Manage preferences". Closing the notice has the same effect as "Essential only".',
+                'You can change your choice at any time via the "Cookie preferences" link at the bottom of the site.',
+                'You can delete or block cookies in your browser settings. If you block essential cookies, some features such as sign-in may not work.'
               ],
               content: [
-                'For questions or feedback: help@healthlexmed.com'
+                'Questions or objections: help@healthlexmed.com'
               ]
             }
           ]
