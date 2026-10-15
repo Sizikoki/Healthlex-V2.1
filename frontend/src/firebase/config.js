@@ -5,7 +5,6 @@ import {
   persistentLocalCache, 
   persistentMultipleTabManager 
 } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,9 +31,6 @@ const db = initializeFirestore(app, {
     tabManager: persistentMultipleTabManager()
   })
 });
-
-// Initialize Analytics (SSR & browser-safe)
-export const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
 
 export { app, auth, db };
 export default app;
