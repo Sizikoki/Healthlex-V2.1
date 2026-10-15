@@ -156,6 +156,7 @@ const loadPixel = () => {
       // Disable the pixel's automatic history (pushState) PageView tracking;
       // SPA PageViews are sent by MetaPixelRouteTracker.
       n.disablePushState = true;
+      n.allowDuplicatePageViews = true;
 
       if (!document.getElementById(PIXEL_SCRIPT_ID)) {
         const script = document.createElement('script');
@@ -171,6 +172,7 @@ const loadPixel = () => {
       }
     } else {
       window.fbq.disablePushState = true;
+      window.fbq.allowDuplicatePageViews = true;
     }
 
     window.fbq('consent', 'grant');
