@@ -419,7 +419,10 @@ export const MorphemeDetail = () => {
             <Button
               size="lg"
               variant="outline"
-              onClick={() => navigate('/register')}
+              onClick={() => {
+                try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+                navigate('/register');
+              }}
               className="border-primary/30 hover:bg-primary/10 w-full sm:w-auto font-semibold"
             >
               {isTr ? 'Ücretsiz Kayıt Ol' : 'Sign Up Free'}

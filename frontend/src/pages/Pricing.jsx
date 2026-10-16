@@ -461,7 +461,7 @@ export const PricingView = () => {
       } catch (e) {}
     }
 
-    if (planToCheckout) {
+    if (planToCheckout && ['basic', 'pro', 'lifetime'].includes(planToCheckout)) {
       try {
         sessionStorage.removeItem('healthlex_selected_plan');
       } catch (e) {}

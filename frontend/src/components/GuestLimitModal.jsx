@@ -57,6 +57,7 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
             <>
               <Button
                 onClick={() => {
+                  try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
                   onClose();
                   navigate('/register');
                 }}

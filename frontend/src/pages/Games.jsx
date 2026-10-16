@@ -362,7 +362,10 @@ export const Games = () => {
                     </p>
                   </div>
                 </div>
-                <Link to="/register">
+                <Link
+                  to="/register"
+                  onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                >
                   <Button size="sm" className="gradient-primary whitespace-nowrap shadow-md">
                     <UserPlus className="w-4 h-4 mr-2" />
                     {t('unlimitedPlaySignUp')}

@@ -274,7 +274,11 @@ export const Navbar = () => {
                 <Link to="/login" className="px-6 py-2 border border-border rounded-lg font-medium text-foreground hover:bg-muted transition-colors bg-card">
                   {t('login')}
                 </Link>
-                <Link to="/register" className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity shadow-sm">
+                <Link
+                  to="/register"
+                  onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                  className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity shadow-sm"
+                >
                   {t('startFree')}
                 </Link>
               </div>
@@ -359,7 +363,14 @@ export const Navbar = () => {
                   <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 border border-border rounded-lg font-medium text-foreground bg-card hover:bg-muted">
                     {t('login')}
                   </Link>
-                  <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90">
+                  <Link
+                    to="/register"
+                    onClick={() => {
+                      try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full text-center py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90"
+                  >
                     {t('startFree')}
                   </Link>
                 </div>

@@ -365,6 +365,7 @@ export const Profile = () => {
       logout();
       toast.dismiss('delete-acc-loading');
       toast.success(t('accountDeleted', 'Hesabınız ve tüm verileriniz kalıcı olarak silindi.'));
+      try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
       navigate('/register');
     } catch (err) {
       toast.dismiss('delete-acc-loading');

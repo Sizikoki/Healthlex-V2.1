@@ -294,7 +294,11 @@ export const ProgressPage = () => {
                 </div>
               </div>
               <div className="flex gap-2.5 whitespace-nowrap">
-                <Link to="/register" className="btn bg-[var(--teal)] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[var(--teal-deep)] transition-all">
+                <Link
+                  to="/register"
+                  onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                  className="btn bg-[var(--teal)] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[var(--teal-deep)] transition-all"
+                >
                   {t('register')}
                 </Link>
                 <Link to="/login" className="btn bg-white border border-gray-300 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-50 transition-all">

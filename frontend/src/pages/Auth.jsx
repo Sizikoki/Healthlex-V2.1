@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Activity, Mail, Lock, User as UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,28 @@ import { auth, db, googleProvider } from '@/firebase/config';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { trackMetaEvent } from '@/services/metaPixel';
+
+const PAID_PLANS = ['basic', 'pro', 'lifetime'];
+const SELECTED_PLAN_KEY = 'healthlex_selected_plan';
+
+// Secili plani bir kez okur, sessionStorage'dan siler ve yalnizca gecerli bir ucretli plansa dondurur.
+const consumeSelectedPlan = () => {
+  const fromUrl = new URLSearchParams(window.location.search).get('plan');
+  let fromStorage = null;
+  try {
+    fromStorage = sessionStorage.getItem(SELECTED_PLAN_KEY);
+    sessionStorage.removeItem(SELECTED_PLAN_KEY);
+  } catch (e) {}
+  const raw = fromUrl || fromStorage;
+  return PAID_PLANS.includes(raw) ? raw : null;
+};
+
+const restoreSelectedPlan = (plan) => {
+  if (!plan) return;
+  try {
+    sessionStorage.setItem(SELECTED_PLAN_KEY, plan);
+  } catch (e) {}
+};
 
 // ── Firestore Kullanici Belgesi Olustur / Kontrol Et ─────────────────────────
 // users/{uid} belgesi yoksa otomatik olusturur.
@@ -126,6 +148,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const authFlowInProgress = useRef(false);
 
   // ?redirect= parametresini oku, yoksa /dashboard
   const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
@@ -134,19 +157,11 @@ export const Login = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     updateCanonicalUrl('https://www.healthlexmed.com/login');
 
-    // Kullanıcı zaten giriş yapmışsa veya oturum açıldığı anda otomatik yönlendir
+    // Kullanıcı zaten giriş yapmışsa otomatik yönlendir (aktif giriş işlemi sürerken müdahale etme)
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      if (currentUser && !currentUser.isAnonymous) {
-        const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-          try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-        })();
-        if (chosenPlan) {
-          try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-          navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
-        } else {
-          navigate(redirectTo, { replace: true });
-        }
-      }
+      if (!currentUser || currentUser.isAnonymous || authFlowInProgress.current) return;
+      const chosenPlan = consumeSelectedPlan();
+      navigate(chosenPlan ? `/pricing?checkout=${chosenPlan}` : redirectTo, { replace: true });
     });
 
     return () => unsubscribe();
@@ -158,6 +173,8 @@ export const Login = () => {
       toast.error(t('fillAllFields', 'Lutfen tum alanlari doldurun'));
       return;
     }
+    const chosenPlan = consumeSelectedPlan();
+    authFlowInProgress.current = true;
     try {
       setLoading(true);
       const { user } = await signInWithEmailAndPassword(auth, email, password);
@@ -170,16 +187,10 @@ export const Login = () => {
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
       toast.success(t('loginSuccess', 'Giris basarili! Hos geldiniz.'));
-      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-      })();
-      if (chosenPlan) {
-        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
-        return;
-      }
-      navigate(redirectTo, { replace: true });
+      navigate(chosenPlan ? `/pricing?checkout=${chosenPlan}` : redirectTo, { replace: true });
     } catch (error) {
+      authFlowInProgress.current = false;
+      restoreSelectedPlan(chosenPlan);
       console.error('Login error:', error);
       toast.error(getAuthErrorMessage(error.code, isTr));
     } finally {
@@ -188,6 +199,8 @@ export const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
+    const chosenPlan = consumeSelectedPlan();
+    authFlowInProgress.current = true;
     try {
       setGoogleLoading(true);
       const { user } = await signInWithPopup(auth, googleProvider);
@@ -200,16 +213,10 @@ export const Login = () => {
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
-      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-      })();
-      if (chosenPlan) {
-        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
-        return;
-      }
-      navigate(redirectTo, { replace: true });
+      navigate(chosenPlan ? `/pricing?checkout=${chosenPlan}` : redirectTo, { replace: true });
     } catch (error) {
+      authFlowInProgress.current = false;
+      restoreSelectedPlan(chosenPlan);
       if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
         console.error('Google login error:', error);
         toast.error(getAuthErrorMessage(error.code, isTr));
@@ -262,6 +269,11 @@ export const Login = () => {
               {t('noAccount', 'Hesabin yok mu?')}{' '}
               <Link
                 to={window.location.search ? `/register${window.location.search}` : (redirectTo && redirectTo !== '/dashboard' ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register')}
+                onClick={() => {
+                  if (!new URLSearchParams(window.location.search).get('plan')) {
+                    try { sessionStorage.removeItem(SELECTED_PLAN_KEY); } catch (e) {}
+                  }
+                }}
                 className="text-primary font-medium hover:underline"
               >
                 {t('signUp', 'Kayit Ol')}
@@ -287,34 +299,28 @@ export const Register = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const authFlowInProgress = useRef(false);
 
   // ?redirect= parametresini oku, yoksa /dashboard
   const redirectTo = new URLSearchParams(window.location.search).get('redirect') || '/dashboard';
-  const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-    try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
+  const defaultTarget = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
+  const rawPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
+    try { return sessionStorage.getItem(SELECTED_PLAN_KEY); } catch (e) { return null; }
   })();
+  const chosenPlan = PAID_PLANS.includes(rawPlan) ? rawPlan : null;
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     updateCanonicalUrl('https://www.healthlexmed.com/register');
 
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      if (currentUser && !currentUser.isAnonymous) {
-        const plan = new URLSearchParams(window.location.search).get('plan') || (() => {
-          try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-        })();
-        if (plan) {
-          try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-          navigate(`/pricing?checkout=${plan}`, { replace: true });
-        } else {
-          const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
-          navigate(targetDestination, { replace: true });
-        }
-      }
+      if (!currentUser || currentUser.isAnonymous || authFlowInProgress.current) return;
+      const plan = consumeSelectedPlan();
+      navigate(plan ? `/pricing?checkout=${plan}` : defaultTarget, { replace: true });
     });
 
     return () => unsubscribe();
-  }, [navigate, redirectTo]);
+  }, [navigate, defaultTarget]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -326,6 +332,8 @@ export const Register = () => {
       toast.error(t('mustAcceptTerms', 'Lutfen Kullanim Kosullari, Gizlilik ve Iptal Politikalarini kabul edin.'));
       return;
     }
+    const selectedPlan = consumeSelectedPlan();
+    authFlowInProgress.current = true;
     try {
       setLoading(true);
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
@@ -339,17 +347,10 @@ export const Register = () => {
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
       toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
-      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-      })();
-      if (chosenPlan) {
-        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
-        return;
-      }
-      const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
-      navigate(targetDestination, { replace: true });
+      navigate(selectedPlan ? `/pricing?checkout=${selectedPlan}` : defaultTarget, { replace: true });
     } catch (error) {
+      authFlowInProgress.current = false;
+      restoreSelectedPlan(selectedPlan);
       console.error('Registration error:', error);
       toast.error(getAuthErrorMessage(error.code, isTr));
     } finally {
@@ -358,6 +359,8 @@ export const Register = () => {
   };
 
   const handleGoogleRegister = async () => {
+    const selectedPlan = consumeSelectedPlan();
+    authFlowInProgress.current = true;
     try {
       setGoogleLoading(true);
       const { user } = await signInWithPopup(auth, googleProvider);
@@ -370,17 +373,10 @@ export const Register = () => {
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
       toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
-      const chosenPlan = new URLSearchParams(window.location.search).get('plan') || (() => {
-        try { return sessionStorage.getItem('healthlex_selected_plan'); } catch (e) { return null; }
-      })();
-      if (chosenPlan) {
-        try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-        navigate(`/pricing?checkout=${chosenPlan}`, { replace: true });
-        return;
-      }
-      const targetDestination = redirectTo === '/dashboard' ? '/welcome?plan=trial' : redirectTo;
-      navigate(targetDestination, { replace: true });
+      navigate(selectedPlan ? `/pricing?checkout=${selectedPlan}` : defaultTarget, { replace: true });
     } catch (error) {
+      authFlowInProgress.current = false;
+      restoreSelectedPlan(selectedPlan);
       if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
         console.error('Google register error:', error);
         toast.error(getAuthErrorMessage(error.code, isTr));
