@@ -126,6 +126,22 @@ export const trackMetaPageView = (url = getCurrentUrl()) => {
 };
 
 /**
+ * Sends a standard/custom Meta Pixel event with an eventID (for CAPI deduplication).
+ * No-op without marketing consent or before the pixel is loaded.
+ */
+export const trackMetaEvent = (name, params = {}, { eventID } = {}) => {
+  if (!isEnabled() || !pixelLoaded) return;
+  if (!hasConsent('marketing')) return;
+  if (typeof window.fbq !== 'function') return;
+
+  try {
+    window.fbq('track', name, params, { eventID });
+  } catch (error) {
+    console.warn(`[MetaPixel] Failed to track ${name}:`, error);
+  }
+};
+
+/**
  * Injects the Meta Pixel (once) and sends the initial PageView.
  */
 const loadPixel = () => {

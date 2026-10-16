@@ -2,6 +2,7 @@ import { initializePaddle } from '@paddle/paddle-js';
 import { toast } from 'sonner';
 import { auth } from '@/firebase/config';
 import { getUser } from '@/utils/storage';
+import { trackMetaEvent } from '@/services/metaPixel';
 
 // Environment variable configurations (Safe client-side tokens & price ID only)
 const PADDLE_TOKEN =
@@ -68,6 +69,20 @@ export const getPaddle = async () => {
         eventCallback: (event) => {
           if (process.env.NODE_ENV !== 'production') {
             console.log('[Paddle Event]', event?.name, event);
+          }
+
+          // Meta Pixel: Ödeme penceresi yüklendiğinde InitiateCheckout
+          if (event?.name === 'checkout.loaded') {
+            const loadedPlanId = event?.data?.custom_data?.planId;
+            const randomId =
+              typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+                ? crypto.randomUUID()
+                : `${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
+            trackMetaEvent(
+              'InitiateCheckout',
+              loadedPlanId ? { content_name: loadedPlanId } : {},
+              { eventID: 'ic_' + randomId }
+            );
           }
 
           // Ödeme veya Deneme Başarılı Bildirimi ve /welcome sayfasına yönlendirme

@@ -17,23 +17,25 @@ import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from '@/firebase/config';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
+import { trackMetaEvent } from '@/services/metaPixel';
 
 // ── Firestore Kullanici Belgesi Olustur / Kontrol Et ─────────────────────────
 // users/{uid} belgesi yoksa otomatik olusturur.
 // Google ile ilk kez giris yapan kullanicilar icin kritiktir.
+// Belge YENI yazildiysa true, zaten varsa false dondurur.
 const ensureUserDoc = async (user) => {
   const ref = doc(db, 'users', user.uid);
   const snap = await getDoc(ref);
-  if (!snap.exists()) {
-    await setDoc(ref, {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName || user.email?.split('@')[0] || 'User',
-      subscriptionStatus: 'free',
-      isPro: false,
-      createdAt: serverTimestamp()
-    });
-  }
+  if (snap.exists()) return false;
+  await setDoc(ref, {
+    uid: user.uid,
+    email: user.email,
+    displayName: user.displayName || user.email?.split('@')[0] || 'User',
+    subscriptionStatus: 'free',
+    isPro: false,
+    createdAt: serverTimestamp()
+  });
+  return true;
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -159,7 +161,10 @@ export const Login = () => {
     try {
       setLoading(true);
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      await ensureUserDoc(user);
+      const isNewUserDoc = await ensureUserDoc(user);
+      if (isNewUserDoc) {
+        trackMetaEvent('CompleteRegistration', {}, { eventID: 'reg_' + user.uid });
+      }
       saveUser({ uid: user.uid, name: user.displayName || email.split('@')[0], email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
@@ -186,7 +191,10 @@ export const Login = () => {
     try {
       setGoogleLoading(true);
       const { user } = await signInWithPopup(auth, googleProvider);
-      await ensureUserDoc(user);
+      const isNewUserDoc = await ensureUserDoc(user);
+      if (isNewUserDoc) {
+        trackMetaEvent('CompleteRegistration', {}, { eventID: 'reg_' + user.uid });
+      }
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
@@ -322,7 +330,10 @@ export const Register = () => {
       setLoading(true);
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(user, { displayName: name });
-      await ensureUserDoc({ ...user, displayName: name });
+      const isNewUserDoc = await ensureUserDoc({ ...user, displayName: name });
+      if (isNewUserDoc) {
+        trackMetaEvent('CompleteRegistration', {}, { eventID: 'reg_' + user.uid });
+      }
       saveUser({ uid: user.uid, name, email, acceptedTerms: true, acceptedTermsAt: new Date().toISOString(), joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
@@ -350,7 +361,10 @@ export const Register = () => {
     try {
       setGoogleLoading(true);
       const { user } = await signInWithPopup(auth, googleProvider);
-      await ensureUserDoc(user);
+      const isNewUserDoc = await ensureUserDoc(user);
+      if (isNewUserDoc) {
+        trackMetaEvent('CompleteRegistration', {}, { eventID: 'reg_' + user.uid });
+      }
       saveUser({ uid: user.uid, name: user.displayName || user.email?.split('@')[0] || 'User', email: user.email, joinDate: user.metadata.creationTime || new Date().toISOString() });
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
