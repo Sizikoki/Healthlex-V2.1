@@ -1,0 +1,8 @@
+PubMed and NCBI Terms and Policies Notification
+Timestamp: 2026-10-16T14:45:00+03:00
+
+Please note the terms and policies at:
+- https://pubmed.ncbi.nlm.nih.gov/disclaimer/
+- https://www.ncbi.nlm.nih.gov/home/about/policies/
+
+Always check the individual license of each paper retrieved by the PubMed API skill for any copyright and reuse restrictions.
