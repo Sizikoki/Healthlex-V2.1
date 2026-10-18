@@ -81,7 +81,7 @@ export const MorphemeGame = () => {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8 px-4">
+    <div className="min-h-screen bg-muted/30 py-3 px-2 sm:py-8 sm:px-4">
       <MorphemeGameFable
         terms={adaptedQuestions}
         language={currentLanguage}

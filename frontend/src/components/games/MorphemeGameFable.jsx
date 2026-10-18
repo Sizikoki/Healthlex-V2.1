@@ -52,6 +52,7 @@ const STRINGS = {
     playAgain: "Yeniden Oyna",
     noQuestions: "Bu kategori için soru bulunamadı.",
     analysis: "Morfem Analizi",
+    removeHint: "Kaldırmak için dokun",
   },
   en: {
     gameTitle: "Morpheme Builder",
@@ -74,6 +75,7 @@ const STRINGS = {
     playAgain: "Play Again",
     noQuestions: "No questions found for this category.",
     analysis: "Morpheme Analysis",
+    removeHint: "Tap to remove",
   },
 };
 
@@ -407,22 +409,24 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
     <button
       type="button"
       onClick={onClick}
+      disabled={dimmed}
       aria-label={`${part.text} — ${meaning}`}
-      className={`group flex flex-col items-start gap-1 rounded-xl border px-3.5 py-2 text-left
-        transition-all duration-150 hover:scale-[1.03] active:scale-95 shadow-sm
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-        ${meta.chip} ${dimmed ? "opacity-60" : ""}`}
+      title={`${part.text} (${tr(part.partType)}): ${meaning}`}
+      className={`group flex flex-col justify-between items-start rounded-xl border p-2 sm:p-2.5 text-left
+        transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs w-full
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-h-[56px] sm:min-h-[64px]
+        ${meta.chip} ${dimmed ? "opacity-60 cursor-default" : "cursor-pointer"}`}
     >
-      <div className="flex items-center justify-between w-full gap-2.5">
-        <span className="font-mono text-base font-bold tracking-tight">
+      <div className="flex items-center justify-between w-full gap-1.5">
+        <span className="font-mono text-xs sm:text-sm md:text-base font-bold tracking-tight text-foreground truncate">
           {part.text}
         </span>
-        <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/50 border border-current/15">
+        <span className="inline-flex items-center shrink-0 gap-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/70 border border-current/15">
           <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
           {tr(part.partType)}
         </span>
       </div>
-      <span className="text-xs font-semibold text-foreground/90 group-hover:text-foreground line-clamp-1">
+      <span className="text-[11px] sm:text-xs font-medium text-foreground/85 group-hover:text-foreground line-clamp-2 mt-1 leading-tight">
         {meaning}
       </span>
     </button>
@@ -561,43 +565,44 @@ export default function MorphemeGameFable({
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto rounded-3xl border border-border bg-card px-4 py-6 text-card-foreground sm:px-6 shadow-xl">
-      <div className="mb-5 flex items-center justify-between gap-3">
+    <div className="w-full max-w-3xl mx-auto rounded-2xl sm:rounded-3xl border border-border bg-card p-3.5 sm:p-6 text-card-foreground shadow-xl">
+      {/* Top Navigation & Status */}
+      <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
         {onBack ? (
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center gap-1.5 rounded-lg px-2 py-1 text-sm text-muted-foreground transition hover:text-foreground hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs sm:text-sm text-muted-foreground transition hover:text-foreground hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <ArrowLeft aria-hidden="true" className="h-4 w-4"/>
-            {tr("back")}
+            <ArrowLeft aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4"/>
+            <span>{tr("back")}</span>
           </button>
         ) : (
           <span />
         )}
 
-        <div className="flex items-center gap-2">
-          <Puzzle aria-hidden="true" className="h-4 w-4 text-primary"/>
-          <span className="text-sm font-semibold text-foreground">{tr("gameTitle")}</span>
+        <div className="flex items-center gap-1.5">
+          <Puzzle aria-hidden="true" className="h-4 w-4 text-primary shrink-0"/>
+          <span className="text-xs sm:text-sm font-semibold text-foreground">{tr("gameTitle")}</span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             type="button"
             onClick={toggleSound}
             aria-label={soundActive ? (language === "en" ? "Mute sound" : "Sesi kapat") : (language === "en" ? "Enable sound" : "Sesi aç")}
-            className="p-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+            className="p-1 sm:p-1.5 rounded-lg border border-border bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
             title={soundActive ? (language === "en" ? "Sound: ON" : "Ses Efektleri: Açık") : (language === "en" ? "Sound: OFF" : "Ses Efektleri: Kapalı")}
           >
             {soundActive ? (
-              <Volume2 aria-hidden="true" className="h-4 w-4 text-primary" />
+              <Volume2 aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
             ) : (
-              <VolumeX aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+              <VolumeX aria-hidden="true" className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
             )}
           </button>
 
           <div
-            className={`rounded-full border px-3 py-1 font-mono text-sm font-medium ${
+            className={`rounded-full border px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-xs sm:text-sm font-medium ${
               model.score >= 0
                 ? "border-border bg-muted text-foreground"
                 : "border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-300"
@@ -609,14 +614,15 @@ export default function MorphemeGameFable({
         </div>
       </div>
 
-      <div className="mb-6">
-        <div className="mb-1.5 flex justify-between text-xs text-muted-foreground">
-          <span>
+      {/* Progress Bar */}
+      <div className="mb-3 sm:mb-4">
+        <div className="mb-1 flex justify-between text-[11px] sm:text-xs text-muted-foreground">
+          <span className="font-medium">
             {tr("question")} {model.currentIndex + 1} / {total}
           </span>
-          <span>{tr("gameSubtitle")}</span>
+          <span className="truncate">{tr("gameSubtitle")}</span>
         </div>
-        <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+        <div className="h-1.5 sm:h-2 w-full overflow-hidden rounded-full bg-muted">
           <div
             className="h-full rounded-full gradient-primary transition-all duration-500"
             style={{ width: `${((model.currentIndex + 1) / total) * 100}%` }}
@@ -624,31 +630,32 @@ export default function MorphemeGameFable({
         </div>
       </div>
 
-      <div className="mb-5 rounded-2xl border border-border bg-muted/40 p-5">
-        <p className="mb-1 text-[11px] uppercase tracking-widest text-primary font-semibold">
-          {tr("targetTerm")}
-        </p>
-        <div className="flex flex-wrap items-center gap-3 mb-1.5">
-          <h2 className="font-serif text-3xl italic tracking-tight text-foreground">
-            {q.targetLatinTerm}
-          </h2>
+      {/* Target Term Card */}
+      <div className="mb-3 sm:mb-4 rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
+        <div className="flex items-center justify-between gap-2 mb-1">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-widest text-primary font-semibold">
+            {tr("targetTerm")}
+          </p>
           {q.englishTerm && q.englishTerm.toLowerCase() !== q.targetLatinTerm.toLowerCase() && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20 text-sm font-semibold text-primary shadow-xs">
-              <span className="text-xs">🇬🇧</span>
-              <span>{q.englishTerm}</span>
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-[11px] sm:text-xs font-medium text-primary shadow-xs">
+              <span className="text-[11px]">🇬🇧</span>
+              <span className="truncate max-w-[170px] sm:max-w-none">{q.englishTerm}</span>
             </div>
           )}
         </div>
-        <p className="text-xs font-medium text-primary/80 mb-2">
-          {language === "en"
-            ? `Assemble the medical term: ${q.targetLatinTerm} (${q.englishTerm || q.targetLatinTerm})`
-            : `Aşağıdaki morfem parçalarını birleştirerek ${q.targetLatinTerm} terimini oluşturun.`}
-        </p>
-        <p className="text-muted-foreground text-sm leading-relaxed">{loc(q.definition)}</p>
+        <h2 className="font-serif text-xl sm:text-2xl md:text-3xl italic font-bold tracking-tight text-foreground leading-tight mb-1">
+          {q.targetLatinTerm}
+        </h2>
+        {loc(q.definition) && (
+          <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+            {loc(q.definition)}
+          </p>
+        )}
       </div>
 
+      {/* Constructed Term Box */}
       <div
-        className={`mb-5 min-h-[96px] rounded-2xl border-2 border-dashed p-4 transition-colors duration-300 ${
+        className={`mb-3 sm:mb-4 min-h-[68px] sm:min-h-[80px] rounded-2xl border-2 border-dashed p-3 sm:p-4 transition-colors duration-300 flex flex-col justify-center ${
           success
             ? "border-emerald-500/60 bg-emerald-500/5"
             : failure
@@ -656,62 +663,86 @@ export default function MorphemeGameFable({
             : "border-border bg-muted/20"
         }`}
       >
-        <p className="mb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
-          {tr("builtTerm")}
-        </p>
+        <div className="flex items-center justify-between mb-1.5">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
+            {tr("builtTerm")}
+          </p>
+          {model.selectedSequence.length > 0 && isPlaying && (
+            <span className="text-[10px] text-muted-foreground/70">
+              {tr("removeHint")}
+            </span>
+          )}
+        </div>
 
         {model.selectedSequence.length === 0 ? (
-          <p className="text-sm text-muted-foreground">{tr("emptyHint")}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground py-0.5">{tr("emptyHint")}</p>
         ) : (
-          <div className="flex flex-wrap items-center gap-2">
-            {model.selectedSequence.map((part, i) => (
-              <React.Fragment key={part.id}>
-                {i > 0 && (
-                  <span className="text-muted-foreground/60" aria-hidden="true">
-                    +
+          <div className="flex flex-col gap-2">
+            {/* Selected parts as interactive compact chips */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              {model.selectedSequence.map((part, i) => {
+                const meta = PART_META[part.partType] ?? PART_META.root;
+                return (
+                  <React.Fragment key={part.id}>
+                    {i > 0 && (
+                      <span className="text-muted-foreground/50 text-xs sm:text-sm font-bold" aria-hidden="true">
+                        +
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playTapSound();
+                        dispatch({ type: "DeselectPart", part });
+                      }}
+                      disabled={!isPlaying}
+                      className={`group inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs sm:text-sm
+                        transition-all duration-150 active:scale-95 shadow-xs font-mono font-bold
+                        ${meta.chip} ${!isPlaying ? "opacity-60 cursor-default" : "hover:border-destructive/60 hover:text-destructive cursor-pointer"}`}
+                      title={`${part.text} — ${language === "en" ? "Click to remove" : "Kaldırmak için tıkla"}`}
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${meta.dot} shrink-0`} />
+                      <span>{part.text}</span>
+                      <X aria-hidden="true" className="h-3 w-3 opacity-60 group-hover:opacity-100 shrink-0 text-muted-foreground group-hover:text-destructive" />
+                    </button>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+
+            {/* Assembled preview */}
+            <div className="flex items-center gap-2 pt-1.5 border-t border-border/40">
+              <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 text-muted-foreground shrink-0"/>
+              <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 min-w-0">
+                <span className="font-mono text-sm sm:text-base font-bold text-primary truncate">
+                  {assembledPreview(model.selectedSequence)}
+                </span>
+                {assembledMeaningPreview(model.selectedSequence, language) && (
+                  <span className="text-[11px] sm:text-xs text-muted-foreground font-medium truncate">
+                    ({assembledMeaningPreview(model.selectedSequence, language)})
                   </span>
                 )}
-                <MorphemeChip
-                  part={part}
-                  tr={tr}
-                  language={language}
-                  dimmed={!isPlaying}
-                  onClick={() => {
-                    playTapSound();
-                    dispatch({ type: "DeselectPart", part });
-                  }}
-                />
-              </React.Fragment>
-            ))}
-            <ArrowRight aria-hidden="true" className="ml-1 h-4 w-4 text-muted-foreground flex-shrink-0"/>
-            <div className="flex flex-col">
-              <span className="font-mono text-lg font-semibold text-primary">
-                {assembledPreview(model.selectedSequence)}
-              </span>
-              {assembledMeaningPreview(model.selectedSequence, language) && (
-                <span className="text-xs text-muted-foreground font-medium">
-                  ({assembledMeaningPreview(model.selectedSequence, language)})
-                </span>
-              )}
+              </div>
             </div>
           </div>
         )}
       </div>
 
+      {/* Answer feedback status */}
       {success && (
         <div
           role="status"
-          className="mb-5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3"
+          className="mb-3 sm:mb-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3.5 py-2.5 sm:px-4 sm:py-3"
         >
-          <p className="flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-300">
-            <Check aria-hidden="true" className="h-5 w-5 text-emerald-500"/>
+          <p className="flex items-center gap-2 font-semibold text-xs sm:text-sm text-emerald-700 dark:text-emerald-300">
+            <Check aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-500 shrink-0"/>
             {model.state?.isEnglishOrder
               ? (language === "en"
                   ? "Correct! Great sequence (English word order accepted). (+1)"
                   : "Doğru! Harika dizilim (İngilizce kelime sırası kabul edildi). (+1)")
               : `${tr("correctMsg")} (+1)`}
           </p>
-          <p className="mt-1.5 text-sm text-emerald-900/80 dark:text-emerald-200/80">
+          <p className="mt-1 text-xs sm:text-sm text-emerald-900/80 dark:text-emerald-200/80">
             <span className="uppercase tracking-wide text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
               {tr("analysis")}:{" "}
             </span>
@@ -724,18 +755,24 @@ export default function MorphemeGameFable({
       {failure && (
         <div
           role="alert"
-          className="mb-5 flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 font-semibold text-rose-700 dark:text-rose-300"
+          className="mb-3 sm:mb-4 flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-semibold text-rose-700 dark:text-rose-300"
         >
-          <X aria-hidden="true" className="h-5 w-5 text-rose-500"/>
+          <X aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5 text-rose-500 shrink-0"/>
           {tr("wrongMsg")} (−1)
         </div>
       )}
 
-      <div className="mb-6">
-        <p className="mb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
-          {tr("pool")}
-        </p>
-        <div className="flex flex-wrap gap-2">
+      {/* Part Pool */}
+      <div className="mb-3 sm:mb-5">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-widest text-muted-foreground font-semibold">
+            {tr("pool")}
+          </p>
+          <span className="text-[10px] text-muted-foreground font-medium">
+            {model.availablePool.length} {language === "en" ? "parts" : "parça"}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2.5">
           {model.availablePool.map((part) => (
             <MorphemeChip
               key={part.id}
@@ -752,21 +789,24 @@ export default function MorphemeGameFable({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => dispatch({ type: "SubmitAnswer" })}
-        disabled={!isPlaying || model.selectedSequence.length === 0}
-        className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-semibold transition
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-          ${
-            isPlaying && model.selectedSequence.length > 0
-              ? "gradient-primary text-primary-foreground hover:opacity-90 active:scale-[0.99] shadow-md shadow-primary/20"
-              : "cursor-not-allowed bg-muted text-muted-foreground/60 border border-border"
-          }`}
-      >
-        <Check aria-hidden="true" className="h-5 w-5"/>
-        {tr("confirm")}
-      </button>
+      {/* Action Button (Sticky on mobile for instant reach) */}
+      <div className="sticky bottom-2 z-10 pt-2 bg-gradient-to-t from-card via-card to-transparent sm:static sm:bg-none sm:pt-0">
+        <button
+          type="button"
+          onClick={() => dispatch({ type: "SubmitAnswer" })}
+          disabled={!isPlaying || model.selectedSequence.length === 0}
+          className={`flex w-full items-center justify-center gap-2 rounded-xl py-2.5 sm:py-3 font-semibold text-sm sm:text-base transition
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-md
+            ${
+              isPlaying && model.selectedSequence.length > 0
+                ? "gradient-primary text-primary-foreground hover:opacity-90 active:scale-[0.99] shadow-primary/20 cursor-pointer"
+                : "cursor-not-allowed bg-muted text-muted-foreground/60 border border-border"
+            }`}
+        >
+          <Check aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5"/>
+          {tr("confirm")}
+        </button>
+      </div>
     </div>
   );
 }
