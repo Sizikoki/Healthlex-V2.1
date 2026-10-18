@@ -303,7 +303,7 @@ export const Flashcards = () => {
 
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <div className="min-h-screen bg-muted/30 pt-8 pb-24 sm:py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6">
@@ -379,7 +379,7 @@ export const Flashcards = () => {
         {/* Flashcard */}
         <div className="perspective-1000 mb-8">
           <Card
-            className={`relative h-[390px] sm:h-[350px] cursor-pointer transition-all duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''
+            className={`grid min-h-[390px] sm:min-h-[350px] cursor-pointer transition-all duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''
               }`}
             onClick={handleFlip}
             style={{
@@ -389,8 +389,8 @@ export const Flashcards = () => {
           >
             {/* Front */}
             <div
-              className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-5 sm:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden"
-              style={{ backfaceVisibility: 'hidden' }}
+              className="col-start-1 row-start-1 backface-hidden flex flex-col items-center justify-center p-5 sm:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden"
+              style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
             >
               <div className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4">
                 {t('term', 'Terim')}
@@ -405,9 +405,10 @@ export const Flashcards = () => {
 
             {/* Back */}
             <div
-              className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-secondary/5 to-accent/5 overflow-y-auto overscroll-contain"
+              className="col-start-1 row-start-1 backface-hidden flex flex-col items-center justify-center py-6 px-4 sm:p-6 bg-gradient-to-br from-secondary/5 to-accent/5"
               style={{
                 backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)'
               }}
             >
