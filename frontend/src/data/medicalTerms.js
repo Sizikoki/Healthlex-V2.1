@@ -10381,7 +10381,7 @@ export const medicalTermsData = {
         },
         {
             "id": 911,
-            "term": "M. Fusiformis",
+            "term": "Musculus Fusiformis",
             "english": "Fusiform Muscle",
             "turkishDefinition": "İğsi kas; ortası kalın, uçlara doğru incelen mekik biçimli kas tipi.",
             "turkishShort": "İğsi kas",
@@ -10394,7 +10394,7 @@ export const medicalTermsData = {
         },
         {
             "id": 912,
-            "term": "M. Planus",
+            "term": "Musculus Planus",
             "english": "Flat Muscle",
             "turkishDefinition": "Yassı kas; geniş ve düz, ince tabaka biçimindeki kas tipi.",
             "turkishShort": "Yassı kas",
@@ -10407,7 +10407,7 @@ export const medicalTermsData = {
         },
         {
             "id": 913,
-            "term": "M. Rectus",
+            "term": "Musculus Rectus",
             "english": "Straight Muscle",
             "turkishDefinition": "Düz kas; lifleri paralel ve düz bir eksende uzanan kas tipi.",
             "turkishShort": "Düz kas",
@@ -10420,7 +10420,7 @@ export const medicalTermsData = {
         },
         {
             "id": 914,
-            "term": "M. Triangularis",
+            "term": "Musculus Triangularis",
             "english": "Triangular Muscle",
             "turkishDefinition": "Üçgen kas; üçgen biçimindeki kas tipi.",
             "turkishShort": "Üçgen kas",
@@ -10433,7 +10433,7 @@ export const medicalTermsData = {
         },
         {
             "id": 915,
-            "term": "M. Quadratus",
+            "term": "Musculus Quadratus",
             "english": "Quadrate Muscle",
             "turkishDefinition": "Dörtgen kas; dört kenarlı, dörtgen biçimindeki kas tipi.",
             "turkishShort": "Dörtgen kas",
@@ -10446,7 +10446,7 @@ export const medicalTermsData = {
         },
         {
             "id": 916,
-            "term": "M. Biventer",
+            "term": "Musculus Biventer",
             "english": "Two-bellied Muscle",
             "turkishDefinition": "İki karınlı kas; ara tendonla ayrılan iki ayrı kas karnından oluşan kas tipi.",
             "turkishShort": "İki karınlı kas",
@@ -10459,7 +10459,7 @@ export const medicalTermsData = {
         },
         {
             "id": 917,
-            "term": "M. Biceps",
+            "term": "Musculus Biceps",
             "english": "Two-headed Muscle",
             "turkishDefinition": "İki başlı kas; iki ayrı başlangıç başından tek bir kasa birleşen kas tipi.",
             "turkishShort": "İki başlı kas",
@@ -10472,7 +10472,7 @@ export const medicalTermsData = {
         },
         {
             "id": 918,
-            "term": "M. Triceps",
+            "term": "Musculus Triceps",
             "english": "Three-headed Muscle",
             "turkishDefinition": "Üç başlı kas; üç ayrı başlangıç başından tek bir kasa birleşen kas tipi.",
             "turkishShort": "Üç başlı kas",
@@ -10485,7 +10485,7 @@ export const medicalTermsData = {
         },
         {
             "id": 919,
-            "term": "M. Quadriceps",
+            "term": "Musculus Quadriceps",
             "english": "Four-headed Muscle",
             "turkishDefinition": "Dört başlı kas; dört ayrı başlangıç başından tek bir kasa birleşen kas tipi.",
             "turkishShort": "Dört başlı kas",
@@ -10498,7 +10498,7 @@ export const medicalTermsData = {
         },
         {
             "id": 920,
-            "term": "M. Semipennatus (m. Unipennatus)",
+            "term": "Musculus Semipennatus (Musculus Unipennatus)",
             "english": "Semipennate Muscle",
             "turkishDefinition": "Yarı tüysü kas; lifleri tendonun sadece bir tarafına açılı biçimde bağlanan kas tipi.",
             "turkishShort": "Yarı tüysü kas",
@@ -10511,7 +10511,7 @@ export const medicalTermsData = {
         },
         {
             "id": 921,
-            "term": "M. Pennatus (m. Bipennatus)",
+            "term": "Musculus Pennatus (Musculus Bipennatus)",
             "english": "Pennate Muscle",
             "turkishDefinition": "Tüysü kas; lifleri merkezi tendonun her iki tarafına açılı biçimde bağlanan, tüy görünümündeki kas tipi.",
             "turkishShort": "Tüysü kas",
@@ -10524,7 +10524,7 @@ export const medicalTermsData = {
         },
         {
             "id": 922,
-            "term": "M. Multipennatus",
+            "term": "Musculus Multipennatus",
             "english": "Multipennate Muscle",
             "turkishDefinition": "Çok tüysü kas; birden fazla tendona açılı liflerle bağlanan, karmaşık tüy görünümündeki kas tipi.",
             "turkishShort": "Çok tüysü kas",
@@ -10537,7 +10537,7 @@ export const medicalTermsData = {
         },
         {
             "id": 923,
-            "term": "M. Orbicularis",
+            "term": "Musculus Orbicularis",
             "english": "Orbicular Muscle",
             "turkishDefinition": "Halkasal kas; bir açıklığı çevreleyen, halka biçimindeki kas tipi.",
             "turkishShort": "Halkasal kas",
@@ -10550,7 +10550,7 @@ export const medicalTermsData = {
         },
         {
             "id": 924,
-            "term": "M. Cutaneus",
+            "term": "Musculus Cutaneus",
             "english": "Cutaneous Muscle",
             "turkishDefinition": "Deri kası; derinin hemen altında yer alan, deriyi hareket ettiren kas tipi.",
             "turkishShort": "Deri kası",
@@ -10563,7 +10563,7 @@ export const medicalTermsData = {
         },
         {
             "id": 925,
-            "term": "M. Abductor",
+            "term": "Musculus Abductor",
             "english": "Abductor Muscle",
             "turkishDefinition": "Uzaklaştırıcı kas; bir uzvu vücudun orta hattından uzaklaştıran kas tipi.",
             "turkishShort": "Uzaklaştırıcı kas",
@@ -10576,7 +10576,7 @@ export const medicalTermsData = {
         },
         {
             "id": 926,
-            "term": "M. Adductor",
+            "term": "Musculus Adductor",
             "english": "Adductor Muscle",
             "turkishDefinition": "Yaklaştırıcı kas; bir uzvu vücudun orta hattına yaklaştıran kas tipi.",
             "turkishShort": "Yaklaştırıcı kas",
@@ -10589,7 +10589,7 @@ export const medicalTermsData = {
         },
         {
             "id": 927,
-            "term": "M. Rotator",
+            "term": "Musculus Rotator",
             "english": "Rotator Muscle",
             "turkishDefinition": "Döndürücü kas; bir kemiği ekseni etrafında döndüren kas tipi.",
             "turkishShort": "Döndürücü kas",
@@ -10602,7 +10602,7 @@ export const medicalTermsData = {
         },
         {
             "id": 928,
-            "term": "M. Flexor",
+            "term": "Musculus Flexor",
             "english": "Flexor Muscle",
             "turkishDefinition": "Bükücü kas; bir eklemi büken, açıyı küçülten kas tipi.",
             "turkishShort": "Bükücü kas",
@@ -10615,7 +10615,7 @@ export const medicalTermsData = {
         },
         {
             "id": 929,
-            "term": "M. Extensor",
+            "term": "Musculus Extensor",
             "english": "Extensor Muscle",
             "turkishDefinition": "Gerici kas; bir eklemi açan, açıyı büyüten kas tipi.",
             "turkishShort": "Gerici kas",
@@ -10628,7 +10628,7 @@ export const medicalTermsData = {
         },
         {
             "id": 930,
-            "term": "M. Pronator",
+            "term": "Musculus Pronator",
             "english": "Pronator Muscle",
             "turkishDefinition": "İçe döndürücü kas; ön kolu içe (avuç içi aşağı bakacak şekilde) döndüren kas tipi.",
             "turkishShort": "İçe döndürücü kas",
@@ -10641,7 +10641,7 @@ export const medicalTermsData = {
         },
         {
             "id": 932,
-            "term": "M. Opponens",
+            "term": "Musculus Opponens",
             "english": "Opponens Muscle",
             "turkishDefinition": "Karşı koydurucu kas; başparmağı diğer parmaklarla karşı karşıya getiren kas tipi.",
             "turkishShort": "Karşı koydurucu kas",
@@ -10654,7 +10654,7 @@ export const medicalTermsData = {
         },
         {
             "id": 933,
-            "term": "M. Sphincter",
+            "term": "Musculus Sphincter",
             "english": "Sphincter Muscle",
             "turkishDefinition": "Büzücü kas; bir vücut açıklığını halka biçiminde sararak kapatan kas tipi.",
             "turkishShort": "Büzücü kas",
@@ -10667,7 +10667,7 @@ export const medicalTermsData = {
         },
         {
             "id": 934,
-            "term": "M. Dilatator",
+            "term": "Musculus Dilatator",
             "english": "Dilator Muscle",
             "turkishDefinition": "Genişletici kas; bir vücut açıklığını genişleten kas tipi.",
             "turkishShort": "Genişletici kas",
@@ -11487,7 +11487,7 @@ export const medicalTermsData = {
     
         {
             "id": 829,
-            "term": "M. Epicranius",
+            "term": "Musculus Epicranius",
             "english": "Epicranius Muscle",
             "turkishDefinition": "Kafatası kası; kafatası derisini hareket ettiren, alın ve artkafa karınlarıyla galea aponörotikadan oluşan kas grubu.",
             "turkishShort": "Kafatası kası",
@@ -11499,7 +11499,7 @@ export const medicalTermsData = {
         },
         {
             "id": 830,
-            "term": "M. Occipitofrontalis",
+            "term": "Musculus Occipitofrontalis",
             "english": "Occipitofrontalis Muscle",
             "turkishDefinition": "Artkafa-alın kası; kaşları kaldıran ve alın derisini kırıştıran, artkafa ve alın karınlarından oluşan kas.",
             "turkishShort": "Artkafa-alın kası",
@@ -11535,7 +11535,7 @@ export const medicalTermsData = {
         },
         {
             "id": 833,
-            "term": "M. Temporoparietalis",
+            "term": "Musculus Temporoparietalis",
             "english": "Temporoparietal Muscle",
             "turkishDefinition": "Şakak-duvar kemiği kası; kulak üstü deriyi gerdiren ince kas.",
             "turkishShort": "Şakak-duvar kemiği kası",
@@ -11559,7 +11559,7 @@ export const medicalTermsData = {
         },
         {
             "id": 835,
-            "term": "M. Procerus",
+            "term": "Musculus Procerus",
             "english": "Procerus Muscle",
             "turkishDefinition": "Burun kökü kası; kaşlar arasındaki deriyi aşağı çeken, burun kökünde enine kırışıklık oluşturan kas.",
             "turkishShort": "Burun kökü kası",
@@ -11571,7 +11571,7 @@ export const medicalTermsData = {
         },
         {
             "id": 836,
-            "term": "M. Nasalis",
+            "term": "Musculus Nasalis",
             "english": "Nasalis Muscle",
             "turkishDefinition": "Burun kası; burun deliklerini sıkıştıran ve genişleten kas.",
             "turkishShort": "Burun kası",
@@ -11583,7 +11583,7 @@ export const medicalTermsData = {
         },
         {
             "id": 837,
-            "term": "Pars Transversa (M. Nasalis)",
+            "term": "Pars Transversa (Musculus Nasalis)",
             "english": "Transverse Part",
             "turkishDefinition": "Enine parça; burun kasının burun deliklerini sıkıştıran enine lifleri.",
             "turkishShort": "Enine parça",
@@ -11595,7 +11595,7 @@ export const medicalTermsData = {
         },
         {
             "id": 838,
-            "term": "Pars Alaris (M. Nasalis)",
+            "term": "Pars Alaris (Musculus Nasalis)",
             "english": "Alar Part",
             "turkishDefinition": "Kanat parçası; burun kasının burun kanadını genişleten lifleri.",
             "turkishShort": "Kanat parçası",
@@ -11607,7 +11607,7 @@ export const medicalTermsData = {
         },
         {
             "id": 839,
-            "term": "M. Depressor Septi Nasi",
+            "term": "Musculus Depressor Septi Nasi",
             "english": "Depressor Septi Nasi Muscle",
             "turkishDefinition": "Burun bölmesi indirici kası; burun ucunu ve bölmesini aşağı çeken küçük kas.",
             "turkishShort": "Burun bölmesi indirici kası",
@@ -11619,7 +11619,7 @@ export const medicalTermsData = {
         },
         {
             "id": 840,
-            "term": "M. Orbicularis Oculi",
+            "term": "Musculus Orbicularis Oculi",
             "english": "Orbicularis Oculi Muscle",
             "turkishDefinition": "Göz çevresi halka kası; göz kapaklarını kapatan, göz çevresini saran halka biçimli kas.",
             "turkishShort": "Göz çevresi halka kası",
@@ -11631,7 +11631,7 @@ export const medicalTermsData = {
         },
         {
             "id": 841,
-            "term": "Pars Palpebralis (M. Orbicularis Oculi)",
+            "term": "Pars Palpebralis (Musculus Orbicularis Oculi)",
             "english": "Palpebral Part",
             "turkishDefinition": "Göz kapağı parçası; göz kapağı içinde yer alan, göz kapaklarını nazikçe kapatan lifler.",
             "turkishShort": "Göz kapağı parçası",
@@ -11655,7 +11655,7 @@ export const medicalTermsData = {
         },
         {
             "id": 843,
-            "term": "Pars Profunda (M. Orbicularis Oculi)",
+            "term": "Pars Profunda (Musculus Orbicularis Oculi)",
             "english": "Deep Part",
             "turkishDefinition": "Derin parça; göz kapağı kasının gözyaşı kesesini çevreleyen derin lifleri.",
             "turkishShort": "Derin parça",
@@ -11667,7 +11667,7 @@ export const medicalTermsData = {
         },
         {
             "id": 844,
-            "term": "Pars Orbitalis (M. Orbicularis Oculi)",
+            "term": "Pars Orbitalis (Musculus Orbicularis Oculi)",
             "english": "Orbital Part",
             "turkishDefinition": "Göz çukuru parçası; göz yuvası çevresini saran, göz kapaklarını sıkıca kapatan dış lifler.",
             "turkishShort": "Göz çukuru parçası",
@@ -11679,7 +11679,7 @@ export const medicalTermsData = {
         },
         {
             "id": 845,
-            "term": "M. Corrugator Supercilii",
+            "term": "Musculus Corrugator Supercilii",
             "english": "Corrugator Supercilii Muscle",
             "turkishDefinition": "Kaş kırıştırıcı kas; kaşları içe ve aşağı çekerek dikey kırışıklık oluşturan kas.",
             "turkishShort": "Kaş kırıştırıcı kas",
@@ -11691,7 +11691,7 @@ export const medicalTermsData = {
         },
         {
             "id": 846,
-            "term": "M. Depressor Supercilii",
+            "term": "Musculus Depressor Supercilii",
             "english": "Depressor Supercilii Muscle",
             "turkishDefinition": "Kaş indirici kas; kaşın iç kısmını aşağı çeken küçük kas.",
             "turkishShort": "Kaş indirici kas",
@@ -11703,7 +11703,7 @@ export const medicalTermsData = {
         },
         {
             "id": 847,
-            "term": "M. Auricularis Anterior",
+            "term": "Musculus Auricularis Anterior",
             "english": "Anterior Auricular Muscle",
             "turkishDefinition": "Ön kulak kası; kulak kepçesini öne doğru çeken küçük kas.",
             "turkishShort": "Ön kulak kası",
@@ -11715,7 +11715,7 @@ export const medicalTermsData = {
         },
         {
             "id": 848,
-            "term": "M. Auricularis Superior",
+            "term": "Musculus Auricularis Superior",
             "english": "Superior Auricular Muscle",
             "turkishDefinition": "Üst kulak kası; kulak kepçesini yukarı doğru çeken küçük kas.",
             "turkishShort": "Üst kulak kası",
@@ -11727,7 +11727,7 @@ export const medicalTermsData = {
         },
         {
             "id": 849,
-            "term": "M. Auricularis Posterior",
+            "term": "Musculus Auricularis Posterior",
             "english": "Posterior Auricular Muscle",
             "turkishDefinition": "Arka kulak kası; kulak kepçesini geriye doğru çeken küçük kas.",
             "turkishShort": "Arka kulak kası",
@@ -11739,7 +11739,7 @@ export const medicalTermsData = {
         },
         {
             "id": 850,
-            "term": "M. Orbicularis Oris",
+            "term": "Musculus Orbicularis Oris",
             "english": "Orbicularis Oris Muscle",
             "turkishDefinition": "Ağız çevresi halka kası; dudakları kapatan ve büzen, ağız çevresini saran halka biçimli kas.",
             "turkishShort": "Ağız çevresi halka kası",
@@ -11751,7 +11751,7 @@ export const medicalTermsData = {
         },
         {
             "id": 851,
-            "term": "Pars Marginalis (M. Orbicularis Oris)",
+            "term": "Pars Marginalis (Musculus Orbicularis Oris)",
             "english": "Marginal Part",
             "turkishDefinition": "Kenar parçası; dudak kenarındaki ince, yüzeyel lifler.",
             "turkishShort": "Kenar parçası",
@@ -11763,7 +11763,7 @@ export const medicalTermsData = {
         },
         {
             "id": 852,
-            "term": "Pars Labialis (M. Orbicularis Oris)",
+            "term": "Pars Labialis (Musculus Orbicularis Oris)",
             "english": "Labial Part",
             "turkishDefinition": "Dudak parçası; dudak içindeki derin, ağzı sıkıca kapatan lifler.",
             "turkishShort": "Dudak parçası",
@@ -11775,7 +11775,7 @@ export const medicalTermsData = {
         },
         {
             "id": 853,
-            "term": "M. Depressor Anguli Oris",
+            "term": "Musculus Depressor Anguli Oris",
             "english": "Depressor Anguli Oris Muscle",
             "turkishDefinition": "Ağız köşesi indirici kas; ağız köşesini aşağı çeken, üzgün ifade oluşturan kas.",
             "turkishShort": "Ağız köşesi indirici kas",
@@ -11787,7 +11787,7 @@ export const medicalTermsData = {
         },
         {
             "id": 854,
-            "term": "M. Transversus Menti",
+            "term": "Musculus Transversus Menti",
             "english": "Transversus Menti Muscle",
             "turkishDefinition": "Çene enine kası; çene ucunda, depressor anguli oris kasının liflerinin birleştiği küçük enine kas.",
             "turkishShort": "Çene enine kası",
@@ -11799,7 +11799,7 @@ export const medicalTermsData = {
         },
         {
             "id": 855,
-            "term": "M. Risorius",
+            "term": "Musculus Risorius",
             "english": "Risorius Muscle",
             "turkishDefinition": "Gülümseme kası; ağız köşesini yana çekerek gülümseme veya sırıtma ifadesi oluşturan ince kas.",
             "turkishShort": "Gülümseme kası",
@@ -11811,7 +11811,7 @@ export const medicalTermsData = {
         },
         {
             "id": 856,
-            "term": "M. Zygomaticus Major",
+            "term": "Musculus Zygomaticus Major",
             "english": "Zygomaticus Major Muscle",
             "turkishDefinition": "Büyük elmacık kası; ağız köşesini yukarı ve dışa çekerek gülümsemeyi sağlayan kas.",
             "turkishShort": "Büyük elmacık kası",
@@ -11823,7 +11823,7 @@ export const medicalTermsData = {
         },
         {
             "id": 857,
-            "term": "M. Zygomaticus Minor",
+            "term": "Musculus Zygomaticus Minor",
             "english": "Zygomaticus Minor Muscle",
             "turkishDefinition": "Küçük elmacık kası; üst dudağı yukarı çeken, burun-dudak oluğunu derinleştiren kas.",
             "turkishShort": "Küçük elmacık kası",
@@ -11835,7 +11835,7 @@ export const medicalTermsData = {
         },
         {
             "id": 858,
-            "term": "M. Levator Labii Superioris",
+            "term": "Musculus Levator Labii Superioris",
             "english": "Levator Labii Superioris Muscle",
             "turkishDefinition": "Üst dudak kaldırıcı kas; üst dudağı yukarı kaldıran kas.",
             "turkishShort": "Üst dudak kaldırıcı kas",
@@ -11847,7 +11847,7 @@ export const medicalTermsData = {
         },
         {
             "id": 859,
-            "term": "M. Levator Labii Superioris Alaeque Nasi",
+            "term": "Musculus Levator Labii Superioris Alaeque Nasi",
             "english": "Levator Labii Superioris Alaeque Nasi Muscle",
             "turkishDefinition": "Üst dudak ve burun kanadı kaldırıcı kas; hem üst dudağı hem burun kanadını yukarı kaldıran kas.",
             "turkishShort": "Üst dudak ve burun kanadı kaldırıcı kas",
@@ -11859,7 +11859,7 @@ export const medicalTermsData = {
         },
         {
             "id": 860,
-            "term": "M. Depressor Labii Inferioris",
+            "term": "Musculus Depressor Labii Inferioris",
             "english": "Depressor Labii Inferioris Muscle",
             "turkishDefinition": "Alt dudak indirici kas; alt dudağı aşağı ve dışa çeken kas.",
             "turkishShort": "Alt dudak indirici kas",
@@ -11871,7 +11871,7 @@ export const medicalTermsData = {
         },
         {
             "id": 861,
-            "term": "M. Levator Anguli Oris",
+            "term": "Musculus Levator Anguli Oris",
             "english": "Levator Anguli Oris Muscle",
             "turkishDefinition": "Ağız köşesi kaldırıcı kas; ağız köşesini yukarı kaldıran kas.",
             "turkishShort": "Ağız köşesi kaldırıcı kas",
@@ -11895,7 +11895,7 @@ export const medicalTermsData = {
         },
         {
             "id": 863,
-            "term": "M. Buccinator",
+            "term": "Musculus Buccinator",
             "english": "Buccinator Muscle",
             "turkishDefinition": "Yanak kası; yanağı kemiğe bastıran, üfleme ve çiğnemeye yardımcı olan düz kas.",
             "turkishShort": "Yanak kası",
@@ -11907,7 +11907,7 @@ export const medicalTermsData = {
         },
         {
             "id": 864,
-            "term": "M. Mentalis",
+            "term": "Musculus Mentalis",
             "english": "Mentalis Muscle",
             "turkishDefinition": "Çene kası; çene derisini yukarı iterek alt dudağı dışa çıkaran kas.",
             "turkishShort": "Çene kası",
@@ -11919,7 +11919,7 @@ export const medicalTermsData = {
         },
         {
             "id": 865,
-            "term": "M. Masseter",
+            "term": "Musculus Masseter",
             "english": "Masseter Muscle",
             "turkishDefinition": "Çiğneme kası; alt çeneyi kaldırıp öne iterek çiğnemeyi sağlayan güçlü kas.",
             "turkishShort": "Çiğneme kası",
@@ -11931,7 +11931,7 @@ export const medicalTermsData = {
         },
         {
             "id": 866,
-            "term": "Pars Superficialis (M. Masseter)",
+            "term": "Pars Superficialis (Musculus Masseter)",
             "english": "Superficial Part",
             "turkishDefinition": "Yüzeyel parça; masseter kasının elmacık kemiğinden başlayan yüzeyel lifleri.",
             "turkishShort": "Yüzeyel parça",
@@ -11943,7 +11943,7 @@ export const medicalTermsData = {
         },
         {
             "id": 867,
-            "term": "M. Temporalis",
+            "term": "Musculus Temporalis",
             "english": "Temporalis Muscle",
             "turkishDefinition": "Şakak kası; şakak çukurundan başlayıp alt çeneyi kaldıran yelpaze biçimli kas.",
             "turkishShort": "Şakak kası",
@@ -11955,7 +11955,7 @@ export const medicalTermsData = {
         },
         {
             "id": 868,
-            "term": "M. Pterygoideus Lateralis",
+            "term": "Musculus Pterygoideus Lateralis",
             "english": "Lateral Pterygoid Muscle",
             "turkishDefinition": "Dış kanat kası; alt çeneyi öne ve yana hareket ettiren kas.",
             "turkishShort": "Dış kanat kası",
@@ -11967,7 +11967,7 @@ export const medicalTermsData = {
         },
         {
             "id": 869,
-            "term": "Caput Superius (M. Pterygoideus Lateralis)",
+            "term": "Caput Superius (Musculus Pterygoideus Lateralis)",
             "english": "Superior Head",
             "turkishDefinition": "Üst baş; dış kanat kasının sfenoid kemiğin büyük kanadından başlayan üst kısmı.",
             "turkishShort": "Üst baş",
@@ -11979,7 +11979,7 @@ export const medicalTermsData = {
         },
         {
             "id": 870,
-            "term": "Caput Inferius (M. Pterygoideus Lateralis)",
+            "term": "Caput Inferius (Musculus Pterygoideus Lateralis)",
             "english": "Inferior Head",
             "turkishDefinition": "Alt baş; dış kanat kasının kanatsı çıkıntıdan başlayan alt kısmı.",
             "turkishShort": "Alt baş",
@@ -11991,7 +11991,7 @@ export const medicalTermsData = {
         },
         {
             "id": 871,
-            "term": "M. Pterygoideus Medialis",
+            "term": "Musculus Pterygoideus Medialis",
             "english": "Medial Pterygoid Muscle",
             "turkishDefinition": "İç kanat kası; alt çeneyi kaldırıp öne iten kas.",
             "turkishShort": "İç kanat kası",
@@ -12063,7 +12063,7 @@ export const medicalTermsData = {
         },
         {
             "id": 877,
-            "term": "M. Longus Capitis",
+            "term": "Musculus Longus Capitis",
             "english": "Longus Capitis Muscle",
             "turkishDefinition": "Uzun baş kası; boyun omurlarından başlayıp başı öne eğen uzun kas.",
             "turkishShort": "Uzun baş kası",
@@ -12075,7 +12075,7 @@ export const medicalTermsData = {
         },
         {
             "id": 878,
-            "term": "M. Longus Colli",
+            "term": "Musculus Longus Colli",
             "english": "Longus Colli Muscle",
             "turkishDefinition": "Uzun boyun kası; boyun omurgasını öne eğen ve stabilize eden uzun kas.",
             "turkishShort": "Uzun boyun kası",
@@ -12087,7 +12087,7 @@ export const medicalTermsData = {
         },
         {
             "id": 879,
-            "term": "M. Scalenus Anterior",
+            "term": "Musculus Scalenus Anterior",
             "english": "Anterior Scalene Muscle",
             "turkishDefinition": "Ön merdiven kası; boynun yan tarafında yer alan, 1. kaburgayı kaldıran kas.",
             "turkishShort": "Ön merdiven kası",
@@ -12099,7 +12099,7 @@ export const medicalTermsData = {
         },
         {
             "id": 880,
-            "term": "M. Scalenus Medius",
+            "term": "Musculus Scalenus Medius",
             "english": "Middle Scalene Muscle",
             "turkishDefinition": "Orta merdiven kası; boynun yan tarafında yer alan, 1. kaburgayı kaldıran en uzun merdiven kası.",
             "turkishShort": "Orta merdiven kası",
@@ -12111,7 +12111,7 @@ export const medicalTermsData = {
         },
         {
             "id": 881,
-            "term": "M. Scalenus Posterior",
+            "term": "Musculus Scalenus Posterior",
             "english": "Posterior Scalene Muscle",
             "turkishDefinition": "Arka merdiven kası; boynun yan tarafında yer alan, 2. kaburgayı kaldıran kas.",
             "turkishShort": "Arka merdiven kası",
@@ -12123,7 +12123,7 @@ export const medicalTermsData = {
         },
         {
             "id": 882,
-            "term": "M. Scalenus Minimus",
+            "term": "Musculus Scalenus Minimus",
             "english": "Smallest Scalene Muscle",
             "turkishDefinition": "En küçük merdiven kası; sabit olmayan, bazı kişilerde bulunan küçük merdiven kası.",
             "turkishShort": "En küçük merdiven kası",
@@ -12135,7 +12135,7 @@ export const medicalTermsData = {
         },
         {
             "id": 883,
-            "term": "M. Sternocleidomastoideus",
+            "term": "Musculus Sternocleidomastoideus",
             "english": "Sternocleidomastoid Muscle",
             "turkishDefinition": "Göğüs kemiği-köprücük-meme çıkıntısı kası; başı döndüren ve öne eğen, boyunda belirgin görünen büyük kas.",
             "turkishShort": "Göğüs kemiği-köprücük-meme çıkıntısı kası",
@@ -12147,7 +12147,7 @@ export const medicalTermsData = {
         },
         {
             "id": 884,
-            "term": "M. Rectus Capitis Anterior",
+            "term": "Musculus Rectus Capitis Anterior",
             "english": "Rectus Capitis Anterior Muscle",
             "turkishDefinition": "Ön düz baş kası; başı öne eğen küçük suboksipital kas.",
             "turkishShort": "Ön düz baş kası",
@@ -12159,7 +12159,7 @@ export const medicalTermsData = {
         },
         {
             "id": 885,
-            "term": "M. Rectus Capitis Lateralis",
+            "term": "Musculus Rectus Capitis Lateralis",
             "english": "Rectus Capitis Lateralis Muscle",
             "turkishDefinition": "Yan düz baş kası; başı yana eğen küçük suboksipital kas.",
             "turkishShort": "Yan düz baş kası",
@@ -12171,7 +12171,7 @@ export const medicalTermsData = {
         },
         {
             "id": 886,
-            "term": "M. Rectus Capitis Posterior Major",
+            "term": "Musculus Rectus Capitis Posterior Major",
             "english": "Rectus Capitis Posterior Major Muscle",
             "turkishDefinition": "Büyük arka düz baş kası; başı geriye uzatan ve döndüren suboksipital kas.",
             "turkishShort": "Büyük arka düz baş kası",
@@ -12183,7 +12183,7 @@ export const medicalTermsData = {
         },
         {
             "id": 887,
-            "term": "M. Rectus Capitis Posterior Minor",
+            "term": "Musculus Rectus Capitis Posterior Minor",
             "english": "Rectus Capitis Posterior Minor Muscle",
             "turkishDefinition": "Küçük arka düz baş kası; başı geriye uzatan küçük suboksipital kas.",
             "turkishShort": "Küçük arka düz baş kası",
@@ -12195,7 +12195,7 @@ export const medicalTermsData = {
         },
         {
             "id": 888,
-            "term": "M. Obliquus Capitis Superior",
+            "term": "Musculus Obliquus Capitis Superior",
             "english": "Superior Oblique Muscle of Head",
             "turkishDefinition": "Üst eğik baş kası; başı yana eğen ve geriye uzatan suboksipital kas.",
             "turkishShort": "Üst eğik baş kası",
@@ -12207,7 +12207,7 @@ export const medicalTermsData = {
         },
         {
             "id": 889,
-            "term": "M. Obliquus Capitis Inferior",
+            "term": "Musculus Obliquus Capitis Inferior",
             "english": "Inferior Oblique Muscle of Head",
             "turkishDefinition": "Alt eğik baş kası; başı döndüren suboksipital kas.",
             "turkishShort": "Alt eğik baş kası",
@@ -12219,7 +12219,7 @@ export const medicalTermsData = {
         },
         {
             "id": 890,
-            "term": "M. Digastricus",
+            "term": "Musculus Digastricus",
             "english": "Digastric Muscle",
             "turkishDefinition": "Çift karınlı kas; alt çeneyi indiren ve dil kemiğini kaldıran, iki karınlı kas.",
             "turkishShort": "Çift karınlı kas",
@@ -12231,7 +12231,7 @@ export const medicalTermsData = {
         },
         {
             "id": 891,
-            "term": "M. Stylohyoideus",
+            "term": "Musculus Stylohyoideus",
             "english": "Stylohyoid Muscle",
             "turkishDefinition": "Sivri çıkıntı-dil kemiği kası; dil kemiğini yukarı ve geriye çeken kas.",
             "turkishShort": "Sivri çıkıntı-dil kemiği kası",
@@ -12243,7 +12243,7 @@ export const medicalTermsData = {
         },
         {
             "id": 892,
-            "term": "M. Mylohyoideus",
+            "term": "Musculus Mylohyoideus",
             "english": "Mylohyoid Muscle",
             "turkishDefinition": "Değirmen-dil kemiği kası; ağız tabanını oluşturan, dil kemiğini kaldıran kas.",
             "turkishShort": "Değirmen-dil kemiği kası",
@@ -12255,7 +12255,7 @@ export const medicalTermsData = {
         },
         {
             "id": 893,
-            "term": "M. Geniohyoideus",
+            "term": "Musculus Geniohyoideus",
             "english": "Geniohyoid Muscle",
             "turkishDefinition": "Çene ucu-dil kemiği kası; dil kemiğini öne çeken kas.",
             "turkishShort": "Çene ucu-dil kemiği kası",
@@ -12267,7 +12267,7 @@ export const medicalTermsData = {
         },
         {
             "id": 894,
-            "term": "M. Sternohyoideus",
+            "term": "Musculus Sternohyoideus",
             "english": "Sternohyoid Muscle",
             "turkishDefinition": "Göğüs kemiği-dil kemiği kası; dil kemiğini aşağı çeken kas.",
             "turkishShort": "Göğüs kemiği-dil kemiği kası",
@@ -12279,7 +12279,7 @@ export const medicalTermsData = {
         },
         {
             "id": 895,
-            "term": "M. Omohyoideus",
+            "term": "Musculus Omohyoideus",
             "english": "Omohyoid Muscle",
             "turkishDefinition": "Kürek kemiği-dil kemiği kası; dil kemiğini aşağı çeken, iki karınlı kas.",
             "turkishShort": "Kürek kemiği-dil kemiği kası",
@@ -12291,7 +12291,7 @@ export const medicalTermsData = {
         },
         {
             "id": 896,
-            "term": "M. Sternothyreoideus",
+            "term": "Musculus Sternothyreoideus",
             "english": "Sternothyroid Muscle",
             "turkishDefinition": "Göğüs kemiği-tiroid kıkırdağı kası; gırtlağı aşağı çeken kas.",
             "turkishShort": "Göğüs kemiği-tiroid kıkırdağı kası",
@@ -12303,7 +12303,7 @@ export const medicalTermsData = {
         },
         {
             "id": 897,
-            "term": "M. Thyrohyoideus",
+            "term": "Musculus Thyrohyoideus",
             "english": "Thyrohyoid Muscle",
             "turkishDefinition": "Tiroid kıkırdağı-dil kemiği kası; gırtlağı yukarı, dil kemiğini aşağı çeken kas.",
             "turkishShort": "Tiroid kıkırdağı-dil kemiği kası",
@@ -12387,7 +12387,7 @@ export const medicalTermsData = {
         },
         {
             "id": 904,
-            "term": "M. Splenius Capitis",
+            "term": "Musculus Splenius Capitis",
             "english": "Splenius Capitis Muscle",
             "turkishDefinition": "Baş sargı kası; başı döndüren ve geriye uzatan geniş ense kası.",
             "turkishShort": "Baş sargı kası",
@@ -12399,9 +12399,9 @@ export const medicalTermsData = {
         },
         {
             "id": 905,
-            "term": "M. Splenius Colli",
+            "term": "Musculus Splenius Colli",
             "english": "Splenius Colli Muscle",
-            "turkishDefinition": "Boyun sargı kası; boyun omurgasını döndüren ve geriye uzatan ense kası. (TA2 resmi adı: M. Splenius Cervicis).",
+            "turkishDefinition": "Boyun sargı kası; boyun omurgasını döndüren ve geriye uzatan ense kası. (TA2 resmi adı: Musculus Splenius Cervicis).",
             "turkishShort": "Boyun sargı kası",
             "roots": "splenius (sargı/bandaj) + collum (boyun)",
             "category": "anatomy",
@@ -12412,7 +12412,7 @@ export const medicalTermsData = {
     ,
         {
             "id": 1062,
-            "term": "Venter Anterior (m. Digastricus)",
+            "term": "Venter Anterior (Musculus Digastricus)",
             "english": "Anterior Belly",
             "turkishDefinition": "Ön karın; digastrik kasın alt çeneden dil kemiğine uzanan ön kısmı.",
             "turkishShort": "Ön karın",
@@ -12425,7 +12425,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1063,
-            "term": "Venter Posterior (m. Digastricus)",
+            "term": "Venter Posterior (Musculus Digastricus)",
             "english": "Posterior Belly",
             "turkishDefinition": "Arka karın; digastrik kasın şakak kemiğinden dil kemiğine uzanan arka kısmı.",
             "turkishShort": "Arka karın",
@@ -12438,7 +12438,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1064,
-            "term": "Venter Superior (m. Omohyoideus)",
+            "term": "Venter Superior (Musculus Omohyoideus)",
             "english": "Superior Belly",
             "turkishDefinition": "Üst karın; omohiyoid kasın dil kemiğine uzanan üst kısmı.",
             "turkishShort": "Üst karın",
@@ -12451,7 +12451,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1065,
-            "term": "Venter Inferior (m. Omohyoideus)",
+            "term": "Venter Inferior (Musculus Omohyoideus)",
             "english": "Inferior Belly",
             "turkishDefinition": "Alt karın; omohiyoid kasın kürek kemiğine uzanan alt kısmı.",
             "turkishShort": "Alt karın",
@@ -12467,7 +12467,7 @@ export const medicalTermsData = {
     
         {
             "id": 956,
-            "term": "Pars Descendens (m. Trapezius)",
+            "term": "Pars Descendens (Musculus Trapezius)",
             "english": "Descending Part",
             "turkishDefinition": "İnen parça; trapez kasının omuz kemiğini yukarı kaldıran üst lifleri.",
             "turkishShort": "İnen parça",
@@ -12480,7 +12480,7 @@ export const medicalTermsData = {
         },
         {
             "id": 957,
-            "term": "Pars Transversa (m. Trapezius)",
+            "term": "Pars Transversa (Musculus Trapezius)",
             "english": "Transverse Part",
             "turkishDefinition": "Enine parça; trapez kasının kürek kemiğini omurgaya yaklaştıran orta lifleri.",
             "turkishShort": "Enine parça",
@@ -12493,7 +12493,7 @@ export const medicalTermsData = {
         },
         {
             "id": 958,
-            "term": "Pars Ascendens (m. Trapezius)",
+            "term": "Pars Ascendens (Musculus Trapezius)",
             "english": "Ascending Part",
             "turkishDefinition": "Yükselen parça; trapez kasının kürek kemiğini aşağı çeken alt lifleri.",
             "turkishShort": "Yükselen parça",
@@ -12506,7 +12506,7 @@ export const medicalTermsData = {
         },
         {
             "id": 959,
-            "term": "M. Serratus Posterior Inferior",
+            "term": "Musculus Serratus Posterior Inferior",
             "english": "Serratus Posterior Inferior Muscle",
             "turkishDefinition": "Arka alt testere kası; alt kaburgaları aşağı ve dışa çeken sırt kası.",
             "turkishShort": "Arka alt testere kası",
@@ -12519,7 +12519,7 @@ export const medicalTermsData = {
         },
         {
             "id": 960,
-            "term": "M. Serratus Posterior Superior",
+            "term": "Musculus Serratus Posterior Superior",
             "english": "Serratus Posterior Superior Muscle",
             "turkishDefinition": "Arka üst testere kası; üst kaburgaları kaldıran sırt kası.",
             "turkishShort": "Arka üst testere kası",
@@ -12532,7 +12532,7 @@ export const medicalTermsData = {
         },
         {
             "id": 961,
-            "term": "M. Erector Spinae",
+            "term": "Musculus Erector Spinae",
             "english": "Erector Spinae Muscle",
             "turkishDefinition": "Omurga dikleştirici kas; omurgayı dik tutan ve geriye uzatan, birçok alt kastan oluşan büyük kas grubu.",
             "turkishShort": "Omurga dikleştirici kas",
@@ -12545,7 +12545,7 @@ export const medicalTermsData = {
         },
         {
             "id": 962,
-            "term": "M. Iliocostalis",
+            "term": "Musculus Iliocostalis",
             "english": "Iliocostalis Muscle",
             "turkishDefinition": "Kalça-kaburga kası; erector spinae'nin en dışta yer alan, kalça kemiğinden kaburgalara uzanan parçası.",
             "turkishShort": "Kalça-kaburga kası",
@@ -12558,7 +12558,7 @@ export const medicalTermsData = {
         },
         {
             "id": 963,
-            "term": "M. Longissimus",
+            "term": "Musculus Longissimus",
             "english": "Longissimus Muscle",
             "turkishDefinition": "En uzun sırt kası; erector spinae'nin orta, en uzun parçası.",
             "turkishShort": "En uzun sırt kası",
@@ -12571,7 +12571,7 @@ export const medicalTermsData = {
         },
         {
             "id": 964,
-            "term": "M. Spinalis",
+            "term": "Musculus Spinalis",
             "english": "Spinalis Muscle",
             "turkishDefinition": "Diken çıkıntı kası; erector spinae'nin en içte, omurga diken çıkıntılarına en yakın parçası.",
             "turkishShort": "Diken çıkıntı kası",
@@ -12597,7 +12597,7 @@ export const medicalTermsData = {
         },
         {
             "id": 966,
-            "term": "M. Semispinalis Capitis",
+            "term": "Musculus Semispinalis Capitis",
             "english": "Semispinalis Capitis Muscle",
             "turkishDefinition": "Yarım diken baş kası; başı geriye uzatan derin ense kası.",
             "turkishShort": "Yarım diken baş kası",
@@ -12636,7 +12636,7 @@ export const medicalTermsData = {
         },
         {
             "id": 969,
-            "term": "Pars Clavicularis (m. Pectoralis Major)",
+            "term": "Pars Clavicularis (Musculus Pectoralis Major)",
             "english": "Clavicular Head",
             "turkishDefinition": "Köprücük kemiği başı; büyük göğüs kasının köprücük kemiğinden başlayan üst lifleri.",
             "turkishShort": "Köprücük kemiği başı",
@@ -12649,7 +12649,7 @@ export const medicalTermsData = {
         },
         {
             "id": 970,
-            "term": "Pars Sternocostalis (m. Pectoralis Major)",
+            "term": "Pars Sternocostalis (Musculus Pectoralis Major)",
             "english": "Sternocostal Head",
             "turkishDefinition": "Göğüs kafesi başı; büyük göğüs kasının göğüs kemiği ve kaburgalardan başlayan orta lifleri.",
             "turkishShort": "Göğüs kafesi başı",
@@ -12662,7 +12662,7 @@ export const medicalTermsData = {
         },
         {
             "id": 971,
-            "term": "Pars Abdominalis (m. Pectoralis Major)",
+            "term": "Pars Abdominalis (Musculus Pectoralis Major)",
             "english": "Abdominal Part",
             "turkishDefinition": "Karın parçası; büyük göğüs kasının karın kaslarının kılıfından başlayan alt lifleri.",
             "turkishShort": "Karın parçası",
@@ -12675,7 +12675,7 @@ export const medicalTermsData = {
         },
         {
             "id": 972,
-            "term": "M. Subclavius",
+            "term": "Musculus Subclavius",
             "english": "Subclavius Muscle",
             "turkishDefinition": "Köprücük kemiği altı kası; köprücük kemiğini aşağı çeken ve stabilize eden küçük kas.",
             "turkishShort": "Köprücük kemiği altı kası",
@@ -12753,7 +12753,7 @@ export const medicalTermsData = {
         },
         {
             "id": 978,
-            "term": "M. Transversus Thoracis",
+            "term": "Musculus Transversus Thoracis",
             "english": "Transversus Thoracis Muscle",
             "turkishDefinition": "Enine göğüs kası; göğüs kemiğinin iç yüzünden kaburgalara uzanan ince kas.",
             "turkishShort": "Enine göğüs kası",
@@ -12922,7 +12922,7 @@ export const medicalTermsData = {
         },
         {
             "id": 991,
-            "term": "M. Rectus Abdominis",
+            "term": "Musculus Rectus Abdominis",
             "english": "Rectus Abdominis Muscle",
             "turkishDefinition": "Düz karın kası; göğüs kemiğinden kasık kemiğine uzanan, karın ön duvarındaki çift, uzun kas.",
             "turkishShort": "Düz karın kası",
@@ -12948,7 +12948,7 @@ export const medicalTermsData = {
         },
         {
             "id": 993,
-            "term": "M. Pyramidalis",
+            "term": "Musculus Pyramidalis",
             "english": "Pyramidalis Muscle",
             "turkishDefinition": "Piramitsi karın kası; kasık kemiğinin önünde yer alan küçük, üçgen kas.",
             "turkishShort": "Piramitsi karın kası",
@@ -12961,7 +12961,7 @@ export const medicalTermsData = {
         },
         {
             "id": 994,
-            "term": "M. Obliquus Externus Abdominis",
+            "term": "Musculus Obliquus Externus Abdominis",
             "english": "External Oblique Muscle",
             "turkishDefinition": "Dış eğik karın kası; karın yan duvarının en dışında yer alan, lifleri çapraz uzanan kas.",
             "turkishShort": "Dış eğik karın kası",
@@ -12987,7 +12987,7 @@ export const medicalTermsData = {
         },
         {
             "id": 996,
-            "term": "M. Obliquus Internus Abdominis",
+            "term": "Musculus Obliquus Internus Abdominis",
             "english": "Internal Oblique Muscle",
             "turkishDefinition": "İç eğik karın kası; karın yan duvarının orta tabakasında yer alan, lifleri dış eğik kasa ters yönde uzanan kas.",
             "turkishShort": "İç eğik karın kası",
@@ -13000,7 +13000,7 @@ export const medicalTermsData = {
         },
         {
             "id": 997,
-            "term": "M. Cremaster",
+            "term": "Musculus Cremaster",
             "english": "Cremaster Muscle",
             "turkishDefinition": "Testis torbası kası; iç eğik karın kasından uzanan, testisi kaldıran ince kas lifleri.",
             "turkishShort": "Testis torbası kası",
@@ -13013,7 +13013,7 @@ export const medicalTermsData = {
         },
         {
             "id": 998,
-            "term": "M. Transversus Abdominis",
+            "term": "Musculus Transversus Abdominis",
             "english": "Transversus Abdominis Muscle",
             "turkishDefinition": "Enine karın kası; karın yan duvarının en derin tabakasında yer alan, lifleri enine uzanan kas.",
             "turkishShort": "Enine karın kası",
@@ -13078,7 +13078,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1003,
-            "term": "M. Quadratus Lumborum",
+            "term": "Musculus Quadratus Lumborum",
             "english": "Quadratus Lumborum Muscle",
             "turkishDefinition": "Dörtgen bel kası; bel bölgesinde, kalça kemiği ile son kaburga arasında uzanan dörtgen kas.",
             "turkishShort": "Dörtgen bel kası",
@@ -13130,7 +13130,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1007,
-            "term": "M. Levator Ani",
+            "term": "Musculus Levator Ani",
             "english": "Levator Ani Muscle",
             "turkishDefinition": "Anüs kaldırıcı kas; pelvis tabanını oluşturan, anüsü destekleyen geniş kas grubu.",
             "turkishShort": "Anüs kaldırıcı kas",
@@ -13143,7 +13143,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1008,
-            "term": "M. Pubococcygeus",
+            "term": "Musculus Pubococcygeus",
             "english": "Pubococcygeus Muscle",
             "turkishDefinition": "Pubokoksigeal kas; kasık kemiğinden kuyruk sokumuna uzanan, levator ani'nin bir parçası.",
             "turkishShort": "Pubokoksigeal kas",
@@ -13156,7 +13156,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1009,
-            "term": "M. Puborectalis",
+            "term": "Musculus Puborectalis",
             "english": "Puborectalis Muscle",
             "turkishDefinition": "Puborektal kas; kasık kemiğinden rektumun arkasına dolanan, anal kıvrımı oluşturan kas.",
             "turkishShort": "Puborektal kas",
@@ -13169,7 +13169,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1010,
-            "term": "M. Iliococcygeus",
+            "term": "Musculus Iliococcygeus",
             "english": "Iliococcygeus Muscle",
             "turkishDefinition": "İliyokoksigeal kas; kalça kemiğinden kuyruk sokumuna uzanan, levator ani'nin bir parçası.",
             "turkishShort": "İliyokoksigeal kas",
@@ -13182,7 +13182,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1011,
-            "term": "M. Coccygeus",
+            "term": "Musculus Coccygeus",
             "english": "Coccygeus Muscle",
             "turkishDefinition": "Kuyruk sokumu kası; sakrum ile kalça kemiği arasında uzanan, pelvis tabanını destekleyen kas.",
             "turkishShort": "Kuyruk sokumu kası",
@@ -13195,7 +13195,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1012,
-            "term": "M. Sphincter Ani Externus",
+            "term": "Musculus Sphincter Ani Externus",
             "english": "External Anal Sphincter",
             "turkishDefinition": "Dış anüs büzücü kası; anüsü isteğe bağlı olarak kapatan çizgili kas.",
             "turkishShort": "Dış anüs büzücü kası",
@@ -13208,7 +13208,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1013,
-            "term": "M. Semispinalis",
+            "term": "Musculus Semispinalis",
             "english": "Semispinalis Muscle",
             "turkishDefinition": "Yarı diken kası; omurga diken çıkıntılarına tutunan, gövdeyi geriye uzatan derin sırt kası.",
             "turkishShort": "Yarı diken kası",
@@ -13247,7 +13247,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1016,
-            "term": "M. Psoas Major",
+            "term": "Musculus Psoas Major",
             "english": "Psoas Major Muscle",
             "turkishDefinition": "Büyük bel kası; bel omurlarından kalçaya uzanan, uyluğun en güçlü bükücü kası.",
             "turkishShort": "Büyük bel kası",
@@ -13260,7 +13260,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1017,
-            "term": "M. Psoas Minor",
+            "term": "Musculus Psoas Minor",
             "english": "Psoas Minor Muscle",
             "turkishDefinition": "Küçük bel kası; bazı kişilerde bulunan, psoas major'ın önünde yer alan ince kas.",
             "turkishShort": "Küçük bel kası",
@@ -13273,7 +13273,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1018,
-            "term": "M. Iliacus",
+            "term": "Musculus Iliacus",
             "english": "Iliacus Muscle",
             "turkishDefinition": "İliak kas; kalça kemiğinin iç yüzünü dolduran, uyluğu büken kas.",
             "turkishShort": "İliak kas",
@@ -13286,7 +13286,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1019,
-            "term": "M. Iliopsoas",
+            "term": "Musculus Iliopsoas",
             "english": "Iliopsoas Muscle",
             "turkishDefinition": "İliyopsoas kası; psoas major ve iliacus kaslarının birleşiminden oluşan, uyluğu büken güçlü kas.",
             "turkishShort": "İliyopsoas kası",
@@ -13300,7 +13300,7 @@ export const medicalTermsData = {
     ,
         {
             "id": 1066,
-            "term": "M. Iliocostalis Lumborum",
+            "term": "Musculus Iliocostalis Lumborum",
             "english": "Iliocostalis Lumborum Muscle",
             "turkishDefinition": "Bel iliyokostal kası; iliocostalis kasının bel bölgesindeki alt parçası.",
             "turkishShort": "Bel iliyokostal kası",
@@ -13313,7 +13313,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1067,
-            "term": "M. Iliocostalis Thoracis",
+            "term": "Musculus Iliocostalis Thoracis",
             "english": "Iliocostalis Thoracis Muscle",
             "turkishDefinition": "Sırt iliyokostal kası; iliocostalis kasının göğüs bölgesindeki orta parçası.",
             "turkishShort": "Sırt iliyokostal kası",
@@ -13326,7 +13326,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1068,
-            "term": "M. Iliocostalis Cervicis",
+            "term": "Musculus Iliocostalis Cervicis",
             "english": "Iliocostalis Cervicis Muscle",
             "turkishDefinition": "Boyun iliyokostal kası; iliocostalis kasının boyun bölgesindeki üst parçası.",
             "turkishShort": "Boyun iliyokostal kası",
@@ -13339,7 +13339,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1069,
-            "term": "M. Longissimus Thoracis",
+            "term": "Musculus Longissimus Thoracis",
             "english": "Longissimus Thoracis Muscle",
             "turkishDefinition": "Sırtın en uzun kası; longissimus kasının göğüs bölgesindeki en büyük parçası.",
             "turkishShort": "Sırtın en uzun kası",
@@ -13352,7 +13352,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1070,
-            "term": "M. Longissimus Cervicis",
+            "term": "Musculus Longissimus Cervicis",
             "english": "Longissimus Cervicis Muscle",
             "turkishDefinition": "Boyunun en uzun kası; longissimus kasının boyun bölgesindeki parçası.",
             "turkishShort": "Boyunun en uzun kası",
@@ -13365,7 +13365,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1071,
-            "term": "M. Longissimus Capitis",
+            "term": "Musculus Longissimus Capitis",
             "english": "Longissimus Capitis Muscle",
             "turkishDefinition": "Başın en uzun kası; longissimus kasının başa uzanan en üst parçası.",
             "turkishShort": "Başın en uzun kası",
@@ -13378,7 +13378,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1072,
-            "term": "M. Spinalis Thoracis",
+            "term": "Musculus Spinalis Thoracis",
             "english": "Spinalis Thoracis Muscle",
             "turkishDefinition": "Sırt diken kası; spinalis kasının göğüs bölgesindeki, diken çıkıntılara en yakın parçası.",
             "turkishShort": "Sırt diken kası",
@@ -13391,7 +13391,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1073,
-            "term": "M. Spinalis Cervicis",
+            "term": "Musculus Spinalis Cervicis",
             "english": "Spinalis Cervicis Muscle",
             "turkishDefinition": "Boyun diken kası; spinalis kasının boyun bölgesindeki parçası.",
             "turkishShort": "Boyun diken kası",
@@ -13404,7 +13404,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1074,
-            "term": "M. Spinalis Capitis",
+            "term": "Musculus Spinalis Capitis",
             "english": "Spinalis Capitis Muscle",
             "turkishDefinition": "Baş diken kası; spinalis kasının başa uzanan, genellikle semispinalis capitis ile birleşik parçası.",
             "turkishShort": "Baş diken kası",
@@ -13417,7 +13417,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1075,
-            "term": "M. Semispinalis Thoracis",
+            "term": "Musculus Semispinalis Thoracis",
             "english": "Semispinalis Thoracis Muscle",
             "turkishDefinition": "Sırt yarı diken kası; semispinalis kasının göğüs bölgesindeki parçası.",
             "turkishShort": "Sırt yarı diken kası",
@@ -13430,7 +13430,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1076,
-            "term": "M. Semispinalis Cervicis",
+            "term": "Musculus Semispinalis Cervicis",
             "english": "Semispinalis Cervicis Muscle",
             "turkishDefinition": "Boyun yarı diken kası; semispinalis kasının boyun bölgesindeki parçası.",
             "turkishShort": "Boyun yarı diken kası",
@@ -13801,7 +13801,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1020,
-            "term": "Caput Longum (m. Biceps Brachii)",
+            "term": "Caput Longum (Musculus Biceps Brachii)",
             "english": "Long Head",
             "turkishDefinition": "Uzun baş; biceps brachii kasının kürek kemiğinin üstündeki çıkıntıdan başlayan uzun başı.",
             "turkishShort": "Uzun baş",
@@ -13814,7 +13814,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1021,
-            "term": "Caput Breve (m. Biceps Brachii)",
+            "term": "Caput Breve (Musculus Biceps Brachii)",
             "english": "Short Head",
             "turkishDefinition": "Kısa baş; biceps brachii kasının kürek kemiğinin gaga çıkıntısından başlayan kısa başı.",
             "turkishShort": "Kısa baş",
@@ -13840,7 +13840,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1023,
-            "term": "Caput Laterale (m. Triceps Brachii)",
+            "term": "Caput Laterale (Musculus Triceps Brachii)",
             "english": "Lateral Head",
             "turkishDefinition": "Dış yan baş; triceps brachii kasının kol kemiğinin arka üst yüzünden başlayan dış başı.",
             "turkishShort": "Dış yan baş",
@@ -13853,7 +13853,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1024,
-            "term": "Caput Mediale (m. Triceps Brachii)",
+            "term": "Caput Mediale (Musculus Triceps Brachii)",
             "english": "Medial Head",
             "turkishDefinition": "İç yan baş; triceps brachii kasının kol kemiğinin arka alt yüzünden başlayan, en derin başı.",
             "turkishShort": "İç yan baş",
@@ -13866,7 +13866,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1025,
-            "term": "M. Pronator Teres",
+            "term": "Musculus Pronator Teres",
             "english": "Pronator Teres Muscle",
             "turkishDefinition": "Yuvarlak içe döndürücü kas; önkolu içe döndüren, dirsek iç kısmından başlayan kas.",
             "turkishShort": "Yuvarlak içe döndürücü kas",
@@ -13879,7 +13879,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1026,
-            "term": "M. Flexor Carpi Radialis",
+            "term": "Musculus Flexor Carpi Radialis",
             "english": "Flexor Carpi Radialis Muscle",
             "turkishDefinition": "Radyal el bileği bükücü kası; el bileğini büken ve radius tarafına doğru bükücü ince önkol kası.",
             "turkishShort": "Radyal el bileği bükücü kası",
@@ -13892,7 +13892,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1027,
-            "term": "M. Palmaris Longus",
+            "term": "Musculus Palmaris Longus",
             "english": "Palmaris Longus Muscle",
             "turkishDefinition": "Uzun avuç kası; avuç içi aponörozunu gerginleştiren, sabit olmayan ince önkol kası.",
             "turkishShort": "Uzun avuç kası",
@@ -13905,7 +13905,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1028,
-            "term": "M. Flexor Carpi Ulnaris",
+            "term": "Musculus Flexor Carpi Ulnaris",
             "english": "Flexor Carpi Ulnaris Muscle",
             "turkishDefinition": "Ulnar el bileği bükücü kası; el bileğini büken ve dirsek kemiği tarafına doğru bükücü önkol kası.",
             "turkishShort": "Ulnar el bileği bükücü kası",
@@ -13918,7 +13918,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1029,
-            "term": "M. Flexor Digitorum Superficialis",
+            "term": "Musculus Flexor Digitorum Superficialis",
             "english": "Flexor Digitorum Superficialis Muscle",
             "turkishDefinition": "Yüzeysel parmak bükücü kası; 2-5. parmakların orta boğumlarını büken yüzeysel önkol kası.",
             "turkishShort": "Yüzeysel parmak bükücü kası",
@@ -13931,7 +13931,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1030,
-            "term": "M. Flexor Digitorum Profundus",
+            "term": "Musculus Flexor Digitorum Profundus",
             "english": "Flexor Digitorum Profundus Muscle",
             "turkishDefinition": "Derin parmak bükücü kası; 2-5. parmakların uç boğumlarını büken derin önkol kası.",
             "turkishShort": "Derin parmak bükücü kası",
@@ -13944,7 +13944,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1031,
-            "term": "M. Flexor Pollicis Longus",
+            "term": "Musculus Flexor Pollicis Longus",
             "english": "Flexor Pollicis Longus Muscle",
             "turkishDefinition": "Uzun başparmak bükücü kası; başparmağın uç boğumunu büken derin önkol kası.",
             "turkishShort": "Uzun başparmak bükücü kası",
@@ -13957,7 +13957,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1032,
-            "term": "M. Pronator Quadratus",
+            "term": "Musculus Pronator Quadratus",
             "english": "Pronator Quadratus Muscle",
             "turkishDefinition": "Dörtgen içe döndürücü kas; el bileğine yakın, önkolu içe döndüren dörtgen kas.",
             "turkishShort": "Dörtgen içe döndürücü kas",
@@ -13970,7 +13970,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1033,
-            "term": "M. Brachioradialis",
+            "term": "Musculus Brachioradialis",
             "english": "Brachioradialis Muscle",
             "turkishDefinition": "Brakioradyal kas; önkolun en hacimli dış kası, dirseği büken kas.",
             "turkishShort": "Brakioradyal kas",
@@ -13983,7 +13983,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1034,
-            "term": "M. Extensor Carpi Radialis Longus",
+            "term": "Musculus Extensor Carpi Radialis Longus",
             "english": "Extensor Carpi Radialis Longus Muscle",
             "turkishDefinition": "Uzun radyal el bileği gerici kası; el bileğini geren ve radius tarafına doğru bükücü önkol kası.",
             "turkishShort": "Uzun radyal el bileği gerici kası",
@@ -13996,7 +13996,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1035,
-            "term": "M. Extensor Carpi Radialis Brevis",
+            "term": "Musculus Extensor Carpi Radialis Brevis",
             "english": "Extensor Carpi Radialis Brevis Muscle",
             "turkishDefinition": "Küçük radyal el bileği gerici kası; el bileğini geren, öncekinden daha kısa önkol kası.",
             "turkishShort": "Küçük radyal el bileği gerici kası",
@@ -14009,7 +14009,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1036,
-            "term": "M. Extensor Digitorum",
+            "term": "Musculus Extensor Digitorum",
             "english": "Extensor Digitorum Muscle",
             "turkishDefinition": "Parmak gerici kası; 2-5. parmakları geren önkol kası.",
             "turkishShort": "Parmak gerici kası",
@@ -14022,7 +14022,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1037,
-            "term": "M. Extensor Digiti Minimi",
+            "term": "Musculus Extensor Digiti Minimi",
             "english": "Extensor Digiti Minimi Muscle",
             "turkishDefinition": "Küçük parmak gerici kası; sadece küçük parmağı geren ince önkol kası.",
             "turkishShort": "Küçük parmak gerici kası",
@@ -14035,7 +14035,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1038,
-            "term": "M. Extensor Carpi Ulnaris",
+            "term": "Musculus Extensor Carpi Ulnaris",
             "english": "Extensor Carpi Ulnaris Muscle",
             "turkishDefinition": "Ulnar el bileği gerici kası; el bileğini geren ve dirsek kemiği tarafına doğru bükücü önkol kası.",
             "turkishShort": "Ulnar el bileği gerici kası",
@@ -14048,7 +14048,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1039,
-            "term": "M. Abductor Pollicis Longus",
+            "term": "Musculus Abductor Pollicis Longus",
             "english": "Abductor Pollicis Longus Muscle",
             "turkishDefinition": "Uzun başparmak uzaklaştırıcı kası; başparmağı avuçtan uzaklaştıran derin önkol kası.",
             "turkishShort": "Uzun başparmak uzaklaştırıcı kası",
@@ -14061,7 +14061,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1040,
-            "term": "M. Extensor Pollicis Brevis",
+            "term": "Musculus Extensor Pollicis Brevis",
             "english": "Extensor Pollicis Brevis Muscle",
             "turkishDefinition": "Küçük başparmak gerici kası; başparmağın taban boğumunu geren derin önkol kası.",
             "turkishShort": "Küçük başparmak gerici kası",
@@ -14074,7 +14074,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1041,
-            "term": "M. Extensor Pollicis Longus",
+            "term": "Musculus Extensor Pollicis Longus",
             "english": "Extensor Pollicis Longus Muscle",
             "turkishDefinition": "Uzun başparmak gerici kası; başparmağın uç boğumunu geren derin önkol kası.",
             "turkishShort": "Uzun başparmak gerici kası",
@@ -14087,7 +14087,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1042,
-            "term": "M. Extensor Indicis",
+            "term": "Musculus Extensor Indicis",
             "english": "Extensor Indicis Muscle",
             "turkishDefinition": "İşaret parmağı gerici kası; sadece işaret parmağını geren ince derin önkol kası.",
             "turkishShort": "İşaret parmağı gerici kası",
@@ -14100,7 +14100,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1043,
-            "term": "M. Palmaris Brevis",
+            "term": "Musculus Palmaris Brevis",
             "english": "Palmaris Brevis Muscle",
             "turkishDefinition": "Kısa avuç kası; avuç içi derisini kırıştıran küçük yüzeysel el kası.",
             "turkishShort": "Kısa avuç kası",
@@ -14113,7 +14113,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1044,
-            "term": "M. Abductor Pollicis Brevis",
+            "term": "Musculus Abductor Pollicis Brevis",
             "english": "Abductor Pollicis Brevis Muscle",
             "turkishDefinition": "Kısa başparmak uzaklaştırıcı kası; başparmağı avuçtan uzaklaştıran yüzeysel el kası.",
             "turkishShort": "Kısa başparmak uzaklaştırıcı kası",
@@ -14126,7 +14126,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1045,
-            "term": "M. Flexor Pollicis Brevis",
+            "term": "Musculus Flexor Pollicis Brevis",
             "english": "Flexor Pollicis Brevis Muscle",
             "turkishDefinition": "Kısa başparmak bükücü kası; başparmağın taban boğumunu büken el kası.",
             "turkishShort": "Kısa başparmak bükücü kası",
@@ -14139,7 +14139,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1046,
-            "term": "M. Opponens Pollicis",
+            "term": "Musculus Opponens Pollicis",
             "english": "Opponens Pollicis Muscle",
             "turkishDefinition": "Başparmak karşılaştırıcı kası; başparmağı diğer parmaklarla karşı karşıya getiren el kası.",
             "turkishShort": "Başparmak karşılaştırıcı kası",
@@ -14152,7 +14152,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1047,
-            "term": "M. Adductor Pollicis",
+            "term": "Musculus Adductor Pollicis",
             "english": "Adductor Pollicis Muscle",
             "turkishDefinition": "Başparmak yakınlaştırıcı kası; başparmağı avuca yaklaştıran el kası.",
             "turkishShort": "Başparmak yakınlaştırıcı kası",
@@ -14165,7 +14165,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1048,
-            "term": "M. Abductor Digiti Minimi Manus",
+            "term": "Musculus Abductor Digiti Minimi Manus",
             "english": "Abductor Digiti Minimi Muscle (Hand)",
             "turkishDefinition": "El küçük parmak uzaklaştırıcı kası; küçük parmağı diğer parmaklardan uzaklaştıran el kası.",
             "turkishShort": "El küçük parmak uzaklaştırıcı kası",
@@ -14178,7 +14178,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1049,
-            "term": "M. Flexor Digiti Minimi Brevis Manus",
+            "term": "Musculus Flexor Digiti Minimi Brevis Manus",
             "english": "Flexor Digiti Minimi Brevis Muscle (Hand)",
             "turkishDefinition": "El küçük parmak kısa bükücü kası; küçük parmağın taban boğumunu büken el kası.",
             "turkishShort": "El küçük parmak kısa bükücü kası",
@@ -14191,7 +14191,7 @@ export const medicalTermsData = {
         },
         {
             "id": 1050,
-            "term": "M. Opponens Digiti Minimi Manus",
+            "term": "Musculus Opponens Digiti Minimi Manus",
             "english": "Opponens Digiti Minimi Muscle (Hand)",
             "turkishDefinition": "El küçük parmak karşılaştırıcı kası; küçük parmağı başparmağa doğru döndüren el kası.",
             "turkishShort": "El küçük parmak karşılaştırıcı kası",
@@ -14347,7 +14347,7 @@ export const medicalTermsData = {
         },
         {
             "id": 931,
-            "term": "M. Supinator",
+            "term": "Musculus Supinator",
             "english": "Supinator Muscle",
             "turkishDefinition": "Ön kolun derin arka kompartmanında bulunan, n. radialis'in ramus profundus'u tarafından delinen ve ön kola supinasyon yaptıran özel kas.",
             "turkishShort": "Dışa döndürücü kas",

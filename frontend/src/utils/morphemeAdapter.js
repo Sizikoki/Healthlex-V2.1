@@ -66,6 +66,11 @@ ROOTS.forEach((r) => {
   }
 });
 
+COMMON_ROOT_DICTIONARY['musculus'] = { tr: 'Kas', en: 'muscle' };
+COMMON_ROOT_DICTIONARY['musculi'] = { tr: 'Kaslar', en: 'muscles' };
+COMMON_ROOT_DICTIONARY['muscul'] = { tr: 'Kas', en: 'muscle' };
+
+
 // Rich fallback distractors pool sourced from morphemesData
 export const FALLBACK_DISTRACTORS = [
   { id: 'dis_a', text: 'a-', meaning: PREFIX_LOOKUP['a-'] || { tr: 'yokluk', en: 'without' }, partType: 'prefix' },
@@ -197,8 +202,9 @@ export function resolveMorphemeEn(rootWord, turkishMeaning) {
  */
 export function getPrimaryLatinTerm(rawTerm) {
   if (!rawTerm || typeof rawTerm !== 'string') return '';
-  const parts = rawTerm.split(/[\/;]/).map((p) => p.trim()).filter(Boolean);
-  let primary = parts[0] || rawTerm.trim();
+  const expanded = rawTerm.replace(/(^|[\s(])(?<![A-Za-z])[Mm]\.\s*/g, (m, p1) => (p1 || '') + 'Musculus ');
+  const parts = expanded.split(/[\/;]/).map((p) => p.trim()).filter(Boolean);
+  let primary = parts[0] || expanded.trim();
   // Sondaki (ACL), (PCL) gibi kısaltmaları temizle
   return primary.replace(/\s*\([A-Z0-9,\s\-]+\)$/i, '').trim();
 }
