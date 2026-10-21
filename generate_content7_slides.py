@@ -195,46 +195,25 @@ slides_4x5 = [
       <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:12px;">
         <!-- -us -> -i -->
         <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:13px;padding:12px 16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-us</span>
-              <span style="font-size:13px;color:{TEXT_MUTED_DARK};">→</span>
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:#FFFFFF;">-i</span>
-            </div>
-            <span style="font-size:11.5px;font-weight:800;color:{ACCENT_DARK};">Kalıp 1</span>
-          </div>
-          <div style="font-size:13.5px;font-weight:700;color:#CBD5E1;">
-            <span style="font-family:monospace;color:#FFFFFF;">fungus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fungi</span>, <span style="font-family:monospace;color:#FFFFFF;">thrombus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">thrombi</span>
+          <div style="font-size:14px;font-weight:700;color:#CBD5E1;">
+            <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-us → -i:</span>
+            <span style="margin-left:6px;"><span style="font-family:monospace;color:#FFFFFF;">fungus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fungi</span>, <span style="font-family:monospace;color:#FFFFFF;">thrombus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">thrombi</span></span>
           </div>
         </div>
 
         <!-- -a -> -ae -->
         <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:13px;padding:12px 16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-a</span>
-              <span style="font-size:13px;color:{TEXT_MUTED_DARK};">→</span>
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:#FFFFFF;">-ae</span>
-            </div>
-            <span style="font-size:11.5px;font-weight:800;color:{TEXT_MUTED_DARK};">ae, e okunur</span>
-          </div>
-          <div style="font-size:13.5px;font-weight:700;color:#CBD5E1;">
-            <span style="font-family:monospace;color:#FFFFFF;">bursa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">bursae</span>, <span style="font-family:monospace;color:#FFFFFF;">fossa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fossae</span>
+          <div style="font-size:14px;font-weight:700;color:#CBD5E1;">
+            <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-a → -ae:</span>
+            <span style="margin-left:6px;"><span style="font-family:monospace;color:#FFFFFF;">bursa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">bursae</span>, <span style="font-family:monospace;color:#FFFFFF;">fossa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fossae</span></span>
           </div>
         </div>
 
         <!-- -um -> -a -->
         <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:13px;padding:12px 16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-um</span>
-              <span style="font-size:13px;color:{TEXT_MUTED_DARK};">→</span>
-              <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:#FFFFFF;">-a</span>
-            </div>
-            <span style="font-size:11.5px;font-weight:800;color:{ACCENT_DARK};">Kalıp 3</span>
-          </div>
-          <div style="font-size:13.5px;font-weight:700;color:#CBD5E1;">
-            <span style="font-family:monospace;color:#FFFFFF;">ovum</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">ova</span>, <span style="font-family:monospace;color:#FFFFFF;">atrium</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">atria</span>
+          <div style="font-size:14px;font-weight:700;color:#CBD5E1;">
+            <span style="font-family:monospace;font-size:15.5px;font-weight:900;color:{ACCENT_DARK};">-um → -a:</span>
+            <span style="margin-left:6px;"><span style="font-family:monospace;color:#FFFFFF;">ovum</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">ova</span>, <span style="font-family:monospace;color:#FFFFFF;">atrium</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">atria</span></span>
           </div>
         </div>
       </div>
@@ -394,14 +373,11 @@ slides_4x5 = [
 
         <!-- caput -> capita -->
         <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:16px 18px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
             <div style="font-family:monospace;font-size:16px;font-weight:900;color:{ACCENT_DARK};">
               caput → capita
             </div>
             <span style="font-size:12px;font-weight:800;color:{TEXT_MUTED_DARK};">baş → başlar</span>
-          </div>
-          <div style="font-size:13.5px;font-weight:600;color:{TEXT_MUTED_DARK};">
-            Anatomide kas başları veya organ tepe kısımlarının çoğulunda kullanılır.
           </div>
         </div>
       </div>
@@ -547,45 +523,24 @@ slides_9x16 = [
         </div>
 
         <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:16px;">
-          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:14px 18px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-us</span>
-                <span style="font-size:14px;color:{TEXT_MUTED_DARK};">→</span>
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:#FFFFFF;">-i</span>
-              </div>
-              <span style="font-size:13px;font-weight:800;color:{ACCENT_DARK};">Kalıp 1</span>
-            </div>
-            <div style="font-size:15px;font-weight:700;color:#CBD5E1;">
-              <span style="font-family:monospace;color:#FFFFFF;">fungus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fungi</span>, <span style="font-family:monospace;color:#FFFFFF;">thrombus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">thrombi</span>
+          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:15px 18px;">
+            <div style="font-size:16px;font-weight:700;color:#CBD5E1;">
+              <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-us → -i:</span>
+              <span style="margin-left:8px;"><span style="font-family:monospace;color:#FFFFFF;">fungus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fungi</span>, <span style="font-family:monospace;color:#FFFFFF;">thrombus</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">thrombi</span></span>
             </div>
           </div>
 
-          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:14px 18px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-a</span>
-                <span style="font-size:14px;color:{TEXT_MUTED_DARK};">→</span>
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:#FFFFFF;">-ae</span>
-              </div>
-              <span style="font-size:13px;font-weight:800;color:{TEXT_MUTED_DARK};">ae, e okunur</span>
-            </div>
-            <div style="font-size:15px;font-weight:700;color:#CBD5E1;">
-              <span style="font-family:monospace;color:#FFFFFF;">bursa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">bursae</span>, <span style="font-family:monospace;color:#FFFFFF;">fossa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fossae</span>
+          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:15px 18px;">
+            <div style="font-size:16px;font-weight:700;color:#CBD5E1;">
+              <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-a → -ae:</span>
+              <span style="margin-left:8px;"><span style="font-family:monospace;color:#FFFFFF;">bursa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">bursae</span>, <span style="font-family:monospace;color:#FFFFFF;">fossa</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">fossae</span></span>
             </div>
           </div>
 
-          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:14px 18px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-um</span>
-                <span style="font-size:14px;color:{TEXT_MUTED_DARK};">→</span>
-                <span style="font-family:monospace;font-size:17px;font-weight:900;color:#FFFFFF;">-a</span>
-              </div>
-              <span style="font-size:13px;font-weight:800;color:{ACCENT_DARK};">Kalıp 3</span>
-            </div>
-            <div style="font-size:15px;font-weight:700;color:#CBD5E1;">
-              <span style="font-family:monospace;color:#FFFFFF;">ovum</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">ova</span>, <span style="font-family:monospace;color:#FFFFFF;">atrium</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">atria</span>
+          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:15px;padding:15px 18px;">
+            <div style="font-size:16px;font-weight:700;color:#CBD5E1;">
+              <span style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">-um → -a:</span>
+              <span style="margin-left:8px;"><span style="font-family:monospace;color:#FFFFFF;">ovum</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">ova</span>, <span style="font-family:monospace;color:#FFFFFF;">atrium</span> → <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:800;">atria</span></span>
             </div>
           </div>
         </div>
@@ -730,15 +685,13 @@ slides_9x16 = [
             </div>
           </div>
 
+          <!-- caput -> capita -->
           <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-radius:16px;padding:16px 18px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
               <div style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};">
                 caput → capita
               </div>
               <span style="font-size:13px;font-weight:800;color:{TEXT_MUTED_DARK};">baş → başlar</span>
-            </div>
-            <div style="font-size:14.5px;font-weight:600;color:{TEXT_MUTED_DARK};">
-              Anatomide kas başları veya organ tepe kısımlarının çoğulunda kullanılır.
             </div>
           </div>
         </div>

@@ -94,6 +94,20 @@ CONTENTS = [
             {"num": 6, "name": "Okumak ve Yazmak", "tag": "Özet"},
             {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
         ]
+    },
+    {
+        "id": 7,
+        "title": "İçerik 7: Çoğul, Kelimenin Sonundan Anlaşılır",
+        "desc": "Çoğul Sonları (-us, -a, -um, -is, -on, -ix/-ex, -ma), Düzensiz Çoğullar (os, foramen, corpus, caput) ve Türkçe Kullanım",
+        "slides": [
+            {"num": 1, "name": "Kapak: Çoğul Kuralları", "tag": "Kapak"},
+            {"num": 2, "name": "Çoğul Sonları 1 (-us, -a, -um)", "tag": "İçerik"},
+            {"num": 3, "name": "Çoğul Sonları 2 (-is, -on, -ix/-ex, -ma)", "tag": "İçerik"},
+            {"num": 4, "name": "Düzensiz Çoğullar (os, foramen)", "tag": "İçerik"},
+            {"num": 5, "name": "Düzensiz Çoğullar (corpus, caput)", "tag": "İçerik"},
+            {"num": 6, "name": "Türkçe Metinlerde Çoğul Kullanım", "tag": "Özet"},
+            {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
+        ]
     }
 ]
 
@@ -113,6 +127,12 @@ for c in CONTENTS:
         # 4:5
         p_filename = f"icerik{cid}_gonderi_{snum:02d}.png"
         p_path = VIDEO_OUTPUT_4X5 / p_filename
+        if not p_path.exists():
+            # Check canonical folder
+            canonical_4x5 = DESKTOP_DIR / "Instagram_Video_Slaytlar" / "4x5_Post_Formati" / f"Icerik_{cid}" / p_filename
+            if canonical_4x5.exists():
+                p_path = canonical_4x5
+
         p_b64 = ""
         if p_path.exists():
             p_b64 = f"data:image/png;base64,{base64.b64encode(p_path.read_bytes()).decode('ascii')}"
@@ -156,6 +176,11 @@ for c in CONTENTS:
         # 9:16
         v_filename = f"icerik{cid}_video_{snum:02d}.png"
         v_path = VIDEO_OUTPUT_9X16 / v_filename
+        if not v_path.exists():
+            canonical_9x16 = DESKTOP_DIR / "Instagram_Video_Slaytlar" / "9x16_Reels_Formati" / f"Icerik_{cid}" / v_filename
+            if canonical_9x16.exists():
+                v_path = canonical_9x16
+
         v_b64 = ""
         if v_path.exists():
             v_b64 = f"data:image/png;base64,{base64.b64encode(v_path.read_bytes()).decode('ascii')}"
@@ -512,29 +537,30 @@ html_template = f"""<!DOCTYPE html>
 
   <div class="header">
     <h1>Tıbbi Terminoloji Görsel Galerisi</h1>
-    <p>İçerik 1'den 6'ya kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 84 görsel).</p>
+    <p>İçerik 1'den 7'ye kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 98 görsel).</p>
   </div>
 
   <div class="filter-section">
     <!-- Filter: Content -->
     <div class="filter-row">
       <span class="filter-label">İÇERİK:</span>
-      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-6)</button>
+      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-7)</button>
       <button class="filter-btn" data-filter="content" data-val="1" onclick="setFilter('content', '1', this)">İçerik 1 (Giriş)</button>
       <button class="filter-btn" data-filter="content" data-val="2" onclick="setFilter('content', '2', this)">İçerik 2 (4 Yapı Taşı)</button>
       <button class="filter-btn" data-filter="content" data-val="3" onclick="setFilter('content', '3', this)">İçerik 3 (Bağlayıcı Ünlü)</button>
       <button class="filter-btn" data-filter="content" data-val="4" onclick="setFilter('content', '4', this)">İçerik 4 (Sondan Başa)</button>
       <button class="filter-btn" data-filter="content" data-val="5" onclick="setFilter('content', '5', this)">İçerik 5 (Okunuş Kuralları)</button>
       <button class="filter-btn" data-filter="content" data-val="6" onclick="setFilter('content', '6', this)">İçerik 6 (Çift Harfler)</button>
-      <span class="stats-badge" id="stats-badge">Görüntülenen: 84 / 84</span>
+      <button class="filter-btn" data-filter="content" data-val="7" onclick="setFilter('content', '7', this)">İçerik 7 (Çoğul Kuralları)</button>
+      <span class="stats-badge" id="stats-badge">Görüntülenen: 98 / 98</span>
     </div>
 
     <!-- Filter: Format & Tag -->
     <div class="filter-row">
       <span class="filter-label">FORMAT:</span>
       <button class="filter-btn active" data-filter="format" data-val="all" onclick="setFilter('format', 'all', this)">Tümü</button>
-      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (42)</button>
-      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (42)</button>
+      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (49)</button>
+      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (49)</button>
 
       <span class="filter-label" style="margin-left:14px;">TÜR:</span>
       <button class="filter-btn active" data-filter="tag" data-val="all" onclick="setFilter('tag', 'all', this)">Tümü</button>
