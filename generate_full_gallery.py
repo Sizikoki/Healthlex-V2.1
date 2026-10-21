@@ -80,6 +80,20 @@ CONTENTS = [
             {"num": 6, "name": "Çok Önemli Ayrım (Uluslararası vs. Türkçe)", "tag": "Özet"},
             {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
         ]
+    },
+    {
+        "id": 6,
+        "title": "İçerik 6: Yan Yana Gelen Harfler Okunuşu Değiştirir",
+        "desc": "Çift Sessizler (ch, ph, th, rh, sch), Tek Harf Farklı Ses (t, j), Çift Ünlüler (ae, oe, eu, au) ve Okumak vs Yazmak",
+        "slides": [
+            {"num": 1, "name": "Kapak: Yan Yana Gelen Harfler", "tag": "Kapak"},
+            {"num": 2, "name": "Çift Sessiz Gruplar (ch, ph, th, rh, sch)", "tag": "İçerik"},
+            {"num": 3, "name": "Tek Harf, Farklı Ses (t ve j)", "tag": "İçerik"},
+            {"num": 4, "name": "Çift Ünlüler (ae, oe, eu)", "tag": "İçerik"},
+            {"num": 5, "name": "AU Çift Ünlüsü", "tag": "İçerik"},
+            {"num": 6, "name": "Okumak ve Yazmak", "tag": "Özet"},
+            {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
+        ]
     }
 ]
 
@@ -498,28 +512,29 @@ html_template = f"""<!DOCTYPE html>
 
   <div class="header">
     <h1>Tıbbi Terminoloji Görsel Galerisi</h1>
-    <p>İçerik 1'den 5'e kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 70 görsel).</p>
+    <p>İçerik 1'den 6'ya kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 84 görsel).</p>
   </div>
 
   <div class="filter-section">
     <!-- Filter: Content -->
     <div class="filter-row">
       <span class="filter-label">İÇERİK:</span>
-      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-5)</button>
+      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-6)</button>
       <button class="filter-btn" data-filter="content" data-val="1" onclick="setFilter('content', '1', this)">İçerik 1 (Giriş)</button>
       <button class="filter-btn" data-filter="content" data-val="2" onclick="setFilter('content', '2', this)">İçerik 2 (4 Yapı Taşı)</button>
       <button class="filter-btn" data-filter="content" data-val="3" onclick="setFilter('content', '3', this)">İçerik 3 (Bağlayıcı Ünlü)</button>
       <button class="filter-btn" data-filter="content" data-val="4" onclick="setFilter('content', '4', this)">İçerik 4 (Sondan Başa)</button>
       <button class="filter-btn" data-filter="content" data-val="5" onclick="setFilter('content', '5', this)">İçerik 5 (Okunuş Kuralları)</button>
-      <span class="stats-badge" id="stats-badge">Görüntülenen: 70 / 70</span>
+      <button class="filter-btn" data-filter="content" data-val="6" onclick="setFilter('content', '6', this)">İçerik 6 (Çift Harfler)</button>
+      <span class="stats-badge" id="stats-badge">Görüntülenen: 84 / 84</span>
     </div>
 
     <!-- Filter: Format & Tag -->
     <div class="filter-row">
       <span class="filter-label">FORMAT:</span>
       <button class="filter-btn active" data-filter="format" data-val="all" onclick="setFilter('format', 'all', this)">Tümü</button>
-      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (35)</button>
-      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (35)</button>
+      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (42)</button>
+      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (42)</button>
 
       <span class="filter-label" style="margin-left:14px;">TÜR:</span>
       <button class="filter-btn active" data-filter="tag" data-val="all" onclick="setFilter('tag', 'all', this)">Tümü</button>

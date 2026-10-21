@@ -493,7 +493,7 @@ slides_4x5 = [
         <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
           <div style="font-size:12px;font-weight:900;letter-spacing:1px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
             {get_svg_icon('book-open', color=ACCENT_LIGHT, size=16)}
-            <span>KLİNİK DERS VE YAZIM FARKI</span>
+            <span>DERS VE YAZIM FARKI</span>
           </div>
           <div style="font-size:14.5px;font-weight:600;line-height:1.52;color:{TITLE_LIGHT};">
             Derste terimi <strong style="font-family:monospace;color:{ACCENT_LIGHT};">oesophagus</strong> diye görürsün ve <strong style="color:{ACCENT_LIGHT};">“ösofagus”</strong> diye okursun. Türkçe metinde ise <strong style="color:{ACCENT_LIGHT};">“özofagus”</strong> yazarsın.
@@ -538,11 +538,10 @@ slides_4x5 = [
         </h2>
 
         <p style="font-size:16px;font-weight:600;line-height:1.55;color:rgba(255,255,255,0.92);margin:0 auto 24px;max-width:400px;">
-          <span style="display:inline-flex;align-items:center;vertical-align:-2px;margin-right:6px;">{get_svg_icon('message-circle', color=ACCENT_TURQUOISE, size=18)}</span>Rehberin tamamını istiyorsan yorumlara <strong style="color:#5eead4;font-weight:900;">REHBER</strong> yaz, linki sana DM'den gönderelim.
+          Rehberin tamamına ulaşmak için:
         </p>
 
-        <div style="background:{CARD_LIGHT};color:{TITLE_LIGHT};border-radius:16px;padding:16px 24px;box-shadow:0 12px 30px rgba(0,0,0,0.25);display:inline-flex;flex-direction:column;align-items:center;gap:5px;width:90%;box-sizing:border-box;">
-          <span style="font-size:12.5px;font-weight:600;color:{TEXT_MUTED_LIGHT};">Ya da doğrudan:</span>
+        <div style="background:{CARD_LIGHT};color:{TITLE_LIGHT};border-radius:16px;padding:16px 24px;box-shadow:0 12px 30px rgba(0,0,0,0.25);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:90%;box-sizing:border-box;">
           <span style="font-size:20px;font-weight:900;color:{ACCENT_LIGHT};letter-spacing:-0.3px;">healthlexmed.com/rehber</span>
         </div>
       </div>
@@ -884,7 +883,7 @@ slides_9x16 = [
           <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:16px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
             <div style="font-size:13px;font-weight:900;letter-spacing:1px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
               {get_svg_icon('book-open', color=ACCENT_LIGHT, size=18)}
-              <span>KLİNİK DERS VE YAZIM FARKI</span>
+              <span>DERS VE YAZIM FARKI</span>
             </div>
             <div style="font-size:16px;font-weight:600;line-height:1.52;color:{TITLE_LIGHT};">
               Derste terimi <strong style="font-family:monospace;color:{ACCENT_LIGHT};">oesophagus</strong> diye görürsün ve <strong style="color:{ACCENT_LIGHT};">“ösofagus”</strong> diye okursun. Türkçe metinde ise <strong style="color:{ACCENT_LIGHT};">“özofagus”</strong> yazarsın.
@@ -928,11 +927,10 @@ slides_9x16 = [
           </h2>
 
           <p style="font-size:19px;font-weight:600;line-height:1.55;color:rgba(255,255,255,0.92);margin:0 auto 24px;max-width:390px;">
-            <span style="display:inline-flex;align-items:center;vertical-align:-2px;margin-right:6px;">{get_svg_icon('message-circle', color=ACCENT_TURQUOISE, size=20)}</span>Rehberin tamamını istiyorsan yorumlara <strong style="color:#5eead4;font-weight:900;">REHBER</strong> yaz, linki sana DM'den gönderelim.
+            Rehberin tamamına ulaşmak için:
           </p>
 
-          <div style="background:{CARD_LIGHT};color:{TITLE_LIGHT};border-radius:18px;padding:18px 24px;box-shadow:0 12px 30px rgba(0,0,0,0.25);display:inline-flex;flex-direction:column;align-items:center;gap:6px;width:95%;box-sizing:border-box;">
-            <span style="font-size:14px;font-weight:600;color:{TEXT_MUTED_LIGHT};">Ya da doğrudan:</span>
+          <div style="background:{CARD_LIGHT};color:{TITLE_LIGHT};border-radius:18px;padding:18px 24px;box-shadow:0 12px 30px rgba(0,0,0,0.25);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:95%;box-sizing:border-box;">
             <span style="font-size:22px;font-weight:900;color:{ACCENT_LIGHT};letter-spacing:-0.3px;">healthlexmed.com/rehber</span>
           </div>
         </div>
