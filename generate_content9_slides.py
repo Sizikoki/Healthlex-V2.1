@@ -157,18 +157,15 @@ slides_4x5 = [
       </div>
 
       <div style="z-index:2;margin-top:auto;margin-bottom:32px;">
-        <div style="font-size:12.5px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:16px;">
-          HASTA GÜVENLİĞİ VE TERMİNOLOJİ
-        </div>
         <h1 style="font-size:32px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 16px 0;">
           Tıbbi terimlerde yapılan bu hatalar hasta güvenliğini riske atabilir.
         </h1>
         <p style="font-size:16px;font-weight:600;line-height:1.55;color:{TEXT_MUTED_LIGHT};margin:0 0 18px 0;">
-          Küçük bir harf ya da yanlış kullanım, tedavide geri dönülmez sonuçlar doğurabilir.
+          Küçük bir harf ya da yanlış kullanım, klinik kayıtta yanlış anlaşılmaya yol açabilir.
         </p>
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:12px;padding:9px 14px;font-size:13px;font-weight:700;color:{ACCENT_LIGHT};">
           {get_svg_icon('alert-circle', color=ACCENT_LIGHT, size=16)}
-          <span>En sık karşılaşılan kritik hatalar ve doğruları</span>
+          <span>Sık yapılan hatalar ve doğruları</span>
         </div>
       </div>
 
@@ -225,36 +222,24 @@ slides_4x5 = [
 
     # SLIDE 3 (4:5) - ANLAM VE KULLANIM 1
     f"""
-    <div class="slide" style="background:{BG_TURQUOISE};color:#FFFFFF;position:relative;width:540px;height:675px;padding:44px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+    <div class="slide" style="background:{BG_TURQUOISE};color:#FFFFFF;position:relative;width:540px;height:675px;padding:46px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
       {get_4x5_swipe_arrow(3, is_dark=False, is_turquoise=True)}
       
       <div>
-        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:8px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:10px;">
           ANLAM VE KULLANIM
         </div>
-        <h2 style="font-size:30px;font-weight:900;line-height:1.22;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 10px 0;">
-          Diller arası melez telaffuz
+        <h2 style="font-size:30px;font-weight:900;line-height:1.24;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px 0;">
+          Yerleşik Türkçe karşılığı varken yabancı terim
         </h2>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:14px;">
-        <div style="background:{CARD_TURQUOISE};border:1px solid {BORDER_TURQUOISE};border-radius:14px;padding:18px 20px;">
-          <div style="font-size:12px;font-weight:900;letter-spacing:1px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:8px;">
-            YANLIŞ SÖYLEYİŞ VE YAZIM
-          </div>
-          <div style="font-size:15.5px;font-weight:700;line-height:1.55;color:#FFFFFF;">
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:auto;">
+        <div style="background:{CARD_TURQUOISE};border:1px solid {BORDER_TURQUOISE};border-radius:14px;padding:22px 22px;">
+          <div style="font-size:16.5px;font-weight:700;line-height:1.6;color:#FFFFFF;">
             Türkçe anatomik adı <span style="color:{ACCENT_TURQUOISE};font-weight:900;">orta serebral arter</span> olan yapıyı <span style="color:#fca5a5;text-decoration:line-through;">"midılserebral arter"</span> diye yazmak veya söylemek.
           </div>
         </div>
-
-        <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:13px;padding:14px 18px;font-size:14px;font-weight:600;line-height:1.5;color:rgba(255,255,255,0.92);">
-          İngilizce (middle cerebral artery), Latince (arteria cerebri media) ve Türkçe terminoloji birbirine karıştırılmamalıdır.
-        </div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;color:#FFFFFF;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
-        {get_svg_icon('check', color=ACCENT_TURQUOISE, size=16)}
-        <span>Tıbbi iletişimde tek bir dilin standart kurallarına sadık kalın.</span>
       </div>
 
       {get_4x5_footer(3, is_dark=False, is_turquoise=True)}
@@ -263,32 +248,24 @@ slides_4x5 = [
 
     # SLIDE 4 (4:5) - ANLAM VE KULLANIM 2
     f"""
-    <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:675px;padding:44px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+    <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:675px;padding:46px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
       {get_4x5_swipe_arrow(4, is_dark=False)}
       
       <div>
-        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:8px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:10px;">
           ANLAM VE KULLANIM
         </div>
-        <h2 style="font-size:30px;font-weight:900;line-height:1.22;letter-spacing:-0.5px;color:{TITLE_LIGHT};margin:0 0 10px 0;">
+        <h2 style="font-size:30px;font-weight:900;line-height:1.24;letter-spacing:-0.5px;color:{TITLE_LIGHT};margin:0 0 16px 0;">
           Raporlarda terminolojik tutarsızlık
         </h2>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:14px;">
-        <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
-          <div style="font-size:15.5px;font-weight:700;line-height:1.55;color:{TITLE_LIGHT};margin-bottom:10px;">
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:auto;">
+        <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:14px;padding:22px 22px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="font-size:16.5px;font-weight:700;line-height:1.6;color:{TITLE_LIGHT};">
             Bir raporda aynı bölge için sırayla <span style="color:{ACCENT_LIGHT};font-weight:900;">"karın"</span>, <span style="color:{ACCENT_LIGHT};font-weight:900;">"batın"</span> ve <span style="font-family:monospace;color:{ACCENT_LIGHT};font-weight:900;">abdomen</span> kullanmak metnin tutarlılığını bozar.
           </div>
-          <div style="font-size:13.5px;font-weight:600;color:{TEXT_MUTED_LIGHT};line-height:1.45;">
-            Aynı tıbbi raporda veya vizitte bir kavram seçilmeli ve metin boyunca tutarlı sürdürülmelidir.
-          </div>
         </div>
-      </div>
-
-      <div style="background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;color:{ACCENT_LIGHT};margin-bottom:4px;display:flex;align-items:center;gap:6px;">
-        {get_svg_icon('check', color=ACCENT_LIGHT, size=16)}
-        <span>Tutarlı dil kullanımı, meslektaşlar arası iletişimi ve hasta takibini güçlendirir.</span>
       </div>
 
       {get_4x5_footer(4, is_dark=False)}
@@ -297,43 +274,24 @@ slides_4x5 = [
 
     # SLIDE 5 (4:5) - ANLAM VE KULLANIM 3
     f"""
-    <div class="slide" style="background:{BG_DARK};color:{TEXT_LIGHT};position:relative;width:540px;height:675px;padding:44px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
+    <div class="slide" style="background:{BG_DARK};color:{TEXT_LIGHT};position:relative;width:540px;height:675px;padding:46px 54px 34px 38px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
       {get_4x5_swipe_arrow(5, is_dark=True)}
       
       <div>
-        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_DARK};text-transform:uppercase;margin-bottom:8px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_DARK};text-transform:uppercase;margin-bottom:10px;">
           ANLAM VE KULLANIM
         </div>
-        <h2 style="font-size:30px;font-weight:900;line-height:1.22;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 10px 0;">
+        <h2 style="font-size:30px;font-weight:900;line-height:1.24;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px 0;">
           Ön eklerin birbiriyle karıştırılması
         </h2>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:12px;">
-        <!-- Kutu 1 -->
-        <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid {ACCENT_DARK};border-radius:14px;padding:15px 18px;">
-          <div style="font-family:monospace;font-size:17px;font-weight:900;color:{ACCENT_DARK};margin-bottom:4px;">
-            hypo-
-          </div>
-          <div style="font-size:14.5px;font-weight:700;color:#FFFFFF;line-height:1.45;">
-            Azlık, yetersizlik veya düşüklük belirtir (örn. hipotansiyon, hipoglisemi).
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:auto;">
+        <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid {ACCENT_DARK};border-radius:14px;padding:22px 22px;">
+          <div style="font-size:16.5px;font-weight:700;color:#FFFFFF;line-height:1.6;">
+            Azlık belirten <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:900;">hypo-</span> ile küçüklük belirten <span style="font-family:monospace;color:#38bdf8;font-weight:900;">micro-</span> birbirinin yerine kullanılamaz.
           </div>
         </div>
-
-        <!-- Kutu 2 -->
-        <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid #38bdf8;border-radius:14px;padding:15px 18px;">
-          <div style="font-family:monospace;font-size:17px;font-weight:900;color:#38bdf8;margin-bottom:4px;">
-            micro-
-          </div>
-          <div style="font-size:14.5px;font-weight:700;color:#FFFFFF;line-height:1.45;">
-            Boyut olarak küçüklük belirtir (örn. mikrosefali, mikrositer).
-          </div>
-        </div>
-      </div>
-
-      <div style="background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.2);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;color:{ACCENT_DARK};margin-bottom:4px;display:flex;align-items:center;gap:6px;">
-        {get_svg_icon('check', color=ACCENT_DARK, size=16)}
-        <span>Azlık belirten hypo- ile küçüklük belirten micro- birbirinin yerine kullanılamaz.</span>
       </div>
 
       {get_4x5_footer(5, is_dark=True)}
@@ -350,18 +308,14 @@ slides_4x5 = [
           KISALTMALAR
         </div>
         <h2 style="font-size:30px;font-weight:900;line-height:1.22;letter-spacing:-0.5px;color:{TITLE_LIGHT};margin:0 0 16px 0;">
-          Aynı kısaltma, iki hayati anlam
+          Aynı kısaltma, iki farklı anlam
         </h2>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:16px;">
-        <!-- Kısaltma Örneği -->
-        <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <span style="font-family:monospace;font-size:20px;font-weight:900;color:{ACCENT_LIGHT};background:rgba(15,118,110,0.08);padding:2px 10px;border-radius:8px;">Ca</span>
-            <span style="font-size:13px;font-weight:800;color:{TEXT_MUTED_LIGHT};">BAĞLAMA GÖRE DEĞİŞİR:</span>
-          </div>
-          <div style="font-size:14.5px;font-weight:700;color:{TITLE_LIGHT};line-height:1.5;">
+        <!-- Ca Kartı -->
+        <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,0.03);">
+          <div style="font-size:15.5px;font-weight:700;color:{TITLE_LIGHT};line-height:1.55;">
             Tıbbi metinde <span style="color:{ACCENT_LIGHT};font-weight:900;">karsinom</span> (kanser), laboratuvar raporunda ise <span style="color:#2563EB;font-weight:900;">kalsiyum</span> demektir.
           </div>
         </div>
@@ -437,18 +391,15 @@ slides_9x16 = [
         </div>
 
         <div style="margin-top:auto;margin-bottom:20px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:16px;">
-            HASTA GÜVENLİĞİ VE TERMİNOLOJİ
-          </div>
           <h1 style="font-size:38px;font-weight:900;line-height:1.2;letter-spacing:-0.7px;color:{TITLE_LIGHT};margin:0 0 18px 0;">
             Tıbbi terimlerde yapılan bu hatalar hasta güvenliğini riske atabilir.
           </h1>
           <p style="font-size:19px;font-weight:600;line-height:1.55;color:{TEXT_MUTED_LIGHT};margin:0 0 20px 0;">
-            Küçük bir harf ya da yanlış kullanım, tedavide geri dönülmez sonuçlar doğurabilir.
+            Küçük bir harf ya da yanlış kullanım, klinik kayıtta yanlış anlaşılmaya yol açabilir.
           </p>
           <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:14px;padding:12px 18px;font-size:15px;font-weight:700;color:{ACCENT_LIGHT};">
             {get_svg_icon('alert-circle', color=ACCENT_LIGHT, size=20)}
-            <span>En sık karşılaşılan kritik hatalar ve doğruları</span>
+            <span>Sık yapılan hatalar ve doğruları</span>
           </div>
         </div>
       </div>
@@ -502,33 +453,21 @@ slides_9x16 = [
     f"""
     <div class="slide" style="background:{BG_TURQUOISE};color:#FFFFFF;position:relative;width:540px;height:960px;box-sizing:border-box;overflow:hidden;">
       <div style="position:absolute;top:110px;left:40px;width:430px;height:640px;display:flex;flex-direction:column;justify-content:center;z-index:2;box-sizing:border-box;">
-        <div style="margin-bottom:18px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:10px;">
+        <div style="margin-bottom:24px;">
+          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:12px;">
             ANLAM VE KULLANIM
           </div>
-          <h2 style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.6px;color:#FFFFFF;margin:0 0 12px 0;">
-            Diller arası melez telaffuz
+          <h2 style="font-size:36px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:#FFFFFF;margin:0 0 12px 0;">
+            Yerleşik Türkçe karşılığı varken yabancı terim
           </h2>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">
-          <div style="background:{CARD_TURQUOISE};border:1px solid {BORDER_TURQUOISE};border-radius:16px;padding:20px 22px;">
-            <div style="font-size:13px;font-weight:900;letter-spacing:1px;color:{ACCENT_TURQUOISE};text-transform:uppercase;margin-bottom:10px;">
-              YANLIŞ SÖYLEYİŞ VE YAZIM
-            </div>
-            <div style="font-size:18px;font-weight:700;line-height:1.5;color:#FFFFFF;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="background:{CARD_TURQUOISE};border:1px solid {BORDER_TURQUOISE};border-radius:18px;padding:26px 24px;">
+            <div style="font-size:19px;font-weight:700;line-height:1.55;color:#FFFFFF;">
               Türkçe anatomik adı <span style="color:{ACCENT_TURQUOISE};font-weight:900;">orta serebral arter</span> olan yapıyı <span style="color:#fca5a5;text-decoration:line-through;">"midılserebral arter"</span> diye yazmak veya söylemek.
             </div>
           </div>
-
-          <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:16px 20px;font-size:15.5px;font-weight:600;line-height:1.5;color:rgba(255,255,255,0.92);">
-            İngilizce (middle cerebral artery), Latince (arteria cerebri media) ve Türkçe terminoloji birbirine karıştırılmamalıdır.
-          </div>
-        </div>
-
-        <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:12px 16px;font-size:14px;font-weight:700;color:#FFFFFF;display:flex;align-items:center;gap:8px;">
-          {get_svg_icon('check', color=ACCENT_TURQUOISE, size=18)}
-          <span>Tıbbi iletişimde tek bir dilin standart kurallarına sadık kalın.</span>
         </div>
       </div>
     </div>
@@ -538,29 +477,21 @@ slides_9x16 = [
     f"""
     <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:960px;box-sizing:border-box;overflow:hidden;">
       <div style="position:absolute;top:110px;left:40px;width:430px;height:640px;display:flex;flex-direction:column;justify-content:center;z-index:2;box-sizing:border-box;">
-        <div style="margin-bottom:18px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:10px;">
+        <div style="margin-bottom:24px;">
+          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:12px;">
             ANLAM VE KULLANIM
           </div>
-          <h2 style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 12px 0;">
+          <h2 style="font-size:36px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 12px 0;">
             Raporlarda terminolojik tutarsızlık
           </h2>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">
-          <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:16px;padding:20px 22px;box-shadow:0 3px 12px rgba(0,0,0,0.04);">
-            <div style="font-size:18px;font-weight:700;line-height:1.55;color:{TITLE_LIGHT};margin-bottom:12px;">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:18px;padding:26px 24px;box-shadow:0 3px 12px rgba(0,0,0,0.04);">
+            <div style="font-size:19px;font-weight:700;line-height:1.55;color:{TITLE_LIGHT};">
               Bir raporda aynı bölge için sırayla <span style="color:{ACCENT_LIGHT};font-weight:900;">"karın"</span>, <span style="color:{ACCENT_LIGHT};font-weight:900;">"batın"</span> ve <span style="font-family:monospace;color:{ACCENT_LIGHT};font-weight:900;">abdomen</span> kullanmak metnin tutarlılığını bozar.
             </div>
-            <div style="font-size:15px;font-weight:600;color:{TEXT_MUTED_LIGHT};line-height:1.5;">
-              Aynı tıbbi raporda veya vizitte bir kavram seçilmeli ve metin boyunca tutarlı sürdürülmelidir.
-            </div>
           </div>
-        </div>
-
-        <div style="background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:14px;padding:12px 16px;font-size:14.5px;font-weight:700;color:{ACCENT_LIGHT};display:flex;align-items:center;gap:8px;">
-          {get_svg_icon('check', color=ACCENT_LIGHT, size=18)}
-          <span>Tutarlı dil kullanımı, meslektaşlar arası iletişimi ve hasta takibini güçlendirir.</span>
         </div>
       </div>
     </div>
@@ -570,40 +501,21 @@ slides_9x16 = [
     f"""
     <div class="slide" style="background:{BG_DARK};color:{TEXT_LIGHT};position:relative;width:540px;height:960px;box-sizing:border-box;overflow:hidden;">
       <div style="position:absolute;top:110px;left:40px;width:430px;height:640px;display:flex;flex-direction:column;justify-content:center;z-index:2;box-sizing:border-box;">
-        <div style="margin-bottom:18px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_DARK};text-transform:uppercase;margin-bottom:10px;">
+        <div style="margin-bottom:24px;">
+          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_DARK};text-transform:uppercase;margin-bottom:12px;">
             ANLAM VE KULLANIM
           </div>
-          <h2 style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.6px;color:#FFFFFF;margin:0 0 12px 0;">
+          <h2 style="font-size:36px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:#FFFFFF;margin:0 0 12px 0;">
             Ön eklerin birbiriyle karıştırılması
           </h2>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:18px;">
-          <!-- Kutu 1 -->
-          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid {ACCENT_DARK};border-radius:16px;padding:18px 20px;">
-            <div style="font-family:monospace;font-size:19px;font-weight:900;color:{ACCENT_DARK};margin-bottom:6px;">
-              hypo-
-            </div>
-            <div style="font-size:16px;font-weight:700;color:#FFFFFF;line-height:1.45;">
-              Azlık, yetersizlik veya düşüklük belirtir (örn. hipotansiyon, hipoglisemi).
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid {ACCENT_DARK};border-radius:18px;padding:26px 24px;">
+            <div style="font-size:19px;font-weight:700;color:#FFFFFF;line-height:1.55;">
+              Azlık belirten <span style="font-family:monospace;color:{ACCENT_DARK};font-weight:900;">hypo-</span> ile küçüklük belirten <span style="font-family:monospace;color:#38bdf8;font-weight:900;">micro-</span> birbirinin yerine kullanılamaz.
             </div>
           </div>
-
-          <!-- Kutu 2 -->
-          <div style="background:{CARD_DARK};border:1px solid {BORDER_DARK};border-left:4px solid #38bdf8;border-radius:16px;padding:18px 20px;">
-            <div style="font-family:monospace;font-size:19px;font-weight:900;color:#38bdf8;margin-bottom:6px;">
-              micro-
-            </div>
-            <div style="font-size:16px;font-weight:700;color:#FFFFFF;line-height:1.45;">
-              Boyut olarak küçüklük belirtir (örn. mikrosefali, mikrositer).
-            </div>
-          </div>
-        </div>
-
-        <div style="background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.2);border-radius:14px;padding:12px 16px;font-size:14.5px;font-weight:700;color:{ACCENT_DARK};display:flex;align-items:center;gap:8px;">
-          {get_svg_icon('check', color=ACCENT_DARK, size=18)}
-          <span>Azlık belirten hypo- ile küçüklük belirten micro- birbirinin yerine kullanılamaz.</span>
         </div>
       </div>
     </div>
@@ -613,22 +525,19 @@ slides_9x16 = [
     f"""
     <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:960px;box-sizing:border-box;overflow:hidden;">
       <div style="position:absolute;top:110px;left:40px;width:430px;height:640px;display:flex;flex-direction:column;justify-content:center;z-index:2;box-sizing:border-box;">
-        <div style="margin-bottom:18px;">
+        <div style="margin-bottom:20px;">
           <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:10px;">
             KISALTMALAR
           </div>
           <h2 style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 16px 0;">
-            Aynı kısaltma, iki hayati anlam
+            Aynı kısaltma, iki farklı anlam
           </h2>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px;">
-          <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-radius:16px;padding:20px 22px;box-shadow:0 3px 12px rgba(0,0,0,0.04);">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-              <span style="font-family:monospace;font-size:22px;font-weight:900;color:{ACCENT_LIGHT};background:rgba(15,118,110,0.08);padding:3px 12px;border-radius:8px;">Ca</span>
-              <span style="font-size:14px;font-weight:800;color:{TEXT_MUTED_LIGHT};">BAĞLAMA GÖRE DEĞİŞİR:</span>
-            </div>
-            <div style="font-size:16.5px;font-weight:700;color:{TITLE_LIGHT};line-height:1.55;">
+          <!-- Ca Kartı -->
+          <div style="background:{CARD_LIGHT};border:1px solid {BORDER_LIGHT};border-left:4px solid {ACCENT_LIGHT};border-radius:16px;padding:22px 22px;box-shadow:0 3px 12px rgba(0,0,0,0.04);">
+            <div style="font-size:18px;font-weight:700;color:{TITLE_LIGHT};line-height:1.55;">
               Tıbbi metinde <span style="color:{ACCENT_LIGHT};font-weight:900;">karsinom</span> (kanser), laboratuvar raporunda ise <span style="color:#2563EB;font-weight:900;">kalsiyum</span> demektir.
             </div>
           </div>
