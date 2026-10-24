@@ -136,6 +136,20 @@ CONTENTS = [
             {"num": 6, "name": "Kısaltmalar (Ca: Karsinom vs Kalsiyum)", "tag": "Özet"},
             {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
         ]
+    },
+    {
+        "id": 10,
+        "title": "İçerik 10: 4 Adımlı Çalışma Yöntemi",
+        "desc": "Parçala ve Anla (cardi/o, -itis), Aralıklı Tekrar (ren/o), Sesli Telaffuz, Bağlam İçinde Okuma ve HealthLexMed Araçları",
+        "slides": [
+            {"num": 1, "name": "Kapak: Binlerce Kelimeyi Unutmamak İçin 4 Adımlı Yöntem", "tag": "Kapak"},
+            {"num": 2, "name": "1. Ezberleme, Parçala ve Anla", "tag": "İçerik"},
+            {"num": 3, "name": "2. Aralıklı Tekrar Yöntemi", "tag": "İçerik"},
+            {"num": 4, "name": "3. Sesli Telaffuz ve İşitsel Hafıza", "tag": "İçerik"},
+            {"num": 5, "name": "4. Bağlam İçinde Okuma Yap", "tag": "İçerik"},
+            {"num": 6, "name": "HealthLexMed'de Bu Yöntemi Uygula", "tag": "Özet"},
+            {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
+        ]
     }
 ]
 
@@ -565,14 +579,14 @@ html_template = f"""<!DOCTYPE html>
 
   <div class="header">
     <h1>Tıbbi Terminoloji Görsel Galerisi</h1>
-    <p>İçerik 1'den 9'a kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 126 görsel).</p>
+    <p>İçerik 1'den 10'a kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 140 görsel).</p>
   </div>
 
   <div class="filter-section">
     <!-- Filter: Content -->
     <div class="filter-row">
       <span class="filter-label">İÇERİK:</span>
-      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-9)</button>
+      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-10)</button>
       <button class="filter-btn" data-filter="content" data-val="1" onclick="setFilter('content', '1', this)">İçerik 1 (Giriş)</button>
       <button class="filter-btn" data-filter="content" data-val="2" onclick="setFilter('content', '2', this)">İçerik 2 (4 Yapı Taşı)</button>
       <button class="filter-btn" data-filter="content" data-val="3" onclick="setFilter('content', '3', this)">İçerik 3 (Bağlayıcı Ünlü)</button>
@@ -582,15 +596,16 @@ html_template = f"""<!DOCTYPE html>
       <button class="filter-btn" data-filter="content" data-val="7" onclick="setFilter('content', '7', this)">İçerik 7 (Çoğul Kuralları)</button>
       <button class="filter-btn" data-filter="content" data-val="8" onclick="setFilter('content', '8', this)">İçerik 8 (Eş Anlamlı Kökler)</button>
       <button class="filter-btn" data-filter="content" data-val="9" onclick="setFilter('content', '9', this)">İçerik 9 (Hasta Güvenliği)</button>
-      <span class="stats-badge" id="stats-badge">Görüntülenen: 126 / 126</span>
+      <button class="filter-btn" data-filter="content" data-val="10" onclick="setFilter('content', '10', this)">İçerik 10 (4 Adımlı Yöntem)</button>
+      <span class="stats-badge" id="stats-badge">Görüntülenen: 140 / 140</span>
     </div>
 
     <!-- Filter: Format & Tag -->
     <div class="filter-row">
       <span class="filter-label">FORMAT:</span>
       <button class="filter-btn active" data-filter="format" data-val="all" onclick="setFilter('format', 'all', this)">Tümü</button>
-      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (63)</button>
-      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (63)</button>
+      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (70)</button>
+      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (70)</button>
 
       <span class="filter-label" style="margin-left:14px;">TÜR:</span>
       <button class="filter-btn active" data-filter="tag" data-val="all" onclick="setFilter('tag', 'all', this)">Tümü</button>
