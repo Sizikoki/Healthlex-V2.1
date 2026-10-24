@@ -157,16 +157,9 @@ slides_4x5 = [
       </div>
 
       <div style="z-index:2;margin-top:auto;margin-bottom:36px;">
-        <div style="font-size:12.5px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:16px;">
-          ÇALIŞMA REHBERİ
-        </div>
-        <h1 style="font-size:34px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 16px 0;">
+        <h1 style="font-size:34px;font-weight:900;line-height:1.24;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0;">
           Binlerce kelimeyi unutmamak için 4 adımlı çalışma yöntemi!
         </h1>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:12px;padding:9px 14px;font-size:13px;font-weight:700;color:{ACCENT_LIGHT};">
-          {get_svg_icon('sparkle', color=ACCENT_LIGHT, size=16)}
-          <span>Tıbbi terminolojiyi ezberlemeden kalıcı öğren</span>
-        </div>
       </div>
 
       <div style="z-index:2;">
@@ -290,13 +283,10 @@ slides_4x5 = [
     <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:675px;padding:44px 50px 32px 36px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;">
       {get_4x5_swipe_arrow(6, is_dark=False)}
       
-      <div>
-        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:10px;">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:800;letter-spacing:2px;color:{ACCENT_LIGHT};text-transform:uppercase;">
           HEALTHLEXMED'DE BU YÖNTEMİ UYGULA
         </div>
-        <h2 style="font-size:27px;font-weight:900;line-height:1.22;letter-spacing:-0.5px;color:{TITLE_LIGHT};margin:0 0 14px 0;">
-          Tıbbi terminolojiye özel öğrenme araçları
-        </h2>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
@@ -394,16 +384,9 @@ slides_9x16 = [
         </div>
 
         <div style="margin-top:auto;margin-bottom:24px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:16px;">
-            ÇALIŞMA REHBERİ
-          </div>
-          <h1 style="font-size:38px;font-weight:900;line-height:1.2;letter-spacing:-0.7px;color:{TITLE_LIGHT};margin:0 0 18px 0;">
+          <h1 style="font-size:38px;font-weight:900;line-height:1.2;letter-spacing:-0.7px;color:{TITLE_LIGHT};margin:0;">
             Binlerce kelimeyi unutmamak için 4 adımlı çalışma yöntemi!
           </h1>
-          <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(15,118,110,0.08);border:1px solid rgba(15,118,110,0.2);border-radius:14px;padding:12px 18px;font-size:15px;font-weight:700;color:{ACCENT_LIGHT};">
-            {get_svg_icon('sparkle', color=ACCENT_LIGHT, size=20)}
-            <span>Tıbbi terminolojiyi ezberlemeden kalıcı öğren</span>
-          </div>
         </div>
       </div>
     </div>
@@ -515,13 +498,10 @@ slides_9x16 = [
     f"""
     <div class="slide" style="background:{BG_LIGHT};color:{TEXT_DARK};position:relative;width:540px;height:960px;box-sizing:border-box;overflow:hidden;">
       <div style="position:absolute;top:110px;left:40px;width:430px;height:640px;display:flex;flex-direction:column;justify-content:center;z-index:2;box-sizing:border-box;">
-        <div style="margin-bottom:20px;">
-          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;margin-bottom:10px;">
+        <div style="margin-bottom:18px;">
+          <div style="font-size:15px;font-weight:800;letter-spacing:2.2px;color:{ACCENT_LIGHT};text-transform:uppercase;">
             HEALTHLEXMED'DE BU YÖNTEMİ UYGULA
           </div>
-          <h2 style="font-size:32px;font-weight:900;line-height:1.2;letter-spacing:-0.6px;color:{TITLE_LIGHT};margin:0 0 14px 0;">
-            Tıbbi terminolojiye özel öğrenme araçları
-          </h2>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:12px;">
