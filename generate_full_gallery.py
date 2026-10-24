@@ -122,6 +122,20 @@ CONTENTS = [
             {"num": 6, "name": "İstisnalar (renal, dermis)", "tag": "Özet"},
             {"num": 7, "name": "Kapanış / CTA (Rehber Linki)", "tag": "CTA"}
         ]
+    },
+    {
+        "id": 9,
+        "title": "İçerik 9: Hasta Güvenliği ve Terminoloji Hataları",
+        "desc": "Yazım Hataları (longitudinal, obstrüksiyon), Melez İfadeler, Tutarsız Kullanım (karın/batın/abdomen), Ön Ekler (hypo/micro) ve Kısaltmalar (Ca)",
+        "slides": [
+            {"num": 1, "name": "Kapak: Bu Hatalar Hasta Güvenliğini Riske Atabilir", "tag": "Kapak"},
+            {"num": 2, "name": "Yazım ve Okunuş (Harf Atlama ve Yazım Hatası)", "tag": "İçerik"},
+            {"num": 3, "name": "Anlam ve Kullanım (Diller Arası Melez Telaffuz)", "tag": "İçerik"},
+            {"num": 4, "name": "Anlam ve Kullanım (Raporlarda Tutarsızlık)", "tag": "İçerik"},
+            {"num": 5, "name": "Anlam ve Kullanım (hypo- ve micro- Ön Ekleri)", "tag": "İçerik"},
+            {"num": 6, "name": "Kısaltmalar (Ca: Karsinom vs Kalsiyum)", "tag": "Özet"},
+            {"num": 7, "name": "Kapanış / CTA (Rehber DM)", "tag": "CTA"}
+        ]
     }
 ]
 
@@ -551,14 +565,14 @@ html_template = f"""<!DOCTYPE html>
 
   <div class="header">
     <h1>Tıbbi Terminoloji Görsel Galerisi</h1>
-    <p>İçerik 1'den 8'e kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 112 görsel).</p>
+    <p>İçerik 1'den 9'a kadar tüm serinin en güncel 4:5 Post ve 9:16 Reels görselleri (toplam 126 görsel).</p>
   </div>
 
   <div class="filter-section">
     <!-- Filter: Content -->
     <div class="filter-row">
       <span class="filter-label">İÇERİK:</span>
-      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-8)</button>
+      <button class="filter-btn active" data-filter="content" data-val="all" onclick="setFilter('content', 'all', this)">Tümü (1-9)</button>
       <button class="filter-btn" data-filter="content" data-val="1" onclick="setFilter('content', '1', this)">İçerik 1 (Giriş)</button>
       <button class="filter-btn" data-filter="content" data-val="2" onclick="setFilter('content', '2', this)">İçerik 2 (4 Yapı Taşı)</button>
       <button class="filter-btn" data-filter="content" data-val="3" onclick="setFilter('content', '3', this)">İçerik 3 (Bağlayıcı Ünlü)</button>
@@ -567,15 +581,16 @@ html_template = f"""<!DOCTYPE html>
       <button class="filter-btn" data-filter="content" data-val="6" onclick="setFilter('content', '6', this)">İçerik 6 (Çift Harfler)</button>
       <button class="filter-btn" data-filter="content" data-val="7" onclick="setFilter('content', '7', this)">İçerik 7 (Çoğul Kuralları)</button>
       <button class="filter-btn" data-filter="content" data-val="8" onclick="setFilter('content', '8', this)">İçerik 8 (Eş Anlamlı Kökler)</button>
-      <span class="stats-badge" id="stats-badge">Görüntülenen: 112 / 112</span>
+      <button class="filter-btn" data-filter="content" data-val="9" onclick="setFilter('content', '9', this)">İçerik 9 (Hasta Güvenliği)</button>
+      <span class="stats-badge" id="stats-badge">Görüntülenen: 126 / 126</span>
     </div>
 
     <!-- Filter: Format & Tag -->
     <div class="filter-row">
       <span class="filter-label">FORMAT:</span>
       <button class="filter-btn active" data-filter="format" data-val="all" onclick="setFilter('format', 'all', this)">Tümü</button>
-      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (56)</button>
-      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (56)</button>
+      <button class="filter-btn" data-filter="format" data-val="4x5" onclick="setFilter('format', '4x5', this)">4:5 Post (63)</button>
+      <button class="filter-btn" data-filter="format" data-val="9x16" onclick="setFilter('format', '9x16', this)">9:16 Reels (63)</button>
 
       <span class="filter-label" style="margin-left:14px;">TÜR:</span>
       <button class="filter-btn active" data-filter="tag" data-val="all" onclick="setFilter('tag', 'all', this)">Tümü</button>
