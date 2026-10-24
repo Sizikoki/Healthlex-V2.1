@@ -378,7 +378,7 @@ slides_4x5 = [
           </div>
           <div style="display:flex;flex-direction:column;gap:5px;font-size:13.5px;font-weight:700;color:#CBD5E1;line-height:1.4;">
             <div>
-              <span style="color:{ACCENT_DARK};font-weight:900;">1)</span> Kemik iliği → <span style="font-family:monospace;color:#FFFFFF;">myelocyte</span> <span style="font-size:12px;color:{TEXT_MUTED_DARK};">(genç ilik hücresi)</span>
+              <span style="color:{ACCENT_DARK};font-weight:900;">1)</span> Kemik iliği → <span style="font-family:monospace;color:#FFFFFF;">myelocyte</span> <span style="font-size:12px;color:{TEXT_MUTED_DARK};">(kemik iliğinde gelişen genç hücre)</span>
             </div>
             <div>
               <span style="color:{ACCENT_DARK};font-weight:900;">2)</span> Omurilik → <span style="font-family:monospace;color:#FFFFFF;">poliomyelitis</span> <span style="font-size:12px;color:{TEXT_MUTED_DARK};">(çocuk felci)</span>
@@ -706,7 +706,7 @@ slides_9x16 = [
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:700;color:#CBD5E1;line-height:1.45;">
               <div>
-                <span style="color:{ACCENT_DARK};font-weight:900;">1)</span> Kemik iliği → <span style="font-family:monospace;color:#FFFFFF;">myelocyte</span> <span style="font-size:13.5px;color:{TEXT_MUTED_DARK};">(genç ilik hücresi)</span>
+                <span style="color:{ACCENT_DARK};font-weight:900;">1)</span> Kemik iliği → <span style="font-family:monospace;color:#FFFFFF;">myelocyte</span> <span style="font-size:13.5px;color:{TEXT_MUTED_DARK};">(kemik iliğinde gelişen genç hücre)</span>
               </div>
               <div>
                 <span style="color:{ACCENT_DARK};font-weight:900;">2)</span> Omurilik → <span style="font-family:monospace;color:#FFFFFF;">poliomyelitis</span> <span style="font-size:13.5px;color:{TEXT_MUTED_DARK};">(çocuk felci)</span>
