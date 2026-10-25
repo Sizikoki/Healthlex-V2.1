@@ -1,0 +1,43 @@
+{
+  "series_id": "icerik01",
+  "series_title": "Peptit Nedir?",
+  "total_slides": 7,
+  "slides": [
+    {
+      "slide_number": 1,
+      "theme_mode": "light",
+      "tag": "PEPTİT SERİSİ · BÖLÜM 1",
+      "title": "Herkes peptit konuşuyor. Peki peptit ne?",
+      "description": "Her peptidi kanıt düzeyiyle ve kaynaklarıyla anlatan bir seri.",
+      "block": {
+        "type": "beads",
+        "variant": "decorative_single",
+        "label": "Amino asit zinciri",
+        "count": 5
+      },
+      "summary": "Önce temel: peptit tam olarak nedir?"
+    },
+    {
+      "slide_number": 2,
+      "theme_mode": "dark",
+      "tag": "TANIM",
+      "title": "Kısa bir amino asit zinciri",
+      "description": "Peptit, 2 ile 50 arası amino asidin peptit bağıyla birleştiği kısa zincirdir. [1]",
+      "block": {
+        "type": "beads",
+        "variant": "comparison",
+        "top": {
+          "label": "Peptit",
+          "sublabel": "2 - 50 Amino Asit (Kısa Zincir)",
+          "count": 3
+        },
+        "bottom": {
+          "label": "Protein",
+          "sublabel": "50+ Amino Asit (Uzun Katlanmış Zincir)",
+          "count": 10
+        }
+      },
+      "summary": "Zincir uzayıp katlanınca protein olur."
+    }
+  ]
+}
