@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,9 +22,11 @@ export const MatchGame = () => {
 
   const previewRole = getPreviewRole();
   const localUser = getUser();
+  const initialUid = localUser?.uid || auth?.currentUser?.uid;
+  // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
+  const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
   const [isPro, setIsPro] = useState(previewRole === 'pro' || checkIsPro(localUser));
   const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(localUser));
-  const [checkingPlan, setCheckingPlan] = useState(!previewRole && Boolean(auth?.currentUser?.uid || localUser?.uid));
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
@@ -38,7 +40,7 @@ export const MatchGame = () => {
 
   useEffect(() => {
     if (previewRole) {
-      setCheckingPlan(false);
+      setPlanReady(true);
       return;
     }
 
@@ -48,13 +50,17 @@ export const MatchGame = () => {
 
       if (!uid) {
         setHasPlan(false);
-        setCheckingPlan(false);
+        setIsPro(false);
+        setPlanReady(true);
         return;
       }
 
       // İlk yerel kullanıcı kontrolü
       if (checkHasPaidPlan(targetUser)) {
         setHasPlan(true);
+      }
+      if (checkIsPro(targetUser)) {
+        setIsPro(true);
       }
 
       try {
@@ -68,14 +74,15 @@ export const MatchGame = () => {
             setIsPro(checkIsPro(targetUser));
             setHasPlan(checkHasPaidPlan(targetUser));
           }
-          setCheckingPlan(false);
+          setPlanReady(true);
         }, (err) => {
           console.warn('[MatchGame] Error checking plan:', err);
-          setCheckingPlan(false);
+          setPlanReady(true);
         });
         return () => unsubDoc();
       } catch (e) {
-        setCheckingPlan(false);
+        console.warn('[MatchGame] Error setting up user listener:', e);
+        setPlanReady(true);
       }
     });
 
@@ -84,7 +91,8 @@ export const MatchGame = () => {
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/match');
-    if (!checkingPlan && !hasPlan) {
+    if (!planReady) return;
+    if (!hasPlan) {
       toast.info(
         currentLanguage === 'en'
           ? 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
@@ -92,10 +100,10 @@ export const MatchGame = () => {
       );
       navigate('/pricing');
     }
-  }, [checkingPlan, hasPlan, currentLanguage, navigate]);
+  }, [planReady, hasPlan, currentLanguage, navigate]);
 
   const setupGame = useCallback((termsList) => {
-    if (!termsList || termsList.length === 0) return;
+    if (!planReady || !termsList || termsList.length === 0) return;
 
     if (!hasPlan) {
       setLoading(false);
@@ -186,14 +194,19 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage, isPro, hasPlan, navigate]);
+  }, [categoryId, currentLanguage, isPro, hasPlan, planReady, navigate]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
   }, [setupGame, allTerms]);
 
+  const hasInitializedTerms = useRef(false);
+
   useEffect(() => {
-    if (checkingPlan || !hasPlan) return;
+    if (!planReady || !hasPlan) return;
+    if (hasInitializedTerms.current) return;
+    hasInitializedTerms.current = true;
+
     const fetchTerms = async () => {
       try {
         setLoading(true);
@@ -257,7 +270,7 @@ export const MatchGame = () => {
 
     fetchTerms();
     updateStreak();
-  }, [categoryId, setupGame, checkingPlan, hasPlan]);
+  }, [categoryId, setupGame, planReady, hasPlan]);
 
 
 
@@ -322,7 +335,7 @@ export const MatchGame = () => {
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
-  if (checkingPlan) {
+  if (!planReady || loading) {
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
@@ -336,18 +349,6 @@ export const MatchGame = () => {
 
   if (!hasPlan) {
     return null;
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
-        <Card className="w-full max-w-md p-8 text-center shadow-xl">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <h3 className="text-xl font-semibold mb-2">{t('loadingCards', 'Oyun Yükleniyor...')}</h3>
-          <p className="text-muted-foreground">{t('fetchingTerms')}</p>
-        </Card>
-      </div>
-    );
   }
 
   if (allTerms.length === 0) {

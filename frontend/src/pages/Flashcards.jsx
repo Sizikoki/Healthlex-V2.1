@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, RotateCw, ChevronRight, Check, X, Sparkles, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -23,36 +23,57 @@ export const Flashcards = () => {
   const categoryId = searchParams.get('category');
 
   const previewRole = getPreviewRole();
+  const initialUser = getUser();
+  const initialUid = initialUser?.uid || auth?.currentUser?.uid;
+  // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
+  const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
   const [currentUserData, setCurrentUserData] = useState(() => getUser());
   const isPro = previewRole === 'pro' || checkIsPro(currentUserData);
   const hasPaidPlan = previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(currentUserData);
   const isLimited = !hasPaidPlan;
 
   useEffect(() => {
-    if (previewRole) return;
-    const uid = auth?.currentUser?.uid || getUser()?.uid;
-    if (!uid) {
-      setCurrentUserData(getUser());
+    if (previewRole) {
+      setPlanReady(true);
       return;
     }
-    try {
-      const userDocRef = doc(db, 'users', uid);
-      const unsub = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          setCurrentUserData(docSnap.data());
-        } else {
-          setCurrentUserData(getUser());
-        }
-      }, (err) => {
-        console.warn('[Flashcards] Could not check live user plan status:', err);
-      });
-      return () => unsub();
-    } catch (e) {
-      console.warn('[Flashcards] Error setting up user listener:', e);
-    }
+
+    const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      const targetUser = firebaseUser || getUser();
+      const uid = targetUser?.uid;
+
+      if (!uid) {
+        setCurrentUserData(null);
+        setPlanReady(true);
+        return;
+      }
+
+      try {
+        const userDocRef = doc(db, 'users', uid);
+        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            setCurrentUserData(docSnap.data());
+          } else {
+            setCurrentUserData(targetUser);
+          }
+          setPlanReady(true);
+        }, (err) => {
+          console.warn('[Flashcards] Could not check live user plan status:', err);
+          setCurrentUserData(targetUser);
+          setPlanReady(true);
+        });
+        return () => unsubDoc();
+      } catch (e) {
+        console.warn('[Flashcards] Error setting up user listener:', e);
+        setPlanReady(true);
+      }
+    });
+
+    return () => unsubAuth();
   }, [previewRole]);
 
   useEffect(() => {
+    if (!planReady) return;
     if (hasPaidPlan) {
       setShowGuestModal(false);
       setLoading(false);
@@ -63,7 +84,7 @@ export const Flashcards = () => {
         setShowGuestModal(true);
       }
     }
-  }, [hasPaidPlan]);
+  }, [hasPaidPlan, planReady]);
 
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,19 +92,20 @@ export const Flashcards = () => {
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
 
-  const initialGuestInfo = isLimited ? getFlashcardGuestDailyInfo() : { canPlay: true };
-  const [loading, setLoading] = useState(initialGuestInfo.canPlay);
-  const [showGuestModal, setShowGuestModal] = useState(!initialGuestInfo.canPlay);
+  const initialGuestInfo = (planReady && isLimited) ? getFlashcardGuestDailyInfo() : { canPlay: true, remaining: MAX_GUEST_DAILY_FLASHCARDS };
+  const [loading, setLoading] = useState(!planReady || initialGuestInfo.canPlay);
+  const [showGuestModal, setShowGuestModal] = useState(planReady && isLimited && !initialGuestInfo.canPlay);
   const [guestModalType, setGuestModalType] = useState('play'); // 'play' | 'restart'
   // Misafir kalan hak sayıları (reaktif state)
   const [guestPlayInfo, setGuestPlayInfo] = useState(
-    isLimited ? getFlashcardGuestDailyInfo() : { remaining: MAX_GUEST_DAILY_FLASHCARDS, canPlay: true }
+    (planReady && isLimited) ? initialGuestInfo : { remaining: MAX_GUEST_DAILY_FLASHCARDS, canPlay: true }
   );
   const [guestRestartInfo, setGuestRestartInfo] = useState(
-    isLimited ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
+    (planReady && isLimited) ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
   );
 
   const loadTerms = useCallback(async (isRestart = false) => {
+    if (!planReady) return;
     // Limit kontrolü: plan almamış herkes (anonim misafir veya kayıtlı ama plansız)
     if (isLimited) {
       if (isRestart) {
@@ -185,13 +207,19 @@ export const Flashcards = () => {
     } finally {
       setLoading(false);
     }
-  }, [categoryId, isPro, isLimited, currentLanguage]);
+  }, [categoryId, isPro, isLimited, currentLanguage, planReady]);
+
+  const hasLoadedInitialTerms = useRef(false);
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/flashcards');
+    if (!planReady) return;
+    if (hasLoadedInitialTerms.current) return;
+    hasLoadedInitialTerms.current = true;
+
     loadTerms();
     updateStreak();
-  }, [loadTerms]);
+  }, [planReady, loadTerms]);
 
   const currentTerm = terms[currentIndex];
   const progress = terms.length > 0 ? ((currentIndex) / terms.length) * 100 : 0;
@@ -238,7 +266,7 @@ export const Flashcards = () => {
     loadTerms(true); // isRestart=true: restart sayılmasın, ayrı oynama hakkı tüketmesin
   };
 
-  if (loading) {
+  if (!planReady || loading) {
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
