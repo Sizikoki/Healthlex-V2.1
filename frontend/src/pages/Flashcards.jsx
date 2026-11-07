@@ -38,7 +38,15 @@ export const Flashcards = () => {
       return;
     }
 
+    let unsubDoc = null;
+
     const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      // Önceki Firestore dinleyicisi varsa kapat (yeni dinleyici açmadan önce veya auth değiştiğinde)
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+
       const targetUser = firebaseUser || getUser();
       const uid = targetUser?.uid;
 
@@ -50,7 +58,7 @@ export const Flashcards = () => {
 
       try {
         const userDocRef = doc(db, 'users', uid);
-        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+        unsubDoc = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             setCurrentUserData(docSnap.data());
           } else {
@@ -62,14 +70,19 @@ export const Flashcards = () => {
           setCurrentUserData(targetUser);
           setPlanReady(true);
         });
-        return () => unsubDoc();
       } catch (e) {
         console.warn('[Flashcards] Error setting up user listener:', e);
         setPlanReady(true);
       }
     });
 
-    return () => unsubAuth();
+    return () => {
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+      unsubAuth();
+    };
   }, [previewRole]);
 
   useEffect(() => {
@@ -104,10 +117,11 @@ export const Flashcards = () => {
     (planReady && isLimited) ? getFlashcardGuestRestartInfo() : { remaining: MAX_GUEST_DAILY_RESTARTS, canRestart: true }
   );
 
-  const loadTerms = useCallback(async (isRestart = false) => {
+  const loadTerms = useCallback(async (isRestart = false, isLanguageChange = false) => {
     if (!planReady) return;
     // Limit kontrolü: plan almamış herkes (anonim misafir veya kayıtlı ama plansız)
-    if (isLimited) {
+    // Dil değişiminde yeni oyun sayılmaz, kota/sayaç tüketilmez
+    if (isLimited && !isLanguageChange) {
       if (isRestart) {
         // Restart hakkını kontrol et ve tüket
         const restartInfo = getFlashcardGuestRestartInfo();
@@ -209,17 +223,25 @@ export const Flashcards = () => {
     }
   }, [categoryId, isPro, isLimited, currentLanguage, planReady]);
 
-  const hasLoadedInitialTerms = useRef(false);
+  const lastLoadedKeyRef = useRef('');
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/flashcards');
     if (!planReady) return;
-    if (hasLoadedInitialTerms.current) return;
-    hasLoadedInitialTerms.current = true;
 
-    loadTerms();
+    const currentKey = `${categoryId || 'all'}|${currentLanguage}`;
+    if (lastLoadedKeyRef.current === currentKey) return;
+
+    const previousKey = lastLoadedKeyRef.current;
+    lastLoadedKeyRef.current = currentKey;
+
+    // Dil değişimi kontrolü: Eğer sadece dil değiştiyse (önceki bir anahtar vardı ve kategori aynı)
+    // günlük oyun hakkı sayacı artırılmamalı.
+    const isLanguageChangeOnly = Boolean(previousKey) && previousKey.split('|')[0] === (categoryId || 'all');
+
+    loadTerms(false, isLanguageChangeOnly);
     updateStreak();
-  }, [planReady, loadTerms]);
+  }, [planReady, categoryId, currentLanguage, loadTerms]);
 
   const currentTerm = terms[currentIndex];
   const progress = terms.length > 0 ? ((currentIndex) / terms.length) * 100 : 0;
@@ -263,7 +285,7 @@ export const Flashcards = () => {
     setLearnedCount(0);
     setSkippedCount(0);
     setShowGuestModal(false);
-    loadTerms(true); // isRestart=true: restart sayılmasın, ayrı oynama hakkı tüketmesin
+    loadTerms(true, false); // isRestart=true, isLanguageChange=false
   };
 
   if (!planReady || loading) {

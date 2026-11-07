@@ -44,7 +44,15 @@ export const MatchGame = () => {
       return;
     }
 
+    let unsubDoc = null;
+
     const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      // Önceki Firestore dinleyicisi varsa kapat (yeni dinleyici açmadan önce veya auth değiştiğinde)
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+
       const targetUser = firebaseUser || getUser();
       const uid = targetUser?.uid;
 
@@ -65,7 +73,7 @@ export const MatchGame = () => {
 
       try {
         const userDocRef = doc(db, 'users', uid);
-        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+        unsubDoc = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
             setIsPro(checkIsPro(data));
@@ -79,14 +87,19 @@ export const MatchGame = () => {
           console.warn('[MatchGame] Error checking plan:', err);
           setPlanReady(true);
         });
-        return () => unsubDoc();
       } catch (e) {
         console.warn('[MatchGame] Error setting up user listener:', e);
         setPlanReady(true);
       }
     });
 
-    return () => unsubAuth();
+    return () => {
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+      unsubAuth();
+    };
   }, [previewRole]);
 
   useEffect(() => {
@@ -200,12 +213,14 @@ export const MatchGame = () => {
     setupGame(allTerms);
   }, [setupGame, allTerms]);
 
-  const hasInitializedTerms = useRef(false);
+  const lastLoadedKeyRef = useRef('');
 
   useEffect(() => {
     if (!planReady || !hasPlan) return;
-    if (hasInitializedTerms.current) return;
-    hasInitializedTerms.current = true;
+
+    const currentKey = `${categoryId || 'all'}|${currentLanguage}`;
+    if (lastLoadedKeyRef.current === currentKey) return;
+    lastLoadedKeyRef.current = currentKey;
 
     const fetchTerms = async () => {
       try {
@@ -270,7 +285,7 @@ export const MatchGame = () => {
 
     fetchTerms();
     updateStreak();
-  }, [categoryId, setupGame, planReady, hasPlan]);
+  }, [planReady, hasPlan, categoryId, currentLanguage, setupGame]);
 
 
 
