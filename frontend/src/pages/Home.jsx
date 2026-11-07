@@ -96,10 +96,18 @@ export const Home = () => {
                 <p className="sub">
                   {content.hero.sub(termCount)}
                 </p>
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <button
                     type="button"
-                    className="site-btn-primary flex items-center"
+                    className="site-btn-primary w-full sm:w-auto flex items-center justify-center"
+                    onClick={() => navigate('/register')}
+                  >
+                    {content.hero.ctaFree || (lang === 'en' ? 'Start Free' : 'Ücretsiz Başla')}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </button>
+                  <button
+                    type="button"
+                    className="site-btn-secondary w-full sm:w-auto flex items-center justify-center"
                     onClick={() => {
                       if (IS_PAYMENT_ACTIVE) {
                         scrollToSection('fiyat');
@@ -108,10 +116,7 @@ export const Home = () => {
                       }
                     }}
                   >
-                    {IS_PAYMENT_ACTIVE
-                      ? (content.pricing.btnText || (lang === 'en' ? 'Subscribe Now' : 'Hemen Katıl'))
-                      : (lang === 'en' ? 'Explore Dictionary' : 'Sözlüğü Keşfet')}
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    {content.hero.ctaPricing || (lang === 'en' ? 'See Pricing' : 'Tarifeleri Gör')}
                   </button>
                 </div>
                 <p className="microline">

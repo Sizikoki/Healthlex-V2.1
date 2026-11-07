@@ -75,8 +75,10 @@ export const HOME_CONTENT = {
         </>
       ),
       ctaBtn: 'Tüm Terimlerin Kilidini Aç',
-      micro1: '✓ Yıllık abonelik',
-      micro2: '✓ TR ⟷ EN',
+      ctaFree: 'Ücretsiz Başla',
+      ctaPricing: 'Tarifeleri Gör',
+      micro1: '✓ Kart gerekmez',
+      micro2: '✓ 947+ terim ücretsiz',
       scrollProof: '↓ Önce kanıt: İlk terimini 20 saniyede çöz.'
     },
     demo: {
@@ -212,8 +214,10 @@ export const HOME_CONTENT = {
         </>
       ),
       ctaBtn: 'Unlock All Terms',
-      micro1: '✓ Annual subscription',
-      micro2: '✓ TR ⟷ EN',
+      ctaFree: 'Start Free',
+      ctaPricing: 'See Pricing',
+      micro1: '✓ No card needed',
+      micro2: '✓ 947+ terms free',
       scrollProof: '↓ Proof first: Solve your first term in 20 seconds.'
     },
     demo: {
