@@ -14,8 +14,7 @@ import { getAllTerms } from '@/data/medicalTerms';
 import { buildTermGroups } from '@/data/groupOrder';
 import { formatMedicalTerm } from '@/utils/format';
 import { useLanguage } from '@/context/LanguageContext';
-import { getTermMorphemes } from '@/utils/morphemeAdapter';
-import { getTermSlug } from '@/utils/termHelper';
+import { getTermSlug, parseRootsToMorphemes } from '@/utils/termHelper';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { scoreAndRankTerms, normalizeSearchText } from '@/utils/searchHelper';
@@ -124,7 +123,8 @@ const TermCard = React.memo(({
               <div className="flex flex-wrap items-center gap-1.5 mt-2 animate-in fade-in duration-150">
                 {morphemes && morphemes.length > 0 ? (
                   morphemes.map((part, idx) => {
-                    const meaningText = part.meaning?.[currentLanguage] || part.meaning?.tr || '';
+                    const partText = part.root || part.text || '';
+                    const meaningText = part.meaning || '';
 
                     return (
                       <React.Fragment key={part.id || idx}>
@@ -134,10 +134,10 @@ const TermCard = React.memo(({
                         <button
                           type="button"
                           onClick={() => onMorphemeClick(part)}
-                          title={`${part.text} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
+                          title={`${partText} — ${meaningText} (${isTr ? 'Sözlükte keşfetmek için tıkla' : 'Click to explore'})`}
                           className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-border/70 bg-muted/60 hover:bg-muted text-foreground hover:border-primary/40 text-xs font-mono font-medium transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs cursor-pointer"
                         >
-                          <span className="font-semibold text-foreground">{part.text}</span>
+                          <span className="font-semibold text-foreground">{partText}</span>
                           {meaningText && (
                             <span
                               title={meaningText}
@@ -489,7 +489,12 @@ export const Study = () => {
   };
 
   const handleMorphemeClick = (part) => {
-    const cleanQuery = part.text.replace(/[-/]/g, '').trim();
+    if (part?.morphemeSlug) {
+      navigate(`/morphemes/${part.morphemeSlug}`);
+      return;
+    }
+    const rawText = part?.root || part?.text || '';
+    const cleanQuery = rawText.replace(/[-/]/g, '').trim();
     if (cleanQuery) {
       navigate(`/morphemes?search=${encodeURIComponent(cleanQuery)}`);
     }
@@ -508,7 +513,7 @@ export const Study = () => {
 
     setMorphemesCache((prev) => {
       if (prev[term.id]) return prev;
-      return { ...prev, [term.id]: getTermMorphemes(term) };
+      return { ...prev, [term.id]: parseRootsToMorphemes(term.roots) };
     });
   }, []);
 

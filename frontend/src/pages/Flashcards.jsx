@@ -11,7 +11,7 @@ import { auth, db } from '@/firebase/config';
 import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
-import { getTermMorphemes } from '@/utils/morphemeAdapter';
+import { parseRootsToMorphemes } from '@/utils/termHelper';
 import { useLanguage } from '@/context/LanguageContext';
 import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
@@ -479,23 +479,23 @@ export const Flashcards = () => {
               </div>
 
               {/* Morfem Analizi */}
-              {currentTerm && getTermMorphemes(currentTerm).length > 0 && (
+              {currentTerm && parseRootsToMorphemes(currentTerm?.roots).length > 0 && (
                 <div className="mt-1 pt-2 sm:mt-2 sm:pt-3 border-t border-border/50 max-w-md w-full text-center">
                   <div className="mb-1.5 text-[10px] sm:text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
                     {t('morphemeStructure', 'Morfem Yapısı')}
                   </div>
                   <div className="flex flex-wrap items-center justify-center gap-1.5">
-                    {getTermMorphemes(currentTerm).map((part, idx) => {
-                      const meaningText = currentLanguage === 'en'
-                        ? (part.meaning?.en || part.meaning?.tr || '')
-                        : (part.meaning?.tr || part.meaning?.en || '');
+                    {parseRootsToMorphemes(currentTerm?.roots).map((part, idx) => {
+                      const meaningText = part.meaning || '';
+
+
                       return (
                         <React.Fragment key={idx}>
                           {idx > 0 && (
                             <span className="text-[10px] text-muted-foreground/70 font-bold select-none">+</span>
                           )}
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg border border-border/70 bg-muted/60 text-[11px] sm:text-xs font-mono font-medium shadow-xs break-words">
-                            <span className="font-semibold text-foreground">{part.text}</span>
+                            <span className="font-semibold text-foreground">{part.root}</span>
                             {meaningText && (
                               <span className="text-[10px] sm:text-[10.5px] font-sans font-normal text-muted-foreground">
                                 ({meaningText})
