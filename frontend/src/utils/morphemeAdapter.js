@@ -9,6 +9,7 @@
  */
 import { getAllTerms } from '@/data/medicalTerms';
 import { DEFAULT_QUESTIONS } from '@/components/games/MorphemeGameFable';
+import { parseRootsToMorphemes } from '@/utils/termHelper';
 import {
   PREFIXES,
   ROOTS,
@@ -308,9 +309,46 @@ export function decomposeWord(wordText, parentMeaningMap = {}) {
   return parts;
 }
 
+const IRREGULAR_LATIN_STEMS = {
+  frons: 'front',
+  paries: 'pariet',
+  tempus: 'tempor',
+  occiput: 'occipit',
+  caput: 'capit',
+  corpus: 'corpor',
+  dens: 'dent',
+  pes: 'ped',
+  margo: 'margin',
+  cartilago: 'cartilagin',
+  foramen: 'foramin',
+  abdomen: 'abdomin',
+  pectus: 'pector',
+  femur: 'femor',
+  pulmo: 'pulmon',
+  atlas: 'atlant',
+  pharynx: 'pharyng',
+  larynx: 'laryng',
+  meninx: 'mening',
+  thorax: 'thorac',
+  cervix: 'cervic',
+  latus: 'later',
+  crus: 'crur',
+  cor: 'cord',
+  glomus: 'glomer',
+  apex: 'apic',
+  cortex: 'cortic',
+  radix: 'radic',
+  hallux: 'halluc',
+  pollex: 'pollic',
+  index: 'indic',
+  coccyx: 'coccyg',
+};
+
+const LATIN_SUFFIX_REGEX = /^(.*?)((?:oidalis|oidale|oideus|oidea|oideum|oidei|oides|oido|osalis|osale|osus|osa|osum|osi|osae|arius|aria|arium|alis|ale|aris|are|icus|ica|icum|eus|ea|eum|inus|ina|inum|ivus|iva|ivum|ioris|iorem|ioribus|iores|ior|ius|ibus|orum|arum|ium|us|um|is|es|ae|am|os|as|em|a|e|i|o|u))$/;
+
 /**
  * Latince kelimelerin çekim ve hal eklerini normalize ederek kök formunu çıkarır.
- * (örn. "ossis" ~ "os", "frontalis" ~ "frontale", "sphenoidalis" ~ "sphenoidale", "petrosa" ~ "petrosus")
+ * (örn. "ossis" ~ "os", "frons" ~ "frontalis" ~ "fronto-", "musculus" ~ "musculi", "interna" ~ "internus")
  */
 export function normalizeLatinStem(word) {
   if (!word || typeof word !== 'string') return '';
@@ -322,27 +360,41 @@ export function normalizeLatinStem(word) {
     return 'os';
   }
 
-  // -oidalis, -oidale, -oideus, -oidea, -oideum, -oidei, -oides -> 'oid'
-  w = w.replace(/(oidalis|oidale|oideus|oidea|oideum|oidei|oides)$/, 'oid');
-
-  // Adjectives / genitives / inflections:
-  // -alis, -ale, -aris, -are, -ibus, -orum, -arum, -ium
-  w = w.replace(/(alis|ale|aris|are|ibus|orum|arum|ium)$/, '');
-
-  // Comparative adjectives:
-  // -ioris, -iorem, -ioribus, -iores, -ior, -ius
-  w = w.replace(/(ioris|iorem|ioribus|iores|ior|ius)$/, '');
-
-  // Latin nominal and adjectival case endings:
-  // -us, -um, -is, -es, -ae, -am, -os, -as, -em
-  w = w.replace(/(us|um|is|es|ae|am|os|as|em)$/, '');
-
-  // Trailing single vowel endings: -a, -e, -i, -o, -u (kök uzunluğu > 3 ise)
-  if (w.length > 3) {
-    w = w.replace(/[aeiou]$/, '');
+  if (IRREGULAR_LATIN_STEMS[w]) {
+    return IRREGULAR_LATIN_STEMS[w];
   }
 
-  return w;
+  const m = w.match(LATIN_SUFFIX_REGEX);
+  if (m && m[1].length >= 2) {
+    w = m[1];
+  }
+
+  if (w.length > 3 && /[io]$/.test(w)) {
+    w = w.slice(0, -1);
+  }
+
+  return IRREGULAR_LATIN_STEMS[w] || w;
+}
+
+function getPartStems(text) {
+  if (!text || typeof text !== 'string') return [];
+  const tokens = text
+    .toLowerCase()
+    .split(/[\s/;]+/)
+    .map((t) => t.replace(/^-+|-+$/g, '').trim())
+    .filter(Boolean);
+  const stems = new Set();
+  for (const tok of tokens) {
+    stems.add(tok);
+    const s = normalizeLatinStem(tok);
+    if (s) stems.add(s);
+  }
+  return [...stems];
+}
+
+function normalizeMeaningTr(meaningObjOrStr) {
+  const raw = typeof meaningObjOrStr === 'string' ? meaningObjOrStr : (meaningObjOrStr?.tr || '');
+  return raw.toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ').trim();
 }
 
 /**
@@ -370,123 +422,44 @@ export function matchWordsWithEntry(subWords, entry) {
 }
 
 /**
- * Terim nesnesini morfem dizisine dönüştürür (Çalışma ve Bilgi kartları için tüm parçaları döner).
- * Önce ardışık kelime gruplarını (n-gram) roots alanıyla yaklaşık eşleştirir;
- * eşleşirse tek parça gösterir, parçalanma fallback'ine düşmez.
+ * Terim nesnesinin roots alanını parseRootsToMorphemes ile çözümleyerek
+ * Morfem Yapıcı oyununun beklediği Part dizisine dönüştürür.
  */
 export function getTermMorphemes(term) {
-  if (!term) return [];
-  const rawTermName = term.term || term.name || '';
-  const primaryTermName = getPrimaryLatinTerm(rawTermName);
-  if (!primaryTermName) return [];
+  if (!term || !term.roots || typeof term.roots !== 'string') return [];
 
-  // 1. roots alanını yapısal kök girdilerine dönüştür
-  const parentMeaningMap = {};
-  const rootEntries = [];
+  const parsed = parseRootsToMorphemes(term.roots);
+  if (!parsed || parsed.length === 0) return [];
 
-  if (term.roots && typeof term.roots === 'string') {
-    const rawRootParts = term.roots.split(/\+|\;/).map((p) => p.trim()).filter(Boolean);
-    rawRootParts.forEach((rp) => {
-      const pIdx = rp.indexOf('(');
-      if (pIdx !== -1) {
-        const rawKey = rp.substring(0, pIdx).trim().toLowerCase().replace(/^-+|-+$/g, '');
-        const cParen = rp.indexOf(')', pIdx);
-        const meaningText = (cParen !== -1 ? rp.substring(pIdx + 1, cParen) : rp.substring(pIdx + 1)).trim();
-        if (rawKey && meaningText) {
-          const enMeaning = resolveMorphemeEn(rawKey, meaningText);
-          const entryWords = rawKey.split(/\s+/).map((w) => w.trim().toLowerCase()).filter(Boolean);
+  return parsed.map((item, idx) => {
+    const rawText = (item.root || '').trim();
+    const lowerRaw = rawText.toLowerCase();
 
-          rootEntries.push({
-            rawKey,
-            words: entryWords,
-            wordCount: entryWords.length,
-            normalizedStems: entryWords.map((w) => normalizeLatinStem(w)),
-            meaning: { tr: meaningText, en: enMeaning },
-          });
-
-          parentMeaningMap[rawKey] = { tr: meaningText, en: enMeaning };
-        }
-      }
-    });
-  }
-
-  // 2. Terimin Latince adını kelimelerine ayır
-  const words = primaryTermName.split(/\s+/).map((w) => w.trim()).filter(Boolean);
-  if (words.length === 0) return [];
-
-  const sequence = [];
-  let i = 0;
-
-  while (i < words.length) {
-    let matched = false;
-
-    // A. Önce ardışık kelime gruplarıyla eşleşme dene (en uzundan 2 kelimeye doğru: n-gram)
-    const maxWindow = Math.min(words.length - i, 4);
-    for (let k = maxWindow; k >= 2; k--) {
-      const subWords = words.slice(i, i + k);
-      const matchingEntry = rootEntries.find((entry) => matchWordsWithEntry(subWords, entry));
-      if (matchingEntry) {
-        sequence.push({
-          id: `t_${term.id || 'term'}_w${i}_k${k}_${Math.random().toString(36).substr(2, 4)}`,
-          text: matchingEntry.rawKey,
-          meaning: matchingEntry.meaning,
-          partType: 'root',
-          wordIndex: i,
-        });
-        i += k;
-        matched = true;
-        break;
+    let partType = item.morphemeType || null;
+    if (!partType) {
+      if (rawText.startsWith('-')) {
+        partType = 'suffix';
+      } else if (PREFIX_LOOKUP[lowerRaw]) {
+        partType = 'prefix';
+      } else {
+        partType = 'root';
       }
     }
 
-    if (matched) continue;
+    const trMeaning = item.meaning || rawText;
+    const enMeaning = item.meaningEn || trMeaning;
 
-    // B. Tek kelimeli eşleşme (k = 1, roots alanındaki girdilerle)
-    const currentWord = words[i];
-    const subWords = [currentWord];
-    const singleMatchingEntry = rootEntries.find((entry) => matchWordsWithEntry(subWords, entry));
-    if (singleMatchingEntry) {
-      sequence.push({
-        id: `t_${term.id || 'term'}_w${i}_k1_${Math.random().toString(36).substr(2, 4)}`,
-        text: currentWord.toLowerCase(),
-        meaning: singleMatchingEntry.meaning,
-        partType: 'root',
-        wordIndex: i,
-      });
-      i += 1;
-      continue;
-    }
-
-    // C. MorphemesData sözlüğünde doğrudan tam kök araması
-    const lowerWord = currentWord.toLowerCase().replace(/^[^\w\u00C0-\u017F]+|[^\w\u00C0-\u017F]+$/g, '');
-    const directRootMeta = ROOT_LOOKUP[lowerWord] || COMMON_ROOT_DICTIONARY[lowerWord];
-    if (directRootMeta) {
-      sequence.push({
-        id: `t_${term.id || 'term'}_w${i}_direct_${Math.random().toString(36).substr(2, 4)}`,
-        text: lowerWord,
-        meaning: { tr: directRootMeta.tr || lowerWord, en: directRootMeta.en || lowerWord },
-        partType: 'root',
-        wordIndex: i,
-      });
-      i += 1;
-      continue;
-    }
-
-    // D. Fallback: decomposeWord (otomatik ön ek / kök / son ek heceleme)
-    const parts = decomposeWord(currentWord, parentMeaningMap);
-    parts.forEach((p, partIdx) => {
-      sequence.push({
-        id: `t_${term.id || 'term'}_w${i}_p${partIdx}_${Math.random().toString(36).substr(2, 4)}`,
-        text: p.text,
-        meaning: p.meaning,
-        partType: p.partType,
-        wordIndex: i,
-      });
-    });
-    i += 1;
-  }
-
-  return sequence;
+    return {
+      id: `t_${term.id || 'term'}_p${idx}_${Math.random().toString(36).substr(2, 4)}`,
+      text: rawText,
+      meaning: {
+        tr: trMeaning,
+        en: enMeaning,
+      },
+      partType,
+      wordIndex: 0,
+    };
+  });
 }
 
 /**
@@ -562,17 +535,42 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
   const pool = [...allParsedParts, ...FALLBACK_DISTRACTORS];
 
   selectedQuestions.forEach((q) => {
-    const correctTexts = new Set(q.correctSequence.map((p) => p.text.toLowerCase()));
-    const validDistractors = pool.filter((p) => !correctTexts.has(p.text.toLowerCase()));
+    const forbiddenTexts = new Set();
+    const forbiddenMeanings = new Set();
+    const forbiddenStems = new Set();
 
+    const registerForbiddenPart = (part) => {
+      const lowerText = (part.text || '').toLowerCase().trim();
+      if (lowerText) forbiddenTexts.add(lowerText);
+
+      const normMeaning = normalizeMeaningTr(part.meaning);
+      if (normMeaning) forbiddenMeanings.add(normMeaning);
+
+      getPartStems(part.text).forEach((s) => forbiddenStems.add(s));
+    };
+
+    q.correctSequence.forEach(registerForbiddenPart);
+
+    const isCandidateAllowed = (candidate) => {
+      const lowerText = (candidate.text || '').toLowerCase().trim();
+      if (!lowerText || forbiddenTexts.has(lowerText)) return false;
+
+      const normMeaning = normalizeMeaningTr(candidate.meaning);
+      if (normMeaning && forbiddenMeanings.has(normMeaning)) return false;
+
+      const candidateStems = getPartStems(candidate.text);
+      if (candidateStems.some((s) => forbiddenStems.has(s))) return false;
+
+      return true;
+    };
+
+    const validDistractors = pool.filter(isCandidateAllowed);
     const shuffled = [...validDistractors].sort(() => Math.random() - 0.5);
     const uniqueDistractors = [];
-    const usedTexts = new Set();
 
     for (const d of shuffled) {
-      const lowerText = d.text.toLowerCase();
-      if (!usedTexts.has(lowerText)) {
-        usedTexts.add(lowerText);
+      if (isCandidateAllowed(d)) {
+        registerForbiddenPart(d);
         uniqueDistractors.push({
           id: `dist_${q.id}_${uniqueDistractors.length}_${Math.random().toString(36).substr(2, 4)}`,
           text: d.text,
@@ -586,9 +584,8 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
     // If still less than 3 distractors, draw from FALLBACK_DISTRACTORS
     if (uniqueDistractors.length < 3) {
       for (const fb of FALLBACK_DISTRACTORS) {
-        const lowerText = fb.text.toLowerCase();
-        if (!correctTexts.has(lowerText) && !usedTexts.has(lowerText)) {
-          usedTexts.add(lowerText);
+        if (isCandidateAllowed(fb)) {
+          registerForbiddenPart(fb);
           uniqueDistractors.push({
             id: `dist_fb_${q.id}_${uniqueDistractors.length}_${Math.random().toString(36).substr(2, 4)}`,
             text: fb.text,

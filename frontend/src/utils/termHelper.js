@@ -72,7 +72,9 @@ export function parseRootsToMorphemes(rootsString) {
       root: rootRaw,
       meaning: meaning,
       morphemeSlug: matchedMorpheme ? matchedMorpheme.slug : null,
-      morphemeName: matchedMorpheme ? matchedMorpheme.displayTerm : null
+      morphemeName: matchedMorpheme ? matchedMorpheme.displayTerm : null,
+      morphemeType: matchedMorpheme ? matchedMorpheme.type : null,
+      meaningEn: matchedMorpheme ? matchedMorpheme.meaningEn : null
     };
   });
 }
