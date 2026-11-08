@@ -38,5 +38,9 @@ Whenever seeding new JSON datasets into Firestore or modifying the terms collect
    - The central `termCountService.js` loads `termCount.json` as its baseline synchronous value for `getInitialTermCount()` and queries Firestore live count in the background via `getTermCount()`.
    - Never hardcode term counts in UI components (`Dashboard.jsx`, `Welcome.jsx`, etc.); always query `termCountService.js`.
 
+3. **Term, Morpheme, Category, Price & Plan Limit Synchronization (`SITE_NUMBERS.md`)**:
+   - Terim, morfem, kategori yüklemesinde, fiyat veya plan limiti değişikliğinde önce `SITE_NUMBERS.md`'yi oku ve oradaki tüm 'sabit metin' ve 'betik/meta' konumlarını güncelle.
+   - Sayı içeren yeni bir kullanıcı metni eklersen, aynı commit'te `SITE_NUMBERS.md`'ye kaydet.
+
 
 
