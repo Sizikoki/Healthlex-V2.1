@@ -230,7 +230,7 @@ export const Profile = () => {
       toast.loading(isTr ? 'İlerleme raporunuz PDF olarak hazırlanıyor...' : 'Generating progress report PDF...', { id: 'export-pdf-toast' });
 
       const terms = getAllTerms();
-      const planTitle = isLifetime ? 'Ömür Boyu (Lifetime)' : isProPlan ? 'Pro Plan' : isBasic ? 'Temel Plan' : isTrialActive ? 'Deneme (Trial)' : 'Ücretsiz (Guest)';
+      const planTitle = isLifetime ? 'Ömür Boyu (Lifetime)' : isProPlan ? 'Pro Plan' : isBasic ? 'Temel Plan' : isTrialActive ? 'Deneme (Trial)' : 'Ücretsiz';
 
       await generateProgressPdf({
         user: effectiveUser,
@@ -626,8 +626,8 @@ export const Profile = () => {
                           ? 'Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 571+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
                           : 'You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 571+ morphemes and Quiz.')
                       : (isTr
-                          ? 'Temel erişimdesiniz. 571 morfem kütüphanesi, 4 oyun modu ve seviye sisteminin tamamına sınırsız erişmek için Pro\'ya geçin.'
-                          : 'You have trial access. Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.')}
+                          ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı, 4 oyun modu ve seviye sisteminin tamamı için Pro\'ya geç.'
+                          : 'You\'re on a free account. Upgrade to Pro to unlock 550+ morphemes, 4 game modes and the full level system.')}
                   </p>
                   {trialState.isActive && (
                     <div className="mt-3 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-lg inline-flex items-center gap-2">

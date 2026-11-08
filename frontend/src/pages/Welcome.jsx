@@ -84,6 +84,10 @@ export const Welcome = () => {
     () => checkHasPaidPlan(effectiveUser) || isPro || isBasic || searchParams.get('plan') === 'pro' || searchParams.get('plan') === 'basic' || searchParams.get('plan') === 'lifetime',
     [effectiveUser, isPro, isBasic, searchParams]
   );
+  const isRegistered = useMemo(
+    () => Boolean(currentUser?.uid || storedUser?.uid || effectiveUser?.uid),
+    [currentUser, storedUser, effectiveUser]
+  );
 
   // Dynamic user greeting name
   const userName = useMemo(() => {
@@ -109,8 +113,11 @@ export const Welcome = () => {
     if (isBasic || searchParams.get('plan') === 'basic') {
       return isTr ? 'HOŞ GELDİN · TEMEL PLAN' : 'WELCOME · BASIC PLAN';
     }
+    if (isRegistered) {
+      return isTr ? 'HOŞ GELDİN · ÜCRETSİZ HESAP' : 'WELCOME · FREE ACCOUNT';
+    }
     return isTr ? 'HOŞ GELDİN · MİSAFİR HESAP' : 'WELCOME · GUEST ACCOUNT';
-  }, [effectiveUser, isPro, isBasic, searchParams, isTr]);
+  }, [effectiveUser, isPro, isBasic, searchParams, isRegistered, isTr]);
 
   const greetingTitle = useMemo(() => {
     if (userName) {
@@ -130,10 +137,15 @@ export const Welcome = () => {
         ? 'Temel planın aktif edildi. Tüm kategoriler, 100 temel morfem ve sınırsız Flashcard & Eşleştirme oyunları kullanımına hazır. Aşağıda detayları görebilirsin.'
         : 'Your Basic plan is active. All categories, 100 core morphemes, and unlimited Flashcard & Matching games are ready. Review your plan below.';
     }
+    if (isRegistered) {
+      return isTr
+        ? 'Ücretsiz hesapla giriş yaptın. Kütüphanenin büyük bölümünü gezebilirsin; oyunlar ve morfem listesi sınırlı. Aşağıda neye, ne kadar erişebildiğini görürsün.'
+        : "You're signed in with a free account. You can explore most of the library; games and the morpheme list are limited. Below you can see what you can access and how much.";
+    }
     return isTr
       ? 'Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.'
       : 'You are currently logged in as a guest. You can explore most of the library for free; games and the morpheme list are limited. Below you can see what and how much you can access.';
-  }, [isPro, effectiveUser, isBasic, isTr]);
+  }, [isPro, effectiveUser, isBasic, isRegistered, isTr]);
 
   // 3 Quotas Cards
   const quotas = useMemo(() => {
@@ -390,12 +402,14 @@ export const Welcome = () => {
       mobileSubtitle: isTr
         ? 'Temel ₺790/yıl · Pro ₺2.000/yıl · Ömür Boyu ₺5.990'
         : 'Basic ₺790/yr · Pro ₺2,000/yr · Lifetime ₺5,990',
-      secondaryText: isTr ? 'Misafir olarak devam et' : 'Continue as guest',
+      secondaryText: isRegistered
+        ? (isTr ? 'Ücretsiz devam et' : 'Continue for free')
+        : (isTr ? 'Misafir olarak devam et' : 'Continue as guest'),
       secondaryLink: '/study',
       primaryText: isTr ? 'Tarifeleri gör →' : 'View plans →',
       primaryLink: '/pricing'
     };
-  }, [isPro, isBasic, effectiveUser, isTr]);
+  }, [isPro, isBasic, effectiveUser, isRegistered, isTr]);
 
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-[#f5f7fb] dark:bg-background py-8 sm:py-12 lg:py-14 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 flex justify-center font-sans antialiased">
@@ -410,13 +424,25 @@ export const Welcome = () => {
               {greetingTitle}
             </h1>
             <p className="m-0 font-normal text-[15px] sm:text-[17px] leading-[1.6] text-[#6b7a90] dark:text-muted-foreground">
-              {isTr && !hasPaidPlan ? (
+              {!hasPaidPlan ? (
                 <>
                   <span className="sm:hidden">
-                    Misafir olarak giriş yaptın. Kütüphaneyi ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır.
+                    {isRegistered
+                      ? (isTr
+                          ? 'Ücretsiz hesapla giriş yaptın. Kütüphaneyi gezebilirsin; oyunlar ve morfem listesi sınırlı.'
+                          : "You're signed in with a free account. You can explore the library; games and the morpheme list are limited.")
+                      : (isTr
+                          ? 'Misafir olarak giriş yaptın. Kütüphaneyi ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır.'
+                          : 'You are logged in as a guest. You can explore the library for free; games and the morpheme list are limited.')}
                   </span>
                   <span className="hidden sm:inline">
-                    Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.
+                    {isRegistered
+                      ? (isTr
+                          ? 'Ücretsiz hesapla giriş yaptın. Kütüphanenin büyük bölümünü gezebilirsin; oyunlar ve morfem listesi sınırlı. Aşağıda neye, ne kadar erişebildiğini görürsün.'
+                          : "You're signed in with a free account. You can explore most of the library; games and the morpheme list are limited. Below you can see what you can access and how much.")
+                      : (isTr
+                          ? 'Şu an misafir olarak giriş yaptın. Kütüphanenin büyük bölümünü ücretsiz gezebilirsin; oyunlar ve morfem listesi sınırlıdır. Aşağıda neye, ne kadar erişebileceğini görürsün.'
+                          : 'You are currently logged in as a guest. You can explore most of the library for free; games and the morpheme list are limited. Below you can see what and how much you can access.')}
                   </span>
                 </>
               ) : (
@@ -572,9 +598,13 @@ export const Welcome = () => {
             {isTr
               ? hasPaidPlan
                 ? 'ÖZELLİK · SENİN PLANIN · PRO'
+                : isRegistered
+                ? 'ÖZELLİK · ÜCRETSİZ HESAP · PRO'
                 : 'ÖZELLİK · MİSAFİR SINIRI · PRO'
               : hasPaidPlan
               ? 'FEATURE · YOUR PLAN · PRO'
+              : isRegistered
+              ? 'FEATURE · FREE ACCOUNT · PRO'
               : 'FEATURE · GUEST LIMIT · PRO'}
           </span>
           {rows.map((r, idx) => {
@@ -619,9 +649,13 @@ export const Welcome = () => {
                   {isTr
                     ? hasPaidPlan
                       ? 'SENİN PLANIN'
+                      : isRegistered
+                      ? 'ÜCRETSİZ HESAP'
                       : 'MİSAFİR SINIRI'
                     : hasPaidPlan
                     ? 'YOUR PLAN'
+                    : isRegistered
+                    ? 'FREE ACCOUNT'
                     : 'GUEST LIMIT'}
                 </span>
                 <span>PRO & ÖMÜR BOYU</span>
