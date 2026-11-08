@@ -532,7 +532,7 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
   const shuffledCandidates = [...candidateQuestions].sort(() => Math.random() - 0.5);
   const selectedQuestions = shuffledCandidates.slice(0, Math.min(roundSize, shuffledCandidates.length));
 
-  const pool = [...allParsedParts, ...FALLBACK_DISTRACTORS];
+  const pool = [...allParsedParts];
 
   selectedQuestions.forEach((q) => {
     const forbiddenTexts = new Set();
