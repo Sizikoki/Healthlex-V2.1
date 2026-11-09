@@ -5,7 +5,8 @@ export const UNLOCKED_CATEGORY_IDS = [
 ];
 
 export const MAX_GUEST_MORPHEMES = 24;
-export const MAX_BASIC_MORPHEMES = 100;
+export const MAX_FREE_USER_MORPHEMES = 50;
+export const MAX_BASIC_MORPHEMES = 150;
 
 export const UNLOCKED_GAMES = [
   'flashcards',
@@ -147,12 +148,14 @@ export const isCategoryUnlocked = (categoryId, isPro) => {
 /**
  * Morfemin kullanıcı için açık olup olmadığını kontrol eder:
  * - Pro/Ömür Boyu: tüm morfemler (571+) açık
- * - Temel plan (isBasic true): ilk 100 morfem açık
+ * - Temel plan (isBasic true): ilk 150 morfem açık
+ * - Kayıtlı ücretsiz kullanıcı (isLoggedIn true): ilk 50 morfem açık
  * - Misafir (giriş yapmamış): ilk 24 morfem açık
  */
-export const isMorphemeUnlocked = (index, isPro, isBasic = false) => {
+export const isMorphemeUnlocked = (index, isPro, isBasic = false, isLoggedIn = false) => {
   if (isPro) return true;
   if (isBasic) return index < MAX_BASIC_MORPHEMES;
+  if (isLoggedIn) return index < MAX_FREE_USER_MORPHEMES;
   return index < MAX_GUEST_MORPHEMES;
 };
 

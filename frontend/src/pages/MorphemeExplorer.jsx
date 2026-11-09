@@ -77,46 +77,77 @@ export const MorphemeExplorer = () => {
   const previewRole = getPreviewRole();
   const [isPro, setIsPro] = useState(previewRole === 'pro');
   const [isBasic, setIsBasic] = useState(previewRole === 'basic');
+  const [userLoggedIn, setUserLoggedIn] = useState(() => {
+    if (previewRole) return previewRole !== 'guest';
+    return isLoggedIn();
+  });
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/morphemes');
   }, []);
 
   useEffect(() => {
-    if (previewRole) return;
-    const uid = auth?.currentUser?.uid || getUser()?.uid;
-    if (!uid) {
-      const localUser = getUser();
-      setIsPro(checkIsPro(localUser));
-      setIsBasic(checkIsBasic(localUser));
+    if (previewRole) {
+      setUserLoggedIn(previewRole !== 'guest');
       return;
     }
 
-    try {
-      const userDocRef = doc(db, 'users', uid);
-      const unsub = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setIsPro(checkIsPro(data));
-          setIsBasic(checkIsBasic(data));
-        } else {
-          const localUser = getUser();
-          setIsPro(checkIsPro(localUser));
-          setIsBasic(checkIsBasic(localUser));
-        }
-      }, (err) => {
-        console.warn('[MorphemeExplorer] Could not check pro status:', err);
+    let unsubDoc = null;
+    const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+
+      const targetUser = firebaseUser || getUser();
+      const uid = targetUser?.uid;
+
+      if (!uid) {
         const localUser = getUser();
+        setUserLoggedIn(Boolean(localUser));
         setIsPro(checkIsPro(localUser));
         setIsBasic(checkIsBasic(localUser));
-      });
-      return () => unsub();
-    } catch (e) {
-      console.warn('[MorphemeExplorer] Error checking pro status:', e);
-      const localUser = getUser();
-      setIsPro(checkIsPro(localUser));
-      setIsBasic(checkIsBasic(localUser));
-    }
+        return;
+      }
+
+      setUserLoggedIn(true);
+      setIsPro(checkIsPro(targetUser));
+      setIsBasic(checkIsBasic(targetUser));
+
+      try {
+        const userDocRef = doc(db, 'users', uid);
+        unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserLoggedIn(true);
+            setIsPro(checkIsPro(data));
+            setIsBasic(checkIsBasic(data));
+          } else {
+            const localUser = getUser();
+            setUserLoggedIn(Boolean(localUser));
+            setIsPro(checkIsPro(localUser));
+            setIsBasic(checkIsBasic(localUser));
+          }
+        }, (err) => {
+          console.warn('[MorphemeExplorer] Could not check pro status:', err);
+          const localUser = getUser();
+          setUserLoggedIn(Boolean(localUser));
+          setIsPro(checkIsPro(localUser));
+          setIsBasic(checkIsBasic(localUser));
+        });
+      } catch (e) {
+        console.warn('[MorphemeExplorer] Error checking pro status:', e);
+        const localUser = getUser();
+        setUserLoggedIn(Boolean(localUser));
+        setIsPro(checkIsPro(localUser));
+        setIsBasic(checkIsBasic(localUser));
+      }
+    });
+
+    return () => {
+      if (unsubDoc) unsubDoc();
+      unsubAuth();
+    };
   }, [previewRole]);
 
   const [searchQuery, setSearchQuery] = useState(() => searchParams.get('search') || '');
@@ -550,7 +581,7 @@ export const MorphemeExplorer = () => {
           <section aria-label={isTr ? 'Morfem Kartları' : 'Morpheme Cards'} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {paginatedMorphemes.map((item) => {
               const slug = (item.displayTerm || '').split(/[\/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
-              const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro, isBasic);
+              const locked = !isPro && !isMorphemeUnlocked(item.globalIndex, isPro, isBasic, userLoggedIn);
               const isLearned = !!morphemeProgress[slug]?.learned;
 
               const handleCardClick = (e) => {
