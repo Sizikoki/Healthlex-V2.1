@@ -129,8 +129,8 @@ export const Welcome = () => {
   const greetingSubtitle = useMemo(() => {
     if (isPro || effectiveUser?.isLifetime) {
       return isTr
-        ? 'Pro üyeliğin aktif edildi. Kütüphanenin tamamını, tüm 571+ morfemi ve 4 oyun modunun hepsini sınırsızca kullanabilirsin. Aşağıda tüm ayrıcalıklarını görebilirsin.'
-        : 'Your Pro membership is active. Enjoy full unrestricted access to all terms, 571+ morphemes, and 4 game modes. Review your privileges below.';
+        ? 'Pro üyeliğin aktif edildi. Kütüphanenin tamamını, tüm 550+ morfemi ve 4 oyun modunun hepsini sınırsızca kullanabilirsin. Aşağıda tüm ayrıcalıklarını görebilirsin.'
+        : 'Your Pro membership is active. Enjoy full unrestricted access to all terms, 550+ morphemes, and 4 game modes. Review your privileges below.';
     }
     if (isBasic) {
       return isTr
@@ -163,12 +163,12 @@ export const Welcome = () => {
         },
         {
           label: isTr ? 'MORFEM' : 'MORPHEMES',
-          v: '571+',
+          v: '550+',
           unit: isTr ? 'morfem (tamamı)' : 'morphemes (full)',
           mobileUnit: isTr ? 'tümü açık' : 'all open',
           note: isTr
             ? 'Ön ek, kök ve son ek kütüphanesinin tamamı sınırsız açık.'
-            : 'All 571+ prefixes, roots, and suffixes completely unlocked.'
+            : 'All 550+ prefixes, roots, and suffixes completely unlocked.'
         },
         {
           label: isTr ? 'OYUNLAR' : 'GAMES',
@@ -196,8 +196,8 @@ export const Welcome = () => {
         {
           label: isTr ? 'MORFEM' : 'MORPHEMES',
           v: '100',
-          unit: isTr ? '/ 571+ morfem' : '/ 571+ morphemes',
-          mobileUnit: isTr ? '/ 571+ açık' : '/ 571+ open',
+          unit: isTr ? '/ 550+ morfem' : '/ 550+ morphemes',
+          mobileUnit: isTr ? '/ 550+ açık' : '/ 550+ open',
           note: isTr
             ? 'En çok kullanılan ilk 100 morfem açık. İleri seviye morfemler Pro gerektirir.'
             : 'Top 100 core morphemes unlocked. Advanced morphemes require Pro.'
@@ -228,8 +228,8 @@ export const Welcome = () => {
       {
         label: isTr ? 'MORFEM' : 'MORPHEMES',
         v: '24',
-        unit: isTr ? '/ 571+ morfem' : '/ 571+ morphemes',
-        mobileUnit: isTr ? '/ 571+ açık' : '/ 571+ open',
+        unit: isTr ? '/ 550+ morfem' : '/ 550+ morphemes',
+        mobileUnit: isTr ? '/ 550+ açık' : '/ 550+ open',
         note: isTr
           ? 'İlk 24 morfem açık; gerisinde ad görünür, anlam ve detay bulanık.'
           : 'First 24 morphemes open; remaining show name with blurred meaning.'
@@ -255,7 +255,7 @@ export const Welcome = () => {
         return [
           { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
-          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '571+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '571+ morfem' },
+          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '550+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '550+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Kişisel tekrar algoritması aktif', pro: 'Sınırsız' },
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Açık' },
@@ -268,7 +268,7 @@ export const Welcome = () => {
         return [
           { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
-          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '571+ morfem' },
+          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '550+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Limitsiz kart çalışması', pro: 'Sınırsız' },
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Temel plan ile sınırsız açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
@@ -281,7 +281,7 @@ export const Welcome = () => {
       return [
         { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
         { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
-        { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '571+ morfem' },
+        { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '550+ morfem' },
         { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'part', limit: 'Günde 5 oyun', sub: 'Her gece yenilenir', pro: 'Sınırsız' },
         { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık' },
         { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
@@ -295,7 +295,7 @@ export const Welcome = () => {
       return [
         { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
-        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '571+ morphemes open', sub: 'Full library unlocked', pro: '571+ morphemes' },
+        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '550+ morphemes open', sub: 'Full library unlocked', pro: '550+ morphemes' },
         { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Adaptive algorithm active', pro: 'Unlimited' },
         { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Unlocked across all categories', pro: 'Unlocked' },
         { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'open', limit: 'Unlimited', sub: 'All difficulty levels', pro: 'Unlocked' },
@@ -308,7 +308,7 @@ export const Welcome = () => {
       return [
         { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
-        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '571+ morphemes' },
+        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '550+ morphemes' },
         { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
         { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Fully unlocked with Basic plan', pro: 'Unlocked' },
         { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
@@ -320,7 +320,7 @@ export const Welcome = () => {
     return [
       { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
-      { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '571+ morphemes' },
+      { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
       { name: 'Flashcards', desc: 'Spaced repetition with cards', type: 'part', limit: '5 games per day', sub: 'Refreshes every midnight', pro: 'Unlimited' },
       { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked' },
       { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
@@ -366,11 +366,11 @@ export const Welcome = () => {
       return {
         title: isTr ? 'Tüm içerikler hesabında aktif!' : 'All content is active on your account!',
         subtitle: isTr
-          ? '16 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
-          : 'Enjoy unlimited access to all 16 categories, 571+ morphemes, and 4 game modes.',
+          ? '16 kategori, 550+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
+          : 'Enjoy unlimited access to all 16 categories, 550+ morphemes, and 4 game modes.',
         mobileSubtitle: isTr
-          ? '16 kategori, 571+ morfem ve 4 oyun modu sınırsız kullanımına hazır.'
-          : 'All 16 categories, 571+ morphemes, and 4 game modes are active.',
+          ? '16 kategori, 550+ morfem ve 4 oyun modu sınırsız kullanımına hazır.'
+          : 'All 16 categories, 550+ morphemes, and 4 game modes are active.',
         secondaryText: isTr ? 'Panelime Git' : 'Go to Dashboard',
         secondaryLink: '/dashboard',
         primaryText: isTr ? 'Çalışmaya Başla →' : 'Start Studying →',
@@ -382,11 +382,11 @@ export const Welcome = () => {
       return {
         title: isTr ? 'Daha fazlası için Pro’ya yükselt' : 'Upgrade to Pro for more',
         subtitle: isTr
-          ? '571+ morfem, Quiz ve Morfem Yapıcı için dilediğin zaman Pro plana geçebilirsin.'
-          : 'Upgrade to Pro anytime to unlock all 571+ morphemes and advanced games.',
+          ? '550+ morfem, Quiz ve Morfem Yapıcı için dilediğin zaman Pro plana geçebilirsin.'
+          : 'Upgrade to Pro anytime to unlock all 550+ morphemes and advanced games.',
         mobileSubtitle: isTr
-          ? '571+ morfem, Quiz ve Morfem Yapıcı için Pro plana geçebilirsin.'
-          : 'Upgrade to Pro for 571+ morphemes, Quiz, and Morpheme Builder.',
+          ? '550+ morfem, Quiz ve Morfem Yapıcı için Pro plana geçebilirsin.'
+          : 'Upgrade to Pro for 550+ morphemes, Quiz, and Morpheme Builder.',
         secondaryText: isTr ? 'Çalışmaya Başla' : 'Start Studying',
         secondaryLink: '/study',
         primaryText: isTr ? 'Pro’ya Yükselt →' : 'Upgrade to Pro →',
@@ -541,7 +541,7 @@ export const Welcome = () => {
                   {isTr ? 'Morfem Kütüphanesi' : 'Morpheme Library'}
                 </div>
                 <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? '571 ön ek, kök ve son ek analizi ve türetim mantığı.' : '571 prefixes, roots and suffixes with logic.'}
+                  {isTr ? '550+ ön ek, kök ve son ek analizi ve türetim mantığı.' : '550+ prefixes, roots and suffixes with logic.'}
                 </div>
               </div>
             </Link>
