@@ -85,9 +85,9 @@ export const HOME_CONTENT = {
       label: 'Bu terimi daha önce hiç görmediysen bile çözebilirsin:',
       hint: 'Parçalara dokunun, anlamları açılsın.',
       nextBtn: 'Sıradaki Terim →',
-      finalMsg: (termCount, totalMorphemes) => (
+      finalMsg: (termCount) => (
         <>
-          <strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {termCount}+ terim ve {totalMorphemes}+ morfem seni bekliyor.
+          <strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {termCount}+ terim ve 550+ morfem seni bekliyor.
         </>
       ),
       finalBtn: 'Tüm Terimlerin Kilidini Aç'
@@ -118,7 +118,7 @@ export const HOME_CONTENT = {
       step3Title: 'Birleştir',
       step3Ex: '= KALP KASI HASTALIĞI',
       step3Desc: 'Terim artık hafızanda. Bir daha listeye bakmana gerek yok.',
-      logicClose: (totalMorphemes) => `${totalMorphemes}+ morfemi öğrendiğinde, daha önce hiç görmediğin terimleri bile rahatlıkla okursun. Ezber sana liste kazandırır; mantık sana tıp dili kazandırır.`
+      logicClose: () => `550+ morfemi öğrendiğinde, daha önce hiç görmediğin terimleri bile rahatlıkla okursun. Ezber sana liste kazandırır; mantık sana tıp dili kazandırır.`
     },
     features: {
       eyebrow: 'İçeride Ne Var?',
@@ -223,9 +223,9 @@ export const HOME_CONTENT = {
       label: 'Even if you have never seen this term before, you can solve it:',
       hint: 'Tap the parts to reveal their meanings.',
       nextBtn: 'Next Term →',
-      finalMsg: (termCount, totalMorphemes) => (
+      finalMsg: (termCount) => (
         <>
-          <strong className="text-foreground">You solved 3 terms without memorizing!</strong> Inside, {termCount}+ terms and {totalMorphemes}+ morphemes are waiting for you.
+          <strong className="text-foreground">You solved 3 terms without memorizing!</strong> Inside, {termCount}+ terms and 550+ morphemes are waiting for you.
         </>
       ),
       finalBtn: 'Unlock All Terms'
@@ -256,7 +256,7 @@ export const HOME_CONTENT = {
       step3Title: 'Combine',
       step3Ex: '= HEART MUSCLE DISEASE',
       step3Desc: 'The term is now in your memory. No need to look at a list again.',
-      logicClose: (totalMorphemes) => `When you learn ${totalMorphemes}+ morphemes, you can easily read even terms you've never seen before. Memorization gives you a list; logic gives you medical language.`
+      logicClose: () => `When you learn 550+ morphemes, you can easily read even terms you've never seen before. Memorization gives you a list; logic gives you medical language.`
     },
     features: {
       eyebrow: "What's Inside?",

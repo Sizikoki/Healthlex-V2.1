@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain, Mail } from 'lucide-react';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
-import { PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { auth } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
@@ -47,7 +46,6 @@ export const Home = () => {
   // ────────────────────────────────────────────────────────────────────────────
 
   const [termCount, setTermCount] = useState(getInitialTermCount);
-  const totalMorphemes = PREFIXES.length + ROOTS.length + SUFFIXES.length; // 571 morfem
 
   useEffect(() => {
     let isMounted = true;
@@ -191,7 +189,7 @@ export const Home = () => {
               </div>
             </div>
             <p className="logic-close">
-              {content.method.logicClose(totalMorphemes)}
+              {content.method.logicClose()}
             </p>
           </div>
         </section>
@@ -207,7 +205,7 @@ export const Home = () => {
                 <div className="l">{content.features.terms}</div>
               </div>
               <div className="stat">
-                <div className="n">{totalMorphemes}+</div>
+                <div className="n">550+</div>
                 <div className="l">{content.features.morphemes}</div>
               </div>
               <div className="stat">

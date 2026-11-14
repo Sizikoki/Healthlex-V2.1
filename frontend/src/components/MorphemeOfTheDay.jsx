@@ -15,7 +15,7 @@ const MOTD_DATA = {
       { prefix: 'hepat', suffix: 'itis', meaning: 'karaciğer iltihabı' },
       { prefix: 'dermat', suffix: 'itis', meaning: 'deri iltihabı' }
     ],
-    cta: '553+ morfemin tamamı'
+    cta: '550+ morfemin tamamı'
   },
   en: {
     label: 'MORPHEME OF THE DAY',
@@ -28,7 +28,7 @@ const MOTD_DATA = {
       { prefix: 'hepat', suffix: 'itis', meaning: 'liver inflammation' },
       { prefix: 'dermat', suffix: 'itis', meaning: 'skin inflammation' }
     ],
-    cta: 'Explore all 553+ morphemes'
+    cta: 'Explore all 550+ morphemes'
   }
 };
 

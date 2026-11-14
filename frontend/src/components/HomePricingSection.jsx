@@ -37,7 +37,7 @@ const PRICING_CONTENT = {
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
-          ['–', 'Tüm 571+ morfem havuzu (Pro ve üzeri)']
+          ['–', 'Tüm 550+ morfem havuzu (Pro ve üzeri)']
         ]
       },
       {
@@ -53,7 +53,7 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: true,
         feats: [
-          ['✓', '16 kategori · 571+ morfem'],
+          ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -72,7 +72,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '16 kategori · 571+ morfem'],
+          ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
           ['✓', 'İlerleme ve seviye sistemi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
@@ -110,7 +110,7 @@ const PRICING_CONTENT = {
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Pro & above)'],
-          ['–', 'Full 571+ morpheme library (Pro & above)']
+          ['–', 'Full 550+ morpheme library (Pro & above)']
         ]
       },
       {
@@ -126,7 +126,7 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: true,
         feats: [
-          ['✓', '16 categories · 571+ morphemes'],
+          ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
@@ -145,7 +145,7 @@ const PRICING_CONTENT = {
         isPro: false,
         isLife: true,
         feats: [
-          ['✓', '16 categories · 571+ morphemes'],
+          ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
           ['✓', 'Progress and level system'],
           ['✓', 'Review with learned terms'],
