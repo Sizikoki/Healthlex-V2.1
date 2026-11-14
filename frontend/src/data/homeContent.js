@@ -71,13 +71,13 @@ export const HOME_CONTENT = {
       title2: 'Çöz.',
       sub: (termCount) => (
         <>
-          Her Latince tıp terimi 2–3 parçadan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong> terimi ezberlemeden oku, sınavdan 2 hafta sonra da hatırla.
+          Tıp terimlerinin çoğu anlamlı parçalardan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong> terimi ezberlemeden oku ve anla.
         </>
       ),
       ctaBtn: 'Tüm Terimlerin Kilidini Aç',
       ctaFree: 'Ücretsiz Başla',
       ctaPricing: 'Tarifeleri Gör',
-      micro1: '✓ Kart gerekmez',
+      micro1: '✓ Ücretsiz hesapta kart gerekmez',
       micro2: '✓ 947+ terim ücretsiz',
       scrollProof: '↓ Önce kanıt: İlk terimini 20 saniyede çöz.'
     },
@@ -210,13 +210,13 @@ export const HOME_CONTENT = {
       title2: 'Solve.',
       sub: (termCount) => (
         <>
-          Every Latin medical term consists of 2–3 parts. Learn the parts; read <strong className="text-foreground font-bold">{termCount}+</strong> terms without memorizing, and remember them even 2 weeks after the exam.
+          Most medical terms consist of meaningful parts. Learn the parts; read and understand <strong className="text-foreground font-bold">{termCount}+</strong> terms without memorizing.
         </>
       ),
       ctaBtn: 'Unlock All Terms',
       ctaFree: 'Start Free',
       ctaPricing: 'See Pricing',
-      micro1: '✓ No card needed',
+      micro1: '✓ No card needed for a free account',
       micro2: '✓ 947+ terms free',
       scrollProof: '↓ Proof first: Solve your first term in 20 seconds.'
     },
