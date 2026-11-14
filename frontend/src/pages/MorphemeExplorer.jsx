@@ -492,11 +492,11 @@ export const MorphemeExplorer = () => {
                 <span>
                   {isBasic
                     ? (isTr
-                        ? 'Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.'
-                        : 'Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.')
+                        ? 'Temel Paket: İlk 100 morfem açık. 550+ morfemin tamamı için Pro’ya geçin.'
+                        : 'Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 550+.')
                     : (isTr
-                        ? 'Misafir Modu: İlk 24 morfem açık. 100 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.'
-                        : 'Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 100 or Pro for all 571+.')}
+                        ? 'Misafir Modu: İlk 24 morfem açık. 100 morfem için Temel plana, 550+ morfemin tamamı için Pro’ya geçin.'
+                        : 'Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 100 or Pro for all 550+.')}
                 </span>
               </div>
               <Link to="/pricing" className="shrink-0 font-bold text-amber-700 dark:text-amber-300 hover:underline">
@@ -590,14 +590,14 @@ export const MorphemeExplorer = () => {
                   if (!isBasic) {
                     toast.info(
                       isTr
-                        ? 'İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
-                        : 'The first 24 morphemes are open for guests. Upgrade to Basic for 100 morphemes or Pro and above for all 571.'
+                        ? 'İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
+                        : 'The first 24 morphemes are open for guests. Upgrade to Basic for 100 morphemes or Pro and above for all 550+.'
                     );
                   } else {
                     toast.info(
                       isTr
-                        ? 'İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
-                        : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro and above to unlock all 571 morphemes.'
+                        ? 'İlk 100 morfem Temel planda açıktır. 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geçin.'
+                        : 'The first 100 morphemes are available in the Basic plan. Upgrade to Pro and above to unlock all 550+ morphemes.'
                     );
                   }
                   navigate('/pricing');

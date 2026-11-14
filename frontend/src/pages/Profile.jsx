@@ -612,19 +612,19 @@ export const Profile = () => {
                       : isTrialActive
                       ? (isBasic
                           ? (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 16 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
-                              : 'You are on a 3-day free trial. Full access to all 16 categories, 571+ morphemes, and 4 game modes.')
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 16 kategori, 550+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 16 categories, 550+ morphemes, and 4 game modes.')
                           : (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. 16 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
-                              : 'You are on a 3-day free trial. Full access to all 16 categories, 571+ morphemes, and 4 game modes.'))
+                              ? '3 günlük ücretsiz deneme sürecindesiniz. 16 kategorinin tamamı, 550+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
+                              : 'You are on a 3-day free trial. Full access to all 16 categories, 550+ morphemes, and 4 game modes.'))
                       : isProPlan
                       ? (isTr
                           ? 'Tüm tıbbi terminoloji morfemlerine, oyun modlarına ve detaylı analizlere sınırsız erişim.'
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
                       : isBasic
                       ? (isTr
-                          ? 'Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 571+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
-                          : 'You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 571+ morphemes and Quiz.')
+                          ? 'Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
+                          : 'You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 550+ morphemes and Quiz.')
                       : (isTr
                           ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı, 4 oyun modu ve seviye sisteminin tamamı için Pro\'ya geç.'
                           : 'You\'re on a free account. Upgrade to Pro to unlock 550+ morphemes, 4 game modes and the full level system.')}
