@@ -514,11 +514,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 - **Eski Fiyat Gösterim Mekanizması:**
   - `HomePricingSection.jsx` [L292] ve `Pricing.jsx` [L595, L777] içinde kartların `plan.old` alanı okunarak Tailwind CSS `line-through` sınıfı (`text-muted-foreground line-through text-sm`) ile ekranda üstü çizili basılır.
 - **İndirim Rozetleri ve Eski Fiyat İlişkisi:**
-  - **Pro Plan Rozeti:** **%55 İndirim** (`badge: 'SINIRLI SÜRE · %55'`, `saveBadge: '%55'` / `saveBadge: '55% OFF'`)
-    - Matematiksel oran: `(4.500 - 2.000) / 4.500 = 2.500 / 4.500 = %55,56` (Aşağı yuvarlanarak **%55** yazılmıştır).
-  - **Ömür Boyu Plan Rozeti:** **%25 İndirim** (`badge: 'SINIRLI SÜRE · %25'` / `badge: 'LIMITED TIME · 25% OFF'`)
-    - Matematiksel oran: `(8.000 - 5.990) / 8.000 = 2.010 / 8.000 = %25,125` (Aşağı yuvarlanarak **%25** yazılmıştır).
-  - **Rozet Yüzdeleri Durumu:** Kod içinde herhangi bir dinamik matematiksel formülle hesaplanmamaktadır. `HomePricingSection.jsx` ve `Pricing.jsx` bileşenlerinde string literal (sabit metin) olarak elle yazılmıştır.
+  - Eski fiyat (`old`) ve yüzde indirim (`%55`, `%25`) ifadeleri `HomePricingSection.jsx` ve `Pricing.jsx` üzerinden kaldırılmıştır; ekranda üstü çizili eski fiyat ve indirim yüzdesi gösterilmez.
+  - Pro ve Ömür Boyu kartlarında rozet metni olarak Türkçe `"Lansman fiyatı"`, İngilizce `"Launch price"` kullanılır.
+  - **Rozet Metinleri Durumu:** `HomePricingSection.jsx` ve `Pricing.jsx` bileşenlerinde string literal (sabit metin) olarak tanımlıdır.
 - **Ömür Boyu Paddle Price ID Bilgisi:**
   - Çevre değişkeni: `process.env.REACT_APP_PADDLE_PRICE_LIFETIME` (frontend) veya `process.env.PADDLE_PRICE_LIFETIME` (backend).
   - Koddaki fallback: `frontend/src/services/paddle.js` [L11] içindeki `PADDLE_PRICE_ID = 'pri_01m1hbkgmff67g3mght6w6bj2q'` değeri Pro plan ID'si ile aynı fallback olarak tanımlanmıştır.
@@ -526,17 +524,17 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
   - Kod tabanında 5.000 TL şeklinde bir fiyat **bulunmamaktadır**.
   - 5000 sayısı yalnızca dahili ürün dokümanlarında (`.cursor/plans/healthlexmed_dna_report_a582584e.plan.md`) hedeflenen terim sayısı olarak ve kod içi zaman aşımı sabitlerinde (`FEEDBACK_DELAY_MS = 5000;`, `duration: 5000`) geçmektedir. Canlı sitedeki tek seferlik Ömür Boyu plan fiyatı **₺5.990**'dır.
 
-### b) Pazarlama Yazım Kuralı
-- Para birimi simgesi: `₺` (başa gelir).
-- Binlik basamak ayracı:
-  - Türkçe metinlerde nokta (`.`): `₺790`, `₺2.000/yıl`, `₺4.500`, `₺5.990`, `₺8.000`.
-  - İngilizce metinlerde virgül (`,`): `₺790`, `₺2,000/yr`, `₺4,500`, `₺5,990`, `₺8,000`.
-- Aylık kırılım formatı:
-  - Türkçe: `(₺66/ay)` ve `(₺167/ay)`.
-  - İngilizce: `(₺66/mo)` ve `(₺167/mo)`.
-- İndirim rozetleri:
-  - Türkçe: `SINIRLI SÜRE · %55` ve `SINIRLI SÜRE · %25`.
-  - İngilizce: `LIMITED TIME · 55% OFF` ve `LIMITED TIME · 25% OFF`.
+- **Pazarlama Yazım Kuralı:**
+  - Para birimi simgesi: `₺` (başa gelir).
+  - Binlik basamak ayracı:
+    - Türkçe metinlerde nokta (`.`): `₺790`, `₺2.000/yıl`, `₺5.990`.
+    - İngilizce metinlerde virgül (`,`): `₺790`, `₺2,000/yr`, `₺5,990`.
+  - Aylık kırılım formatı:
+    - Türkçe: `(₺66/ay)` ve `(₺167/ay)`.
+    - İngilizce: `(₺66/mo)` ve `(₺167/mo)`.
+  - Lansman rozetleri (eski fiyat ve yüzde indirim gösterilmez):
+    - Türkçe: `Lansman fiyatı`.
+    - İngilizce: `Launch price`.
 
 ### c) Konum Tablosu
 
@@ -562,25 +560,20 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/components/HomePricingSection.jsx` | `once: '₺5,990',` | sabit metin | Ömür Boyu tek seferlik tutar (EN) |
 | `frontend/src/pages/Pricing.jsx` | `yrp: '₺790',` | sabit metin | Temel plan yıllık tutarı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',` | sabit metin | Temel plan aylık kırılım notu (TR) |
-| `frontend/src/pages/Pricing.jsx` | `old: '₺4.500',` | sabit metin | Pro plan eski üstü çizili fiyatı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `badge: 'SINIRLI SÜRE · %55',` | sabit metin | Pro plan kampanya rozeti (TR - Elle yazılmış sabit) |
+| `frontend/src/pages/Pricing.jsx` | `badge: 'Lansman fiyatı',` | sabit metin | Pro plan lansman rozeti (TR) |
 | `frontend/src/pages/Pricing.jsx` | `yrp: '₺2.000',` | sabit metin | Pro plan yıllık tutarı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `noteYr: '3 gün ücretsiz · Sonra ₺2.000/yıl (₺167/ay)',` | sabit metin | Pro plan aylık kırılım notu (TR) |
-| `frontend/src/pages/Pricing.jsx` | `old: '₺8.000',` | sabit metin | Ömür Boyu plan eski üstü çizili fiyatı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `badge: 'SINIRLI SÜRE · %25',` | sabit metin | Ömür Boyu plan kampanya rozeti (TR - Elle yazılmış sabit) |
+| `frontend/src/pages/Pricing.jsx` | `badge: 'Lansman fiyatı',` | sabit metin | Ömür Boyu plan lansman rozeti (TR) |
 | `frontend/src/pages/Pricing.jsx` | `once: '₺5.990',` | sabit metin | Ömür Boyu tek seferlik tutar (TR) |
-| `frontend/src/pages/Pricing.jsx` | `className="text-muted-foreground line-through text-sm"` | dinamik | Üstü çizili eski fiyat (`plan.old`) render elementi |
 | `frontend/src/pages/Pricing.jsx` | `yrp: '₺790',` | sabit metin | Temel plan yıllık tutarı (EN) |
 | `frontend/src/pages/Pricing.jsx` | `noteYr: '3 days free · Then ₺790/yr (₺66/mo)',` | sabit metin | Temel plan aylık kırılım notu (EN) |
-| `frontend/src/pages/Pricing.jsx` | `old: '₺4,500',` | sabit metin | Pro plan eski üstü çizili fiyatı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `badge: 'LIMITED TIME · 55% OFF',` | sabit metin | Pro plan kampanya rozeti (EN - Elle yazılmış sabit) |
+| `frontend/src/pages/Pricing.jsx` | `badge: 'Launch price',` | sabit metin | Pro plan lansman rozeti (EN) |
 | `frontend/src/pages/Pricing.jsx` | `yrp: '₺2,000',` | sabit metin | Pro plan yıllık tutarı (EN) |
 | `frontend/src/pages/Pricing.jsx` | `noteYr: '3 days free · Then ₺2,000/yr (₺167/mo)',` | sabit metin | Pro plan aylık kırılım notu (EN) |
-| `frontend/src/pages/Pricing.jsx` | `old: '₺8,000',` | sabit metin | Ömür Boyu plan eski üstü çizili fiyatı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `badge: 'LIMITED TIME · 25% OFF',` | sabit metin | Ömür Boyu plan kampanya rozeti (EN - Elle yazılmış sabit) |
+| `frontend/src/pages/Pricing.jsx` | `badge: 'Launch price',` | sabit metin | Ömür Boyu plan lansman rozeti (EN) |
 | `frontend/src/pages/Pricing.jsx` | `once: '₺5,990',` | sabit metin | Ömür Boyu tek seferlik tutar (EN) |
-| `frontend/src/components/TopInfoBar.jsx` | `'SINIRLI SÜRE: PRO %55 İNDİRİM'` | sabit metin | Kayan üst duyuru bandı kampanya metni (TR) |
-| `frontend/src/components/TopInfoBar.jsx` | `'LIMITED TIME: PRO 55% OFF'` | sabit metin | Kayan üst duyuru bandı kampanya metni (EN) |
+| `frontend/src/components/TopInfoBar.jsx` | `'LANSMAN FİYATLARI GEÇERLİ'` | sabit metin | Kayan üst duyuru bandı lansman metni (TR) |
+| `frontend/src/components/TopInfoBar.jsx` | `'LAUNCH PRICES AVAILABLE'` | sabit metin | Kayan üst duyuru bandı lansman metni (EN) |
 | `frontend/src/pages/Auth.jsx` | `? 'Seçilen plan: Ömür Boyu · ₺5.990 tek ödeme'` | sabit metin | Kayıt/Giriş ekranı Ömür Boyu plan seçimi (TR) |
 | `frontend/src/pages/Auth.jsx` | `: 'Selected plan: Lifetime · ₺5,990 one-time'}` | sabit metin | Kayıt/Giriş ekranı Ömür Boyu plan seçimi (EN) |
 | `frontend/src/pages/Auth.jsx` | `? 'Seçilen plan: Pro · 3 Gün Ücretsiz Dene (Sonra ₺2.000/yıl)'` | sabit metin | Kayıt/Giriş ekranı Pro plan seçimi (TR) |
@@ -600,8 +593,7 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/utils/storage.js` | `return isTr ? '₺2.000/yıl' : '₺2,000/yr';` | sabit metin | Kullanıcı verisinden Pro plan fiyatını döndüren fonksiyon |
 
 ### d) Fiyatlarda Şu An Yanlış / Eski Olanlar
-- Sitedeki fiyatlar (Temel: ₺790, Pro: ₺2.000 [eski ₺4.500], Ömür Boyu: ₺5.990 [eski ₺8.000]) ve indirim rozetleri (%55 Pro, %25 Ömür Boyu) kendi içinde tutarlıdır.
-- Rozet yüzdeleri elle yazılmış sabit metinlerdir; ileride eski veya yeni fiyatlar değiştiğinde bu rozet metinleri formülle hesaplanmadığı için elle güncellenmelidir.
+- Sitedeki güncel fiyatlar (Temel: ₺790, Pro: ₺2.000, Ömür Boyu: ₺5.990) ve lansman rozetleri (`Lansman fiyatı` / `Launch price`) kendi içinde tutarlıdır; eski fiyat ve yüzde indirim ifadeleri kaldırılmıştır.
 
 ---
 

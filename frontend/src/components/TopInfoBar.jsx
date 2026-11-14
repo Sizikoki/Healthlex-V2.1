@@ -25,7 +25,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
     '16 KATEGORİ',
     '4 OYUN MODU',
     'TR ⇄ EN',
-    'SINIRLI SÜRE: PRO %55 İNDİRİM',
+    'LANSMAN FİYATLARI GEÇERLİ',
     '3 GÜN ÜCRETSİZ DENE · DİLEDİĞİN AN İPTAL ET',
     'TEK TIKLA İPTAL'
   ] : [
@@ -34,7 +34,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
     '16 CATEGORIES',
     '4 GAME MODES',
     'TR ⇄ EN',
-    'LIMITED TIME: PRO 55% OFF',
+    'LAUNCH PRICES AVAILABLE',
     'TRY 3 DAYS FREE · CANCEL ANYTIME',
     'CANCEL IN ONE CLICK'
   ];
