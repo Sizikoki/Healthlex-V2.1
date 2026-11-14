@@ -548,24 +548,17 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `api/webhook/paddle.js` | `const basicPriceId = (process.env.PADDLE_PRICE_BASIC || 'pri_01m2c1yyzta4wwxdwf6h5mbyh7').toLowerCase();` | kod sabiti / env | Paddle webhook Temel plan doğrulama ID'si |
 | `frontend/src/components/HomePricingSection.jsx` | `yrp: '₺790',` | sabit metin | Temel plan yıllık tutarı (TR) |
 | `frontend/src/components/HomePricingSection.jsx` | `noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',` | sabit metin | Temel plan aylık kırılım notu (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `old: '₺4.500',` | sabit metin | Pro plan eski üstü çizili fiyatı (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `saveBadge: '%55',` | sabit metin | Pro plan tasarruf rozeti (TR - Elle yazılmış sabit) |
-| `frontend/src/components/HomePricingSection.jsx` | `badge: 'SINIRLI SÜRE · %55',` | sabit metin | Pro plan kampanya rozeti (TR - Elle yazılmış sabit) |
+| `frontend/src/components/HomePricingSection.jsx` | `badge: 'Lansman fiyatı',` | sabit metin | Pro plan lansman rozeti (TR) |
 | `frontend/src/components/HomePricingSection.jsx` | `yrp: '₺2.000',` | sabit metin | Pro plan yıllık tutarı (TR) |
 | `frontend/src/components/HomePricingSection.jsx` | `noteYr: '3 gün ücretsiz · Sonra ₺2.000/yıl (₺167/ay)',` | sabit metin | Pro plan aylık kırılım notu (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `old: '₺8.000',` | sabit metin | Ömür Boyu plan eski üstü çizili fiyatı (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `badge: 'SINIRLI SÜRE · %25',` | sabit metin | Ömür Boyu plan kampanya rozeti (TR - Elle yazılmış sabit) |
+| `frontend/src/components/HomePricingSection.jsx` | `badge: 'Lansman fiyatı',` | sabit metin | Ömür Boyu plan lansman rozeti (TR) |
 | `frontend/src/components/HomePricingSection.jsx` | `once: '₺5.990',` | sabit metin | Ömür Boyu tek seferlik tutar (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `className="text-muted-foreground line-through text-sm"` | dinamik | Üstü çizili eski fiyat (`plan.old`) render elementi |
 | `frontend/src/components/HomePricingSection.jsx` | `yrp: '₺790',` | sabit metin | Temel plan yıllık tutarı (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `noteYr: '3 days free · Then ₺790/yr (₺66/mo)',` | sabit metin | Temel plan aylık kırılım notu (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `old: '₺4,500',` | sabit metin | Pro plan eski üstü çizili fiyatı (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `saveBadge: '55% OFF',` | sabit metin | Pro plan tasarruf rozeti (EN - Elle yazılmış sabit) |
-| `frontend/src/components/HomePricingSection.jsx` | `badge: 'LIMITED TIME · 55% OFF',` | sabit metin | Pro plan kampanya rozeti (EN - Elle yazılmış sabit) |
+| `frontend/src/components/HomePricingSection.jsx` | `badge: 'Launch price',` | sabit metin | Pro plan lansman rozeti (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `yrp: '₺2,000',` | sabit metin | Pro plan yıllık tutarı (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `noteYr: '3 days free · Then ₺2,000/yr (₺167/mo)',` | sabit metin | Pro plan aylık kırılım notu (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `old: '₺8,000',` | sabit metin | Ömür Boyu plan eski üstü çizili fiyatı (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `badge: 'LIMITED TIME · 25% OFF',` | sabit metin | Ömür Boyu plan kampanya rozeti (EN - Elle yazılmış sabit) |
+| `frontend/src/components/HomePricingSection.jsx` | `badge: 'Launch price',` | sabit metin | Ömür Boyu plan lansman rozeti (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `once: '₺5,990',` | sabit metin | Ömür Boyu tek seferlik tutar (EN) |
 | `frontend/src/pages/Pricing.jsx` | `yrp: '₺790',` | sabit metin | Temel plan yıllık tutarı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',` | sabit metin | Temel plan aylık kırılım notu (TR) |

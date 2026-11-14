@@ -14,7 +14,6 @@ const PRICING_CONTENT = {
     sub: 'Abonelik planlarında 3 gün ₺0 deneme süresi. Dilediğin an iptal et.',
     monthly: 'Aylık',
     yearly: 'Yıllık',
-    saveBadge: '%55',
     perMo: '/ ay',
     perYr: '/ yıl',
     perOnce: 'tek ödeme',
@@ -44,10 +43,9 @@ const PRICING_CONTENT = {
         id: 'pro',
         name: 'Pro',
         tag: 'Tam öğrenme deneyimi; 4 mod, seviye, tekrar.',
-        badge: 'SINIRLI SÜRE · %55',
+        badge: 'Lansman fiyatı',
         mo: null,
         yrp: '₺2.000',
-        old: '₺4.500',
         noteYr: '3 gün ücretsiz · Sonra ₺2.000/yıl (₺167/ay)',
         noteMo: 'Sadece yıllık · ₺167/ay',
         cta: '3 Gün Ücretsiz Dene',
@@ -64,8 +62,7 @@ const PRICING_CONTENT = {
         id: 'lifetime',
         name: 'Ömür Boyu',
         tag: 'Bir kez öde süresiz kullan.',
-        badge: 'SINIRLI SÜRE · %25',
-        old: '₺8.000',
+        badge: 'Lansman fiyatı',
         once: '₺5.990',
         note: 'Tek ödeme · Deneme süresi yoktur (Doğrudan satın alma)',
         cta: 'Ömür Boyu Satın Al',
@@ -87,7 +84,6 @@ const PRICING_CONTENT = {
     sub: '3-day $0 trial on subscription plans. Cancel anytime in 1 click.',
     monthly: 'Monthly',
     yearly: 'Yearly',
-    saveBadge: '55% OFF',
     perMo: '/ mo',
     perYr: '/ yr',
     perOnce: 'one-time',
@@ -117,10 +113,9 @@ const PRICING_CONTENT = {
         id: 'pro',
         name: 'Pro',
         tag: 'The full experience; 4 modes, levels, review.',
-        badge: 'LIMITED TIME · 55% OFF',
+        badge: 'Launch price',
         mo: null,
         yrp: '₺2,000',
-        old: '₺4,500',
         noteYr: '3 days free · Then ₺2,000/yr (₺167/mo)',
         noteMo: 'Yearly only · ₺167/mo',
         cta: 'Start 3-Day Free Trial',
@@ -137,8 +132,7 @@ const PRICING_CONTENT = {
         id: 'lifetime',
         name: 'Lifetime',
         tag: 'Pay once, use forever.',
-        badge: 'LIMITED TIME · 25% OFF',
-        old: '₺8,000',
+        badge: 'Launch price',
         once: '₺5,990',
         note: 'One payment · No trial period (Direct purchase)',
         cta: 'Buy Lifetime Plan',
@@ -228,9 +222,6 @@ export const HomePricingSection = () => {
           <div className="inline-flex bg-card border border-border rounded-xl p-1.5 font-bold text-sm mt-4 shadow-xs select-none">
             <span className="py-2 px-5 rounded-lg bg-primary text-primary-foreground shadow-xs font-bold flex items-center gap-2">
               {t.yearly}
-              <span className="text-[11px] font-extrabold bg-amber-500 text-white px-2 py-0.5 rounded-full shadow-xs">
-                {t.saveBadge}
-              </span>
             </span>
           </div>
         </div>
@@ -288,11 +279,6 @@ export const HomePricingSection = () => {
 
                 {/* Fiyat Alanı */}
                 <div className="flex flex-col gap-1">
-                  {p.old && (
-                    <span className="font-semibold text-sm text-muted-foreground/60 line-through">
-                      {p.old}
-                    </span>
-                  )}
                   <div className="flex items-baseline gap-1.5">
                     <span className="font-extrabold text-3xl sm:text-4xl text-foreground tracking-tight">
                       {price}
