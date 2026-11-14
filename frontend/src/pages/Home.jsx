@@ -397,18 +397,6 @@ export const Home = () => {
                       <span className="text-muted-foreground">{content.comparison.row5ValNotes}</span>
                     </td>
                   </tr>
-                  <tr>
-                    <td>{content.comparison.row6}</td>
-                    <td>
-                      <Check className="w-5 h-5 text-primary mx-auto" />
-                    </td>
-                    <td>
-                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                    </td>
-                    <td>
-                      <Minus className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>

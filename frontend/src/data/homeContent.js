@@ -113,7 +113,7 @@ export const HOME_CONTENT = {
       step2No: 'ADIM 2',
       step2Title: 'Anla',
       step2Ex: 'KALP · KAS · HASTALIK',
-      step2Desc: (termCount) => `Her parçanın tek bir anlamı vardır ve ${termCount}+ terimin içinde tekrar eder.`,
+      step2Desc: (termCount) => `Her parçanın bir anlamı vardır ve ${termCount}+ terimin içinde tekrar eder.`,
       step3No: 'ADIM 3',
       step3Title: 'Birleştir',
       step3Ex: '= KALP KASI HASTALIĞI',
@@ -162,8 +162,7 @@ export const HOME_CONTENT = {
       row5: 'Ödeme Modeli',
       row5ValHealthlex: 'Yıllık abonelik',
       row5ValCards: 'Abonelik / Saatlerce deste hazırlığı',
-      row5ValNotes: 'Ücretsiz (Zaman maliyeti yüksek)',
-      row6: '2 hafta sonra hatırlama oranı'
+      row5ValNotes: 'Ücretsiz (Zaman maliyeti yüksek)'
     },
     pricing: {
       eyebrow: 'Fiyatlandırma',
@@ -252,7 +251,7 @@ export const HOME_CONTENT = {
       step2No: 'STEP 2',
       step2Title: 'Understand',
       step2Ex: 'HEART · MUSCLE · DISEASE',
-      step2Desc: (termCount) => `Each part has a single meaning and repeats across ${termCount}+ terms.`,
+      step2Desc: (termCount) => `Each part has a meaning and repeats across ${termCount}+ terms.`,
       step3No: 'STEP 3',
       step3Title: 'Combine',
       step3Ex: '= HEART MUSCLE DISEASE',
@@ -301,8 +300,7 @@ export const HOME_CONTENT = {
       row5: 'Pricing Model',
       row5ValHealthlex: 'Annual subscription',
       row5ValCards: 'Subscription / Hours of deck creation',
-      row5ValNotes: 'Free (High time cost)',
-      row6: 'Retention rate 2 weeks after the exam'
+      row5ValNotes: 'Free (High time cost)'
     },
     pricing: {
       eyebrow: 'Pricing',

@@ -104,14 +104,14 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/services/termCountService.js` | `const BASELINE_COUNT = typeof termCountConfig?.totalTerms === 'number' ? termCountConfig.totalTerms : 947;` | dinamik | termCount.json okunamadığında devreye giren fallback |
 | `frontend/src/pages/Home.jsx` | `const [termCount, setTermCount] = useState(getInitialTermCount);` | dinamik | Ana sayfa terim sayısı durum yöneticisi |
 | `frontend/src/pages/Home.jsx` | `<div className="n">{termCount}+</div>` | dinamik (kurala aykırı çıktı) | Ekrana "947+" basar (Kural: 940+) |
-| `frontend/src/data/homeContent.js` | `Her Latince tıp terimi 2–3 parçadan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong>` | dinamik (kurala aykırı çıktı) | Ekrana "947+" basar |
-| `frontend/src/data/homeContent.js` | `Every Latin medical term consists of 2–3 parts. Learn the parts; read <strong className="text-foreground font-bold">{termCount}+</strong>` | dinamik (kurala aykırı çıktı) | Ekrana "947+" basar |
+| `frontend/src/data/homeContent.js` | `Tıp terimlerinin çoğu anlamlı parçalardan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong>` | dinamik (kurala aykırı çıktı) | Ekrana "947+" basar |
+| `frontend/src/data/homeContent.js` | `Most medical terms consist of meaningful parts. Learn the parts; read and understand <strong className="text-foreground font-bold">{termCount}+</strong>` | dinamik (kurala aykırı çıktı) | Ekrana "947+" basar |
 | `frontend/src/data/homeContent.js` | `micro2: '✓ 947+ terim ücretsiz',` | sabit metin | Hero mikro ikna metni (TR) |
 | `frontend/src/data/homeContent.js` | `micro2: '✓ 947+ terms free',` | sabit metin | Hero mikro ikna metni (EN) |
 | `frontend/src/data/homeContent.js` | `<strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {termCount}+ terim ve {totalMorphemes}+ morfem seni bekliyor.` | dinamik (kurala aykırı çıktı) | İnteraktif demo bitişi (Ekrana "947+" basar) |
 | `frontend/src/data/homeContent.js` | `<strong className="text-foreground">You solved 3 terms without memorizing!</strong> Inside, {termCount}+ terms and {totalMorphemes}+ morphemes are waiting for you.` | dinamik (kurala aykırı çıktı) | İnteraktif demo bitişi (Ekrana "947+" basar) |
-| `frontend/src/data/homeContent.js` | `step2Desc: (termCount) => \`Her parçanın tek bir anlamı vardır ve \${termCount}+ terimin içinde tekrar eder.\`` | dinamik (kurala aykırı çıktı) | Metot adımı şablonu (Ekrana "947+" basar) |
-| `frontend/src/data/homeContent.js` | `step2Desc: (termCount) => \`Each part has a single meaning and repeats across \${termCount}+ terms.\`` | dinamik (kurala aykırı çıktı) | Metot adımı şablonu (Ekrana "947+" basar) |
+| `frontend/src/data/homeContent.js` | `step2Desc: (termCount) => \`Her parçanın bir anlamı vardır ve \${termCount}+ terimin içinde tekrar eder.\`` | dinamik (kurala aykırı çıktı) | Metot adımı şablonu (Ekrana "947+" basar) |
+| `frontend/src/data/homeContent.js` | `step2Desc: (termCount) => \`Each part has a meaning and repeats across \${termCount}+ terms.\`` | dinamik (kurala aykırı çıktı) | Metot adımı şablonu (Ekrana "947+" basar) |
 | `frontend/src/components/TopInfoBar.jsx` | `\`\${count}+ TERİM\`` | dinamik (kurala aykırı çıktı) | Kayan bant: Ekrana "947+ TERİM" basar |
 | `frontend/src/components/TopInfoBar.jsx` | `\`\${count}+ TERMS\`` | dinamik (kurala aykırı çıktı) | Kayan bant: Ekrana "947+ TERMS" basar |
 | `frontend/src/pages/Welcome.jsx` | `{isTr ? '16 kategori, 940+ detaylı tıbbi terim ve klinik köken.' : '16 categories, 940+ medical terms with origins.'}` | sabit metin | Karşılama sayfası Pro ayrıcalıkları kartı (Kurala uygun: 940+) |
