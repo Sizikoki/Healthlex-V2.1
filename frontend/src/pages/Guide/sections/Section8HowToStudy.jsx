@@ -39,7 +39,7 @@ const HEALTHLEX_APPS = [
   {
     title: 'Morfem kütüphanesi',
     path: '/morphemes',
-    desc: "570'ten fazla ön ek, kök ve son ek, örnek çözümlemeleriyle.",
+    desc: "550'den fazla ön ek, kök ve son ek, örnek çözümlemeleriyle.",
   },
   {
     title: 'Kelime kartları',

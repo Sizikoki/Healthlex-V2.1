@@ -62,7 +62,7 @@ export const RightSidebar = () => {
           Morfem kütüphanesi
         </h4>
         <p className="m-0 font-normal text-[13px] leading-[1.55] text-[#c5d3ea]">
-          570&apos;ten fazla ön ek, kök ve son eki örnek çözümlemeleriyle keşfet.
+          550&apos;den fazla ön ek, kök ve son eki örnek çözümlemeleriyle keşfet.
         </p>
         <span className="font-extrabold text-[13px] text-white group-hover:text-blue-300 flex items-center gap-[6px] mt-[4px] transition-colors">
           Göz at →
