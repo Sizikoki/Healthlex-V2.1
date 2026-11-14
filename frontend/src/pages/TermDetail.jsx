@@ -448,8 +448,8 @@ export const TermDetail = () => {
           </h3>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {isTr
-              ? 'HealthLexMed ile 200+ anatomik yapıyı ve 570+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
-              : 'Study 200+ anatomical terms and 570+ morphemes through Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
+              ? 'HealthLexMed ile 940+ terimi ve 550+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
+              : 'Study 940+ terms and 550+ morphemes through Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Button
