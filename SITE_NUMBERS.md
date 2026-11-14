@@ -180,8 +180,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/data/homeContent.js` | `logicClose: () => \`When you learn 550+ morphemes, you can easily read...\`` | sabit metin | Yöntem bölümü kapanışı (EN, Kurala uygun: 550+) |
 | `frontend/src/data/homeContent.js` | `text: \`16 kategorinin tamamı + \${totalMorphemes}'den fazla morfem kütüphanesi\`` | dinamik (kurala aykırı çıktı) | Ekrana "571'den fazla" basar |
 | `frontend/src/data/homeContent.js` | `text: \`All 16 categories + over \${totalMorphemes} morpheme library\`` | dinamik (kurala aykırı çıktı) | Ekrana "over 571" basar |
-| `frontend/src/components/TopInfoBar.jsx` | `'571+ MORFEM',` | sabit metin | Kayan üst duyuru bandı (TR) |
-| `frontend/src/components/TopInfoBar.jsx` | `'571+ MORPHEMES',` | sabit metin | Kayan üst duyuru bandı (EN) |
+| `frontend/src/components/TopInfoBar.jsx` | `'550+ MORFEM',` | sabit metin | Kayan üst duyuru bandı (TR) |
+| `frontend/src/components/TopInfoBar.jsx` | `'550+ MORPHEMES',` | sabit metin | Kayan üst duyuru bandı (EN) |
 | `frontend/src/components/MorphemeOfTheDay.jsx` | `cta: '550+ morfemin tamamı'` | sabit metin | Günün morfemi CTA buton metni (TR) |
 | `frontend/src/components/MorphemeOfTheDay.jsx` | `cta: 'Explore all 550+ morphemes'` | sabit metin | Günün morfemi CTA buton metni (EN) |
 | `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 570+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (570+) |
@@ -199,14 +199,14 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/components/HomePricingSection.jsx` | `['–', 'Full 550+ morpheme library (Pro & above)']` | sabit metin | Ana sayfa fiyatlandırma tablosu Temel plan satırı (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Ana sayfa fiyatlandırma tablosu Pro plan satırı (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Ana sayfa fiyatlandırma tablosu Ömür Boyu plan satırı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['–', 'Tüm 571+ morfem havuzu (Pro ve üzeri)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 571+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 571+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '100 morfem', '571+ (Tümü)', '571+ (Tümü)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['–', 'Full 571+ morpheme library (Pro & above)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 571+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 571+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '100 morphemes', '571+ (All)', '571+ (All)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['–', 'Tüm 550+ morfem havuzu (Pro ve üzeri)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 550+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 550+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '100 morfem', '550+ (Tümü)', '550+ (Tümü)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['–', 'Full 550+ morpheme library (Pro & above)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '100 morphemes', '550+ (All)', '550+ (All)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (EN) |
 | `frontend/src/pages/FAQ.jsx` | `Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları...` | sabit metin | SSS cevabı 2 (TR) |
 | `frontend/src/pages/FAQ.jsx` | `The Pro plan provides unrestricted access to all 571+ morphemes, Quiz and Morpheme Builder...` | sabit metin | SSS cevabı 2 (EN) |
 | `frontend/scripts/prerender-faq.mjs` | `Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları...` | betik/meta | Prerender FAQ statik HTML metni (TR) |
