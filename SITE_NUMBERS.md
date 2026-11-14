@@ -115,9 +115,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/components/TopInfoBar.jsx` | `\`\${count}+ TERİM\`` | dinamik (kurala aykırı çıktı) | Kayan bant: Ekrana "947+ TERİM" basar |
 | `frontend/src/components/TopInfoBar.jsx` | `\`\${count}+ TERMS\`` | dinamik (kurala aykırı çıktı) | Kayan bant: Ekrana "947+ TERMS" basar |
 | `frontend/src/pages/Welcome.jsx` | `{isTr ? '16 kategori, 940+ detaylı tıbbi terim ve klinik köken.' : '16 categories, 940+ medical terms with origins.'}` | sabit metin | Karşılama sayfası Pro ayrıcalıkları kartı (Kurala uygun: 940+) |
-| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 570+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (Terim kurala uygun: 940+) |
-| `frontend/public/index.html` | `<meta property="og:description" content="770+ medikal terim, 570+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | OpenGraph açıklama etiketi |
-| `frontend/public/index.html` | `<meta name="twitter:description" content="770+ medikal terim, 570+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | Twitter Card açıklama etiketi |
+| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 550+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (Terim: 940+, Morfem: 550+) |
+| `frontend/public/index.html` | `<meta property="og:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | OpenGraph açıklama etiketi (Terim: 940+, Morfem: 550+) |
+| `frontend/public/index.html` | `<meta name="twitter:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | Twitter Card açıklama etiketi (Terim: 940+, Morfem: 550+) |
 | `frontend/src/pages/Dashboard.jsx` | `588+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}` | sabit metin | Öğrenci panosu istatistik kartı başlığı |
 | `frontend/src/pages/Dashboard.jsx` | `588+ {isTr ? 'terim' : 'terms'}` | sabit metin | Öğrenci panosu alt istatistik rozeti |
 | `frontend/src/pages/TermDetail.jsx` | `? 'HealthLexMed ile 200+ anatomik yapıyı ve 570+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'` | sabit metin | Terim detay sayfası SEO/alt açıklama metni (TR) |
@@ -132,8 +132,7 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 1. **`frontend/src/pages/Dashboard.jsx`**: `588+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}` — **ESKİ** (588+ kalmış; 940+ olmalı).
 2. **`frontend/src/pages/Dashboard.jsx`**: `588+ {isTr ? 'terim' : 'terms'}` — **ESKİ** (588+ kalmış; 940+ olmalı).
 3. **`frontend/src/pages/TermDetail.jsx`**: `200+ anatomik yapıyı` / `200+ anatomical terms` — **ESKİ** (200+ kalmış; 940+ olmalı).
-4. **`frontend/public/index.html`**: `og:description` ve `twitter:description` içindeki `770+ medikal terim` — **ESKİ** (770+ kalmış; 940+ olmalı).
-5. **`frontend/src/data/homeContent.js`**: `micro2: '✓ 947+ terim ücretsiz'` ve `✓ 947+ terms free'` — **KURALA AYKIRI** (Gerçek sayı 947+ yazılmış; yuvarlanmış "940+" olmalı).
+4. **`frontend/src/data/homeContent.js`**: `micro2: '✓ 947+ terim ücretsiz'` ve `✓ 947+ terms free'` — **KURALA AYKIRI** (Gerçek sayı 947+ yazılmış; yuvarlanmış "940+" olmalı).
 6. **`frontend/src/components/TrialDashboardView.jsx`**: `const termsMax = getAllTerms().length || 571;` — **KOD İÇİ TEKRAR / YANLIŞ YEDEK TÜR** (Terim sayısının fallback değerine morfem sayısı olan 571 yazılmış; 947 olmalı).
 7. **`frontend/src/pages/Home.jsx`**: `<div className="n">{termCount}+</div>` — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `947+` üretir; kurala göre `940+` olmalıdır).
 8. **`frontend/src/data/homeContent.js`**: `{termCount}+` şablonları — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `947+` üretir; kurala göre `940+` olmalıdır).
@@ -184,9 +183,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/components/TopInfoBar.jsx` | `'550+ MORPHEMES',` | sabit metin | Kayan üst duyuru bandı (EN) |
 | `frontend/src/components/MorphemeOfTheDay.jsx` | `cta: '550+ morfemin tamamı'` | sabit metin | Günün morfemi CTA buton metni (TR) |
 | `frontend/src/components/MorphemeOfTheDay.jsx` | `cta: 'Explore all 550+ morphemes'` | sabit metin | Günün morfemi CTA buton metni (EN) |
-| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 570+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (570+) |
-| `frontend/public/index.html` | `<meta property="og:description" content="770+ medikal terim, 570+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | OpenGraph açıklama etiketi (570+) |
-| `frontend/public/index.html` | `<meta name="twitter:description" content="770+ medikal terim, 570+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | Twitter Card açıklama etiketi (570+) |
+| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 550+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (550+) |
+| `frontend/public/index.html` | `<meta property="og:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | OpenGraph açıklama etiketi (550+) |
+| `frontend/public/index.html` | `<meta name="twitter:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | Twitter Card açıklama etiketi (550+) |
 | `frontend/src/pages/TermDetail.jsx` | `? 'HealthLexMed ile 200+ anatomik yapıyı ve 570+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'` | sabit metin | Terim detay alt açıklama (TR) |
 | `frontend/src/pages/TermDetail.jsx` | `: 'Study 200+ anatomical terms and 570+ morphemes through Flashcards, Matching, Quiz, and Morpheme Breakdown.'}` | sabit metin | Terim detay alt açıklama (EN) |
 | `frontend/src/pages/MorphemeDetail.jsx` | `? '570+ morfem ve 16 kategori ile anatomiyi 4 interaktif oyun modunda test edin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'` | sabit metin | Morfem detay alt açıklama (TR) |
@@ -259,8 +258,7 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 5. **`frontend/src/pages/Dashboard.jsx`**: `{learnedMorphemes} / 571` — **KOD İÇİ TEKRAR** (Paydaya 571 elle yazılmış; dinamik toplam kullanılmalı).
 6. **`frontend/src/pages/Dashboard.jsx`**: `571 morfemden ${learnedMorphemes}` / `out of 571 morphemes` — **KOD İÇİ TEKRAR** (571 sayısı metin şablonuna elle gömülmüş).
 7. **`frontend/src/components/MorphemeOfTheDay.jsx`**: `const TOTAL_MORPHEMES = 553;`, `cta: '553+ morfemin tamamı'` ve `'Explore all 553+ morphemes'` — **ESKİ / KURALA AYKIRI** (553+ kalmış; "550+ morfem" kuralına uyarlanmalı).
-8. **`frontend/public/index.html`**: `description`, `og:description` ve `twitter:description` meta etiketlerinde geçen `570+ morfem` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" kuralına uyarlanmalı).
-9. **`frontend/src/pages/TermDetail.jsx`**: `570+ morfemi` / `570+ morphemes` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" olmalı).
+8. **`frontend/src/pages/TermDetail.jsx`**: `570+ morfemi` / `570+ morphemes` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" olmalı).
 10. **`frontend/src/pages/MorphemeDetail.jsx`**: `570+ morfem ve 16 kategori` / `570+ morphemes` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" olmalı).
 11. **`frontend/src/pages/Guide/components/RightSidebar.jsx`**: `570&apos;ten fazla ön ek, kök ve son eki` — **ESKİ / KURALA AYKIRI** (570'ten fazla yazılmış; "550+ morfem" kuralına uyarlanmalı).
 12. **`frontend/src/pages/Guide/sections/Section8HowToStudy.jsx`**: `570'ten fazla ön ek, kök ve son ek` — **ESKİ / KURALA AYKIRI** (570'ten fazla yazılmış; "550+ morfem" kuralına uyarlanmalı).
@@ -305,7 +303,7 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/utils/generateProgressPdf.js` | `// 16 Kategori Listesi` | yorum satırı | PDF rapor oluşturucu kategori listesi başlığı |
 | `frontend/src/utils/generateProgressPdf.js` | `const catList = [` | dinamik / sabit | 16 kategorinin id ve adlarını içeren liste |
 | `frontend/src/utils/generateProgressPdf.js` | `${isTr ? '16 Anatomik Kategoride İlerleme Dağılımı' : 'Progress Across 16 Anatomical Categories'}` | sabit metin | PDF raporu tablo başlığı |
-| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 570+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi |
+| `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 550+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi |
 | `frontend/src/components/TopInfoBar.jsx` | `'16 KATEGORİ',` | sabit metin | Kayan üst duyuru bandı (TR) |
 | `frontend/src/components/TopInfoBar.jsx` | `'16 CATEGORIES',` | sabit metin | Kayan üst duyuru bandı (EN) |
 | `frontend/src/pages/Home.jsx` | `<div className="n">16</div>` | sabit metin | Ana sayfa istatistik sayacı kutusu |
