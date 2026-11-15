@@ -32,7 +32,7 @@ import {
   getUserTrialState,
   getFlashcardGuestDailyInfo
 } from '@/utils/storage';
-import { getPastDueState, getPreviewRole } from '@/utils/planAccess';
+import { getPastDueState, getPreviewRole, MAX_FREE_USER_MORPHEMES, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -221,7 +221,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
     },
     {
       label: isTr ? 'MORFEM' : 'MORPHEMES',
-      v: '24',
+      v: String(MAX_FREE_USER_MORPHEMES),
       unit: isTr ? `/ ${TOTAL_MORPHEMES} açık` : `/ ${TOTAL_MORPHEMES} open`,
       note: isTr ? 'Gerisi ad görünür, anlam bulanık' : 'Remaining name visible, meaning blurred',
       borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
@@ -406,7 +406,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
               {/* Morfem İlerleme Çubuğu */}
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
-                  <span>{isTr ? `24 / ${TOTAL_MORPHEMES} açık` : `24 / ${TOTAL_MORPHEMES} open`}</span>
+                  <span>{isTr ? `${MAX_FREE_USER_MORPHEMES} / ${TOTAL_MORPHEMES} açık` : `${MAX_FREE_USER_MORPHEMES} / ${TOTAL_MORPHEMES} open`}</span>
                   <span className="text-[#6b7a90] dark:text-muted-foreground">%4</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
@@ -731,7 +731,7 @@ const BasicUserDashboard = ({
     { label: isTr ? 'ÖĞRENİLEN' : 'LEARNED', v: String(learnedCount), unit: isTr ? 'terim' : 'terms' },
     { label: isTr ? 'SERİ' : 'STREAK', v: String(streakDays), unit: isTr ? 'gün' : 'days' },
     { label: isTr ? 'KÜTÜPHANE' : 'LIBRARY', v: termsVal, unit: isTr ? 'terim' : 'terms' },
-    { label: isTr ? 'MORFEM' : 'MORPHEMES', v: '100', unit: isTr ? 'açık' : 'unlocked' }
+    { label: isTr ? 'MORFEM' : 'MORPHEMES', v: String(MAX_BASIC_MORPHEMES), unit: isTr ? 'açık' : 'unlocked' }
   ];
 
   return (
@@ -972,7 +972,7 @@ const BasicUserDashboard = ({
           <div className="flex flex-col gap-3.5 text-left">
             <div className="flex justify-between items-baseline">
               <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'MORFEMLER · 100 TANESİ AÇIK' : 'MORPHEMES · 100 UNLOCKED'}
+                {isTr ? `MORFEMLER · ${MAX_BASIC_MORPHEMES} TANESİ AÇIK` : `MORPHEMES · ${MAX_BASIC_MORPHEMES} UNLOCKED`}
               </span>
               <Link to="/morphemes" className="font-bold text-[12px] text-[#2563eb] hover:underline">
                 {isTr ? 'Liste →' : 'List →'}
@@ -983,7 +983,7 @@ const BasicUserDashboard = ({
               {/* Morfem İlerleme Çubuğu */}
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
-                  <span>{isTr ? `100 / ${TOTAL_MORPHEMES} açık` : `100 / ${TOTAL_MORPHEMES} open`}</span>
+                  <span>{isTr ? `${MAX_BASIC_MORPHEMES} / ${TOTAL_MORPHEMES} açık` : `${MAX_BASIC_MORPHEMES} / ${TOTAL_MORPHEMES} open`}</span>
                   <span className="text-[#2563eb] dark:text-blue-400 font-extrabold">%18</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
@@ -1011,8 +1011,8 @@ const BasicUserDashboard = ({
 
               <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? `Temel planda 100 morfem sınırsız açıktır. Kalan ${TOTAL_MORPHEMES - 100} morfem için Pro’ya geçebilirsiniz.`
-                  : `100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining ${TOTAL_MORPHEMES - 100}.`}
+                  ? `Temel planda ${MAX_BASIC_MORPHEMES} morfem sınırsız açıktır. Kalan ${TOTAL_MORPHEMES - MAX_BASIC_MORPHEMES} morfem için Pro’ya geçebilirsiniz.`
+                  : `${MAX_BASIC_MORPHEMES} morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining ${TOTAL_MORPHEMES - MAX_BASIC_MORPHEMES}.`}
               </span>
             </div>
           </div>
