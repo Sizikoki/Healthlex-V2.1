@@ -41,6 +41,7 @@ import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
 import { getTermsByCategory } from '@/data/medicalTerms';
+import { TOTAL_MORPHEMES } from '@/data/morphemesData';
 import { toast } from 'sonner';
 
 // --- Kullanıcı Plan Çözümleme ---
@@ -221,7 +222,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
     {
       label: isTr ? 'MORFEM' : 'MORPHEMES',
       v: '24',
-      unit: isTr ? '/ 571 açık' : '/ 571 open',
+      unit: isTr ? `/ ${TOTAL_MORPHEMES} açık` : `/ ${TOTAL_MORPHEMES} open`,
       note: isTr ? 'Gerisi ad görünür, anlam bulanık' : 'Remaining name visible, meaning blurred',
       borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
     },
@@ -405,7 +406,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
               {/* Morfem İlerleme Çubuğu */}
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
-                  <span>{isTr ? '24 / 571 açık' : '24 / 571 open'}</span>
+                  <span>{isTr ? `24 / ${TOTAL_MORPHEMES} açık` : `24 / ${TOTAL_MORPHEMES} open`}</span>
                   <span className="text-[#6b7a90] dark:text-muted-foreground">%4</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
@@ -982,7 +983,7 @@ const BasicUserDashboard = ({
               {/* Morfem İlerleme Çubuğu */}
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
-                  <span>{isTr ? '100 / 571 açık' : '100 / 571 open'}</span>
+                  <span>{isTr ? `100 / ${TOTAL_MORPHEMES} açık` : `100 / ${TOTAL_MORPHEMES} open`}</span>
                   <span className="text-[#2563eb] dark:text-blue-400 font-extrabold">%18</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
@@ -1206,7 +1207,7 @@ const ProUserDashboard = ({
   const learnedCount = stats.learnedTerms || 0;
   const learnedMorphemes = stats.learnedMorphemes !== undefined ? stats.learnedMorphemes : getLearnedMorphemesCount();
   const userLevel = stats.userLevel || getUserLevel(learnedCount, learnedMorphemes);
-  const morphemePct = Math.round((learnedMorphemes / 571) * 100);
+  const morphemePct = Math.round((learnedMorphemes / TOTAL_MORPHEMES) * 100);
 
   // Oyun kartları listesi (10a SVG ikonları ve degradeleri ile)
   const games = [
@@ -1323,7 +1324,7 @@ const ProUserDashboard = ({
               </span>
               <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4b5563] dark:text-muted-foreground bg-white dark:bg-card border border-[#e5e9f2] dark:border-border px-3 py-1 rounded-full shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                571 {isTr ? 'Morfem Kütüphanesi' : 'Morphemes'}
+                {TOTAL_MORPHEMES} {isTr ? 'Morfem Kütüphanesi' : 'Morphemes'}
               </span>
               <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4b5563] dark:text-muted-foreground bg-white dark:bg-card border border-[#e5e9f2] dark:border-border px-3 py-1 rounded-full shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
@@ -1723,7 +1724,7 @@ const ProUserDashboard = ({
               </div>
               <div className="flex items-baseline justify-between">
                 <span className="font-extrabold text-[28px] leading-none text-[#0f1b33] dark:text-foreground">
-                  {learnedMorphemes} / 571
+                  {learnedMorphemes} / {TOTAL_MORPHEMES}
                 </span>
                 <span className="text-[12px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/40">
                   {learnedMorphemes > 0 ? `%${morphemePct} ${isTr ? 'Öğrenildi' : 'Learned'}` : (isTr ? 'Tümü Açık' : 'All Unlocked')}
@@ -1738,11 +1739,11 @@ const ProUserDashboard = ({
               <span className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground">
                 {learnedMorphemes > 0
                   ? (isTr
-                      ? `571 morfemden ${learnedMorphemes} tanesini öğrendiniz (%${morphemePct}). Morfem Atlası’ndan yenilerini keşfedebilirsiniz.`
-                      : `You have learned ${learnedMorphemes} out of 571 morphemes (${morphemePct}%). Keep exploring in the atlas.`)
+                      ? `${TOTAL_MORPHEMES} morfemden ${learnedMorphemes} tanesini öğrendiniz (%${morphemePct}). Morfem Atlası’ndan yenilerini keşfedebilirsiniz.`
+                      : `You have learned ${learnedMorphemes} out of ${TOTAL_MORPHEMES} morphemes (${morphemePct}%). Keep exploring in the atlas.`)
                   : (isTr
-                      ? '571 morfemin tamamı hesabına tanımlı. Morfem Atlası’nda "Öğrendim" butonuna basarak ilerlemeni kaydedebilirsin.'
-                      : 'All 571 morphemes are unlocked. Visit Morpheme Atlas and click "Mark Learned" to track progress.')}
+                      ? `${TOTAL_MORPHEMES} morfemin tamamı hesabına tanımlı. Morfem Atlası’nda "Öğrendim" butonuna basarak ilerlemeni kaydedebilirsin.`
+                      : `All ${TOTAL_MORPHEMES} morphemes are unlocked. Visit Morpheme Atlas and click "Mark Learned" to track progress.`)}
               </span>
             </div>
 
@@ -1816,7 +1817,7 @@ const ProUserDashboard = ({
                 {isTr ? '🔬 Morfem & Kök Atlası' : '🔬 Morpheme Atlas'}
               </span>
               <span className="font-bold text-[11.5px] bg-white/90 dark:bg-amber-900/60 px-2 py-0.5 rounded-[5px]">
-                571 {isTr ? 'morfem' : 'morphemes'}
+                {TOTAL_MORPHEMES} {isTr ? 'morfem' : 'morphemes'}
               </span>
             </Link>
           </div>

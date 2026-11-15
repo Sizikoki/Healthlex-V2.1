@@ -2812,3 +2812,5 @@ SUFFIXES.forEach((s) => {
     SUFFIX_LOOKUP[clean] = meta;
   });
 });
+
+export const TOTAL_MORPHEMES = PREFIXES.length + ROOTS.length + SUFFIXES.length;
