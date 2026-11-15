@@ -46,28 +46,28 @@ export const FAQ = () => {
             category: 'pricing',
             icon: Sparkles,
             q: 'Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?',
-            a: 'Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süreniz boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsiniz. 3 gün dolmadan önce dilediğiniz an tek tıkla iptal edebilirsiniz; deneme süresi içinde iptal etmeniz durumunda kartınızdan hiçbir ücret çekilmez.'
+            a: 'Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süren boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsin. 3 gün dolmadan önce dilediğin an tek tıkla iptal edebilirsin; deneme süresi içinde iptal etmen durumunda kartından hiçbir ücret çekilmez.'
           },
           {
             id: 'categories',
             category: 'content',
             icon: BookOpen,
             q: 'Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?',
-            a: `16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk ${MAX_BASIC_MORPHEMES} morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsiniz.`
+            a: `16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk ${MAX_BASIC_MORPHEMES} morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsin.`
           },
           {
             id: 'register',
             category: 'account',
             icon: UserPlus,
             q: 'Nasıl kayıt olurum / hesap oluştururum?',
-            a: "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adınız, e-posta adresiniz ve belirleyeceğiniz şifre ile yalnızca 10 saniyede ücretsiz hesabınızı oluşturabilirsiniz. Dilerseniz Google hesabınızla da tek tıkla şifresiz ve anında kayıt olabilirsiniz."
+            a: "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adın, e-posta adresin ve belirleyeceğin şifre ile yalnızca 10 saniyede ücretsiz hesabını oluşturabilirsin. Dilersen Google hesabınla da tek tıkla şifresiz ve anında kayıt olabilirsin."
           },
           {
             id: 'mobile',
             category: 'tech',
             icon: Smartphone,
             q: 'Mobilde/tarayıcıda çalışıyor mu, uygulama indirmem gerekiyor mu?',
-            a: "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmenize gerek kalmadan; telefon, tablet ve masaüstü bilgisayarınızdaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilerseniz tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsiniz."
+            a: "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmene gerek kalmadan; telefon, tablet ve masaüstü bilgisayarındaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsin."
           },
           {
             id: 'sources',
@@ -81,7 +81,7 @@ export const FAQ = () => {
             category: 'pricing',
             icon: CreditCard,
             q: 'Fiyatlandırma nasıl, iptal edebilir miyim?',
-            a: 'HealthLexMed bütçenize göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerinizi profilinizden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğiniz an tek tıkla iptal edebilirsiniz. İptal ettiğinizde ödemesini yaptığınız dönem sonuna kadar erişiminiz kesintisiz devam eder.'
+            a: 'HealthLexMed bütçene göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerini profilinden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğin an tek tıkla iptal edebilirsin. İptal ettiğinde ödemesini yaptığın dönem sonuna kadar erişimin kesintisiz devam eder.'
           },
           {
             id: 'sla',
@@ -95,21 +95,21 @@ export const FAQ = () => {
             category: 'account',
             icon: CheckCircle2,
             q: 'Aboneliğimi nasıl iptal edebilir veya yönetebilirim?',
-            a: 'Giriş yaptıktan sonra Profil sayfanızdaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postanızdan bir ileti göndererek aboneliğinizi anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsiniz.'
+            a: 'Giriş yaptıktan sonra Profil sayfandaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsin.'
           },
           {
             id: 'payment-partner',
             category: 'pricing',
             icon: ShieldCheck,
             q: 'Ödeme ve fatura işlemlerim nerede işlenir?',
-            a: 'HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgileriniz sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontlarınız kayıtlı e-postanıza otomatik olarak iletilir.'
+            a: 'HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgilerin sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir.'
           },
           {
             id: 'term-feedback',
             category: 'support',
             icon: Mail,
             q: 'Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?',
-            a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerinizi İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinizde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
+            a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerini İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
           }
         ]
       : [
@@ -315,7 +315,7 @@ export const FAQ = () => {
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 {isTr
-                  ? 'HealthLexMed üyelikleri, 3 günlük ücretsiz deneme, içerik kapsamı ve tıp kaynakları hakkında aklınıza takılan tüm soruların yanıtları.'
+                  ? 'HealthLexMed üyelikleri, 3 günlük ücretsiz deneme, içerik kapsamı ve tıp kaynakları hakkında aklına takılan tüm soruların yanıtları.'
                   : 'Answers to all your questions regarding HealthLexMed memberships, the 3-day free trial, medical terminology sources, and mobile access.'}
               </p>
 
@@ -364,11 +364,11 @@ export const FAQ = () => {
             <div className="text-center py-12 border border-dashed border-border rounded-2xl bg-card/40 p-8">
               <HelpCircle className="w-10 h-10 text-muted-foreground/50 mx-auto mb-3" />
               <h3 className="text-base font-bold text-foreground">
-                {isTr ? 'Aradığınız kriterlere uygun soru bulunamadı' : 'No questions found'}
+                {isTr ? 'Aradığın kriterlere uygun soru bulunamadı' : 'No questions found'}
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-4">
                 {isTr
-                  ? 'Farklı bir arama terimi deneyebilir veya destek ekibimizle doğrudan iletişime geçebilirsiniz.'
+                  ? 'Farklı bir arama terimi deneyebilir veya destek ekibimizle doğrudan iletişime geçebilirsin.'
                   : 'Try a different search keyword or contact our support team directly.'}
               </p>
               <Button
@@ -433,11 +433,11 @@ export const FAQ = () => {
           <div className="mt-12 p-6 sm:p-8 rounded-2xl border border-primary/20 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
             <div className="space-y-1.5">
               <h3 className="text-base sm:text-lg font-bold text-foreground">
-                {isTr ? 'Başka bir sorunuz mu var?' : 'Have another question?'}
+                {isTr ? 'Başka bir sorun mu var?' : 'Have another question?'}
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-lg">
                 {isTr
-                  ? 'Tıbbi terim önerileri, iş birliği veya teknik destek için bize 7/24 dilediğiniz an ulaşabilirsiniz. En geç 24-48 saat içinde yanıtlıyoruz.'
+                  ? 'Tıbbi terim önerileri, iş birliği veya teknik destek için bize 7/24 dilediğin an ulaşabilirsin. En geç 24-48 saat içinde yanıtlıyoruz.'
                   : 'For medical terminology feedback, partnerships, or technical support, feel free to reach out anytime. We respond within 24-48 hours.'}
               </p>
             </div>
@@ -445,7 +445,7 @@ export const FAQ = () => {
               <Link to="/contact">
                 <Button className="font-semibold gap-2">
                   <Mail className="w-4 h-4" />
-                  {isTr ? 'Bize Ulaşın' : 'Contact Us'}
+                  {isTr ? 'Bize Ulaş' : 'Contact Us'}
                 </Button>
               </Link>
               <Link to="/pricing">

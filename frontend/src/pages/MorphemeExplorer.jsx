@@ -179,7 +179,7 @@ export const MorphemeExplorer = () => {
       if (!isLoggedIn()) {
         toast.info(
           isLearned
-            ? (isTr ? `"${morphemeDisplay}" öğrenildi! (Misafir: İlerlemeniz bu cihazda saklanır)` : `"${morphemeDisplay}" marked as learned!`)
+            ? (isTr ? `"${morphemeDisplay}" öğrenildi! (Misafir: İlerlemen bu cihazda saklanır)` : `"${morphemeDisplay}" marked as learned!`)
             : (isTr ? `"${morphemeDisplay}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
         );
       } else {
@@ -437,7 +437,7 @@ export const MorphemeExplorer = () => {
           </h1>
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground">
             {isTr
-              ? `Tıbbi terimlerin yapı taşlarını oluşturan ${allMorphemes.length} kök ve eki keşfedin, Türkçe/İngilizce anlamlarını ve kelime formüllerini anında öğrenin.`
+              ? `Tıbbi terimlerin yapı taşlarını oluşturan ${allMorphemes.length} kök ve eki keşfet, Türkçe/İngilizce anlamlarını ve kelime formüllerini anında öğren.`
               : `Explore the ${allMorphemes.length} building blocks of medical terminology. Search prefixes, roots, and suffixes with dual-language definitions and formulas.`}
           </p>
 
@@ -492,10 +492,10 @@ export const MorphemeExplorer = () => {
                 <span>
                   {isBasic
                     ? (isTr
-                        ? `Temel Paket: İlk ${MAX_BASIC_MORPHEMES} morfem açık. 550+ morfemin tamamı için Pro’ya geçin.`
+                        ? `Temel Paket: İlk ${MAX_BASIC_MORPHEMES} morfem açık. 550+ morfemin tamamı için Pro’ya geç.`
                         : `Basic Plan: First ${MAX_BASIC_MORPHEMES} morphemes unlocked. Upgrade to Pro for all 550+.`)
                     : (isTr
-                        ? `Misafir Modu: İlk ${MAX_GUEST_MORPHEMES} morfem açık. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamı için Pro’ya geçin.`
+                        ? `Misafir Modu: İlk ${MAX_GUEST_MORPHEMES} morfem açık. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamı için Pro’ya geç.`
                         : `Guest Mode: First ${MAX_GUEST_MORPHEMES} morphemes unlocked. Upgrade to Basic for ${MAX_BASIC_MORPHEMES} or Pro for all 550+.`)}
                 </span>
               </div>
@@ -539,7 +539,7 @@ export const MorphemeExplorer = () => {
                 <SelectTrigger className="w-full py-2.5 bg-background border-border rounded-xl text-sm">
                   <div className="flex items-center gap-2 truncate">
                     <Filter className="w-4 h-4 text-muted-foreground shrink-0" />
-                    <SelectValue placeholder={isTr ? 'Kategori Seçin' : 'Select Category'} />
+                    <SelectValue placeholder={isTr ? 'Kategori Seç' : 'Select Category'} />
                   </div>
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border max-h-80">
@@ -590,13 +590,13 @@ export const MorphemeExplorer = () => {
                   if (!isBasic) {
                     toast.info(
                       isTr
-                        ? `İlk ${MAX_GUEST_MORPHEMES} morfem misafirlere açıktır. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geçin.`
+                        ? `İlk ${MAX_GUEST_MORPHEMES} morfem misafirlere açıktır. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geç.`
                         : `The first ${MAX_GUEST_MORPHEMES} morphemes are open for guests. Upgrade to Basic for ${MAX_BASIC_MORPHEMES} morphemes or Pro and above for all 550+.`
                     );
                   } else {
                     toast.info(
                       isTr
-                        ? `İlk ${MAX_BASIC_MORPHEMES} morfem Temel planda açıktır. 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geçin.`
+                        ? `İlk ${MAX_BASIC_MORPHEMES} morfem Temel planda açıktır. 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geç.`
                         : `The first ${MAX_BASIC_MORPHEMES} morphemes are available in the Basic plan. Upgrade to Pro and above to unlock all 550+ morphemes.`
                     );
                   }
@@ -725,7 +725,7 @@ export const MorphemeExplorer = () => {
                           {locked ? (
                             <span className="font-semibold text-amber-600 dark:text-amber-400 inline-flex items-center gap-1 group-hover:underline shrink-0">
                               <Lock className="w-3.5 h-3.5" />
-                              {isTr ? "Pro'ya Geçin" : 'Upgrade to Pro'}
+                              {isTr ? "Pro'ya Geç" : 'Upgrade to Pro'}
                               <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                             </span>
                           ) : (
@@ -753,7 +753,7 @@ export const MorphemeExplorer = () => {
                                   ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/25'
                                   : 'bg-muted/70 hover:bg-primary/10 text-muted-foreground hover:text-primary border border-border hover:border-primary/30'
                               }`}
-                              title={isLearned ? (isTr ? 'Öğrenildi olarak işaretli (kaldırmak için tıklayın)' : 'Marked as learned (click to unmark)') : (isTr ? 'Öğrendim olarak işaretle' : 'Mark as learned')}
+                              title={isLearned ? (isTr ? 'Öğrenildi olarak işaretli (kaldırmak için tıkla)' : 'Marked as learned (click to unmark)') : (isTr ? 'Öğrendim olarak işaretle' : 'Mark as learned')}
                             >
                               {isLearned ? (
                                 <>
@@ -786,7 +786,7 @@ export const MorphemeExplorer = () => {
             </div>
             <div className="space-y-1">
               <h3 className="text-lg font-semibold text-foreground">
-                {isTr ? 'Aramanızla eşleşen morfem bulunamadı' : 'No matching morphemes found'}
+                {isTr ? 'Aramanla eşleşen morfem bulunamadı' : 'No matching morphemes found'}
               </h3>
               {searchedMorphemes.length > 0 ? (
                 <p className="text-sm text-primary font-medium max-w-md mx-auto">
@@ -797,7 +797,7 @@ export const MorphemeExplorer = () => {
               ) : (
                 <p className="text-sm text-muted-foreground max-w-md mx-auto">
                   {isTr
-                    ? 'Farklı bir kök, ön ek veya Türkçe/İngilizce tıbbi kelime aramayı deneyebilirsiniz.'
+                    ? 'Farklı bir kök, ön ek veya Türkçe/İngilizce tıbbi kelime aramayı deneyebilirsin.'
                     : 'Try searching with a different affix, root, or keyword.'}
                 </p>
               )}

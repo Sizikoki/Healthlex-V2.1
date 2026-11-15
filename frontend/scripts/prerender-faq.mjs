@@ -31,7 +31,7 @@ const faqSchemaJson = {
       "name": "Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süreniz boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsiniz. 3 gün dolmadan önce dilediğiniz an tek tıkla iptal edebilirsiniz; deneme süresi içinde iptal etmeniz durumunda kartınızdan hiçbir ücret çekilmez."
+        "text": "Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süren boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsin. 3 gün dolmadan önce dilediğin an tek tıkla iptal edebilirsin; deneme süresi içinde iptal etmen durumunda kartından hiçbir ücret çekilmez."
       }
     },
     {
@@ -39,7 +39,7 @@ const faqSchemaJson = {
       "name": "Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 150 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsiniz."
+        "text": "16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 150 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsin."
       }
     },
     {
@@ -47,7 +47,7 @@ const faqSchemaJson = {
       "name": "Nasıl kayıt olurum / hesap oluştururum?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adınız, e-posta adresiniz ve belirleyeceğiniz şifre ile yalnızca 10 saniyede ücretsiz hesabınızı oluşturabilirsiniz. Dilerseniz Google hesabınızla da tek tıkla şifresiz ve anında kayıt olabilirsiniz."
+        "text": "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adın, e-posta adresin ve belirleyeceğin şifre ile yalnızca 10 saniyede ücretsiz hesabını oluşturabilirsin. Dilersen Google hesabınla da tek tıkla şifresiz ve anında kayıt olabilirsin."
       }
     },
     {
@@ -55,7 +55,7 @@ const faqSchemaJson = {
       "name": "Mobilde/tarayıcıda çalışıyor mu, uygulama indirmem gerekiyor mu?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmenize gerek kalmadan; telefon, tablet ve masaüstü bilgisayarınızdaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilerseniz tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsiniz."
+        "text": "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmene gerek kalmadan; telefon, tablet ve masaüstü bilgisayarındaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsin."
       }
     },
     {
@@ -71,7 +71,7 @@ const faqSchemaJson = {
       "name": "Fiyatlandırma nasıl, iptal edebilir miyim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed bütçenize göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerinizi profilinizden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğiniz an tek tıkla iptal edebilirsiniz. İptal ettiğinizde ödemesini yaptığınız dönem sonuna kadar erişiminiz kesintisiz devam eder."
+        "text": "HealthLexMed bütçene göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerini profilinden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğin an tek tıkla iptal edebilirsin. İptal ettiğinde ödemesini yaptığın dönem sonuna kadar erişimin kesintisiz devam eder."
       }
     },
     {
@@ -87,7 +87,7 @@ const faqSchemaJson = {
       "name": "Aboneliğimi nasıl iptal edebilir veya yönetebilirim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Giriş yaptıktan sonra Profil sayfanızdaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postanızdan bir ileti göndererek aboneliğinizi anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsiniz."
+        "text": "Giriş yaptıktan sonra Profil sayfandaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsin."
       }
     },
     {
@@ -95,7 +95,7 @@ const faqSchemaJson = {
       "name": "Ödeme ve fatura işlemlerim nerede işlenir?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgileriniz sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontlarınız kayıtlı e-postanıza otomatik olarak iletilir."
+        "text": "HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgilerin sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir."
       }
     },
     {
@@ -103,7 +103,7 @@ const faqSchemaJson = {
       "name": "Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerinizi İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinizde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır."
+        "text": "Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerini İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır."
       }
     }
   ]

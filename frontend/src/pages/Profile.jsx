@@ -227,7 +227,7 @@ export const Profile = () => {
   const handleExportPdf = async () => {
     try {
       setIsExportingPdf(true);
-      toast.loading(isTr ? 'İlerleme raporunuz PDF olarak hazırlanıyor...' : 'Generating progress report PDF...', { id: 'export-pdf-toast' });
+      toast.loading(isTr ? 'İlerleme raporun PDF olarak hazırlanıyor...' : 'Generating progress report PDF...', { id: 'export-pdf-toast' });
 
       const terms = getAllTerms();
       const planTitle = isLifetime ? 'Ömür Boyu (Lifetime)' : isProPlan ? 'Pro Plan' : isBasic ? 'Temel Plan' : isTrialActive ? 'Deneme (Trial)' : 'Ücretsiz';
@@ -271,7 +271,7 @@ export const Profile = () => {
     link.download = `HealthLex-Ham-Veri-${cleanName}.json`;
     link.click();
     URL.revokeObjectURL(url);
-    toast.success(t('dataDownloaded', 'Ham verileriniz JSON olarak indirildi.'));
+    toast.success(t('dataDownloaded', 'Ham verilerin JSON olarak indirildi.'));
   };
 
   const [portalLoading, setPortalLoading] = useState(false);
@@ -281,7 +281,7 @@ export const Profile = () => {
       setPortalLoading(true);
       const currentUser = auth.currentUser;
       if (!currentUser) {
-        toast.error(isTr ? 'Oturum açmanız gerekiyor.' : 'You must be logged in.');
+        toast.error(isTr ? 'Oturum açman gerekiyor.' : 'You must be logged in.');
         return;
       }
 
@@ -311,13 +311,13 @@ export const Profile = () => {
 
   const handleDeleteAccount = async () => {
     const confirmation = window.confirm(
-      t('deleteAccountConfirm', 'Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.')
+      t('deleteAccountConfirm', 'Hesabını silmek istediğine emin misin? Bu işlem geri alınamaz.')
     );
     if (!confirmation) return;
 
     try {
       setIsDeletingAccount(true);
-      const loadingMsg = currentLanguage === 'en' ? 'Deleting account and cloud data...' : 'Hesabınız ve tüm verileriniz siliniyor...';
+      const loadingMsg = currentLanguage === 'en' ? 'Deleting account and cloud data...' : 'Hesabın ve tüm verilerin siliniyor...';
       toast.loading(loadingMsg, { id: 'delete-acc-loading' });
 
       const currentUser = auth.currentUser;
@@ -364,7 +364,7 @@ export const Profile = () => {
       // 4. Yerel oturumu temizle ve yönlendir
       logout();
       toast.dismiss('delete-acc-loading');
-      toast.success(t('accountDeleted', 'Hesabınız ve tüm verileriniz kalıcı olarak silindi.'));
+      toast.success(t('accountDeleted', 'Hesabın ve tüm verilerin kalıcı olarak silindi.'));
       try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
       navigate('/register');
     } catch (err) {
@@ -372,7 +372,7 @@ export const Profile = () => {
       console.error('Delete account error:', err);
       if (err?.code === 'auth/requires-recent-login') {
         toast.error(
-          t('deleteAccountRelogin', 'Güvenlik nedeniyle, hesabınızı silmeden önce çıkış yapıp tekrar giriş yapmanız gerekmektedir.')
+          t('deleteAccountRelogin', 'Güvenlik nedeniyle, hesabını silmeden önce çıkış yapıp tekrar giriş yapman gerekmektedir.')
         );
       } else {
         toast.error(t('deleteAccountError', 'Hesap silinirken bir sorun oluştu.'));
@@ -393,7 +393,7 @@ export const Profile = () => {
   const handleTogglePin = (badgeId) => {
     const isAlreadyPinned = pinnedBadges.includes(badgeId);
     if (!isAlreadyPinned && pinnedBadges.length >= 3) {
-      toast.warning(t('maxBadgesWarning', 'En fazla 3 adet rozet vitrine ekleyebilirsiniz.'));
+      toast.warning(t('maxBadgesWarning', 'En fazla 3 adet rozet vitrine ekleyebilirsin.'));
       return;
     }
     const updated = isAlreadyPinned
@@ -550,7 +550,7 @@ export const Profile = () => {
                     {isTr ? 'Abonelik & Tarife' : 'Subscription & Plan'}
                   </div>
                   <h2 className="font-serif font-semibold text-[1.28rem] text-[var(--ink)] m-0">
-                    {isTr ? 'Üyelik Durumunuz' : 'Your Membership Plan'}
+                    {isTr ? 'Üyelik Durumun' : 'Your Membership Plan'}
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 self-start sm:self-auto">
@@ -612,10 +612,10 @@ export const Profile = () => {
                       : isTrialActive
                       ? (isBasic
                           ? (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. Tüm 16 kategori, 550+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.'
+                              ? '3 günlük ücretsiz deneme sürecindesin. Tüm 16 kategori, 550+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsin.'
                               : 'You are on a 3-day free trial. Full access to all 16 categories, 550+ morphemes, and 4 game modes.')
                           : (isTr
-                              ? '3 günlük ücretsiz deneme sürecindesiniz. 16 kategorinin tamamı, 550+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.'
+                              ? '3 günlük ücretsiz deneme sürecindesin. 16 kategorinin tamamı, 550+ morfem ve 4 oyun moduna sınırsız erişebilirsin.'
                               : 'You are on a 3-day free trial. Full access to all 16 categories, 550+ morphemes, and 4 game modes.'))
                       : isProPlan
                       ? (isTr
@@ -623,7 +623,7 @@ export const Profile = () => {
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
                       : isBasic
                       ? (isTr
-                          ? `Temel plandasınız: 16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro'ya geçebilirsiniz.`
+                          ? `Temel plandasın: 16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro'ya geçebilirsin.`
                           : `You are on the Basic plan: 16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 550+ morphemes and Quiz.`)
                       : (isTr
                           ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı, 4 oyun modu ve seviye sisteminin tamamı için Pro\'ya geç.'
@@ -638,7 +638,7 @@ export const Profile = () => {
                   {hasActiveSubscription && (
                     <p className="text-[0.78rem] text-[var(--muted)] mt-2.5 leading-normal opacity-90">
                       ℹ️ {isTr
-                        ? 'Abonelik iptali veya fatura detaylarınız için Paddle portalını kullanabilir veya help@healthlexmed.com ile iletişime geçebilirsiniz.'
+                        ? 'Abonelik iptali veya fatura detayların için Paddle portalını kullanabilir veya help@healthlexmed.com ile iletişime geçebilirsin.'
                         : 'For cancellation or invoice details, you can use the Paddle portal or contact help@healthlexmed.com.'}
                     </p>
                   )}
@@ -731,8 +731,8 @@ export const Profile = () => {
                       title={
                         badge.unlocked 
                           ? (isPinned 
-                              ? (isTr ? 'Vitrinden kaldırmak için tıklayın' : 'Click to remove from showcase') 
-                              : (isTr ? 'Vitrine eklemek için tıklayın' : 'Click to add to showcase')) 
+                              ? (isTr ? 'Vitrinden kaldırmak için tıkla' : 'Click to remove from showcase') 
+                              : (isTr ? 'Vitrine eklemek için tıkla' : 'Click to add to showcase')) 
                           : (isTr ? 'Bu rozet henüz kazanılmadı' : 'Badge not unlocked yet')
                       }
                     >
@@ -820,7 +820,7 @@ export const Profile = () => {
                   </div>
                   <div className="setting-sub text-[0.8rem] text-[var(--muted)] mt-0.5 max-w-[420px]">
                     {isTr 
-                      ? '16 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerinizi içeren resmi PDF raporu.' 
+                      ? '16 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerini içeren resmi PDF raporu.' 
                       : 'Official PDF report containing 16 categories, learned terms, badges, and study stats.'}
                   </div>
                   <button

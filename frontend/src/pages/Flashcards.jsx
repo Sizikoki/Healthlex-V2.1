@@ -310,27 +310,27 @@ export const Flashcards = () => {
           onClose={() => isRestartLimit ? setShowGuestModal(false) : navigate('/games')}
           title={
             isRestartLimit
-              ? t('guestFlashcardRestartLimitTitle', 'Günlük Yeniden Başlatma Hakkınız Doldu! 🔄')
-              : t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')
+              ? t('guestFlashcardRestartLimitTitle', 'Günlük Yeniden Başlatma Hakkın Doldu! 🔄')
+              : t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkın Doldu! 🎯')
           }
           description={
             isRestartLimit
               ? (userLoggedIn
-                  ? t('userFlashcardRestartLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsiniz. Sınırsız pratik yapmak için lütfen planınızı yükseltin.`)
-                  : t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen planınızı yükseltin.`))
+                  ? t('userFlashcardRestartLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsin. Sınırsız pratik yapmak için lütfen planını yükselt.`)
+                  : t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen planını yükselt.`))
               : (userLoggedIn
-                  ? t('userFlashcardDailyLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.`)
-                  : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen planınızı yükseltin.`))
+                  ? t('userFlashcardDailyLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması hakkın doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planını yükselt.`)
+                  : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemeni kaydetmek için lütfen planını yükselt.`))
           }
           cardTitle={
             userLoggedIn
-              ? t('upgradePlanCardTitle', 'Planınızı Yükseltin')
-              : t('guestLimitCardTitle', 'Ücretsiz Üye Olun')
+              ? t('upgradePlanCardTitle', 'Planını Yükselt')
+              : t('guestLimitCardTitle', 'Ücretsiz Üye Ol')
           }
           cardDesc={
             userLoggedIn
-              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
-              : t('guestLimitCardDesc', 'Kayıt olarak ilerlemenizi senkronize edebilir ve platform özelliklerinden faydalanabilirsiniz.')
+              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
+              : t('guestLimitCardDesc', 'Kayıt olarak ilerlemeni senkronize edebilir ve platform özelliklerinden faydalanabilirsin.')
           }
         />
       </div>
@@ -388,7 +388,7 @@ export const Flashcards = () => {
                 size="icon"
                 onClick={handleRestart}
                 disabled={isLimited && !guestRestartInfo.canRestart}
-                title={isLimited ? `${guestRestartInfo.remaining} restart hakkınız kaldı` : t('restart', 'Yeniden Başlat')}
+                title={isLimited ? `${guestRestartInfo.remaining} restart hakkın kaldı` : t('restart', 'Yeniden Başlat')}
               >
                 <RotateCw className="w-5 h-5" />
               </Button>

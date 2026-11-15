@@ -797,16 +797,16 @@ const BasicUserDashboard = ({
               <div>
                 <p className="font-bold text-sm">
                   {pastDueState.isWithinGracePeriod
-                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
+                    ? (isTr ? 'Ödemen Kartından Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
                     : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
                 </p>
                 <p className="text-xs opacity-90 mt-0.5">
                   {pastDueState.isWithinGracePeriod
                     ? (isTr
-                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
+                        ? `Abonelik yenilemen alınamadı. Hizmetinin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartını güncellemelisin.`
                         : `Your subscription renewal failed. Please update your card within ${pastDueState.daysLeft} days to avoid service interruption.`)
                     : (isTr
-                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin veya yeni bir plan seçin.'
+                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartını güncelle veya yeni bir plan seç.'
                         : 'Access is restricted because the 5-day grace period has expired. Please update your card.')}
                 </p>
               </div>
@@ -1013,7 +1013,7 @@ const BasicUserDashboard = ({
 
               <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? `Temel planda ${MAX_BASIC_MORPHEMES} morfem sınırsız açıktır. Kalan ${TOTAL_MORPHEMES - MAX_BASIC_MORPHEMES} morfem için Pro’ya geçebilirsiniz.`
+                  ? `Temel planda ${MAX_BASIC_MORPHEMES} morfem sınırsız açıktır. Kalan ${TOTAL_MORPHEMES - MAX_BASIC_MORPHEMES} morfem için Pro’ya geçebilirsin.`
                   : `${MAX_BASIC_MORPHEMES} morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining ${TOTAL_MORPHEMES - MAX_BASIC_MORPHEMES}.`}
               </span>
             </div>
@@ -1375,16 +1375,16 @@ const ProUserDashboard = ({
               <div>
                 <p className="font-bold text-sm">
                   {pastDueState.isWithinGracePeriod
-                    ? (isTr ? 'Ödemeniz Kartınızdan Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
+                    ? (isTr ? 'Ödemen Kartından Tahsil Edilemedi' : 'Subscription Renewal Payment Failed')
                     : (isTr ? '5 Günlük Ek Süre Sona Erdi' : '5-Day Grace Period Expired')}
                 </p>
                 <p className="text-xs opacity-90 mt-0.5">
                   {pastDueState.isWithinGracePeriod
                     ? (isTr
-                        ? `Abonelik yenilemeniz alınamadı. Hizmetinizin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartınızı güncellemelisiniz.`
+                        ? `Abonelik yenilemen alınamadı. Hizmetinin kesilmemesi için ${pastDueState.daysLeft} gün içerisinde kartını güncellemelisin.`
                         : `Your subscription renewal failed. Please update your card within ${pastDueState.daysLeft} days to avoid service interruption.`)
                     : (isTr
-                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartınızı güncelleyin.'
+                        ? '5 günlük ek süre sona erdiği için erişim kısıtlanmıştır. Lütfen kartını güncelle.'
                         : 'Access is restricted because the 5-day grace period has expired. Please update your card.')}
                 </p>
               </div>
@@ -1548,7 +1548,7 @@ const ProUserDashboard = ({
               </div>
               <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? 'Giriş yaptıkça günlük seriniz korunur. Terim ve morfem öğrendikçe seviyeniz yükselir.'
+                  ? 'Giriş yaptıkça günlük serin korunur. Terim ve morfem öğrendikçe seviyen yükselir.'
                   : 'Daily visits keep your streak alive. Master terms and morphemes to level up.'}
               </span>
             </div>
@@ -1741,7 +1741,7 @@ const ProUserDashboard = ({
               <span className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground">
                 {learnedMorphemes > 0
                   ? (isTr
-                      ? `${TOTAL_MORPHEMES} morfemden ${learnedMorphemes} tanesini öğrendiniz (%${morphemePct}). Morfem Atlası’ndan yenilerini keşfedebilirsiniz.`
+                      ? `${TOTAL_MORPHEMES} morfemden ${learnedMorphemes} tanesini öğrendin (%${morphemePct}). Morfem Atlası’ndan yenilerini keşfedebilirsin.`
                       : `You have learned ${learnedMorphemes} out of ${TOTAL_MORPHEMES} morphemes (${morphemePct}%). Keep exploring in the atlas.`)
                   : (isTr
                       ? `${TOTAL_MORPHEMES} morfemin tamamı hesabına tanımlı. Morfem Atlası’nda "Öğrendim" butonuna basarak ilerlemeni kaydedebilirsin.`
@@ -2006,7 +2006,7 @@ export const Dashboard = () => {
     if (targetRank < currentRank && targetPlanKey !== 'lifetime') {
       const confirmed = window.confirm(
         isTr
-          ? `${currentPlan === 'pro' ? 'Pro' : 'mevcut'} planınızdan Temel plana düşürüleceksiniz. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musunuz?`
+          ? `${currentPlan === 'pro' ? 'Pro' : 'mevcut'} planından Temel plana düşürüleceksin. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musun?`
           : `You will downgrade to the Basic plan. The new price takes effect at the end of your current billing period. No immediate refund. Proceed?`
       );
       if (!confirmed) return;
@@ -2015,7 +2015,7 @@ export const Dashboard = () => {
     if (targetPlanKey === 'lifetime' && firestoreData?.paddleSubscriptionId) {
       const confirmed = window.confirm(
         isTr
-          ? 'Mevcut yıllık aboneliğiniz ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan Pro süreniz için iade yapılmayacak. Onaylıyor musunuz?'
+          ? 'Mevcut yıllık aboneliğin ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan Pro süren için iade yapılmayacak. Onaylıyor musun?'
           : 'Your current subscription will be cancelled immediately and the Lifetime purchase screen will open. No refund for unused Pro time. Proceed?'
       );
       if (!confirmed) return;
@@ -2034,7 +2034,7 @@ export const Dashboard = () => {
       if (result.success && !result.requiresCheckout) {
         toast.success(
           isTr
-            ? `Planınız başarıyla değiştirildi 🎉`
+            ? `Planın başarıyla değiştirildi 🎉`
             : `Your plan has been updated successfully 🎉`
         );
       } else if (!result.success && result.error) {

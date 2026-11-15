@@ -290,7 +290,7 @@ export const Games = () => {
       const gameObj = games.find((g) => g.id === gameId);
       toast.info(
         isTr
-          ? `${gameObj?.title || 'Bu oyun'} modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.`
+          ? `${gameObj?.title || 'Bu oyun'} modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinde açıktır.`
           : `${gameObj?.title || 'This game'} mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.`
       );
       navigate('/pricing');
@@ -467,32 +467,32 @@ export const Games = () => {
             modalMode === 'match'
               ? t('guestMatchLockedTitle', 'Eşleştirme Oyunu Kayıtlı Kullanıcılara Özeldir! 🎯')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkınız Doldu! 🎯')
+              ? t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkın Doldu! 🎯')
               : undefined
           }
           description={
             modalMode === 'match'
-              ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarınızı kaydetmek için lütfen ücretsiz kayıt olun.')
+              ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarını kaydetmek için lütfen ücretsiz kayıt ol.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? (userIsLoggedIn
-                  ? t('userFlashcardDailyLimitDesc', 'Günlük en fazla 5 kelime kartı çalışması hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.')
-                  : t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen planınızı yükseltin.'))
+                  ? t('userFlashcardDailyLimitDesc', 'Günlük en fazla 5 kelime kartı çalışması hakkın doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planını yükselt.')
+                  : t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen planını yükselt.'))
               : undefined
           }
           cardTitle={
             modalMode === 'match'
-              ? t('guestMatchCardTitle', 'Ücretsiz Üye Olun & Eşleştirmeye Başlayın')
+              ? t('guestMatchCardTitle', 'Ücretsiz Üye Ol & Eşleştirmeye Başla')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? (userIsLoggedIn ? t('upgradePlanCardTitle', 'Planınızı Yükseltin') : t('guestLimitCardTitle', 'Ücretsiz Üye Olun'))
+              ? (userIsLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Ücretsiz Üye Ol'))
               : undefined
           }
           cardDesc={
             modalMode === 'match'
-              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına erişebilir, ilerlemenizi tüm cihazlarınızda takip edebilirsiniz.')
+              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına erişebilir, ilerlemeni tüm cihazlarında takip edebilirsin.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? (userIsLoggedIn
-                  ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
-                  : t('guestLimitCardDesc', 'Üye olarak ilerlemenizi senkronize edebilir ve platform özelliklerinden faydalanabilirsiniz.'))
+                  ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
+                  : t('guestLimitCardDesc', 'Üye olarak ilerlemeni senkronize edebilir ve platform özelliklerinden faydalanabilirsin.'))
               : undefined
           }
         />

@@ -471,7 +471,7 @@ export const Study = () => {
       if (!isLoggedIn()) {
         toast.info(
           newStatus
-            ? (isTr ? 'Terim öğrenildi! (Misafir Modu: İlerlemeniz bu cihazda saklanır)' : 'Term learned! (Guest Mode: Progress saved locally)')
+            ? (isTr ? 'Terim öğrenildi! (Misafir Modu: İlerlemen bu cihazda saklanır)' : 'Term learned! (Guest Mode: Progress saved locally)')
             : (isTr ? 'Öğrenildi işareti kaldırıldı' : 'Unmarked as learned')
         );
       } else {
