@@ -37,9 +37,9 @@ export function formatMedicalTerm(term) {
   return term.split(' ').map(word => {
     if (word.includes('-')) {
       return word.split('-').map(subWord => {
-        return subWord.charAt(0).toLocaleUpperCase('en') + subWord.slice(1).toLocaleLowerCase('tr-TR');
+        return subWord.charAt(0).toLocaleUpperCase('en') + subWord.slice(1).toLocaleLowerCase('en');
       }).join('-');
     }
-    return word.charAt(0).toLocaleUpperCase('en') + word.slice(1).toLocaleLowerCase('tr-TR');
+    return word.charAt(0).toLocaleUpperCase('en') + word.slice(1).toLocaleLowerCase('en');
   }).join(' ');
 }

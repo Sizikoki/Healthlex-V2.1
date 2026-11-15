@@ -216,7 +216,7 @@ function assembledPreview(parts) {
       const currentStartsWithHyphen = currentRaw.startsWith("-");
 
       if (prevEndsWithHyphen || currentStartsWithHyphen) {
-        result += cleanCurrent.toLocaleLowerCase("tr-TR");
+        result += cleanCurrent.toLocaleLowerCase("en");
       } else {
         result += " " + cleanCurrent.charAt(0).toLocaleUpperCase("en") + cleanCurrent.slice(1);
       }
