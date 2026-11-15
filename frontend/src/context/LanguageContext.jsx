@@ -15,6 +15,10 @@ export const LanguageProvider = ({ children }) => {
     return saved === 'en' ? 'en' : 'tr';
   });
 
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'tr';
+  }, [currentLanguage]);
+
   // Sync language with Firestore user preferences if logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {

@@ -1,8 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="utf-8" />
+    <script>
+      try {
+        var l = localStorage.getItem('healthlex_lang');
+        if (l === 'en' || l === 'tr') document.documentElement.lang = l;
+      } catch (e) {}
+    </script>
     <meta name="facebook-domain-verification" content="xqo030swv0rp50grs08qsewfz41v28" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=2" sizes="any" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico?v=2" />
