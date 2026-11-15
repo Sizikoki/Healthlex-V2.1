@@ -81,7 +81,7 @@ const PRICING_CONTENT = {
   en: {
     eyebrow: 'PRICING',
     title: 'Pick the plan that fits',
-    sub: '3-day $0 trial on subscription plans. Cancel anytime in 1 click.',
+    sub: '3-day ₺0 trial on subscription plans. Cancel anytime in 1 click.',
     monthly: 'Monthly',
     yearly: 'Yearly',
     perMo: '/ mo',

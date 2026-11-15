@@ -117,7 +117,7 @@ export const FAQ = () => {
             category: 'pricing',
             icon: Sparkles,
             q: 'How does the free trial work and how long does it last?',
-            a: 'We offer a 3-day $0 free trial for both Basic and Pro membership plans. During the trial period, you can explore all features of the selected tier without limitation. You can cancel anytime in 1 click before the 3 days end, and your card will not be charged.'
+            a: 'We offer a 3-day ₺0 free trial for both Basic and Pro membership plans. During the trial period, you can explore all features of the selected tier without limitation. You can cancel anytime in 1 click before the 3 days end, and your card will not be charged.'
           },
           {
             id: 'categories',

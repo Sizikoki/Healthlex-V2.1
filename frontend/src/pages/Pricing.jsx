@@ -116,10 +116,10 @@ const TRANSLATIONS = {
     daysLeft: 'days left',
     currentPlan: 'CURRENT PLAN',
     title: 'Pick the plan that fits',
-    sub: '3-day $0 trial on subscription plans. Cancel anytime in one click.',
+    sub: '3-day ₺0 trial on subscription plans. Cancel anytime in one click.',
     titleVisitor: 'Split, understand, rebuild terms.',
-    subVisitor: '3 days $0 trial on subscription plans. Cancel anytime in 1 click, billed annually after 3 days.',
-    noCardNote: '$0 billed today · Cancel anytime in one click.',
+    subVisitor: '3 days ₺0 trial on subscription plans. Cancel anytime in 1 click, billed annually after 3 days.',
+    noCardNote: '₺0 billed today · Cancel anytime in one click.',
     startTrial: 'Try 3 days free',
     tabNames: ['Basic', 'Pro', 'Lifetime'],
     monthly: 'Monthly',
@@ -193,7 +193,7 @@ const TRANSLATIONS = {
       ['Progress tracking', 'Flashcard & Matching', 'All games + Level system', 'All games + Level system'],
       ['Review with learned terms', '–', '✓', '✓'],
       ['Future modules included', '–', '✓', '✓'],
-      ['3-Day Free Trial ($0)', '✓', '✓', '– (Direct Purchase)'],
+      ['3-Day Free Trial (₺0)', '✓', '✓', '– (Direct Purchase)'],
       ['Billing', 'Yearly', 'Yearly', 'One-time (Lifetime)']
     ]
   }
