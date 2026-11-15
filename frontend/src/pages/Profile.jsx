@@ -6,7 +6,7 @@ import { collection, query, where, getDocs, writeBatch, doc, onSnapshot } from '
 import { auth, db } from '@/firebase/config';
 import { toast } from 'sonner';
 import { useLanguage } from '@/context/LanguageContext';
-import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 import { generateProgressPdf } from '@/utils/generateProgressPdf';
 import { getAllTerms } from '@/data/medicalTerms';
 
@@ -623,8 +623,8 @@ export const Profile = () => {
                           : 'Unlimited access to all medical terminology morphemes, game modes, and in-depth analyses.')
                       : isBasic
                       ? (isTr
-                          ? 'Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro\'ya geçebilirsiniz.'
-                          : 'You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 550+ morphemes and Quiz.')
+                          ? `Temel plandasınız: 16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro'ya geçebilirsiniz.`
+                          : `You are on the Basic plan: 16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 550+ morphemes and Quiz.`)
                       : (isTr
                           ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı, 4 oyun modu ve seviye sisteminin tamamı için Pro\'ya geç.'
                           : 'You\'re on a free account. Upgrade to Pro to unlock 550+ morphemes, 4 game modes and the full level system.')}

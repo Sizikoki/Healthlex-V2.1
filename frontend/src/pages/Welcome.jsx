@@ -6,7 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
-import { checkIsPro, checkIsBasic, checkHasPaidPlan } from '@/utils/planAccess';
+import { checkIsPro, checkIsBasic, checkHasPaidPlan, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Welcome = () => {
@@ -134,8 +134,8 @@ export const Welcome = () => {
     }
     if (isBasic) {
       return isTr
-        ? 'Temel planın aktif edildi. Tüm kategoriler, 100 temel morfem ve sınırsız Flashcard & Eşleştirme oyunları kullanımına hazır. Aşağıda detayları görebilirsin.'
-        : 'Your Basic plan is active. All categories, 100 core morphemes, and unlimited Flashcard & Matching games are ready. Review your plan below.';
+        ? `Temel planın aktif edildi. Tüm kategoriler, ${MAX_BASIC_MORPHEMES} temel morfem ve sınırsız Flashcard & Eşleştirme oyunları kullanımına hazır. Aşağıda detayları görebilirsin.`
+        : `Your Basic plan is active. All categories, ${MAX_BASIC_MORPHEMES} core morphemes, and unlimited Flashcard & Matching games are ready. Review your plan below.`;
     }
     if (isRegistered) {
       return isTr
@@ -195,12 +195,12 @@ export const Welcome = () => {
         },
         {
           label: isTr ? 'MORFEM' : 'MORPHEMES',
-          v: '100',
+          v: String(MAX_BASIC_MORPHEMES),
           unit: isTr ? '/ 550+ morfem' : '/ 550+ morphemes',
           mobileUnit: isTr ? '/ 550+ açık' : '/ 550+ open',
           note: isTr
-            ? 'En çok kullanılan ilk 100 morfem açık. İleri seviye morfemler Pro gerektirir.'
-            : 'Top 100 core morphemes unlocked. Advanced morphemes require Pro.'
+            ? `En çok kullanılan ilk ${MAX_BASIC_MORPHEMES} morfem açık. İleri seviye morfemler Pro gerektirir.`
+            : `Top ${MAX_BASIC_MORPHEMES} core morphemes unlocked. Advanced morphemes require Pro.`
         },
         {
           label: isTr ? 'OYUNLAR' : 'GAMES',
@@ -268,7 +268,7 @@ export const Welcome = () => {
         return [
           { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
-          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '550+ morfem' },
+          { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: `İlk ${MAX_BASIC_MORPHEMES} morfem açık`, sub: 'İleri düzey için Pro gerekir', pro: '550+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Limitsiz kart çalışması', pro: 'Sınırsız' },
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Temel plan ile sınırsız açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
@@ -308,7 +308,7 @@ export const Welcome = () => {
       return [
         { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
-        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '550+ morphemes' },
+        { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `Top ${MAX_BASIC_MORPHEMES} morphemes open`, sub: 'Advanced morphemes require Pro', pro: '550+ morphemes' },
         { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
         { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Fully unlocked with Basic plan', pro: 'Unlocked' },
         { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
