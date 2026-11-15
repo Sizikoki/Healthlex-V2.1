@@ -94,8 +94,8 @@ export const getPaddle = async () => {
             const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
             const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge || pendingCheckoutPlan !== 'lifetime');
             const msgTr = isTrial
-              ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
-              : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
+              ? 'Deneme sürecine başarıyla başladın! Hoş geldin 🎉'
+              : 'Ödemen başarıyla tamamlandı! Hoş geldin 🎉';
             const msgEn = isTrial
               ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
               : 'Payment successful! Welcome to HealthLexMed 🎉';
@@ -115,7 +115,7 @@ export const getPaddle = async () => {
           if (event?.name === 'checkout.payment.failed') {
             console.warn('[Paddle] Payment failed:', event.data);
             const isEn = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en';
-            toast.error(isEn ? 'Payment could not be completed. Please check your card details and try again.' : 'Ödeme işlemi tamamlanamadı. Lütfen kart bilgilerinizi kontrol edip tekrar deneyin.', {
+            toast.error(isEn ? 'Payment could not be completed. Please check your card details and try again.' : 'Ödeme işlemi tamamlanamadı. Lütfen kart bilgilerini kontrol edip tekrar dene.', {
               duration: 6000
             });
           }
@@ -124,7 +124,7 @@ export const getPaddle = async () => {
           if (event?.name === 'checkout.error') {
             console.error('[Paddle] Checkout error:', event.data);
             const isEn = typeof window !== 'undefined' && localStorage.getItem('healthlex_lang') === 'en';
-            toast.error(isEn ? 'An error occurred during checkout. Please try again.' : 'Ödeme sırasında bir hata oluştu. Lütfen tekrar deneyiniz.');
+            toast.error(isEn ? 'An error occurred during checkout. Please try again.' : 'Ödeme sırasında bir hata oluştu. Lütfen tekrar dene.');
           }
 
           // Pencere Kapatıldığında
@@ -146,8 +146,8 @@ export const getPaddle = async () => {
               const isZeroCharge = totalVal === 0 || totalVal === '0' || totalVal === '0.00' || totalVal === undefined;
               const isTrial = planId !== 'lifetime' && (planId === 'basic' || planId === 'pro' || isZeroCharge);
               const msgTr = isTrial
-                ? 'Deneme sürecine başarıyla başladınız! Hoş geldiniz 🎉'
-                : 'Ödemeniz başarıyla tamamlandı! Hoş geldiniz 🎉';
+                ? 'Deneme sürecine başarıyla başladın! Hoş geldin 🎉'
+                : 'Ödemen başarıyla tamamlandı! Hoş geldin 🎉';
               const msgEn = isTrial
                 ? 'Your free trial has started! Welcome to HealthLexMed 🎉'
                 : 'Payment successful! Welcome to HealthLexMed 🎉';
@@ -293,7 +293,7 @@ export const openPaddleCheckout = async ({
     toast.error(
       currentLang === 'en'
         ? 'You must be signed in to make a purchase.'
-        : 'Satın alma yapabilmek için giriş yapmanız gerekiyor.',
+        : 'Satın alma yapabilmek için giriş yapman gerekiyor.',
       { duration: 4000 }
     );
     console.warn('[Paddle] Checkout blocked: no authenticated user.');
@@ -304,7 +304,7 @@ export const openPaddleCheckout = async ({
   try {
     const paddle = await getPaddle();
     if (!paddle) {
-      toast.error(currentLang === 'en' ? 'Payment system could not be initialized. Please check your connection.' : 'Ödeme sistemi başlatılamadı. Lütfen internet bağlantınızı kontrol edin.');
+      toast.error(currentLang === 'en' ? 'Payment system could not be initialized. Please check your connection.' : 'Ödeme sistemi başlatılamadı. Lütfen internet bağlantını kontrol et.');
       return;
     }
 

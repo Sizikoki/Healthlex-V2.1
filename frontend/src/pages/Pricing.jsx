@@ -333,7 +333,7 @@ export const PricingView = () => {
     const clickedPlanKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
 
     if (userCurrentPlan === 'lifetime') {
-      toast.info(isTr ? 'Zaten Ömür Boyu VIP üyeliğiniz bulunmaktadır.' : 'You already have Lifetime VIP access.');
+      toast.info(isTr ? 'Zaten Ömür Boyu VIP üyeliğin bulunmaktadır.' : 'You already have Lifetime VIP access.');
       return;
     }
 
@@ -349,7 +349,7 @@ export const PricingView = () => {
         sessionStorage.setItem('healthlex_selected_plan', clickedPlanKey);
       } catch (e) {}
       const loginMsg = isTr
-        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluşturun veya giriş yapın.'
+        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluştur veya giriş yap.'
         : 'Please create a free account or sign in to continue.';
       toast.info(loginMsg, { duration: 4000 });
       navigate(`/register?plan=${clickedPlanKey}&redirect=${encodeURIComponent('/pricing')}`);
@@ -371,7 +371,7 @@ export const PricingView = () => {
       if (targetRank < currentRank && clickedPlanKey !== 'lifetime') {
         const confirmed = window.confirm(
           isTr
-            ? `${userCurrentPlan === 'pro' ? 'Pro' : 'mevcut'} planınızdan Temel plana düşürüleceksiniz. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musunuz?`
+            ? `${userCurrentPlan === 'pro' ? 'Pro' : 'mevcut'} planından Temel plana düşürüleceksin. Mevcut dönem sonunda yeni fiyat uygulanacak, anlık iade yapılmayacak. Onaylıyor musun?`
             : `You will downgrade to the Basic plan. The new price takes effect at the end of your current billing period. No immediate refund. Proceed?`
         );
         if (!confirmed) return;
@@ -380,7 +380,7 @@ export const PricingView = () => {
       if (clickedPlanKey === 'lifetime' && userData?.paddleSubscriptionId) {
         const confirmed = window.confirm(
           isTr
-            ? 'Mevcut yıllık aboneliğiniz ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan süreniz için iade yapılmayacak. Onaylıyor musunuz?'
+            ? 'Mevcut yıllık aboneliğin ANINDA iptal edilecek ve Ömür Boyu satın alma ekranı açılacak. Kalan süren için iade yapılmayacak. Onaylıyor musun?'
             : 'Your current subscription will be cancelled immediately and the Lifetime checkout will open. No refund for unused time. Proceed?'
         );
         if (!confirmed) return;
@@ -401,7 +401,7 @@ export const PricingView = () => {
         if (result.success && !result.requiresCheckout) {
           toast.success(
             isTr
-              ? 'Planınız başarıyla değiştirildi 🎉'
+              ? 'Planın başarıyla değiştirildi 🎉'
               : 'Your plan has been updated successfully 🎉'
           );
         } else if (!result.success && result.error) {
@@ -562,7 +562,7 @@ export const PricingView = () => {
           {/* Rozet */}
           {isCurrentMobilePlan ? (
             <span className="absolute -top-3 left-5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[10px] tracking-wider py-1 px-3 rounded-md shadow-xs">
-              {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
+              {isTr ? 'MEVCUT PLANIN' : 'CURRENT PLAN'}
             </span>
           ) : (
             selPlan.badge && (
@@ -653,9 +653,9 @@ export const PricingView = () => {
                 }`}
               >
                 {isCurrentMobilePlan
-                  ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
+                  ? (isTr ? 'Mevcut Planın' : 'Current Plan')
                   : isMobLifetimeLocked
-                  ? (isTr ? 'Zaten Ömür Boyu Erişiminiz Var' : 'Already Have Lifetime Access')
+                  ? (isTr ? 'Zaten Ömür Boyu Erişimin Var' : 'Already Have Lifetime Access')
                   : `${selPlan.cta} →`}
               </button>
             );
@@ -738,7 +738,7 @@ export const PricingView = () => {
                 {/* Rozetler */}
                 {isCardCurrentPlan ? (
                   <span className="absolute -top-3 left-6 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-extrabold text-[11px] tracking-wide py-1 px-3.5 rounded-full shadow-xs">
-                    {isTr ? 'MEVCUT PLANINIZ' : 'CURRENT PLAN'}
+                    {isTr ? 'MEVCUT PLANIN' : 'CURRENT PLAN'}
                   </span>
                 ) : (
                   p.badge && (
@@ -783,9 +783,9 @@ export const PricingView = () => {
                   }`}
                 >
                   {isCardCurrentPlan
-                    ? (isTr ? 'Mevcut Planınız' : 'Current Plan')
+                    ? (isTr ? 'Mevcut Planın' : 'Current Plan')
                     : isCardLifetimeLocked
-                    ? (isTr ? 'Zaten Ömür Boyu Erişiminiz Var' : 'Already Have Lifetime Access')
+                    ? (isTr ? 'Zaten Ömür Boyu Erişimin Var' : 'Already Have Lifetime Access')
                     : p.cta}
                 </button>
 

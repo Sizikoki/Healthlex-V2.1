@@ -67,7 +67,7 @@ export const Contact = () => {
     if (!email.trim() || !message.trim()) {
       toast.error(
         isTr
-          ? 'Lütfen e-posta adresinizi ve mesajınızı doldurunuz.'
+          ? 'Lütfen e-posta adresini ve mesajını doldur.'
           : 'Please fill in your email and message.'
       );
       return;
@@ -92,7 +92,7 @@ export const Contact = () => {
     setSubmitted(true);
     toast.success(
       isTr
-        ? 'E-posta istemciniz açılıyor... Talebinize 24-48 saat içinde dönüş sağlanacaktır.'
+        ? 'E-posta istemcin açılıyor... Talebine 24-48 saat içinde dönüş sağlanacaktır.'
         : 'Opening your email client... You will receive a response within 24-48 hours.'
     );
   };
@@ -101,19 +101,19 @@ export const Contact = () => {
     ? [
         {
           q: 'Taleplerime ne kadar sürede yanıt verilir?',
-          a: 'Destek ekibimiz tüm talepleri önceliklendirerek inceler. Resmi hizmet standardımız gereğince tüm taleplerinize en geç 24-48 saat içinde dönüş sağlanır.'
+          a: 'Destek ekibimiz tüm talepleri önceliklendirerek inceler. Resmi hizmet standardımız gereğince tüm taleplerine en geç 24-48 saat içinde dönüş sağlanır.'
         },
         {
           q: 'Aboneliğimi nasıl iptal edebilir veya yönetebilirim?',
-          a: 'Giriş yaptıktan sonra Profil sayfanızdan veya doğrudan help@healthlexmed.com adresine kayıtlı e-postanızdan bir ileti göndererek aboneliğinizi anında ve herhangi bir cayma cezası olmaksızın iptal edebilirsiniz.'
+          a: 'Giriş yaptıktan sonra Profil sayfandan veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın iptal edebilirsin.'
         },
         {
           q: 'Ödeme ve fatura işlemlerim nerede işlenir?',
-          a: 'HealthLexMed üzerindeki tüm abonelik ve ödeme işlemleri uluslararası ödeme ortağımız Paddle güvencesiyle yürütülür. Fatura ve ödeme dekontlarınız kayıtlı e-postanıza otomatik olarak iletilir.'
+          a: 'HealthLexMed üzerindeki tüm abonelik ve ödeme işlemleri uluslararası ödeme ortağımız Paddle güvencesiyle yürütülür. Fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir.'
         },
         {
           q: 'Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?',
-          a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli doğrulamaktadır. Terim adı, kategori ve önerinizi help@healthlexmed.com adresine ilettiğinizde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
+          a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli doğrulamaktadır. Terim adı, kategori ve önerini help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
         }
       ]
     : [
@@ -162,7 +162,7 @@ export const Contact = () => {
               </h1>
               <p className="mt-3 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 {isTr
-                  ? 'Sorularınız, teknik destek talepleriniz, abonelik işlemleriniz veya tıp terminolojisi önerileriniz için buradayız.'
+                  ? 'Soruların, teknik destek taleplerin, abonelik işlemlerin veya tıp terminolojisi önerilerin için buradayız.'
                   : "We're here to help with your inquiries, technical support, subscription questions, or medical terminology suggestions."}
               </p>
             </div>
@@ -239,13 +239,13 @@ export const Contact = () => {
                 <div className="p-3 rounded-md bg-emerald-500/5 border border-emerald-500/15">
                   <p className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400 leading-snug">
                     {isTr
-                      ? 'Taleplerinize 24-48 saat içinde dönüş sağlanır.'
+                      ? 'Taleplerine 24-48 saat içinde dönüş sağlanır.'
                       : 'Requests are replied within 24-48 hours.'}
                   </p>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {isTr
-                    ? 'Ekibimiz haftanın 7 günü gelen tüm kullanıcı mesajlarını inceler ve çözümü hızla e-posta adresinize iletir.'
+                    ? 'Ekibimiz haftanın 7 günü gelen tüm kullanıcı mesajlarını inceler ve çözümü hızla e-posta adresine iletir.'
                     : 'Our team reviews inquiries 7 days a week and delivers resolution directly to your email.'}
                 </p>
               </CardContent>
@@ -267,7 +267,7 @@ export const Contact = () => {
               <CardContent className="space-y-2">
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {isTr
-                    ? 'Ödemeleriniz, faturalandırma ve abonelik yönetiminiz küresel standartlarda güvence altındadır. İptal ve iade talepleri anında işlenir.'
+                    ? 'Ödemelerin, faturalandırma ve abonelik yönetimin küresel standartlarda güvence altındadır. İptal ve iade talepleri anında işlenir.'
                     : 'Billing, receipts, and subscriptions adhere to international compliance. Cancellation and refund requests are processed promptly.'}
                 </p>
                 <div className="text-[11px] text-muted-foreground/80 pt-1 flex items-center gap-1.5">
@@ -294,7 +294,7 @@ export const Contact = () => {
                   </div>
                   <CardDescription className="text-xs leading-relaxed">
                     {isTr
-                      ? 'Formu gönderdiğinizde, yazdıklarınız varsayılan e-posta uygulamanıza (Gmail, Outlook vb.) aktarılır ve help@healthlexmed.com alıcısıyla açılır.'
+                      ? 'Formu gönderdiğinde, yazdıkların varsayılan e-posta uygulamana (Gmail, Outlook vb.) aktarılır ve help@healthlexmed.com alıcısıyla açılır.'
                       : 'When submitted, your message will open in your default email application (Gmail, Outlook, etc.) addressed to help@healthlexmed.com.'}
                   </CardDescription>
                 </CardHeader>
@@ -305,7 +305,7 @@ export const Contact = () => {
                       {/* Ad Soyad */}
                       <div className="space-y-1.5">
                         <Label htmlFor="contact-name" className="text-xs font-semibold">
-                          {isTr ? 'Adınız Soyadınız' : 'Full Name'}
+                          {isTr ? 'Ad Soyad' : 'Full Name'}
                         </Label>
                         <Input
                           id="contact-name"
@@ -320,7 +320,7 @@ export const Contact = () => {
                       {/* E-posta */}
                       <div className="space-y-1.5">
                         <Label htmlFor="contact-email" className="text-xs font-semibold">
-                          {isTr ? 'E-Posta Adresiniz' : 'Email Address'} <span className="text-destructive">*</span>
+                          {isTr ? 'E-posta adresi' : 'Email Address'} <span className="text-destructive">*</span>
                         </Label>
                         <Input
                           id="contact-email"
@@ -341,7 +341,7 @@ export const Contact = () => {
                       </Label>
                       <Select value={category} onValueChange={setCategory}>
                         <SelectTrigger id="contact-category" className="text-sm">
-                          <SelectValue placeholder={isTr ? 'Kategori Seçiniz' : 'Select Category'} />
+                          <SelectValue placeholder={isTr ? 'Kategori seç' : 'Select Category'} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="general">
@@ -381,7 +381,7 @@ export const Contact = () => {
                     {/* Mesaj */}
                     <div className="space-y-1.5">
                       <Label htmlFor="contact-message" className="text-xs font-semibold">
-                        {isTr ? 'Mesajınız' : 'Message'} <span className="text-destructive">*</span>
+                        {isTr ? 'Mesaj' : 'Message'} <span className="text-destructive">*</span>
                       </Label>
                       <Textarea
                         id="contact-message"
@@ -391,7 +391,7 @@ export const Contact = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder={
                           isTr
-                            ? 'Lütfen talebinizi, karşılaştığınız durumu veya önerinizi detaylıca yazınız...'
+                            ? 'Lütfen talebini, karşılaştığın durumu veya önerini detaylıca yaz...'
                             : 'Please describe your request, issue, or suggestion in detail...'
                         }
                         className="text-sm resize-y"
@@ -406,7 +406,7 @@ export const Contact = () => {
                           {isTr ? 'SLA Bilgilendirmesi: ' : 'SLA Notice: '}
                         </strong>
                         {isTr
-                          ? 'Taleplerinize 24-48 saat içinde dönüş sağlanır. help@healthlexmed.com alıcısıyla doğrudan e-posta gönderilir.'
+                          ? 'Taleplerine 24-48 saat içinde dönüş sağlanır. help@healthlexmed.com alıcısıyla doğrudan e-posta gönderilir.'
                           : 'Requests are replied within 24-48 hours. Direct email communication to help@healthlexmed.com.'}
                       </div>
                     </div>
@@ -419,7 +419,7 @@ export const Contact = () => {
                     {submitted && (
                       <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-800 dark:text-emerald-300">
                         {isTr
-                          ? '✓ E-posta istemciniz tetiklendi. Talebiniz bize ulaştıktan sonra 24-48 saat içinde help@healthlexmed.com üzerinden yanıtlanacaktır.'
+                          ? '✓ E-posta istemcin tetiklendi. Talebin bize ulaştıktan sonra 24-48 saat içinde help@healthlexmed.com üzerinden yanıtlanacaktır.'
                           : '✓ Email client triggered. You will receive a response within 24-48 hours from help@healthlexmed.com.'}
                       </div>
                     )}
@@ -486,11 +486,11 @@ export const Contact = () => {
               <div className="p-5 rounded-xl border border-primary/20 bg-primary/5 space-y-3">
                 <h4 className="text-sm font-bold text-foreground flex items-center gap-2">
                   <Mail className="w-4 h-4 text-primary" />
-                  {isTr ? 'Doğrudan Yazmak İster misiniz?' : 'Prefer Direct Email?'}
+                  {isTr ? 'Doğrudan Yazmak İster misin?' : 'Prefer Direct Email?'}
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {isTr
-                    ? 'Formu kullanmak istemiyorsanız, kişisel veya kurumsal e-posta istemcinizden doğrudan help@healthlexmed.com adresine yazabilirsiniz.'
+                    ? 'Formu kullanmak istemiyorsan, kişisel veya kurumsal e-posta istemcinden doğrudan help@healthlexmed.com adresine yazabilirsin.'
                     : 'If you prefer not to use the form, write to us directly at help@healthlexmed.com from your preferred email client.'}
                 </p>
                 <div className="pt-1">

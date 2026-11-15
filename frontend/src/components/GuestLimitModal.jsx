@@ -19,10 +19,10 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
             <Lock className="w-8 h-8 text-white" />
           </div>
           <DialogTitle className="text-2xl font-bold text-gray-900">
-            {title || t('guestLimitTitle', '3 Günlük Ücretsiz Deneme Süreniz Sona Erdi! 🎯')}
+            {title || t('guestLimitTitle', '3 Günlük Ücretsiz Deneme Süren Sona Erdi! 🎯')}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600 mt-2 leading-relaxed">
-            {description || t('guestLimitDesc', 'Tüm platform içeriklerini ve oyunları keşfetmeniz için sunulan deneme süreniz veya günlük oynama hakkınız tamamlandı. Sınırsız pratik yapmak için lütfen planınızı yükseltin.')}
+            {description || t('guestLimitDesc', 'Tüm platform içeriklerini ve oyunları keşfetmen için sunulan deneme süren veya günlük oynama hakkın tamamlandı. Sınırsız pratik yapmak için lütfen planını yükselt.')}
           </DialogDescription>
         </DialogHeader>
 
@@ -30,11 +30,11 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
           <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold block text-amber-950">
-              {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planınızı Yükseltin') : t('guestLimitCardTitle', 'Planınızı Yükseltin veya Üye Olun'))}
+              {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Planını Yükselt veya Üye Ol'))}
             </strong>
             {cardDesc || (userLoggedIn
-              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.')
-              : t('guestLimitCardDesc', 'Üyelik oluşturup planınızı seçerek kelime kartlarına ve oyunlara sınırsız erişebilirsiniz.'))}
+              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
+              : t('guestLimitCardDesc', 'Üyelik oluşturup planını seçerek kelime kartlarına ve oyunlara sınırsız erişebilirsin.'))}
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
               className="w-full h-12 text-base font-semibold gradient-primary shadow-md hover:shadow-lg transition-all"
             >
               <Crown className="w-5 h-5 mr-2" />
-              {t('upgradePlanBtn', 'Planınızı Yükseltin')}
+              {t('upgradePlanBtn', 'Planını Yükselt')}
               <ArrowUpRight className="w-4 h-4 ml-1 opacity-80" />
             </Button>
           ) : (

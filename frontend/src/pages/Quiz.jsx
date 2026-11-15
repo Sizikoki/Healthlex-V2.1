@@ -53,7 +53,7 @@ export const Quiz = () => {
       toast.info(
         currentLanguage === 'en'
           ? 'Quiz mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.'
-          : 'Quiz modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinizde açıktır.'
+          : 'Quiz modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinde açıktır.'
       );
       navigate('/pricing');
     }

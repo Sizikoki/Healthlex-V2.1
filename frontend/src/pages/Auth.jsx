@@ -65,17 +65,17 @@ const ensureUserDoc = async (user) => {
 const getAuthErrorMessage = (errorCode, isTr) => {
   const msgs = {
     tr: {
-      'auth/invalid-email':          'Gecersiz bir e-posta adresi girdiniz.',
-      'auth/user-disabled':          'Bu kullanici hesabi engellenmistir.',
-      'auth/user-not-found':         'Bu e-posta adresine kayitli bir kullanici bulunamadi.',
-      'auth/wrong-password':         'Hatali sifre girdiniz. Lutfen tekrar deneyin.',
-      'auth/email-already-in-use':   'Bu e-posta adresi zaten kullanimda.',
-      'auth/weak-password':          'Sifreniz cok zayif. Sifre en az 6 karakter olmalidir.',
-      'auth/operation-not-allowed':  'Bu giris yontemine izin verilmedi.',
-      'auth/too-many-requests':      'Cok fazla basarisiz giris denemesi. Lutfen daha sonra tekrar deneyin.',
-      'auth/invalid-credential':     'E-posta adresi veya sifre hatali.',
-      'auth/popup-closed-by-user':   'Google giris penceresi kapatildi.',
-      'auth/cancelled-popup-request':'Giris islemi iptal edildi.'
+      'auth/invalid-email':          'Geçersiz bir e-posta adresi girdin.',
+      'auth/user-disabled':          'Bu kullanıcı hesabı engellenmiştir.',
+      'auth/user-not-found':         'Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.',
+      'auth/wrong-password':         'Hatalı şifre girdin. Lütfen tekrar dene.',
+      'auth/email-already-in-use':   'Bu e-posta adresi zaten kullanımda.',
+      'auth/weak-password':          'Şifren çok zayıf. Şifre en az 6 karakter olmalıdır.',
+      'auth/operation-not-allowed':  'Bu giriş yöntemine izin verilmedi.',
+      'auth/too-many-requests':      'Çok fazla başarısız giriş denemesi. Lütfen daha sonra tekrar dene.',
+      'auth/invalid-credential':     'E-posta adresi veya şifre hatalı.',
+      'auth/popup-closed-by-user':   'Google giriş penceresi kapatıldı.',
+      'auth/cancelled-popup-request':'Giriş işlemi iptal edildi.'
     },
     en: {
       'auth/invalid-email':          'You entered an invalid email address.',
@@ -186,7 +186,7 @@ export const Login = () => {
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
-      toast.success(t('loginSuccess', 'Giris basarili! Hos geldiniz.'));
+      toast.success(t('loginSuccess', 'Giriş başarılı! Hoş geldin.'));
       navigate(chosenPlan ? `/pricing?checkout=${chosenPlan}` : redirectTo, { replace: true });
     } catch (error) {
       authFlowInProgress.current = false;
@@ -212,7 +212,7 @@ export const Login = () => {
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
-      toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
+      toast.success(isTr ? 'Google ile giriş başarılı! Hoş geldin.' : 'Signed in with Google! Welcome.');
       navigate(chosenPlan ? `/pricing?checkout=${chosenPlan}` : redirectTo, { replace: true });
     } catch (error) {
       authFlowInProgress.current = false;
@@ -238,7 +238,7 @@ export const Login = () => {
             </Link>
           </div>
           <CardTitle className="text-2xl font-bold">{t('loginTitle', "HealthLexMed'e Giris Yap")}</CardTitle>
-          <CardDescription>{t('loginSubtitle', 'Hesabiniza erisin ve ogrenmeye devam edin')}</CardDescription>
+          <CardDescription>{t('loginSubtitle', 'Hesabına eriş ve öğrenmeye devam et')}</CardDescription>
         </CardHeader>
         <CardContent>
           <GoogleButton onClick={handleGoogleLogin} loading={googleLoading} isTr={isTr} />
@@ -346,7 +346,7 @@ export const Register = () => {
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
-      toast.success(t('registerSuccess', 'Hesap olusturuldu! Hos geldiniz.'));
+      toast.success(t('registerSuccess', 'Hesap oluşturuldu! Hoş geldin.'));
       navigate(selectedPlan ? `/pricing?checkout=${selectedPlan}` : defaultTarget, { replace: true });
     } catch (error) {
       authFlowInProgress.current = false;
@@ -372,7 +372,7 @@ export const Register = () => {
       syncProgressFromFirestore().catch(() => {});
       syncMorphemeProgressFromFirestore().catch(() => {});
       syncStreakFromFirestore().catch(() => {});
-      toast.success(isTr ? 'Google ile giris basarili! Hos geldiniz.' : 'Signed in with Google! Welcome.');
+      toast.success(isTr ? 'Google ile giriş başarılı! Hoş geldin.' : 'Signed in with Google! Welcome.');
       navigate(selectedPlan ? `/pricing?checkout=${selectedPlan}` : defaultTarget, { replace: true });
     } catch (error) {
       authFlowInProgress.current = false;
@@ -441,7 +441,7 @@ export const Register = () => {
               <Label htmlFor="name">{t('fullName', 'Ad Soyad')}</Label>
               <div className="relative">
                 <UserIcon className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                <Input id="name" type="text" placeholder={t('fullNamePlaceholder', 'Adiniz Soyadiniz')} value={name} onChange={(e) => setName(e.target.value)} className="pl-10" disabled={isAnyLoading} />
+                <Input id="name" type="text" placeholder={t('fullNamePlaceholder', 'Ad Soyad')} value={name} onChange={(e) => setName(e.target.value)} className="pl-10" disabled={isAnyLoading} />
               </div>
             </div>
             <div className="space-y-2">

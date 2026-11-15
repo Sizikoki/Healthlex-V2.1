@@ -39,7 +39,7 @@ export async function changePlan({ firebaseUser, firestoreData, targetPlanKey, c
   if (!firebaseUser) {
     return {
       success: false,
-      error: isTr ? 'Lütfen önce giriş yapın.' : 'Please sign in first.'
+      error: isTr ? 'Lütfen önce giriş yap.' : 'Please sign in first.'
     };
   }
 
@@ -73,7 +73,7 @@ export async function changePlan({ firebaseUser, firestoreData, targetPlanKey, c
     console.error('[subscriptionService] getIdToken failed:', err);
     return {
       success: false,
-      error: isTr ? 'Oturum bilgisi alınamadı. Lütfen tekrar giriş yapın.' : 'Could not retrieve session token. Please sign in again.'
+      error: isTr ? 'Oturum bilgisi alınamadı. Lütfen tekrar giriş yap.' : 'Could not retrieve session token. Please sign in again.'
     };
   }
 
@@ -107,7 +107,7 @@ export async function changePlan({ firebaseUser, firestoreData, targetPlanKey, c
     return {
       success: false,
       error: data.message || (isTr
-        ? 'Abonelik güncellenirken bir sorun oluştu. Lütfen tekrar deneyin.'
+        ? 'Abonelik güncellenirken bir sorun oluştu. Lütfen tekrar dene.'
         : 'An error occurred while updating subscription. Please try again.')
     };
   } catch (err) {
@@ -115,7 +115,7 @@ export async function changePlan({ firebaseUser, firestoreData, targetPlanKey, c
     return {
       success: false,
       error: isTr
-        ? 'Bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyiniz.'
+        ? 'Bağlantı hatası oluştu. Lütfen daha sonra tekrar dene.'
         : 'Connection error. Please try again later.'
     };
   }

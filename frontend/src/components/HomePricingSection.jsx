@@ -171,7 +171,7 @@ export const HomePricingSection = () => {
         sessionStorage.setItem('healthlex_selected_plan', plan.id);
       } catch (e) {}
       const loginMsg = isTr
-        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluşturun veya giriş yapın.'
+        ? 'İşleme devam etmek için lütfen önce ücretsiz hesap oluştur veya giriş yap.'
         : 'Please create a free account or sign in to continue.';
       toast.info(loginMsg, { duration: 4000 });
       navigate(`/register?plan=${plan.id}&redirect=${encodeURIComponent('/pricing')}`);
