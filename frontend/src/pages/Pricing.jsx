@@ -29,7 +29,6 @@ const TRANSLATIONS = {
     subVisitor: 'Abonelik planlarında 3 gün ₺0 deneme. Dilediğin an tek tıkla iptal et, 3 gün sonra yıllık faturalandırılır.',
     noCardNote: 'Bugün ₺0 çekilir · Dilediğin an iptal et.',
     startTrial: '3 gün ücretsiz dene',
-    save: '2 ay bedava',
     tabNames: ['Temel', 'Pro', 'Ömür Boyu'],
     monthly: 'Aylık',
     yearly: 'Yıllık',
@@ -122,7 +121,6 @@ const TRANSLATIONS = {
     subVisitor: '3 days $0 trial on subscription plans. Cancel anytime in 1 click, billed annually after 3 days.',
     noCardNote: '$0 billed today · Cancel anytime in one click.',
     startTrial: 'Try 3 days free',
-    save: '2 months free',
     tabNames: ['Basic', 'Pro', 'Lifetime'],
     monthly: 'Monthly',
     yearly: 'Yearly',
@@ -600,7 +598,7 @@ export const PricingView = () => {
           {(isMobBasic || isMobPro) && (
             <div className="flex bg-muted/60 border border-border rounded-xl p-1 font-bold text-xs select-none">
               <span className="flex-1 py-2 text-center rounded-lg bg-card text-foreground shadow-xs flex items-center justify-center gap-1.5 font-bold">
-                {t.yearly} · {t.save}
+                {t.yearly}
               </span>
             </div>
           )}
