@@ -147,7 +147,7 @@ export const isCategoryUnlocked = (categoryId, isPro) => {
 
 /**
  * Morfemin kullanıcı için açık olup olmadığını kontrol eder:
- * - Pro/Ömür Boyu: tüm morfemler (571+) açık
+ * - Pro/Ömür Boyu: tüm morfemler (TOTAL_MORPHEMES) açık
  * - Temel plan (isBasic true): ilk 150 morfem açık
  * - Kayıtlı ücretsiz kullanıcı (isLoggedIn true): ilk 50 morfem açık
  * - Misafir (giriş yapmamış): ilk 24 morfem açık

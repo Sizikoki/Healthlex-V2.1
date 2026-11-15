@@ -60,7 +60,7 @@ export function parseRootsToMorphemes(rootsString) {
 
     const cleanRoot = rootRaw.replace(/[-_/;]/g, '').trim().toLowerCase();
 
-    // Check if this root exists in our 571 morphemes
+    // Check if this root exists in TOTAL_MORPHEMES
     const matchedMorpheme = allMorphemes.find(m => {
       if (m.slug === cleanRoot) return true;
       const variants = (m.variants || []).map(v => v.replace(/[-_/;]/g, '').trim().toLowerCase());
