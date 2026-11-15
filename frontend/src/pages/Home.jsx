@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Minus, ArrowRight, BookOpen, Layers, Trophy, Brain, Mail } from 'lucide-react';
-import { getTermCount, getInitialTermCount } from '@/services/termCountService';
+import { getTermCount, getInitialTermCount, roundDownToTen } from '@/services/termCountService';
 import { auth } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
@@ -120,7 +120,7 @@ export const Home = () => {
                 <p className="microline">
                   <span>{content.hero.micro1}</span>
                   <span>·</span>
-                  <span>{content.hero.micro2}</span>
+                  <span>{content.hero.micro2(termCount)}</span>
                 </p>
                 <p
                   className="down"
@@ -201,7 +201,7 @@ export const Home = () => {
             <h2>{content.features.title}</h2>
             <div className="stats">
               <div className="stat">
-                <div className="n">{termCount}+</div>
+                <div className="n">{roundDownToTen(termCount)}+</div>
                 <div className="l" lang={lang === 'tr' ? 'tr' : undefined}>{content.features.terms}</div>
               </div>
               <div className="stat">

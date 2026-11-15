@@ -48,3 +48,11 @@ export async function getTermCount() {
 export function getInitialTermCount() {
   return cachedCount;
 }
+
+/**
+ * Sayıyı aşağı doğru en yakın onluğa yuvarlar (örn. 947 -> 940).
+ */
+export function roundDownToTen(n) {
+  if (typeof n !== 'number' || Number.isNaN(n) || n < 10) return n;
+  return Math.floor(n / 10) * 10;
+}

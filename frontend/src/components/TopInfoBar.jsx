@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { getTermCount, getInitialTermCount } from '@/services/termCountService';
+import { getTermCount, getInitialTermCount, roundDownToTen } from '@/services/termCountService';
 
 export const TopInfoBar = ({ variant = 'primary' }) => {
   const { currentLanguage } = useLanguage();
@@ -21,7 +21,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
 
   const items = isTr ? [
     '550+ MORFEM',
-    `${count}+ TERİM`,
+    `${roundDownToTen(count)}+ TERİM`,
     '16 KATEGORİ',
     '4 OYUN MODU',
     'TR ⇄ EN',
@@ -30,7 +30,7 @@ export const TopInfoBar = ({ variant = 'primary' }) => {
     'TEK TIKLA İPTAL'
   ] : [
     '550+ MORPHEMES',
-    `${count}+ TERMS`,
+    `${roundDownToTen(count)}+ TERMS`,
     '16 CATEGORIES',
     '4 GAME MODES',
     'TR ⇄ EN',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { roundDownToTen } from '@/services/termCountService';
 
 export const getHomeDemoRounds = (lang = 'tr') => {
   if (lang === 'en') {
@@ -71,14 +72,14 @@ export const HOME_CONTENT = {
       title2: 'Çöz.',
       sub: (termCount) => (
         <>
-          Tıp terimlerinin çoğu anlamlı parçalardan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{termCount}+</strong> terimi ezberlemeden oku ve anla.
+          Tıp terimlerinin çoğu anlamlı parçalardan oluşur. Parçaları öğren; <strong className="text-foreground font-bold">{roundDownToTen(termCount)}+</strong> terimi ezberlemeden oku ve anla.
         </>
       ),
       ctaBtn: 'Tüm Terimlerin Kilidini Aç',
       ctaFree: 'Ücretsiz Başla',
       ctaPricing: 'Tarifeleri Gör',
       micro1: '✓ Ücretsiz hesapta kart gerekmez',
-      micro2: '✓ 947+ terim ücretsiz',
+      micro2: (termCount) => `✓ ${roundDownToTen(termCount)}+ terim ücretsiz`,
       scrollProof: '↓ Önce kanıt: İlk terimini 20 saniyede çöz.'
     },
     demo: {
@@ -87,7 +88,7 @@ export const HOME_CONTENT = {
       nextBtn: 'Sıradaki Terim →',
       finalMsg: (termCount) => (
         <>
-          <strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {termCount}+ terim ve 550+ morfem seni bekliyor.
+          <strong className="text-foreground">3 terimi ezberlemeden çözdün!</strong> İçeride {roundDownToTen(termCount)}+ terim ve 550+ morfem seni bekliyor.
         </>
       ),
       finalBtn: 'Tüm Terimlerin Kilidini Aç'
@@ -113,7 +114,7 @@ export const HOME_CONTENT = {
       step2No: 'ADIM 2',
       step2Title: 'Anla',
       step2Ex: 'KALP · KAS · HASTALIK',
-      step2Desc: (termCount) => `Her parçanın bir anlamı vardır ve ${termCount}+ terimin içinde tekrar eder.`,
+      step2Desc: (termCount) => `Her parçanın bir anlamı vardır ve ${roundDownToTen(termCount)}+ terimin içinde tekrar eder.`,
       step3No: 'ADIM 3',
       step3Title: 'Birleştir',
       step3Ex: '= KALP KASI HASTALIĞI',
@@ -209,14 +210,14 @@ export const HOME_CONTENT = {
       title2: 'Solve.',
       sub: (termCount) => (
         <>
-          Most medical terms consist of meaningful parts. Learn the parts; read and understand <strong className="text-foreground font-bold">{termCount}+</strong> terms without memorizing.
+          Most medical terms consist of meaningful parts. Learn the parts; read and understand <strong className="text-foreground font-bold">{roundDownToTen(termCount)}+</strong> terms without memorizing.
         </>
       ),
       ctaBtn: 'Unlock All Terms',
       ctaFree: 'Start Free',
       ctaPricing: 'See Pricing',
       micro1: '✓ No card needed for a free account',
-      micro2: '✓ 947+ terms free',
+      micro2: (termCount) => `✓ ${roundDownToTen(termCount)}+ terms free`,
       scrollProof: '↓ Proof first: Solve your first term in 20 seconds.'
     },
     demo: {
@@ -225,7 +226,7 @@ export const HOME_CONTENT = {
       nextBtn: 'Next Term →',
       finalMsg: (termCount) => (
         <>
-          <strong className="text-foreground">You solved 3 terms without memorizing!</strong> Inside, {termCount}+ terms and 550+ morphemes are waiting for you.
+          <strong className="text-foreground">You solved 3 terms without memorizing!</strong> Inside, {roundDownToTen(termCount)}+ terms and 550+ morphemes are waiting for you.
         </>
       ),
       finalBtn: 'Unlock All Terms'
@@ -251,7 +252,7 @@ export const HOME_CONTENT = {
       step2No: 'STEP 2',
       step2Title: 'Understand',
       step2Ex: 'HEART · MUSCLE · DISEASE',
-      step2Desc: (termCount) => `Each part has a meaning and repeats across ${termCount}+ terms.`,
+      step2Desc: (termCount) => `Each part has a meaning and repeats across ${roundDownToTen(termCount)}+ terms.`,
       step3No: 'STEP 3',
       step3Title: 'Combine',
       step3Ex: '= HEART MUSCLE DISEASE',
