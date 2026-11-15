@@ -22,7 +22,7 @@ export const Section2Structure = () => {
         <div className="bg-white border border-[#e3e8f1] rounded-[14px] sm:rounded-[16px] p-[18px] sm:p-[22px] flex flex-col gap-[10px]">
           <div className="flex justify-between items-center">
             <span className="font-extrabold text-[17px] text-[#0f1b33]">Kök</span>
-            <span className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#1e40af]">
+            <span lang="en" className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#1e40af]">
               Word root
             </span>
           </div>
@@ -41,7 +41,7 @@ export const Section2Structure = () => {
         <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[22px] flex flex-col gap-[10px]">
           <div className="flex justify-between items-center">
             <span className="font-extrabold text-[17px] text-[#0f1b33]">Ön ek</span>
-            <span className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#166534]">
+            <span lang="en" className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#166534]">
               Prefix
             </span>
           </div>
@@ -63,7 +63,7 @@ export const Section2Structure = () => {
         <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[22px] flex flex-col gap-[10px]">
           <div className="flex justify-between items-center">
             <span className="font-extrabold text-[17px] text-[#0f1b33]">Son ek</span>
-            <span className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#9a3f07]">
+            <span lang="en" className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#9a3f07]">
               Suffix
             </span>
           </div>
@@ -86,7 +86,7 @@ export const Section2Structure = () => {
         <div className="bg-white border border-[#e3e8f1] rounded-[16px] p-[22px] flex flex-col gap-[10px]">
           <div className="flex justify-between items-center">
             <span className="font-extrabold text-[17px] text-[#0f1b33]">Bağlayıcı ünlü</span>
-            <span className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#475569]">
+            <span lang="en" className="font-extrabold text-[12px] uppercase tracking-[0.14em] text-[#475569]">
               Combining vowel
             </span>
           </div>

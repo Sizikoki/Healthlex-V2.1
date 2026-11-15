@@ -38,6 +38,7 @@ export const TermsMarquee = () => {
         {[...TERMS, ...TERMS].map((term, idx) => (
           <span
             key={`${term}-${idx}`}
+            lang="en"
             className="inline-flex items-center px-6 sm:px-8 text-sm sm:text-base md:text-lg font-semibold uppercase tracking-wider text-muted-foreground/80 transition-colors group-hover:text-foreground"
             style={{ fontFamily: "'Space Grotesk', 'Playfair Display', serif" }}
           >

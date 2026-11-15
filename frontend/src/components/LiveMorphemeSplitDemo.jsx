@@ -173,6 +173,7 @@ export const LiveMorphemeSplitDemo = () => {
         {/* Ana Terim Başlığı */}
         <div
           key={`word-${currentIndex}`}
+          lang="en"
           className="hlm-rise relative z-10 mt-6 font-bold tracking-tight text-foreground uppercase ml-1 sm:ml-2"
           style={{
             fontFamily: "'Space Grotesk', 'Playfair Display', sans-serif",
