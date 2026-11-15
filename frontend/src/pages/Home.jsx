@@ -197,12 +197,12 @@ export const Home = () => {
         {/* ================= İÇERİK ================= */}
         <section>
           <div className="wrap">
-            <span className="eyebrow" lang={lang === 'tr' ? 'tr' : undefined}>{content.features.eyebrow}</span>
+            <span className="eyebrow">{content.features.eyebrow}</span>
             <h2>{content.features.title}</h2>
             <div className="stats">
               <div className="stat">
                 <div className="n">{roundDownToTen(termCount)}+</div>
-                <div className="l" lang={lang === 'tr' ? 'tr' : undefined}>{content.features.terms}</div>
+                <div className="l">{content.features.terms}</div>
               </div>
               <div className="stat">
                 <div className="n">550+</div>
@@ -210,7 +210,7 @@ export const Home = () => {
               </div>
               <div className="stat">
                 <div className="n">16</div>
-                <div className="l" lang={lang === 'tr' ? 'tr' : undefined}>{content.features.categories}</div>
+                <div className="l">{content.features.categories}</div>
               </div>
               <div className="stat">
                 <div className="n">4</div>
@@ -218,7 +218,7 @@ export const Home = () => {
               </div>
               <div className="stat">
                 <div className="n">2</div>
-                <div className="l" lang={lang === 'tr' ? 'tr' : undefined}>{content.features.languages}</div>
+                <div className="l">{content.features.languages}</div>
               </div>
             </div>
             <div className="games">
@@ -318,13 +318,13 @@ export const Home = () => {
         {/* ================= KARŞILAŞTIRMA ================= */}
         <section>
           <div className="wrap">
-            <span className="eyebrow" lang={lang === 'tr' ? 'tr' : undefined}>{content.comparison.eyebrow}</span>
+            <span className="eyebrow">{content.comparison.eyebrow}</span>
             <h2>{content.comparison.title}</h2>
             <div className="table-scroll">
               <table>
                 <thead>
                   <tr>
-                    <th lang={lang === 'tr' ? 'tr' : undefined}>{content.comparison.thFeature}</th>
+                    <th>{content.comparison.thFeature}</th>
                     <th>{content.comparison.thHealthlex}</th>
                     <th>
                       {content.comparison.thCards.split('\n')[0]}
