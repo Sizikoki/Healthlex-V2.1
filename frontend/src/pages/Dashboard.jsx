@@ -39,7 +39,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
-import { getTermCount, getInitialTermCount } from '@/services/termCountService';
+import { getTermCount, getInitialTermCount, roundDownToTen } from '@/services/termCountService';
 import { getTermsByCategory } from '@/data/medicalTerms';
 import { TOTAL_MORPHEMES } from '@/data/morphemesData';
 import { toast } from 'sonner';
@@ -724,7 +724,7 @@ const BasicUserDashboard = ({
   }, [trialState, firestoreData, isTr]);
 
   const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 0;
-  const termsVal = termCount ? String(termCount) : '446';
+  const termsVal = String(termCount || getInitialTermCount());
   const learnedCount = getStats()?.learnedTerms || 0;
 
   const statsList = [
@@ -1011,8 +1011,8 @@ const BasicUserDashboard = ({
 
               <span className="font-normal text-[12px] leading-[1.4] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? 'Temel planda 100 morfem sınırsız açıktır. Kalan 471 morfem için Pro’ya geçebilirsiniz.'
-                  : '100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 471.'}
+                  ? `Temel planda 100 morfem sınırsız açıktır. Kalan ${TOTAL_MORPHEMES - 100} morfem için Pro’ya geçebilirsiniz.`
+                  : `100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining ${TOTAL_MORPHEMES - 100}.`}
               </span>
             </div>
           </div>
@@ -1320,7 +1320,7 @@ const ProUserDashboard = ({
             <div className="flex flex-wrap items-center gap-2 pt-0.5">
               <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4b5563] dark:text-muted-foreground bg-white dark:bg-card border border-[#e5e9f2] dark:border-border px-3 py-1 rounded-full shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                588+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}
+                {roundDownToTen(termCount)}+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}
               </span>
               <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#4b5563] dark:text-muted-foreground bg-white dark:bg-card border border-[#e5e9f2] dark:border-border px-3 py-1 rounded-full shadow-2xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
@@ -1805,7 +1805,7 @@ const ProUserDashboard = ({
                 {isTr ? '📚 Tüm Terimler Sözlüğü' : '📚 All Terms Glossary'}
               </span>
               <span className="font-bold text-[11.5px] bg-white/90 dark:bg-blue-900/60 px-2 py-0.5 rounded-[5px]">
-                588+ {isTr ? 'terim' : 'terms'}
+                {roundDownToTen(termCount)}+ {isTr ? 'terim' : 'terms'}
               </span>
             </Link>
 

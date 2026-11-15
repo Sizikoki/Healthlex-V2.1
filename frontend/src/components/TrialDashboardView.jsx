@@ -6,6 +6,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useLanguage } from '@/context/LanguageContext';
 import { getUser, getStats, getStreak, getUserTrialState, formatTurkishName } from '@/utils/storage';
 import { getAllTerms } from '@/data/medicalTerms';
+import { getInitialTermCount } from '@/services/termCountService';
 
 const TRANSLATIONS = {
   tr: {
@@ -169,7 +170,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
   const currentStreak = streak.currentStreak || 0;
   const longestStreak = Math.max(currentStreak, streak.longestStreak || 0);
   const learnedTermsCount = stats.learnedTerms || 0;
-  const termsMax = getAllTerms().length || 571;
+  const termsMax = getAllTerms().length || getInitialTermCount();
 
   // Gerçek doğruluk oranı: quiz ortalama skoru (0 quiz varsa null)
   const realAccuracy = (stats.quizzesTaken || 0) > 0 ? (stats.averageQuizScore || 0) : null;
