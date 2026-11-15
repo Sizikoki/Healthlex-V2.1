@@ -209,7 +209,7 @@ function assembledPreview(parts) {
     if (!cleanCurrent) continue;
 
     if (i === 0) {
-      result = cleanCurrent.charAt(0).toLocaleUpperCase("tr-TR") + cleanCurrent.slice(1);
+      result = cleanCurrent.charAt(0).toLocaleUpperCase("en") + cleanCurrent.slice(1);
     } else {
       const prevRaw = parts[i - 1].text.trim();
       const prevEndsWithHyphen = prevRaw.endsWith("-");
@@ -218,7 +218,7 @@ function assembledPreview(parts) {
       if (prevEndsWithHyphen || currentStartsWithHyphen) {
         result += cleanCurrent.toLocaleLowerCase("tr-TR");
       } else {
-        result += " " + cleanCurrent.charAt(0).toLocaleUpperCase("tr-TR") + cleanCurrent.slice(1);
+        result += " " + cleanCurrent.charAt(0).toLocaleUpperCase("en") + cleanCurrent.slice(1);
       }
     }
   }
