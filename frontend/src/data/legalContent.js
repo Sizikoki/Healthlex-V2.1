@@ -229,7 +229,7 @@ export const LEGAL_CONTENT = {
           content: [
             '3 günlük deneme süresi başlatan kullanıcılar, aboneliklerini 72 saatlik süre dolmadan önce istedikleri an sonlandırabilir.',
             'İptal işlemi; profil ayarlarından veya Paddle tarafından e-posta adresinize gönderilen faturadaki "Manage Subscription / Cancel" linki üzerinden tek tıkla yapılabilir.',
-            'Deneme süresi dolmadan yapılan iptallerde karttan hiçbir ücret çekilmez ($0 / 0 TL).'
+            'Deneme süresi dolmadan yapılan iptallerde karttan hiçbir ücret çekilmez (₺0).'
           ]
         },
         {
@@ -322,7 +322,7 @@ export const LEGAL_CONTENT = {
           title: '4. SUBSCRIPTION AND 3-DAY FREE TRIAL',
           content: [
             'The PLATFORM provides services based on an annual subscription model (Basic Plan and Full Plan). Current pricing is displayed transparently on the website and checkout screens.',
-            'During the 3-day free trial provided to new users, all plan features are accessible without restriction. If the subscription is cancelled before the trial ends, no charge will be made ($0.00).',
+            'During the 3-day free trial provided to new users, all plan features are accessible without restriction. If the subscription is cancelled before the trial ends, no charge will be made (₺0).',
             'Subscriptions not cancelled before the trial expires will automatically renew at the end of the trial period and annually thereafter.'
           ],
           subsections: [
@@ -495,7 +495,7 @@ export const LEGAL_CONTENT = {
           content: [
             'Users activating a 3-day free trial may cancel their subscription at any time prior to the expiration of the 72-hour trial window.',
             'Cancellation can be executed with a single click via your account Profile page or via the "Manage Subscription / Cancel" link found on your receipt email from Paddle.',
-            'If cancelled during the trial period, no charges will be billed to your card ($0.00 / 0 TL).'
+            'If cancelled during the trial period, no charges will be billed to your card (₺0).'
           ]
         },
         {
