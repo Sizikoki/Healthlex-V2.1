@@ -7,7 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
-import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -46,14 +46,14 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Temel',
-        tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
+        tag: `16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard & Eşleştirme.`,
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
         noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
         cta: '3 Gün Ücretsiz Dene',
         feats: [
-          ['✓', '16 anatomik kategori · 100 morfem'],
+          ['✓', `16 anatomik kategori · ${MAX_BASIC_MORPHEMES} morfem`],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     ],
     rows: [
       ['Çalışma / Sözlük terimleri', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)'],
-      ['Morfem kütüphanesi', '100 morfem', '550+ (Tümü)', '550+ (Tümü)'],
+      ['Morfem kütüphanesi', `${MAX_BASIC_MORPHEMES} morfem`, '550+ (Tümü)', '550+ (Tümü)'],
       ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız', 'Sınırsız'],
       ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
       ['İlerleme takibi', 'Flashcard & Eşleştirme', 'Tüm oyunlar + Seviye sistemi', 'Tüm oyunlar + Seviye sistemi'],
@@ -138,14 +138,14 @@ const TRANSLATIONS = {
     plans: [
       {
         name: 'Basic',
-        tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
+        tag: `16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards & Matching.`,
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
         noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
         cta: 'Start 3-Day Free Trial',
         feats: [
-          ['✓', '16 anatomical categories · 100 morphemes'],
+          ['✓', `16 anatomical categories · ${MAX_BASIC_MORPHEMES} morphemes`],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Pro & above)'],
@@ -187,7 +187,7 @@ const TRANSLATIONS = {
     ],
     rows: [
       ['Study / Glossary terms', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked'],
-      ['Morpheme library', '100 morphemes', '550+ (All)', '550+ (All)'],
+      ['Morpheme library', `${MAX_BASIC_MORPHEMES} morphemes`, '550+ (All)', '550+ (All)'],
       ['Flashcard · Matching', 'Unlimited', 'Unlimited', 'Unlimited'],
       ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],
       ['Progress tracking', 'Flashcard & Matching', 'All games + Level system', 'All games + Level system'],

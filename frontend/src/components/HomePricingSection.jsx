@@ -6,6 +6,7 @@ import { auth } from '@/firebase/config';
 import { getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { ArrowRight } from 'lucide-react';
+import { MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 
 const PRICING_CONTENT = {
   tr: {
@@ -24,7 +25,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Temel',
-        tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',
+        tag: `16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard & Eşleştirme.`,
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Aylık faturalandırılır',
@@ -32,7 +33,7 @@ const PRICING_CONTENT = {
         cta: '3 Gün Ücretsiz Dene',
         isPro: false,
         feats: [
-          ['✓', '16 anatomik kategori · 100 morfem'],
+          ['✓', `16 anatomik kategori · ${MAX_BASIC_MORPHEMES} morfem`],
           ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
           ['✓', 'Kişisel ilerleme takibi'],
           ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
@@ -94,7 +95,7 @@ const PRICING_CONTENT = {
       {
         id: 'basic',
         name: 'Basic',
-        tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',
+        tag: `16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards & Matching.`,
         mo: '₺99',
         yrp: '₺790',
         noteMo: 'Billed monthly',
@@ -102,7 +103,7 @@ const PRICING_CONTENT = {
         cta: 'Start 3-Day Free Trial',
         isPro: false,
         feats: [
-          ['✓', '16 anatomical categories · 100 morphemes'],
+          ['✓', `16 anatomical categories · ${MAX_BASIC_MORPHEMES} morphemes`],
           ['✓', 'Unlimited Flashcards and Matching games'],
           ['✓', 'Personal progress tracking'],
           ['–', 'Quiz and Morpheme Builder (Pro & above)'],
