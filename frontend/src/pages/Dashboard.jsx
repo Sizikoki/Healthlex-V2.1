@@ -113,7 +113,7 @@ const FREE_DASHBOARD_CATEGORIES = [
 ];
 
 const FREE_DASHBOARD_MORPHEMES = [
-  // Açık 24 morfem havuzundan seçilen 5 açık morfem (Ön Ekler)
+  // Açık MAX_FREE_USER_MORPHEMES morfem havuzundan seçilen 5 açık morfem (Ön Ekler)
   { name: 'bi-', slug: 'bi', meaningTr: 'iki, çift', meaningEn: 'two, double', unblurred: true },
   { name: 'hemi-', slug: 'hemi', meaningTr: 'yarı, yarım', meaningEn: 'half, one-sided', unblurred: true },
   { name: 'mono-', slug: 'mono', meaningTr: 'tek, bir', meaningEn: 'single, one', unblurred: true },
@@ -210,6 +210,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
   const remainingPlays = flashcardInfo?.playsRemaining ?? 5;
   const totalPlays = flashcardInfo?.maxPlays ?? 5;
   const termsVal = String(termCount || getInitialTermCount());
+  const freePct = Math.round((MAX_FREE_USER_MORPHEMES / TOTAL_MORPHEMES) * 100);
 
   const quotas = [
     {
@@ -407,10 +408,10 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
                   <span>{isTr ? `${MAX_FREE_USER_MORPHEMES} / ${TOTAL_MORPHEMES} açık` : `${MAX_FREE_USER_MORPHEMES} / ${TOTAL_MORPHEMES} open`}</span>
-                  <span className="text-[#6b7a90] dark:text-muted-foreground">%4</span>
+                  <span className="text-[#6b7a90] dark:text-muted-foreground">{`%${freePct}`}</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
-                  <div className="w-[4.2%] h-full bg-[#2563eb]" />
+                  <div className="h-full bg-[#2563eb]" style={{ width: `${freePct}%` }} />
                 </div>
               </div>
 
@@ -726,6 +727,7 @@ const BasicUserDashboard = ({
   const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 0;
   const termsVal = String(termCount || getInitialTermCount());
   const learnedCount = getStats()?.learnedTerms || 0;
+  const basicPct = Math.round((MAX_BASIC_MORPHEMES / TOTAL_MORPHEMES) * 100);
 
   const statsList = [
     { label: isTr ? 'ÖĞRENİLEN' : 'LEARNED', v: String(learnedCount), unit: isTr ? 'terim' : 'terms' },
@@ -968,7 +970,7 @@ const BasicUserDashboard = ({
             )}
           </div>
 
-          {/* SÜTUN 2: MORFEMLER · 100 TANESİ AÇIK */}
+          {/* SÜTUN 2: MORFEMLER · MAX_BASIC_MORPHEMES TANESİ AÇIK */}
           <div className="flex flex-col gap-3.5 text-left">
             <div className="flex justify-between items-baseline">
               <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#6b7a90] dark:text-muted-foreground uppercase">
@@ -984,10 +986,10 @@ const BasicUserDashboard = ({
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between font-bold text-[13px] text-[#0f1b33] dark:text-foreground">
                   <span>{isTr ? `${MAX_BASIC_MORPHEMES} / ${TOTAL_MORPHEMES} açık` : `${MAX_BASIC_MORPHEMES} / ${TOTAL_MORPHEMES} open`}</span>
-                  <span className="text-[#2563eb] dark:text-blue-400 font-extrabold">%18</span>
+                  <span className="text-[#2563eb] dark:text-blue-400 font-extrabold">{`%${basicPct}`}</span>
                 </div>
                 <div className="h-1.5 bg-[#eef1f6] dark:bg-muted rounded-full overflow-hidden">
-                  <div className="w-[17.5%] h-full bg-[#2563eb]" />
+                  <div className="h-full bg-[#2563eb]" style={{ width: `${basicPct}%` }} />
                 </div>
               </div>
 
