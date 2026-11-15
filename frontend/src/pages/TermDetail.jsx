@@ -168,7 +168,7 @@ export const TermDetail = () => {
           </h2>
           <p className="text-muted-foreground mb-6">
             {isTr
-              ? 'Aradığınız terim veritabanımızda bulunamadı veya yazımı hatalı olabilir.'
+              ? 'Aradığın terim veritabanımızda bulunamadı veya yazımı hatalı olabilir.'
               : 'The requested medical term could not be found or may be misspelled.'}
           </p>
           <Button onClick={() => navigate('/study')} className="gradient-primary">
@@ -443,12 +443,12 @@ export const TermDetail = () => {
           </Badge>
           <h3 className="text-2xl font-bold text-foreground max-w-lg mx-auto">
             {isTr
-              ? 'Tüm Anatomi Terimlerini Ezberlemeden Öğrenin'
+              ? 'Tüm Anatomi Terimlerini Ezberlemeden Öğren'
               : 'Master All Medical Anatomy Terms with Interactive Games'}
           </h3>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {isTr
-              ? 'HealthLexMed ile 940+ terimi ve 550+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
+              ? 'HealthLexMed ile 940+ terimi ve 550+ morfemi 4 interaktif oyun modunda pekiştir. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilgini kalıcı hale getir.'
               : 'Study 940+ terms and 550+ morphemes through Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">

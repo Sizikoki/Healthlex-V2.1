@@ -78,7 +78,7 @@ export const MorphemeDetail = () => {
       if (!isLoggedIn()) {
         toast.info(
           nextLearned
-            ? (isTr ? `"${termName}" öğrenildi! (Misafir: İlerlemeniz bu cihazda saklanır)` : `"${termName}" marked as learned!`)
+            ? (isTr ? `"${termName}" öğrenildi! (Misafir: İlerlemen bu cihazda saklanır)` : `"${termName}" marked as learned!`)
             : (isTr ? `"${termName}" öğrenildi işareti kaldırıldı` : 'Unmarked as learned')
         );
       } else {
@@ -143,7 +143,7 @@ export const MorphemeDetail = () => {
           </h2>
           <p className="text-muted-foreground mb-6">
             {isTr
-              ? 'Aradığınız morfem veritabanımızda bulunamadı veya yazımı hatalı olabilir.'
+              ? 'Aradığın morfem veritabanımızda bulunamadı veya yazımı hatalı olabilir.'
               : 'The requested morpheme could not be found or may be misspelled.'}
           </p>
           <Button onClick={() => navigate('/morphemes')} className="gradient-primary">
@@ -399,12 +399,12 @@ export const MorphemeDetail = () => {
           </Badge>
           <h3 className="text-2xl font-bold text-foreground max-w-lg mx-auto">
             {isTr
-              ? 'Tıp Terimlerini Ezberlemeyi Bırakın, Kök Mantığıyla Öğrenin'
+              ? 'Tıp Terimlerini Ezberlemeyi Bırak, Kök Mantığıyla Öğren'
               : 'Stop Memorizing Terms, Learn with Morpheme Logic'}
           </h3>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {isTr
-              ? '550+ morfem ve 16 kategori ile anatomiyi 4 interaktif oyun modunda test edin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'
+              ? '550+ morfem ve 16 kategori ile anatomiyi 4 interaktif oyun modunda test et. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilgini kalıcı hale getir.'
               : 'Master Latin medical terminology through 550+ morphemes, 16 categories and 4 game modes. Flashcards, Matching, Quiz, and Morpheme Breakdown.'}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
