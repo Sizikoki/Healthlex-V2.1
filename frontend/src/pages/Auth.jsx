@@ -116,7 +116,7 @@ const GoogleButton = ({ onClick, loading, isTr }) => (
       ? <div className="w-4 h-4 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin" />
       : <GoogleIcon />}
     {loading
-      ? (isTr ? 'Giris yapiliyor...' : 'Signing in...')
+      ? (isTr ? 'Giriş yapılıyor...' : 'Signing in...')
       : (isTr ? 'Google ile Devam Et' : 'Continue with Google')}
   </button>
 );
@@ -170,7 +170,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error(t('fillAllFields', 'Lutfen tum alanlari doldurun'));
+      toast.error(t('fillAllFields', 'Lütfen tüm alanları doldur'));
       return;
     }
     const chosenPlan = consumeSelectedPlan();
@@ -237,7 +237,7 @@ export const Login = () => {
               <img src="/logo-mark.png" alt="HealthLexMed Logo" className="w-10 h-10 object-contain" />
             </Link>
           </div>
-          <CardTitle className="text-2xl font-bold">{t('loginTitle', "HealthLexMed'e Giris Yap")}</CardTitle>
+          <CardTitle className="text-2xl font-bold">{t('loginTitle', "HealthLexMed'e Giriş Yap")}</CardTitle>
           <CardDescription>{t('loginSubtitle', 'Hesabına eriş ve öğrenmeye devam et')}</CardDescription>
         </CardHeader>
         <CardContent>
@@ -253,20 +253,20 @@ export const Login = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t('password', 'Sifre')}</Label>
+              <Label htmlFor="password">{t('password', 'Şifre')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input id="password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-10" disabled={isAnyLoading} />
               </div>
             </div>
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={isAnyLoading}>
-              {loading ? t('loggingIn', 'Giris Yapiliyor...') : t('login', 'Giris Yap')}
+              {loading ? t('loggingIn', 'Giriş Yapılıyor...') : t('login', 'Giriş Yap')}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              {t('noAccount', 'Hesabin yok mu?')}{' '}
+              {t('noAccount', 'Hesabın yok mu?')}{' '}
               <Link
                 to={window.location.search ? `/register${window.location.search}` : (redirectTo && redirectTo !== '/dashboard' ? `/register?redirect=${encodeURIComponent(redirectTo)}` : '/register')}
                 onClick={() => {
@@ -276,7 +276,7 @@ export const Login = () => {
                 }}
                 className="text-primary font-medium hover:underline"
               >
-                {t('signUp', 'Kayit Ol')}
+                {t('signUp', 'Kayıt Ol')}
               </Link>
             </p>
           </div>
@@ -325,11 +325,11 @@ export const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
-      toast.error(t('fillAllFields', 'Lutfen tum alanlari doldurun'));
+      toast.error(t('fillAllFields', 'Lütfen tüm alanları doldur'));
       return;
     }
     if (!acceptTerms) {
-      toast.error(t('mustAcceptTerms', 'Lutfen Kullanim Kosullari, Gizlilik ve Iptal Politikalarini kabul edin.'));
+      toast.error(t('mustAcceptTerms', 'Kayıt olabilmek için lütfen Kullanım Koşulları, Gizlilik ve İptal Politikalarını kabul et.'));
       return;
     }
     const selectedPlan = consumeSelectedPlan();
@@ -397,8 +397,8 @@ export const Register = () => {
               <img src="/logo-mark.png" alt="HealthLexMed Logo" className="w-10 h-10 object-contain" />
             </Link>
           </div>
-          <CardTitle className="text-2xl font-bold">{t('registerTitle', "HealthLexMed'e Kayit Ol")}</CardTitle>
-          <CardDescription>{t('registerSubtitle', 'Ucretsiz hesap olustur ve ogrenmeye basla')}</CardDescription>
+          <CardTitle className="text-2xl font-bold">{t('registerTitle', "HealthLexMed'e Kayıt Ol")}</CardTitle>
+          <CardDescription>{t('registerSubtitle', 'Ücretsiz hesap oluştur ve öğrenmeye başla')}</CardDescription>
         </CardHeader>
         {chosenPlan && (
           <div className="mx-6 mb-3 p-3 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm font-semibold shadow-xs bg-muted/60 border-border">
@@ -452,7 +452,7 @@ export const Register = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t('password', 'Sifre')}</Label>
+              <Label htmlFor="password">{t('password', 'Şifre')}</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                 <Input id="password" type="password" placeholder={t('passwordPlaceholder', 'En az 6 karakter')} value={password} onChange={(e) => setPassword(e.target.value)} className="pl-10" disabled={isAnyLoading} />
@@ -472,28 +472,28 @@ export const Register = () => {
               />
               <Label htmlFor="acceptTerms" className="text-xs text-muted-foreground leading-relaxed cursor-pointer select-none font-normal">
                 {t('acceptTermsPrefix', '')}
-                <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('termsOfService', 'Kullanim Kosullari')}</Link>
+                <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('termsOfService', 'Kullanım Koşulları')}</Link>
                 {', '}
-                <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('privacyPolicy', 'Gizlilik Politikasi')}</Link>
+                <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('privacyPolicy', 'Gizlilik Politikası')}</Link>
                 {isTr ? ' ve ' : ' and '}
-                <Link to="/refund" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('refundPolicy', 'Iptal ve Iade Politikasi')}</Link>
-                {t('acceptTermsSuffix', "'ni okudum, anladim ve kabul ediyorum.")}
+                <Link to="/refund" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">{t('refundPolicy', 'İptal & İade Politikası')}</Link>
+                {t('acceptTermsSuffix', "'nı okudum, anladım ve kabul ediyorum.")}
               </Label>
             </div>
 
             <Button type="submit" className="w-full gradient-primary shadow-lg" disabled={isAnyLoading}>
-              {loading ? t('creatingAccount', 'Hesap Olusturuluyor...') : t('createAccount', 'Hesap Olustur')}
+              {loading ? t('creatingAccount', 'Hesap Oluşturuluyor...') : t('createAccount', 'Hesap Oluştur')}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              {t('alreadyHaveAccount', 'Zaten hesabin var mi?')}{' '}
+              {t('alreadyHaveAccount', 'Zaten hesabın var mı?')}{' '}
               <Link
                 to={window.location.search ? `/login${window.location.search}` : (redirectTo && redirectTo !== '/dashboard' ? `/login?redirect=${encodeURIComponent(redirectTo)}` : '/login')}
                 className="text-primary font-medium hover:underline"
               >
-                {t('login', 'Giris Yap')}
+                {t('login', 'Giriş Yap')}
               </Link>
             </p>
           </div>

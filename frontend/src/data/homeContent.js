@@ -84,7 +84,7 @@ export const HOME_CONTENT = {
     },
     demo: {
       label: 'Bu terimi daha önce hiç görmediysen bile çözebilirsin:',
-      hint: 'Parçalara dokunun, anlamları açılsın.',
+      hint: 'Parçalara dokun, anlamları açılsın.',
       nextBtn: 'Sıradaki Terim →',
       finalMsg: (termCount) => (
         <>
@@ -178,11 +178,11 @@ export const HOME_CONTENT = {
         { active: true, text: 'İlerleme istatistikleri ve seviye sistemi' },
         { active: true, text: 'TR ⟷ EN çift dil desteği' },
         { active: true, text: 'Gelecek tüm yeni modüller ve güncellemeler dahil' },
-        { active: true, text: 'İstediğiniz zaman tek tıkla iptal etme özgürlüğü' }
+        { active: true, text: 'İstediğin zaman tek tıkla iptal etme özgürlüğü' }
       ],
       btnText: 'Hemen Katıl',
       flowLine: 'Ödemeni yap → hesabın anında açılsın → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, dilediğin an iptal edebilirsin.',
-      guaranteeLine: 'Tüm modüller, sınavlar ve güncellemeler tek üyelikle elinizin altında.'
+      guaranteeLine: 'Tüm modüller, sınavlar ve güncellemeler tek üyelikle elinin altında.'
     },
     footer: {
       term: 'STERNO · CLEIDO · MASTOIDEUS',
@@ -191,7 +191,7 @@ export const HOME_CONTENT = {
         'cleido = Köprücük kemiği',
         'mastoid = Kulak arkasındaki çıkıntı'
       ],
-      punch: 'Bu sayfaya girmeden önce bu terimi anlamlandıramıyor olabilirdiniz. Şimdi bir arkadaşınıza gönderin — bakalım o çözebilecek mi?',
+      punch: 'Bu sayfaya girmeden önce bu terimi anlamlandıramıyor olabilirdin. Şimdi bir arkadaşına gönder — bakalım o çözebilecek mi?',
       ctaBtn: 'Tüm Terimlerin Kilidini Aç',
       meta: 'HealthLexMed — Latince tıp terimlerini kök mantığıyla ve oyunlaştırarak öğreten eğitim platformu.',
       links: {
@@ -201,7 +201,7 @@ export const HOME_CONTENT = {
         refund: 'İptal ve İade'
       },
       supportEmail: 'help@healthlexmed.com',
-      slaNotice: 'Taleplerinize 24-48 saat içinde dönüş sağlanır.'
+      slaNotice: 'Taleplerine 24-48 saat içinde dönüş sağlanır.'
     }
   },
   en: {
