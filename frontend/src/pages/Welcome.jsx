@@ -6,7 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { getTermCount, getInitialTermCount } from '@/services/termCountService';
-import { checkIsPro, checkIsBasic, checkHasPaidPlan, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
+import { checkIsPro, checkIsBasic, checkHasPaidPlan, MAX_BASIC_MORPHEMES, MAX_GUEST_MORPHEMES, MAX_FREE_USER_MORPHEMES } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Welcome = () => {
@@ -88,6 +88,7 @@ export const Welcome = () => {
     () => Boolean(currentUser?.uid || storedUser?.uid || effectiveUser?.uid),
     [currentUser, storedUser, effectiveUser]
   );
+  const freeMorphemes = isRegistered ? MAX_FREE_USER_MORPHEMES : MAX_GUEST_MORPHEMES;
 
   // Dynamic user greeting name
   const userName = useMemo(() => {
@@ -227,12 +228,12 @@ export const Welcome = () => {
       },
       {
         label: isTr ? 'MORFEM' : 'MORPHEMES',
-        v: '24',
+        v: String(freeMorphemes),
         unit: isTr ? '/ 550+ morfem' : '/ 550+ morphemes',
         mobileUnit: isTr ? '/ 550+ açık' : '/ 550+ open',
         note: isTr
-          ? 'İlk 24 morfem açık; gerisinde ad görünür, anlam ve detay bulanık.'
-          : 'First 24 morphemes open; remaining show name with blurred meaning.'
+          ? `İlk ${freeMorphemes} morfem açık; gerisinde ad görünür, anlam ve detay bulanık.`
+          : `First ${freeMorphemes} morphemes open; remaining show name with blurred meaning.`
       },
       {
         label: isTr ? 'FLASHCARD' : 'FLASHCARDS',
@@ -244,7 +245,7 @@ export const Welcome = () => {
           : 'Daily plays refresh every midnight. Other games are locked.'
       }
     ];
-  }, [termCount, isPro, isBasic, effectiveUser, isTr]);
+  }, [termCount, isPro, isBasic, effectiveUser, isTr, freeMorphemes]);
 
   // Feature Comparison Table Rows
   const rows = useMemo(() => {
@@ -281,7 +282,7 @@ export const Welcome = () => {
       return [
         { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Kilit yok', pro: 'Sınırsız' },
         { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
-        { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '550+ morfem' },
+        { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: `İlk ${freeMorphemes} morfem açık`, sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '550+ morfem' },
         { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'part', limit: 'Günde 5 oyun', sub: 'Her gece yenilenir', pro: 'Sınırsız' },
         { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık' },
         { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
@@ -320,14 +321,14 @@ export const Welcome = () => {
     return [
       { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
-      { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
+      { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `First ${freeMorphemes} morphemes open`, sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
       { name: 'Flashcards', desc: 'Spaced repetition with cards', type: 'part', limit: '5 games per day', sub: 'Refreshes every midnight', pro: 'Unlimited' },
       { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked' },
       { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
       { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
       { name: 'Progress & Streaks', desc: 'Daily review, streak & leveling', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' }
     ];
-  }, [termCount, isTr, isPro, isBasic, effectiveUser]);
+  }, [termCount, isTr, isPro, isBasic, effectiveUser, freeMorphemes]);
 
   // Style helper for table badges & indicators
   const getRowStyle = (type) => {
