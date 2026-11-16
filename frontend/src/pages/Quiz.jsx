@@ -3,8 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import QuizGameFable from '@/components/games/QuizGameFable';
 import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
-import { isLoggedIn, canGuestPlay, getUser } from '@/utils/storage';
-import { GuestLimitModal } from '@/components/GuestLimitModal';
+import { getUser } from '@/utils/storage';
 import { isGameUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -16,7 +15,6 @@ export const Quiz = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
   const { currentLanguage, t } = useLanguage();
-  const [showLimitModal, setShowLimitModal] = useState(false);
 
   const [isPro, setIsPro] = useState(() => {
     try {
@@ -59,12 +57,6 @@ export const Quiz = () => {
     }
   }, [isPro, currentLanguage, navigate]);
 
-  useEffect(() => {
-    if (!isLoggedIn() && !canGuestPlay()) {
-      setShowLimitModal(true);
-    }
-  }, []);
-
   const categoryTerms = useMemo(() => {
     return category === 'all'
       ? getAllTerms()
@@ -83,13 +75,6 @@ export const Quiz = () => {
         language={currentLanguage}
         onBack={() => navigate(category && category !== 'all' ? `/games?category=${category}` : '/games')}
         t={t}
-      />
-      <GuestLimitModal
-        isOpen={showLimitModal}
-        onClose={() => {
-          setShowLimitModal(false);
-          navigate(category && category !== 'all' ? `/games?category=${category}` : '/games');
-        }}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { isLoggedIn, canGuestPlay, getGuestTrialInfo, getFlashcardGuestDailyInfo, getUser } from '@/utils/storage';
+import { isLoggedIn, getFlashcardGuestDailyInfo, getUser } from '@/utils/storage';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { useLanguage } from '@/context/LanguageContext';
 import { auth, db } from '@/firebase/config';
@@ -138,7 +138,6 @@ export const Games = () => {
   const navigate = useNavigate();
 
   const userIsLoggedIn = isLoggedIn();
-  const trialInfo = getGuestTrialInfo();
 
   // Canlı Firestore / API verilerini çekme ve yerel fallback mekanizması
   useEffect(() => {
@@ -307,13 +306,6 @@ export const Games = () => {
       }
     }
 
-    if (!userIsLoggedIn && !canGuestPlay()) {
-      e.preventDefault();
-      setModalMode('general');
-      setIsLimitModalOpen(true);
-      return;
-    }
-
     if (INLINE_GAMES.includes(gameId)) {
       setActiveGame(gameId);
     } else {
@@ -352,14 +344,6 @@ export const Games = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-base">{t('guestMode')}</h3>
-                    <p className="text-sm opacity-90">
-                      {t('guestPlaysRemaining')}{' '}
-                      <strong className="text-amber-700 dark:text-amber-300 font-bold">
-                        {trialInfo.isExpired
-                          ? t('trialExpired', 'Süre Doldu')
-                          : `${trialInfo.daysLeft} ${t('guestDaysRemaining', 'gün kaldı')}`}
-                      </strong>
-                    </p>
                   </div>
                 </div>
                 <Link

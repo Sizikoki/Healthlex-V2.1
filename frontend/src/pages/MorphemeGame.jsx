@@ -4,8 +4,7 @@ import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import { useLanguage } from '@/context/LanguageContext';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
-import { isLoggedIn, canGuestPlay, getUser } from '@/utils/storage';
-import { GuestLimitModal } from '@/components/GuestLimitModal';
+import { getUser } from '@/utils/storage';
 import { isGameUnlocked, checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { auth, db } from '@/firebase/config';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -17,7 +16,6 @@ export const MorphemeGame = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category') || 'all';
   const { currentLanguage, t } = useLanguage();
-  const [showLimitModal, setShowLimitModal] = useState(false);
 
   const [isPro, setIsPro] = useState(() => {
     try {
@@ -60,12 +58,6 @@ export const MorphemeGame = () => {
     }
   }, [isPro, currentLanguage, navigate]);
 
-  useEffect(() => {
-    if (!isLoggedIn() && !canGuestPlay()) {
-      setShowLimitModal(true);
-    }
-  }, []);
-
   const categoryTerms = useMemo(() => {
     return category === 'all'
       ? getAllTerms()
@@ -87,13 +79,6 @@ export const MorphemeGame = () => {
         language={currentLanguage}
         onBack={() => navigate('/games')}
         t={t}
-      />
-      <GuestLimitModal
-        isOpen={showLimitModal}
-        onClose={() => {
-          setShowLimitModal(false);
-          navigate('/games');
-        }}
       />
     </div>
   );

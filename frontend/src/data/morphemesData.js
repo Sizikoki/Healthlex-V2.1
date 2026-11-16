@@ -3,7 +3,7 @@
  *  HealthLexMed — Kapsamlı Tıbbi Morfem Veritabanı (morphemesData.js)
  *  Tıbbi Ön Ekler (Prefixes - 116 adet),
  *  Kelime Kökleri / Birleştirme Formları (Combining Forms / Roots - 318 adet),
- *  Son Ekler (Suffixes - 125 adet).
+ *  Son Ekler (Suffixes - 137 adet).
  * =====================================================================
  */
 

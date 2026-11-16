@@ -19,10 +19,10 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
             <Lock className="w-8 h-8 text-white" />
           </div>
           <DialogTitle className="text-2xl font-bold text-gray-900">
-            {title || t('guestLimitTitle', '3 Günlük Ücretsiz Deneme Süren Sona Erdi! 🎯')}
+            {title || t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkın Doldu! 🎯')}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600 mt-2 leading-relaxed">
-            {description || t('guestLimitDesc', 'Tüm platform içeriklerini ve oyunları keşfetmen için sunulan deneme süren veya günlük oynama hakkın tamamlandı. Sınırsız pratik yapmak için lütfen planını yükselt.')}
+            {description || t('guestFlashcardDailyLimitDesc', 'Günlük ücretsiz kelime kartı hakkın doldu. Sınırsız pratik yapmak için lütfen planını yükselt.')}
           </DialogDescription>
         </DialogHeader>
 

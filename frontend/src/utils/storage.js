@@ -124,50 +124,6 @@ export const incrementFlashcardGuestRestart = () => {
   };
 };
 
-// Guest 3-Day Trial Limit Utilities (Her iki paket için de 3 günlük misafir deneme süresi)
-export const GUEST_TRIAL_DAYS = 3;
-export const GUEST_TRIAL_MS = GUEST_TRIAL_DAYS * 24 * 60 * 60 * 1000;
-
-export const getGuestTrialInfo = () => {
-  let startTime = localStorage.getItem('medterm_guest_trial_start');
-  if (!startTime) {
-    startTime = Date.now().toString();
-    localStorage.setItem('medterm_guest_trial_start', startTime);
-  }
-
-  const startMs = parseInt(startTime, 10) || Date.now();
-  const elapsedMs = Math.max(0, Date.now() - startMs);
-  const remainingMs = Math.max(0, GUEST_TRIAL_MS - elapsedMs);
-  const isExpired = remainingMs <= 0;
-
-  const daysLeft = Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
-  const hoursLeft = Math.ceil(remainingMs / (60 * 60 * 1000));
-
-  return {
-    startMs,
-    remainingMs,
-    isExpired,
-    daysLeft,
-    hoursLeft
-  };
-};
-
-export const canGuestPlay = () => {
-  if (isLoggedIn()) return true;
-  const trial = getGuestTrialInfo();
-  return !trial.isExpired;
-};
-
-export const getGuestRemainingPlays = () => {
-  if (isLoggedIn()) return Infinity;
-  const trial = getGuestTrialInfo();
-  return trial.daysLeft;
-};
-
-export const incrementGuestPlay = () => {
-  return canGuestPlay();
-};
-
 // ── Türkçe Karakter ve İsim Biçimlendirici ──────────────────────────────────────
 export const formatTurkishName = (name) => {
   if (!name || typeof name !== 'string') return '';

@@ -72,9 +72,6 @@ export const translations = {
     quizDesc: "Çoktan seçmeli sorularla bilgini test et. Kendini sına, ilerlemeyi gör.",
     quizNextQuestion: "Sıradaki Soru",
     morphemeDesc: "Verilen tanıma göre tıbbi terimi ön ek, kök ve son ek seçerek kendin oluştur!",
-    guestPlaysRemaining: "3 Günlük Ücretsiz Deneme:",
-    guestDaysRemaining: "gün kaldı",
-    guestHoursRemaining: "saat kaldı",
     unlimitedPlaySignUp: "Kayıt Ol & Sınırsız Devam Et",
     tip1Title: "🎯 Düzenli Çalış",
     tip1Desc: "Her gün en az 10 dakika çalışarak günlük serileri koru ve hızlı öğren.",
@@ -336,8 +333,6 @@ export const translations = {
     passwordPlaceholder: "En az 6 karakter",
 
     // GuestLimitModal
-    guestLimitTitle: "3 Günlük Ücretsiz Deneme Süren Sona Erdi! 🎯",
-    guestLimitDesc: "Tüm platform içeriklerini ve oyunları keşfetmen için sunulan deneme süren veya günlük hakkın tamamlandı. Sınırsız pratik yapmak için lütfen planını yükselt.",
     guestLimitCardTitle: "Ücretsiz Üye Ol",
     guestLimitCardDesc: "Kayıt olarak ilerlemeni senkronize edebilir ve platform özelliklerinden faydalanabilirsin.",
     upgradePlanCardTitle: "Planını Yükselt",
@@ -460,9 +455,6 @@ export const translations = {
     quizDesc: "Test your knowledge with multiple choice questions. Challenge yourself, see progress.",
     quizNextQuestion: "Next Question",
     morphemeDesc: "Build the medical term yourself by selecting prefix, root and suffix!",
-    guestPlaysRemaining: "3-Day Free Trial:",
-    guestDaysRemaining: "days left",
-    guestHoursRemaining: "hours left",
     unlimitedPlaySignUp: "Sign Up & Continue Unlimited",
     tip1Title: "🎯 Practice Regularly",
     tip1Desc: "Maintain your daily streak and learn faster by practicing at least 10 minutes every day.",
@@ -724,8 +716,6 @@ export const translations = {
     passwordPlaceholder: "At least 6 characters",
 
     // GuestLimitModal
-    guestLimitTitle: "Your 3-Day Free Trial Has Ended! 🎯",
-    guestLimitDesc: "Your trial period or daily limit to explore platform content and games has ended. Please upgrade your plan for unlimited practice.",
     guestLimitCardTitle: "Sign Up Free",
     guestLimitCardDesc: "Create an account to sync your progress and access platform features.",
     upgradePlanCardTitle: "Upgrade Your Plan",

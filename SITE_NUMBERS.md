@@ -24,7 +24,7 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 ### 2. Yeni Kategori Açıldığında
 - [ ] **Bölüm 3 (Kategori Sayısı)** ve **Bölüm 7 (Kategori Erişim Vaatleri)** tablolarını açın.
 - [ ] `frontend/src/data/medicalTerms.js` dosyasında yeni alt kategori anahtarını (`medicalTermsData`), `subcategoriesBySystem` ve gerekirse `categories` haritasını güncelleyin.
-- [ ] `frontend/src/utils/planAccess.js` içindeki `UNLOCKED_CATEGORY_IDS` dizisini ve oyun kilit kurallarını gözden geçirin.
+- [ ] Oyunlarda kategori kısıtı yoktur (12e); erişim yalnızca oyun seviyesinde kontrol edilir (`isGameUnlocked`).
 - [ ] `frontend/src/utils/generateProgressPdf.js` içindeki `catList` (kategori listesi) dizisine yeni kategoriyi ekleyin.
 - [ ] Sabit "16 kategori" metinlerini yeni kategori sayısına göre güncelleyin:
   - `frontend/public/index.html` (`meta description`)
@@ -67,11 +67,11 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 ### 5. Plan Limiti veya Süresi Değiştiğinde
 - [ ] **Bölüm 4 (Plan Limitleri)** ve **Bölüm 5 (Deneme Süresi)** konum tablolarını açın.
 - [ ] Kod sabitlerini güncelleyin:
-  - `frontend/src/utils/planAccess.js` (`MAX_GUEST_MORPHEMES`, `MAX_BASIC_MORPHEMES`)
-  - `frontend/src/utils/storage.js` (`MAX_GUEST_DAILY_FLASHCARDS`, `MAX_GUEST_DAILY_RESTARTS`, `GUEST_TRIAL_DAYS`, `GUEST_TRIAL_MS`)
-- [ ] Kod içi tekrarları (`Dashboard.jsx` içindeki `?? 5` ve `3 * 24 * 60 * 60 * 1000` hesaplamaları) güncelleyin.
+  - `frontend/src/utils/planAccess.js` (`MAX_GUEST_MORPHEMES`, `MAX_FREE_USER_MORPHEMES`, `MAX_BASIC_MORPHEMES`)
+  - `frontend/src/data/morphemesData.js` (`TOTAL_MORPHEMES`)
+  - `frontend/src/utils/storage.js` (`MAX_GUEST_DAILY_FLASHCARDS`, `MAX_GUEST_DAILY_RESTARTS`)
 - [ ] Kullanıcı metinlerini ve çevirileri güncelleyin:
-  - `frontend/src/i18n/translations.js` (`guestFlashcardDailyLimitDesc`, `userFlashcardDailyLimitDesc`, `userFlashcardRestartLimitDesc`, `guestPlaysRemaining`, `guestLimitTitle`)
+  - `frontend/src/i18n/translations.js` (`guestFlashcardDailyLimitDesc`, `userFlashcardDailyLimitDesc`, `userFlashcardRestartLimitDesc`)
   - `frontend/src/pages/Flashcards.jsx` & `frontend/src/pages/Games.jsx`
   - `frontend/src/pages/FAQ.jsx` & `frontend/scripts/prerender-faq.mjs`
   - `frontend/src/pages/Dashboard.jsx` & `frontend/src/pages/Welcome.jsx`
@@ -118,8 +118,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/public/index.html` | `<meta name="description" content="Tıp ve sağlık öğrencileri için interaktif tıbbi terminoloji ve anatomi platformu. 940+ terim, 550+ morfem, 16 kategori ve 4 oyun moduyla Latince tıp terimlerini kök mantığıyla kalıcı öğrenin." />` | betik/meta | HTML meta description etiketi (Terim: 940+, Morfem: 550+) |
 | `frontend/public/index.html` | `<meta property="og:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | OpenGraph açıklama etiketi (Terim: 940+, Morfem: 550+) |
 | `frontend/public/index.html` | `<meta name="twitter:description" content="940+ tıbbi terim, 550+ morfem ve 4 oyun modu ile tıp terimlerini ezberlemeden, kök mantığıyla kalıcı olarak öğrenin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme." />` | betik/meta | Twitter Card açıklama etiketi (Terim: 940+, Morfem: 550+) |
-| `frontend/src/pages/Dashboard.jsx` | `588+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}` | sabit metin | Öğrenci panosu istatistik kartı başlığı |
-| `frontend/src/pages/Dashboard.jsx` | `588+ {isTr ? 'terim' : 'terms'}` | sabit metin | Öğrenci panosu alt istatistik rozeti |
+| `frontend/src/pages/Dashboard.jsx` | `940+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}` | sabit metin | Öğrenci panosu istatistik kartı başlığı |
+| `frontend/src/pages/Dashboard.jsx` | `940+ {isTr ? 'terim' : 'terms'}` | sabit metin | Öğrenci panosu alt istatistik rozeti |
 | `frontend/src/pages/TermDetail.jsx` | `? 'HealthLexMed ile 200+ anatomik yapıyı ve 570+ morfemi 4 interaktif oyun modunda pekiştirin. Bilgi Kartları, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'` | sabit metin | Terim detay sayfası SEO/alt açıklama metni (TR) |
 | `frontend/src/pages/TermDetail.jsx` | `: 'Study 200+ anatomical terms and 570+ morphemes through Flashcards, Matching, Quiz, and Morpheme Breakdown.'}` | sabit metin | Terim detay sayfası SEO/alt açıklama metni (EN) |
 | `frontend/src/components/TrialDashboardView.jsx` | `const termsMax = getAllTerms().length || 571;` | kod içi tekrar | Deneme panosu terim ilerleme çubuğu üst sınırı (Yedek: 571) |
@@ -128,15 +128,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `scripts/move_terms_to_correct_categories.js` | `console.log('  - Total terms: 947 (remains unchanged)\n');` | yorum satırı | Kategori taşıma konsol logu |
 | `scripts/move_term_734.js` | `console.log('  - Total terms: 947 (unchanged)');` | yorum satırı | Terim 734 taşıma konsol logu |
 
-### d) Terim Sayısında Şu An Yanlış / Eski Olanlar
-1. **`frontend/src/pages/Dashboard.jsx`**: `588+ {isTr ? 'Tıbbi Terim' : 'Medical Terms'}` — **ESKİ** (588+ kalmış; 940+ olmalı).
-2. **`frontend/src/pages/Dashboard.jsx`**: `588+ {isTr ? 'terim' : 'terms'}` — **ESKİ** (588+ kalmış; 940+ olmalı).
-3. **`frontend/src/pages/TermDetail.jsx`**: `200+ anatomik yapıyı` / `200+ anatomical terms` — **ESKİ** (200+ kalmış; 940+ olmalı).
-4. **`frontend/src/data/homeContent.js`**: `micro2: '✓ 947+ terim ücretsiz'` ve `✓ 947+ terms free'` — **KURALA AYKIRI** (Gerçek sayı 947+ yazılmış; yuvarlanmış "940+" olmalı).
-6. **`frontend/src/components/TrialDashboardView.jsx`**: `const termsMax = getAllTerms().length || 571;` — **KOD İÇİ TEKRAR / YANLIŞ YEDEK TÜR** (Terim sayısının fallback değerine morfem sayısı olan 571 yazılmış; 947 olmalı).
-7. **`frontend/src/pages/Home.jsx`**: `<div className="n">{termCount}+</div>` — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `947+` üretir; kurala göre `940+` olmalıdır).
-8. **`frontend/src/data/homeContent.js`**: `{termCount}+` şablonları — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `947+` üretir; kurala göre `940+` olmalıdır).
-9. **`frontend/src/components/TopInfoBar.jsx`**: `\`${count}+ TERİM\`` ve `\`${count}+ TERMS\`` — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `947+ TERİM` ve `947+ TERMS` üretir; kurala göre `940+` olmalıdır).
+### d) Güncel Durum Notu
+- Gerçek terim sayısı `947` (`termCount.json`, `medicalTerms.js`), pazarlama yazım standardı ise **"940+ terim"** / **"940+ terms"** olarak sabitlenmiştir.
 
 ---
 
@@ -170,7 +163,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | :--- | :--- | :--- | :--- |
 | `frontend/src/data/morphemesData.js` | `// 1. ÖN EKLER (PREFIXES - 116 Adet)` | yorum satırı | Ön ekler bölüm başlığı yorumu |
 | `frontend/src/data/morphemesData.js` | `*  Kelime Kökleri / Birleştirme Formları (Combining Forms / Roots - 318 adet),` | yorum satırı | Kökler bölüm başlığı yorumu |
-| `frontend/src/data/morphemesData.js` | `*  Son Ekler (Suffixes - 125 adet).` | yorum satırı | Başlık yorumu (Gerçekte 137 son ek tanımlı) |
+| `frontend/src/data/morphemesData.js` | `*  Son Ekler (Suffixes - 137 adet).` | yorum satırı | Başlık yorumu (116+318+137 = 571) |
+| `frontend/src/data/morphemesData.js` | `export const TOTAL_MORPHEMES = PREFIXES.length + ROOTS.length + SUFFIXES.length;` | kod sabiti | Dinamik toplam morfem sabiti (`571`) |
 | `frontend/src/utils/morphemeHelper.js` | `* Returns a standardized array of all 559 morphemes with slugs and variants.` | yorum satırı | JSDoc yorumu (559 = eski toplam 116+318+125) |
 | `frontend/src/utils/termHelper.js` | `// Check if this root exists in our 571 morphemes` | yorum satırı | Morfem eşleme açıklama yorumu |
 | `frontend/src/utils/planAccess.js` | `* - Pro/Ömür Boyu: tüm morfemler (571+) açık` | yorum satırı | Plan erişim kontrolü JSDoc yorumu |
@@ -201,11 +195,11 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Pricing.jsx` | `['–', 'Tüm 550+ morfem havuzu (Pro ve üzeri)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 550+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 550+ morfem'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '100 morfem', '550+ (Tümü)', '550+ (Tümü)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '150 morfem', '550+ (Tümü)', '550+ (Tümü)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (TR) |
 | `frontend/src/pages/Pricing.jsx` | `['–', 'Full 550+ morpheme library (Pro & above)']` | sabit metin | Fiyatlandırma sayfası tablosu Temel plan satırı (EN) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Pro plan satırı (EN) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 550+ morphemes'],` | sabit metin | Fiyatlandırma sayfası tablosu Ömür Boyu plan satırı (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '100 morphemes', '550+ (All)', '550+ (All)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '150 morphemes', '550+ (All)', '550+ (All)'],` | sabit metin | Fiyatlandırma detaylı karşılaştırma tablosu satırı (EN) |
 | `frontend/src/pages/FAQ.jsx` | `Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları...` | sabit metin | SSS cevabı 2 (TR) |
 | `frontend/src/pages/FAQ.jsx` | `The Pro plan provides unrestricted access to all 571+ morphemes, Quiz and Morpheme Builder...` | sabit metin | SSS cevabı 2 (EN) |
 | `frontend/scripts/prerender-faq.mjs` | `Pro planda ise 571+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları...` | betik/meta | Prerender FAQ statik HTML metni (TR) |
@@ -218,9 +212,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Profile.jsx` | `Upgrade to Pro to unlock 571 morphemes, 4 game modes, and unlimited tracking.` | sabit metin | Profil süresi bitmiş deneme yükseltme metni (EN) |
 | `frontend/src/pages/Dashboard.jsx` | `unit: isTr ? '/ 571 açık' : '/ 571 open',` | sabit metin | Pano misafir morfem kutusu birimi |
 | `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '24 / 571 açık' : '24 / 571 open'}</span>` | sabit metin | Pano misafir ilerleme çubuğu etiketi |
-| `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '100 / 571 açık' : '100 / 571 open'}</span>` | sabit metin | Pano Temel plan ilerleme çubuğu etiketi |
-| `frontend/src/pages/Dashboard.jsx` | `? 'Temel planda 100 morfem sınırsız açıktır. Kalan 471 morfem için Pro’ya geçebilirsiniz.'` | sabit metin | Pano Temel plan açıklama metni (471 = 571-100) |
-| `frontend/src/pages/Dashboard.jsx` | `: '100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 471.'` | sabit metin | Pano Temel plan açıklama metni (EN) |
+| `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '150 / 571 açık' : '150 / 571 open'}</span>` | sabit metin | Pano Temel plan ilerleme çubuğu etiketi |
+| `frontend/src/pages/Dashboard.jsx` | `? 'Temel planda 150 morfem sınırsız açıktır. Kalan 421 morfem için Pro’ya geçebilirsiniz.'` | sabit metin | Pano Temel plan açıklama metni (421 = 571-150) |
+| `frontend/src/pages/Dashboard.jsx` | `: '150 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 421.'` | sabit metin | Pano Temel plan açıklama metni (EN) |
 | `frontend/src/pages/Dashboard.jsx` | `const morphemePct = Math.round((learnedMorphemes / 571) * 100);` | kod içi tekrar | Pano öğrenilen morfem yüzdesi formülü (sabit bölen 571) |
 | `frontend/src/pages/Dashboard.jsx` | `571 {isTr ? 'Morfem Kütüphanesi' : 'Morphemes'}` | sabit metin | Pano morfem kütüphanesi kart başlığı |
 | `frontend/src/pages/Dashboard.jsx` | `{learnedMorphemes} / 571` | kod içi tekrar | Pano öğrenilen morfem kesir göstergesi (sabit payda 571) |
@@ -243,28 +237,16 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Welcome.jsx` | `571+ morfem, Quiz ve Morfem Yapıcı için dilediğin zaman Pro plana geçebilirsin.` | sabit metin | Karşılama sayfası Temel plan yükseltme önerisi (TR) |
 | `frontend/src/pages/Welcome.jsx` | `Upgrade to Pro anytime to unlock all 571+ morphemes and advanced games.` | sabit metin | Karşılama sayfası Temel plan yükseltme önerisi (EN) |
 | `frontend/src/pages/Welcome.jsx` | `{isTr ? '571 ön ek, kök ve son ek analizi ve türetim mantığı.' : '571 prefixes, roots and suffixes with logic.'}` | sabit metin | Karşılama sayfası özellik kartı alt metni |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası kilitli içerik bannerı (TR) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.` | sabit metin | Morfem Atlası kilitli içerik bannerı (EN) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Misafir Modu: İlk 24 morfem açık. 100 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası misafir bannerı (TR) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 100 or Pro for all 571+.` | sabit metin | Morfem Atlası misafir bannerı (EN) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kartı kilit modalı misafir açıklaması |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kartı kilit modalı Temel plan açıklaması |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Temel Paket: İlk 150 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası kilitli içerik bannerı (TR) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Basic Plan: First 150 morphemes unlocked. Upgrade to Pro for all 571+.` | sabit metin | Morfem Atlası kilitli içerik bannerı (EN) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Misafir Modu: İlk 24 morfem açık. 150 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası misafir bannerı (TR) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 150 or Pro for all 571+.` | sabit metin | Morfem Atlası misafir bannerı (EN) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 24 morfem misafirlere açıktır. 150 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kartı kilit modalı misafir açıklaması |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 150 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kartı kilit modalı Temel plan açıklaması |
 
-### d) Morfem Sayısında Şu An Yanlış / Eski Olanlar
-1. **`frontend/src/pages/Home.jsx`**: `<div className="n">{totalMorphemes}+</div>` — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `571+` üretir; pazarlama kuralı `550+` olmalıdır).
-2. **`frontend/src/data/homeContent.js`**: `logicClose` şablonları — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `571+` üretir; pazarlama kuralı `550+` olmalıdır).
-3. **`frontend/src/data/homeContent.js`**: `text: 16 kategorinin tamamı + ${totalMorphemes}'den fazla...` — **DİNAMİK (KURALA AYKIRI ÇIKTI)** (Ekranda `571'den fazla` üretir; pazarlama kuralı `550+` olmalıdır).
-4. **`frontend/src/pages/Dashboard.jsx`**: `const morphemePct = Math.round((learnedMorphemes / 571) * 100);` — **KOD İÇİ TEKRAR** (571 sayısı formüle elle yazılmış; kütüphanenin dinamik uzunluğu kullanılmalı).
-5. **`frontend/src/pages/Dashboard.jsx`**: `{learnedMorphemes} / 571` — **KOD İÇİ TEKRAR** (Paydaya 571 elle yazılmış; dinamik toplam kullanılmalı).
-6. **`frontend/src/pages/Dashboard.jsx`**: `571 morfemden ${learnedMorphemes}` / `out of 571 morphemes` — **KOD İÇİ TEKRAR** (571 sayısı metin şablonuna elle gömülmüş).
-7. **`frontend/src/components/MorphemeOfTheDay.jsx`**: `const TOTAL_MORPHEMES = 553;`, `cta: '553+ morfemin tamamı'` ve `'Explore all 553+ morphemes'` — **ESKİ / KURALA AYKIRI** (553+ kalmış; "550+ morfem" kuralına uyarlanmalı).
-8. **`frontend/src/pages/TermDetail.jsx`**: `570+ morfemi` / `570+ morphemes` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" olmalı).
-10. **`frontend/src/pages/MorphemeDetail.jsx`**: `570+ morfem ve 16 kategori` / `570+ morphemes` — **ESKİ / KURALA AYKIRI** (570+ kalmış; "550+ morfem" olmalı).
-11. **`frontend/src/pages/Guide/components/RightSidebar.jsx`**: `570&apos;ten fazla ön ek, kök ve son eki` — **ESKİ / KURALA AYKIRI** (570'ten fazla yazılmış; "550+ morfem" kuralına uyarlanmalı).
-12. **`frontend/src/pages/Guide/sections/Section8HowToStudy.jsx`**: `570'ten fazla ön ek, kök ve son ek` — **ESKİ / KURALA AYKIRI** (570'ten fazla yazılmış; "550+ morfem" kuralına uyarlanmalı).
-13. **`frontend/src/data/morphemesData.js`**: Başlık açıklama yorumunda `Son Ekler (Suffixes - 125 adet)` — **ESKİ YORUM** (Gerçekte dizide 137 son ek mevcuttur; 116+318+137 = 571).
-14. **`frontend/src/utils/morphemeHelper.js`**: JSDoc yorumunda `array of all 559 morphemes` — **ESKİ YORUM** (559 eski sayı; 571 olmalı).
-15. **Kullanıcıya Yönelik Pazarlama Metinlerinde "571+" Yazılması**: `TopInfoBar.jsx`, `HomePricingSection.jsx`, `Pricing.jsx`, `Welcome.jsx`, `FAQ.jsx`, `Profile.jsx`, `MorphemeExplorer.jsx` dosyalarında pazarlama metni olarak "571+" yerine "550+ morfem" standardına geçilmelidir.
+### d) Morfem Sayısı Senkronizasyon Notu
+- Toplam morfem sayısı `frontend/src/data/morphemesData.js` içindeki `TOTAL_MORPHEMES` (`PREFIXES.length + ROOTS.length + SUFFIXES.length` = `116 + 318 + 137 = 571`) üzerinden dinamik okunur; `Dashboard.jsx` dağılım kartı da `PREFIXES.length`, `ROOTS.length`, `SUFFIXES.length` kullanır (12e).
+- Pazarlama metinlerinde **"550+ morfem"** / **"550+ morphemes"** standardı kullanılır.
 
 ---
 
@@ -309,16 +291,16 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Home.jsx` | `<div className="n">16</div>` | sabit metin | Ana sayfa istatistik sayacı kutusu |
 | `frontend/src/data/homeContent.js` | `text: \`16 kategorinin tamamı + \${totalMorphemes}'den fazla morfem kütüphanesi\`` | dinamik metin | Ana sayfa özellik maddesi (TR) |
 | `frontend/src/data/homeContent.js` | `text: \`All 16 categories + over \${totalMorphemes} morpheme library\`` | dinamik metin | Ana sayfa özellik maddesi (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan kartı rozet metni (TR) |
+| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 kategori sözlüğü, 150 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan kartı rozet metni (TR) |
 | `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 kategori · 571+ morfem'],` | sabit metin | Pro ve Ömür Boyu plan kartı özellikleri (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan kartı rozet metni (EN) |
+| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 categories glossary, 150 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan kartı rozet metni (EN) |
 | `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 categories · 571+ morphemes'],` | sabit metin | Pro ve Ömür Boyu plan kartı özellikleri (EN) |
-| `frontend/src/pages/Pricing.jsx` | `tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan kartı rozet metni (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomik kategori · 100 morfem'],` | sabit metin | Temel plan kartı madde 1 (TR) |
+| `frontend/src/pages/Pricing.jsx` | `tag: '16 kategori sözlüğü, 150 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan kartı rozet metni (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomik kategori · 150 morfem'],` | sabit metin | Temel plan kartı madde 1 (TR) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 kategori · 571+ morfem'],` | sabit metin | Pro ve Ömür Boyu plan kartı maddesi (TR) |
 | `frontend/src/pages/Pricing.jsx` | `['Çalışma / Sözlük terimleri', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)'],` | sabit metin | Plan karşılaştırma tablosu satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan kartı rozet metni (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomical categories · 100 morphemes'],` | sabit metin | Temel plan kartı madde 1 (EN) |
+| `frontend/src/pages/Pricing.jsx` | `tag: '16 categories glossary, 150 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan kartı rozet metni (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomical categories · 150 morphemes'],` | sabit metin | Temel plan kartı madde 1 (EN) |
 | `frontend/src/pages/Pricing.jsx` | `['✓', '16 categories · 571+ morphemes'],` | sabit metin | Pro ve Ömür Boyu plan kartı maddesi (EN) |
 | `frontend/src/pages/Pricing.jsx` | `['Study / Glossary terms', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked'],` | sabit metin | Plan karşılaştırma tablosu satırı (EN) |
 | `frontend/src/pages/FAQ.jsx` | `16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır.` | sabit metin | SSS cevabı 2 (TR) |
@@ -327,8 +309,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Profile.jsx` | `Tüm 16 kategori, 571+ morfem ve 4 oyun modunun tamamına sınırsız erişebilirsiniz.` | sabit metin | Profil deneme bannerı (TR) |
 | `frontend/src/pages/Profile.jsx` | `Full access to all 16 categories, 571+ morphemes, and 4 game modes.` | sabit metin | Profil deneme bannerı (EN) |
 | `frontend/src/pages/Profile.jsx` | `16 kategorinin tamamı, 571+ morfem ve 4 oyun moduna sınırsız erişebilirsiniz.` | sabit metin | Profil deneme durumu bildirim metni (TR) |
-| `frontend/src/pages/Profile.jsx` | `Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık.` | sabit metin | Profil Temel plan açıklaması (TR) |
-| `frontend/src/pages/Profile.jsx` | `You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.` | sabit metin | Profil Temel plan açıklaması (EN) |
+| `frontend/src/pages/Profile.jsx` | `Temel plandasınız: 16 kategori sözlüğü, 150 morfem ve sınırsız Flashcard & Eşleştirme açık.` | sabit metin | Profil Temel plan açıklaması (TR) |
+| `frontend/src/pages/Profile.jsx` | `You are on the Basic plan: 16 categories glossary, 150 morphemes, and unlimited Flashcards & Matching unlocked.` | sabit metin | Profil Temel plan açıklaması (EN) |
 | `frontend/src/pages/Profile.jsx` | `? '16 kategori, öğrenilen terimler, rozetler ve çalışma istatistiklerinizi içeren resmi PDF raporu.'` | sabit metin | Profil PDF indirme kartı açıklaması (TR) |
 | `frontend/src/pages/Profile.jsx` | `: 'Official PDF report containing 16 categories, learned terms, badges, and study stats.'}` | sabit metin | Profil PDF indirme kartı açıklaması (EN) |
 | `frontend/src/pages/Welcome.jsx` | `{ name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },` | sabit metin | Karşılama sayfası plan tablosu (TR) |
@@ -342,24 +324,28 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/MorphemeDetail.jsx` | `? '570+ morfem ve 16 kategori ile anatomiyi 4 interaktif oyun modunda test edin. Flashcard, Eşleştirme, Quiz ve Morfem Çözümleme ile bilginizi kalıcı hale getirin.'` | sabit metin | Morfem detay alt açıklama (TR) |
 | `frontend/src/pages/MorphemeDetail.jsx` | `: 'Master Latin medical terminology through 570+ morphemes, 16 categories and 4 game modes. Flashcards, Matching, Quiz, and Morpheme Breakdown.'}` | sabit metin | Morfem detay alt açıklama (EN) |
 
-### d) Kategori Sayısında Şu An Yanlış / Eski Olanlar
-- Kategori sayısı (16), mevcut veritabanı yapısıyla tutarlıdır.
-- Ancak vaat edilen erişim ile oyunlardaki fiili kilit durumu arasında kritik bir çelişki bulunmaktadır (Ayrıntılar için bkz. **Bölüm 7**).
+### d) Kategori Sayısı Senkronizasyon Notu
+- Kategori sayısı (`16`) mevcut veritabanı yapısıyla tutarlıdır.
+- 12e kararıyla oyunlarda kategori kısıtı tamamen kaldırılmıştır; misafir ve ücretsiz kullanıcılar dahil herkes her oyunda 16 kategorinin tamamını seçebilir (erişim yalnızca oyun seviyesinde kontrol edilir).
 
 ---
 
-## 4. Plan Limitleri (Misafir, Temel, Flashcard Kotası, Yeniden Başlatma)
+## 4. Plan Limitleri (Misafir, Ücretsiz, Temel, Flashcard Kotası, Yeniden Başlatma)
 
 ### a) Gerçek Değerler ve Kaynakları
 - **Misafir Morfem Kotası:** **24** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_GUEST_MORPHEMES = 24;`).
-- **Temel Plan Morfem Kotası:** **100** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_BASIC_MORPHEMES = 100;`).
-- **Günlük Flashcard Hakkı (Misafir):** **5** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_FLASHCARDS = 5;`, 8 Kasım kararı).
-- **Günlük Yeniden Başlatma Hakkı (Misafir):** **10** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_RESTARTS = 10;`).
+- **Kayıtlı Ücretsiz Kullanıcı Morfem Kotası:** **50** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_FREE_USER_MORPHEMES = 50;`).
+- **Temel Plan Morfem Kotası:** **150** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_BASIC_MORPHEMES = 150;`).
+- **Pro & Ömür Boyu Morfem Kotası:** Tümü (**571** = `116 + 318 + 137`). Kaynak: `frontend/src/data/morphemesData.js` (`TOTAL_MORPHEMES`).
+- **Günlük Flashcard Hakkı (Misafir ve Kayıtlı Ücretsiz):** **5** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_FLASHCARDS = 5;`, 8 Kasım kararı).
+- **Günlük Yeniden Başlatma Hakkı (Misafir ve Kayıtlı Ücretsiz):** **10** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_RESTARTS = 10;`).
 
 ### b) Pazarlama Yazım Kuralı
 - **Misafir Morfem:** "İlk 24 morfem açık" / İngilizce: "First 24 morphemes open"
-- **Temel Plan Morfem:** "İlk 100 morfem açık" / İngilizce: "Top 100 morphemes open"
-- **Günlük Flashcard Hakkı:** "5" (8 Kasım kararı). Metinlerde 10 veya başka bir değer geçiyorsa **ESKİ** olarak işaretlenir.
+- **Kayıtlı Ücretsiz Morfem:** "İlk 50 morfem açık" / İngilizce: "First 50 morphemes open"
+- **Temel Plan Morfem:** "İlk 150 morfem açık" / İngilizce: "Top 150 morphemes open"
+- **Pro / Ömür Boyu Morfem:** "550+ morfem (Tümü)" / İngilizce: "550+ morphemes (All)"
+- **Günlük Flashcard Hakkı:** "5" (8 Kasım kararı).
 - **Yeniden Başlatma Hakkı:** "10" kez yeniden başlatma.
 
 ### c) Konum Tablosu
@@ -367,7 +353,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | Dosya | Aranacak Metin | Tür | Not |
 | :--- | :--- | :--- | :--- |
 | `frontend/src/utils/planAccess.js` | `export const MAX_GUEST_MORPHEMES = 24;` | kod sabiti | Misafirlerin Morfem Atlası'nda görebileceği açık morfem limiti |
-| `frontend/src/utils/planAccess.js` | `export const MAX_BASIC_MORPHEMES = 100;` | kod sabiti | Temel plan abonelerinin Morfem Atlası'nda görebileceği açık morfem limiti |
+| `frontend/src/utils/planAccess.js` | `export const MAX_FREE_USER_MORPHEMES = 50;` | kod sabiti | Kayıtlı ücretsiz kullanıcıların Morfem Atlası'nda görebileceği açık morfem limiti |
+| `frontend/src/utils/planAccess.js` | `export const MAX_BASIC_MORPHEMES = 150;` | kod sabiti | Temel plan abonelerinin Morfem Atlası'nda görebileceği açık morfem limiti |
+| `frontend/src/data/morphemesData.js` | `export const TOTAL_MORPHEMES = PREFIXES.length + ROOTS.length + SUFFIXES.length;` | kod sabiti | Pro & Ömür Boyu tüm morfem toplamı (`571`) |
 | `frontend/src/utils/storage.js` | `export const MAX_GUEST_DAILY_FLASHCARDS = 5;` | kod sabiti | Misafir günlük Flashcard oturum limiti (8 Kasım kararı) |
 | `frontend/src/utils/storage.js` | `export const MAX_GUEST_DAILY_RESTARTS = 10;` | kod sabiti | Misafir günlük oturum yeniden başlatma limiti |
 | `frontend/src/i18n/translations.js` | `guestFlashcardDailyLimitDesc: "Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.",` | sabit metin | Flashcard günlük limit modalı açıklaması (TR) |
@@ -376,43 +364,43 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/pages/Dashboard.jsx` | `const totalPlays = flashcardInfo?.maxPlays ?? 5;` | kod içi tekrar | Pano günlük toplam oyun hakkı fallback değeri (`MAX_GUEST_DAILY_FLASHCARDS` yerine sabit 5) |
 | `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '24 / 571 açık' : '24 / 571 open'}</span>` | sabit metin | Pano misafir morfem ilerleme çubuğu etiketi |
 | `frontend/src/pages/Dashboard.jsx` | `v: '24',` | sabit metin | Pano misafir morfem kartı açık sayısı |
-| `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '100 / 571 açık' : '100 / 571 open'}</span>` | sabit metin | Pano Temel plan morfem ilerleme çubuğu etiketi |
-| `frontend/src/pages/Dashboard.jsx` | `{ label: isTr ? 'MORFEM' : 'MORPHEMES', v: '100', unit: isTr ? 'açık' : 'unlocked' }` | sabit metin | Pano Temel plan üst istatistik kutusu |
-| `frontend/src/pages/Dashboard.jsx` | `? 'Temel planda 100 morfem sınırsız açıktır. Kalan 471 morfem için Pro’ya geçebilirsiniz.'` | sabit metin | Pano Temel plan açıklama metni |
-| `frontend/src/pages/Dashboard.jsx` | `: '100 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 471.'` | sabit metin | Pano Temel plan açıklama metni (EN) |
+| `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '150 / 571 açık' : '150 / 571 open'}</span>` | sabit metin | Pano Temel plan morfem ilerleme çubuğu etiketi |
+| `frontend/src/pages/Dashboard.jsx` | `{ label: isTr ? 'MORFEM' : 'MORPHEMES', v: '150', unit: isTr ? 'açık' : 'unlocked' }` | sabit metin | Pano Temel plan üst istatistik kutusu |
+| `frontend/src/pages/Dashboard.jsx` | `? 'Temel planda 150 morfem sınırsız açıktır. Kalan 421 morfem için Pro’ya geçebilirsiniz.'` | sabit metin | Pano Temel plan açıklama metni |
+| `frontend/src/pages/Dashboard.jsx` | `: '150 morphemes are unlocked in Basic plan. Upgrade to Pro for the remaining 421.'` | sabit metin | Pano Temel plan açıklama metni (EN) |
 | `frontend/src/pages/Flashcards.jsx` | `const initialGuestInfo = (planReady && isLimited) ? getFlashcardGuestDailyInfo() : { canPlay: true, remaining: MAX_GUEST_DAILY_FLASHCARDS };` | dinamik | Flashcard oyunu başlangıç kota bilgisi |
 | `frontend/src/pages/Flashcards.jsx` | `? \`\${guestPlayInfo.remaining} of \${MAX_GUEST_DAILY_FLASHCARDS} daily plays left\`` | dinamik metin | Kalan hak göstergesi (EN) |
 | `frontend/src/pages/Flashcards.jsx` | `: \`Günlük \${guestPlayInfo.remaining}/\${MAX_GUEST_DAILY_FLASHCARDS} oynama hakkı\`` | dinamik metin | Kalan hak göstergesi (TR) |
 | `frontend/src/pages/Flashcards.jsx` | `? t('userFlashcardRestartLimitDesc', \`Günlük en fazla \${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsiniz. Sınırsız pratik yapmak için lütfen planınızı yükseltin.\`)` | dinamik metin | Yeniden başlatma limit uyarısı |
 | `frontend/src/pages/Games.jsx` | `? t('userFlashcardDailyLimitDesc', 'Günlük en fazla 5 kelime kartı çalışması hakkınız doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planınızı yükseltin.')` | sabit metin fallback | Oyunlar sayfası Flashcard kilit açıklaması (TR) |
 | `frontend/src/pages/Games.jsx` | `: t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen planınızı yükseltin.')` | sabit metin fallback | Oyunlar sayfası Flashcard kilit açıklaması (TR misafir) |
-| `frontend/src/pages/FAQ.jsx` | `Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 100 morfemi...` | sabit metin | SSS cevabı 2 (TR) |
-| `frontend/src/pages/FAQ.jsx` | `Guests can explore the first 24 morphemes and play up to 5 Flashcard sessions daily. The Basic plan unlocks the top 100 morphemes...` | sabit metin | SSS cevabı 2 (EN) |
-| `frontend/scripts/prerender-faq.mjs` | `Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 100 morfemi...` | betik/meta | Prerender FAQ statik HTML metni (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan etiketi (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 anatomik kategori · 100 morfem'],` | sabit metin | Temel plan maddesi (TR) |
-| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan etiketi (EN) |
-| `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 anatomical categories · 100 morphemes'],` | sabit metin | Temel plan maddesi (EN) |
-| `frontend/src/pages/Pricing.jsx` | `tag: '16 kategori sözlüğü, 100 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Fiyatlandırma Temel plan etiketi (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomik kategori · 100 morfem'],` | sabit metin | Fiyatlandırma Temel plan maddesi (TR) |
-| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '100 morfem', '571+ (Tümü)', '571+ (Tümü)'],` | sabit metin | Karşılaştırma tablosu morfem satırı (TR) |
-| `frontend/src/pages/Pricing.jsx` | `tag: '16 categories glossary, 100 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Fiyatlandırma Temel plan etiketi (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomical categories · 100 morphemes'],` | sabit metin | Fiyatlandırma Temel plan maddesi (EN) |
-| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '100 morphemes', '571+ (All)', '571+ (All)'],` | sabit metin | Karşılaştırma tablosu morfem satırı (EN) |
-| `frontend/src/pages/Profile.jsx` | `Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık.` | sabit metin | Profil Temel plan durumu (TR) |
-| `frontend/src/pages/Profile.jsx` | `You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.` | sabit metin | Profil Temel plan durumu (EN) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Temel Paket: İlk 100 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası Temel plan kilit uyarısı (TR) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Basic Plan: First 100 morphemes unlocked. Upgrade to Pro for all 571+.` | sabit metin | Morfem Atlası Temel plan kilit uyarısı (EN) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Misafir Modu: İlk 24 morfem açık. 100 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası Misafir kilit uyarısı (TR) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 100 or Pro for all 571+.` | sabit metin | Morfem Atlası Misafir kilit uyarısı (EN) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 24 morfem misafirlere açıktır. 100 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kart kilidi modalı (Misafir) |
-| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 100 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kart kilidi modalı (Temel) |
+| `frontend/src/pages/FAQ.jsx` | `Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 150 morfemi...` | sabit metin | SSS cevabı 2 (TR) |
+| `frontend/src/pages/FAQ.jsx` | `Guests can explore the first 24 morphemes and play up to 5 Flashcard sessions daily. The Basic plan unlocks the top 150 morphemes...` | sabit metin | SSS cevabı 2 (EN) |
+| `frontend/scripts/prerender-faq.mjs` | `Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 150 morfemi...` | betik/meta | Prerender FAQ statik HTML metni (TR) |
+| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 kategori sözlüğü, 150 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Temel plan etiketi (TR) |
+| `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 anatomik kategori · 150 morfem'],` | sabit metin | Temel plan maddesi (TR) |
+| `frontend/src/components/HomePricingSection.jsx` | `tag: '16 categories glossary, 150 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Temel plan etiketi (EN) |
+| `frontend/src/components/HomePricingSection.jsx` | `['✓', '16 anatomical categories · 150 morphemes'],` | sabit metin | Temel plan maddesi (EN) |
+| `frontend/src/pages/Pricing.jsx` | `tag: '16 kategori sözlüğü, 150 morfem, sınırsız Flashcard & Eşleştirme.',` | sabit metin | Fiyatlandırma Temel plan etiketi (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomik kategori · 150 morfem'],` | sabit metin | Fiyatlandırma Temel plan maddesi (TR) |
+| `frontend/src/pages/Pricing.jsx` | `['Morfem kütüphanesi', '150 morfem', '571+ (Tümü)', '571+ (Tümü)'],` | sabit metin | Karşılaştırma tablosu morfem satırı (TR) |
+| `frontend/src/pages/Pricing.jsx` | `tag: '16 categories glossary, 150 morphemes, unlimited Flashcards & Matching.',` | sabit metin | Fiyatlandırma Temel plan etiketi (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['✓', '16 anatomical categories · 150 morphemes'],` | sabit metin | Fiyatlandırma Temel plan maddesi (EN) |
+| `frontend/src/pages/Pricing.jsx` | `['Morpheme library', '150 morphemes', '571+ (All)', '571+ (All)'],` | sabit metin | Karşılaştırma tablosu morfem satırı (EN) |
+| `frontend/src/pages/Profile.jsx` | `Temel plandasınız: 16 kategori sözlüğü, 150 morfem ve sınırsız Flashcard & Eşleştirme açık.` | sabit metin | Profil Temel plan durumu (TR) |
+| `frontend/src/pages/Profile.jsx` | `You are on the Basic plan: 16 categories glossary, 150 morphemes, and unlimited Flashcards & Matching unlocked.` | sabit metin | Profil Temel plan durumu (EN) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Temel Paket: İlk 150 morfem açık. 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası Temel plan kilit uyarısı (TR) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Basic Plan: First 150 morphemes unlocked. Upgrade to Pro for all 571+.` | sabit metin | Morfem Atlası Temel plan kilit uyarısı (EN) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Misafir Modu: İlk 24 morfem açık. 150 morfem için Temel plana, 571+ morfemin tamamı için Pro’ya geçin.` | sabit metin | Morfem Atlası Misafir kilit uyarısı (TR) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `Guest Mode: First 24 morphemes unlocked. Upgrade to Basic for 150 or Pro for all 571+.` | sabit metin | Morfem Atlası Misafir kilit uyarısı (EN) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 24 morfem misafirlere açıktır. 150 morfem için Temel plana, 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kart kilidi modalı (Misafir) |
+| `frontend/src/pages/MorphemeExplorer.jsx` | `İlk 150 morfem Temel planda açıktır. 571 morfemin tamamına erişmek için Pro ve üzeri planlara geçin.` | sabit metin | Morfem kart kilidi modalı (Temel) |
 | `frontend/src/pages/Welcome.jsx` | `100 temel morfem ve sınırsız Flashcard & Eşleştirme oyunları kullanımına hazır.` | sabit metin | Karşılama sayfası Temel plan aktivasyon metni |
-| `frontend/src/pages/Welcome.jsx` | `En çok kullanılan ilk 100 morfem açık. İleri seviye morfemler Pro gerektirir.` | sabit metin | Karşılama sayfası Temel morfem kartı |
+| `frontend/src/pages/Welcome.jsx` | `En çok kullanılan ilk 150 morfem açık. İleri seviye morfemler Pro gerektirir.` | sabit metin | Karşılama sayfası Temel morfem kartı |
 | `frontend/src/pages/Welcome.jsx` | `İlk 24 morfem açık; gerisinde ad görünür, anlam ve detay bulanık.` | sabit metin | Karşılama sayfası Misafir morfem kartı |
-| `frontend/src/pages/Welcome.jsx` | `{ name: 'Morfem listesi', ..., limit: 'İlk 100 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '571+ morfem' },` | sabit metin | Karşılama tablosu satırı (TR) |
+| `frontend/src/pages/Welcome.jsx` | `{ name: 'Morfem listesi', ..., limit: 'İlk 150 morfem açık', sub: 'İleri düzey için Pro gerekir', pro: '571+ morfem' },` | sabit metin | Karşılama tablosu satırı (TR) |
 | `frontend/src/pages/Welcome.jsx` | `{ name: 'Morfem listesi', ..., limit: 'İlk 24 morfem açık', sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '571+ morfem' },` | sabit metin | Karşılama tablosu satırı (TR) |
-| `frontend/src/pages/Welcome.jsx` | `{ name: 'Morpheme list', ..., limit: 'Top 100 morphemes open', sub: 'Advanced morphemes require Pro', pro: '571+ morphemes' },` | sabit metin | Karşılama tablosu satırı (EN) |
+| `frontend/src/pages/Welcome.jsx` | `{ name: 'Morpheme list', ..., limit: 'Top 150 morphemes open', sub: 'Advanced morphemes require Pro', pro: '571+ morphemes' },` | sabit metin | Karşılama tablosu satırı (EN) |
 | `frontend/src/pages/Welcome.jsx` | `{ name: 'Morpheme list', ..., limit: 'First 24 morphemes open', sub: 'Rest locked: name visible, meaning blurred', pro: '571+ morphemes' },` | sabit metin | Karşılama tablosu satırı (EN) |
 
 ### d) Plan Limitlerinde Şu An Yanlış / Eski Olanlar
@@ -424,10 +412,10 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 ## 5. Deneme Süresi (Trial Duration - 3 Gün)
 
 ### a) Gerçek Değer ve Kaynağı
-- **Bugünkü Gerçek Değer:** **3 gün** (72 saat)
+- **Bugünkü Gerçek Değer:** **3 gün** (72 saat) — Yalnızca kayıtlı kullanıcının Paddle abonelik denemesi (`subscriptionStatus: 'trialing'`, `trialStartDate`/`trialEndDate`, `pro_trial`) için geçerlidir.
+- **Misafir Yerel Deneme:** **YOK** (12f kararıyla `medterm_guest_trial_start` ve `GUEST_TRIAL_DAYS`/`GUEST_TRIAL_MS` kaldırıldı; misafir yalnızca günlük 5 Flashcard, ilk 24 morfem ve oyun seviyesi kurallarıyla sınırlandırılır).
 - **Hesaplama Kaynağı:**
-  - `frontend/src/utils/storage.js` (`export const GUEST_TRIAL_DAYS = 3; export const GUEST_TRIAL_MS = GUEST_TRIAL_DAYS * 24 * 60 * 60 * 1000;`)
-  - `frontend/src/utils/planAccess.js` (`endMs = start + (3 * 24 * 60 * 60 * 1000);`)
+  - `frontend/src/utils/planAccess.js` & `frontend/src/utils/storage.js` (`getUserTrialState`, kayıtlı kullanıcı Paddle deneme hesabı)
   - Paddle Subscription Trial ayarları (3 günlük ₺0 deneme)
 
 ### b) Pazarlama Yazım Kuralı
@@ -438,11 +426,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 
 | Dosya | Aranacak Metin | Tür | Not |
 | :--- | :--- | :--- | :--- |
-| `frontend/src/utils/storage.js` | `export const GUEST_TRIAL_DAYS = 3;` | kod sabiti | Misafir deneme süresi gün sayısı sabiti |
-| `frontend/src/utils/storage.js` | `export const GUEST_TRIAL_MS = GUEST_TRIAL_DAYS * 24 * 60 * 60 * 1000;` | dinamik | Milisaniye cinsinden deneme süresi hesabı |
-| `frontend/src/utils/planAccess.js` | `endMs = start + (3 * 24 * 60 * 60 * 1000);` | kod içi tekrar | Üyelik deneme süresi bitiş hesabı (`GUEST_TRIAL_MS` kullanmıyor) |
-| `frontend/src/pages/Dashboard.jsx` | `trialEndObj = new Date(created.getTime() + 3 * 24 * 60 * 60 * 1000);` | kod içi tekrar | Pano deneme bitişi hesabı (`GUEST_TRIAL_MS` kullanmıyor) |
-| `frontend/src/pages/Dashboard.jsx` | `trialEndObj = new Date(startMs + 3 * 24 * 60 * 60 * 1000);` | kod içi tekrar | Pano deneme bitişi hesabı (`GUEST_TRIAL_MS` kullanmıyor) |
+| `frontend/src/utils/storage.js` | `export const getUserTrialState = (currentUser) => {` | dinamik | Kayıtlı kullanıcı Paddle 3 günlük deneme durumu hesaplayıcısı (misafir için `hasTrial: false`) |
+| `frontend/src/pages/Dashboard.jsx` | `trialEndObj = new Date(created.getTime() + 3 * 24 * 60 * 60 * 1000);` | kod içi tekrar | Pano kayıtlı kullanıcı deneme bitişi hesabı |
+| `frontend/src/pages/Dashboard.jsx` | `trialEndObj = new Date(startMs + 3 * 24 * 60 * 60 * 1000);` | kod içi tekrar | Pano kayıtlı kullanıcı deneme bitişi hesabı |
 | `frontend/public/index.html` | `"description": "3 Günlük Ücretsiz Deneme"` | betik/meta | JSON-LD Structured Data Schema `offers.description` alanı |
 | `frontend/src/components/TopInfoBar.jsx` | `'3 GÜN ÜCRETSİZ DENE · DİLEDİĞİN AN İPTAL ET'` | sabit metin | Kayan üst duyuru bandı (TR) |
 | `frontend/src/components/TopInfoBar.jsx` | `'TRY 3 DAYS FREE · CANCEL ANYTIME'` | sabit metin | Kayan üst duyuru bandı (EN) |
@@ -614,8 +600,8 @@ Kullanıcıya kategorilerin açık veya kilitli olduğuna dair sitede verilen t�
    - EN: `{ name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' }`
    - Vaat: 16 kategoride sınırsız gezinme hakkı vadedilir.
 4. **`frontend/src/pages/Profile.jsx`:**
-   - TR: `Temel plandasınız: 16 kategori sözlüğü, 100 morfem ve sınırsız Flashcard & Eşleştirme açık.`
-   - EN: `You are on the Basic plan: 16 categories glossary, 100 morphemes, and unlimited Flashcards & Matching unlocked.`
+   - TR: `Temel plandasınız: 16 kategori sözlüğü, 150 morfem ve sınırsız Flashcard & Eşleştirme açık.`
+   - EN: `You are on the Basic plan: 16 categories glossary, 150 morphemes, and unlimited Flashcards & Matching unlocked.`
    - Vaat: Temel planda "16 kategori sözlüğü"nün ve oyunların açık olduğu söylenir.
 5. **`frontend/src/components/TrialDashboardView.jsx`:**
    - TR: `proLockCategories: '16 kategoride ilerleme takibi Temel plan ve üzeri planlarda açılır.'`
@@ -625,13 +611,14 @@ Kullanıcıya kategorilerin açık veya kilitli olduğuna dair sitede verilen t�
    - TR: `Tüm oyun modlarına ve kategorilere sınırsız erişim için planınızı yükseltin.`
    - EN: `Upgrade your plan for unlimited access to all game modes and categories.`
 
-### b) Kod İçi Fiili Durum ve Mevcut Mimari Çelişki
-- **Sözlük Düzeyinde (`frontend/src/pages/Study.jsx`):** 16 anatomik kategorinin tamamı misafirler dahil herkese açıktır; kilit uygulanmaz. Bu durum SSS ve Fiyatlandırma vaadiyle örtüşmektedir.
-- **Oyunlar Düzeyinde (`frontend/src/utils/planAccess.js`):**
-  - Kodda `export const UNLOCKED_CATEGORY_IDS = ['skull_bones', 'face_bones', 'trunk_bones'];` şeklinde yalnızca **3 kategori** tanımlıdır.
-  - `frontend/src/pages/Flashcards.jsx` [L177] ve `frontend/src/pages/MatchGame.jsx` [L133] bileşenlerinde, Temel plan abonesi veya misafir kullanıcı kalan 13 kategoriden birini seçtiğinde şu uyarı verilerek içerik kilitlenir:
-    - *"Bu kategori Pro plana özeldir. Temel planda açık olan kategorilerden biri yükleniyor..."*
-- **Mimari Not:** "16 kategori açık" ifadesi yalnızca sözlük/çalışma modu için geçerlidir; interaktif oyun modlarında (Flashcard ve Match) Temel planda sadece 3 kategori açıktır, 13 kategori ise Pro plana kilitlidir. Bu durum kullanıcı tarafında kafa karışıklığı yaratabilecek bir sınır ayrımıdır.
+### b) Kod İçi Fiili Durum (12e Güncel)
+- **Sözlük Düzeyinde (`frontend/src/pages/Study.jsx`):** 16 anatomik kategorinin tamamı misafirler dahil herkese açıktır; kilit uygulanmaz.
+- **Oyunlar Düzeyinde (`frontend/src/pages/Flashcards.jsx`, `frontend/src/pages/MatchGame.jsx`, `frontend/src/pages/Quiz.jsx`, `frontend/src/pages/MorphemeGame.jsx`):**
+  - 12e kararıyla oyunlarda kategori kısıtlaması tamamen kaldırılmıştır (`UNLOCKED_CATEGORY_IDS` ve `isCategoryUnlocked` silinmiştir). Misafir ve ücretsiz kullanıcılar dahil herkes her oyunda 16 kategorinin tamamını seçebilir.
+  - Erişim yalnızca **oyun seviyesinde** kontrol edilir (`isGameUnlocked` — `frontend/src/utils/planAccess.js`):
+    - **Flashcard:** Günlük 5 hak (`MAX_GUEST_DAILY_FLASHCARDS` — misafir ve kayıtlı ücretsiz).
+    - **Eşleştirme:** Temel ve üstü.
+    - **Quiz ve Morfem Yapıcı:** Pro ve üstü (Ömür Boyu ve Paddle deneme dahil).
 
 ---
 
@@ -640,7 +627,7 @@ Kullanıcıya kategorilerin açık veya kilitli olduğuna dair sitede verilen t�
 Belge bütünlüğü kapsamında incelenen diğer yapay zeka ve derleme noktaları:
 
 1. **`frontend/public/index.html` JSON-LD Yapısal Verileri:**
-   - Kontrol edildi: JSON-LD içerisinde `"offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY", "description": "3 Günlük Ücretsiz Deneme" }` yer almaktadır. Koddaki `GUEST_TRIAL_DAYS = 3` ve `TRY` para birimiyle tutarlıdır.
+   - Kontrol edildi: JSON-LD içerisinde `"offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY", "description": "3 Günlük Ücretsiz Deneme" }` yer almaktadır. Kayıtlı kullanıcı Paddle 3 günlük deneme ve `TRY` para birimiyle tutarlıdır.
 2. **FAQ Dışındaki Prerender / Sitemap Betikleri:**
    - `frontend/scripts/prerender-rehber.mjs` ve `frontend/scripts/generate-sitemap.mjs` kontrol edildi.
    - Bu betiklerde sabitlenmiş pazarlama sayıları (940+, 550+ vb.) bulunmamaktadır; veri kaynaklarından (`getAllTerms()`, `morphemesData.js`) dinamik URL ve içerik üretmektedir.
