@@ -563,13 +563,6 @@ const BASIC_DASHBOARD_LOCKED_GAMES = [
     enName: 'Morpheme Builder',
     plan: 'Pro ve üzeri gerekir',
     enPlan: 'Requires Pro & above'
-  },
-  {
-    id: 'level',
-    name: 'Seviye ve günlük tekrar',
-    enName: 'Level & daily repetition',
-    plan: 'Pro ve üzeri gerekir',
-    enPlan: 'Requires Pro & above'
   }
 ];
 
@@ -1060,7 +1053,7 @@ const BasicUserDashboard = ({
               </div>
             </div>
 
-            {/* 3 Kilitli Oyun (Quiz, Morfem Yapıcı, Seviye ve tekrar) */}
+            {/* 2 Kilitli Oyun (Quiz, Morfem Yapıcı) */}
             <div className="flex flex-col gap-2">
               {BASIC_DASHBOARD_LOCKED_GAMES.map((g) => (
                 <Link
@@ -1090,8 +1083,8 @@ const BasicUserDashboard = ({
           <div>
             <div className="font-semibold text-base sm:text-[17px] font-['Lora',Georgia,serif] text-[#0f1b33] dark:text-foreground">
               {isTr
-                ? 'Quiz, Morfem Yapıcı ve seviye sistemi Pro’da'
-                : 'Quiz, Morpheme Builder and level system in Pro'}
+                ? 'Quiz ve Morfem Yapıcı Pro’da'
+                : 'Quiz and Morpheme Builder in Pro'}
             </div>
             <div className="font-normal text-[12px] sm:text-[13px] text-[#6b7a90] dark:text-muted-foreground mt-1">
               {isTr
