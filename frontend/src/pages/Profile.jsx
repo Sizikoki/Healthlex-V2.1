@@ -626,8 +626,8 @@ export const Profile = () => {
                           ? `Temel plandasın: 16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem ve sınırsız Flashcard & Eşleştirme açık. Tüm 550+ morfem ve Quiz için Pro'ya geçebilirsin.`
                           : `You are on the Basic plan: 16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, and unlimited Flashcards & Matching unlocked. Upgrade to Pro for all 550+ morphemes and Quiz.`)
                       : (isTr
-                          ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı, 4 oyun modu ve seviye sisteminin tamamı için Pro\'ya geç.'
-                          : 'You\'re on a free account. Upgrade to Pro to unlock 550+ morphemes, 4 game modes and the full level system.')}
+                          ? 'Ücretsiz hesaptasın. 550+ morfemin tamamı ve 4 oyun modu için Pro\'ya geç.'
+                          : 'You\'re on a free account. Upgrade to Pro to unlock 550+ morphemes and 4 game modes.')}
                   </p>
                   {trialState.isActive && (
                     <div className="mt-3 text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-lg inline-flex items-center gap-2">

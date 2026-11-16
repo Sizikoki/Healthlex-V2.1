@@ -806,8 +806,8 @@ const BasicUserDashboard = ({
                 {billingInfo.trialEndDateFormatted && (
                   <>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                        {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
+                      <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground">
+                        {(isTr ? 'Deneme bitişi:' : 'Trial ends:').toLocaleUpperCase(isTr ? 'tr-TR' : 'en-US')}
                       </span>
                       <span className="font-bold text-[#0f1b33] dark:text-foreground">
                         {billingInfo.trialEndDateFormatted}
@@ -818,14 +818,9 @@ const BasicUserDashboard = ({
                 )}
                 {billingInfo.firstBillingDateFormatted && (
                   <>
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                        {isTr ? 'İlk tahsilat:' : 'First billing:'}
-                      </span>
-                      <span className="font-bold text-[#0f1b33] dark:text-foreground">
-                        {billingInfo.firstBillingDateFormatted}
-                      </span>
-                    </div>
+                    <span className="text-[12px] text-[#6b7a90] dark:text-muted-foreground">
+                      {isTr ? 'İptal etmezsen bu tarihte yıllık ücret alınır.' : "If you don't cancel, the annual fee is charged on this date."}
+                    </span>
                     <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
                   </>
                 )}
@@ -1394,22 +1389,17 @@ const ProUserDashboard = ({
               </div>
               <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                  {isTr ? 'Deneme bitişi:' : 'Trial ends:'}
+                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground">
+                  {(isTr ? 'Deneme bitişi:' : 'Trial ends:').toLocaleUpperCase(isTr ? 'tr-TR' : 'en-US')}
                 </span>
                 <span className="font-bold text-[#0f1b33] dark:text-foreground">
                   {trialState.formattedEndDate(isTr ? 'tr' : 'en')}
                 </span>
               </div>
               <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                  {isTr ? 'İlk tahsilat:' : 'First billing:'}
-                </span>
-                <span className="font-bold text-[#0f1b33] dark:text-foreground">
-                  {trialState.formattedBillingDate(isTr ? 'tr' : 'en')}
-                </span>
-              </div>
+              <span className="text-[12px] text-[#6b7a90] dark:text-muted-foreground">
+                {isTr ? 'İptal etmezsen bu tarihte yıllık ücret alınır.' : "If you don't cancel, the annual fee is charged on this date."}
+              </span>
               <span className="text-[#dfe4ee] dark:text-border hidden sm:inline">•</span>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-[11px] leading-none tracking-[0.1em] text-[#6b7a90] dark:text-muted-foreground uppercase">

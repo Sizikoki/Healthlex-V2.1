@@ -261,7 +261,7 @@ export const Welcome = () => {
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Açık' },
           { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'open', limit: 'Sınırsız', sub: 'Tüm seviyeler açık', pro: 'Açık' },
-          { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: 'open', limit: 'Aktif', sub: 'Tüm başarılar ve istatistikler', pro: 'Açık' }
+          { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: 'open', limit: 'Aktif', sub: 'Tüm başarılar ve istatistikler', pro: 'Açık' }
         ];
       }
 
@@ -274,7 +274,7 @@ export const Welcome = () => {
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Temel plan ile sınırsız açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
           { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
-          { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: 'open', limit: 'Açık', sub: 'İlerleme, günlük seri ve kategori takibi açık', pro: 'Açık' }
+          { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: 'open', limit: 'Açık', sub: 'İlerleme, günlük seri ve kategori takibi açık', pro: 'Açık' }
         ];
       }
 
@@ -287,7 +287,7 @@ export const Welcome = () => {
         { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık' },
         { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
         { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
-        { name: 'İlerleme ve seviye', desc: 'Günlük tekrar, seri, seviye', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; detaylı analiz Temel+’da' : 'Ücretsiz hesapta ilerleme kaydı; detaylı analiz Temel+’da', pro: 'Açık' }
+        { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; detaylı analiz Temel+’da' : 'Ücretsiz hesapta ilerleme kaydı; detaylı analiz Temel+’da', pro: 'Açık' }
       ];
     }
 
@@ -326,7 +326,7 @@ export const Welcome = () => {
       { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked' },
       { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
       { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
-      { name: 'Progress & Streaks', desc: 'Daily review, streak & leveling', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; detailed analytics in Basic+' : 'Progress saved with free account; analytics in Basic+', pro: 'Unlocked' }
+      { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; detailed analytics in Basic+' : 'Progress saved with free account; analytics in Basic+', pro: 'Unlocked' }
     ];
   }, [termCount, isTr, isPro, isBasic, effectiveUser, freeMorphemes, isRegistered]);
 

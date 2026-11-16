@@ -43,7 +43,7 @@ const PRICING_CONTENT = {
       {
         id: 'pro',
         name: 'Pro',
-        tag: 'Tam öğrenme deneyimi; 4 mod, seviye, tekrar.',
+        tag: 'Tam öğrenme deneyimi; 4 mod, seri, tekrar.',
         badge: 'Lansman fiyatı',
         mo: null,
         yrp: '₺2.000',
@@ -54,7 +54,7 @@ const PRICING_CONTENT = {
         feats: [
           ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
-          ['✓', 'İlerleme ve seviye sistemi'],
+          ['✓', 'İlerleme ve günlük seri takibi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
           ['✓', 'Gelecek modüller dahil']
         ]
@@ -72,7 +72,7 @@ const PRICING_CONTENT = {
         feats: [
           ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
-          ['✓', 'İlerleme ve seviye sistemi'],
+          ['✓', 'İlerleme ve günlük seri takibi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
           ['✓', 'Gelecek modüller dahil']
         ]
@@ -113,7 +113,7 @@ const PRICING_CONTENT = {
       {
         id: 'pro',
         name: 'Pro',
-        tag: 'The full experience; 4 modes, levels, review.',
+        tag: 'The full experience; 4 modes, streaks, review.',
         badge: 'Launch price',
         mo: null,
         yrp: '₺2,000',
@@ -124,7 +124,7 @@ const PRICING_CONTENT = {
         feats: [
           ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
-          ['✓', 'Progress and level system'],
+          ['✓', 'Progress and daily streak tracking'],
           ['✓', 'Review with learned terms'],
           ['✓', 'Future modules included']
         ]
@@ -142,7 +142,7 @@ const PRICING_CONTENT = {
         feats: [
           ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
-          ['✓', 'Progress and level system'],
+          ['✓', 'Progress and daily streak tracking'],
           ['✓', 'Review with learned terms'],
           ['✓', 'Future modules included']
         ]

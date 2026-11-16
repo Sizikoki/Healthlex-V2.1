@@ -349,9 +349,9 @@ export const getUserTrialState = (currentUser) => {
   const summaryText = (lang = 'tr') => {
     const isTr = lang === 'tr';
     if (isTr) {
-      return `Deneme bitişi: ${formattedEndDate('tr')} · İlk tahsilat: ${formattedBillingDate('tr')} · Tutar: ${amountText(true)}`;
+      return `Deneme bitişi: ${formattedEndDate('tr')} · Tutar: ${amountText(true)} · İptal etmezsen bu tarihte yıllık ücret alınır.`;
     }
-    return `Trial ends: ${formattedEndDate('en')} · First billing: ${formattedBillingDate('en')} · Amount: ${amountText(false)}`;
+    return `Trial ends: ${formattedEndDate('en')} · Amount: ${amountText(false)} · If you don't cancel, the annual fee is charged on this date.`;
   };
 
   return {

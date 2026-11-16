@@ -62,7 +62,7 @@ const TRANSLATIONS = {
       },
       {
         name: 'Pro',
-        tag: 'Tam öğrenme deneyimi; 4 mod, seviye, tekrar.',
+        tag: 'Tam öğrenme deneyimi; 4 mod, seri, tekrar.',
         badge: 'Lansman fiyatı',
         mo: null,
         yrp: '₺2.000',
@@ -72,7 +72,7 @@ const TRANSLATIONS = {
         feats: [
           ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
-          ['✓', 'İlerleme ve seviye sistemi'],
+          ['✓', 'İlerleme ve günlük seri takibi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
           ['✓', 'Gelecek modüller dahil']
         ]
@@ -87,7 +87,7 @@ const TRANSLATIONS = {
         feats: [
           ['✓', '16 kategori · 550+ morfem'],
           ['✓', '4 oyun modu'],
-          ['✓', 'İlerleme ve seviye sistemi'],
+          ['✓', 'İlerleme ve günlük seri takibi'],
           ['✓', 'Öğrendiğin terimlerle tekrar'],
           ['✓', 'Gelecek modüller dahil']
         ]
@@ -98,7 +98,7 @@ const TRANSLATIONS = {
       ['Morfem kütüphanesi', `${MAX_BASIC_MORPHEMES} morfem`, '550+ (Tümü)', '550+ (Tümü)'],
       ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız', 'Sınırsız'],
       ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
-      ['İlerleme takibi', 'Flashcard & Eşleştirme', 'Tüm oyunlar + Seviye sistemi', 'Tüm oyunlar + Seviye sistemi'],
+      ['İlerleme takibi', 'Açık', 'Açık', 'Açık'],
       ['Öğrenilen terimlerle tekrar', '–', '✓', '✓'],
       ['Gelecek modüller dahil', '–', '✓', '✓'],
       ['3 Gün Ücretsiz Deneme (₺0)', '✓', '✓', '– (Doğrudan Satın Alma)'],
@@ -154,7 +154,7 @@ const TRANSLATIONS = {
       },
       {
         name: 'Pro',
-        tag: 'The full experience; 4 modes, levels, review.',
+        tag: 'The full experience; 4 modes, streaks, review.',
         badge: 'Launch price',
         mo: null,
         yrp: '₺2,000',
@@ -164,7 +164,7 @@ const TRANSLATIONS = {
         feats: [
           ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
-          ['✓', 'Progress and level system'],
+          ['✓', 'Progress and daily streak tracking'],
           ['✓', 'Review with learned terms'],
           ['✓', 'Future modules included']
         ]
@@ -179,7 +179,7 @@ const TRANSLATIONS = {
         feats: [
           ['✓', '16 categories · 550+ morphemes'],
           ['✓', '4 game modes'],
-          ['✓', 'Progress and level system'],
+          ['✓', 'Progress and daily streak tracking'],
           ['✓', 'Review with learned terms'],
           ['✓', 'Future modules included']
         ]
@@ -190,7 +190,7 @@ const TRANSLATIONS = {
       ['Morpheme library', `${MAX_BASIC_MORPHEMES} morphemes`, '550+ (All)', '550+ (All)'],
       ['Flashcard · Matching', 'Unlimited', 'Unlimited', 'Unlimited'],
       ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],
-      ['Progress tracking', 'Flashcard & Matching', 'All games + Level system', 'All games + Level system'],
+      ['Progress tracking', 'Unlocked', 'Unlocked', 'Unlocked'],
       ['Review with learned terms', '–', '✓', '✓'],
       ['Future modules included', '–', '✓', '✓'],
       ['3-Day Free Trial (₺0)', '✓', '✓', '– (Direct Purchase)'],
