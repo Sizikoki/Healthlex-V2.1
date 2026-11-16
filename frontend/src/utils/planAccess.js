@@ -1,9 +1,3 @@
-export const UNLOCKED_CATEGORY_IDS = [
-  'skull_bones',
-  'face_bones',
-  'trunk_bones'
-];
-
 export const MAX_GUEST_MORPHEMES = 24;
 export const MAX_FREE_USER_MORPHEMES = 50;
 export const MAX_BASIC_MORPHEMES = 150;
@@ -134,15 +128,6 @@ export const checkIsPro = (userData) => {
 
   if (userData.isPro === true) return true;
   return false;
-};
-
-/**
- * Kategorinin kullanıcı için açık olup olmadığını kontrol eder
- */
-export const isCategoryUnlocked = (categoryId, isPro) => {
-  if (isPro) return true;
-  if (!categoryId || categoryId === 'all') return false;
-  return UNLOCKED_CATEGORY_IDS.includes(categoryId);
 };
 
 /**

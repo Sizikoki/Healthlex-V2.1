@@ -13,7 +13,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { parseRootsToMorphemes } from '@/utils/termHelper';
 import { useLanguage } from '@/context/LanguageContext';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Flashcards = () => {
@@ -28,7 +28,6 @@ export const Flashcards = () => {
   // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
   const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
   const [currentUserData, setCurrentUserData] = useState(() => getUser());
-  const isPro = previewRole === 'pro' || checkIsPro(currentUserData);
   const hasPaidPlan = previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(currentUserData);
   const isLimited = !hasPaidPlan;
 
@@ -168,60 +167,28 @@ export const Flashcards = () => {
         rawTerms = getAllTerms();
       }
 
-      let activeCategoryId = categoryId;
-      if (!isPro && categoryId && categoryId !== 'all' && !isCategoryUnlocked(categoryId, isPro)) {
-        activeCategoryId = 'skull_bones';
-        toast.info(
-          currentLanguage === 'en'
-            ? 'This category is exclusive to Pro. Redirecting to an unlocked category...'
-            : 'Bu kategori Pro plana özeldir. Temel planda açık olan kategorilerden biri yükleniyor...'
-        );
-      }
-
       let filteredTerms = rawTerms;
-      if (activeCategoryId && activeCategoryId !== 'all') {
-        filteredTerms = rawTerms.filter(t => t.category === activeCategoryId);
+      if (categoryId && categoryId !== 'all') {
+        filteredTerms = rawTerms.filter(t => t.category === categoryId);
         if (filteredTerms.length === 0) {
-          filteredTerms = rawTerms.filter(t => t.system === activeCategoryId || t.subcategory === activeCategoryId);
+          filteredTerms = rawTerms.filter(t => t.system === categoryId || t.subcategory === categoryId);
         }
-      } else if (!isPro) {
-        filteredTerms = rawTerms.filter(t =>
-          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.system)
-        );
       }
 
       if (filteredTerms.length === 0) {
-        filteredTerms = !isPro
-          ? rawTerms.filter(t =>
-              UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-              UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-              UNLOCKED_CATEGORY_IDS.includes(t.system)
-            )
-          : rawTerms;
+        filteredTerms = rawTerms;
       }
 
       const shuffled = [...filteredTerms].sort(() => Math.random() - 0.5);
       setTerms(shuffled.slice(0, Math.min(20, shuffled.length)));
     } catch (error) {
       console.error('Error fetching terms in Flashcards:', error);
-      let selectedTerms = getRandomTerms(20, activeCategoryId);
-      if (!isPro) {
-        selectedTerms = selectedTerms.filter(t =>
-          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.system)
-        );
-        if (selectedTerms.length === 0) {
-          selectedTerms = getTermsByCategory('skull_bones').slice(0, 20);
-        }
-      }
+      const selectedTerms = getRandomTerms(20, categoryId);
       setTerms(selectedTerms);
     } finally {
       setLoading(false);
     }
-  }, [categoryId, isPro, isLimited, currentLanguage, planReady]);
+  }, [categoryId, isLimited, planReady]);
 
   const lastLoadedKeyRef = useRef('');
 

@@ -41,7 +41,7 @@ import { changePlan } from '@/services/subscriptionService';
 import { useLanguage } from '@/context/LanguageContext';
 import { getTermCount, getInitialTermCount, roundDownToTen } from '@/services/termCountService';
 import { getTermsByCategory } from '@/data/medicalTerms';
-import { TOTAL_MORPHEMES } from '@/data/morphemesData';
+import { TOTAL_MORPHEMES, PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { toast } from 'sonner';
 
 // --- Kullanıcı Plan Çözümleme ---
@@ -1752,15 +1752,15 @@ const ProUserDashboard = ({
             {/* Ön Ek, Kök, Son Ek Dağılımı */}
             <div className="grid grid-cols-3 gap-2 pt-2.5 border-t border-[#f0f3f8] dark:border-border/50 text-center">
               <div className="flex flex-col">
-                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">155</span>
+                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">{PREFIXES.length}</span>
                 <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground font-semibold">{isTr ? 'Ön Ek' : 'Prefix'}</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">285</span>
+                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">{ROOTS.length}</span>
                 <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground font-semibold">{isTr ? 'Kök' : 'Root'}</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">131</span>
+                <span className="font-bold text-[14px] text-[#0f1b33] dark:text-foreground">{SUFFIXES.length}</span>
                 <span className="text-[11px] text-[#6b7a90] dark:text-muted-foreground font-semibold">{isTr ? 'Son Ek' : 'Suffix'}</span>
               </div>
             </div>

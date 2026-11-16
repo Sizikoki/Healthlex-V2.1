@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { auth, db } from '@/firebase/config';
 import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
-import { isCategoryUnlocked, UNLOCKED_CATEGORY_IDS, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
 
@@ -25,7 +25,6 @@ export const MatchGame = () => {
   const initialUid = localUser?.uid || auth?.currentUser?.uid;
   // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
   const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
-  const [isPro, setIsPro] = useState(previewRole === 'pro' || checkIsPro(localUser));
   const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(localUser));
 
   const [allTerms, setAllTerms] = useState([]);
@@ -58,7 +57,6 @@ export const MatchGame = () => {
 
       if (!uid) {
         setHasPlan(false);
-        setIsPro(false);
         setPlanReady(true);
         return;
       }
@@ -67,19 +65,14 @@ export const MatchGame = () => {
       if (checkHasPaidPlan(targetUser)) {
         setHasPlan(true);
       }
-      if (checkIsPro(targetUser)) {
-        setIsPro(true);
-      }
 
       try {
         const userDocRef = doc(db, 'users', uid);
         unsubDoc = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
-            setIsPro(checkIsPro(data));
             setHasPlan(checkHasPaidPlan(data));
           } else {
-            setIsPro(checkIsPro(targetUser));
             setHasPlan(checkHasPaidPlan(targetUser));
           }
           setPlanReady(true);
@@ -124,38 +117,16 @@ export const MatchGame = () => {
       return;
     }
 
-    let activeCategoryId = categoryId;
-    if (!isPro && categoryId && categoryId !== 'all' && !isCategoryUnlocked(categoryId, isPro)) {
-      activeCategoryId = 'skull_bones';
-      toast.info(
-        currentLanguage === 'en'
-          ? 'This category is exclusive to Pro. Redirecting to an unlocked category...'
-          : 'Bu kategori Pro plana özeldir. Temel planda açık olan kategorilerden biri yükleniyor...'
-      );
-    }
-
     let filtered = termsList;
-    if (activeCategoryId && activeCategoryId !== 'all') {
-      filtered = termsList.filter(t => t.category === activeCategoryId);
+    if (categoryId && categoryId !== 'all') {
+      filtered = termsList.filter(t => t.category === categoryId);
       if (filtered.length === 0) {
-        filtered = termsList.filter(t => t.system === activeCategoryId || t.subcategory === activeCategoryId);
+        filtered = termsList.filter(t => t.system === categoryId || t.subcategory === categoryId);
       }
-    } else if (!isPro) {
-      filtered = termsList.filter(t =>
-        UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-        UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-        UNLOCKED_CATEGORY_IDS.includes(t.system)
-      );
     }
 
     if (filtered.length === 0) {
-      filtered = !isPro
-        ? termsList.filter(t =>
-            UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-            UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-            UNLOCKED_CATEGORY_IDS.includes(t.system)
-          )
-        : termsList;
+      filtered = termsList;
     }
 
     // Filter terms that have valid match content based on language
@@ -163,14 +134,7 @@ export const MatchGame = () => {
     const validTerms = filtered.filter(t =>
       t.term && (isEn ? (t.english || t.turkish || t.turkishShort || t.turkishDefinition) : (t.turkishShort || t.turkishDefinition))
     );
-    const fallbackList = !isPro
-      ? termsList.filter(t =>
-          UNLOCKED_CATEGORY_IDS.includes(t.category) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.subcategory) ||
-          UNLOCKED_CATEGORY_IDS.includes(t.system)
-        )
-      : termsList;
-    const sourceList = validTerms.length >= 6 ? validTerms : (filtered.length >= 6 ? filtered : fallbackList);
+    const sourceList = validTerms.length >= 6 ? validTerms : (filtered.length >= 6 ? filtered : termsList);
 
     // Select 6 random terms dynamically
     const shuffledTerms = [...sourceList].sort(() => Math.random() - 0.5);
@@ -207,7 +171,7 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage, isPro, hasPlan, planReady, navigate]);
+  }, [categoryId, currentLanguage, hasPlan, planReady, navigate]);
 
   const initializeGame = useCallback(() => {
     setupGame(allTerms);
