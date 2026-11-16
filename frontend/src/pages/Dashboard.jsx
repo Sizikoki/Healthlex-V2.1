@@ -29,8 +29,7 @@ import {
   getUserLevel,
   logout,
   formatTurkishName,
-  getUserTrialState,
-  getFlashcardGuestDailyInfo
+  getUserTrialState
 } from '@/utils/storage';
 import { getPastDueState, getPreviewRole, MAX_FREE_USER_MORPHEMES, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
@@ -97,9 +96,9 @@ const FREE_DASHBOARD_CATEGORIES = [
   { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', enName: 'Skull Bones', defaultCount: 42 },
   { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', enName: 'Face Bones', defaultCount: 31 },
   { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', enName: 'Trunk Bones', defaultCount: 38 },
-  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Extremite Kemikleri', enName: 'Upper Extremity Bones', defaultCount: 46 },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri', enName: 'Upper Extremity Bones', defaultCount: 46 },
   { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri', enName: 'Upper Extremity Joints', defaultCount: 27 },
-  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Extremite Kemikleri', enName: 'Lower Extremity Bones', defaultCount: 44 },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri', enName: 'Lower Extremity Bones', defaultCount: 44 },
   { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', enName: 'Lower Extremity Joints', defaultCount: 29 },
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', enName: 'Spine Joints', defaultCount: 22 },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', enName: 'Head and Neck Joints', defaultCount: 18 },
@@ -152,7 +151,7 @@ const FREE_DASHBOARD_LOCKED_GAMES = [
 // =============================================================================
 // YENİ KAYITLI MİSAFİR / ÜCRETSİZ KULLANICI İÇİN DİNAMİK PANEL (8a Şablonu)
 // =============================================================================
-const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, todayFormatted }) => {
+const FreeUserDashboard = ({ userName, streak, termCount, isTr, todayFormatted }) => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -207,8 +206,6 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
   };
 
   const streakDays = streak?.currentStreak && streak.currentStreak > 0 ? streak.currentStreak : 1;
-  const remainingPlays = flashcardInfo?.playsRemaining ?? 5;
-  const totalPlays = flashcardInfo?.maxPlays ?? 5;
   const termsVal = String(termCount || getInitialTermCount());
   const freePct = Math.round((MAX_FREE_USER_MORPHEMES / TOTAL_MORPHEMES) * 100);
 
@@ -229,9 +226,9 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
     },
     {
       label: isTr ? 'FLASHCARD' : 'FLASHCARDS',
-      v: `${remainingPlays} / ${totalPlays}`,
-      unit: isTr ? 'bugün' : 'today',
-      note: isTr ? 'Günlük hak her gece yenilenir' : 'Daily plays refresh every midnight',
+      v: '∞',
+      unit: isTr ? 'sınırsız' : 'unlimited',
+      note: isTr ? 'Ücretsiz hesapta sınırsız kart çalışması' : 'Unlimited flashcards with free account',
       borderClass: 'sm:border-l sm:border-[#eef1f6] dark:sm:border-border/60 sm:pl-6'
     },
     {
@@ -472,26 +469,14 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, flashcardInfo, t
               <div className="flex justify-between items-center">
                 <span className="font-extrabold text-[15px]">Flashcard</span>
                 <span className="font-extrabold text-[12px] bg-white/15 px-2 py-1 rounded-[6px]">
-                  {remainingPlays} / {totalPlays} {isTr ? 'hak' : 'plays'}
+                  {isTr ? 'Sınırsız' : 'Unlimited'}
                 </span>
-              </div>
-
-              {/* 5 Hak Gösterge Çubuğu (Pips) */}
-              <div className="flex gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`flex-1 h-[5px] rounded-[3px] transition-colors ${
-                      i < remainingPlays ? 'bg-[#5aa9ff]' : 'bg-white/20'
-                    }`}
-                  />
-                ))}
               </div>
 
               <span className="font-normal text-[13px] leading-[1.45] text-[#b8c4d9]">
                 {isTr
-                  ? `Bugün ${remainingPlays} oyun oynayabilirsin. Hak her gece yenilenir.`
-                  : `You can play ${remainingPlays} games today. Plays refresh every midnight.`}
+                  ? 'Ücretsiz hesabınla sınırsız kelime kartı çalışabilirsin.'
+                  : 'Practice unlimited flashcards with your free account.'}
               </span>
 
               <Link
@@ -1976,7 +1961,6 @@ export const Dashboard = () => {
   }, [firebaseUser]);
 
   const streak = streakState;
-  const flashcardInfo = getFlashcardGuestDailyInfo();
 
   const todayFormatted = new Date().toLocaleDateString(isTr ? 'tr-TR' : 'en-US', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
@@ -2066,7 +2050,6 @@ export const Dashboard = () => {
         streak={streak}
         termCount={termCount}
         isTr={isTr}
-        flashcardInfo={flashcardInfo}
         todayFormatted={todayFormatted}
       />
     );

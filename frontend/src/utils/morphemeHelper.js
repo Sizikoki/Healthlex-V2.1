@@ -29,7 +29,7 @@ export const CATEGORY_NAMES = {
 };
 
 /**
- * Returns a standardized array of all 559 morphemes with slugs and variants.
+ * Returns a standardized array of all morphemes with slugs and variants.
  */
 export function getAllMorphemes() {
   const list = [];

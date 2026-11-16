@@ -23,9 +23,9 @@ const GAME_CATEGORIES = [
   { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
   { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri' },
   { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri' },
-  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Extremite Kemikleri' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri' },
   { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri' },
-  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Extremite Kemikleri' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri' },
   { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
   { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
   { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
@@ -458,25 +458,21 @@ export const Games = () => {
             modalMode === 'match'
               ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarını kaydetmek için lütfen ücretsiz kayıt ol.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? (userIsLoggedIn
-                  ? t('userFlashcardDailyLimitDesc', 'Günlük en fazla 5 kelime kartı çalışması hakkın doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planını yükselt.')
-                  : t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen planını yükselt.'))
+              ? t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen ücretsiz üye ol.')
               : undefined
           }
           cardTitle={
             modalMode === 'match'
               ? t('guestMatchCardTitle', 'Ücretsiz Üye Ol & Eşleştirmeye Başla')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? (userIsLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Ücretsiz Üye Ol'))
+              ? t('guestLimitCardTitle', 'Ücretsiz Üye Ol')
               : undefined
           }
           cardDesc={
             modalMode === 'match'
               ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına erişebilir, ilerlemeni tüm cihazlarında takip edebilirsin.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? (userIsLoggedIn
-                  ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
-                  : t('guestLimitCardDesc', 'Üye olarak ilerlemeni senkronize edebilir ve platform özelliklerinden faydalanabilirsin.'))
+              ? t('guestLimitCardDesc', 'Üye olarak sınırsız kelime kartı çalışabilir ve ilerlemeni tüm cihazlarında senkronize edebilirsin.')
               : undefined
           }
         />

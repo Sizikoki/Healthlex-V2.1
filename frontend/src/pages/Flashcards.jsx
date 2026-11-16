@@ -13,7 +13,7 @@ import { formatMedicalTerm } from '@/utils/format';
 import { GuestLimitModal } from '@/components/GuestLimitModal';
 import { parseRootsToMorphemes } from '@/utils/termHelper';
 import { useLanguage } from '@/context/LanguageContext';
-import { checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 
 export const Flashcards = () => {
@@ -28,8 +28,8 @@ export const Flashcards = () => {
   // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
   const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
   const [currentUserData, setCurrentUserData] = useState(() => getUser());
-  const hasPaidPlan = previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(currentUserData);
-  const isLimited = !hasPaidPlan;
+  const isUserLoggedIn = Boolean(previewRole || currentUserData?.uid || auth?.currentUser?.uid || isLoggedIn());
+  const isLimited = !isUserLoggedIn;
 
   useEffect(() => {
     if (previewRole) {
@@ -86,7 +86,7 @@ export const Flashcards = () => {
 
   useEffect(() => {
     if (!planReady) return;
-    if (hasPaidPlan) {
+    if (!isLimited) {
       setShowGuestModal(false);
       setLoading(false);
     } else {
@@ -96,7 +96,7 @@ export const Flashcards = () => {
         setShowGuestModal(true);
       }
     }
-  }, [hasPaidPlan, planReady]);
+  }, [isLimited, planReady]);
 
   const [terms, setTerms] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -269,7 +269,6 @@ export const Flashcards = () => {
 
   if (showGuestModal) {
     const isRestartLimit = guestModalType === 'restart';
-    const userLoggedIn = isLoggedIn();
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <GuestLimitModal
@@ -282,23 +281,11 @@ export const Flashcards = () => {
           }
           description={
             isRestartLimit
-              ? (userLoggedIn
-                  ? t('userFlashcardRestartLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsin. Sınırsız pratik yapmak için lütfen planını yükselt.`)
-                  : t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen planını yükselt.`))
-              : (userLoggedIn
-                  ? t('userFlashcardDailyLimitDesc', `Günlük en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması hakkın doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planını yükselt.`)
-                  : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemeni kaydetmek için lütfen planını yükselt.`))
+              ? t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen ücretsiz üye ol.`)
+              : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemeni kaydetmek için lütfen ücretsiz üye ol.`)
           }
-          cardTitle={
-            userLoggedIn
-              ? t('upgradePlanCardTitle', 'Planını Yükselt')
-              : t('guestLimitCardTitle', 'Ücretsiz Üye Ol')
-          }
-          cardDesc={
-            userLoggedIn
-              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
-              : t('guestLimitCardDesc', 'Kayıt olarak ilerlemeni senkronize edebilir ve platform özelliklerinden faydalanabilirsin.')
-          }
+          cardTitle={t('guestLimitCardTitle', 'Ücretsiz Üye Ol')}
+          cardDesc={t('guestLimitCardDesc', 'Kayıt olarak sınırsız kelime kartı çalışabilir ve ilerlemeni tüm cihazlarında senkronize edebilirsin.')}
         />
       </div>
     );

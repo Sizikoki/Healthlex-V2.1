@@ -172,14 +172,6 @@ export const HOME_CONTENT = {
       topline: 'Tek bir yıllık plan ile tüm Latince tıp kütüphanesine ve interaktif modüllere sınırsız erişim.',
       planTitle: 'Annual Pro Membership',
       period: 'yıllık faturalandırılır',
-      features: (totalMorphemes) => [
-        { active: true, text: `16 kategorinin tamamı + ${totalMorphemes}'den fazla morfem kütüphanesi` },
-        { active: true, text: '4 oyun modunun tamamı (Bilgi Kartları, Eşleştirme, Quiz, Morfem Oyunu)' },
-        { active: true, text: 'İlerleme istatistikleri ve seviye sistemi' },
-        { active: true, text: 'TR ⟷ EN çift dil desteği' },
-        { active: true, text: 'Gelecek tüm yeni modüller ve güncellemeler dahil' },
-        { active: true, text: 'İstediğin zaman tek tıkla iptal etme özgürlüğü' }
-      ],
       btnText: 'Hemen Katıl',
       flowLine: 'Ödemeni yap → hesabın anında açılsın → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, dilediğin an iptal edebilirsin.',
       guaranteeLine: 'Tüm modüller, sınavlar ve güncellemeler tek üyelikle elinin altında.'
@@ -310,14 +302,6 @@ export const HOME_CONTENT = {
       topline: 'One single annual plan with unlimited access to the entire Latin medical terminology library and interactive modules.',
       planTitle: 'Annual Pro Membership',
       period: 'billed annually',
-      features: (totalMorphemes) => [
-        { active: true, text: `All 16 categories + over ${totalMorphemes} morpheme library` },
-        { active: true, text: 'All 4 game modes (Flashcards, Matching, Quiz, Morpheme Game)' },
-        { active: true, text: 'Progress statistics and leveling system' },
-        { active: true, text: 'TR ⟷ EN bilingual support' },
-        { active: true, text: 'All upcoming modules and updates included' },
-        { active: true, text: 'Cancel anytime with one click' }
-      ],
       btnText: 'Subscribe Now',
       flowLine: 'Complete payment → your account unlocks immediately → start your first category in 2 minutes. Renews automatically annually, cancel anytime.',
       guaranteeLine: 'All modules, quizzes, and future updates in one single membership.'

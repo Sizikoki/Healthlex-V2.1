@@ -240,11 +240,6 @@ export const translations = {
     guestModePreview: "Misafir Modu (Canlı Önizleme)",
 
     // Landing / Home
-    heroBadge: "Sınava Hazırlananlar İçin",
-    heroTitle1: "Tıbbi Terimleri",
-    heroTitle2: "Ezberlemeden,",
-    heroTitle3: "Kalıcı Öğren",
-    heroDesc: "Kök, önek ve sonekleri oyunlaştırılmış kartlarla pekiştir. Sınav öncesi hızlı tekrar için tasarlandı — kayıt olmadan hemen dene.",
     tryWithoutRegister: "Kayıt olmadan dene",
     showNotTellTitle: "Anlatmak yerine",
     showNotTellSub: "gösteriyoruz",
@@ -342,8 +337,6 @@ export const translations = {
     signUpUnlimited: "Ücretsiz Üye Ol",
     alreadyHaveAccountLogin: "Zaten Hesabım Var, Giriş Yap",
     backToGamesPage: "Oyunlar Sayfasına Dön",
-    userFlashcardDailyLimitDesc: "Günlük kelime kartı çalışma hakkın doldu. Sınırsız pratik yapmak ve tüm içeriklere erişmek için lütfen planını yükselt.",
-    userFlashcardRestartLimitDesc: "Günlük yeniden başlatma hakkın doldu. Sınırsız pratik yapmak için lütfen planını yükselt.",
 
     // İletişim & Destek (Contact)
     contactSupport: "İletişim & Destek",
@@ -623,11 +616,6 @@ export const translations = {
     guestModePreview: "Guest Mode (Live Preview)",
 
     // Landing / Home
-    heroBadge: "For Exam Preparation",
-    heroTitle1: "Learn Medical Terms",
-    heroTitle2: "Without Memorizing,",
-    heroTitle3: "Permanently",
-    heroDesc: "Master roots, prefixes, and suffixes with gamified flashcards. Designed for quick exam review — try now without registering.",
     tryWithoutRegister: "Try without registering",
     showNotTellTitle: "Instead of telling,",
     showNotTellSub: "we show you",
@@ -725,8 +713,6 @@ export const translations = {
     signUpUnlimited: "Sign Up Free",
     alreadyHaveAccountLogin: "Already have an account, Log In",
     backToGamesPage: "Back to Games Page",
-    userFlashcardDailyLimitDesc: "Your daily flashcard limit has been reached. Please upgrade your plan to practice without limits.",
-    userFlashcardRestartLimitDesc: "Your daily restart limit has been reached. Please upgrade your plan to practice without limits.",
 
     // Contact & Support
     contactSupport: "Contact & Support",

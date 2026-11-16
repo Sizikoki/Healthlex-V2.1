@@ -337,8 +337,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 - **Kayıtlı Ücretsiz Kullanıcı Morfem Kotası:** **50** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_FREE_USER_MORPHEMES = 50;`).
 - **Temel Plan Morfem Kotası:** **150** morfem. Kaynak: `frontend/src/utils/planAccess.js` (`export const MAX_BASIC_MORPHEMES = 150;`).
 - **Pro & Ömür Boyu Morfem Kotası:** Tümü (**571** = `116 + 318 + 137`). Kaynak: `frontend/src/data/morphemesData.js` (`TOTAL_MORPHEMES`).
-- **Günlük Flashcard Hakkı (Misafir ve Kayıtlı Ücretsiz):** **5** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_FLASHCARDS = 5;`, 8 Kasım kararı).
-- **Günlük Yeniden Başlatma Hakkı (Misafir ve Kayıtlı Ücretsiz):** **10** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_RESTARTS = 10;`).
+- **Günlük Flashcard Hakkı (Misafir):** **5** oturum; **Kayıtlı Ücretsiz ve Üstü:** **Sınırsız**. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_FLASHCARDS = 5;`, 8 Kasım kararı / Adım 13).
+- **Günlük Yeniden Başlatma Hakkı (Misafir):** **10** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_RESTARTS = 10;`).
 
 ### b) Pazarlama Yazım Kuralı
 - **Misafir Morfem:** "İlk 24 morfem açık" / İngilizce: "First 24 morphemes open"
@@ -616,7 +616,7 @@ Kullanıcıya kategorilerin açık veya kilitli olduğuna dair sitede verilen t�
 - **Oyunlar Düzeyinde (`frontend/src/pages/Flashcards.jsx`, `frontend/src/pages/MatchGame.jsx`, `frontend/src/pages/Quiz.jsx`, `frontend/src/pages/MorphemeGame.jsx`):**
   - 12e kararıyla oyunlarda kategori kısıtlaması tamamen kaldırılmıştır (`UNLOCKED_CATEGORY_IDS` ve `isCategoryUnlocked` silinmiştir). Misafir ve ücretsiz kullanıcılar dahil herkes her oyunda 16 kategorinin tamamını seçebilir.
   - Erişim yalnızca **oyun seviyesinde** kontrol edilir (`isGameUnlocked` — `frontend/src/utils/planAccess.js`):
-    - **Flashcard:** Günlük 5 hak (`MAX_GUEST_DAILY_FLASHCARDS` — misafir ve kayıtlı ücretsiz).
+    - **Flashcard:** Misafir günde 5 hak (`MAX_GUEST_DAILY_FLASHCARDS`), kayıtlı ücretsiz ve üstü sınırsız.
     - **Eşleştirme:** Temel ve üstü.
     - **Quiz ve Morfem Yapıcı:** Pro ve üstü (Ömür Boyu ve Paddle deneme dahil).
 
