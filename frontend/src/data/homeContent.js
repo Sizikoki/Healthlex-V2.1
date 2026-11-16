@@ -165,17 +165,6 @@ export const HOME_CONTENT = {
       row5ValCards: 'Abonelik / Saatlerce deste hazırlığı',
       row5ValNotes: 'Ücretsiz (Zaman maliyeti yüksek)'
     },
-    pricing: {
-      eyebrow: 'Fiyatlandırma',
-      title: 'Yıllık Pro Üyelik',
-      badge: 'YILLIK TAM ERİŞİM',
-      topline: 'Tek bir yıllık plan ile tüm Latince tıp kütüphanesine ve interaktif modüllere sınırsız erişim.',
-      planTitle: 'Annual Pro Membership',
-      period: 'yıllık faturalandırılır',
-      btnText: 'Hemen Katıl',
-      flowLine: 'Ödemeni yap → hesabın anında açılsın → 2 dakika sonra ilk kategorindesin. Abonelik her yıl otomatik yenilenir, dilediğin an iptal edebilirsin.',
-      guaranteeLine: 'Tüm modüller, sınavlar ve güncellemeler tek üyelikle elinin altında.'
-    },
     footer: {
       term: 'STERNO · CLEIDO · MASTOIDEUS',
       meanings: [
@@ -294,17 +283,6 @@ export const HOME_CONTENT = {
       row5ValHealthlex: 'Annual subscription',
       row5ValCards: 'Subscription / Hours of deck creation',
       row5ValNotes: 'Free (High time cost)'
-    },
-    pricing: {
-      eyebrow: 'Pricing',
-      title: 'Annual Pro Membership',
-      badge: 'FULL ANNUAL ACCESS',
-      topline: 'One single annual plan with unlimited access to the entire Latin medical terminology library and interactive modules.',
-      planTitle: 'Annual Pro Membership',
-      period: 'billed annually',
-      btnText: 'Subscribe Now',
-      flowLine: 'Complete payment → your account unlocks immediately → start your first category in 2 minutes. Renews automatically annually, cancel anytime.',
-      guaranteeLine: 'All modules, quizzes, and future updates in one single membership.'
     },
     footer: {
       term: 'STERNO · CLEIDO · MASTOIDEUS',
