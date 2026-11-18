@@ -6,7 +6,6 @@ import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getRandomTerms, getAllTerms } from '@/data/medicalTerms';
 import { saveProgress, saveFlashcardSession, updateStreak, isLoggedIn, getFlashcardGuestDailyInfo, incrementFlashcardGuestPlay, getFlashcardGuestRestartInfo, incrementFlashcardGuestRestart, MAX_GUEST_DAILY_FLASHCARDS, MAX_GUEST_DAILY_RESTARTS, getUser } from '@/utils/storage';
-import { toast } from 'sonner';
 import { auth, db } from '@/firebase/config';
 import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
@@ -21,6 +20,7 @@ export const Flashcards = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const categoryId = searchParams.get('category');
+  const fromParam = searchParams.get('from');
 
   const previewRole = getPreviewRole();
   const initialUser = getUser();
@@ -103,6 +103,7 @@ export const Flashcards = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [learnedCount, setLearnedCount] = useState(0);
   const [skippedCount, setSkippedCount] = useState(0);
+  const [completedSummary, setCompletedSummary] = useState(null);
 
   const initialGuestInfo = (planReady && isLimited) ? getFlashcardGuestDailyInfo() : { canPlay: true, remaining: MAX_GUEST_DAILY_FLASHCARDS };
   const [loading, setLoading] = useState(!planReady || initialGuestInfo.canPlay);
@@ -238,15 +239,12 @@ export const Flashcards = () => {
     } else {
       // Session complete
       saveFlashcardSession(categoryId || 'all', finalLearned, terms.length);
-      const finishMsg = t('sessionCompleteToast', `Tamamlandı! ${finalLearned}/${terms.length} terim öğrenildi.`)
-        .replace('{learned}', finalLearned)
-        .replace('{total}', terms.length);
-      toast.success(finishMsg);
-      navigate(categoryId && categoryId !== 'all' ? `/games?category=${categoryId}` : '/games');
+      setCompletedSummary({ learned: finalLearned, total: terms.length });
     }
   };
 
   const handleRestart = () => {
+    setCompletedSummary(null);
     setCurrentIndex(0);
     setIsFlipped(false);
     setLearnedCount(0);
@@ -287,6 +285,65 @@ export const Flashcards = () => {
           cardTitle={t('guestLimitCardTitle', 'Ücretsiz Üye Ol')}
           cardDesc={t('guestLimitCardDesc', 'Kayıt olarak sınırsız kelime kartı çalışabilir ve ilerlemeni tüm cihazlarında senkronize edebilirsin.')}
         />
+      </div>
+    );
+  }
+
+  if (completedSummary) {
+    const registerUrl = `/register?from=${encodeURIComponent(fromParam || 'flashcards-end')}`;
+    const gamesUrl = categoryId && categoryId !== 'all' ? `/games?category=${categoryId}` : '/games';
+
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md p-6 sm:p-8 text-center shadow-xl">
+          <h2 className="text-2xl font-bold text-[#0f1b33] mb-2">
+            Desteyi bitirdin
+          </h2>
+          <p className="text-base text-muted-foreground mb-6">
+            {completedSummary.learned}/{completedSummary.total} terimi biliyorum dedin.
+          </p>
+
+          {!isUserLoggedIn && (
+            <div className="mb-6 p-4 rounded-xl bg-muted/40 border border-border text-left sm:text-center">
+              <p className="text-sm text-foreground/90 leading-relaxed mb-4">
+                Ücretsiz hesapla ilerlemen kaydedilir, kartlarla sınırsız çalışırsın.
+              </p>
+              <Link
+                to={registerUrl}
+                onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                className="w-full min-h-[48px] inline-flex items-center justify-center rounded-lg bg-[#0f1b33] hover:bg-[#1b2d52] text-white font-semibold text-base px-5 py-3 transition-colors"
+              >
+                Ücretsiz hesap aç
+              </Link>
+              <div className="mt-3 text-center">
+                <Link
+                  to="/login"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+                >
+                  Zaten hesabım var, giriş yap
+                </Link>
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleRestart}
+              className="w-full min-h-[48px]"
+            >
+              Tekrar çalış
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="w-full min-h-[48px]"
+            >
+              <Link to={gamesUrl}>Oyunlara dön</Link>
+            </Button>
+          </div>
+        </Card>
       </div>
     );
   }
