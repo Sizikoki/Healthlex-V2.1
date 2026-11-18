@@ -396,7 +396,10 @@ export const Flashcards = () => {
               className="col-start-1 row-start-1 backface-hidden flex flex-col items-center justify-center p-5 sm:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden"
               style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
             >
-              <div className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4">
+              <div
+                lang={currentLanguage === 'en' ? 'en' : 'tr'}
+                className="text-xs sm:text-sm font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4"
+              >
                 {t('term', 'Terim')}
               </div>
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 break-words px-2 max-w-full hyphens-auto font-serif">
@@ -416,7 +419,10 @@ export const Flashcards = () => {
                 transform: 'rotateY(180deg)'
               }}
             >
-              <div className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1.5">
+              <div
+                lang={currentLanguage === 'en' ? 'en' : 'tr'}
+                className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1.5"
+              >
                 {currentLanguage === 'en' ? t('englishDefinitionLabel', 'Definition / English Meaning') : t('turkishDefinitionLabel', 'Türkçe Tanım')}
               </div>
               {currentLanguage === 'en' && (currentTerm.english || currentTerm.turkish) && currentTerm.englishDefinition && (
@@ -435,7 +441,10 @@ export const Flashcards = () => {
               {/* Morfem Analizi */}
               {currentTerm && parseRootsToMorphemes(currentTerm?.roots).length > 0 && (
                 <div className="mt-1 pt-2 sm:mt-2 sm:pt-3 border-t border-border/50 max-w-md w-full text-center">
-                  <div className="mb-1.5 text-[10px] sm:text-[11px] font-bold text-foreground/90 tracking-wide uppercase">
+                  <div
+                    lang={currentLanguage === 'en' ? 'en' : 'tr'}
+                    className="mb-1.5 text-[10px] sm:text-[11px] font-bold text-foreground/90 tracking-wide uppercase"
+                  >
                     {t('morphemeStructure', 'Morfem Yapısı')}
                   </div>
                   <div className="flex flex-wrap items-center justify-center gap-1.5">

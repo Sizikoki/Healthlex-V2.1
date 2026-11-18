@@ -485,7 +485,10 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t, categ
             >
               {/* Soru kartı */}
               <div className="rounded-2xl border border-border bg-muted/40 px-4 py-5 sm:px-6 sm:py-8 text-center mb-5 overflow-hidden">
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-2.5 sm:mb-3">
+                <p
+                  lang={language === 'en' ? 'en' : 'tr'}
+                  className="text-xs font-semibold uppercase tracking-wider text-primary mb-2.5 sm:mb-3"
+                >
                   {currentQuestion.direction === QUIZ_DIRECTIONS.TERM_TO_MEANING
                     ? tx('quizPromptTerm', L.promptTermToMeaning)
                     : tx('quizPromptMeaning', L.promptMeaningToTerm)}

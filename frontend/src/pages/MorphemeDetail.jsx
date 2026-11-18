@@ -287,7 +287,7 @@ export const MorphemeDetail = () => {
           {morpheme.example && (
             <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
               <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">
-                {isTr ? 'Klinik Örnek & Çözümleme' : 'Clinical Example & Breakdown'}
+                {isTr ? 'Klinik Örnek & Çözümleme' : <span lang="en">Clinical Example & Breakdown</span>}
               </div>
               <div className="text-base font-bold text-foreground font-mono mb-1">
                 {morpheme.example}
@@ -395,7 +395,7 @@ export const MorphemeDetail = () => {
         {/* Conversion & Call to Action (CTA) Banner */}
         <div className="p-8 rounded-2xl gradient-hero border border-primary/20 shadow-md text-center space-y-4">
           <Badge className="gradient-primary text-xs px-3 py-1 font-semibold uppercase tracking-wider">
-            {isTr ? '3 Günlük Ücretsiz Deneme' : '3-Day Free Access'}
+            {isTr ? '3 Günlük Ücretsiz Deneme' : <span lang="en">3-Day Free Access</span>}
           </Badge>
           <h3 className="text-2xl font-bold text-foreground max-w-lg mx-auto">
             {isTr

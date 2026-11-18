@@ -105,9 +105,12 @@ export const TermDetail = () => {
   useEffect(() => {
     if (term) {
       const enName = term.turkish || term.english || '';
+      const norm = (s) => (s || '').trim().replace(/\s+/g, ' ').toLowerCase();
+      const isSameName = !enName || norm(term.term) === norm(enName);
+      const nameWithOptionalEn = isSameName ? term.term : `${term.term} (${enName})`;
       const titleStr = isTr
-        ? `${term.term} (${enName}) Nedir? | Anatomi ve Kök Analizi - HealthLexMed`
-        : `${term.term} (${enName}) Medical Definition & Anatomy Breakdown - HealthLexMed`;
+        ? `${nameWithOptionalEn} Nedir? | Anatomi ve Kök Analizi - HealthLexMed`
+        : `${nameWithOptionalEn} Medical Definition & Anatomy Breakdown - HealthLexMed`;
       document.title = titleStr;
 
       // Meta descriptions (Standard, OpenGraph, Twitter)
@@ -125,6 +128,8 @@ export const TermDetail = () => {
         }
       };
 
+      updateMetaTag('meta[property="og:title"]', 'property', 'og:title', titleStr);
+      updateMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', titleStr);
       updateMetaTag('meta[name="description"]', 'name', 'description', metaDescriptionText);
       updateMetaTag('meta[property="og:description"]', 'property', 'og:description', metaDescriptionText);
       updateMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', metaDescriptionText);
@@ -312,11 +317,11 @@ export const TermDetail = () => {
             </div>
           </div>
 
-          {/* Morfem ve Köken Analizi (Kelimelerin Yapı Taşları) */}
+            {/* Morfem ve Köken Analizi (Kelimelerin Yapı Taşları) */}
           {term.roots && (
             <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
               <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2.5">
-                {isTr ? 'Morfem ve Köken Analizi' : 'Morpheme & Etymological Breakdown'}
+                {isTr ? 'Morfem ve Köken Analizi' : <span lang="en">Morpheme & Etymological Breakdown</span>}
               </div>
 
               {parsedRoots.length > 0 ? (
@@ -365,7 +370,7 @@ export const TermDetail = () => {
               <div>
                 <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
                   <span>{isTr ? '🇹🇷' : '🇬🇧'}</span>
-                  <span>{isTr ? 'Anatomik Tanım & Fonksiyonel Açıklama' : 'Anatomical Definition & Function'}</span>
+                  <span>{isTr ? 'Anatomik Tanım & Fonksiyonel Açıklama' : <span lang="en">Anatomical Definition & Function</span>}</span>
                 </div>
                 <p className="text-sm sm:text-base text-foreground leading-relaxed font-sans">
                   {primaryDefinition}
@@ -376,7 +381,13 @@ export const TermDetail = () => {
                 <div className="pt-3.5 border-t border-border/50">
                   <div className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
                     <span>{isTr ? '🇬🇧' : '🇹🇷'}</span>
-                    <span>{isTr ? 'İngilizce Tanım (English Definition)' : 'Turkish Definition & Context'}</span>
+                    <span>
+                      {isTr ? (
+                        <>İngilizce Tanım (<span lang="en">English Definition</span>)</>
+                      ) : (
+                        <span lang="en">Turkish Definition & Context</span>
+                      )}
+                    </span>
                   </div>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-sans">
                     {secondaryDefinition}
@@ -456,7 +467,7 @@ export const TermDetail = () => {
         {/* Conversion & Call to Action (CTA) Banner */}
         <div data-nosnippet className="p-5 sm:p-8 rounded-2xl gradient-hero border border-primary/20 shadow-md text-center space-y-4">
           <Badge className="gradient-primary text-xs px-3 py-1 font-semibold uppercase tracking-wider">
-            {isTr ? '3 Günlük Ücretsiz Deneme' : '3-Day Free Access'}
+            {isTr ? '3 Günlük Ücretsiz Deneme' : <span lang="en">3-Day Free Access</span>}
           </Badge>
           <h3 className="text-2xl font-bold text-foreground max-w-lg mx-auto">
             {isTr

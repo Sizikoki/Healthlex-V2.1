@@ -39,7 +39,10 @@ const TermCard = React.memo(({
     >
       {/* Category Badge */}
       <div className="absolute top-3 right-3 z-10">
-        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50">
+        <span
+          lang={currentLanguage === 'en' ? 'en' : 'tr'}
+          className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground border border-border/50"
+        >
           {categoryBadgeText}
         </span>
       </div>

@@ -239,7 +239,7 @@ export const Legal = ({ activeDoc: propActiveDoc }) => {
               <article className="rounded-xl border border-border bg-card p-6 sm:p-8 md:p-10 shadow-sm">
                 {/* Belge Başlığı & Meta */}
                 <header className="border-b border-border/80 pb-6 mb-8">
-                  <div className="text-xs font-semibold text-primary tracking-wide uppercase mb-2">
+                  <div lang="en" className="text-xs font-semibold text-primary tracking-wide uppercase mb-2">
                     HealthLexMed Legal Docs
                   </div>
                   <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground font-serif">

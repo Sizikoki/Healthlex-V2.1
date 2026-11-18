@@ -421,7 +421,10 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
         <span className="font-mono text-xs sm:text-sm md:text-base font-bold tracking-tight text-foreground truncate">
           {part.text}
         </span>
-        <span className="inline-flex items-center shrink-0 gap-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/70 border border-current/15">
+        <span
+          lang={language === "en" ? "en" : "tr"}
+          className="inline-flex items-center shrink-0 gap-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/70 border border-current/15"
+        >
           <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
           {tr(part.partType)}
         </span>
@@ -743,7 +746,10 @@ export default function MorphemeGameFable({
               : `${tr("correctMsg")} (+1)`}
           </p>
           <p className="mt-1 text-xs sm:text-sm text-emerald-900/80 dark:text-emerald-200/80">
-            <span className="uppercase tracking-wide text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
+            <span
+              lang={language === "en" ? "en" : "tr"}
+              className="uppercase tracking-wide text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold"
+            >
               {tr("analysis")}:{" "}
             </span>
             {q.correctSequence
