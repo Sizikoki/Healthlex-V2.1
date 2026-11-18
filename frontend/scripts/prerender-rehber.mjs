@@ -93,6 +93,11 @@ const prerenderContent = `
           <li><strong>Uluslararası standart:</strong> Anatomi terimleri <em>Terminologia Anatomica</em> adlı resmi standartla belirlenir. Dünyanın her yerinde aynı yapıyı ifade eder.</li>
           <li><strong>Görev paylaşımı:</strong> Anatomik yapılarda ağırlıklı olarak Latince, hastalık ve cerrahi terimlerinde Grekçe kökler kullanılır.</li>
         </ul>
+        <div class="rehber-try-box">
+          <h3>Okuduğunu 2 dakikada dene</h3>
+          <p>20 kartlık bir desteyle terimleri parçalayarak çalış; kayıt gerekmez.</p>
+          <p><a href="/flashcards?from=rehber-s1">Karma deste kartlarıyla çalış &rarr;</a></p>
+        </div>
       </section>
 
       <section id="s2">
@@ -118,6 +123,11 @@ const prerenderContent = `
           <li><strong>Adım 4: Parçaları Türkçe cümle mantığıyla birleştir.</strong></li>
         </ol>
         <p>Örnek çözümlemeler: <em>gastroenteritis</em> (mide ve ince bağırsak iltihabı), <em>electrocardiogram</em> (kalbin elektriksel aktivitesinin kaydı), <em>endoscopy</em> (iç organların görüntülenmesi).</p>
+        <div class="rehber-try-box">
+          <h3>Şimdi sen çöz</h3>
+          <p>Kemik yapılarını kartlarla parçala.</p>
+          <p><a href="/flashcards?category=bone_structures&amp;from=rehber-s3">Kemik yapıları kartlarıyla çalış &rarr;</a></p>
+        </div>
       </section>
 
       <section id="s4">
@@ -144,6 +154,11 @@ const prerenderContent = `
             <tr><td>eu, au</td><td>ö / av</td><td>neuron, auris</td><td>nöron, avris</td></tr>
           </tbody>
         </table>
+        <div class="rehber-try-box">
+          <h3>Okunuşu terimlerde gör</h3>
+          <p>Kafatası terimlerinde bu kuralları kartlarla dene.</p>
+          <p><a href="/flashcards?category=skull_bones&amp;from=rehber-s4">Kafatası kemikleri kartlarıyla çalış &rarr;</a></p>
+        </div>
       </section>
 
       <section id="s5">
@@ -202,6 +217,11 @@ const prerenderContent = `
           <li><strong>Anlam ve kullanım tutarsızlıkları:</strong> Aynı raporda bir bölge için sırayla "karın", Arapça kökenli "batın" ve Latince "abdomen" kullanmak metnin tutarlılığını bozar.</li>
           <li><strong>Niteleyici ön ekleri karıştırmak:</strong> Azlık belirten <em>hypo-</em> ile küçüklük belirten <em>micro-</em> birbirinin yerine kullanılamaz.</li>
         </ul>
+        <div class="rehber-try-box">
+          <h3>Hatalarını kartlarda yakala</h3>
+          <p>Yön terimleriyle kendini dene.</p>
+          <p><a href="/flashcards?category=anatomic_direction&amp;from=rehber-s7">Anatomik yön terimleri kartlarıyla çalış &rarr;</a></p>
+        </div>
       </section>
 
       <section id="s8">

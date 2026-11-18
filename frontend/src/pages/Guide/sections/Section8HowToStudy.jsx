@@ -38,32 +38,32 @@ const STUDY_METHODS = [
 const HEALTHLEX_APPS = [
   {
     title: 'Morfem kütüphanesi',
-    path: '/morphemes',
+    path: '/morphemes?from=rehber-s8',
     desc: "550'den fazla ön ek, kök ve son ek, örnek çözümlemeleriyle.",
   },
   {
     title: 'Kelime kartları',
-    path: '/flashcards',
+    path: '/flashcards?from=rehber-s8',
     desc: 'Aralıklı tekrar planına göre kendin kullanarak terimleri hatırla.',
   },
   {
     title: 'Eşleştirme',
-    path: '/match',
+    path: '/match?from=rehber-s8',
     desc: 'Terimleri Türkçe karşılıklarıyla süreye karşı eşleştir.',
   },
   {
     title: 'Quiz',
-    path: '/quiz',
+    path: '/quiz?from=rehber-s8',
     desc: 'Kategorilere göre çoktan seçmeli sorularla kendini ölç.',
   },
   {
     title: 'Morfem yapıcı',
-    path: '/morpheme',
+    path: '/morpheme?from=rehber-s8',
     desc: 'Verilen tanımdan terimi parçalarıyla sıfırdan kur.',
   },
   {
     title: 'İlerleme takibi',
-    path: '/progress',
+    path: '/progress?from=rehber-s8',
     desc: 'Öğrendiğin terimleri ve çalışma serini panelinden izle.',
   },
 ];
@@ -135,7 +135,7 @@ export const Section8HowToStudy = () => {
 
         {/* Alt Buton: Telefonda tam genişlikte */}
         <Link
-          to="/morphemes"
+          to="/morphemes?from=rehber-s8"
           className="w-full sm:w-auto text-center sm:self-start min-h-[48px] flex items-center justify-center bg-white text-[#0f1b33] font-extrabold text-[15px] px-[22px] py-[14px] rounded-[11px] hover:bg-[#f1f5f9] transition-colors"
         >
           Morfem kütüphanesine göz at →

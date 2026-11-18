@@ -1,6 +1,7 @@
 import React from 'react';
 import { MorphemeBadge } from '../components/MorphemeBadge';
 import { CalloutBox } from '../components/CalloutBox';
+import { SectionTryBox } from '../components/SectionTryBox';
 
 export const Section3Steps = () => {
   return (
@@ -198,6 +199,18 @@ export const Section3Steps = () => {
           <b>Kalbin elektriksel aktivitesinin kaydı.</b>
         </p>
       </div>
+
+      <SectionTryBox
+        title="Şimdi sen çöz"
+        text="Kemik yapılarını kartlarla parçala."
+        deck={{ category: 'bone_structures', label: 'Kemik yapıları' }}
+        morphemes={[
+          { text: 'oste/o', type: 'root' },
+          { text: 'arthr/o', type: 'root' },
+          { text: '-itis', type: 'suffix' },
+        ]}
+        from="rehber-s3"
+      />
     </section>
   );
 };

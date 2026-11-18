@@ -1,4 +1,5 @@
 import React from 'react';
+import { SectionTryBox } from '../components/SectionTryBox';
 
 export const Section1Intro = () => {
   return (
@@ -60,6 +61,13 @@ export const Section1Intro = () => {
           </span>
         </div>
       </div>
+
+      <SectionTryBox
+        title="Okuduğunu 2 dakikada dene"
+        text="20 kartlık bir desteyle terimleri parçalayarak çalış; kayıt gerekmez."
+        deck={{ category: '', label: 'Karma deste' }}
+        from="rehber-s1"
+      />
     </section>
   );
 };

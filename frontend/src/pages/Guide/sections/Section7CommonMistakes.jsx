@@ -1,6 +1,7 @@
 import React from 'react';
 import { MorphemeBadge } from '../components/MorphemeBadge';
 import { CalloutBox } from '../components/CalloutBox';
+import { SectionTryBox } from '../components/SectionTryBox';
 
 export const Section7CommonMistakes = () => {
   return (
@@ -159,6 +160,17 @@ export const Section7CommonMistakes = () => {
       <CalloutBox type="warning" title="Hasta güvenliği">
         Aynı kısaltma bağlama göre farklı anlamlara gelebilir. <b>Ca</b> bir metinde karsinom, bir laboratuvar raporunda kalsiyum demektir. Belirsiz kısaltmalar hasta güvenliği açısından risk taşır.
       </CalloutBox>
+
+      <SectionTryBox
+        title="Hatalarını kartlarda yakala"
+        text="Yön terimleriyle kendini dene."
+        deck={{ category: 'anatomic_direction', label: 'Anatomik yön terimleri' }}
+        morphemes={[
+          { text: 'hypo-', type: 'prefix' },
+          { text: 'micro-', type: 'prefix' },
+        ]}
+        from="rehber-s7"
+      />
     </section>
   );
 };
