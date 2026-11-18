@@ -15,7 +15,8 @@
 
 import { hasConsent, onConsentChange } from '@/services/analytics';
 
-export const META_PIXEL_ID = (process.env.REACT_APP_META_PIXEL_ID || '').trim();
+// Piksel ID herkese açık bir değerdir; Vercel env yerine burada tutulur.
+export const META_PIXEL_ID = '1727804541850465';
 
 const PIXEL_SCRIPT_ID = 'meta-pixel-script';
 const PIXEL_SCRIPT_SRC = 'https://connect.facebook.net/en_US/fbevents.js';
