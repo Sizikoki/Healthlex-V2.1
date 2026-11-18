@@ -59,7 +59,15 @@ export function getAllMorphemes() {
 
   ROOTS.forEach((r, idx) => {
     const raw = r.root || '';
+    const rawParts = raw.split('/').map(s => s.replace(/[-_]/g, '').trim().toLowerCase()).filter(Boolean);
     const mainVariant = raw.split(/[/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
+    const variants = filterVariants(r.variants, raw);
+    if (rawParts.length === 2) {
+      const combined = `${rawParts[0]}${rawParts[1]}`;
+      if (!variants.includes(combined)) {
+        variants.push(combined);
+      }
+    }
     list.push({
       id: `r_${idx}`,
       type: 'root',
@@ -67,7 +75,7 @@ export function getAllMorphemes() {
       typeNameEn: 'Combining Form / Root',
       displayTerm: r.root,
       slug: mainVariant,
-      variants: filterVariants(r.variants, raw),
+      variants,
       meaningTr: r.meaningTr,
       meaningEn: r.meaningEn,
       category: r.category,
