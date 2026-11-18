@@ -60,10 +60,23 @@ export function parseRootsToMorphemes(rootsString) {
 
     const cleanRoot = rootRaw.replace(/[-_/;]/g, '').trim().toLowerCase();
 
-    // Check if this root exists in TOTAL_MORPHEMES
-    const matchedMorpheme = allMorphemes.find(m => {
+    // Determine target morpheme pool by hyphen position:
+    // - trailing hyphen ("re-", "bi-") -> only prefixes
+    // - leading hyphen ("-alis", "-or") -> only suffixes
+    // - unhyphenated ("radius", "inter") -> all morphemes (roots, prefixes, suffixes)
+    let candidateMorphemes = allMorphemes;
+    if (rootRaw.endsWith('-') && !rootRaw.startsWith('-')) {
+      candidateMorphemes = allMorphemes.filter(m => m.type === 'prefix');
+    } else if (rootRaw.startsWith('-') && !rootRaw.endsWith('-')) {
+      candidateMorphemes = allMorphemes.filter(m => m.type === 'suffix');
+    }
+
+    // Check if this root exists in candidateMorphemes
+    const matchedMorpheme = candidateMorphemes.find(m => {
       if (m.slug === cleanRoot) return true;
-      const variants = (m.variants || []).map(v => v.replace(/[-_/;]/g, '').trim().toLowerCase());
+      const variants = (m.variants || [])
+        .map(v => v.replace(/[-_/;]/g, '').trim().toLowerCase())
+        .filter(v => v.length > 1);
       return variants.includes(cleanRoot);
     });
 

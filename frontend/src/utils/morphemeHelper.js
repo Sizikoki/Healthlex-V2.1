@@ -33,6 +33,9 @@ export const CATEGORY_NAMES = {
  */
 export function getAllMorphemes() {
   const list = [];
+  const filterVariants = (explicitVariants, raw) =>
+    (explicitVariants || raw.split(/[/;]/).map(v => v.trim()))
+      .filter(v => v.replace(/[-_/;]/g, '').trim().length > 1);
 
   PREFIXES.forEach((p, idx) => {
     const raw = p.prefix || '';
@@ -44,7 +47,7 @@ export function getAllMorphemes() {
       typeNameEn: 'Prefix',
       displayTerm: p.prefix,
       slug: mainVariant,
-      variants: p.variants || raw.split(/[/;]/).map(v => v.trim()),
+      variants: filterVariants(p.variants, raw),
       meaningTr: p.meaningTr,
       meaningEn: p.meaningEn,
       category: p.category,
@@ -64,7 +67,7 @@ export function getAllMorphemes() {
       typeNameEn: 'Combining Form / Root',
       displayTerm: r.root,
       slug: mainVariant,
-      variants: r.variants || raw.split(/[/;]/).map(v => v.trim()),
+      variants: filterVariants(r.variants, raw),
       meaningTr: r.meaningTr,
       meaningEn: r.meaningEn,
       category: r.category,
@@ -84,7 +87,7 @@ export function getAllMorphemes() {
       typeNameEn: 'Suffix',
       displayTerm: s.suffix,
       slug: mainVariant,
-      variants: s.variants || raw.split(/[/;]/).map(v => v.trim()),
+      variants: filterVariants(s.variants, raw),
       meaningTr: s.meaningTr,
       meaningEn: s.meaningEn,
       category: s.category,
@@ -109,9 +112,11 @@ export function findMorphemeBySlug(slug) {
   let found = all.find(m => m.slug === clean);
   if (found) return found;
 
-  // 2. Variant match
+  // 2. Variant match (ignore single-character variants)
   found = all.find(m => {
-    const cleanVariants = (m.variants || []).map(v => v.replace(/[-_]/g, '').trim().toLowerCase());
+    const cleanVariants = (m.variants || [])
+      .map(v => v.replace(/[-_]/g, '').trim().toLowerCase())
+      .filter(v => v.length > 1);
     return cleanVariants.includes(clean);
   });
 

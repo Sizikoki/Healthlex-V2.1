@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/i18n/translations';
 import { db } from '@/firebase/config';
 import { collection, getDocs } from 'firebase/firestore';
 import {
@@ -26,6 +27,40 @@ import {
   parseRootsToMorphemes,
   buildTermMetaDescription
 } from '@/utils/termHelper';
+
+const CATEGORIES = [
+  { id: 'all', key: 'allCategories', name: 'Tüm Terimler', nameEn: 'All Terms' },
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri', system: 'movement', subcategory: 'upper_extremity_joints' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', system: 'movement', subcategory: 'lower_extremity_joints' },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
+  { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları', system: 'movement', subcategory: 'head_and_neck_muscles' },
+  { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları', system: 'movement', subcategory: 'trunk_muscles' },
+  { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları', system: 'movement', subcategory: 'upper_extremity_muscles' },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', system: 'movement', subcategory: 'muscle_structures' },
+  { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', system: 'movement', subcategory: 'bone_structures' },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', category: 'movement_terms' },
+  { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri', system: 'movement', subcategory: 'anatomic_direction' },
+];
+
+const getTurkishCategoryLabel = (item) => {
+  if (!item) return null;
+  const subcat = item.subcategory === 'motus' ? 'movement_terms' : item.subcategory;
+  const cat = CATEGORIES.find(
+    (c) =>
+      c.id !== 'all' &&
+      ((c.subcategory && c.subcategory === subcat) ||
+        (c.category && (c.category === item.category || c.category === subcat)) ||
+        c.id === subcat)
+  );
+  if (!cat) return null;
+  return translations?.tr?.[cat.key] || cat.name || null;
+};
 
 export const TermDetail = () => {
   const { slug } = useParams();
@@ -235,14 +270,14 @@ export const TermDetail = () => {
                 <Badge variant="secondary" className="font-semibold text-xs px-2.5 py-0.5">
                   {isTr ? 'Anatomik Terim' : 'Anatomical Term'}
                 </Badge>
-                {term.system && (
+                {term.system === 'movement' && (
                   <Badge variant="outline" className="text-xs px-2.5 py-0.5 border-border">
-                    {term.system === 'movement' ? (isTr ? 'Hareket Sistemi' : 'Musculoskeletal') : term.system}
+                    {isTr ? 'Hareket Sistemi' : 'Musculoskeletal'}
                   </Badge>
                 )}
-                {term.subcategory && (
+                {getTurkishCategoryLabel(term) && (
                   <Badge variant="outline" className="text-xs px-2.5 py-0.5 border-border text-muted-foreground">
-                    {term.subcategory.replace(/_/g, ' ')}
+                    {getTurkishCategoryLabel(term)}
                   </Badge>
                 )}
               </div>
@@ -401,6 +436,7 @@ export const TermDetail = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {relatedTerms.map((rel, idx) => {
                 const relSlug = getTermSlug(rel.term);
+                const relCategoryLabel = getTurkishCategoryLabel(rel);
                 return (
                   <Link
                     key={idx}
@@ -413,9 +449,9 @@ export const TermDetail = () => {
                           <span className="font-bold text-base text-foreground font-serif group-hover:text-primary transition-colors">
                             {rel.term}
                           </span>
-                          {rel.system && (
+                          {relCategoryLabel && (
                             <Badge variant="secondary" className="text-[10px] px-1.5 py-0 shrink-0">
-                              {rel.system}
+                              {relCategoryLabel}
                             </Badge>
                           )}
                         </div>
