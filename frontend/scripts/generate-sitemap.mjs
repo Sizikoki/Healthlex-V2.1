@@ -38,13 +38,6 @@ async function generateSitemap() {
   const uniqueUrls = new Map();
   staticPages.forEach(p => uniqueUrls.set(p.loc, p));
 
-  // Helper for morpheme slugs
-  function getMorphemeSlug(rawTerm) {
-    if (!rawTerm) return '';
-    const firstVariant = rawTerm.split(/[/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase();
-    return firstVariant.replace(/[^a-z0-9]/g, '').trim();
-  }
-
   // Helper for medical term slugs
   function getTermSlug(term) {
     if (!term) return '';
@@ -63,17 +56,17 @@ async function generateSitemap() {
   }
 
   // 2. Dynamic Morpheme Pages (/morphemes/:slug)
+  // Uses the exact slug logic from getAllMorphemes() in src/utils/morphemeHelper.js
   const allMorphemes = [
-    ...PREFIXES.map(p => p.prefix),
-    ...ROOTS.map(r => r.root),
-    ...SUFFIXES.map(s => s.suffix)
+    ...PREFIXES.map(p => ({ slug: (p.prefix || '').split(/[/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase() })),
+    ...ROOTS.map(r => ({ slug: (r.root || '').split(/[/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase() })),
+    ...SUFFIXES.map(s => ({ slug: (s.suffix || '').split(/[/;]/)[0].replace(/[-_]/g, '').trim().toLowerCase() }))
   ];
 
   let morphemeCount = 0;
-  allMorphemes.forEach(raw => {
-    const slug = getMorphemeSlug(raw);
+  allMorphemes.forEach(({ slug }) => {
     if (slug) {
-      const loc = `${baseUrl}/morphemes/${slug}`;
+      const loc = encodeURI(`${baseUrl}/morphemes/${slug}`);
       if (!uniqueUrls.has(loc)) {
         uniqueUrls.set(loc, {
           loc,

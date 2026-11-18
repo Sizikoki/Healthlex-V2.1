@@ -1,0 +1,20 @@
+// Sabit kategori listesi (Tüm Terimler en başta)
+export const CATEGORIES = [
+  { id: 'all', key: 'allCategories', name: 'Tüm Terimler', nameEn: 'All Terms' },
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri', system: 'movement', subcategory: 'skull_bones' },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri', system: 'movement', subcategory: 'face_bones' },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri', system: 'movement', subcategory: 'trunk_bones' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri', system: 'movement', subcategory: 'upper_extremity_bones' },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri', system: 'movement', subcategory: 'upper_extremity_joints' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri', system: 'movement', subcategory: 'lower_extremity_bones' },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri', system: 'movement', subcategory: 'lower_extremity_joints' },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri', system: 'movement', subcategory: 'spine_joints' },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri', system: 'movement', subcategory: 'head_and_neck_joints' },
+  { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları', system: 'movement', subcategory: 'head_and_neck_muscles' },
+  { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları', system: 'movement', subcategory: 'trunk_muscles' },
+  { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları', system: 'movement', subcategory: 'upper_extremity_muscles' },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar', system: 'movement', subcategory: 'muscle_structures' },
+  { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları', system: 'movement', subcategory: 'bone_structures' },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri', category: 'movement_terms' },
+  { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri', system: 'movement', subcategory: 'anatomic_direction' },
+];
