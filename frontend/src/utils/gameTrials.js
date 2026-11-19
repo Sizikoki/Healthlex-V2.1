@@ -174,11 +174,13 @@ export const consumeGameTrial = ({ gameId, isLoggedIn = false, uid = null, isPro
   return current;
 };
 
-export const getTrialRemainingText = (mode, remaining) => {
+export const getTrialRemainingText = (mode, remaining, language = 'tr') => {
   if (mode === 'guest') {
     if (remaining >= 2) return '2 deneme hakkın var';
     if (remaining === 1) return '1 deneme hakkın kaldı';
-    return 'Denemelerin bitti.';
+    return language === 'en'
+      ? 'Your free tries are used up. Create a free account to get 5 plays per game every week and save your progress.'
+      : 'Denemelerin bitti. Ücretsiz hesap aç, her oyundan haftada 5 hak kazan ve ilerlemen kaydedilsin.';
   }
   if (mode === 'free_weekly') {
     if (remaining > 0) {

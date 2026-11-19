@@ -464,7 +464,7 @@ export const Games = () => {
                 const isFreeWeekly = trial.mode === 'free_weekly';
                 const isTrialMode = isGuestTrial || isFreeWeekly;
                 const isTrialExhausted = isTrialMode && !trial.canPlay;
-                const trialText = isTrialMode ? getTrialRemainingText(trial.mode, trial.remaining) : '';
+                const trialText = isTrialMode ? getTrialRemainingText(trial.mode, trial.remaining, currentLanguage) : '';
                 const isMatch = game.id === 'match';
 
                 return (

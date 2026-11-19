@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, RotateCcw, Sparkles, UserPlus } from 'lucide-rea
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getTrialRemainingText } from '@/utils/gameTrials';
+import { useLanguage } from '@/context/LanguageContext';
 
 const clearPendingPlan = () => {
   try {
@@ -18,10 +19,14 @@ const clearPendingPlan = () => {
  * visits /match, /quiz, or /morpheme with 0 remaining trials.
  */
 export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
+  const { currentLanguage } = useLanguage();
   const isGuest = mode === 'guest';
   const registerUrl = `/register?from=games-${gameId}`;
   const loginUrl = `/login?from=games-${gameId}`;
   const pricingUrl = `/pricing?from=games-${gameId}`;
+  const exhaustedText = isGuest
+    ? getTrialRemainingText('guest', 0, currentLanguage)
+    : 'Bu haftaki 5 hakkını kullandın. Pazartesi yenilenir.';
 
   return (
     <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
@@ -36,9 +41,7 @@ export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
           </div>
 
           <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-            {isGuest
-              ? 'Denemelerin bitti.'
-              : 'Bu haftaki 5 hakkını kullandın. Pazartesi yenilenir.'}
+            {exhaustedText}
           </h2>
 
           <div className="mt-6 flex flex-col gap-3">
@@ -102,9 +105,10 @@ export const GameTrialFinishFooter = ({
   playAgainLabel = 'Yeniden Oyna',
   backLabel = 'Oyunlara Dön',
 }) => {
+  const { currentLanguage } = useLanguage();
   const isGuest = mode === 'guest';
   const isExhausted = remaining <= 0;
-  const statusText = getTrialRemainingText(mode, remaining);
+  const statusText = getTrialRemainingText(mode, remaining, currentLanguage);
   const registerUrl = `/register?from=games-${gameId}`;
   const loginUrl = `/login?from=games-${gameId}`;
   const pricingUrl = `/pricing?from=games-${gameId}`;
