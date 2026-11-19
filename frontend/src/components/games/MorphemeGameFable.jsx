@@ -21,6 +21,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import { saveMorphemeScore, updateStreak } from "@/utils/storage";
+import { GameTrialFinishFooter } from "@/components/games/GameTrialNotice";
 import {
   playCorrectSound,
   playWrongSound,
@@ -441,6 +442,9 @@ export default function MorphemeGameFable({
   onBack,
   language = "tr",
   t: tProp,
+  trialMode = "none",
+  trialRemaining = Infinity,
+  onRoundStart,
 }) {
   const questions = useMemo(() => normalizeQuestions(terms), [terms]);
 
@@ -463,6 +467,10 @@ export default function MorphemeGameFable({
 
   const [model, dispatch] = useReducer(update, questions, init);
   const hasSavedRef = useRef(false);
+  const pendingConsumeRef = useRef(true);
+  const onRoundStartRef = useRef(onRoundStart);
+  onRoundStartRef.current = onRoundStart;
+  const isTrialLimited = trialMode === "guest" || trialMode === "free_weekly";
   const [soundActive, setSoundActive] = useState(() => isSoundEnabled());
 
   const toggleSound = () => {
@@ -475,6 +483,23 @@ export default function MorphemeGameFable({
     hasSavedRef.current = false;
     dispatch({ type: "SetQuestions", questions });
   }, [questions]);
+
+  // Consume trial once per round when the first question is ready on screen
+  useEffect(() => {
+    if (model.questions && model.questions.length > 0 && pendingConsumeRef.current) {
+      pendingConsumeRef.current = false;
+      if (typeof onRoundStartRef.current === "function") {
+        onRoundStartRef.current();
+      }
+    }
+  }, [model.questions]);
+
+  const handlePlayAgain = useCallback(() => {
+    if (isTrialLimited && trialRemaining <= 0) return;
+    pendingConsumeRef.current = true;
+    hasSavedRef.current = false;
+    dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) });
+  }, [isTrialLimited, trialRemaining, terms]);
 
   useEffect(() => {
     if (model.state.tag !== "AnswerChecked") return;
@@ -532,29 +557,43 @@ export default function MorphemeGameFable({
           </span>{" "}
           / {total}
         </p>
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => {
-              hasSavedRef.current = false;
-              dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) });
-            }}
-            className="flex items-center gap-2 rounded-xl gradient-primary px-5 py-2.5 font-semibold text-primary-foreground transition hover:opacity-90 shadow-md shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            <RotateCcw aria-hidden="true" className="h-4 w-4"/>
-            {tr("playAgain")}
-          </button>
-          {onBack && (
+        {isTrialLimited ? (
+          <div className="mt-6 max-w-md mx-auto">
+            <GameTrialFinishFooter
+              gameId="morpheme"
+              mode={trialMode}
+              remaining={trialRemaining}
+              onPlayAgain={handlePlayAgain}
+              onBack={onBack}
+              playAgainLabel={tr("playAgain")}
+              backLabel={tr("back")}
+            />
+          </div>
+        ) : (
+          <div className="mt-8 flex items-center justify-center gap-3">
             <button
               type="button"
-              onClick={onBack}
-              className="flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-5 py-2.5 text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              onClick={() => {
+                hasSavedRef.current = false;
+                dispatch({ type: "SetQuestions", questions: normalizeQuestions(terms) });
+              }}
+              className="flex items-center gap-2 rounded-xl gradient-primary px-5 py-2.5 font-semibold text-primary-foreground transition hover:opacity-90 shadow-md shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <ArrowLeft aria-hidden="true" className="h-4 w-4"/>
-              {tr("back")}
+              <RotateCcw aria-hidden="true" className="h-4 w-4"/>
+              {tr("playAgain")}
             </button>
-          )}
-        </div>
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                className="flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-5 py-2.5 text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <ArrowLeft aria-hidden="true" className="h-4 w-4"/>
+                {tr("back")}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     );
   }

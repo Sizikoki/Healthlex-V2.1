@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Trophy, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,9 @@ import { toast } from 'sonner';
 import { auth, db } from '@/firebase/config';
 import { collection, getDocs, doc, onSnapshot } from 'firebase/firestore';
 import { formatMedicalTerm } from '@/utils/format';
-import { checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { getGameTrialState, consumeGameTrial } from '@/utils/gameTrials';
+import { GameTrialExhaustedScreen, GameTrialFinishFooter } from '@/components/games/GameTrialNotice';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
 
@@ -22,10 +24,16 @@ export const MatchGame = () => {
 
   const previewRole = getPreviewRole();
   const localUser = getUser();
-  const initialUid = localUser?.uid || auth?.currentUser?.uid;
+  const initialUid = localUser?.uid || auth?.currentUser?.uid || null;
   // Giriş yapmış kullanıcıda planReady=false başlar, ilk onSnapshot cevabında true olur. Misafirde baştan true.
   const [planReady, setPlanReady] = useState(() => (previewRole ? true : !Boolean(initialUid)));
+  const [currentUid, setCurrentUid] = useState(initialUid);
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(() => Boolean(previewRole || initialUid || isLoggedIn()));
+  const [isPro, setIsPro] = useState(() => previewRole === 'pro' || checkIsPro(localUser));
   const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(localUser));
+  const [hasActiveRound, setHasActiveRound] = useState(false);
+  const [trialTick, setTrialTick] = useState(0);
+  const pendingConsumeRef = useRef(true);
 
   const [allTerms, setAllTerms] = useState([]);
   const [cards, setCards] = useState([]);
@@ -53,15 +61,19 @@ export const MatchGame = () => {
       }
 
       const targetUser = firebaseUser || getUser();
-      const uid = targetUser?.uid;
+      const uid = targetUser?.uid || null;
+      setCurrentUid(uid);
+      setUserIsLoggedIn(Boolean(uid || isLoggedIn()));
 
       if (!uid) {
+        setIsPro(false);
         setHasPlan(false);
         setPlanReady(true);
         return;
       }
 
       // İlk yerel kullanıcı kontrolü
+      setIsPro(checkIsPro(targetUser));
       if (checkHasPaidPlan(targetUser)) {
         setHasPlan(true);
       }
@@ -71,8 +83,10 @@ export const MatchGame = () => {
         unsubDoc = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
+            setIsPro(checkIsPro(data));
             setHasPlan(checkHasPaidPlan(data));
           } else {
+            setIsPro(checkIsPro(targetUser));
             setHasPlan(checkHasPaidPlan(targetUser));
           }
           setPlanReady(true);
@@ -95,27 +109,28 @@ export const MatchGame = () => {
     };
   }, [previewRole]);
 
+  const trialState = useMemo(
+    () =>
+      getGameTrialState({
+        gameId: 'match',
+        isLoggedIn: userIsLoggedIn,
+        uid: currentUid,
+        isPro,
+        hasPlan,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [userIsLoggedIn, currentUid, isPro, hasPlan, trialTick]
+  );
+
+  const isTrialLimited = trialState.mode === 'guest' || trialState.mode === 'free_weekly';
+  const trialExhausted = isTrialLimited && !trialState.canPlay && !hasActiveRound;
+
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/match');
-    if (!planReady) return;
-    if (!hasPlan) {
-      toast.info(
-        currentLanguage === 'en'
-          ? 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
-          : 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
-      );
-      navigate('/pricing');
-    }
-  }, [planReady, hasPlan, currentLanguage, navigate]);
+  }, []);
 
   const setupGame = useCallback((termsList) => {
     if (!planReady || !termsList || termsList.length === 0) return;
-
-    if (!hasPlan) {
-      setLoading(false);
-      navigate('/pricing');
-      return;
-    }
 
     let filtered = termsList;
     if (categoryId && categoryId !== 'all') {
@@ -164,6 +179,21 @@ export const MatchGame = () => {
     });
 
     const shuffled = gameCards.sort(() => Math.random() - 0.5);
+    if (shuffled.length > 0 && pendingConsumeRef.current) {
+      pendingConsumeRef.current = false;
+      if (isTrialLimited) {
+        consumeGameTrial({
+          gameId: 'match',
+          isLoggedIn: userIsLoggedIn,
+          uid: currentUid,
+          isPro,
+          hasPlan,
+        });
+        setTrialTick((n) => n + 1);
+      }
+      setHasActiveRound(true);
+    }
+
     setCards(shuffled);
     setSelected([]);
     setMatched([]);
@@ -171,22 +201,67 @@ export const MatchGame = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
-  }, [categoryId, currentLanguage, hasPlan, planReady, navigate]);
+  }, [categoryId, currentLanguage, planReady, isTrialLimited, userIsLoggedIn, currentUid, isPro, hasPlan]);
 
   const initializeGame = useCallback(() => {
+    if (isTrialLimited) {
+      const latest = getGameTrialState({
+        gameId: 'match',
+        isLoggedIn: userIsLoggedIn,
+        uid: currentUid,
+        isPro,
+        hasPlan,
+      });
+      if (!latest.canPlay) {
+        setGameComplete(false);
+        setHasActiveRound(false);
+        setTrialTick((n) => n + 1);
+        return;
+      }
+    }
+    pendingConsumeRef.current = true;
     setupGame(allTerms);
-  }, [setupGame, allTerms]);
+  }, [isTrialLimited, userIsLoggedIn, currentUid, isPro, hasPlan, setupGame, allTerms]);
 
   const lastLoadedKeyRef = useRef('');
 
   useEffect(() => {
-    if (!planReady || !hasPlan) return;
+    if (!planReady) return;
+    if (trialExhausted) {
+      setLoading(false);
+      return;
+    }
 
     const currentKey = `${categoryId || 'all'}|${currentLanguage}`;
     if (lastLoadedKeyRef.current === currentKey) return;
     lastLoadedKeyRef.current = currentKey;
 
+    const mapLocalTerms = () =>
+      getAllTerms()
+        .map(t => ({
+          id: t.id,
+          term: t.term,
+          turkish: t.turkish || '',
+          english: t.english || t.turkish || '',
+          englishDefinition: t.englishDefinition || t.english || '',
+          turkishShort: t.turkishShort || '',
+          turkishDefinition: t.turkishDefinition || t.definition || '',
+          category: t.category || '',
+          system: t.system || '',
+          subcategory: t.subcategory || ''
+        }))
+        .filter(t => t.term && (t.turkishShort || t.turkishDefinition || t.english || t.turkish));
+
     const fetchTerms = async () => {
+      // Misafirde Firestore'a istek atmadan yerel paketten yükle
+      if (!userIsLoggedIn) {
+        const localTerms = mapLocalTerms();
+        setAllTerms(localTerms);
+        setupGame(localTerms);
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         let timeoutId;
@@ -227,19 +302,7 @@ export const MatchGame = () => {
         setupGame(normalized);
       } catch (error) {
         console.error('Error fetching terms in MatchGame:', error);
-        const localTerms = getAllTerms().map(t => ({
-          id: t.id,
-          term: t.term,
-          turkish: t.turkish || '',
-          english: t.english || t.turkish || '',
-          englishDefinition: t.englishDefinition || t.english || '',
-          turkishShort: t.turkishShort || '',
-          turkishDefinition: t.definition || '',
-          category: t.category || '',
-          system: t.system || '',
-          subcategory: t.subcategory || ''
-        })).filter(t => t.term && (t.turkishShort || t.turkishDefinition || t.english || t.turkish));
-
+        const localTerms = mapLocalTerms();
         setAllTerms(localTerms);
         setupGame(localTerms);
       } finally {
@@ -249,7 +312,7 @@ export const MatchGame = () => {
 
     fetchTerms();
     updateStreak();
-  }, [planReady, hasPlan, categoryId, currentLanguage, setupGame]);
+  }, [planReady, trialExhausted, userIsLoggedIn, categoryId, currentLanguage, setupGame]);
 
 
 
@@ -314,7 +377,10 @@ export const MatchGame = () => {
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
-  if (!planReady || loading) {
+  const backToGames = () =>
+    navigate(categoryId && categoryId !== 'all' ? `/games?category=${categoryId}` : '/games');
+
+  if (!planReady || (loading && !trialExhausted)) {
     return (
       <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md p-8 text-center shadow-xl">
@@ -326,8 +392,14 @@ export const MatchGame = () => {
     );
   }
 
-  if (!hasPlan) {
-    return null;
+  if (trialExhausted) {
+    return (
+      <GameTrialExhaustedScreen
+        gameId="match"
+        mode={trialState.mode}
+        onBack={backToGames}
+      />
+    );
   }
 
   if (allTerms.length === 0) {
@@ -468,15 +540,27 @@ export const MatchGame = () => {
                     <div className="text-sm text-muted-foreground">{t('moves')}</div>
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <Button variant="outline" onClick={initializeGame} className="flex-1">
-                    <RotateCw className="w-4 h-4 mr-2" />
-                    {t('playAgain')}
-                  </Button>
-                  <Button onClick={() => navigate(categoryId && categoryId !== 'all' ? `/games?category=${categoryId}` : '/games')} className="flex-1 gradient-primary">
-                    {t('viewGames')}
-                  </Button>
-                </div>
+                {isTrialLimited ? (
+                  <GameTrialFinishFooter
+                    gameId="match"
+                    mode={trialState.mode}
+                    remaining={trialState.remaining}
+                    onPlayAgain={initializeGame}
+                    onBack={backToGames}
+                    playAgainLabel={t('playAgain')}
+                    backLabel={t('viewGames')}
+                  />
+                ) : (
+                  <div className="flex gap-3">
+                    <Button variant="outline" onClick={initializeGame} className="flex-1">
+                      <RotateCw className="w-4 h-4 mr-2" />
+                      {t('playAgain')}
+                    </Button>
+                    <Button onClick={backToGames} className="flex-1 gradient-primary">
+                      {t('viewGames')}
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>

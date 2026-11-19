@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock } from 'lucide-react';
+import { BookOpen, Shuffle, Brain, ArrowRight, Puzzle, UserPlus, Lock, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -13,7 +13,8 @@ import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
 import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
-import { isGameUnlocked, isGameUnlockedForGuest, checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
+import { getGameTrialState, consumeGameTrial, getTrialRemainingText } from '@/utils/gameTrials';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -48,8 +49,12 @@ export const Games = () => {
 
   const isTr = currentLanguage !== 'en';
   const previewRole = getPreviewRole();
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
-  const [hasPlan, setHasPlan] = useState(previewRole === 'pro' || previewRole === 'basic');
+  const initialUser = getUser();
+  const [currentUid, setCurrentUid] = useState(() => initialUser?.uid || auth?.currentUser?.uid || null);
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(() => Boolean(previewRole || initialUser?.uid || auth?.currentUser?.uid || isLoggedIn()));
+  const [isPro, setIsPro] = useState(() => previewRole === 'pro' || checkIsPro(initialUser));
+  const [hasPlan, setHasPlan] = useState(() => previewRole === 'pro' || previewRole === 'basic' || checkHasPaidPlan(initialUser));
+  const [trialTick, setTrialTick] = useState(0);
 
   useEffect(() => {
     updateCanonicalUrl('https://www.healthlexmed.com/games');
@@ -58,24 +63,34 @@ export const Games = () => {
   useEffect(() => {
     if (previewRole) return;
 
+    let unsubDoc = null;
     const unsubAuth = auth.onAuthStateChanged((firebaseUser) => {
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+
       const targetUser = firebaseUser || getUser();
-      const uid = targetUser?.uid;
+      const uid = targetUser?.uid || null;
+      setCurrentUid(uid);
+      setUserIsLoggedIn(Boolean(uid || isLoggedIn()));
 
       if (!uid) {
         const localUser = getUser();
         setIsPro(checkIsPro(localUser));
         setHasPlan(checkHasPaidPlan(localUser));
+        setTrialTick((n) => n + 1);
         return;
       }
 
+      setIsPro(checkIsPro(targetUser));
       if (checkHasPaidPlan(targetUser)) {
         setHasPlan(true);
       }
 
       try {
         const userDocRef = doc(db, 'users', uid);
-        const unsubDoc = onSnapshot(userDocRef, (docSnap) => {
+        unsubDoc = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
             setIsPro(checkIsPro(data));
@@ -84,16 +99,22 @@ export const Games = () => {
             setIsPro(checkIsPro(targetUser));
             setHasPlan(checkHasPaidPlan(targetUser));
           }
+          setTrialTick((n) => n + 1);
         }, (err) => {
           console.warn('[Games] Could not check pro/plan status:', err);
         });
-        return () => unsubDoc();
       } catch (e) {
         console.warn('[Games] Error checking pro/plan status:', e);
       }
     });
 
-    return () => unsubAuth();
+    return () => {
+      if (unsubDoc) {
+        unsubDoc();
+        unsubDoc = null;
+      }
+      unsubAuth();
+    };
   }, [previewRole]);
 
   const [selectedCategory, setSelectedCategory] = useState(() => {
@@ -137,10 +158,10 @@ export const Games = () => {
   const [, setIsLoadingTerms] = useState(false);
   const navigate = useNavigate();
 
-  const userIsLoggedIn = isLoggedIn();
-
   // Canlı Firestore / API verilerini çekme ve yerel fallback mekanizması
+  // Misafirde Firestore'a istek atılmaz, yerel senkronize paket kullanılır.
   useEffect(() => {
+    if (!userIsLoggedIn) return;
     let isMounted = true;
 
     const fetchLiveTerms = async () => {
@@ -205,7 +226,7 @@ export const Games = () => {
     return () => {
       isMounted = false;
     };
-  }, [selectedCategory]);
+  }, [selectedCategory, userIsLoggedIn]);
 
   const categoryTerms = useMemo(() => {
     const baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
@@ -272,19 +293,42 @@ export const Games = () => {
     return selectedCategory === 'all' ? '' : `?category=${selectedCategory}`;
   };
 
-  const handleGamePlayClick = (e, gameId, gamePath) => {
-    if (!hasPlan && gameId === 'match') {
-      e.preventDefault();
-      toast.info(
-        isTr
-          ? 'Eşleştirme oyunu Temel ve üzeri planlara özeldir. Flashcard oyunu misafir kullanımına açıktır.'
-          : 'Matching game is exclusive to Basic and above plans. Flashcards are available in guest mode.'
-      );
-      navigate('/pricing');
-      return;
-    }
+  const getTrialForGame = useCallback(
+    (gameId) =>
+      getGameTrialState({
+        gameId,
+        isLoggedIn: userIsLoggedIn,
+        uid: currentUid,
+        isPro,
+        hasPlan,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [userIsLoggedIn, currentUid, isPro, hasPlan, trialTick]
+  );
 
-    if (!isGameUnlocked(gameId, isPro, hasPlan)) {
+  const handleInlineRoundStart = useCallback(
+    (gameId) => {
+      consumeGameTrial({
+        gameId,
+        isLoggedIn: userIsLoggedIn,
+        uid: currentUid,
+        isPro,
+        hasPlan,
+      });
+      setTrialTick((n) => n + 1);
+    },
+    [userIsLoggedIn, currentUid, isPro, hasPlan]
+  );
+
+  const handleInlineBack = useCallback(() => {
+    setActiveGame(null);
+    setTrialTick((n) => n + 1);
+  }, []);
+
+  const handleGamePlayClick = (e, gameId, gamePath) => {
+    const trial = getTrialForGame(gameId);
+
+    if (trial.mode === 'paid_locked') {
       e.preventDefault();
       const gameObj = games.find((g) => g.id === gameId);
       toast.info(
@@ -293,6 +337,11 @@ export const Games = () => {
           : `${gameObj?.title || 'This game'} mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.`
       );
       navigate('/pricing');
+      return;
+    }
+
+    if ((trial.mode === 'guest' || trial.mode === 'free_weekly') && !trial.canPlay) {
+      e.preventDefault();
       return;
     }
 
@@ -313,6 +362,8 @@ export const Games = () => {
     }
   };
 
+  const activeTrial = activeGame ? getTrialForGame(activeGame) : null;
+
   return (
     <div className="min-h-screen bg-muted/30 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -322,16 +373,22 @@ export const Games = () => {
           <MorphemeGameFable
             terms={adaptedQuestions}
             language={currentLanguage}
-            onBack={() => setActiveGame(null)}
+            onBack={handleInlineBack}
             t={t}
+            trialMode={activeTrial?.mode || 'none'}
+            trialRemaining={activeTrial?.remaining ?? Infinity}
+            onRoundStart={() => handleInlineRoundStart('morpheme')}
           />
         ) : activeGame === 'quiz' ? (
           <QuizGameFable
             terms={categoryTerms}
             categoryId={selectedCategory}
             language={currentLanguage}
-            onBack={() => setActiveGame(null)}
+            onBack={handleInlineBack}
             t={t}
+            trialMode={activeTrial?.mode || 'none'}
+            trialRemaining={activeTrial?.remaining ?? Infinity}
+            onRoundStart={() => handleInlineRoundStart('quiz')}
           />
         ) : (
           <>
@@ -387,22 +444,46 @@ export const Games = () => {
                   </SelectContent>
                 </Select>
               </div>
+
+              {/* Category Info Note */}
+              <div className="mt-4 max-w-2xl mx-auto px-4 py-3 rounded-xl border border-primary/25 bg-primary/5 flex items-start gap-3 text-left">
+                <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <p className="text-sm text-foreground/90 leading-relaxed">
+                  Kartlar seçtiğin kategorinin tüm terimlerinden gelir. Bilmediğin terimler çıkması normal; her terimin parçaları kartta yazıyor, onlardan çözmeye çalış.
+                </p>
+              </div>
             </div>
 
             {/* Games Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {games.map((game) => {
                 const Icon = game.icon;
-                const locked = !isGameUnlocked(game.id, isPro, hasPlan);
+                const trial = getTrialForGame(game.id);
+                const isPaidLocked = trial.mode === 'paid_locked';
+                const isGuestTrial = trial.mode === 'guest';
+                const isFreeWeekly = trial.mode === 'free_weekly';
+                const isTrialMode = isGuestTrial || isFreeWeekly;
+                const isTrialExhausted = isTrialMode && !trial.canPlay;
+                const trialText = isTrialMode ? getTrialRemainingText(trial.mode, trial.remaining) : '';
                 const isMatch = game.id === 'match';
+
                 return (
-                  <Card key={game.id} className={`group transition-all duration-300 ${locked ? 'opacity-90 border-dashed hover:border-amber-500/50' : 'hover:shadow-2xl hover:-translate-y-2'}`}>
+                  <Card
+                    key={game.id}
+                    className={`group flex flex-col justify-between transition-all duration-300 ${
+                      isPaidLocked
+                        ? 'opacity-90 border-dashed hover:border-amber-500/50'
+                        : isTrialExhausted
+                        ? 'opacity-95 border-border'
+                        : 'hover:shadow-2xl hover:-translate-y-2'
+                    }`}
+                  >
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${game.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                           <Icon className="w-8 h-8 text-white" />
                         </div>
-                        {locked && (
+                        {isPaidLocked && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                             <Lock className="w-3 h-3" />
                             {isMatch ? (isTr ? 'Temel' : 'Basic') : (isTr ? 'Pro / Ömür Boyu' : 'Pro / Lifetime')}
@@ -413,28 +494,66 @@ export const Games = () => {
                       <CardDescription className="text-base">{game.description}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button
-                        onClick={(e) => handleGamePlayClick(e, game.id, game.path)}
-                        className={`w-full transition-all cursor-pointer ${
-                          locked
-                            ? 'bg-muted hover:bg-amber-500/15 text-foreground border border-border hover:border-amber-500/40'
-                            : 'gradient-primary group-hover:shadow-lg'
-                        }`}
-                      >
-                        {locked ? (
-                          <>
-                            <Lock className="mr-2 w-4 h-4 text-amber-500" />
-                            {isMatch
-                              ? (isTr ? 'Temel ve Üzeri ile Aç' : 'Unlock with Basic & Above')
-                              : (isTr ? 'Pro ve Üzeri' : 'Pro & Above')}
-                          </>
-                        ) : (
-                          <>
-                            {t('play')}
+                      {isPaidLocked ? (
+                        <Button
+                          onClick={(e) => handleGamePlayClick(e, game.id, game.path)}
+                          className="w-full transition-all cursor-pointer bg-muted hover:bg-amber-500/15 text-foreground border border-border hover:border-amber-500/40"
+                        >
+                          <Lock className="mr-2 w-4 h-4 text-amber-500" />
+                          {isMatch
+                            ? (isTr ? 'Temel ve Üzeri ile Aç' : 'Unlock with Basic & Above')
+                            : (isTr ? 'Pro ve Üzeri' : 'Pro & Above')}
+                        </Button>
+                      ) : isTrialExhausted ? (
+                        <div className="space-y-2.5 text-center">
+                          <p className="text-sm font-medium text-foreground">
+                            {trialText}
+                          </p>
+                          {isGuestTrial ? (
+                            <>
+                              <Button asChild className="w-full gradient-primary shadow-md">
+                                <Link
+                                  to={`/register?from=games-${game.id}`}
+                                  onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                                >
+                                  Ücretsiz hesap aç
+                                  <ArrowRight className="ml-2 w-4 h-4" />
+                                </Link>
+                              </Button>
+                              <div>
+                                <Link
+                                  to={`/login?from=games-${game.id}`}
+                                  className="text-xs text-primary font-medium hover:underline"
+                                >
+                                  Giriş yap
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <Button asChild className="w-full gradient-primary shadow-md">
+                              <Link to={`/pricing?from=games-${game.id}`}>
+                                Planları gör
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                              </Link>
+                            </Button>
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          <Button
+                            onClick={(e) => handleGamePlayClick(e, game.id, game.path)}
+                            className="w-full transition-all cursor-pointer gradient-primary group-hover:shadow-lg"
+                          >
+                            {isGuestTrial ? 'Dene' : isFreeWeekly ? 'Oyna' : t('play')}
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                          </>
-                        )}
-                      </Button>
+                          </Button>
+                          {trialText && (
+                            <p className="text-xs text-muted-foreground text-center mt-2">
+                              {trialText}
+                            </p>
+                          )}
+                        </>
+                      )}
                     </CardContent>
                   </Card>
                 );

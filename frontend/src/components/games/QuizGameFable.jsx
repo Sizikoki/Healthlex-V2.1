@@ -12,6 +12,7 @@ import {
   ArrowLeft, ArrowRight, Trophy, Check, X, RotateCcw, Zap, Target, BookOpen,
 } from 'lucide-react';
 import { saveQuizScore, updateStreak } from '@/utils/storage';
+import { GameTrialFinishFooter } from '@/components/games/GameTrialNotice';
 
 // ── Ayarlar ──────────────────────────────────────────────────────────────────
 const FEEDBACK_DELAY_MS = 5000; // Geri bildirim süresi (Doğru ve Yanlış için 5 sn)
@@ -268,9 +269,22 @@ const KEYFRAMES = `
 // =============================================================================
 // Bileşen
 // =============================================================================
-export default function QuizGameFable({ terms, language = 'tr', onBack, t, categoryId = 'all' }) {
+export default function QuizGameFable({
+  terms,
+  language = 'tr',
+  onBack,
+  t,
+  categoryId = 'all',
+  trialMode = 'none',
+  trialRemaining = Infinity,
+  onRoundStart,
+}) {
   const [model, dispatch] = useReducer(update, initialModel);
   const hasSavedRef = useRef(false);
+  const pendingConsumeRef = useRef(true);
+  const onRoundStartRef = useRef(onRoundStart);
+  onRoundStartRef.current = onRoundStart;
+  const isTrialLimited = trialMode === 'guest' || trialMode === 'free_weekly';
 
   const L = TEXT[language] || TEXT.tr;
   const tx = useCallback(
@@ -299,6 +313,22 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t, categ
   useEffect(() => {
     startRound();
   }, [startRound]);
+
+  // Consume trial once per round when the first question is ready on screen
+  useEffect(() => {
+    if (model.questions && model.questions.length > 0 && pendingConsumeRef.current) {
+      pendingConsumeRef.current = false;
+      if (typeof onRoundStartRef.current === 'function') {
+        onRoundStartRef.current();
+      }
+    }
+  }, [model.questions]);
+
+  const handlePlayAgain = useCallback(() => {
+    if (isTrialLimited && trialRemaining <= 0) return;
+    pendingConsumeRef.current = true;
+    startRound();
+  }, [isTrialLimited, trialRemaining, startRound]);
 
   // Save quiz score upon completion
   useEffect(() => {
@@ -660,33 +690,45 @@ export default function QuizGameFable({ terms, language = 'tr', onBack, t, categ
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  type="button"
-                  onClick={startRound}
-                  className={cx(
-                    'flex-1 min-h-[56px] rounded-xl font-bold text-white gradient-primary',
-                    'hover:opacity-90 active:scale-[0.98] transition-all touch-manipulation select-none',
-                    'flex items-center justify-center gap-2 shadow-lg shadow-primary/20',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-                  )}
-                >
-                  <RotateCcw className="w-5 h-5" />
-                  {tx('quizPlayAgain', L.playAgain)}
-                </button>
-                <button
-                  type="button"
-                  onClick={onBack}
-                  className={cx(
-                    'flex-1 min-h-[56px] rounded-xl font-semibold text-foreground',
-                    'border border-border bg-muted/50 hover:bg-muted',
-                    'active:scale-[0.98] transition-all touch-manipulation select-none',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-                  )}
-                >
-                  {tx('back', L.back)}
-                </button>
-              </div>
+              {isTrialLimited ? (
+                <GameTrialFinishFooter
+                  gameId="quiz"
+                  mode={trialMode}
+                  remaining={trialRemaining}
+                  onPlayAgain={handlePlayAgain}
+                  onBack={onBack}
+                  playAgainLabel={tx('quizPlayAgain', L.playAgain)}
+                  backLabel={tx('back', L.back)}
+                />
+              ) : (
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="button"
+                    onClick={startRound}
+                    className={cx(
+                      'flex-1 min-h-[56px] rounded-xl font-bold text-white gradient-primary',
+                      'hover:opacity-90 active:scale-[0.98] transition-all touch-manipulation select-none',
+                      'flex items-center justify-center gap-2 shadow-lg shadow-primary/20',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                    )}
+                  >
+                    <RotateCcw className="w-5 h-5" />
+                    {tx('quizPlayAgain', L.playAgain)}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onBack}
+                    className={cx(
+                      'flex-1 min-h-[56px] rounded-xl font-semibold text-foreground',
+                      'border border-border bg-muted/50 hover:bg-muted',
+                      'active:scale-[0.98] transition-all touch-manipulation select-none',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                    )}
+                  >
+                    {tx('back', L.back)}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
