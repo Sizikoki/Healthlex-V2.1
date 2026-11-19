@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalloutBox } from '../components/CalloutBox';
 import { PronunciationTable } from '../components/PronunciationTable';
-import { SectionTryBox } from '../components/SectionTryBox';
+import { RehberQuiz } from '../components/RehberQuiz';
 
 export const Section4Pronunciation = () => {
   return (
@@ -32,16 +32,13 @@ export const Section4Pronunciation = () => {
         Latince &quot;artikulasyo&quot; okunur, çünkü u harfi ü okunmaz. Türkçeye Fransızca üzerinden geçen &quot;artikülasyon&quot; kelimesindeki ü sesi ise yazım geleneğinden gelir.
       </p>
 
-      <SectionTryBox
-        title="Okunuşu terimlerde gör"
-        text="Kafatası terimlerinde bu kuralları kartlarla dene."
-        deck={{ category: 'skull_bones', label: 'Kafatası kemikleri' }}
+      <RehberQuiz
+        bolum={4}
         morphemes={[
           { text: 'thorac/o', type: 'root' },
           { text: 'pharyng/o', type: 'root' },
           { text: 'cerebr/o', type: 'root' },
         ]}
-        from="rehber-s4"
       />
     </section>
   );

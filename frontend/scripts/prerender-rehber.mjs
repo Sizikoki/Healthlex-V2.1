@@ -13,7 +13,46 @@ if (!fs.existsSync(indexHtmlPath)) {
   process.exit(0);
 }
 
-console.log('🚀 Prerendering /rehber/index.html and /rehber.html with Schema.org Article & Breadcrumbs...');
+const quizzesSource = fs.readFileSync(
+  path.join(projectRoot, 'src', 'data', 'rehberQuizzes.js'),
+  'utf8'
+);
+const REHBER_QUIZZES = new Function(
+  `${quizzesSource.replace(/export\s+const\s+REHBER_QUIZZES\s*=/, 'const REHBER_QUIZZES =')}\nreturn REHBER_QUIZZES;`
+)();
+
+const escapeHtml = (str = '') =>
+  String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
+const renderPrerenderQuiz = (bolum) => {
+  const quiz = REHBER_QUIZZES[bolum];
+  if (!quiz || !Array.isArray(quiz.sorular) || quiz.sorular.length === 0) return '';
+  const firstQ = quiz.sorular[0];
+  const badgeText =
+    firstQ.tur === 'yeni' ? 'Yeni terim · parçalarından çöz' : 'Rehberde gördün';
+  const termHtml = firstQ.terim
+    ? `\n          <p class="rehber-quiz-term"><em>${escapeHtml(firstQ.terim)}</em></p>`
+    : '';
+  const optionsHtml = firstQ.siklar
+    .map((sik) => `            <li>${escapeHtml(sik)}</li>`)
+    .join('\n');
+
+  return `<div class="rehber-quiz-box" data-rehber-quiz="s${bolum}">
+          <h3>Okuduğunu dene <span>(5 soru)</span></h3>
+          <p>${escapeHtml(quiz.baslik)}</p>
+          <p>${escapeHtml(badgeText)}</p>
+          <p><strong>${escapeHtml(firstQ.soru)}</strong></p>${termHtml}
+          <ul>
+${optionsHtml}
+          </ul>
+        </div>`;
+};
+
+console.log('Prerendering /rehber/index.html and /rehber.html with Schema.org Article & Breadcrumbs...');
 
 const indexHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 
@@ -93,11 +132,6 @@ const prerenderContent = `
           <li><strong>Uluslararası standart:</strong> Anatomi terimleri <em>Terminologia Anatomica</em> adlı resmi standartla belirlenir. Dünyanın her yerinde aynı yapıyı ifade eder.</li>
           <li><strong>Görev paylaşımı:</strong> Anatomik yapılarda ağırlıklı olarak Latince, hastalık ve cerrahi terimlerinde Grekçe kökler kullanılır.</li>
         </ul>
-        <div class="rehber-try-box">
-          <h3>Okuduğunu 2 dakikada dene</h3>
-          <p>20 kartlık bir desteyle terimleri parçalayarak çalış; kayıt gerekmez.</p>
-          <p><a href="/flashcards?from=rehber-s1">Karma deste kartlarıyla çalış &rarr;</a></p>
-        </div>
       </section>
 
       <section id="s2">
@@ -123,11 +157,7 @@ const prerenderContent = `
           <li><strong>Adım 4: Parçaları Türkçe cümle mantığıyla birleştir.</strong></li>
         </ol>
         <p>Örnek çözümlemeler: <em>gastroenteritis</em> (mide ve ince bağırsak iltihabı), <em>electrocardiogram</em> (kalbin elektriksel aktivitesinin kaydı), <em>endoscopy</em> (iç organların görüntülenmesi).</p>
-        <div class="rehber-try-box">
-          <h3>Şimdi sen çöz</h3>
-          <p>Kemik yapılarını kartlarla parçala.</p>
-          <p><a href="/flashcards?category=bone_structures&amp;from=rehber-s3">Kemik yapıları kartlarıyla çalış &rarr;</a></p>
-        </div>
+        ${renderPrerenderQuiz(3)}
       </section>
 
       <section id="s4">
@@ -154,11 +184,7 @@ const prerenderContent = `
             <tr><td>eu, au</td><td>ö / av</td><td>neuron, auris</td><td>nöron, avris</td></tr>
           </tbody>
         </table>
-        <div class="rehber-try-box">
-          <h3>Okunuşu terimlerde gör</h3>
-          <p>Kafatası terimlerinde bu kuralları kartlarla dene.</p>
-          <p><a href="/flashcards?category=skull_bones&amp;from=rehber-s4">Kafatası kemikleri kartlarıyla çalış &rarr;</a></p>
-        </div>
+        ${renderPrerenderQuiz(4)}
       </section>
 
       <section id="s5">
@@ -184,6 +210,7 @@ const prerenderContent = `
         </table>
         <h3>Anatomide Sık Geçen Düzensiz Çoğullar</h3>
         <p><em>os &rarr; ossa</em> (kemik &rarr; kemikler: Ossa Cranii), <em>foramen &rarr; foramina</em> (delik &rarr; delikler), <em>corpus &rarr; corpora</em> (gövde &rarr; gövdeler), <em>caput &rarr; capita</em> (baş &rarr; başlar).</p>
+        ${renderPrerenderQuiz(5)}
       </section>
 
       <section id="s6">
@@ -207,6 +234,7 @@ const prerenderContent = `
         <h3>Aynı Kök, İki Farklı Anlam (Eşadlılık)</h3>
         <p><em>scler/o:</em> 1. Sert, sertleşme (arteriosclerosis), 2. Gözün beyaz tabakası (scleritis).</p>
         <p><em>myel/o:</em> 1. Kemik iliği (myelocyte), 2. Omurilik (poliomyelitis).</p>
+        ${renderPrerenderQuiz(6)}
       </section>
 
       <section id="s7">
@@ -217,11 +245,7 @@ const prerenderContent = `
           <li><strong>Anlam ve kullanım tutarsızlıkları:</strong> Aynı raporda bir bölge için sırayla "karın", Arapça kökenli "batın" ve Latince "abdomen" kullanmak metnin tutarlılığını bozar.</li>
           <li><strong>Niteleyici ön ekleri karıştırmak:</strong> Azlık belirten <em>hypo-</em> ile küçüklük belirten <em>micro-</em> birbirinin yerine kullanılamaz.</li>
         </ul>
-        <div class="rehber-try-box">
-          <h3>Hatalarını kartlarda yakala</h3>
-          <p>Yön terimleriyle kendini dene.</p>
-          <p><a href="/flashcards?category=anatomic_direction&amp;from=rehber-s7">Anatomik yön terimleri kartlarıyla çalış &rarr;</a></p>
-        </div>
+        ${renderPrerenderQuiz(7)}
       </section>
 
       <section id="s8">

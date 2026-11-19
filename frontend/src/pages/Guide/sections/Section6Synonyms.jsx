@@ -1,5 +1,6 @@
 import React from 'react';
 import { MorphemeBadge } from '../components/MorphemeBadge';
+import { RehberQuiz } from '../components/RehberQuiz';
 
 const SYNONYM_ROOTS = [
   {
@@ -253,6 +254,8 @@ export const Section6Synonyms = () => {
           </div>
         </div>
       </div>
+
+      <RehberQuiz bolum={6} />
     </section>
   );
 };

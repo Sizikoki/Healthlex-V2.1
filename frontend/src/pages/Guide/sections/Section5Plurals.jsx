@@ -1,5 +1,6 @@
 import React from 'react';
 import { CalloutBox } from '../components/CalloutBox';
+import { RehberQuiz } from '../components/RehberQuiz';
 
 const PLURAL_RULES = [
   {
@@ -238,6 +239,8 @@ export const Section5Plurals = () => {
         Türkçe bir rapor veya ders notu yazarken Latince çoğul eki kullanmak zorunda değilsin.{' '}
         <i>vertebrae</i> yerine <b>vertebralar</b>, <i>thrombi</i> yerine <b>trombüsler</b> yazmak Türk tıp kullanımında tamamen doğrudur.
       </CalloutBox>
+
+      <RehberQuiz bolum={5} />
     </section>
   );
 };

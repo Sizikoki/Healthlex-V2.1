@@ -39,9 +39,10 @@ const MORPHEME_SLUG_MAP = {
  * @param {string} text - Morpheme text (e.g. 'epi-', 'cardi/o', '-itis')
  * @param {'prefix' | 'root' | 'suffix' | 'mp' | 'mr' | 'ms'} type - Type of morpheme
  * @param {boolean} linkable - Whether to wrap with Link to /morphemes/:slug
+ * @param {string} from - Optional ?from= query param for tracking source section
  * @param {string} className - Optional extra classes
  */
-export const MorphemeBadge = ({ text, type = 'root', linkable = true, className = '' }) => {
+export const MorphemeBadge = ({ text, type = 'root', linkable = true, from = '', className = '' }) => {
   // Normalize type
   const normalizedType =
     type === 'prefix' || type === 'mp'
@@ -51,9 +52,15 @@ export const MorphemeBadge = ({ text, type = 'root', linkable = true, className 
       : 'mr';
 
   const typeStyles = {
-    mp: 'bg-[#e7f6ec] text-[#166534] border-[#bfe5cb] hover:bg-[#d8f0df]',
-    mr: 'bg-[#e8efff] text-[#1e40af] border-[#c7d6fb] hover:bg-[#dce7ff]',
-    ms: 'bg-[#fdf1e3] text-[#9a3f07] border-[#f3d3ad] hover:bg-[#fae6ce]',
+    mp: 'bg-[#e7f6ec] text-[#166534] border-[#bfe5cb]',
+    mr: 'bg-[#e8efff] text-[#1e40af] border-[#c7d6fb]',
+    ms: 'bg-[#fdf1e3] text-[#9a3f07] border-[#f3d3ad]',
+  };
+
+  const hoverStyles = {
+    mp: 'hover:bg-[#d8f0df]',
+    mr: 'hover:bg-[#dce7ff]',
+    ms: 'hover:bg-[#fae6ce]',
   };
 
   const cleanSlug =
@@ -71,11 +78,15 @@ export const MorphemeBadge = ({ text, type = 'root', linkable = true, className 
     );
   }
 
+  const targetUrl = from
+    ? `/morphemes/${cleanSlug}?from=${encodeURIComponent(from)}`
+    : `/morphemes/${cleanSlug}`;
+
   return (
     <Link
-      to={`/morphemes/${cleanSlug}`}
+      to={targetUrl}
       title={`${text} morfemini incele`}
-      className={`${baseStyle} ${typeStyles[normalizedType]} ${className}`}
+      className={`${baseStyle} ${typeStyles[normalizedType]} ${hoverStyles[normalizedType]} ${className}`}
     >
       {text}
     </Link>
