@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, RotateCcw, Sparkles, UserPlus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getTrialRemainingText } from '@/utils/gameTrials';
@@ -32,14 +32,6 @@ export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
     <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
       <Card className="w-full max-w-md shadow-xl border-border">
         <CardContent className="p-6 sm:p-8 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-5">
-            {isGuest ? (
-              <UserPlus className="w-7 h-7 text-primary" />
-            ) : (
-              <Sparkles className="w-7 h-7 text-primary" />
-            )}
-          </div>
-
           <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
             {exhaustedText}
           </h2>

@@ -40,6 +40,9 @@ export const MatchGame = () => {
   const [selected, setSelected] = useState([]);
   const [matched, setMatched] = useState([]);
   const [moves, setMoves] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [wrongPairIds, setWrongPairIds] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
@@ -198,6 +201,9 @@ export const MatchGame = () => {
     setSelected([]);
     setMatched([]);
     setMoves(0);
+    setCorrectCount(0);
+    setWrongCount(0);
+    setWrongPairIds([]);
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameComplete(false);
@@ -346,6 +352,7 @@ export const MatchGame = () => {
 
       if (newSelected[0].pairId === newSelected[1].pairId && newSelected[0].type !== newSelected[1].type) {
         // Match found
+        setCorrectCount((prev) => prev + 1);
         setTimeout(() => {
           setMatched([...matched, card.pairId]);
           setSelected([]);
@@ -362,6 +369,9 @@ export const MatchGame = () => {
         }, 500);
       } else {
         // No match
+        setWrongCount((prev) => prev + 1);
+        const mistakenPairId = newSelected[0].pairId;
+        setWrongPairIds((prev) => (prev.includes(mistakenPairId) ? prev : [...prev, mistakenPairId]));
         setTimeout(() => {
           setSelected([]);
         }, 1000);
@@ -374,6 +384,22 @@ export const MatchGame = () => {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  const mixedUpItems = useMemo(() => {
+    if (wrongPairIds.length === 0 || cards.length === 0) return [];
+    return wrongPairIds
+      .map((pairId) => {
+        const termCard = cards.find((c) => c.pairId === pairId && c.type === 'term');
+        const meaningCard = cards.find((c) => c.pairId === pairId && c.type === 'meaning');
+        if (!termCard || !meaningCard) return null;
+        return {
+          pairId,
+          term: termCard.content,
+          meaning: meaningCard.content,
+        };
+      })
+      .filter(Boolean);
+  }, [wrongPairIds, cards]);
 
   const progress = cards.length > 0 ? (matched.length / (cards.length / 2)) * 100 : 0;
 
@@ -522,14 +548,50 @@ export const MatchGame = () => {
 
         {/* Complete Modal */}
         {gameComplete && (
-          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
-            <Card className="max-w-md w-full mx-4 shadow-2xl">
-              <CardContent className="p-8 text-center">
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+            <Card className="max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+              <CardContent className="p-5 sm:p-8 text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-success to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold mb-2">{t('congratulations')}</h2>
-                <p className="text-muted-foreground mb-6">{t('matchCompleteSub')}</p>
+                <p className="text-muted-foreground mb-4">{t('matchCompleteSub')}</p>
+
+                <div className="space-y-2 mb-4 text-left">
+                  <div className="flex items-center justify-between gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+                    <span>{t('matchCorrectMatches', 'Doğru eşleşme')}:</span>
+                    <span>{correctCount}</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-2 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm font-semibold text-rose-700 dark:text-rose-300">
+                    <span>{t('matchWrongAttempts', 'Yanlış deneme')}:</span>
+                    <span>{wrongCount}</span>
+                  </div>
+                </div>
+
+                {wrongCount > 0 ? (
+                  <div className="mb-5 rounded-lg border border-border bg-muted/40 p-3 text-left">
+                    <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-2">
+                      {t('matchMixedUp', 'Karıştırdıkların')}
+                    </h3>
+                    <ul className="space-y-1.5">
+                      {mixedUpItems.map((item) => (
+                        <li
+                          key={item.pairId}
+                          className="text-xs sm:text-sm leading-snug text-foreground break-words"
+                        >
+                          <span className="font-semibold">{item.term}</span>
+                          <span className="mx-1.5 text-muted-foreground">→</span>
+                          <span className="text-muted-foreground">{item.meaning}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <p className="mb-5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                    {t('matchNoMixUps', 'Hiç karıştırmadın, tebrikler!')}
+                  </p>
+                )}
+
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <div className="text-3xl font-bold text-primary">{formatTime(elapsedTime)}</div>
