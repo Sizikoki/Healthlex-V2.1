@@ -71,7 +71,7 @@ export const translations = {
     matchDesc: "Terimleri Türkçe karşılıklarıyla eşleştir. Hızlı düşün, rekor kır!",
     quizDesc: "Çoktan seçmeli sorularla bilgini test et. Kendini sına, ilerlemeyi gör.",
     quizNextQuestion: "Sıradaki Soru",
-    morphemeDesc: "Verilen tanıma göre tıbbi terimi ön ek, kök ve son ek seçerek kendin oluştur!",
+    morphemeDesc: "Terimin parçalarını doğru sırayla seç, terimi kendin kur!",
     unlimitedPlaySignUp: "Ücretsiz Kayıt Ol",
     tip1Title: "🎯 Düzenli Çalış",
     tip1Desc: "Her gün en az 10 dakika çalışarak günlük serileri koru ve hızlı öğren.",
@@ -140,7 +140,7 @@ export const translations = {
     morphemeFinalScore: "Toplam Puan",
     morphemePlayAgain: "Yeniden Oyna",
     morphemeNoQuestions: "Bu kategori için soru bulunamadı.",
-    morphemeAnalysis: "Morfem Analizi",
+    morphemeAnalysis: "Parçalar",
 
     // Dashboard ve İlerleme Paneli
     termsMastered: "Öğrenilen Terimler",
@@ -451,7 +451,7 @@ export const translations = {
     matchDesc: "Match terms with their meanings. Think fast, break records!",
     quizDesc: "Test your knowledge with multiple choice questions. Challenge yourself, see progress.",
     quizNextQuestion: "Next Question",
-    morphemeDesc: "Build the medical term yourself by selecting prefix, root and suffix!",
+    morphemeDesc: "Pick the parts in the right order and build the term yourself!",
     unlimitedPlaySignUp: "Sign Up Free",
     tip1Title: "🎯 Practice Regularly",
     tip1Desc: "Maintain your daily streak and learn faster by practicing at least 10 minutes every day.",
@@ -520,7 +520,7 @@ export const translations = {
     morphemeFinalScore: "Final Score",
     morphemePlayAgain: "Play Again",
     morphemeNoQuestions: "No questions found for this category.",
-    morphemeAnalysis: "Morpheme Analysis",
+    morphemeAnalysis: "Parts",
 
     // Dashboard ve İlerleme Paneli
     termsMastered: "Terms Mastered",

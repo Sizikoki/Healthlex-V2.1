@@ -59,7 +59,7 @@ const STRINGS = {
     finalScore: "Toplam Puan",
     playAgain: "Yeniden Oyna",
     noQuestions: "Bu kategori için soru bulunamadı.",
-    analysis: "Morfem Analizi",
+    analysis: "Parçalar",
     removeHint: "Kaldırmak için dokun",
   },
   en: {
@@ -82,7 +82,7 @@ const STRINGS = {
     finalScore: "Final Score",
     playAgain: "Play Again",
     noQuestions: "No questions found for this category.",
-    analysis: "Morpheme Analysis",
+    analysis: "Parts",
     removeHint: "Tap to remove",
   },
 };
@@ -504,18 +504,27 @@ export default function MorphemeGameFable({
 
   useEffect(() => {
     hasSavedRef.current = false;
+    pendingConsumeRef.current = true;
     dispatch({ type: "SetQuestions", questions });
   }, [questions]);
 
-  // Consume trial once per round when the first question is ready on screen
-  useEffect(() => {
-    if (model.questions && model.questions.length > 0 && pendingConsumeRef.current) {
+  const handleSubmitAnswer = useCallback(() => {
+    if (model.state.tag !== "Playing" || model.selectedSequence.length === 0) return;
+    if (pendingConsumeRef.current) {
+      if (isTrialLimited && trialRemaining <= 0) return;
       pendingConsumeRef.current = false;
       if (typeof onRoundStartRef.current === "function") {
         onRoundStartRef.current();
       }
     }
-  }, [model.questions]);
+    dispatch({ type: "SubmitAnswer" });
+  }, [model.state.tag, model.selectedSequence.length, isTrialLimited, trialRemaining]);
+
+  const canSwitchCategory = !(
+    isTrialLimited &&
+    trialRemaining <= 0 &&
+    !pendingConsumeRef.current
+  );
 
   const handlePlayAgain = useCallback(() => {
     if (isTrialLimited && trialRemaining <= 0) return;
@@ -685,7 +694,11 @@ export default function MorphemeGameFable({
           <span className="text-[11px] sm:text-xs font-medium text-muted-foreground shrink-0">
             {typeof tProp === "function" ? tProp("category") : (language === "en" ? "Category" : "Kategori")}:
           </span>
-          <Select value={selectedCategory} onValueChange={onCategoryChange}>
+          <Select
+            value={selectedCategory}
+            onValueChange={onCategoryChange}
+            disabled={!canSwitchCategory}
+          >
             <SelectTrigger className="h-8 text-xs sm:text-sm max-w-[240px] sm:max-w-[280px]">
               <SelectValue />
             </SelectTrigger>
@@ -894,7 +907,7 @@ export default function MorphemeGameFable({
       <div className="sticky bottom-2 z-10 pt-2 bg-gradient-to-t from-card via-card to-transparent sm:static sm:bg-none sm:pt-0">
         <button
           type="button"
-          onClick={() => dispatch({ type: "SubmitAnswer" })}
+          onClick={handleSubmitAnswer}
           disabled={!isPlaying || model.selectedSequence.length === 0}
           className={`flex w-full items-center justify-center gap-2 rounded-xl py-2.5 sm:py-3 font-semibold text-sm sm:text-base transition
             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-md
