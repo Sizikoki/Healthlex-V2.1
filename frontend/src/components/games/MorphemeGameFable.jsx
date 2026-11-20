@@ -23,6 +23,13 @@ import {
 import { saveMorphemeScore, updateStreak } from "@/utils/storage";
 import { GameTrialFinishFooter } from "@/components/games/GameTrialNotice";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   playCorrectSound,
   playWrongSound,
   playTapSound,
@@ -40,7 +47,7 @@ const STRINGS = {
     question: "Soru",
     targetTerm: "Hedef Terim",
     builtTerm: "Oluşturulan Terim",
-    emptyHint: "Havuzdan parçaları sırayla seç: Ön Ek → Kök → Son Ek",
+    emptyHint: "Parçaları terimdeki sırayla seç.",
     pool: "Parça Havuzu",
     confirm: "Kombinasyonu Onayla",
     correctMsg: "Doğru! Harika dizilim.",
@@ -63,7 +70,7 @@ const STRINGS = {
     question: "Question",
     targetTerm: "Target Term",
     builtTerm: "Constructed Term",
-    emptyHint: "Select parts from the pool in order: Prefix, Root, Suffix",
+    emptyHint: "Pick the parts in the order they appear in the term.",
     pool: "Part Pool",
     confirm: "Confirm Combination",
     correctMsg: "Correct! Great sequence.",
@@ -82,16 +89,16 @@ const STRINGS = {
 
 const PART_META = {
   prefix: {
-    chip: "border-indigo-500/50 bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 hover:border-indigo-600 dark:hover:border-indigo-400 hover:bg-indigo-500/15",
-    dot: "bg-indigo-600 dark:bg-indigo-400",
-  },
-  root: {
-    chip: "border-violet-500/50 bg-violet-500/10 text-violet-900 dark:text-violet-300 hover:border-violet-600 dark:hover:border-violet-400 hover:bg-violet-500/15",
-    dot: "bg-violet-600 dark:bg-violet-400",
+    chip: "border-emerald-500/50 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 hover:border-emerald-600 dark:hover:border-emerald-400 hover:bg-emerald-500/15",
+    dot: "bg-emerald-600 dark:bg-emerald-400",
   },
   suffix: {
-    chip: "border-amber-500/50 bg-amber-500/10 text-amber-900 dark:text-amber-300 hover:border-amber-600 dark:hover:border-amber-400 hover:bg-amber-500/15",
-    dot: "bg-amber-600 dark:bg-amber-400",
+    chip: "border-orange-500/50 bg-orange-500/10 text-orange-900 dark:text-orange-300 hover:border-orange-600 dark:hover:border-orange-400 hover:bg-orange-500/15",
+    dot: "bg-orange-600 dark:bg-orange-400",
+  },
+  default: {
+    chip: "border-border bg-muted/40 text-foreground hover:border-primary/50 hover:bg-muted/70",
+    dot: "bg-muted-foreground",
   },
 };
 
@@ -396,7 +403,11 @@ function update(model, msg) {
 }
 
 function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
-  const meta = PART_META[part.partType] ?? PART_META.root;
+  const badgeType =
+    part.partType === "prefix" || part.partType === "suffix"
+      ? part.partType
+      : null;
+  const meta = badgeType ? PART_META[badgeType] : PART_META.default;
   const rawMeaning =
     typeof part.meaning === "string"
       ? part.meaning
@@ -406,33 +417,41 @@ function MorphemeChip({ part, onClick, tr, language, dimmed = false }) {
     ? rawMeaning.charAt(0).toLocaleUpperCase(language === "tr" ? "tr-TR" : "en-US") + rawMeaning.slice(1)
     : "";
 
+  const titleText = badgeType
+    ? `${part.text} (${tr(badgeType)})${meaning ? `: ${meaning}` : ""}`
+    : `${part.text}${meaning ? `: ${meaning}` : ""}`;
+
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={dimmed}
-      aria-label={`${part.text} — ${meaning}`}
-      title={`${part.text} (${tr(part.partType)}): ${meaning}`}
+      aria-label={meaning ? `${part.text} — ${meaning}` : part.text}
+      title={titleText}
       className={`group flex flex-col justify-between items-start rounded-xl border p-2 sm:p-2.5 text-left
         transition-all duration-150 hover:scale-[1.02] active:scale-95 shadow-xs w-full
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary min-h-[56px] sm:min-h-[64px]
         ${meta.chip} ${dimmed ? "opacity-60 cursor-default" : "cursor-pointer"}`}
     >
-      <div className="flex items-center justify-between w-full gap-1.5">
-        <span className="font-mono text-xs sm:text-sm md:text-base font-bold tracking-tight text-foreground truncate">
+      <div className="flex flex-wrap items-start justify-between w-full gap-1">
+        <span className="font-mono text-xs sm:text-sm md:text-base font-bold tracking-tight text-foreground break-words min-w-0 leading-snug">
           {part.text}
         </span>
-        <span
-          lang={language === "en" ? "en" : "tr"}
-          className="inline-flex items-center shrink-0 gap-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/70 border border-current/15"
-        >
-          <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
-          {tr(part.partType)}
-        </span>
+        {badgeType && (
+          <span
+            lang={language === "en" ? "en" : "tr"}
+            className="inline-flex items-center shrink-0 gap-1 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-background/70 border border-current/15"
+          >
+            <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
+            {tr(badgeType)}
+          </span>
+        )}
       </div>
-      <span className="text-[11px] sm:text-xs font-medium text-foreground/85 group-hover:text-foreground line-clamp-2 mt-1 leading-tight">
-        {meaning}
-      </span>
+      {meaning && (
+        <span className="text-[11px] sm:text-xs font-medium text-foreground/85 group-hover:text-foreground line-clamp-2 mt-1 leading-tight">
+          {meaning}
+        </span>
+      )}
     </button>
   );
 }
@@ -445,14 +464,18 @@ export default function MorphemeGameFable({
   trialMode = "none",
   trialRemaining = Infinity,
   onRoundStart,
+  categories = null,
+  selectedCategory = "all",
+  onCategoryChange = null,
 }) {
   const questions = useMemo(() => normalizeQuestions(terms), [terms]);
 
   const tr = useCallback(
     (key) => {
       if (typeof tProp === "function") {
-        const v = tProp(`morphemeGame.${key}`);
-        if (v && v !== `morphemeGame.${key}`) return v;
+        const camelKey = `morpheme${key.charAt(0).toUpperCase()}${key.slice(1)}`;
+        const v = tProp(camelKey);
+        if (v && v !== camelKey) return v;
       }
       return STRINGS[language]?.[key] ?? STRINGS.tr[key] ?? key;
     },
@@ -656,6 +679,32 @@ export default function MorphemeGameFable({
         </div>
       </div>
 
+      {/* Morpheme Category Selector */}
+      {Array.isArray(categories) && typeof onCategoryChange === "function" && (
+        <div className="mb-3 sm:mb-4 flex items-center justify-between gap-2">
+          <span className="text-[11px] sm:text-xs font-medium text-muted-foreground shrink-0">
+            {typeof tProp === "function" ? tProp("category") : (language === "en" ? "Category" : "Kategori")}:
+          </span>
+          <Select value={selectedCategory} onValueChange={onCategoryChange}>
+            <SelectTrigger className="h-8 text-xs sm:text-sm max-w-[240px] sm:max-w-[280px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">
+                {typeof tProp === "function"
+                  ? tProp("allCategories")
+                  : (language === "en" ? "All Categories" : "Tüm Kategoriler")}
+              </SelectItem>
+              {categories.map((cat) => (
+                <SelectItem key={cat.id} value={cat.id}>
+                  {typeof tProp === "function" ? tProp(cat.key, cat.name) : cat.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       {/* Progress Bar */}
       <div className="mb-3 sm:mb-4">
         <div className="mb-1 flex justify-between text-[11px] sm:text-xs text-muted-foreground">
@@ -723,7 +772,11 @@ export default function MorphemeGameFable({
             {/* Selected parts as interactive compact chips */}
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               {model.selectedSequence.map((part, i) => {
-                const meta = PART_META[part.partType] ?? PART_META.root;
+                const badgeType =
+                  part.partType === "prefix" || part.partType === "suffix"
+                    ? part.partType
+                    : null;
+                const meta = badgeType ? PART_META[badgeType] : PART_META.default;
                 return (
                   <React.Fragment key={part.id}>
                     {i > 0 && (
@@ -743,7 +796,7 @@ export default function MorphemeGameFable({
                         ${meta.chip} ${!isPlaying ? "opacity-60 cursor-default" : "hover:border-destructive/60 hover:text-destructive cursor-pointer"}`}
                       title={`${part.text} — ${language === "en" ? "Click to remove" : "Kaldırmak için tıkla"}`}
                     >
-                      <span className={`h-1.5 w-1.5 rounded-full ${meta.dot} shrink-0`} />
+                      {badgeType && <span className={`h-1.5 w-1.5 rounded-full ${meta.dot} shrink-0`} />}
                       <span>{part.text}</span>
                       <X aria-hidden="true" className="h-3 w-3 opacity-60 group-hover:opacity-100 shrink-0 text-muted-foreground group-hover:text-destructive" />
                     </button>
@@ -792,7 +845,10 @@ export default function MorphemeGameFable({
               {tr("analysis")}:{" "}
             </span>
             {q.correctSequence
-              .map((p) => `${p.text} (${loc(p.meaning)})`)
+              .map((p) => {
+                const m = loc(p.meaning);
+                return m ? `${p.text} (${m})` : p.text;
+              })
               .join(" + ")}
           </p>
         </div>

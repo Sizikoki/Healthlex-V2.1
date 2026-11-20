@@ -3,8 +3,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import { GameTrialExhaustedScreen } from '@/components/games/GameTrialNotice';
 import { useLanguage } from '@/context/LanguageContext';
-import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
-import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
+import { getAllTerms } from '@/data/medicalTerms';
+import {
+  adaptTermsToMorphemeQuestions,
+  filterTermsForMorphemeGame,
+  getEligibleMorphemeCategories,
+  termMatchesMorphemeCategory,
+  MORPHEME_GAME_CATEGORIES,
+} from '@/utils/morphemeAdapter';
 import { getUser, isLoggedIn } from '@/utils/storage';
 import { checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
 import { getGameTrialState, consumeGameTrial } from '@/utils/gameTrials';
@@ -15,8 +21,8 @@ import { toast } from 'sonner';
 
 export const MorphemeGame = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const category = searchParams.get('category') || 'all';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawCategory = searchParams.get('category') || 'all';
   const { currentLanguage, t } = useLanguage();
 
   const previewRole = getPreviewRole();
@@ -147,11 +153,35 @@ export const MorphemeGame = () => {
     setTrialTick((n) => n + 1);
   }, [userIsLoggedIn, currentUid, isPro, hasPlan]);
 
+  const allEligibleTerms = useMemo(() => {
+    return filterTermsForMorphemeGame(getAllTerms());
+  }, []);
+
+  const eligibleCategories = useMemo(() => {
+    return getEligibleMorphemeCategories(allEligibleTerms, MORPHEME_GAME_CATEGORIES);
+  }, [allEligibleTerms]);
+
+  const category = useMemo(() => {
+    if (rawCategory === 'all') return 'all';
+    return eligibleCategories.some((c) => c.id === rawCategory) ? rawCategory : 'all';
+  }, [rawCategory, eligibleCategories]);
+
+  const handleCategoryChange = useCallback(
+    (val) => {
+      if (!val || val === 'all') {
+        setSearchParams({});
+      } else {
+        setSearchParams({ category: val });
+      }
+    },
+    [setSearchParams]
+  );
+
   const categoryTerms = useMemo(() => {
     return category === 'all'
-      ? getAllTerms()
-      : getTermsByCategory(category);
-  }, [category]);
+      ? allEligibleTerms
+      : allEligibleTerms.filter((term) => termMatchesMorphemeCategory(term, category));
+  }, [allEligibleTerms, category]);
 
   const adaptedQuestions = useMemo(() => {
     return adaptTermsToMorphemeQuestions(categoryTerms);
@@ -196,6 +226,9 @@ export const MorphemeGame = () => {
         trialMode={trialState.mode}
         trialRemaining={trialState.remaining}
         onRoundStart={handleRoundStart}
+        categories={eligibleCategories}
+        selectedCategory={category}
+        onCategoryChange={handleCategoryChange}
       />
     </div>
   );

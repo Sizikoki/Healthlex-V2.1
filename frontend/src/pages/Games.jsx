@@ -10,7 +10,12 @@ import { useLanguage } from '@/context/LanguageContext';
 import { auth, db } from '@/firebase/config';
 import { collection, getDocs, query, where, doc, onSnapshot } from 'firebase/firestore';
 import { getAllTerms, getTermsByCategory } from '@/data/medicalTerms';
-import { adaptTermsToMorphemeQuestions } from '@/utils/morphemeAdapter';
+import {
+  adaptTermsToMorphemeQuestions,
+  filterTermsForMorphemeGame,
+  getEligibleMorphemeCategories,
+  termMatchesMorphemeCategory,
+} from '@/utils/morphemeAdapter';
 import MorphemeGameFable from '@/components/games/MorphemeGameFable';
 import QuizGameFable from '@/components/games/QuizGameFable';
 import { checkIsPro, checkHasPaidPlan, getPreviewRole } from '@/utils/planAccess';
@@ -250,9 +255,38 @@ export const Games = () => {
     return getTermsByCategory(selectedCategory);
   }, [selectedCategory, liveTerms]);
 
+  const eligibleMorphemeTerms = useMemo(() => {
+    const baseList = liveTerms.length > 0 ? liveTerms : getAllTerms();
+    return filterTermsForMorphemeGame(baseList);
+  }, [liveTerms]);
+
+  const morphemeCategories = useMemo(() => {
+    return getEligibleMorphemeCategories(eligibleMorphemeTerms, GAME_CATEGORIES);
+  }, [eligibleMorphemeTerms]);
+
+  const [morphemeCategory, setMorphemeCategory] = useState('all');
+
+  useEffect(() => {
+    if (selectedCategory === 'all') {
+      setMorphemeCategory('all');
+    } else if (morphemeCategories.some((c) => c.id === selectedCategory)) {
+      setMorphemeCategory(selectedCategory);
+    } else {
+      setMorphemeCategory('all');
+    }
+  }, [selectedCategory, morphemeCategories]);
+
+  const morphemeFilteredTerms = useMemo(() => {
+    return morphemeCategory === 'all'
+      ? eligibleMorphemeTerms
+      : eligibleMorphemeTerms.filter((termItem) =>
+          termMatchesMorphemeCategory(termItem, morphemeCategory)
+        );
+  }, [eligibleMorphemeTerms, morphemeCategory]);
+
   const adaptedQuestions = useMemo(() => {
-    return adaptTermsToMorphemeQuestions(categoryTerms);
-  }, [categoryTerms]);
+    return adaptTermsToMorphemeQuestions(morphemeFilteredTerms);
+  }, [morphemeFilteredTerms]);
 
   const games = [
     {
@@ -378,6 +412,9 @@ export const Games = () => {
             trialMode={activeTrial?.mode || 'none'}
             trialRemaining={activeTrial?.remaining ?? Infinity}
             onRoundStart={() => handleInlineRoundStart('morpheme')}
+            categories={morphemeCategories}
+            selectedCategory={morphemeCategory}
+            onCategoryChange={setMorphemeCategory}
           />
         ) : activeGame === 'quiz' ? (
           <QuizGameFable

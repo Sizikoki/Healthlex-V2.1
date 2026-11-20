@@ -421,9 +421,38 @@ export function matchWordsWithEntry(subWords, entry) {
   return true;
 }
 
+export const MORPHEME_GAME_CATEGORIES = [
+  { id: 'skull_bones', key: 'skullBones', name: 'Kafatası Kemikleri' },
+  { id: 'face_bones', key: 'faceBones', name: 'Yüz Kemikleri' },
+  { id: 'trunk_bones', key: 'trunkBones', name: 'Gövde Kemikleri' },
+  { id: 'upper_extremity_bones', key: 'upperExtremityBones', name: 'Üst Ekstremite Kemikleri' },
+  { id: 'upper_extremity_joints', key: 'upperExtremityJoints', name: 'Üst Ekstremite Eklemleri' },
+  { id: 'lower_extremity_bones', key: 'lowerExtremityBones', name: 'Alt Ekstremite Kemikleri' },
+  { id: 'lower_extremity_joints', key: 'lowerExtremityJoints', name: 'Alt Ekstremite Eklemleri' },
+  { id: 'spine_joints', key: 'spineJoints', name: 'Omurga Eklemleri' },
+  { id: 'head_and_neck_joints', key: 'headAndNeckJoints', name: 'Kafa ve Boyun Eklemleri' },
+  { id: 'head_and_neck_muscles', key: 'headAndNeckMuscles', name: 'Baş ve Boyun Kasları' },
+  { id: 'trunk_muscles', key: 'trunkMuscles', name: 'Gövde Kasları' },
+  { id: 'upper_extremity_muscles', key: 'upperExtremityMuscles', name: 'Üst Ekstremite Kasları' },
+  { id: 'muscle_structures', key: 'muscleStructures', name: 'Kas ve Kasla İlişkili Yapılar' },
+  { id: 'bone_structures', key: 'boneStructures', name: 'Kemik / İskelet Yapıları' },
+  { id: 'movement_terms', key: 'movementTerms', name: 'Hareket Terimleri' },
+  { id: 'anatomic_direction', key: 'anatomicDirection', name: 'Anatomik Yön Terimleri' },
+];
+
+export const MORPHEME_MIN_CATEGORY_TERMS = 4;
+
+/**
+ * Küçük harf + yalnızca a-z harfleri (boşluk, tire, parantez, noktalama silinir).
+ */
+export function normalizeForMorphemeMatch(str) {
+  return (str || '').toLowerCase().replace(/[^a-z]/g, '');
+}
+
 /**
  * Terim nesnesinin roots alanını parseRootsToMorphemes ile çözümleyerek
  * Morfem Yapıcı oyununun beklediği Part dizisine dönüştürür.
+ * Tür yalnızca tire kuralına göre belirlenir: "-" ile bitiyorsa prefix, "-" ile başlıyorsa suffix, tiresizse null.
  */
 export function getTermMorphemes(term) {
   if (!term || !term.roots || typeof term.roots !== 'string') return [];
@@ -433,21 +462,22 @@ export function getTermMorphemes(term) {
 
   return parsed.map((item, idx) => {
     const rawText = (item.root || '').trim();
-    const lowerRaw = rawText.toLowerCase();
 
-    let partType = item.morphemeType || null;
-    if (!partType) {
-      if (rawText.startsWith('-')) {
-        partType = 'suffix';
-      } else if (PREFIX_LOOKUP[lowerRaw]) {
-        partType = 'prefix';
-      } else {
-        partType = 'root';
-      }
+    let partType = null;
+    if (rawText.endsWith('-') && !rawText.startsWith('-')) {
+      partType = 'prefix';
+    } else if (rawText.startsWith('-') && !rawText.endsWith('-')) {
+      partType = 'suffix';
     }
 
-    const trMeaning = item.meaning || rawText;
-    const enMeaning = item.meaningEn || trMeaning;
+    const trMeaning = (item.meaning || '').trim();
+    const matchedEn =
+      item.meaningEn &&
+      ((partType && item.morphemeType === partType) ||
+        (!partType && item.morphemeType === 'root'))
+        ? item.meaningEn
+        : '';
+    const enMeaning = trMeaning ? (matchedEn || trMeaning) : '';
 
     return {
       id: `t_${term.id || 'term'}_p${idx}_${Math.random().toString(36).substr(2, 4)}`,
@@ -463,18 +493,60 @@ export function getTermMorphemes(term) {
 }
 
 /**
- * Terim nesnesini morfem dizisine dönüştürür (Oyun soruları için en az 2 parça gerektirir).
+ * Terim nesnesini morfem dizisine dönüştürür.
+ * En az 2 parça ve parçaların birleşimi ile terimin kendisinin normalize eşleşmesini gerektirir.
  */
 export function parseTermToMorphemes(term) {
   const sequence = getTermMorphemes(term);
-  return sequence.length >= 2 ? sequence : null;
+  if (sequence.length < 2) return null;
+
+  const joinedParts = normalizeForMorphemeMatch(sequence.map((p) => p.text).join(''));
+  const normalizedTerm = normalizeForMorphemeMatch(term?.term || '');
+  if (!joinedParts || joinedParts !== normalizedTerm) return null;
+
+  return sequence;
 }
 
 /**
- * Tıbbi terimleri 10'ar soruluk Morfem Yapıcı oyun sorularına dönüştürür.
+ * Morfem Yapıcı oyunu için uygun terimleri filtreler (yerel ve Firestore yolları için tek yardımcı).
+ */
+export function filterTermsForMorphemeGame(terms) {
+  if (!Array.isArray(terms)) return [];
+  return terms.filter((term) => parseTermToMorphemes(term) !== null);
+}
+
+/**
+ * Bir terimin verilen kategori kimliğine ait olup olmadığını kontrol eder.
+ */
+export function termMatchesMorphemeCategory(term, categoryId) {
+  if (!term || !categoryId || categoryId === 'all') return true;
+  return (
+    term.subcategory === categoryId ||
+    term.category === categoryId ||
+    term.system === categoryId
+  );
+}
+
+/**
+ * Morfem Yapıcı'da en az minCount (varsayılan 4) uygun terime sahip kategorileri döndürür.
+ */
+export function getEligibleMorphemeCategories(
+  terms,
+  categories = MORPHEME_GAME_CATEGORIES,
+  minCount = MORPHEME_MIN_CATEGORY_TERMS
+) {
+  const eligibleTerms = filterTermsForMorphemeGame(terms);
+  return categories.filter((cat) => {
+    const count = eligibleTerms.filter((term) => termMatchesMorphemeCategory(term, cat.id)).length;
+    return count >= minCount;
+  });
+}
+
+/**
+ * Tıbbi terimleri 10'ar soruluk (veya kategoride 10'dan az varsa o kadar) Morfem Yapıcı oyun sorularına dönüştürür.
  */
 export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
-  let sourceTerms = Array.isArray(terms) && terms.length > 0 ? terms : [];
+  const sourceTerms = filterTermsForMorphemeGame(terms);
 
   const candidateQuestions = [];
   const allParsedParts = [];
@@ -504,7 +576,7 @@ export function adaptTermsToMorphemeQuestions(terms, roundSize = 10) {
 
   // Yalnızca kategoride hiç soru üretilemediyse genel havuzdan fallback yap
   if (candidateQuestions.length === 0) {
-    const fallbackTerms = getAllTerms();
+    const fallbackTerms = filterTermsForMorphemeGame(getAllTerms());
     fallbackTerms.forEach((term, idx) => {
       const primaryTerm = getPrimaryLatinTerm(term.term);
       if (!candidateQuestions.some((q) => q.targetLatinTerm === primaryTerm)) {
