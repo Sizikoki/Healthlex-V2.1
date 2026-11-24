@@ -18,7 +18,7 @@ const FOOTER_TRANSLATIONS = {
     cookies: 'Çerez Politikası',
     cookiePreferences: 'Çerez tercihleri',
     col3Title: 'DESTEK',
-    supportSla: '24 - 48 saat içerisinde yanıtlıyoruz.',
+    supportSla: 'Genellikle 1–2 iş günü içinde yanıtlıyoruz.',
     disclaimer: 'HealthLexMed bir eğitim aracıdır; tıbbi tavsiye, tanı veya tedavi yerine geçmez.',
     copyright: '© 2026 HealthLexMed · Tüm hakları saklıdır.',
     crafted: 'Türkiye’de tasarlandı'
@@ -37,7 +37,7 @@ const FOOTER_TRANSLATIONS = {
     cookies: 'Cookie Policy',
     cookiePreferences: 'Cookie preferences',
     col3Title: 'SUPPORT',
-    supportSla: 'We reply within 24 - 48 hours.',
+    supportSla: 'We usually reply within 1–2 business days.',
     disclaimer: 'HealthLexMed is an educational tool; it does not replace medical advice, diagnosis, or treatment.',
     copyright: '© 2026 HealthLexMed · All rights reserved.',
     crafted: 'Designed in Türkiye'
