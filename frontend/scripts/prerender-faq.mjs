@@ -31,7 +31,7 @@ const faqSchemaJson = {
       "name": "Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süren boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsin. 3 gün dolmadan önce dilediğin an tek tıkla iptal edebilirsin; deneme süresi içinde iptal etmen durumunda kartından hiçbir ücret çekilmez."
+        "text": "Temel ve Pro planlarda 3 günlük ücretsiz deneme var; deneme boyunca seçtiğin planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda seçtiğin planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir."
       }
     },
     {
@@ -39,7 +39,7 @@ const faqSchemaJson = {
       "name": "Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk 150 morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsin."
+        "text": "Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard'a erişebilirsin. Temel plan: ilk 150 morfem, sınırsız Flashcard ve Eşleştirme, ilerleme takibi. Pro plan: 550+ morfemin tamamı, Quiz ve Morfem Yapıcı oyunları. 3 günlük ücretsiz deneme boyunca seçtiğin planın tüm özellikleri açık."
       }
     },
     {
@@ -47,7 +47,7 @@ const faqSchemaJson = {
       "name": "Nasıl kayıt olurum / hesap oluştururum?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adın, e-posta adresin ve belirleyeceğin şifre ile yalnızca 10 saniyede ücretsiz hesabını oluşturabilirsin. Dilersen Google hesabınla da tek tıkla şifresiz ve anında kayıt olabilirsin."
+        "text": "Sağ üstteki 'Kayıt Ol' düğmesinden adın, e-posta adresin ve bir şifreyle ücretsiz hesap açabilirsin. İstersen Google hesabınla da kayıt olabilirsin."
       }
     },
     {
@@ -55,7 +55,7 @@ const faqSchemaJson = {
       "name": "Mobilde/tarayıcıda çalışıyor mu, uygulama indirmem gerekiyor mu?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmene gerek kalmadan; telefon, tablet ve masaüstü bilgisayarındaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsin."
+        "text": "Uygulama indirmene gerek yok. HealthLexMed telefon, tablet ve bilgisayardaki tarayıcılarda (Chrome, Safari, Edge) çalışır. İstersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek telefonuna kısayol olarak ekleyebilirsin."
       }
     },
     {
@@ -63,7 +63,7 @@ const faqSchemaJson = {
       "name": "Terimler hangi kaynaklardan doğrulanıyor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tüm Latince tıp terimleri ve morfolojik kök-ek çözümlemeleri, uluslararası anatomi terminoloji standardı olan Federative Committee on Anatomical Terminology (FCAT) tarafından yayınlanan 'Terminologia Anatomica' referans alınarak ve tıp fakültesi anatomi müfredatlarıyla uyumlu olarak hazırlanmıştır. İçerikler, sağlık profesyonelleri ve fizyoterapistler tarafından klinik doğruluk denetiminden geçirilmektedir."
+        "text": "Anatomik terimler, uluslararası anatomi terminolojisi standardı Terminologia Anatomica (TA98 ve güncel sürümü TA2) esas alınarak hazırlanır. Kök, önek ve sonek çözümlemeleri tıbbi terminoloji kaynaklarından derlenir. İçerikler, platformun kurucusu Fizyoterapist Sıddık Çiçek tarafından hazırlanıp kontrol edilir. Bir hata görürsen bize bildirmen, kaynağı herkes için daha doğru yapar."
       }
     },
     {
@@ -71,7 +71,7 @@ const faqSchemaJson = {
       "name": "Fiyatlandırma nasıl, iptal edebilir miyim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed bütçene göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerini profilinden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğin an tek tıkla iptal edebilirsin. İptal ettiğinde ödemesini yaptığın dönem sonuna kadar erişimin kesintisiz devam eder."
+        "text": "Üç plan var: Yıllık Temel, Yıllık Pro ve tek ödemeli Ömür Boyu. Temel ve Pro aboneliklerini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder."
       }
     },
     {
@@ -79,7 +79,7 @@ const faqSchemaJson = {
       "name": "Taleplerime ne kadar sürede yanıt verilir?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Destek ekibimiz tüm talepleri önceliklendirerek inceler. Resmi hizmet standardımız (SLA) gereğince tüm kullanıcı sorularına, önerilerine ve teknik destek iletilerine en geç 24-48 saat içinde e-posta yoluyla detaylı dönüş sağlanır."
+        "text": "Tüm mesajları help@healthlexmed.com üzerinden okuyup yanıtlıyoruz. Genellikle 1–2 iş günü içinde dönüş yapıyoruz."
       }
     },
     {
@@ -87,7 +87,7 @@ const faqSchemaJson = {
       "name": "Aboneliğimi nasıl iptal edebilir veya yönetebilirim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Giriş yaptıktan sonra Profil sayfandaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsin."
+        "text": "Giriş yaptıktan sonra Profil sayfandaki abonelik bölümünden aboneliğini iptal edebilir ya da planını değiştirebilirsin. İstersen kayıtlı e-postandan help@healthlexmed.com adresine yazarak da iptal talebini iletebilirsin. Cayma bedeli yok."
       }
     },
     {
@@ -95,7 +95,7 @@ const faqSchemaJson = {
       "name": "Ödeme ve fatura işlemlerim nerede işlenir?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgilerin sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir."
+        "text": "Ödemeler, uluslararası ödeme kuruluşu Paddle üzerinden alınır. Kart bilgilerin bizim sunucularımızda tutulmaz. Fatura ve ödeme belgelerin kayıtlı e-postana gönderilir."
       }
     },
     {
@@ -103,7 +103,7 @@ const faqSchemaJson = {
       "name": "Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerini İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır."
+        "text": "Terim adını ve gördüğün hatayı İletişim sayfasından ya da help@healthlexmed.com adresinden bize ilet. Her bildirimi kaynaklarla karşılaştırarak inceliyor, doğru bulduğumuz düzeltmeleri yayına alıyoruz. Bildirimin için teşekkürler."
       }
     }
   ]

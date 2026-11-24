@@ -1,20 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  HelpCircle,
-  ChevronDown,
-  ArrowLeft,
-  Search,
-  CheckCircle2,
-  ShieldCheck,
-  CreditCard,
-  Smartphone,
-  BookOpen,
-  UserPlus,
-  Mail,
-  Sparkles,
-  ArrowRight
-} from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/context/LanguageContext';
@@ -44,144 +30,124 @@ export const FAQ = () => {
           {
             id: 'trial',
             category: 'pricing',
-            icon: Sparkles,
             q: 'Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?',
-            a: 'Temel ve Pro üyelik paketlerimizde 3 günlük ₺0 ücretsiz deneme süresi sunulmaktadır. Deneme süren boyunca platformun tüm özelliklerini tam kapsamıyla deneyimleyebilirsin. 3 gün dolmadan önce dilediğin an tek tıkla iptal edebilirsin; deneme süresi içinde iptal etmen durumunda kartından hiçbir ücret çekilmez.'
+            a: 'Temel ve Pro planlarda 3 günlük ücretsiz deneme var; deneme boyunca seçtiğin planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda seçtiğin planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir.'
           },
           {
             id: 'categories',
             category: 'content',
-            icon: BookOpen,
             q: 'Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?',
-            a: `16 anatomik kategorinin ve tıbbi terimler sözlüğünün tamamı misafirler dahil tüm kullanıcılara açıktır. Misafirler ilk 24 morfeme ve günde 5 tur Flashcard oyununa ücretsiz erişebilir. Temel plan; ilk ${MAX_BASIC_MORPHEMES} morfemi, sınırsız Flashcard ve Eşleştirme oyununu ve kişisel ilerleme takibini içerir. Pro planda ise 550+ morfemin tamamı, Quiz ve Morfem Çözümleme oyun modları, akıllı tekrar algoritması ve tüm gelişmiş analizler sınırsız kullanıma açılır. Ayrıca 3 günlük ücretsiz deneme sürecinde tüm Pro özelliklerini sınırsızca deneyimleyebilirsin.`
+            a: `Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard'a erişebilirsin. Temel plan: ilk ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard ve Eşleştirme, ilerleme takibi. Pro plan: 550+ morfemin tamamı, Quiz ve Morfem Yapıcı oyunları. 3 günlük ücretsiz deneme boyunca seçtiğin planın tüm özellikleri açık.`
           },
           {
             id: 'register',
             category: 'account',
-            icon: UserPlus,
             q: 'Nasıl kayıt olurum / hesap oluştururum?',
-            a: "Sağ üst menüdeki 'Kayıt Ol' butonuna tıklayarak adın, e-posta adresin ve belirleyeceğin şifre ile yalnızca 10 saniyede ücretsiz hesabını oluşturabilirsin. Dilersen Google hesabınla da tek tıkla şifresiz ve anında kayıt olabilirsin."
+            a: "Sağ üstteki 'Kayıt Ol' düğmesinden adın, e-posta adresin ve bir şifreyle ücretsiz hesap açabilirsin. İstersen Google hesabınla da kayıt olabilirsin."
           },
           {
             id: 'mobile',
             category: 'tech',
-            icon: Smartphone,
             q: 'Mobilde/tarayıcıda çalışıyor mu, uygulama indirmem gerekiyor mu?',
-            a: "HealthLexMed modern bir Progressive Web App (PWA) mimarisine sahiptir. App Store veya Google Play'den yer kaplayan bir uygulama indirmene gerek kalmadan; telefon, tablet ve masaüstü bilgisayarındaki tüm modern tarayıcılarda (Chrome, Safari, Edge) tam ekran ve yüksek hızda çalışır. Dilersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek uygulama gibi anında başlatabilirsin."
+            a: "Uygulama indirmene gerek yok. HealthLexMed telefon, tablet ve bilgisayardaki tarayıcılarda (Chrome, Safari, Edge) çalışır. İstersen tarayıcı menüsünden 'Ana Ekrana Ekle' diyerek telefonuna kısayol olarak ekleyebilirsin."
           },
           {
             id: 'sources',
             category: 'content',
-            icon: ShieldCheck,
             q: 'Terimler hangi kaynaklardan doğrulanıyor?',
-            a: "Tüm Latince tıp terimleri ve morfolojik kök-ek çözümlemeleri, uluslararası anatomi terminoloji standardı olan Federative Committee on Anatomical Terminology (FCAT) tarafından yayınlanan 'Terminologia Anatomica' referans alınarak ve tıp fakültesi anatomi müfredatlarıyla uyumlu olarak hazırlanmıştır. İçerikler, sağlık profesyonelleri ve fizyoterapistler tarafından klinik doğruluk denetiminden geçirilmektedir."
+            a: 'Anatomik terimler, uluslararası anatomi terminolojisi standardı Terminologia Anatomica (TA98 ve güncel sürümü TA2) esas alınarak hazırlanır. Kök, önek ve sonek çözümlemeleri tıbbi terminoloji kaynaklarından derlenir. İçerikler, platformun kurucusu Fizyoterapist Sıddık Çiçek tarafından hazırlanıp kontrol edilir. Bir hata görürsen bize bildirmen, kaynağı herkes için daha doğru yapar.'
           },
           {
             id: 'pricing',
             category: 'pricing',
-            icon: CreditCard,
             q: 'Fiyatlandırma nasıl, iptal edebilir miyim?',
-            a: 'HealthLexMed bütçene göre esnek seçenekler sunar: Yıllık Temel, Yıllık Pro (en avantajlı) ve tek seferlik ödeme içeren Ömür Boyu planları bulunmaktadır. Temel ve Pro aboneliklerini profilinden herhangi bir cayma bedeli veya taahhüt olmaksızın dilediğin an tek tıkla iptal edebilirsin. İptal ettiğinde ödemesini yaptığın dönem sonuna kadar erişimin kesintisiz devam eder.'
+            a: 'Üç plan var: Yıllık Temel, Yıllık Pro ve tek ödemeli Ömür Boyu. Temel ve Pro aboneliklerini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder.'
           },
           {
-            id: 'sla',
+            id: 'response-time',
             category: 'support',
-            icon: HelpCircle,
             q: 'Taleplerime ne kadar sürede yanıt verilir?',
-            a: 'Destek ekibimiz tüm talepleri önceliklendirerek inceler. Resmi hizmet standardımız (SLA) gereğince tüm kullanıcı sorularına, önerilerine ve teknik destek iletilerine en geç 24-48 saat içinde e-posta yoluyla detaylı dönüş sağlanır.'
+            a: 'Tüm mesajları help@healthlexmed.com üzerinden okuyup yanıtlıyoruz. Genellikle 1–2 iş günü içinde dönüş yapıyoruz.'
           },
           {
             id: 'cancel-how',
             category: 'account',
-            icon: CheckCircle2,
             q: 'Aboneliğimi nasıl iptal edebilir veya yönetebilirim?',
-            a: 'Giriş yaptıktan sonra Profil sayfandaki abonelik yönetim panelinden veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın sonlandırabilirsin.'
+            a: 'Giriş yaptıktan sonra Profil sayfandaki abonelik bölümünden aboneliğini iptal edebilir ya da planını değiştirebilirsin. İstersen kayıtlı e-postandan help@healthlexmed.com adresine yazarak da iptal talebini iletebilirsin. Cayma bedeli yok.'
           },
           {
             id: 'payment-partner',
             category: 'pricing',
-            icon: ShieldCheck,
             q: 'Ödeme ve fatura işlemlerim nerede işlenir?',
-            a: 'HealthLexMed üzerindeki tüm abonelik, kart saklama ve ödeme işlemleri uluslararası Merchant of Record ödeme ortağımız Paddle güvencesiyle 256-bit SSL şifreleme ile yürütülür. Kredi kartı bilgilerin sunucularımızda asla tutulmaz. Resmi fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir.'
+            a: 'Ödemeler, uluslararası ödeme kuruluşu Paddle üzerinden alınır. Kart bilgilerin bizim sunucularımızda tutulmaz. Fatura ve ödeme belgelerin kayıtlı e-postana gönderilir.'
           },
           {
             id: 'term-feedback',
             category: 'support',
-            icon: Mail,
             q: 'Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?',
-            a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli güncellemekte ve doğrulamaktadır. Terim adı, ilgili kategori ve önerini İletişim sayfasından veya help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
+            a: 'Terim adını ve gördüğün hatayı İletişim sayfasından ya da help@healthlexmed.com adresinden bize ilet. Her bildirimi kaynaklarla karşılaştırarak inceliyor, doğru bulduğumuz düzeltmeleri yayına alıyoruz. Bildirimin için teşekkürler.'
           }
         ]
       : [
           {
             id: 'trial',
             category: 'pricing',
-            icon: Sparkles,
             q: 'How does the free trial work and how long does it last?',
-            a: 'We offer a 3-day ₺0 free trial for both Basic and Pro membership plans. During the trial period, you can explore all features of the selected tier without limitation. You can cancel anytime in 1 click before the 3 days end, and your card will not be charged.'
+            a: 'Both Basic and Pro plans include a 3-day free trial; during the trial, all features of your chosen plan are open. Card details are required to start the trial. If you cancel from your profile before the 3 days end, you will not be charged. If you do not cancel, the annual fee for your chosen plan is charged at the end of the trial and the subscription renews each year.'
           },
           {
             id: 'categories',
             category: 'content',
-            icon: BookOpen,
-            q: 'Which features are free, and what is included in Basic and Pro plans?',
-            a: `All 16 anatomical categories and the complete medical glossary are openly accessible to everyone, including guests. Guests can explore the first 24 morphemes and play up to 5 Flashcard sessions daily. The Basic plan unlocks the top ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcard and Matching games, and personal progress tracking. The Pro plan provides unrestricted access to all 550+ morphemes, Quiz and Morpheme Builder game modes, smart review spaced repetition, and in-depth analytics. Additionally, the 3-day free trial grants complete, unrestricted access to all Pro features.`
+            q: 'Which content is free, and what is included in Basic and Pro plans?',
+            a: `All glossary terms and 16 categories are open to everyone, even without an account. As a guest, you can access the first 24 morphemes and 5 Flashcard rounds per day. Basic plan: first ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards and Matching, progress tracking. Pro plan: all 550+ morphemes, Quiz and Morpheme Builder games. During the 3-day free trial, all features of your chosen plan are open.`
           },
           {
             id: 'register',
             category: 'account',
-            icon: UserPlus,
             q: 'How do I register or create an account?',
-            a: 'Click the "Register" button in the top navigation. You can create your free account in just 10 seconds using your name, email, and password, or sign in instantly with your Google account.'
+            a: "You can create a free account from the 'Register' button at the top right using your name, email address, and a password. You can also sign up with your Google account."
           },
           {
             id: 'mobile',
             category: 'tech',
-            icon: Smartphone,
-            q: 'Does it work on mobile/browsers, do I need to install an app?',
-            a: 'HealthLexMed is built on a modern Progressive Web App (PWA) architecture. You do not need to download an app from the App Store or Google Play; it runs smoothly and responsively across all smartphones, tablets, and desktop browsers (Chrome, Safari, Edge). You can also tap "Add to Home Screen" to use it just like a native app.'
+            q: 'Does it work on mobile and browsers, or do I need to download an app?',
+            a: "You do not need to download an app. HealthLexMed works in browsers (Chrome, Safari, Edge) on phones, tablets, and computers. You can also add a shortcut to your phone using 'Add to Home Screen' in your browser menu."
           },
           {
             id: 'sources',
             category: 'content',
-            icon: ShieldCheck,
-            q: 'Which sources are used to verify the medical terms?',
-            a: 'All Latin medical terms and morpheme breakdowns are compiled in accordance with "Terminologia Anatomica" (the international standard published by FCAT) and standard medical school anatomy curricula. Content is clinically reviewed and verified by healthcare professionals and physiotherapists.'
+            q: 'Which sources are used to verify the terms?',
+            a: 'Anatomical terms are prepared based on the international anatomical terminology standard Terminologia Anatomica (TA98 and its current edition TA2). Root, prefix, and suffix breakdowns are compiled from medical terminology references. Content is prepared and reviewed by the platform founder, Physiotherapist Sıddık Çiçek. Reporting any error you notice helps make the resource more accurate for everyone.'
           },
           {
             id: 'pricing',
             category: 'pricing',
-            icon: CreditCard,
-            q: 'How is pricing structured, and can I cancel anytime?',
-            a: 'HealthLexMed offers flexible plans: Annual Basic, Annual Pro (most popular), and a one-time Lifetime plan. You can cancel your Basic or Pro subscription anytime directly from your profile with zero cancellation fees or commitments. Your access remains active until the end of your billing cycle.'
+            q: 'How does pricing work, and can I cancel?',
+            a: 'There are three plans: Annual Basic, Annual Pro, and a one-time Lifetime plan. You can cancel your Basic or Pro subscription anytime from your profile with no cancellation fee. After cancelling, your access continues until the end of your paid period.'
           },
           {
-            id: 'sla',
+            id: 'response-time',
             category: 'support',
-            icon: HelpCircle,
-            q: 'How fast will I receive a response to my inquiry?',
-            a: 'Our support team prioritizes and reviews every request. In accordance with our official service standard (SLA), requests are replied with a detailed email within 24-48 hours.'
+            q: 'How long does it take to get a reply?',
+            a: 'We read and answer all messages at help@healthlexmed.com. We usually reply within 1–2 business days.'
           },
           {
             id: 'cancel-how',
             category: 'account',
-            icon: CheckCircle2,
-            q: 'How can I manage or cancel my subscription?',
-            a: 'You can cancel anytime from your Profile page under the subscription management section after logging in, or simply email us at help@healthlexmed.com from your registered email address. There are no cancellation penalties.'
+            q: 'How can I cancel or manage my subscription?',
+            a: 'After signing in, you can cancel your subscription or change your plan from the subscription section on your Profile page. You can also email help@healthlexmed.com from your registered email address to request cancellation. There is no cancellation fee.'
           },
           {
             id: 'payment-partner',
             category: 'pricing',
-            icon: ShieldCheck,
             q: 'Where are payments and invoices processed?',
-            a: 'All subscription and billing processes on HealthLexMed are handled securely through our international Merchant of Record partner, Paddle, with 256-bit SSL encryption. We never store credit card data on our servers. Invoices and receipts are sent automatically to your registered email.'
+            a: 'Payments are processed through the international payment provider Paddle. Your card details are not stored on our servers. Invoices and payment receipts are sent to your registered email address.'
           },
           {
             id: 'term-feedback',
             category: 'support',
-            icon: Mail,
-            q: 'What should I do if I notice an issue with a medical term or definition?',
-            a: 'Our medical terminology editorial team verifies content continuously. Please send the term name and your suggestion via our Contact page or to help@healthlexmed.com; our panel will review and apply corrections within 24-48 hours.'
+            q: 'What should I do if I notice an error in a medical term or explanation?',
+            a: 'Send us the term name and the error you noticed through the Contact page or at help@healthlexmed.com. We check every report against reference sources and publish verified corrections. Thank you for letting us know.'
           }
         ];
   }, [isTr]);
@@ -233,7 +199,7 @@ export const FAQ = () => {
         { id: 'content', label: 'İçerik & Kaynaklar' },
         { id: 'account', label: 'Hesap & Abonelik' },
         { id: 'tech', label: 'Mobil & Teknik' },
-        { id: 'support', label: 'Destek & SLA' }
+        { id: 'support', label: 'Destek' }
       ]
     : [
         { id: 'all', label: 'All Questions' },
@@ -241,7 +207,7 @@ export const FAQ = () => {
         { id: 'content', label: 'Content & Sources' },
         { id: 'account', label: 'Account & Plans' },
         { id: 'tech', label: 'Mobile & Tech' },
-        { id: 'support', label: 'Support & SLA' }
+        { id: 'support', label: 'Support' }
       ];
 
   // Schema.org FAQPage JSON-LD (Sayfadaki TÜM sorular ve yanıtlarla birebir eşleşir)
@@ -298,16 +264,14 @@ export const FAQ = () => {
             <div className="flex items-center gap-2 mb-6">
               <Link
                 to="/"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
                 {isTr ? 'Ana Sayfaya Dön' : 'Back to Home'}
               </Link>
             </div>
 
             <div className="text-center max-w-2xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">
-                <HelpCircle className="w-4 h-4" />
+              <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">
                 {isTr ? 'Bilgi & Yardım Merkezi' : 'Help & Information Center'}
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-serif text-foreground">
@@ -321,7 +285,6 @@ export const FAQ = () => {
 
               {/* Canlı Arama Çubuğu */}
               <div className="relative max-w-xl mx-auto pt-2">
-                <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <Input
                   type="text"
                   value={searchQuery}
@@ -331,7 +294,7 @@ export const FAQ = () => {
                       ? 'Sorularda veya yanıtlarda ara (örn: deneme, iptal, mobil, kaynak)...'
                       : 'Search questions or answers (e.g. trial, cancel, mobile, source)...'
                   }
-                  className="pl-10 pr-4 py-2.5 bg-card/80 border-border text-sm shadow-xs rounded-xl"
+                  className="px-4 py-2.5 bg-card/80 border-border text-sm shadow-xs rounded-xl"
                 />
               </div>
             </div>
@@ -362,14 +325,13 @@ export const FAQ = () => {
         <section className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           {filteredFaqs.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-border rounded-2xl bg-card/40 p-8">
-              <HelpCircle className="w-10 h-10 text-muted-foreground/50 mx-auto mb-3" />
               <h3 className="text-base font-bold text-foreground">
                 {isTr ? 'Aradığın kriterlere uygun soru bulunamadı' : 'No questions found'}
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-4">
                 {isTr
-                  ? 'Farklı bir arama terimi deneyebilir veya destek ekibimizle doğrudan iletişime geçebilirsin.'
-                  : 'Try a different search keyword or contact our support team directly.'}
+                  ? 'Farklı bir arama terimi deneyebilir veya bize doğrudan yazabilirsin.'
+                  : 'Try a different search keyword or write to us directly.'}
               </p>
               <Button
                 variant="outline"
@@ -386,7 +348,6 @@ export const FAQ = () => {
             <div className="space-y-4">
               {filteredFaqs.map((item, idx) => {
                 const isOpen = !!openItems[idx];
-                const IconComponent = item.icon || HelpCircle;
 
                 return (
                   <div
@@ -400,14 +361,9 @@ export const FAQ = () => {
                       className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-muted/20 transition-colors"
                       aria-expanded={isOpen}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                          <IconComponent className="w-4 h-4" />
-                        </div>
-                        <span className="font-bold text-sm sm:text-base text-foreground font-sans leading-snug">
-                          {item.q}
-                        </span>
-                      </div>
+                      <span className="font-bold text-sm sm:text-base text-foreground font-sans leading-snug">
+                        {item.q}
+                      </span>
                       <ChevronDown
                         className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 ${
                           isOpen ? 'rotate-180 text-primary' : ''
@@ -417,7 +373,7 @@ export const FAQ = () => {
 
                     {/* Yanıt İçeriği (Görünür HTML Metni) */}
                     {isOpen && (
-                      <div className="px-4 pb-5 pt-1 sm:px-5 sm:pb-6 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40 bg-muted/10">
+                      <div className="px-4 pb-5 pt-3 sm:px-5 sm:pb-6 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40 bg-muted/10">
                         <p className="m-0 text-foreground/90 font-normal">
                           {item.a}
                         </p>
@@ -437,21 +393,19 @@ export const FAQ = () => {
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-lg">
                 {isTr
-                  ? 'Tıbbi terim önerileri, iş birliği veya teknik destek için bize 7/24 dilediğin an ulaşabilirsin. En geç 24-48 saat içinde yanıtlıyoruz.'
-                  : 'For medical terminology feedback, partnerships, or technical support, feel free to reach out anytime. We respond within 24-48 hours.'}
+                  ? 'Tıbbi terim önerileri, iş birliği ya da teknik destek için bize her zaman yazabilirsin. Genellikle 1–2 iş günü içinde yanıtlıyoruz.'
+                  : 'You can write to us anytime for medical term suggestions, collaborations, or technical support. We usually reply within 1–2 business days.'}
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 shrink-0">
               <Link to="/contact">
-                <Button className="font-semibold gap-2">
-                  <Mail className="w-4 h-4" />
+                <Button className="font-semibold">
                   {isTr ? 'Bize Ulaş' : 'Contact Us'}
                 </Button>
               </Link>
               <Link to="/pricing">
-                <Button variant="outline" className="font-semibold gap-2">
+                <Button variant="outline" className="font-semibold">
                   {isTr ? 'Tarifeleri İncele' : 'View Pricing'}
-                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
             </div>
