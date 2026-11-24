@@ -92,8 +92,8 @@ export const Contact = () => {
     setSubmitted(true);
     toast.success(
       isTr
-        ? 'E-posta istemcin açılıyor... Talebine 24-48 saat içinde dönüş sağlanacaktır.'
-        : 'Opening your email client... You will receive a response within 24-48 hours.'
+        ? 'E-posta istemcin açılıyor. Genellikle 1–2 iş günü içinde dönüş yapıyoruz.'
+        : 'Opening your email client. We usually reply within 1–2 business days.'
     );
   };
 
@@ -101,37 +101,37 @@ export const Contact = () => {
     ? [
         {
           q: 'Taleplerime ne kadar sürede yanıt verilir?',
-          a: 'Destek ekibimiz tüm talepleri önceliklendirerek inceler. Resmi hizmet standardımız gereğince tüm taleplerine en geç 24-48 saat içinde dönüş sağlanır.'
+          a: 'Mesajlarını help@healthlexmed.com üzerinden okuyup yanıtlıyoruz. Genellikle 1–2 iş günü içinde dönüş yapıyoruz.'
         },
         {
           q: 'Aboneliğimi nasıl iptal edebilir veya yönetebilirim?',
-          a: 'Giriş yaptıktan sonra Profil sayfandan veya doğrudan help@healthlexmed.com adresine kayıtlı e-postandan bir ileti göndererek aboneliğini anında ve herhangi bir cayma cezası olmaksızın iptal edebilirsin.'
+          a: 'Giriş yaptıktan sonra Profil sayfandan ya da kayıtlı e-postandan help@healthlexmed.com adresine yazarak aboneliğini iptal edebilirsin. Cayma bedeli yok.'
         },
         {
           q: 'Ödeme ve fatura işlemlerim nerede işlenir?',
-          a: 'HealthLexMed üzerindeki tüm abonelik ve ödeme işlemleri uluslararası ödeme ortağımız Paddle güvencesiyle yürütülür. Fatura ve ödeme dekontların kayıtlı e-postana otomatik olarak iletilir.'
+          a: 'Ödemeler, uluslararası ödeme kuruluşu Paddle üzerinden alınır. Fatura ve ödeme belgelerin kayıtlı e-postana gönderilir.'
         },
         {
           q: 'Bir tıbbi terimde veya açıklamada hata fark edersem ne yapmalıyım?',
-          a: 'Tıbbi terminoloji ekibimiz içerikleri sürekli doğrulamaktadır. Terim adı, kategori ve önerini help@healthlexmed.com adresine ilettiğinde terminoloji komisyonumuz 24-48 saat içinde inceleyerek düzeltmeyi yayına alır.'
+          a: 'Terim adını ve gördüğün hatayı bize ilet. Her bildirimi kaynaklarla karşılaştırarak inceliyor, doğru bulduğumuz düzeltmeleri yayına alıyoruz.'
         }
       ]
     : [
         {
-          q: 'How fast will I receive a response to my inquiry?',
-          a: 'Our support team prioritizes and reviews every request. In accordance with our official service standard, requests are replied within 24-48 hours.'
+          q: 'How long does it take to get a reply?',
+          a: 'We read and answer your messages at help@healthlexmed.com. We usually reply within 1–2 business days.'
         },
         {
-          q: 'How can I manage or cancel my subscription?',
-          a: 'You can cancel anytime from your Profile page after logging in, or simply email us at help@healthlexmed.com from your registered email address. There are no cancellation penalties.'
+          q: 'How can I cancel or manage my subscription?',
+          a: 'After signing in, you can cancel your subscription from your Profile page or by emailing help@healthlexmed.com from your registered email address. There is no cancellation fee.'
         },
         {
           q: 'Where are payments and invoices processed?',
-          a: 'All subscription and billing processes on HealthLexMed are handled securely through our international Merchant of Record partner, Paddle. Invoices and receipts are sent automatically to your registered email.'
+          a: 'Payments are processed through the international payment provider Paddle. Invoices and payment receipts are sent to your registered email address.'
         },
         {
-          q: 'What should I do if I notice an issue with a medical term or definition?',
-          a: 'Our medical terminology editorial team verifies content continuously. Please email the term name and your suggestion to help@healthlexmed.com; our panel will review and apply corrections within 24-48 hours.'
+          q: 'What should I do if I notice an error in a medical term or explanation?',
+          a: 'Send us the term name and the error you noticed. We check every report against reference sources and publish verified corrections.'
         }
       ];
 
@@ -226,27 +226,27 @@ export const Contact = () => {
                   <Clock className="w-5 h-5" />
                 </div>
                 <CardTitle className="text-base font-bold flex items-center justify-between">
-                  <span>{isTr ? 'Hızlı Yanıt Garantisi' : 'Response Guarantee'}</span>
+                  <span>{isTr ? 'Yanıt Süresi' : 'Response Time'}</span>
                   <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
-                    24-48h SLA
+                    {isTr ? '1–2 iş günü' : '1–2 business days'}
                   </Badge>
                 </CardTitle>
                 <CardDescription className="text-xs">
-                  {isTr ? 'Resmi hizmet seviyesi taahhüdümüz' : 'Our official service commitment'}
+                  {isTr ? 'E-posta üzerinden yanıtlıyoruz' : 'We reply by email'}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className="p-3 rounded-md bg-emerald-500/5 border border-emerald-500/15">
                   <p className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400 leading-snug">
                     {isTr
-                      ? 'Taleplerine 24-48 saat içinde dönüş sağlanır.'
-                      : 'Requests are replied within 24-48 hours.'}
+                      ? 'Genellikle 1–2 iş günü içinde dönüş yapıyoruz.'
+                      : 'We usually reply within 1–2 business days.'}
                   </p>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {isTr
-                    ? 'Ekibimiz haftanın 7 günü gelen tüm kullanıcı mesajlarını inceler ve çözümü hızla e-posta adresine iletir.'
-                    : 'Our team reviews inquiries 7 days a week and delivers resolution directly to your email.'}
+                    ? 'Gelen tüm mesajları okuyup yanıtı doğrudan e-posta adresine gönderiyoruz.'
+                    : 'We read all incoming messages and send our reply directly to your email address.'}
                 </p>
               </CardContent>
             </Card>
@@ -267,8 +267,8 @@ export const Contact = () => {
               <CardContent className="space-y-2">
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {isTr
-                    ? 'Ödemelerin, faturalandırma ve abonelik yönetimin küresel standartlarda güvence altındadır. İptal ve iade talepleri anında işlenir.'
-                    : 'Billing, receipts, and subscriptions adhere to international compliance. Cancellation and refund requests are processed promptly.'}
+                    ? 'Ödeme, fatura ve abonelik işlemleri Paddle üzerinden yürütülür. İptal ve iade taleplerini profilinden ya da e-posta ile iletebilirsin.'
+                    : 'Payments, invoices, and subscriptions are handled through Paddle. You can submit cancellation and refund requests from your profile or by email.'}
                 </p>
                 <div className="text-[11px] text-muted-foreground/80 pt-1 flex items-center gap-1.5">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -403,11 +403,11 @@ export const Contact = () => {
                       <Clock className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-foreground font-medium">
-                          {isTr ? 'SLA Bilgilendirmesi: ' : 'SLA Notice: '}
+                          {isTr ? 'Yanıt süresi: ' : 'Response time: '}
                         </strong>
                         {isTr
-                          ? 'Taleplerine 24-48 saat içinde dönüş sağlanır. help@healthlexmed.com alıcısıyla doğrudan e-posta gönderilir.'
-                          : 'Requests are replied within 24-48 hours. Direct email communication to help@healthlexmed.com.'}
+                          ? 'Genellikle 1–2 iş günü içinde yanıtlıyoruz. Mesajın doğrudan help@healthlexmed.com adresine gönderilir.'
+                          : 'We usually reply within 1–2 business days. Your message is sent directly to help@healthlexmed.com.'}
                       </div>
                     </div>
 
@@ -419,8 +419,8 @@ export const Contact = () => {
                     {submitted && (
                       <div className="p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-800 dark:text-emerald-300">
                         {isTr
-                          ? '✓ E-posta istemcin tetiklendi. Talebin bize ulaştıktan sonra 24-48 saat içinde help@healthlexmed.com üzerinden yanıtlanacaktır.'
-                          : '✓ Email client triggered. You will receive a response within 24-48 hours from help@healthlexmed.com.'}
+                          ? 'E-posta istemcin açıldı. Mesajın bize ulaştıktan sonra genellikle 1–2 iş günü içinde help@healthlexmed.com üzerinden yanıtlıyoruz.'
+                          : 'Your email client opened. Once we receive your message, we usually reply within 1–2 business days from help@healthlexmed.com.'}
                       </div>
                     )}
                   </form>

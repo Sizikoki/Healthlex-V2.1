@@ -1609,15 +1609,15 @@ const ProUserDashboard = ({
           <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[16px] p-5 sm:p-6 flex flex-col justify-between gap-3 shadow-xs">
             <div className="flex flex-col gap-2.5">
               <span className="font-extrabold text-[11px] leading-none tracking-[0.14em] text-[#6b7a90] dark:text-muted-foreground uppercase">
-                {isTr ? 'ZAYIF TERİMLER' : 'WEAK TERMS'}
+                {isTr ? 'İLERLEME TAKİBİ' : 'PROGRESS TRACKING'}
               </span>
               <span className="font-semibold text-[14px] leading-[1.5] text-[#3c4858] dark:text-foreground/90">
-                {isTr ? 'Zorlandığın terimler burada birikir.' : 'Terms you struggle with accumulate here.'}
+                {isTr ? 'Kategori yüzdeleri, rozetler ve oyun geçmişin.' : 'Category percentages, badges, and game history.'}
               </span>
               <span className="font-normal text-[13px] leading-[1.5] text-[#6b7a90] dark:text-muted-foreground">
                 {isTr
-                  ? 'Oyun oynadıkça ve test çözdükçe yanlış bildiğin terimler otomatik olarak bu alana eklenir.'
-                  : 'As you play games and solve quizzes, terms you miss will automatically appear here.'}
+                  ? 'Flashcard, Eşleştirme, Quiz ve Morfem Yapıcı oturumların ile 16 kategorideki ilerlemeni takip edebilirsin.'
+                  : 'Track your progress across 16 categories along with your Flashcards, Matching, Quiz, and Morpheme Builder sessions.'}
               </span>
             </div>
             <Link

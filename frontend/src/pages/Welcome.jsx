@@ -257,7 +257,7 @@ export const Welcome = () => {
           { name: 'Kategoriler', desc: '16 tıp kategorisi', type: 'open', limit: '16 kategori, sınırsız gezinme', sub: 'Tüm kategoriler açık', pro: 'Sınırsız' },
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
           { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '550+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '550+ morfem' },
-          { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Kişisel tekrar algoritması aktif', pro: 'Sınırsız' },
+          { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde sınırsız kart', pro: 'Sınırsız' },
           { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Açık' },
           { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Açık' },
           { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'open', limit: 'Sınırsız', sub: 'Tüm seviyeler açık', pro: 'Açık' },
@@ -287,7 +287,7 @@ export const Welcome = () => {
         { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık' },
         { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
         { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
-        { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; detaylı analiz Temel+’da' : 'Ücretsiz hesapta ilerleme kaydı; detaylı analiz Temel+’da', pro: 'Açık' }
+        { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; kategori yüzdeleri ve oyun geçmişi Temel+’da' : 'Ücretsiz hesapta ilerleme kaydı; kategori yüzdeleri ve oyun geçmişi Temel+’da', pro: 'Açık' }
       ];
     }
 
@@ -297,11 +297,11 @@ export const Welcome = () => {
         { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'All categories unlocked', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
         { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '550+ morphemes open', sub: 'Full library unlocked', pro: '550+ morphemes' },
-        { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Adaptive algorithm active', pro: 'Unlimited' },
+        { name: 'Flashcards', desc: 'Card review', type: 'open', limit: 'Unlimited', sub: 'Unlimited cards across all categories', pro: 'Unlimited' },
         { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Unlocked across all categories', pro: 'Unlocked' },
         { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'open', limit: 'Unlimited', sub: 'All difficulty levels', pro: 'Unlocked' },
         { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'open', limit: 'Unlimited', sub: 'All levels unlocked', pro: 'Unlocked' },
-        { name: 'Progress & Streaks', desc: 'Daily reviews & streaks', type: 'open', limit: 'Active', sub: 'Full analytics & achievements', pro: 'Unlocked' }
+        { name: 'Progress & Streaks', desc: 'Daily reviews & streaks', type: 'open', limit: 'Active', sub: 'Category percentages, badges & game history', pro: 'Unlocked' }
       ];
     }
 
@@ -310,7 +310,7 @@ export const Welcome = () => {
         { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
         { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `Top ${MAX_BASIC_MORPHEMES} morphemes open`, sub: 'Advanced morphemes require Pro', pro: '550+ morphemes' },
-        { name: 'Flashcards', desc: 'Spaced repetition', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
+        { name: 'Flashcards', desc: 'Card review', type: 'open', limit: 'Unlimited', sub: 'Unrestricted card sessions', pro: 'Unlimited' },
         { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Fully unlocked with Basic plan', pro: 'Unlocked' },
         { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
         { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
@@ -322,11 +322,11 @@ export const Welcome = () => {
       { name: 'Categories', desc: '16 medical categories', type: 'open', limit: '16 categories, unlimited browsing', sub: 'No lock', pro: 'Unlimited' },
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
       { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `First ${freeMorphemes} morphemes open`, sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
-      { name: 'Flashcards', desc: 'Spaced repetition with cards', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Unlimited' : '5 games per day', sub: isRegistered ? 'Unlimited with free account' : 'Refreshes every midnight', pro: 'Unlimited' },
+      { name: 'Flashcards', desc: 'Card review', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Unlimited' : '5 games per day', sub: isRegistered ? 'Unlimited with free account' : 'Refreshes every midnight', pro: 'Unlimited' },
       { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked' },
       { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
       { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
-      { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; detailed analytics in Basic+' : 'Progress saved with free account; analytics in Basic+', pro: 'Unlocked' }
+      { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; category percentages & game history in Basic+' : 'Progress saved with free account; category percentages & game history in Basic+', pro: 'Unlocked' }
     ];
   }, [termCount, isTr, isPro, isBasic, effectiveUser, freeMorphemes, isRegistered]);
 
@@ -564,7 +564,7 @@ export const Welcome = () => {
                   {isTr ? 'Flashcard & Tekrar' : 'Flashcard & Review'}
                 </div>
                 <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? 'Aralıklı tekrar algoritması ile kalıcı hafıza çalışması.' : 'Spaced repetition for long-term memorization.'}
+                  {isTr ? 'Kartlarla terim ve anlam tekrarı yap.' : 'Review terms and meanings with flashcards.'}
                 </div>
               </div>
             </Link>

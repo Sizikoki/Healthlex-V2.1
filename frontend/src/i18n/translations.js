@@ -346,14 +346,14 @@ export const translations = {
     contactSupport: "İletişim & Destek",
     contactSupportDesc: "Soruların, teknik destek taleplerin veya geri bildirimlerin için bize dilediğin zaman ulaşabilirsin.",
     supportEmail: "help@healthlexmed.com",
-    contactSlaNotice: "Taleplerine 24-48 saat içinde dönüş sağlanır.",
+    contactSlaNotice: "Genellikle 1–2 iş günü içinde yanıtlıyoruz.",
     termsOfService: "Kullanım Koşulları",
     privacyPolicy: "Gizlilik Politikası",
     refundPolicy: "İptal & İade Politikası",
     copyEmail: "Adresi Kopyala",
     emailCopied: "E-posta adresi panoya kopyalandı!",
     openEmailApp: "E-posta Uygulamasında Aç",
-    formPaddleNotice: "Mesajı gönderdiğinde varsayılan e-posta istemcin help@healthlexmed.com alıcısıyla açılır. Talebine 24-48 saat içinde dönüş sağlanır.",
+    formPaddleNotice: "Mesajı gönderdiğinde varsayılan e-posta istemcin help@healthlexmed.com alıcısıyla açılır. Genellikle 1–2 iş günü içinde yanıtlıyoruz.",
 
     // Kayıt ve Çerez Tercihleri
     acceptTermsPrefix: "",
@@ -726,14 +726,14 @@ export const translations = {
     contactSupport: "Contact & Support",
     contactSupportDesc: "Feel free to reach out to us anytime for questions, technical support, billing, or feedback.",
     supportEmail: "help@healthlexmed.com",
-    contactSlaNotice: "Requests are replied within 24-48 hours.",
+    contactSlaNotice: "We usually reply within 1–2 business days.",
     termsOfService: "Terms of Service",
     privacyPolicy: "Privacy Policy",
     refundPolicy: "Refund Policy",
     copyEmail: "Copy Email",
     emailCopied: "Email address copied to clipboard!",
     openEmailApp: "Open in Email App",
-    formPaddleNotice: "Submitting this form opens your default email client addressed to help@healthlexmed.com. You will receive a response within 24-48 hours.",
+    formPaddleNotice: "Submitting this form opens your default email client addressed to help@healthlexmed.com. We usually reply within 1–2 business days.",
 
     // Registration and Cookie Preferences
     acceptTermsPrefix: "I have read, understood, and accept the ",

@@ -182,7 +182,7 @@ export const HOME_CONTENT = {
         refund: 'İptal ve İade'
       },
       supportEmail: 'help@healthlexmed.com',
-      slaNotice: 'Taleplerine 24-48 saat içinde dönüş sağlanır.'
+      slaNotice: 'Genellikle 1–2 iş günü içinde yanıtlıyoruz.'
     }
   },
   en: {
@@ -301,7 +301,7 @@ export const HOME_CONTENT = {
         refund: 'Refund Policy'
       },
       supportEmail: 'help@healthlexmed.com',
-      slaNotice: 'Requests are replied within 24-48 hours.'
+      slaNotice: 'We usually reply within 1–2 business days.'
     }
   }
 };

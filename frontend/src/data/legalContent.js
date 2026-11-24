@@ -8,7 +8,7 @@ export const LEGAL_CONTENT = {
       needHelp: 'Sorunuz mu var?',
       supportNotice: 'Tüm yasal ve operasyonel sorularınız için bize ulaşabilirsiniz.',
       contactSupport: 'İletişim & Destek',
-      responseSla: 'Taleplerinize 24-48 saat içinde dönüş sağlanır.'
+      responseSla: 'Genellikle 1–2 iş günü içinde yanıtlıyoruz.'
     },
     terms: {
       id: 'terms',
@@ -274,7 +274,7 @@ export const LEGAL_CONTENT = {
       needHelp: 'Have questions?',
       supportNotice: 'Feel free to reach out to us for any legal, billing, or operational inquiries.',
       contactSupport: 'Contact & Support',
-      responseSla: 'Requests are replied within 24-48 hours.'
+      responseSla: 'We usually reply within 1–2 business days.'
     },
     terms: {
       id: 'terms',

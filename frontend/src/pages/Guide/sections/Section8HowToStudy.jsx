@@ -44,7 +44,7 @@ const HEALTHLEX_APPS = [
   {
     title: 'Kelime kartları',
     path: '/flashcards?from=rehber-s8',
-    desc: 'Aralıklı tekrar planına göre kendin kullanarak terimleri hatırla.',
+    desc: 'Kartları çevirerek terimleri ve anlamlarını tekrar et.',
   },
   {
     title: 'Eşleştirme',
