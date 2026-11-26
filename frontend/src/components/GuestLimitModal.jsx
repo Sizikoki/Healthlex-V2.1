@@ -33,7 +33,7 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
               {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Planını Yükselt veya Üye Ol'))}
             </strong>
             {cardDesc || (userLoggedIn
-              ? t('upgradePlanCardDesc', 'Temel veya Pro plana geçerek tüm kelime kartlarına ve oyunlara sınırsız erişebilirsin.')
+              ? t('upgradePlanCardDesc', "Pro'ya geçerek tüm oyunlara ve 550+ morfeme sınırsız erişebilirsin.")
               : t('guestLimitCardDesc', 'Üyelik oluşturup planını seçerek kelime kartlarına ve oyunlara sınırsız erişebilirsin.'))}
           </div>
         </div>

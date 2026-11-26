@@ -33,7 +33,7 @@ import {
   syncMorphemeProgressFromFirestore,
   isLoggedIn
 } from '@/utils/storage';
-import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole, MAX_BASIC_MORPHEMES, MAX_GUEST_MORPHEMES } from '@/utils/planAccess';
+import { isMorphemeUnlocked, checkIsPro, checkIsBasic, getPreviewRole, MAX_BASIC_MORPHEMES, MAX_GUEST_MORPHEMES, MAX_FREE_USER_MORPHEMES } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { scoreAndRankMorphemes, normalizeSearchText } from '@/utils/searchHelper';
 import { toast } from 'sonner';
@@ -495,8 +495,8 @@ export const MorphemeExplorer = () => {
                         ? `Temel Paket: İlk ${MAX_BASIC_MORPHEMES} morfem açık. 550+ morfemin tamamı için Pro’ya geç.`
                         : `Basic Plan: First ${MAX_BASIC_MORPHEMES} morphemes unlocked. Upgrade to Pro for all 550+.`)
                     : (isTr
-                        ? `Misafir Modu: İlk ${MAX_GUEST_MORPHEMES} morfem açık. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamı için Pro’ya geç.`
-                        : `Guest Mode: First ${MAX_GUEST_MORPHEMES} morphemes unlocked. Upgrade to Basic for ${MAX_BASIC_MORPHEMES} or Pro for all 550+.`)}
+                        ? `Misafir Modu: İlk ${MAX_GUEST_MORPHEMES} morfem açık. Ücretsiz kayıtla ${MAX_FREE_USER_MORPHEMES} morfem, Pro ile 550+ morfemin tamamı açılır.`
+                        : `Guest Mode: First ${MAX_GUEST_MORPHEMES} morphemes unlocked. Sign up for free for ${MAX_FREE_USER_MORPHEMES} morphemes, or upgrade to Pro for all 550+.`)}
                 </span>
               </div>
               <Link to="/pricing" className="shrink-0 font-bold text-amber-700 dark:text-amber-300 hover:underline">
@@ -590,8 +590,8 @@ export const MorphemeExplorer = () => {
                   if (!isBasic) {
                     toast.info(
                       isTr
-                        ? `İlk ${MAX_GUEST_MORPHEMES} morfem misafirlere açıktır. ${MAX_BASIC_MORPHEMES} morfem için Temel plana, 550+ morfemin tamamına erişmek için Pro ve üzeri planlara geç.`
-                        : `The first ${MAX_GUEST_MORPHEMES} morphemes are open for guests. Upgrade to Basic for ${MAX_BASIC_MORPHEMES} morphemes or Pro and above for all 550+.`
+                        ? `İlk ${MAX_GUEST_MORPHEMES} morfem misafirlere açıktır. Ücretsiz kayıtla ${MAX_FREE_USER_MORPHEMES} morfem, Pro ile 550+ morfemin tamamı açılır.`
+                        : `The first ${MAX_GUEST_MORPHEMES} morphemes are open for guests. Sign up for free for ${MAX_FREE_USER_MORPHEMES} morphemes, or upgrade to Pro for all 550+.`
                     );
                   } else {
                     toast.info(
@@ -645,7 +645,7 @@ export const MorphemeExplorer = () => {
                           {locked && (
                             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0">
                               <Lock className="w-3 h-3" />
-                              {isBasic ? (isTr ? 'Pro ve Üzeri' : 'Pro & Above') : (isTr ? 'Temel ve Üzeri' : 'Basic & Above')}
+                              {isTr ? 'Pro ve Üzeri' : 'Pro & Above'}
                             </span>
                           )}
                         </div>

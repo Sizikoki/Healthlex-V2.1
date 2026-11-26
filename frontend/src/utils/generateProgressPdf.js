@@ -11,7 +11,7 @@ export const generateProgressPdf = async ({
   quizScores = [],
   matchScores = [],
   morphemeScores = [],
-  planName = 'Temel',
+  planName = 'Pro',
   isTr = true
 }) => {
   // 16 Kategori Listesi

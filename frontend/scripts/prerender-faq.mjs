@@ -31,15 +31,15 @@ const faqSchemaJson = {
       "name": "Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Temel ve Pro planlarda 3 günlük ücretsiz deneme var; deneme boyunca seçtiğin planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda seçtiğin planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir."
+        "text": "Pro planda 3 günlük ücretsiz deneme bulunur; deneme süresince planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda Pro planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir."
       }
     },
     {
       "@type": "Question",
-      "name": "Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?",
+      "name": "Hangi içerikler ücretsiz, hangileri Pro plana dahil?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard'a erişebilirsin. Temel plan: ilk 150 morfem, sınırsız Flashcard ve Eşleştirme, ilerleme takibi. Pro plan: 550+ morfemin tamamı, Quiz ve Morfem Yapıcı oyunları. 3 günlük ücretsiz deneme boyunca seçtiğin planın tüm özellikleri açık."
+        "text": "Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard çalışmasına erişebilirsin. Ücretsiz kayıtlı hesap: ilk 50 morfem ve sınırsız Flashcard çalışması sunar. Pro plan: 550+ morfemin tamamı, Eşleştirme, Quiz ve Morfem Yapıcı oyunları ile detaylı ilerleme takibini açar. 3 günlük ücretsiz deneme boyunca Pro planın tüm özellikleri açıktır."
       }
     },
     {
@@ -71,7 +71,7 @@ const faqSchemaJson = {
       "name": "Fiyatlandırma nasıl, iptal edebilir miyim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Üç plan var: Yıllık Temel, Yıllık Pro ve tek ödemeli Ömür Boyu. Temel ve Pro aboneliklerini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder."
+        "text": "Ücretsiz hesap, Yıllık Pro ve tek ödemeli Ömür Boyu seçenekleri bulunur. Pro aboneliğini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder."
       }
     },
     {

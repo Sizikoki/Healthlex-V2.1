@@ -127,8 +127,8 @@ export const Quiz = () => {
     if (trialState.mode === 'paid_locked') {
       toast.info(
         currentLanguage === 'en'
-          ? 'Quiz mode is exclusive to Pro and above plans. Flashcards and Matching games are available in your Basic plan.'
-          : 'Quiz modu Pro ve üzeri planlara özeldir. Flashcard ve Eşleştirme oyunları Temel paketinde açıktır.'
+          ? 'Quiz mode is exclusive to Pro and above plans.'
+          : 'Quiz modu Pro ve üzeri planlara özeldir.'
       );
       navigate('/pricing');
     }

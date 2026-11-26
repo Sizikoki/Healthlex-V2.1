@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/context/LanguageContext';
 import { updateCanonicalUrl } from '@/utils/seo';
-import { MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 
 export const FAQ = () => {
   const { currentLanguage } = useLanguage();
@@ -31,13 +30,13 @@ export const FAQ = () => {
             id: 'trial',
             category: 'pricing',
             q: 'Ücretsiz deneme nasıl çalışıyor, kaç gün sürüyor?',
-            a: 'Temel ve Pro planlarda 3 günlük ücretsiz deneme var; deneme boyunca seçtiğin planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda seçtiğin planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir.'
+            a: 'Pro planda 3 günlük ücretsiz deneme bulunur; deneme süresince planın tüm özellikleri açıktır. Denemeyi başlatırken kart bilgisi istenir. 3 gün dolmadan profilinden iptal edersen hiçbir ücret çekilmez. İptal etmezsen deneme sonunda Pro planın yıllık ücreti tahsil edilir ve abonelik her yıl yenilenir.'
           },
           {
             id: 'categories',
             category: 'content',
-            q: 'Hangi içerikler ücretsiz, hangileri Temel ve Pro planlara dahil?',
-            a: `Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard'a erişebilirsin. Temel plan: ilk ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard ve Eşleştirme, ilerleme takibi. Pro plan: 550+ morfemin tamamı, Quiz ve Morfem Yapıcı oyunları. 3 günlük ücretsiz deneme boyunca seçtiğin planın tüm özellikleri açık.`
+            q: 'Hangi içerikler ücretsiz, hangileri Pro plana dahil?',
+            a: 'Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard çalışmasına erişebilirsin. Ücretsiz kayıtlı hesap: ilk 50 morfem ve sınırsız Flashcard çalışması sunar. Pro plan: 550+ morfemin tamamı, Eşleştirme, Quiz ve Morfem Yapıcı oyunları ile detaylı ilerleme takibini açar. 3 günlük ücretsiz deneme boyunca Pro planın tüm özellikleri açıktır.'
           },
           {
             id: 'register',
@@ -61,7 +60,7 @@ export const FAQ = () => {
             id: 'pricing',
             category: 'pricing',
             q: 'Fiyatlandırma nasıl, iptal edebilir miyim?',
-            a: 'Üç plan var: Yıllık Temel, Yıllık Pro ve tek ödemeli Ömür Boyu. Temel ve Pro aboneliklerini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder.'
+            a: 'Ücretsiz hesap, Yıllık Pro ve tek ödemeli Ömür Boyu seçenekleri bulunur. Pro aboneliğini profilinden istediğin zaman iptal edebilirsin; cayma bedeli yok. İptal ettiğinde, ödediğin dönemin sonuna kadar erişimin devam eder.'
           },
           {
             id: 'response-time',
@@ -93,13 +92,13 @@ export const FAQ = () => {
             id: 'trial',
             category: 'pricing',
             q: 'How does the free trial work and how long does it last?',
-            a: 'Both Basic and Pro plans include a 3-day free trial; during the trial, all features of your chosen plan are open. Card details are required to start the trial. If you cancel from your profile before the 3 days end, you will not be charged. If you do not cancel, the annual fee for your chosen plan is charged at the end of the trial and the subscription renews each year.'
+            a: 'The Pro plan includes a 3-day free trial; during the trial, all Pro features are open. Card details are required to start the trial. If you cancel from your profile before the 3 days end, you will not be charged. If you do not cancel, the annual fee for the Pro plan is charged at the end of the trial and the subscription renews each year.'
           },
           {
             id: 'categories',
             category: 'content',
-            q: 'Which content is free, and what is included in Basic and Pro plans?',
-            a: `All glossary terms and 16 categories are open to everyone, even without an account. As a guest, you can access the first 24 morphemes and 5 Flashcard rounds per day. Basic plan: first ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards and Matching, progress tracking. Pro plan: all 550+ morphemes, Quiz and Morpheme Builder games. During the 3-day free trial, all features of your chosen plan are open.`
+            q: 'Which content is free, and what is included in the Pro plan?',
+            a: 'All glossary terms and 16 categories are open to everyone, even without an account. As a guest, you can access the first 24 morphemes and 5 Flashcard rounds per day. Free registered account: first 50 morphemes and unlimited Flashcard practice. Pro plan: all 550+ morphemes, Matching, Quiz, and Morpheme Builder games with full progress tracking. During the 3-day free trial, all Pro features are open.'
           },
           {
             id: 'register',
@@ -123,7 +122,7 @@ export const FAQ = () => {
             id: 'pricing',
             category: 'pricing',
             q: 'How does pricing work, and can I cancel?',
-            a: 'There are three plans: Annual Basic, Annual Pro, and a one-time Lifetime plan. You can cancel your Basic or Pro subscription anytime from your profile with no cancellation fee. After cancelling, your access continues until the end of your paid period.'
+            a: 'Options include a Free account, Annual Pro, and a one-time Lifetime plan. You can cancel your Pro subscription anytime from your profile with no cancellation fee. After cancelling, your access continues until the end of your paid period.'
           },
           {
             id: 'response-time',

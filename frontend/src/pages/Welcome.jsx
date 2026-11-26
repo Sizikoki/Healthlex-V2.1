@@ -284,10 +284,10 @@ export const Welcome = () => {
         { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
         { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: `İlk ${freeMorphemes} morfem açık`, sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '550+ morfem' },
         { name: 'Flashcard', desc: 'Kartlarla tekrar', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Sınırsız' : 'Günde 5 oyun', sub: isRegistered ? 'Ücretsiz hesapta sınırsız' : 'Her gece yenilenir', pro: 'Sınırsız' },
-        { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Temel ve üzeri planlarla açılır', pro: 'Açık' },
+        { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Pro ile açılır', pro: 'Açık' },
         { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
         { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
-        { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; kategori yüzdeleri ve oyun geçmişi Temel+’da' : 'Ücretsiz hesapta ilerleme kaydı; kategori yüzdeleri ve oyun geçmişi Temel+’da', pro: 'Açık' }
+        { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; kategori yüzdeleri ve oyun geçmişi Pro’da' : 'Ücretsiz hesapta ilerleme kaydı; kategori yüzdeleri ve oyun geçmişi Pro’da', pro: 'Açık' }
       ];
     }
 
@@ -323,10 +323,10 @@ export const Welcome = () => {
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
       { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `First ${freeMorphemes} morphemes open`, sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
       { name: 'Flashcards', desc: 'Card review', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Unlimited' : '5 games per day', sub: isRegistered ? 'Unlimited with free account' : 'Refreshes every midnight', pro: 'Unlimited' },
-      { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Basic and above', pro: 'Unlocked' },
+      { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Pro', pro: 'Unlocked' },
       { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
       { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
-      { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; category percentages & game history in Basic+' : 'Progress saved with free account; category percentages & game history in Basic+', pro: 'Unlocked' }
+      { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; category percentages & game history in Pro' : 'Progress saved with free account; category percentages & game history in Pro', pro: 'Unlocked' }
     ];
   }, [termCount, isTr, isPro, isBasic, effectiveUser, freeMorphemes, isRegistered]);
 
