@@ -6,7 +6,6 @@ import { auth } from '@/firebase/config';
 import { getUser } from '@/utils/storage';
 import { toast } from 'sonner';
 import { ArrowRight } from 'lucide-react';
-import { MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
 
 const PRICING_CONTENT = {
   tr: {
@@ -22,24 +21,6 @@ const PRICING_CONTENT = {
     vat: 'Fiyatlara KDV dahil',
     secure: '256-bit güvenli ödeme',
     plans: [
-      {
-        id: 'basic',
-        name: 'Temel',
-        tag: `16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard & Eşleştirme.`,
-        mo: '₺99',
-        yrp: '₺790',
-        noteMo: 'Aylık faturalandırılır',
-        noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
-        cta: '3 Gün Ücretsiz Dene',
-        isPro: false,
-        feats: [
-          ['✓', `16 anatomik kategori · ${MAX_BASIC_MORPHEMES} morfem`],
-          ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
-          ['✓', 'Kişisel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
-          ['–', 'Tüm 550+ morfem havuzu (Pro ve üzeri)']
-        ]
-      },
       {
         id: 'pro',
         name: 'Pro',
@@ -92,24 +73,6 @@ const PRICING_CONTENT = {
     vat: 'VAT included',
     secure: '256-bit secure payment',
     plans: [
-      {
-        id: 'basic',
-        name: 'Basic',
-        tag: `16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards & Matching.`,
-        mo: '₺99',
-        yrp: '₺790',
-        noteMo: 'Billed monthly',
-        noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
-        cta: 'Start 3-Day Free Trial',
-        isPro: false,
-        feats: [
-          ['✓', `16 anatomical categories · ${MAX_BASIC_MORPHEMES} morphemes`],
-          ['✓', 'Unlimited Flashcards and Matching games'],
-          ['✓', 'Personal progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Pro & above)'],
-          ['–', 'Full 550+ morpheme library (Pro & above)']
-        ]
-      },
       {
         id: 'pro',
         name: 'Pro',
@@ -227,8 +190,8 @@ export const HomePricingSection = () => {
           </div>
         </div>
 
-        {/* 3 Tarife Kartı Izgarası (Temel, Pro, Ömür Boyu) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8 items-stretch max-w-6xl mx-auto">
+        {/* 2 Tarife Kartı Izgarası (Pro, Ömür Boyu) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8 items-stretch max-w-4xl mx-auto">
           {t.plans.map((p) => {
             const isPro = p.isPro;
             const isLife = p.isLife;

@@ -398,11 +398,11 @@ export const Welcome = () => {
     return {
       title: isTr ? 'Tamamını açmak için bir plan seç' : 'Choose a plan to unlock everything',
       subtitle: isTr
-        ? 'Temel ₺790/yıl · Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
-        : 'Basic ₺790/yr · Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time',
+        ? 'Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
+        : 'Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time',
       mobileSubtitle: isTr
-        ? 'Temel ₺790/yıl · Pro ₺2.000/yıl · Ömür Boyu ₺5.990'
-        : 'Basic ₺790/yr · Pro ₺2,000/yr · Lifetime ₺5,990',
+        ? 'Pro ₺2.000/yıl · Ömür Boyu ₺5.990'
+        : 'Pro ₺2,000/yr · Lifetime ₺5,990',
       secondaryText: isRegistered
         ? (isTr ? 'Ücretsiz devam et' : 'Continue for free')
         : (isTr ? 'Misafir olarak devam et' : 'Continue as guest'),

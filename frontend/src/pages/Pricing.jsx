@@ -7,7 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { openPaddleCheckout, getPriceIdForPlan, PADDLE_PRICE_ID, IS_PAYMENT_ACTIVE } from '@/services/paddle';
 import { changePlan } from '@/services/subscriptionService';
-import { checkIsPro, getPreviewRole, MAX_BASIC_MORPHEMES } from '@/utils/planAccess';
+import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { toast } from 'sonner';
 
@@ -29,11 +29,10 @@ const TRANSLATIONS = {
     subVisitor: 'Abonelik planlarında 3 gün ₺0 deneme. Dilediğin an tek tıkla iptal et, 3 gün sonra yıllık faturalandırılır.',
     noCardNote: 'Bugün ₺0 çekilir · Dilediğin an iptal et.',
     startTrial: '3 gün ücretsiz dene',
-    tabNames: ['Temel', 'Pro', 'Ömür Boyu'],
+    tabNames: ['Pro', 'Ömür Boyu'],
     monthly: 'Aylık',
     yearly: 'Yıllık',
     compare: 'ÖZELLİKLER',
-    pBasic: 'TEMEL',
     pPro: 'PRO',
     pLife: 'ÖMÜR BOYU',
     cancel: 'Tek tıkla iptal, soru sorulmaz',
@@ -44,22 +43,6 @@ const TRANSLATIONS = {
     perOnce: 'tek ödeme',
     free: '₺0',
     plans: [
-      {
-        name: 'Temel',
-        tag: `16 kategori sözlüğü, ${MAX_BASIC_MORPHEMES} morfem, sınırsız Flashcard & Eşleştirme.`,
-        mo: '₺99',
-        yrp: '₺790',
-        noteMo: 'Aylık faturalandırılır',
-        noteYr: '3 gün ücretsiz · Sonra ₺790/yıl (₺66/ay)',
-        cta: '3 Gün Ücretsiz Dene',
-        feats: [
-          ['✓', `16 anatomik kategori · ${MAX_BASIC_MORPHEMES} morfem`],
-          ['✓', 'Sınırsız Flashcard ve Eşleştirme oyunları'],
-          ['✓', 'Kişisel ilerleme takibi'],
-          ['–', 'Quiz ve Morfem Yapıcı (Pro ve üzeri)'],
-          ['–', 'Tüm 550+ morfem havuzu (Pro ve üzeri)']
-        ]
-      },
       {
         name: 'Pro',
         tag: 'Tam öğrenme deneyimi; 4 mod, seri, tekrar.',
@@ -94,15 +77,15 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Çalışma / Sözlük terimleri', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)'],
-      ['Morfem kütüphanesi', `${MAX_BASIC_MORPHEMES} morfem`, '550+ (Tümü)', '550+ (Tümü)'],
-      ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız', 'Sınırsız'],
-      ['Quiz · Morfem Yapıcı', '– (Kilitli)', '✓', '✓'],
-      ['İlerleme takibi', 'Açık', 'Açık', 'Açık'],
-      ['Öğrenilen terimlerle tekrar', '–', '✓', '✓'],
-      ['Gelecek modüller dahil', '–', '✓', '✓'],
-      ['3 Gün Ücretsiz Deneme (₺0)', '✓', '✓', '– (Doğrudan Satın Alma)'],
-      ['Faturalandırma', 'Yıllık', 'Yıllık', 'Tek Seferlik (Süresiz)']
+      ['Çalışma / Sözlük terimleri', '16 Kategori (Tümü açık)', '16 Kategori (Tümü açık)'],
+      ['Morfem kütüphanesi', '550+ (Tümü)', '550+ (Tümü)'],
+      ['Flashcard · Eşleştirme', 'Sınırsız', 'Sınırsız'],
+      ['Quiz · Morfem Yapıcı', '✓', '✓'],
+      ['İlerleme takibi', 'Açık', 'Açık'],
+      ['Öğrenilen terimlerle tekrar', '✓', '✓'],
+      ['Gelecek modüller dahil', '✓', '✓'],
+      ['3 Gün Ücretsiz Deneme (₺0)', '✓', '– (Doğrudan Satın Alma)'],
+      ['Faturalandırma', 'Yıllık', 'Tek Seferlik (Süresiz)']
     ]
   },
   en: {
@@ -121,11 +104,10 @@ const TRANSLATIONS = {
     subVisitor: '3 days ₺0 trial on subscription plans. Cancel anytime in 1 click, billed annually after 3 days.',
     noCardNote: '₺0 billed today · Cancel anytime in one click.',
     startTrial: 'Try 3 days free',
-    tabNames: ['Basic', 'Pro', 'Lifetime'],
+    tabNames: ['Pro', 'Lifetime'],
     monthly: 'Monthly',
     yearly: 'Yearly',
     compare: 'FEATURES',
-    pBasic: 'BASIC',
     pPro: 'PRO',
     pLife: 'LIFETIME',
     cancel: 'Cancel in one click, no questions',
@@ -136,22 +118,6 @@ const TRANSLATIONS = {
     perOnce: 'one-time',
     free: '₺0',
     plans: [
-      {
-        name: 'Basic',
-        tag: `16 categories glossary, ${MAX_BASIC_MORPHEMES} morphemes, unlimited Flashcards & Matching.`,
-        mo: '₺99',
-        yrp: '₺790',
-        noteMo: 'Billed monthly',
-        noteYr: '3 days free · Then ₺790/yr (₺66/mo)',
-        cta: 'Start 3-Day Free Trial',
-        feats: [
-          ['✓', `16 anatomical categories · ${MAX_BASIC_MORPHEMES} morphemes`],
-          ['✓', 'Unlimited Flashcards and Matching games'],
-          ['✓', 'Personal progress tracking'],
-          ['–', 'Quiz and Morpheme Builder (Pro & above)'],
-          ['–', 'Full 550+ morpheme library (Pro & above)']
-        ]
-      },
       {
         name: 'Pro',
         tag: 'The full experience; 4 modes, streaks, review.',
@@ -186,15 +152,15 @@ const TRANSLATIONS = {
       }
     ],
     rows: [
-      ['Study / Glossary terms', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked'],
-      ['Morpheme library', `${MAX_BASIC_MORPHEMES} morphemes`, '550+ (All)', '550+ (All)'],
-      ['Flashcard · Matching', 'Unlimited', 'Unlimited', 'Unlimited'],
-      ['Quiz · Morpheme Builder', '– (Locked)', '✓', '✓'],
-      ['Progress tracking', 'Unlocked', 'Unlocked', 'Unlocked'],
-      ['Review with learned terms', '–', '✓', '✓'],
-      ['Future modules included', '–', '✓', '✓'],
-      ['3-Day Free Trial (₺0)', '✓', '✓', '– (Direct Purchase)'],
-      ['Billing', 'Yearly', 'Yearly', 'One-time (Lifetime)']
+      ['Study / Glossary terms', 'All 16 Categories Unlocked', 'All 16 Categories Unlocked'],
+      ['Morpheme library', '550+ (All)', '550+ (All)'],
+      ['Flashcard · Matching', 'Unlimited', 'Unlimited'],
+      ['Quiz · Morpheme Builder', '✓', '✓'],
+      ['Progress tracking', 'Unlocked', 'Unlocked'],
+      ['Review with learned terms', '✓', '✓'],
+      ['Future modules included', '✓', '✓'],
+      ['3-Day Free Trial (₺0)', '✓', '– (Direct Purchase)'],
+      ['Billing', 'Yearly', 'One-time (Lifetime)']
     ]
   }
 };
@@ -202,7 +168,7 @@ const TRANSLATIONS = {
 export const PricingView = () => {
   const navigate = useNavigate();
   const { currentLanguage, setLanguage } = useLanguage();
-  const [mobileTab, setMobileTab] = useState(1); // 0: Temel, 1: Pro, 2: Ömür
+  const [mobileTab, setMobileTab] = useState(0); // 0: Pro, 1: Ömür Boyu
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const previewRole = getPreviewRole();
   const [userData, setUserData] = useState(null);
@@ -302,9 +268,8 @@ export const PricingView = () => {
   }, [userData, currentUser]);
 
   const selPlan = t.plans[mobileTab] || t.plans[0];
-  const isMobBasic = mobileTab === 0;
-  const isMobPro = mobileTab === 1;
-  const isMobLife = mobileTab === 2;
+  const isMobPro = mobileTab === 0;
+  const isMobLife = mobileTab === 1;
 
   let mobPrice = selPlan.yrp;
   let mobPer = t.perYr;
@@ -318,19 +283,14 @@ export const PricingView = () => {
     mobPrice = selPlan.yrp;
     mobPer = t.perYr;
     mobNote = selPlan.noteYr;
-  } else if (isMobBasic) {
-    mobPrice = selPlan.yrp;
-    mobPer = t.perYr;
-    mobNote = selPlan.noteYr;
   }
 
   const isCurrentMobilePlan =
-    (mobileTab === 0 && userCurrentPlan === 'basic') ||
-    (mobileTab === 1 && userCurrentPlan === 'pro') ||
-    (mobileTab === 2 && userCurrentPlan === 'lifetime');
+    (mobileTab === 0 && userCurrentPlan === 'pro') ||
+    (mobileTab === 1 && userCurrentPlan === 'lifetime');
 
   const handlePlanClick = async (planIndex) => {
-    const clickedPlanKey = planIndex === 0 ? 'basic' : planIndex === 1 ? 'pro' : 'lifetime';
+    const clickedPlanKey = planIndex === 0 ? 'pro' : 'lifetime';
 
     if (userCurrentPlan === 'lifetime') {
       toast.info(isTr ? 'Zaten Ömür Boyu VIP üyeliğin bulunmaktadır.' : 'You already have Lifetime VIP access.');
@@ -467,7 +427,7 @@ export const PricingView = () => {
         window.history.replaceState({}, '', newUrl);
       }
 
-      const planIndex = planToCheckout === 'basic' ? 0 : planToCheckout === 'lifetime' ? 2 : 1;
+      const planIndex = planToCheckout === 'lifetime' ? 1 : 0;
       setTimeout(() => {
         handlePlanClick(planIndex);
       }, 400);
@@ -478,7 +438,7 @@ export const PricingView = () => {
   return (
     <div className="min-h-screen bg-background text-foreground antialiased transition-colors flex flex-col justify-between">
       {/* ==================================================================== */}
-      {/* 1) MOBİL GÖRÜNÜM (lg:hidden): FABLE SEÇENEK TABLI & TEK KART TASARIMI */}
+      {/* 1) MOBİL GÖRÜNÜM (lg:hidden): 2 SEÇENEK TABLI & TEK KART TASARIMI */}
       {/* ==================================================================== */}
       <div className="w-full flex lg:hidden flex-col gap-4 max-w-md mx-auto px-4 py-6 pb-28">
         {/* Mobil Üst Başlık Kartı (Dark Banner) */}
@@ -533,7 +493,7 @@ export const PricingView = () => {
           </div>
         </div>
 
-        {/* 4 Segmentli Plan Tab Seçici ([Ücretsiz] [Temel] [Pro] [Ömür]) */}
+        {/* 2 Segmentli Plan Tab Seçici ([Pro] [Ömür]) */}
         <div className="flex bg-card border border-border rounded-xl p-1 font-bold text-xs shadow-xs select-none">
           {t.tabNames.map((name, idx) => {
             const isSelected = mobileTab === idx;
@@ -594,8 +554,8 @@ export const PricingView = () => {
             <span className="text-xs text-muted-foreground">{mobNote}</span>
           </div>
 
-          {/* Sadece Yıllık Seçeneği (Temel veya Pro için) */}
-          {(isMobBasic || isMobPro) && (
+          {/* Sadece Yıllık Seçeneği (Pro için) */}
+          {isMobPro && (
             <div className="flex bg-muted/60 border border-border rounded-xl p-1 font-bold text-xs select-none">
               <span className="flex-1 py-2 text-center rounded-lg bg-card text-foreground shadow-xs flex items-center justify-center gap-1.5 font-bold">
                 {t.yearly}
@@ -636,7 +596,7 @@ export const PricingView = () => {
         {/* Mobil Alt Yapışkan CTA Alanı */}
         <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-md border-t border-border p-3 sm:p-4 shadow-lg lg:hidden flex flex-col gap-2">
           {(() => {
-            const isMobLifetimeLocked = userCurrentPlan === 'lifetime' && mobileTab < 2;
+            const isMobLifetimeLocked = userCurrentPlan === 'lifetime' && mobileTab === 0;
 
             return (
               <button
@@ -663,7 +623,7 @@ export const PricingView = () => {
           <div className="text-xs text-muted-foreground text-center">
             {t.noCardNote}{' '}
             <button
-              onClick={() => handlePlanClick(1)}
+              onClick={() => handlePlanClick(0)}
               className="font-bold text-primary hover:underline cursor-pointer"
             >
               {t.startTrial}
@@ -673,7 +633,7 @@ export const PricingView = () => {
       </div>
 
       {/* ==================================================================== */}
-      {/* 2) MASAÜSTÜ GÖRÜNÜM (hidden lg:flex): 3'LÜ GENİŞ KART IZGARASI & TABLO */}
+      {/* 2) MASAÜSTÜ GÖRÜNÜM (hidden lg:flex): 2'Lİ GENİŞ KART IZGARASI & TABLO */}
       {/* ==================================================================== */}
       <div className="hidden lg:flex w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex-col gap-12 items-center flex-1">
         
@@ -694,12 +654,11 @@ export const PricingView = () => {
           </div>
         </div>
 
-        {/* 3 Plan Kartı */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8 w-full max-w-6xl items-stretch">
+        {/* 2 Plan Kartı */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8 w-full max-w-4xl items-stretch">
           {t.plans.map((p, idx) => {
-            const isBasic = idx === 0;
-            const isPro = idx === 1;
-            const isLife = idx === 2;
+            const isPro = idx === 0;
+            const isLife = idx === 1;
 
             let price = p.yrp;
             let per = t.perYr;
@@ -713,18 +672,13 @@ export const PricingView = () => {
               price = p.yrp;
               per = t.perYr;
               note = p.noteYr;
-            } else if (isBasic) {
-              price = p.yrp;
-              per = t.perYr;
-              note = p.noteYr;
             }
 
             const isCardCurrentPlan =
-              (idx === 0 && userCurrentPlan === 'basic') ||
-              (idx === 1 && userCurrentPlan === 'pro') ||
-              (idx === 2 && userCurrentPlan === 'lifetime');
+              (idx === 0 && userCurrentPlan === 'pro') ||
+              (idx === 1 && userCurrentPlan === 'lifetime');
 
-            const isCardLifetimeLocked = userCurrentPlan === 'lifetime' && idx < 2;
+            const isCardLifetimeLocked = userCurrentPlan === 'lifetime' && idx === 0;
 
             return (
               <div
@@ -775,7 +729,7 @@ export const PricingView = () => {
                   className={`w-full text-center font-bold text-[14px] xl:text-[15px] py-3.5 px-4 rounded-xl transition-all shadow-xs ${
                     isCardCurrentPlan
                       ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 cursor-not-allowed opacity-90'
-                      : isCardLifetimeLocked
+                    : isCardLifetimeLocked
                       ? 'bg-muted text-muted-foreground border border-border cursor-not-allowed opacity-75'
                       : isPro
                       ? 'bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:from-[#2563eb] hover:to-[#3b82f6] text-white shadow-md hover:shadow-lg cursor-pointer'
@@ -818,10 +772,9 @@ export const PricingView = () => {
         </div>
 
         {/* Karşılaştırma Tablosu */}
-        <div className="w-full max-w-6xl bg-card border border-border rounded-2xl overflow-hidden shadow-xs">
-          <div className="grid grid-cols-4 p-4 sm:p-5 xl:p-6 2xl:p-7 border-b border-border font-extrabold text-xs sm:text-sm tracking-wider text-muted-foreground uppercase bg-muted/30">
+        <div className="w-full max-w-4xl bg-card border border-border rounded-2xl overflow-hidden shadow-xs">
+          <div className="grid grid-cols-3 p-4 sm:p-5 xl:p-6 2xl:p-7 border-b border-border font-extrabold text-xs sm:text-sm tracking-wider text-muted-foreground uppercase bg-muted/30">
             <span className="col-span-1">{t.compare}</span>
-            <span className="text-center">{t.pBasic}</span>
             <span className="text-center text-primary font-black">{t.pPro}</span>
             <span className="text-center">{t.pLife}</span>
           </div>
@@ -830,12 +783,11 @@ export const PricingView = () => {
             {t.rows.map((r, rIdx) => (
               <div
                 key={rIdx}
-                className="grid grid-cols-4 p-4 sm:p-5 xl:p-6 text-[14px] sm:text-[15px] xl:text-[16px] font-semibold text-foreground items-center hover:bg-muted/20 transition-colors"
+                className="grid grid-cols-3 p-4 sm:p-5 xl:p-6 text-[14px] sm:text-[15px] xl:text-[16px] font-semibold text-foreground items-center hover:bg-muted/20 transition-colors"
               >
                 <span className="col-span-1 text-muted-foreground font-medium">{r[0]}</span>
-                <span className="text-center text-muted-foreground">{r[1]}</span>
-                <span className="text-center text-primary font-bold">{r[2]}</span>
-                <span className="text-center text-foreground font-bold">{r[3]}</span>
+                <span className="text-center text-primary font-bold">{r[1]}</span>
+                <span className="text-center text-foreground font-bold">{r[2]}</span>
               </div>
             ))}
           </div>
