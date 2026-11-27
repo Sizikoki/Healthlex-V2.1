@@ -124,9 +124,10 @@ const FREE_DASHBOARD_MORPHEMES = [
   { name: '-itis', slug: 'itis', meaningTr: 'iltihap, yangı', meaningEn: 'inflammation', unblurred: false }
 ];
 
-const FREE_DASHBOARD_LOCKED_GAMES = [
+const FREE_DASHBOARD_GAMES = [
   {
     id: 'match',
+    path: '/match',
     name: 'Eşleştirme',
     enName: 'Matching Game',
     plan: 'Haftada 5 hak · Pazartesi yenilenir',
@@ -134,6 +135,7 @@ const FREE_DASHBOARD_LOCKED_GAMES = [
   },
   {
     id: 'quiz',
+    path: '/quiz',
     name: 'Quiz',
     enName: 'Quiz Mode',
     plan: 'Haftada 5 hak · Pazartesi yenilenir',
@@ -141,6 +143,7 @@ const FREE_DASHBOARD_LOCKED_GAMES = [
   },
   {
     id: 'morpheme',
+    path: '/morpheme',
     name: 'Morfem Yapıcı',
     enName: 'Morpheme Builder',
     plan: 'Haftada 5 hak · Pazartesi yenilenir',
@@ -487,12 +490,12 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, todayFormatted }
               </Link>
             </div>
 
-            {/* Kilitli Oyunlar Listesi */}
+            {/* Haftalık Haklı Oyunlar Listesi */}
             <div className="flex flex-col gap-2">
-              {FREE_DASHBOARD_LOCKED_GAMES.map((g) => (
+              {FREE_DASHBOARD_GAMES.map((g) => (
                 <Link
                   key={g.id}
-                  to="/pricing"
+                  to={g.path}
                   className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[12px] p-3 sm:px-3.5 sm:py-3 flex justify-between items-center gap-2.5 opacity-85 hover:opacity-100 hover:border-[#2563eb]/40 transition-all group"
                 >
                   <div>

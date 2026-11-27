@@ -28,7 +28,7 @@ const getUserStorageKey = (baseKey) => {
 export const MAX_GUEST_DAILY_FLASHCARDS = 5;
 
 export const getFlashcardGuestDailyInfo = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = normalizeLocalDateStr(new Date());
   try {
     const raw = localStorage.getItem('medterm_flashcard_guest_daily');
     if (raw) {
@@ -55,7 +55,7 @@ export const getFlashcardGuestDailyInfo = () => {
 };
 
 export const incrementFlashcardGuestPlay = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = normalizeLocalDateStr(new Date());
   const info = getFlashcardGuestDailyInfo();
   const nextCount = info.count + 1;
   try {
@@ -78,7 +78,7 @@ export const incrementFlashcardGuestPlay = () => {
 export const MAX_GUEST_DAILY_RESTARTS = 10;
 
 export const getFlashcardGuestRestartInfo = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = normalizeLocalDateStr(new Date());
   try {
     const raw = localStorage.getItem('medterm_flashcard_guest_restart_daily');
     if (raw) {
@@ -105,7 +105,7 @@ export const getFlashcardGuestRestartInfo = () => {
 };
 
 export const incrementFlashcardGuestRestart = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = normalizeLocalDateStr(new Date());
   const info = getFlashcardGuestRestartInfo();
   const nextCount = info.count + 1;
   try {
