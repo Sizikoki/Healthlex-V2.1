@@ -129,8 +129,8 @@ const FREE_DASHBOARD_LOCKED_GAMES = [
     id: 'match',
     name: 'Eşleştirme',
     enName: 'Matching Game',
-    plan: 'Temel ve üzeri ile açılır',
-    enPlan: 'Unlocked with Basic & above'
+    plan: 'Pro ile Aç',
+    enPlan: 'Unlock with Pro'
   },
   {
     id: 'quiz',
@@ -520,8 +520,8 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, todayFormatted }
             </div>
             <div className="font-normal text-[13px] text-[#6b7a90] dark:text-muted-foreground mt-1">
               {isTr
-                ? 'Temel ₺790/yıl · Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
-                : 'Basic ₺790/yr · Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time'}
+                ? 'Pro lansman fiyatı ₺2.000/yıl · Ömür Boyu ₺5.990 tek ödeme'
+                : 'Pro launch price ₺2,000/yr · Lifetime ₺5,990 one-time'}
             </div>
           </div>
 

@@ -539,7 +539,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockActivity}
-              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -628,7 +628,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockBadges}
-              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -675,7 +675,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockCategories}
-              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -719,7 +719,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockGames}
-              badge={isTr ? 'TEMEL / PRO' : 'BASIC / PRO'}
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
@@ -837,7 +837,7 @@ export const TrialDashboardView = ({ user: propUser, userData: propUserData }) =
 
             <ProLockCard
               text={t.proLockHistory}
-              badge={isTr ? 'TEMEL VE ÜZERİ' : 'BASIC & ABOVE'}
+              badge={isTr ? 'PRO VE ÜZERİ' : 'PRO & ABOVE'}
               ctaText={isTr ? 'Plan Seç →' : 'Choose Plan →'}
             />
           </div>
