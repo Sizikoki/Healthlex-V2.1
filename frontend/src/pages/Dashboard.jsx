@@ -129,22 +129,22 @@ const FREE_DASHBOARD_LOCKED_GAMES = [
     id: 'match',
     name: 'Eşleştirme',
     enName: 'Matching Game',
-    plan: 'Pro ile Aç',
-    enPlan: 'Unlock with Pro'
+    plan: 'Haftada 5 hak · Pazartesi yenilenir',
+    enPlan: '5 plays/week · Resets Monday'
   },
   {
     id: 'quiz',
     name: 'Quiz',
     enName: 'Quiz Mode',
-    plan: 'Pro ve üzeri gerekir',
-    enPlan: 'Requires Pro & above'
+    plan: 'Haftada 5 hak · Pazartesi yenilenir',
+    enPlan: '5 plays/week · Resets Monday'
   },
   {
     id: 'morpheme',
     name: 'Morfem Yapıcı',
     enName: 'Morpheme Builder',
-    plan: 'Pro ve üzeri gerekir',
-    enPlan: 'Requires Pro & above'
+    plan: 'Haftada 5 hak · Pazartesi yenilenir',
+    enPlan: '5 plays/week · Resets Monday'
   }
 ];
 
@@ -504,7 +504,7 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, todayFormatted }
                     </div>
                   </div>
                   <span className="font-extrabold text-[11px] leading-none tracking-[0.06em] px-2 py-1.5 rounded-[6px] bg-[#f5f7fb] dark:bg-muted text-[#6b7a90] dark:text-muted-foreground shrink-0 select-none">
-                    🔒 {isTr ? 'KİLİTLİ' : 'LOCKED'}
+                    {isTr ? 'Pro: sınırsız' : 'Pro: unlimited'}
                   </span>
                 </Link>
               ))}

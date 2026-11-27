@@ -279,11 +279,11 @@ export const Flashcards = () => {
           }
           description={
             isRestartLimit
-              ? t('guestFlashcardRestartLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilir. Sınırsız pratik yapmak için lütfen ücretsiz üye ol.`)
-              : t('guestFlashcardDailyLimitDesc', `Misafir kullanıcılar günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemeni kaydetmek için lütfen ücretsiz üye ol.`)
+              ? t('guestFlashcardRestartLimitDesc', `Misafir olarak günde en fazla ${MAX_GUEST_DAILY_RESTARTS} kez yeniden başlatabilirsin. Sınırsız Flashcard çalışmak için ücretsiz hesap aç.`)
+              : t('guestFlashcardDailyLimitDesc', `Misafir olarak günde en fazla ${MAX_GUEST_DAILY_FLASHCARDS} kelime kartı çalışması yapabilirsin. Sınırsız Flashcard çalışmak ve ilerlemeni kaydetmek için ücretsiz hesap aç.`)
           }
           cardTitle={t('guestLimitCardTitle', 'Ücretsiz Üye Ol')}
-          cardDesc={t('guestLimitCardDesc', 'Kayıt olarak sınırsız kelime kartı çalışabilir ve ilerlemeni tüm cihazlarında senkronize edebilirsin.')}
+          cardDesc={t('guestLimitCardDesc', 'Ücretsiz hesap açarak sınırsız Flashcard çalışabilir, diğer oyunlarda haftada 5’er hak kazanabilir ve ilerlemeni kaydedebilirsin.')}
         />
       </div>
     );

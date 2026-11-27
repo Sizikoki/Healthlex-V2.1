@@ -501,7 +501,12 @@ export const Games = () => {
                 const isFreeWeekly = trial.mode === 'free_weekly';
                 const isTrialMode = isGuestTrial || isFreeWeekly;
                 const isTrialExhausted = isTrialMode && !trial.canPlay;
-                const trialText = isTrialMode ? getTrialRemainingText(trial.mode, trial.remaining, currentLanguage) : '';
+                const isFreeFlashcards = game.id === 'flashcards' && userIsLoggedIn && !hasPlan && !isPro;
+                const trialText = isTrialMode
+                  ? getTrialRemainingText(trial.mode, trial.remaining, currentLanguage)
+                  : isFreeFlashcards
+                  ? (isTr ? 'Ücretsiz hesapta sınırsız' : 'Unlimited with free account')
+                  : '';
                 const isMatch = game.id === 'match';
 
                 return (
@@ -569,7 +574,7 @@ export const Games = () => {
                           ) : (
                             <Button asChild className="w-full gradient-primary shadow-md">
                               <Link to={`/pricing?from=games-${game.id}`}>
-                                Planları gör
+                                {isTr ? 'Planları gör' : 'View plans'}
                                 <ArrowRight className="ml-2 w-4 h-4" />
                               </Link>
                             </Button>
@@ -581,7 +586,7 @@ export const Games = () => {
                             onClick={(e) => handleGamePlayClick(e, game.id, game.path)}
                             className="w-full transition-all cursor-pointer gradient-primary group-hover:shadow-lg"
                           >
-                            {isGuestTrial ? 'Dene' : isFreeWeekly ? 'Oyna' : t('play')}
+                            {isGuestTrial ? 'Dene' : t('play')}
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </Button>
                           {trialText && (
@@ -605,30 +610,30 @@ export const Games = () => {
           onClose={() => setIsLimitModalOpen(false)}
           title={
             modalMode === 'match'
-              ? t('guestMatchLockedTitle', 'Eşleştirme Oyunu Kayıtlı Kullanıcılara Özeldir! 🎯')
+              ? t('guestMatchLockedTitle', 'Eşleştirme Deneme Hakkın Doldu! 🎯')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkın Doldu! 🎯')
               : undefined
           }
           description={
             modalMode === 'match'
-              ? t('guestMatchLockedDesc', 'Eşleştirme oyunu yalnızca kayıtlı üyelere açıktır. Terimleri eşleştirerek pratik yapmak ve skorlarını kaydetmek için lütfen ücretsiz kayıt ol.')
+              ? t('guestMatchLockedDesc', 'Misafir olarak her oyunda toplam 2 deneme hakkın var. Ücretsiz hesap açarak Eşleştirme, Quiz ve Morfem Yapıcı’da haftada 5’er hak kazanabilirsin.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestFlashcardDailyLimitDesc', 'Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak için lütfen ücretsiz üye ol.')
+              ? t('guestFlashcardDailyLimitDesc', 'Misafir olarak günde en fazla 5 kelime kartı çalışması yapabilirsin. Sınırsız Flashcard çalışmak ve ilerlemeni kaydetmek için ücretsiz hesap aç.')
               : undefined
           }
           cardTitle={
             modalMode === 'match'
-              ? t('guestMatchCardTitle', 'Ücretsiz Üye Ol & Eşleştirmeye Başla')
+              ? t('guestMatchCardTitle', 'Ücretsiz Hesap Aç · Haftada 5 Hak')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
               ? t('guestLimitCardTitle', 'Ücretsiz Üye Ol')
               : undefined
           }
           cardDesc={
             modalMode === 'match'
-              ? t('guestMatchCardDesc', 'Ücretsiz üyelik oluşturarak Eşleştirme ve Flashcard oyunlarına erişebilir, ilerlemeni tüm cihazlarında takip edebilirsin.')
+              ? t('guestMatchCardDesc', 'Ücretsiz hesapla Flashcard sınırsız, diğer oyunlar haftada 5’er hak (Pazartesi yenilenir). Pro ile tüm oyunlar sınırsız.')
               : modalMode === 'flashcards' || (!userIsLoggedIn && !getFlashcardGuestDailyInfo().canPlay)
-              ? t('guestLimitCardDesc', 'Üye olarak sınırsız kelime kartı çalışabilir ve ilerlemeni tüm cihazlarında senkronize edebilirsin.')
+              ? t('guestLimitCardDesc', 'Ücretsiz hesap açarak sınırsız Flashcard çalışabilir, diğer oyunlarda haftada 5’er hak kazanabilir ve ilerlemeni kaydedebilirsin.')
               : undefined
           }
         />

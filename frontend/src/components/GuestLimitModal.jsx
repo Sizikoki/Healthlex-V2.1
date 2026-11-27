@@ -22,7 +22,7 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
             {title || t('guestFlashcardDailyLimitTitle', 'Günlük Ücretsiz Kelime Kartı Hakkın Doldu! 🎯')}
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600 mt-2 leading-relaxed">
-            {description || t('guestFlashcardDailyLimitDesc', 'Günlük ücretsiz kelime kartı hakkın doldu. Sınırsız pratik yapmak için lütfen planını yükselt.')}
+            {description || t('guestFlashcardDailyLimitDesc', 'Misafir olarak günde en fazla 5 kelime kartı çalışması yapabilirsin. Sınırsız Flashcard çalışmak ve ilerlemeni kaydetmek için ücretsiz hesap aç.')}
           </DialogDescription>
         </DialogHeader>
 
@@ -30,11 +30,11 @@ export const GuestLimitModal = ({ isOpen, onClose, title, description, cardTitle
           <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="font-semibold block text-amber-950">
-              {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Planını Yükselt veya Üye Ol'))}
+              {cardTitle || (userLoggedIn ? t('upgradePlanCardTitle', 'Planını Yükselt') : t('guestLimitCardTitle', 'Ücretsiz Üye Ol'))}
             </strong>
             {cardDesc || (userLoggedIn
               ? t('upgradePlanCardDesc', "Pro'ya geçerek tüm oyunlara ve 550+ morfeme sınırsız erişebilirsin.")
-              : t('guestLimitCardDesc', 'Üyelik oluşturup planını seçerek kelime kartlarına ve oyunlara sınırsız erişebilirsin.'))}
+              : t('guestLimitCardDesc', 'Ücretsiz hesap açarak sınırsız Flashcard çalışabilir, diğer oyunlarda haftada 5’er hak kazanabilir ve ilerlemeni kaydedebilirsin.'))}
           </div>
         </div>
 

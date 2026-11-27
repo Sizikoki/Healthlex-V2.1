@@ -184,9 +184,13 @@ export const getTrialRemainingText = (mode, remaining, language = 'tr') => {
   }
   if (mode === 'free_weekly') {
     if (remaining > 0) {
-      return `Bu hafta ${remaining}/${FREE_WEEKLY_TRIAL_LIMIT} hakkın kaldı · Pazartesi yenilenir`;
+      return language === 'en'
+        ? `${remaining}/${FREE_WEEKLY_TRIAL_LIMIT} plays left this week · Resets Monday · Pro: unlimited`
+        : `Bu hafta ${remaining}/${FREE_WEEKLY_TRIAL_LIMIT} hakkın kaldı · Pazartesi yenilenir · Pro: sınırsız`;
     }
-    return 'Bu haftaki 5 hakkını kullandın. Pazartesi yenilenir.';
+    return language === 'en'
+      ? 'You used all 5 plays for this week · Resets Monday · Pro: unlimited'
+      : 'Bu haftaki 5 hakkını kullandın · Pazartesi yenilenir · Pro: sınırsız';
   }
   return '';
 };

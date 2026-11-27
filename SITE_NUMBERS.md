@@ -339,6 +339,8 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 - **Pro & Ömür Boyu Morfem Kotası:** Tümü (**571** = `116 + 318 + 137`). Kaynak: `frontend/src/data/morphemesData.js` (`TOTAL_MORPHEMES`).
 - **Günlük Flashcard Hakkı (Misafir):** **5** oturum; **Kayıtlı Ücretsiz ve Üstü:** **Sınırsız**. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_FLASHCARDS = 5;`, 8 Kasım kararı / Adım 13).
 - **Günlük Yeniden Başlatma Hakkı (Misafir):** **10** oturum. Kaynak: `frontend/src/utils/storage.js` (`export const MAX_GUEST_DAILY_RESTARTS = 10;`).
+- **Misafir Oyun Deneme Hakkı (Eşleştirme, Quiz, Morfem Yapıcı):** Her oyundan toplam **2** deneme (yenilenmez). Kaynak: `frontend/src/utils/gameTrials.js` (`export const GUEST_TRIAL_LIMIT = 2;`, 19 Kasım kararı).
+- **Kayıtlı Ücretsiz Haftalık Oyun Hakkı (Eşleştirme, Quiz, Morfem Yapıcı):** Her oyundan haftada **5** hak (Pazartesi 00:00 yerel saatte yenilenir). Kaynak: `frontend/src/utils/gameTrials.js` (`export const FREE_WEEKLY_TRIAL_LIMIT = 5;`, 19 Kasım kararı).
 
 ### b) Pazarlama Yazım Kuralı
 - **Misafir Morfem:** "İlk 24 morfem açık" / İngilizce: "First 24 morphemes open"
@@ -347,6 +349,9 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 - **Pro / Ömür Boyu Morfem:** "550+ morfem (Tümü)" / İngilizce: "550+ morphemes (All)"
 - **Günlük Flashcard Hakkı:** "5" (8 Kasım kararı).
 - **Yeniden Başlatma Hakkı:** "10" kez yeniden başlatma.
+- **Misafir Oyun Denemesi (Eşleştirme/Quiz/Morfem Yapıcı):** "Toplam 2 deneme hakkı" / "2 deneme hakkın var" / İngilizce: "2 free tries total"
+- **Kayıtlı Ücretsiz Haftalık Oyun Hakkı:** "Haftada 5 hak · Pazartesi yenilenir" / İngilizce: "5 plays/week · Resets Monday"
+- **Pro / Ömür Boyu Oyun Hakkı:** "Pro: sınırsız" / İngilizce: "Pro: unlimited"
 
 ### c) Konum Tablosu
 
@@ -358,8 +363,19 @@ Yeni bir veri yüklendiğinde veya parametre değiştiğinde aşağıdaki bölü
 | `frontend/src/data/morphemesData.js` | `export const TOTAL_MORPHEMES = PREFIXES.length + ROOTS.length + SUFFIXES.length;` | kod sabiti | Pro & Ömür Boyu tüm morfem toplamı (`571`) |
 | `frontend/src/utils/storage.js` | `export const MAX_GUEST_DAILY_FLASHCARDS = 5;` | kod sabiti | Misafir günlük Flashcard oturum limiti (8 Kasım kararı) |
 | `frontend/src/utils/storage.js` | `export const MAX_GUEST_DAILY_RESTARTS = 10;` | kod sabiti | Misafir günlük oturum yeniden başlatma limiti |
-| `frontend/src/i18n/translations.js` | `guestFlashcardDailyLimitDesc: "Misafir kullanıcılar günde en fazla 5 kelime kartı çalışması yapabilir. Sınırsız pratik yapmak ve ilerlemenizi kaydetmek için lütfen ücretsiz üye olun.",` | sabit metin | Flashcard günlük limit modalı açıklaması (TR) |
-| `frontend/src/i18n/translations.js` | `guestFlashcardDailyLimitDesc: "Guests can perform up to 5 flashcard study sessions daily. Please sign up for free for unlimited practice and to save your progress.",` | sabit metin | Flashcard günlük limit modalı açıklaması (EN) |
+| `frontend/src/utils/gameTrials.js` | `export const GUEST_TRIAL_LIMIT = 2;` | kod sabiti | Misafir Eşleştirme/Quiz/Morfem Yapıcı toplam deneme limiti |
+| `frontend/src/utils/gameTrials.js` | `export const FREE_WEEKLY_TRIAL_LIMIT = 5;` | kod sabiti | Ücretsiz kayıtlı kullanıcı haftalık oyun limiti (Pazartesi yenilenir) |
+| `frontend/src/utils/gameTrials.js` | `Bu hafta ${remaining}/${FREE_WEEKLY_TRIAL_LIMIT} hakkın kaldı · Pazartesi yenilenir · Pro: sınırsız` | dinamik metin | Oyunlar kart altı ve tur sonu kalan haftalık hak metni (TR/EN) |
+| `frontend/src/utils/gameTrials.js` | `Bu haftaki 5 hakkını kullandın · Pazartesi yenilenir · Pro: sınırsız` | sabit metin | Haftalık 5 hak bitiş metni (TR/EN) |
+| `frontend/src/i18n/translations.js` | `guestFlashcardDailyLimitDesc: "Misafir olarak günde en fazla 5 kelime kartı çalışması yapabilirsin..."` | sabit metin | Flashcard günlük limit modalı açıklaması (TR/EN) |
+| `frontend/src/i18n/translations.js` | `guestFlashcardRestartLimitDesc: "Misafir olarak günde en fazla 10 kez yeniden başlatabilirsin..."` | sabit metin | Flashcard günlük yeniden başlatma limiti açıklaması (TR/EN) |
+| `frontend/src/i18n/translations.js` | `guestMatchLockedDesc`, `guestMatchCardTitle`, `guestMatchCardDesc`, `registerToPlay`, `matchExclusiveToBasic`, `guestLimitCardDesc`, `guestProgressNotice` | sabit metin | Misafir 2 deneme ve ücretsiz hesap haftada 5 hak çeviri metinleri (TR/EN) |
+| `frontend/src/components/GuestLimitModal.jsx` | `Misafir olarak günde en fazla 5 kelime kartı...` / `diğer oyunlarda haftada 5’er hak...` | sabit metin fallback | Misafir limit modalı fallback açıklamaları |
+| `frontend/src/pages/Welcome.jsx` | `Ücretsiz hesapta Flashcard sınırsız; diğer 3 oyunda haftada 5’er hak · Pazartesi yenilenir.` / `diğer 3 oyunda toplam 2’şer deneme hakkın var.` | sabit metin | Karşılama sayfası Flashcard kota kartı, modül kartları ve karşılaştırma tablosu oyun satırları (TR/EN) |
+| `frontend/src/pages/Dashboard.jsx` | `plan: 'Haftada 5 hak · Pazartesi yenilenir'`, `enPlan: '5 plays/week · Resets Monday'` | sabit metin | Ücretsiz kullanıcı panosu Eşleştirme/Quiz/Morfem Yapıcı kart alt metinleri |
+| `frontend/src/pages/Games.jsx` | `guestMatchLockedDesc`, `guestFlashcardDailyLimitDesc`, `guestMatchCardTitle`, `guestMatchCardDesc`, `guestLimitCardDesc` | sabit metin fallback | Oyunlar sayfası GuestLimitModal fallback metinleri |
+| `frontend/src/pages/Profile.jsx` | `Ücretsiz hesaptasın: Flashcard sınırsız, Eşleştirme, Quiz ve Morfem Yapıcı’da haftada 5’er hak (Pazartesi yenilenir)...` | sabit metin | Profil sayfası ücretsiz hesap durum açıklaması (TR/EN) |
+| `frontend/src/pages/FAQ.jsx` & `frontend/scripts/prerender-faq.mjs` | `...toplam 2 deneme hakkına... haftada 5 hak (Pazartesi yenilenir)...` | sabit metin / betik | SSS cevabı 2 misafir (2 deneme) ve ücretsiz hesap (haftada 5 hak) açıklaması (TR/EN) |
 | `frontend/src/pages/Dashboard.jsx` | `const remainingPlays = flashcardInfo?.playsRemaining ?? 5;` | kod içi tekrar | Pano günlük kalan oyun hakkı fallback değeri (`MAX_GUEST_DAILY_FLASHCARDS` yerine sabit 5) |
 | `frontend/src/pages/Dashboard.jsx` | `const totalPlays = flashcardInfo?.maxPlays ?? 5;` | kod içi tekrar | Pano günlük toplam oyun hakkı fallback değeri (`MAX_GUEST_DAILY_FLASHCARDS` yerine sabit 5) |
 | `frontend/src/pages/Dashboard.jsx` | `<span>{isTr ? '24 / 571 açık' : '24 / 571 open'}</span>` | sabit metin | Pano misafir morfem ilerleme çubuğu etiketi |
@@ -615,10 +631,10 @@ Kullanıcıya kategorilerin açık veya kilitli olduğuna dair sitede verilen t�
 - **Sözlük Düzeyinde (`frontend/src/pages/Study.jsx`):** 16 anatomik kategorinin tamamı misafirler dahil herkese açıktır; kilit uygulanmaz.
 - **Oyunlar Düzeyinde (`frontend/src/pages/Flashcards.jsx`, `frontend/src/pages/MatchGame.jsx`, `frontend/src/pages/Quiz.jsx`, `frontend/src/pages/MorphemeGame.jsx`):**
   - 12e kararıyla oyunlarda kategori kısıtlaması tamamen kaldırılmıştır (`UNLOCKED_CATEGORY_IDS` ve `isCategoryUnlocked` silinmiştir). Misafir ve ücretsiz kullanıcılar dahil herkes her oyunda 16 kategorinin tamamını seçebilir.
-  - Erişim yalnızca **oyun seviyesinde** kontrol edilir (`isGameUnlocked` — `frontend/src/utils/planAccess.js`):
-    - **Flashcard:** Misafir günde 5 hak (`MAX_GUEST_DAILY_FLASHCARDS`), kayıtlı ücretsiz ve üstü sınırsız.
-    - **Eşleştirme:** Temel ve üstü.
-    - **Quiz ve Morfem Yapıcı:** Pro ve üstü (Ömür Boyu ve Paddle deneme dahil).
+  - Erişim yalnızca **oyun seviyesinde** kontrol edilir (`getGameTrialState` — `frontend/src/utils/gameTrials.js` ve `getFlashcardGuestDailyInfo` — `frontend/src/utils/storage.js`):
+    - **Flashcard:** Misafir günde 5 hak (`MAX_GUEST_DAILY_FLASHCARDS`, her gün yenilenir + günde 10 yeniden başlatma `MAX_GUEST_DAILY_RESTARTS`), kayıtlı ücretsiz ve üstü sınırsız.
+    - **Eşleştirme:** Misafir toplam 2 deneme (`GUEST_TRIAL_LIMIT`), kayıtlı ücretsiz haftada 5 hak (`FREE_WEEKLY_TRIAL_LIMIT`, Pazartesi yenilenir), Temel, Pro (3 günlük deneme dahil) ve Ömür Boyu sınırsız.
+    - **Quiz ve Morfem Yapıcı:** Misafir her oyundan toplam 2 deneme (`GUEST_TRIAL_LIMIT`), kayıtlı ücretsiz her oyundan haftada 5 hak (`FREE_WEEKLY_TRIAL_LIMIT`, Pazartesi yenilenir), Temel planda kapalı (`paid_locked`), Pro (3 günlük deneme dahil) ve Ömür Boyu sınırsız.
 
 ---
 

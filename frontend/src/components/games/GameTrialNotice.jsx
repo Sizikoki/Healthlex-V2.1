@@ -26,7 +26,7 @@ export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
   const pricingUrl = `/pricing?from=games-${gameId}`;
   const exhaustedText = isGuest
     ? getTrialRemainingText('guest', 0, currentLanguage)
-    : 'Bu haftaki 5 hakkını kullandın. Pazartesi yenilenir.';
+    : getTrialRemainingText('free_weekly', 0, currentLanguage);
 
   return (
     <div className="min-h-screen bg-muted/30 flex items-center justify-center py-12 px-4">
@@ -58,7 +58,7 @@ export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
             ) : (
               <Button asChild className="w-full gradient-primary shadow-md">
                 <Link to={pricingUrl}>
-                  Planları gör
+                  {currentLanguage === 'en' ? 'View plans' : 'Planları gör'}
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </Button>
@@ -67,13 +67,13 @@ export const GameTrialExhaustedScreen = ({ gameId, mode, onBack }) => {
             {onBack ? (
               <Button variant="outline" onClick={onBack} className="w-full mt-1">
                 <ArrowLeft className="mr-2 w-4 h-4" />
-                Oyunlara Dön
+                {currentLanguage === 'en' ? 'Back to Games' : 'Oyunlara Dön'}
               </Button>
             ) : (
               <Button asChild variant="outline" className="w-full mt-1">
                 <Link to="/games">
                   <ArrowLeft className="mr-2 w-4 h-4" />
-                  Oyunlara Dön
+                  {currentLanguage === 'en' ? 'Back to Games' : 'Oyunlara Dön'}
                 </Link>
               </Button>
             )}
@@ -141,7 +141,7 @@ export const GameTrialFinishFooter = ({
           ) : (
             <Button asChild className="w-full min-h-[48px] gradient-primary shadow-md">
               <Link to={pricingUrl}>
-                Planları gör
+                {currentLanguage === 'en' ? 'View plans' : 'Planları gör'}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>

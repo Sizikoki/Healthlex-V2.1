@@ -241,8 +241,12 @@ export const Welcome = () => {
         unit: isRegistered ? (isTr ? 'sınırsız' : 'unlimited') : (isTr ? 'oyun / gün' : 'games / day'),
         mobileUnit: isRegistered ? (isTr ? 'sınırsız' : 'unlimited') : (isTr ? 'oyun / gün' : 'plays / day'),
         note: isRegistered
-          ? (isTr ? 'Ücretsiz hesapta sınırsız kart çalışması. Diğer oyunlar kilitli.' : 'Unlimited flashcards with free account. Other games are locked.')
-          : (isTr ? 'Günlük hak her gece yenilenir. Diğer oyunlar kilitli.' : 'Daily plays refresh every midnight. Other games are locked.')
+          ? (isTr
+              ? 'Ücretsiz hesapta Flashcard sınırsız; diğer 3 oyunda haftada 5’er hak · Pazartesi yenilenir.'
+              : 'Unlimited Flashcards; 5 plays/week in each of the other 3 games · Resets Monday.')
+          : (isTr
+              ? 'Günlük Flashcard hakkı her gece yenilenir; diğer 3 oyunda toplam 2’şer deneme hakkın var.'
+              : 'Daily Flashcard plays refresh every midnight; 2 free tries total in each of the other 3 games.')
       }
     ];
   }, [termCount, isPro, isBasic, effectiveUser, isTr, freeMorphemes, isRegistered]);
@@ -258,9 +262,9 @@ export const Welcome = () => {
           { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
           { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'open', limit: '550+ morfem açık', sub: 'Tüm kütüphane sınırsız açık', pro: '550+ morfem' },
           { name: 'Flashcard', desc: 'Kartlarla tekrar', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde sınırsız kart', pro: 'Sınırsız' },
-          { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Açık' },
-          { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Açık' },
-          { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'open', limit: 'Sınırsız', sub: 'Tüm seviyeler açık', pro: 'Açık' },
+          { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'open', limit: 'Sınırsız', sub: 'Tüm kategorilerde açık', pro: 'Sınırsız' },
+          { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'open', limit: 'Sınırsız', sub: 'Tüm zorluk derecelerinde açık', pro: 'Sınırsız' },
+          { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'open', limit: 'Sınırsız', sub: 'Tüm seviyeler açık', pro: 'Sınırsız' },
           { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: 'open', limit: 'Aktif', sub: 'Tüm başarılar ve istatistikler', pro: 'Açık' }
         ];
       }
@@ -284,9 +288,9 @@ export const Welcome = () => {
         { name: 'Terim detay sayfaları', desc: 'Link veya arama ile erişim', type: 'open', limit: `${termsCountStr} terim, tam içerik`, sub: 'Link veya aramayla; tanım, köken, örnek açık', pro: 'Tüm terimler' },
         { name: 'Morfem listesi', desc: 'Ön ek, kök, son ek', type: 'part', limit: `İlk ${freeMorphemes} morfem açık`, sub: 'Gerisi kilitli: ad görünür, anlam bulanık', pro: '550+ morfem' },
         { name: 'Flashcard', desc: 'Kartlarla tekrar', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Sınırsız' : 'Günde 5 oyun', sub: isRegistered ? 'Ücretsiz hesapta sınırsız' : 'Her gece yenilenir', pro: 'Sınırsız' },
-        { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'lock', limit: 'Kapalı', sub: 'Pro ile açılır', pro: 'Açık' },
-        { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
-        { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'lock', limit: 'Kapalı', sub: 'Pro ve üzeri gerekir', pro: 'Açık' },
+        { name: 'Eşleştirme', desc: 'Terim ↔ Türkçe karşılık', type: 'part', limit: isRegistered ? 'Haftada 5 hak · Pazartesi yenilenir' : 'Toplam 2 deneme hakkı', sub: isRegistered ? 'Ücretsiz hesapta açık' : 'Ücretsiz hesapta haftada 5 hak · Pazartesi yenilenir', pro: 'Sınırsız' },
+        { name: 'Quiz', desc: 'Kategoriye özel çoktan seçmeli', type: 'part', limit: isRegistered ? 'Haftada 5 hak · Pazartesi yenilenir' : 'Toplam 2 deneme hakkı', sub: isRegistered ? 'Ücretsiz hesapta açık' : 'Ücretsiz hesapta haftada 5 hak · Pazartesi yenilenir', pro: 'Sınırsız' },
+        { name: 'Morfem Yapıcı', desc: 'Terimi parçalarından kur', type: 'part', limit: isRegistered ? 'Haftada 5 hak · Pazartesi yenilenir' : 'Toplam 2 deneme hakkı', sub: isRegistered ? 'Ücretsiz hesapta açık' : 'Ücretsiz hesapta haftada 5 hak · Pazartesi yenilenir', pro: 'Sınırsız' },
         { name: 'İlerleme ve günlük seri', desc: 'Günlük tekrar ve seri takibi', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'İlerleme kaydı aktif' : 'Kapalı', sub: isRegistered ? 'Seri ve öğrenilenler kaydedilir; kategori yüzdeleri ve oyun geçmişi Pro’da' : 'Ücretsiz hesapta ilerleme kaydı; kategori yüzdeleri ve oyun geçmişi Pro’da', pro: 'Açık' }
       ];
     }
@@ -298,9 +302,9 @@ export const Welcome = () => {
         { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins & examples open', pro: 'All terms' },
         { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'open', limit: '550+ morphemes open', sub: 'Full library unlocked', pro: '550+ morphemes' },
         { name: 'Flashcards', desc: 'Card review', type: 'open', limit: 'Unlimited', sub: 'Unlimited cards across all categories', pro: 'Unlimited' },
-        { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Unlocked across all categories', pro: 'Unlocked' },
-        { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'open', limit: 'Unlimited', sub: 'All difficulty levels', pro: 'Unlocked' },
-        { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'open', limit: 'Unlimited', sub: 'All levels unlocked', pro: 'Unlocked' },
+        { name: 'Matching Game', desc: 'Term ↔ Meaning', type: 'open', limit: 'Unlimited', sub: 'Unlocked across all categories', pro: 'Unlimited' },
+        { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'open', limit: 'Unlimited', sub: 'All difficulty levels', pro: 'Unlimited' },
+        { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'open', limit: 'Unlimited', sub: 'All levels unlocked', pro: 'Unlimited' },
         { name: 'Progress & Streaks', desc: 'Daily reviews & streaks', type: 'open', limit: 'Active', sub: 'Category percentages, badges & game history', pro: 'Unlocked' }
       ];
     }
@@ -323,9 +327,9 @@ export const Welcome = () => {
       { name: 'Term detail pages', desc: 'Access via link or search', type: 'open', limit: `${termsCountStr} terms, full content`, sub: 'Definitions, origins and examples open', pro: 'All terms' },
       { name: 'Morpheme list', desc: 'Prefixes, roots, suffixes', type: 'part', limit: `First ${freeMorphemes} morphemes open`, sub: 'Rest locked: name visible, meaning blurred', pro: '550+ morphemes' },
       { name: 'Flashcards', desc: 'Card review', type: isRegistered ? 'open' : 'part', limit: isRegistered ? 'Unlimited' : '5 games per day', sub: isRegistered ? 'Unlimited with free account' : 'Refreshes every midnight', pro: 'Unlimited' },
-      { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'lock', limit: 'Locked', sub: 'Unlocked with Pro', pro: 'Unlocked' },
-      { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
-      { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'lock', limit: 'Locked', sub: 'Requires Pro and above', pro: 'Unlocked' },
+      { name: 'Matching Game', desc: 'Term ↔ English meaning', type: 'part', limit: isRegistered ? '5 plays/week · Resets Monday' : '2 free tries total', sub: isRegistered ? 'Open with free account' : 'Free account: 5 plays/week · Resets Monday', pro: 'Unlimited' },
+      { name: 'Quiz', desc: 'Category-specific multiple choice', type: 'part', limit: isRegistered ? '5 plays/week · Resets Monday' : '2 free tries total', sub: isRegistered ? 'Open with free account' : 'Free account: 5 plays/week · Resets Monday', pro: 'Unlimited' },
+      { name: 'Morpheme Builder', desc: 'Build terms from parts', type: 'part', limit: isRegistered ? '5 plays/week · Resets Monday' : '2 free tries total', sub: isRegistered ? 'Open with free account' : 'Free account: 5 plays/week · Resets Monday', pro: 'Unlimited' },
       { name: 'Progress & Streaks', desc: 'Daily review & streak tracking', type: isRegistered ? 'part' : 'lock', limit: isRegistered ? 'Progress saved' : 'Locked', sub: isRegistered ? 'Streak & learned terms saved; category percentages & game history in Pro' : 'Progress saved with free account; category percentages & game history in Pro', pro: 'Unlocked' }
     ];
   }, [termCount, isTr, isPro, isBasic, effectiveUser, freeMorphemes, isRegistered]);
@@ -564,7 +568,13 @@ export const Welcome = () => {
                   {isTr ? 'Flashcard & Tekrar' : 'Flashcard & Review'}
                 </div>
                 <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? 'Kartlarla terim ve anlam tekrarı yap.' : 'Review terms and meanings with flashcards.'}
+                  {isBasic
+                    ? (isTr ? 'Kartlarla terim ve anlam tekrarı yap.' : 'Review terms and meanings with flashcards.')
+                    : (isPro || effectiveUser?.isLifetime)
+                    ? (isTr ? 'Tüm kategorilerde sınırsız kart tekrarı yap.' : 'Review terms with unlimited flashcards.')
+                    : isRegistered
+                    ? (isTr ? 'Ücretsiz hesapta sınırsız kart tekrarı yap.' : 'Unlimited flashcard review with free account.')
+                    : (isTr ? 'Günde 5 oyun hakkıyla kart tekrarı yap.' : 'Review terms with 5 flashcard games per day.')}
                 </div>
               </div>
             </Link>
@@ -586,7 +596,13 @@ export const Welcome = () => {
                   {isTr ? 'İnteraktif Oyun Modları' : 'Interactive Games'}
                 </div>
                 <div className="font-normal text-[13px] leading-[1.45] text-[#6b7a90] dark:text-muted-foreground mt-1">
-                  {isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı ile pekiştir.' : 'Matching, Quiz and Morpheme Builder games.'}
+                  {isBasic
+                    ? (isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı ile pekiştir.' : 'Matching, Quiz and Morpheme Builder games.')
+                    : (isPro || effectiveUser?.isLifetime)
+                    ? (isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı sınırsız açık.' : 'Matching, Quiz, and Morpheme Builder — unlimited.')
+                    : isRegistered
+                    ? (isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı: haftada 5’er hak · Pazartesi yenilenir.' : 'Matching, Quiz & Morpheme Builder: 5 plays/week each · Resets Monday.')
+                    : (isTr ? 'Eşleştirme, Quiz ve Morfem Yapıcı: her oyunda 2 deneme hakkı.' : 'Matching, Quiz & Morpheme Builder: 2 free tries per game.')}
                 </div>
               </div>
             </Link>

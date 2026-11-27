@@ -36,7 +36,7 @@ export const FAQ = () => {
             id: 'categories',
             category: 'content',
             q: 'Hangi içerikler ücretsiz, hangileri Pro plana dahil?',
-            a: 'Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme ve günde 5 tur Flashcard çalışmasına erişebilirsin. Ücretsiz kayıtlı hesap: ilk 50 morfem ve sınırsız Flashcard çalışması sunar. Pro plan: 550+ morfemin tamamı, Eşleştirme, Quiz ve Morfem Yapıcı oyunları ile detaylı ilerleme takibini açar. 3 günlük ücretsiz deneme boyunca Pro planın tüm özellikleri açıktır.'
+            a: 'Sözlükteki tüm terimler ve 16 kategori, kayıt olmasan da herkese açık. Misafir olarak ilk 24 morfeme, günde 5 tur Flashcard çalışmasına ve Eşleştirme, Quiz ile Morfem Yapıcı oyunlarının her birinde toplam 2 deneme hakkına erişebilirsin. Ücretsiz kayıtlı hesap: ilk 50 morfem, sınırsız Flashcard ve diğer 3 oyunun her birinde haftada 5 hak (Pazartesi yenilenir) sunar. Pro plan ve Ömür Boyu: 550+ morfemin tamamını, 4 oyun modunun hepsini sınırsız olarak ve detaylı ilerleme takibini açar. 3 günlük ücretsiz deneme boyunca Pro planın tüm özellikleri açıktır.'
           },
           {
             id: 'register',
@@ -98,7 +98,7 @@ export const FAQ = () => {
             id: 'categories',
             category: 'content',
             q: 'Which content is free, and what is included in the Pro plan?',
-            a: 'All glossary terms and 16 categories are open to everyone, even without an account. As a guest, you can access the first 24 morphemes and 5 Flashcard rounds per day. Free registered account: first 50 morphemes and unlimited Flashcard practice. Pro plan: all 550+ morphemes, Matching, Quiz, and Morpheme Builder games with full progress tracking. During the 3-day free trial, all Pro features are open.'
+            a: 'All glossary terms and 16 categories are open to everyone, even without an account. As a guest, you can access the first 24 morphemes, 5 Flashcard rounds per day, and 2 free tries in each of Matching, Quiz, and Morpheme Builder. Free registered account: first 50 morphemes, unlimited Flashcards, and 5 plays per week in each of the other 3 games (resets Monday). Pro and Lifetime plans unlock all 550+ morphemes, unlimited play across all 4 game modes, and full progress tracking. During the 3-day free trial, all Pro features are open.'
           },
           {
             id: 'register',
