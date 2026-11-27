@@ -61,11 +61,17 @@ export const Navbar = () => {
         { path: '/progress', label: t('progress') },
       ];
 
-  const LanguageSwitcher = () => (
-    <div className="flex items-center bg-card border border-border rounded-lg p-1 text-xs font-semibold shadow-sm">
+  const LanguageSwitcher = ({ compact = false }) => (
+    <div
+      className={`flex items-center bg-card border border-border rounded-lg ${
+        compact ? 'p-0.5 min-[400px]:p-1 text-[11px] min-[400px]:text-xs' : 'p-1 text-xs'
+      } font-semibold shadow-sm`}
+    >
       <button
         onClick={() => setLanguage('tr')}
-        className={`px-2.5 py-1 rounded transition-colors ${
+        className={`${
+          compact ? 'px-1.5 py-0.5 min-[400px]:px-2.5 min-[400px]:py-1' : 'px-2.5 py-1'
+        } rounded transition-colors ${
           currentLanguage === 'tr'
             ? 'bg-primary text-primary-foreground font-bold'
             : 'text-muted-foreground hover:text-foreground'
@@ -76,7 +82,9 @@ export const Navbar = () => {
       </button>
       <button
         onClick={() => setLanguage('en')}
-        className={`px-2.5 py-1 rounded transition-colors ${
+        className={`${
+          compact ? 'px-1.5 py-0.5 min-[400px]:px-2.5 min-[400px]:py-1' : 'px-2.5 py-1'
+        } rounded transition-colors ${
           currentLanguage === 'en'
             ? 'bg-primary text-primary-foreground font-bold'
             : 'text-muted-foreground hover:text-foreground'
@@ -90,16 +98,16 @@ export const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border" data-purpose="main-header">
-      <div className="w-full max-w-[1720px] 2xl:max-w-[1840px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 gap-2">
+      <div className={`w-full max-w-[1720px] 2xl:max-w-[1840px] mx-auto ${!loggedIn ? 'px-3 min-[400px]:px-4 sm:px-6 lg:px-8' : 'px-4 sm:px-6 lg:px-8'}`}>
+        <div className={`flex justify-between items-center h-20 ${!loggedIn ? 'gap-1 desktop:gap-2' : 'gap-2'}`}>
           {/* Logo — giriş yapmış kullanıcıda /dashboard'a götürür */}
-          <Link to={loggedIn ? '/dashboard' : '/'} className="flex items-center gap-2.5 flex-shrink-0 group">
+          <Link to={loggedIn ? '/dashboard' : '/'} className={`flex items-center ${!loggedIn ? 'gap-1.5 desktop:gap-2.5' : 'gap-2.5'} flex-shrink-0 group`}>
             <img
               src="/logo-mark.png"
               alt="HealthLexMed Logo"
               className="w-9 h-9 object-contain transition-transform group-hover:scale-105"
             />
-            <span className="text-xl font-bold tracking-tight text-foreground">
+            <span className={`${!loggedIn ? 'hidden min-[360px]:inline text-lg desktop:text-xl' : 'text-xl'} font-bold tracking-tight text-foreground`}>
               Health<span className="text-primary font-semibold font-serif italic">Lex</span>Med
             </span>
           </Link>
@@ -193,13 +201,13 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Top Actions: Language switcher + compact CTA for guests */}
-          <div className="desktop:hidden flex items-center gap-2 sm:gap-3 shrink-0">
-            <LanguageSwitcher />
+          <div className={`desktop:hidden flex items-center ${!loggedIn ? 'gap-1.5 sm:gap-3' : 'gap-2 sm:gap-3'} shrink-0`}>
+            <LanguageSwitcher compact={!loggedIn} />
             {!loggedIn && (
               <Link
                 to="/register"
                 onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
-                className="px-2.5 sm:px-3.5 py-1.5 bg-primary text-primary-foreground rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap"
+                className="px-2 sm:px-3.5 py-1.5 bg-primary text-primary-foreground rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap"
               >
                 {t('startFree')}
               </Link>
