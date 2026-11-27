@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, User, LogOut, LayoutDashboard } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { getUser, logout, isLoggedIn, getStats, getUserTrialState, formatTurkishName } from '@/utils/storage';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '@/firebase/config';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { User, LogOut, LayoutDashboard } from 'lucide-react';
+import { logout } from '@/utils/storage';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 import { useLanguage } from '@/context/LanguageContext';
 import {
   DropdownMenu,
@@ -14,111 +12,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { getPreviewRole } from '@/utils/planAccess';
+import { useNavAuth } from '@/hooks/useNavAuth';
 
 export const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const previewRole = getPreviewRole();
-  const [firebaseUser, setFirebaseUser] = useState(
-    previewRole ? { uid: 'preview-uid', email: 'dr.kaya@healthlexmed.com', displayName: 'Dr. Ahmet Kaya' } : null
-  );
-  const [userData, setUserData] = useState(
-    previewRole === 'trial' ? { subscriptionStatus: 'trialing', isTrial: true } : null
-  );
-  const [isPro, setIsPro] = useState(previewRole === 'pro');
-  const [isBasic, setIsBasic] = useState(previewRole === 'basic');
-  const [isLifetime, setIsLifetime] = useState(previewRole === 'lifetime');
   const { currentLanguage, setLanguage, t } = useLanguage();
-
-  useEffect(() => {
-    if (previewRole) {
-      if (previewRole === 'lifetime') {
-        setIsLifetime(true);
-        setIsPro(false);
-        setIsBasic(false);
-      } else if (previewRole === 'pro') {
-        setIsLifetime(false);
-        setIsPro(true);
-        setIsBasic(false);
-      } else if (previewRole === 'basic') {
-        setIsLifetime(false);
-        setIsPro(false);
-        setIsBasic(true);
-      } else if (previewRole === 'trial') {
-        setIsLifetime(false);
-        setIsPro(false);
-        setIsBasic(false);
-        setUserData({ subscriptionStatus: 'trialing', isTrial: true });
-      }
-      return;
-    }
-    const unsubscribe = onAuthStateChanged(auth, (usr) => {
-      setFirebaseUser(usr);
-    });
-    return () => unsubscribe();
-  }, [previewRole]);
-
-  // Pro & Temel Durumu Kontrolü (Firestore canlı dinleme + localStorage fallback)
-  useEffect(() => {
-    if (previewRole) return;
-    const uid = firebaseUser?.uid || getUser()?.uid;
-    if (!uid) {
-      const localUser = getUser();
-      setUserData(localUser);
-      const isLifetimePlan = localUser?.isLifetime === true || localUser?.planType === 'lifetime' || (localUser?.plan || '').toLowerCase().includes('lifetime') || (localUser?.plan || '').toLowerCase().includes('ömür');
-      const isBasicPlan = !isLifetimePlan && (localUser?.isBasic === true || (localUser?.plan || '').toLowerCase().includes('basic'));
-      const isProPlan = !isLifetimePlan && !isBasicPlan && (localUser?.isPro === true || localUser?.subscriptionStatus === 'active');
-      setIsLifetime(isLifetimePlan);
-      setIsPro(isProPlan);
-      setIsBasic(isBasicPlan);
-      return;
-    }
-
-    try {
-      const userDocRef = doc(db, 'users', uid);
-      const unsub = onSnapshot(userDocRef, (docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setUserData(data);
-          const isLifetimePlan = data.isLifetime === true || data.planType === 'lifetime' || (data.plan || '').toLowerCase().includes('lifetime') || (data.plan || '').toLowerCase().includes('ömür');
-          const isBasicPlan = !isLifetimePlan && (data.isBasic === true || data.subscriptionStatus === 'basic' || (data.plan || '').toLowerCase().includes('basic'));
-          const status = (data.subscriptionStatus || '').toLowerCase();
-          const isPaidPro = !isLifetimePlan && !isBasicPlan && (data.isPro === true || status === 'active' || status === 'pro');
-          setIsLifetime(isLifetimePlan);
-          setIsPro(isPaidPro);
-          setIsBasic(isBasicPlan);
-        } else {
-          setUserData(null);
-          setIsLifetime(false);
-          setIsPro(false);
-          setIsBasic(false);
-        }
-      }, (err) => {
-        console.warn('[Navbar] Could not read user pro status:', err);
-      });
-      return () => unsub();
-    } catch (e) {
-      console.warn('[Navbar] Firestore snapshot error:', e);
-    }
-  }, [firebaseUser, previewRole]);
-
-  const loggedIn = !!firebaseUser || isLoggedIn();
-  const user = getUser();
-  const stats = loggedIn ? getStats() : null;
-  const currentUserObj = userData || user || firebaseUser;
-  const trialState = getUserTrialState(
-    previewRole === 'trial'
-      ? { ...currentUserObj, subscriptionStatus: 'trialing', isTrial: true }
-      : currentUserObj
-  );
-  const isTrialActive = trialState.hasTrial && trialState.isActive && !trialState.isExpired;
-  const trialDaysLeft = trialState.daysLeft;
-  const formattedUserName = formatTurkishName(
-    firebaseUser?.displayName || user?.name || firebaseUser?.email?.split('@')[0] || user?.email?.split('@')[0]
-  );
-  const userInitial = (formattedUserName.charAt(0) || 'U').toLocaleUpperCase('tr-TR');
+  const {
+    loggedIn,
+    isPro,
+    isBasic,
+    isLifetime,
+    isTrialActive,
+    trialDaysLeft,
+    userInitial,
+  } = useNavAuth();
 
   const isActive = (path) => location.pathname === path;
 
@@ -184,7 +91,7 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border" data-purpose="main-header">
       <div className="w-full max-w-[1720px] 2xl:max-w-[1840px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-20 gap-2">
           {/* Logo — giriş yapmış kullanıcıda /dashboard'a götürür */}
           <Link to={loggedIn ? '/dashboard' : '/'} className="flex items-center gap-2.5 flex-shrink-0 group">
             <img
@@ -285,99 +192,20 @@ export const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button & Language switcher */}
-          <div className="desktop:hidden flex items-center gap-3">
+          {/* Mobile Top Actions: Language switcher + compact CTA for guests */}
+          <div className="desktop:hidden flex items-center gap-2 sm:gap-3 shrink-0">
             <LanguageSwitcher />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-foreground hover:bg-muted"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+            {!loggedIn && (
+              <Link
+                to="/register"
+                onClick={() => { try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {} }}
+                className="px-2.5 sm:px-3.5 py-1.5 bg-primary text-primary-foreground rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap"
+              >
+                {t('startFree')}
+              </Link>
+            )}
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="desktop:hidden py-4 space-y-2 border-t border-border">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2 rounded-lg font-medium transition-all ${
-                  isActive(link.path)
-                    ? 'bg-primary text-primary-foreground font-semibold'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-border space-y-2">
-              {loggedIn ? (
-                <>
-                  <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="outline" className="w-full justify-between">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-2" />
-                        {user?.name || t('myProfile')}
-                      </div>
-                      {isLifetime ? (
-                        <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300">
-                          👑 {currentLanguage === 'en' ? 'LIFETIME' : 'ÖMÜR BOYU'}
-                        </span>
-                      ) : isPro ? (
-                        <span className="text-[11px] font-black px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
-                          ★ PRO
-                        </span>
-                      ) : isBasic ? (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-700 dark:text-blue-300">
-                          TEMEL
-                        </span>
-                      ) : isTrialActive ? (
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-700 dark:text-amber-300">
-                          {currentLanguage === 'en'
-                            ? (trialDaysLeft <= 1 ? 'Trial · Last day' : `Trial · ${trialDaysLeft}d`)
-                            : (trialDaysLeft <= 1 ? 'Deneme · Son gün' : `Deneme · ${trialDaysLeft} gün`)}
-                        </span>
-                      ) : null}
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="destructive"
-                    className="w-full"
-                    onClick={() => {
-                      handleLogout();
-                      setMobileMenuOpen(false);
-                    }}
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    {t('logout')}
-                  </Button>
-                </>
-              ) : (
-                <div className="grid grid-cols-2 gap-2 px-2">
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 border border-border rounded-lg font-medium text-foreground bg-card hover:bg-muted">
-                    {t('login')}
-                  </Link>
-                  <Link
-                    to="/register"
-                    onClick={() => {
-                      try { sessionStorage.removeItem('healthlex_selected_plan'); } catch (e) {}
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full text-center py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90"
-                  >
-                    {t('startFree')}
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );

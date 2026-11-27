@@ -17,6 +17,15 @@ export const translations = {
     myProfile: "Profilim",
     home: "Ana Sayfa",
     dashboard: "Panelim",
+    navHome: "Ana sayfa",
+    navStudy: "Çalış",
+    navGames: "Oyunlar",
+    navGuide: "Rehber",
+    navLogin: "Giriş",
+    navDashboard: "Panelim",
+    navAccount: "Hesabım",
+    navTerms: "Terimler",
+    navMorphemes: "Morfemler",
 
     // Kategori Etiketleri
     movementSystem: "Hareket Sistemi",
@@ -399,6 +408,15 @@ export const translations = {
     myProfile: "My Profile",
     home: "Home",
     dashboard: "Dashboard",
+    navHome: "Home",
+    navStudy: "Study",
+    navGames: "Games",
+    navGuide: "Guide",
+    navLogin: "Sign in",
+    navDashboard: "Dashboard",
+    navAccount: "Account",
+    navTerms: "Terms",
+    navMorphemes: "Morphemes",
 
     // Kategori Etiketleri
     movementSystem: "Movement System",

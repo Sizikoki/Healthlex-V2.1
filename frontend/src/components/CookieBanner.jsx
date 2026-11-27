@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Cookie, ShieldCheck, X, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/context/LanguageContext';
 import { getCookieConsent, setCookieConsent } from '@/services/analytics';
+import { shouldShowBottomNav } from '@/utils/bottomNav';
 
 export const CookieBanner = () => {
   const { t } = useLanguage();
+  const location = useLocation();
+  const bottomNavVisible = shouldShowBottomNav(location.pathname);
   const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsConsent, setAnalyticsConsent] = useState(false);
@@ -92,7 +95,11 @@ export const CookieBanner = () => {
     <div
       role="region"
       aria-label="Cookie Consent"
-      className="fixed bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-6 sm:right-auto sm:max-w-md z-50 animate-[hlxFadeUp_0.35s_ease-out]"
+      className={`fixed left-2.5 right-2.5 sm:left-6 sm:right-auto sm:max-w-md z-50 animate-[hlxFadeUp_0.35s_ease-out] ${
+        bottomNavVisible
+          ? 'bottom-[calc(64px_+_env(safe-area-inset-bottom)_+_10px)] desktop:bottom-4'
+          : 'bottom-2.5 sm:bottom-4'
+      }`}
     >
       <div className="bg-card/95 backdrop-blur-md text-card-foreground border border-border/80 shadow-2xl rounded-xl sm:rounded-2xl p-3.5 sm:p-5 relative overflow-hidden max-h-[82vh] overflow-y-auto">
         {/* Top subtle decorative accent */}

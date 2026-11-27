@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import { Navbar } from '@/components/Navbar';
+import { BottomNav } from '@/components/BottomNav';
 import { Footer } from '@/components/Footer';
 import { Home } from '@/pages/Home';
 import { Dashboard } from '@/pages/Dashboard';
@@ -33,6 +34,8 @@ import { initAnalyticsOnLoad } from '@/services/analytics';
 import { initMetaPixelOnLoad } from '@/services/metaPixel';
 import { MetaPixelRouteTracker } from '@/components/MetaPixelRouteTracker';
 import { getPreviewRole } from '@/utils/planAccess';
+import { NavAuthProvider } from '@/hooks/useNavAuth';
+import { shouldShowBottomNav } from '@/utils/bottomNav';
 import './App.css';
 
 /**
@@ -122,6 +125,72 @@ const ScrollToTop = () => {
   return null;
 };
 
+const AppLayout = () => {
+  const { pathname } = useLocation();
+  const showBottomNav = shouldShowBottomNav(pathname);
+
+  return (
+    <div
+      className={`App min-h-screen bg-background flex flex-col justify-between ${
+        showBottomNav ? 'pb-[calc(64px_+_env(safe-area-inset-bottom))] desktop:pb-0' : ''
+      }`}
+    >
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/panel" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/study" element={<Study />} />
+        <Route path="/study/:slug" element={<TermDetail />} />
+        <Route path="/terms/:slug" element={<TermDetail />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/flashcards" element={<Flashcards />} />
+        <Route path="/match" element={<MatchGame />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/morpheme" element={<MorphemeGame />} />
+        <Route path="/morphemes" element={<MorphemeExplorer />} />
+        <Route path="/morfemler" element={<Navigate to="/morphemes" replace />} />
+        <Route path="/morphemes/:slug" element={<MorphemeDetail />} />
+        <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
+        <Route path="/rehber" element={<Guide />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
+        <Route path="/hakkinda" element={<Navigate to="/contact" replace />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/sss" element={<Navigate to="/faq" replace />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/terms" element={<Legal activeDoc="terms" />} />
+        <Route path="/kullanim-kosullari" element={<Navigate to="/terms" replace />} />
+        <Route path="/privacy" element={<Legal activeDoc="privacy" />} />
+        <Route path="/gizlilik" element={<Navigate to="/privacy" replace />} />
+        <Route path="/refund" element={<Legal activeDoc="refund" />} />
+        <Route path="/iptal-iade" element={<Navigate to="/refund" replace />} />
+        <Route path="/cerez" element={<Navigate to="/privacy" replace />} />
+        <Route path="/legal" element={<Navigate to="/terms" replace />} />
+        <Route path="/progress" element={<ProgressPage />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/success" element={<Navigate to="/welcome" replace />} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <AppFooter />
+      <BottomNav />
+      <Toaster position="top-right" richColors />
+      <CookieBanner />
+    </div>
+  );
+};
+
 function App() {
   useEffect(() => {
     getPaddle(); // Pre-warm & initialize Paddle.js with live client-side token
@@ -137,65 +206,14 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-
   return (
     <LanguageProvider>
       <BrowserRouter>
-        <ScrollToTop />
-        <MetaPixelRouteTracker />
-        <div className="App min-h-screen bg-background flex flex-col justify-between">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/panel" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/study" element={<Study />} />
-            <Route path="/study/:slug" element={<TermDetail />} />
-            <Route path="/terms/:slug" element={<TermDetail />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/flashcards" element={<Flashcards />} />
-            <Route path="/match" element={<MatchGame />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/morpheme" element={<MorphemeGame />} />
-            <Route path="/morphemes" element={<MorphemeExplorer />} />
-            <Route path="/morfemler" element={<Navigate to="/morphemes" replace />} />
-            <Route path="/morphemes/:slug" element={<MorphemeDetail />} />
-            <Route path="/morpheme-explorer" element={<MorphemeExplorer />} />
-            <Route path="/rehber" element={<Guide />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/iletisim" element={<Navigate to="/contact" replace />} />
-            <Route path="/hakkinda" element={<Navigate to="/contact" replace />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/sss" element={<Navigate to="/faq" replace />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/terms" element={<Legal activeDoc="terms" />} />
-            <Route path="/kullanim-kosullari" element={<Navigate to="/terms" replace />} />
-            <Route path="/privacy" element={<Legal activeDoc="privacy" />} />
-            <Route path="/gizlilik" element={<Navigate to="/privacy" replace />} />
-            <Route path="/refund" element={<Legal activeDoc="refund" />} />
-            <Route path="/iptal-iade" element={<Navigate to="/refund" replace />} />
-            <Route path="/cerez" element={<Navigate to="/privacy" replace />} />
-            <Route path="/legal" element={<Navigate to="/terms" replace />} />
-            <Route path="/progress" element={<ProgressPage />} />
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/success" element={<Navigate to="/welcome" replace />} />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-          <AppFooter />
-          <Toaster position="top-right" richColors />
-          <CookieBanner />
-        </div>
+        <NavAuthProvider>
+          <ScrollToTop />
+          <MetaPixelRouteTracker />
+          <AppLayout />
+        </NavAuthProvider>
       </BrowserRouter>
     </LanguageProvider>
   );
