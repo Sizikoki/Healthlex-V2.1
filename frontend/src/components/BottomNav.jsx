@@ -73,7 +73,8 @@ export const BottomNav = () => {
     p.startsWith('/morphemes/') ||
     p === '/morfemler' ||
     p === '/morpheme-explorer';
-  const isStudyActive = isTermsSubActive || isMorphemesSubActive;
+  const isFavoritesSubActive = p === '/favorilerim' || p === '/tekrar';
+  const isStudyActive = isTermsSubActive || isMorphemesSubActive || isFavoritesSubActive;
   const isGamesActive = p === '/games' || p.startsWith('/games/');
   const isGuideActive = p === '/rehber' || p.startsWith('/rehber/');
   const isLoginActive = p === '/login' || p === '/register';
@@ -191,6 +192,24 @@ export const BottomNav = () => {
               <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[#0f766e]" />
             )}
           </Link>
+          {loggedIn && (
+            <Link
+              to="/favorilerim"
+              role="menuitem"
+              aria-current={isFavoritesSubActive ? 'page' : undefined}
+              onClick={() => setStudyMenuOpen(false)}
+              className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm transition-colors min-h-[44px] ${
+                isFavoritesSubActive
+                  ? 'text-[#0f766e] bg-[#0f766e]/10 font-semibold'
+                  : 'text-foreground hover:bg-muted font-medium'
+              }`}
+            >
+              <span>{t('navFavorites', 'Favorilerim')}</span>
+              {isFavoritesSubActive && (
+                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[#0f766e]" />
+              )}
+            </Link>
+          )}
         </div>
       )}
 

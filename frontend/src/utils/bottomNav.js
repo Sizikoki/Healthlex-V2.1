@@ -6,6 +6,7 @@ const HIDDEN_BOTTOM_NAV_PATHS = new Set([
   '/login',
   '/register',
   '/pricing',
+  '/tekrar',
 ]);
 
 /**

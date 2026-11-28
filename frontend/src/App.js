@@ -24,6 +24,8 @@ import { FAQ } from '@/pages/FAQ';
 import { Legal } from '@/pages/Legal';
 import { Pricing } from '@/pages/Pricing';
 import { Welcome } from '@/pages/Welcome';
+import { Favorites } from '@/pages/Favorites';
+import { Review } from '@/pages/Review';
 import { syncProgressFromFirestore } from '@/utils/storage';
 import { auth } from '@/firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -35,6 +37,7 @@ import { initMetaPixelOnLoad } from '@/services/metaPixel';
 import { MetaPixelRouteTracker } from '@/components/MetaPixelRouteTracker';
 import { getPreviewRole } from '@/utils/planAccess';
 import { NavAuthProvider } from '@/hooks/useNavAuth';
+import { ReviewProvider } from '@/hooks/useReview';
 import { shouldShowBottomNav } from '@/utils/bottomNav';
 import './App.css';
 
@@ -97,6 +100,7 @@ const AppFooter = () => {
     p.startsWith('/match/') ||
     p === '/quiz' ||
     p.startsWith('/quiz/') ||
+    p === '/tekrar' ||
     (p.startsWith('/morpheme') && !p.startsWith('/morphemes'));
 
   if (isGameRoute) {
@@ -176,6 +180,16 @@ const AppLayout = () => {
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/success" element={<Navigate to="/welcome" replace />} />
+        <Route path="/favorilerim" element={
+          <ProtectedRoute>
+            <Favorites />
+          </ProtectedRoute>
+        } />
+        <Route path="/tekrar" element={
+          <ProtectedRoute>
+            <Review />
+          </ProtectedRoute>
+        } />
         <Route path="/profile" element={
           <ProtectedRoute>
             <Profile />
@@ -212,7 +226,9 @@ function App() {
         <NavAuthProvider>
           <ScrollToTop />
           <MetaPixelRouteTracker />
-          <AppLayout />
+          <ReviewProvider>
+            <AppLayout />
+          </ReviewProvider>
         </NavAuthProvider>
       </BrowserRouter>
     </LanguageProvider>

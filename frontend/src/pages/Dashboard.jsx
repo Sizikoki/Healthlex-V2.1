@@ -42,6 +42,9 @@ import { getTermCount, getInitialTermCount, roundDownToTen } from '@/services/te
 import { getTermsByCategory } from '@/data/medicalTerms';
 import { TOTAL_MORPHEMES, PREFIXES, ROOTS, SUFFIXES } from '@/data/morphemesData';
 import { toast } from 'sonner';
+import { ReviewDueCard } from '@/components/ReviewDueCard';
+import { useReview } from '@/hooks/useReview';
+import { formatDueLabel } from '@/utils/reviewScheduler';
 
 // --- Kullanıcı Plan Çözümleme ---
 // Plan Seviyeleri: 'lifetime' | 'pro' | 'pro_trial' | 'basic' | 'trial' | 'expired'
@@ -288,6 +291,9 @@ const FreeUserDashboard = ({ userName, streak, termCount, isTr, todayFormatted }
             </span>
           </form>
         </div>
+
+        {/* Bugün tekrar edilecek (Favorilerim + aralıklı tekrar) */}
+        <ReviewDueCard isTr={isTr} />
 
         {/* 4'lü Kota ve Limit Özet Şeridi */}
         <div className="bg-white dark:bg-card border border-[#e5e9f2] dark:border-border rounded-[14px] p-4 sm:p-[18px_24px] grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 shadow-xs">
@@ -1127,14 +1133,7 @@ const ProUserDashboard = ({
   const searchInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [recentTerms, setRecentTerms] = useState([]);
-  const [goal, setGoal] = useState(() => {
-    try {
-      const saved = localStorage.getItem('healthlex_daily_goal');
-      return saved ? parseInt(saved, 10) : 15;
-    } catch {
-      return 15;
-    }
-  });
+  const review = useReview();
 
   const isLifetime = currentPlan === 'lifetime';
   const isProTrial = currentPlan === 'pro_trial' && trialState?.hasTrial && trialState?.isActive;
@@ -1163,13 +1162,6 @@ const ProUserDashboard = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
-  const handleGoalChange = (newGoal) => {
-    setGoal(newGoal);
-    try {
-      localStorage.setItem('healthlex_daily_goal', String(newGoal));
-    } catch (e) {}
-  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -1424,7 +1416,7 @@ const ProUserDashboard = ({
 
         {/* 2'Lİ ÜST IZGARA: BUGÜNKÜ TEKRAR & SEVİYE VE SERİ */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] xl:grid-cols-[1.35fr_1fr] gap-5 xl:gap-6 items-stretch">
-          {/* Sol Kart: BUGÜNKÜ TEKRAR (11a) */}
+          {/* Sol Kart: BUGÜNKÜ TEKRAR — Favorilerim + aralıklı tekrar (FSRS) verisi */}
           <div className="bg-[#0f1b33] dark:bg-[#0b1426] dark:border dark:border-[#1e2e4a] rounded-[18px] p-6 sm:p-7 xl:p-8 text-white flex flex-col justify-between gap-5 shadow-md text-left">
             <div className="flex justify-between items-start gap-4">
               <div>
@@ -1432,23 +1424,29 @@ const ProUserDashboard = ({
                   {isTr ? 'BUGÜNKÜ TEKRAR' : 'TODAY’S REVIEW'}
                 </div>
                 <div className="font-semibold text-2xl sm:text-[28px] leading-[1.2] font-['Lora',Georgia,serif] mt-2 text-white">
-                  {learnedCount > 0
-                    ? (isTr ? 'Bugünkü tekrarlarına devam et' : 'Continue today’s review')
-                    : (isTr ? 'İlk tekrarınla başla' : 'Start your first review')}
+                  {review.count === 0
+                    ? (isTr ? 'Favori terimlerinle tekrara başla' : 'Start reviewing your favorite terms')
+                    : review.dueTodayCount > 0
+                      ? (isTr ? `Bugün ${review.dueTodayCount} terim seni bekliyor` : `${review.dueTodayCount} terms are due today`)
+                      : (isTr ? 'Bugünlük tekrarın tamam' : 'You’re done for today')}
                 </div>
                 <div className="font-normal text-[14px] leading-[1.5] text-[#b8c4d9] mt-2 max-w-xl">
-                  {learnedCount > 0
+                  {review.count === 0
                     ? (isTr
-                        ? `${learnedCount} terim öğrendin. Hedefine ulaşmak için günlük tekrarını yap.`
-                        : `You have learned ${learnedCount} terms. Complete your daily review to reach your goal.`)
-                    : (isTr
-                        ? 'Henüz çalıştığın terim yok. Hedefini seç, sistem her gün sana o kadar terim getirsin.'
-                        : 'No studied terms yet. Pick your target and the system will present that many terms each day.')}
+                        ? 'Terim kartlarındaki kalbe dokun. Eklediğin terimler, unutmaya başlayacağın zamana göre sana yeniden gelir.'
+                        : 'Tap the heart on term cards. Each term comes back right before you would forget it.')
+                    : review.dueTodayCount > 0
+                      ? (isTr
+                          ? `Favorilerinde ${review.count} terim var. Tekrar birkaç dakika sürer.`
+                          : `You have ${review.count} favorite terms. Review takes a few minutes.`)
+                      : (isTr
+                          ? `Sıradaki tekrar: ${formatDueLabel(review.nextDueIso, true)}`
+                          : `Next review: ${formatDueLabel(review.nextDueIso, false)}`)}
                 </div>
               </div>
               <div className="text-right shrink-0">
                 <div className="font-extrabold text-3xl sm:text-[36px] leading-none text-white">
-                  {Math.min(learnedCount, goal)} / {goal}
+                  {review.dueTodayCount}
                 </div>
                 <div className="font-semibold text-[12px] text-[#b8c4d9] mt-1">
                   {isTr ? 'bugün' : 'today'}
@@ -1456,38 +1454,16 @@ const ProUserDashboard = ({
               </div>
             </div>
 
-            {/* Günlük Hedef Seçici */}
-            <div className="flex flex-col gap-2">
-              <span className="font-extrabold text-[11px] leading-none tracking-[0.12em] text-[#8fb3ff] uppercase">
-                {isTr ? 'GÜNLÜK HEDEF' : 'DAILY GOAL'}
-              </span>
-              <div className="flex gap-2">
-                {[10, 15, 20, 25].map((n) => {
-                  const on = goal === n;
-                  return (
-                    <button
-                      key={n}
-                      type="button"
-                      onClick={() => handleGoalChange(n)}
-                      className={`flex-1 text-center py-2.5 rounded-[10px] font-extrabold text-[14px] transition-all cursor-pointer ${
-                        on
-                          ? 'bg-white text-[#0f1b33] border border-white shadow-xs'
-                          : 'bg-white/6 hover:bg-white/10 text-[#dbe4f5] border border-white/18'
-                      }`}
-                    >
-                      {n}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Bugünkü Tekrarını Yap Butonu */}
+            {/* Tekrar / Favorilerim Butonu */}
             <Link
-              to="/flashcards"
+              to={review.count === 0 ? '/study' : review.dueTodayCount > 0 ? '/tekrar' : '/favorilerim'}
               className="block text-center bg-gradient-to-r from-[#2b7fff] to-[#5aa9ff] hover:opacity-95 text-white font-bold text-[15px] py-3.5 px-4 rounded-[12px] shadow-xs transition-all"
             >
-              {isTr ? 'Bugünkü tekrarını yap →' : 'Start today’s review →'}
+              {review.count === 0
+                ? (isTr ? 'Terimlere git →' : 'Browse terms →')
+                : review.dueTodayCount > 0
+                  ? (isTr ? 'Bugünkü tekrarını yap →' : 'Start today’s review →')
+                  : (isTr ? 'Favorilerimi gör →' : 'See my favorites →')}
             </Link>
           </div>
 

@@ -28,6 +28,7 @@ import {
   buildTermMetaDescription
 } from '@/utils/termHelper';
 import { CATEGORIES } from '@/data/categories';
+import { FavoriteButton } from '@/components/FavoriteButton';
 
 const getTurkishCategoryLabel = (item) => {
   if (!item) return null;
@@ -274,6 +275,9 @@ export const TermDetail = () => {
             </div>
 
             <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              {term.id !== undefined && term.id !== null && (
+                <FavoriteButton termId={term.id} termName={term.term} variant="labeled" />
+              )}
               <Button
                 size="sm"
                 onClick={() => navigate('/flashcards')}

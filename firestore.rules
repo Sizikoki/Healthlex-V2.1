@@ -16,6 +16,15 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
+      function gameTrialsValid() {
+        let before = resource.data.get('gameTrials', {});
+        let after = request.resource.data.get('gameTrials', {});
+        return after.keys().hasOnly(['match', 'quiz', 'morpheme'])
+          && after.values().hasOnly([true])
+          && (!before.get('match', false) || after.get('match', false) == true)
+          && (!before.get('quiz', false) || after.get('quiz', false) == true)
+          && (!before.get('morpheme', false) || after.get('morpheme', false) == true);
+      }
       allow read: if isOwner(userId);
       // Kayıt: yalnızca bu 6 alan, ücretsiz başlangıç
       allow create: if isOwner(userId)
@@ -26,7 +35,8 @@ service cloud.firestore {
       // Güncelleme: yalnızca dil tercihi ve seri
       allow update: if isOwner(userId)
         && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly(['preferences', 'streak']);
+             .hasOnly(['preferences', 'streak', 'gameTrials'])
+        && gameTrialsValid();
       allow delete: if false;
     }
 
@@ -54,6 +64,34 @@ service cloud.firestore {
         && request.resource.data.userId == request.auth.uid;
       allow delete: if isSignedIn()
         && (resource == null || resource.data.userId == request.auth.uid);
+    }
+
+    // Favorilerim + aralıklı tekrar: kullanıcı başına tek belge (user_review/{uid})
+    // cards: { "<termId>": { fav, src, addedAt, due, stability, difficulty, reps, lapses, state, ... } }
+    match /user_review/{userId} {
+      // Ücretli plan: Ömür Boyu veya Pro (deneme dahil); alanları yalnızca webhook yazar
+      function isPaidUser() {
+        let u = get(/databases/$(database)/documents/users/$(userId)).data;
+        return u.get('isLifetime', false) == true
+          || (u.get('isPro', false) == true
+              && u.get('subscriptionStatus', '') in ['active', 'trialing', 'past_due']);
+      }
+      function validShape() {
+        return request.resource.data.keys().hasOnly(['userId', 'cards', 'updatedAt'])
+          && request.resource.data.userId == userId
+          && request.resource.data.cards is map;
+      }
+      allow read: if isOwner(userId);
+      // Ücretsiz: en fazla 20 terim; ücretli: en fazla 1500
+      allow create: if isOwner(userId) && validShape()
+        && (request.resource.data.cards.size() <= 20
+            || (request.resource.data.cards.size() <= 1500 && isPaidUser()));
+      // Sayı artmıyorsa her zaman serbest (plandan düşen kullanıcı mevcut kartlarını tekrar edebilir)
+      allow update: if isOwner(userId) && validShape()
+        && (request.resource.data.cards.size() <= 20
+            || request.resource.data.cards.size() <= resource.data.cards.size()
+            || (request.resource.data.cards.size() <= 1500 && isPaidUser()));
+      allow delete: if false;
     }
 
     match /{document=**} {

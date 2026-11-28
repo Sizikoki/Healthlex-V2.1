@@ -19,6 +19,7 @@ import { getTermSlug, parseRootsToMorphemes } from '@/utils/termHelper';
 import { checkIsPro, getPreviewRole } from '@/utils/planAccess';
 import { updateCanonicalUrl } from '@/utils/seo';
 import { scoreAndRankTerms, normalizeSearchText } from '@/utils/searchHelper';
+import { FavoriteButton } from '@/components/FavoriteButton';
 
 const TermCard = React.memo(({
   term,
@@ -174,6 +175,7 @@ const TermCard = React.memo(({
               <span>{t('markLearned')}</span>
             )}
           </button>
+          <FavoriteButton termId={term.id} termName={term.term} />
         </div>
       </div>
     </div>
